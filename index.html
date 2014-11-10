@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Dexie.js - Minimalistic IndexedDB Wrapper</title>
+		<meta charset='utf-8'>
+		<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+		<meta name='viewport' content='width=device-width, initial-scale=1'>
+		<meta name='description' content='The easiest way to use IndexedDB. A lightweight, minimalistic wrapper that provides a straightforward API for developers using IndexedDB.'>
+		<link href='/assets/css/bootstrap.min.css' rel='stylesheet'>
+		<link href='/assets/css/prism.css' rel='stylesheet'>
+		<link href='/assets/css/stylesheet.css' rel='stylesheet'>
+	</head>
+
+	<body class='language-javascript'>
+
+		<div class='jumbotron' id='parallax'>
+			<div class='parallax-wrap'>
+				<div class='layer' data-depth='.3'>
+					<img src='/assets/images/bg.png'/>
+				</div>
+			</div>
+			<div class='container'>
+				<h1>Dexie.js</h1>
+				<p>A Minimalistic Wrapper for IndexedDB</p>
+				<a class='download btn btn-primary btn-lg' href='https://github.com/dfahlander/Dexie.js/wiki/Download' role='button'>
+					<span class='glyphicon glyphicon-save'></span>
+					<span>Download</span>
+				</a>
+				<span class='download-details'>( only 12k minified and gzipped )</span>
+			</div>
+		</div>
+
+		<div class='container' id='callouts'>
+			<div class='row'>
+				<div class='col-md-4'>
+					<h2>Easy to learn</h2>
+					<p>Dexie was written to be straightforward and easy to learn. If you've ever had to work with native IndexedDB then you'll certainly appreciate Dexie's concise API.</p>
+					<p><a class='btn btn-success' href='https://github.com/dfahlander/Dexie.js/wiki/Tutorial' role='button'>Dive right in &raquo;</a></p>
+				</div>
+				<div class='col-md-4'>
+					<h2>Well documented</h2>
+					<p>What good is any development tool without great documentation? Dexie is thoroughly explained, and examples are available to help you on your way.</p>
+					<p><a class='btn btn-success' href='https://github.com/dfahlander/Dexie.js/wiki/API%20Reference' role='button'>Check it out &raquo;</a></p>
+				</div>
+				<div class='col-md-4'>
+					<h2>Extendable</h2>
+					<p>Adding custom methods to your Dexie instance is easy. Simply <strong>Dexie.addons.push()</strong> and you've got a reusable, chainable method like any other native one.</p>
+					<p><a class='btn btn-success' href='https://github.com/dfahlander/Dexie.js/wiki/Building%20Addons' role='button'>See it in action &raquo;</a></p>
+				</div>
+			</div>
+		</div>
+
+		<div class='container'>
+			<hr/>
+		</div>
+
+		<div class='container'>
+			<h2>Basic examples</h2>
+			<div class='row'>
+				<div class='col-md-6'>
+					<code>
+
+	/*
+	|---------------------------------------------
+	| Make a database connection
+	|---------------------------------------------
+	*/
+
+	var db = new Dexie('MyDatabase');
+
+
+	// Define a schema
+	db.version(1)
+		.stores({
+			friends: 'name, age'
+		});
+
+
+	// Open the database
+	db.open()
+		.catch(function(error){
+			alert('Uh oh : ' + error);
+		});
+
+
+					</code>
+				</div>
+				<div class='col-md-6'>
+					<code>
+
+	/*
+	|---------------------------------------------
+	| Then run some queries
+	|---------------------------------------------
+	*/
+
+	// Find some old friends
+	db.friends
+		.where('age')
+		.above(75)
+		.each(function(friend){
+			console.log(friend.name);
+		});
+
+
+	// or make a new one
+	db.friends
+		.add({
+			name: 'Camilla',
+			age: 25
+		});
+
+
+					</code>
+				</div>
+			</div>
+		</div>
+
+		<div class='container'>
+			<hr/>
+		</div>
+
+		<div class='container' id='callouts'>
+			<div class='row'>
+				<div class='col-md-12'>
+					<h2>That's all folks!</h2>
+					<p>Now go make something awesome.</p>
+				</div>
+			</div>
+		</div>
+
+		<div class='container'>
+			<footer>
+				<p>&copy; 2014. Dexie.js is the creation of David Fahlander.</p>
+			</footer>
+		</div>
+
+		<script src='/assets/js/jquery.min.js'></script>
+		<script src='/assets/js/bootstrap.min.js'></script>
+		<script src='/assets/js/prism.js'></script>
+		<script src='/assets/js/parallax.min.js'></script>
+		<script>
+			new Parallax(document.getElementById('parallax'));
+		</script>
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			ga('create', 'UA-7780680-5', 'auto');
+			ga('send', 'pageview');
+		</script>
+	</body>
+</html>

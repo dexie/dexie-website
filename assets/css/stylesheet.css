@@ -1,0 +1,85 @@
+#parallax {
+	height: 400px;
+	padding: 120px 0 0;
+	overflow: hidden;
+	color: #FFF;
+	text-shadow:
+		-1px -2px 5px rgba(0, 0, 0, .5),
+		0 0 25px rgba(0, 0, 0, .7);
+	background: #2E0854;
+}
+
+#parallax .btn {
+	text-shadow: none;
+}
+
+#parallax .parallax-wrap {
+	position: absolute;
+	top: 0;
+	z-index: 1;
+	height: 400px;
+	overflow: hidden;
+}
+
+#parallax .layer img {
+	width: 110%;
+	min-height: 550px;
+	margin: -135px 0 0 -5%;
+	opacity: .8;
+}
+
+#parallax .container {
+	position: relative;
+	z-index: 100;
+}
+
+.download {
+	width: 200px;
+}
+
+.download:hover {
+	border: 1px solid rgba(0, 0, 0, .6);
+	box-shadow: 0 0 10px rgba(255, 255, 255, .3);
+}
+
+.download-details {
+	display: block;
+	width: 200px;
+	padding: .5em 0;
+	color: rgba(255, 255, 255, .5);
+	font-size: .8em;
+	text-shadow: none;
+	text-align: center;
+}
+
+#callouts [class^='col-'] {
+	margin-bottom: 20px;
+}
+
+code {
+	float: left;
+	width: 100%;
+	margin-bottom: 20px;
+	overflow: auto;
+}
+
+code::-webkit-scrollbar {
+    width: 10px;
+	height: 10px;
+}
+
+code::-webkit-scrollbar-track {
+	background: rgba(0, 0, 0, .1);
+}
+
+code::-webkit-scrollbar-thumb {
+	background: rgba(0, 0, 0, .2);
+	border: 1px solid rgba(0, 0, 0, .15);
+	border-radius: 1px;
+}
+
+footer {
+	padding-bottom: 30px;
+	color: #AAA;
+	font-size: .9em;
+}

@@ -84,3 +84,18 @@ footer {
 	color: #AAA;
 	font-size: .9em;
 }
+
+img.dexie-logo-icon {
+    position:absolute; margin-left: -13px; margin-top: 22px; width: 34px; height: 34px; display: none;
+}
+
+@media screen and (min-width: 768px) {
+    img.dexie-logo-icon {
+        position: absolute;
+        margin-left: -21px;
+        margin-top: 25px;
+        width: 57px;
+        height: 57px;
+        display: inherit;
+    }
+}

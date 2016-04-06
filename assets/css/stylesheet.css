@@ -1,3 +1,7 @@
+body {
+	font-family: Arial, sans-serif;
+}
+
 #parallax {
 	height: 400px;
 	padding: 120px 0 0;

@@ -90,14 +90,14 @@ footer {
 }
 
 img.dexie-logo-icon {
-    position:absolute; margin-left: -13px; margin-top: 23px; width: 34px; height: 34px;
+    position:absolute; margin-left: -13px; margin-top: 22px; width: 34px; height: 34px; display: none;
 }
 
 @media screen and (min-width: 768px) {
     img.dexie-logo-icon {
         position: absolute;
         margin-left: -21px;
-        margin-top: 26px;
+        margin-top: 25px;
         width: 57px;
         height: 57px;
         display: inherit;

@@ -38,6 +38,12 @@ body {
 	z-index: 100;
 }
 
+#parallax #star-button {
+	position: absolute;
+	bottom: 2px;
+	right: 6px;
+}
+
 .download {
 	width: 200px;
 }

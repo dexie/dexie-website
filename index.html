@@ -82,17 +82,16 @@
 
 
 	// Define a schema
-	db.version(1)
-		.stores({
-			friends: 'name, age'
-		});
+	db.version(1).stores({
+		friends: 'name, age'
+	});
 
 
 	// Open the database
 	db.open()
-		.catch(function(error){
-			alert('Uh oh : ' + error);
-		});
+	    .catch(function(error){
+	        alert('Uh oh : ' + error);
+	    });
 
 
 					</code>
@@ -107,20 +106,19 @@
 	*/
 
 	// Find some old friends
-	db.friends
+	var friends = yield db.friends
 		.where('age')
 		.above(75)
-		.each(function(friend){
-			console.log(friend.name);
-		});
+		.toArray();
 
 
 	// or make a new one
-	db.friends
-		.add({
-			name: 'Camilla',
-			age: 25
-		});
+	db.friends.add({
+		name: 'Camilla',
+		age: 25
+	});
+
+
 
 
 					</code>

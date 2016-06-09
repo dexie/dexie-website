@@ -43,6 +43,7 @@ body {
 	bottom: 2px;
 	right: 6px;
 	z-index: 90;
+	background-image: none;
 }
 
 .download {

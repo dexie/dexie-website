@@ -80,7 +80,6 @@
 
 	var db = new Dexie('MyDatabase');
 
-
 	// Define a schema
 	db.version(1).stores({
 		friends: 'name, age'
@@ -88,10 +87,9 @@
 
 
 	// Open the database
-	db.open()
-	    .catch(function(error){
-	        alert('Uh oh : ' + error);
-	    });
+	db.open().catch(function(error){
+		alert('Uh oh : ' + error);
+	});
 
 
 					</code>
@@ -106,20 +104,18 @@
 	*/
 
 	// Find some old friends
-	var friends = yield db.friends
+	db.friends
 		.where('age')
 		.above(75)
-		.toArray();
-
+		.each (function (friend) {
+			console.log (friend.name);
+		});
 
 	// or make a new one
 	db.friends.add({
 		name: 'Camilla',
 		age: 25
 	});
-
-
-
 
 					</code>
 				</div>

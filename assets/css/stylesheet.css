@@ -58,11 +58,12 @@ body {
 .download-details {
 	display: block;
 	width: 200px;
-	padding: .5em 0;
+	padding: 0 0;
+	margin: -1em 0 1em 0;
 	color: rgba(255, 255, 255, .5);
 	font-size: .8em;
 	text-shadow: none;
-	text-align: center;
+	text-align: left;
 }
 
 #callouts [class^='col-'] {

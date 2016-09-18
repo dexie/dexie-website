@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1920"
+   height="1080"
+   viewBox="0 0 1920 1080"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="logo-dexie.svg">
+  <title
+     id="title3455">Dexie Logo</title>
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.5"
+     inkscape:cx="926.71897"
+     inkscape:cy="555.43916"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     units="px"
+     inkscape:window-width="1536"
+     inkscape:window-height="801"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Dexie Logo</dc:title>
+        <dc:date>11. July 2016</dc:date>
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Carlos Pinto</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:rights>
+          <cc:Agent>
+            <dc:title>Logo bsed on design by David Fahlander</dc:title>
+          </cc:Agent>
+        </dc:rights>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>Carlos Pinto</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:identifier>Dexie.js Logo</dc:identifier>
+        <dc:source></dc:source>
+        <dc:language>English</dc:language>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>dexie</rdf:li>
+            <rdf:li>database</rdf:li>
+            <rdf:li>javascript</rdf:li>
+            <rdf:li>jquery</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+        <dc:description>The 2016 logo version of the Dexie.JS project.</dc:description>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,27.637839)">
+    <g
+       id="g3441"
+       transform="translate(14.735157,30.070435)">
+      <g
+         id="g3340"
+         transform="matrix(0.69493665,0,0,-0.69493665,103.79892,634.68441)"
+         style="fill:#ff7f2a;stroke:none">
+        <path
+           style="fill:#ff7f2a"
+           id="path3342"
+           d="M 97,506 C 31,488 10,466 10,414 c 0,-34 5,-47 25,-63 26,-19 104,-41 150,-41 23,0 25,4 25,43 l 0,43 -70,11 c -127,20 -127,56 -1,76 45,7 71,16 71,24 0,16 -49,16 -113,-1 z"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:#ff7f2a"
+           id="path3344"
+           d="m 10,299 c 0,-24 4,-49 8,-56 12,-19 75,-42 136,-49 l 56,-7 0,47 c 0,41 -2,46 -23,46 -39,0 -140,30 -159,47 -17,15 -18,14 -18,-28 z"
+           inkscape:connector-curvature="0" />
+        <path
+           style="fill:#ff7f2a"
+           id="path3346"
+           d="m 10,179 c 0,-24 4,-49 8,-56 12,-19 75,-42 136,-49 l 56,-7 0,47 c 0,41 -2,46 -23,46 -39,0 -140,30 -159,47 -17,15 -18,14 -18,-28 z"
+           inkscape:connector-curvature="0" />
+      </g>
+      <path
+         d="m 278.55521,598.51347 0,-312.83548 107.76394,0 q 36.49035,0 55.69581,4.48128 26.88764,6.18842 45.8797,22.40636 24.75367,20.91259 36.91715,53.56187 12.37681,32.43588 12.37681,74.26109 0,35.63679 -8.32236,63.16459 -8.32236,27.52783 -21.33936,45.6663 -13.01702,17.92511 -28.59479,28.3814 -15.36437,10.24293 -37.34394,15.57775 -21.76618,5.33484 -50.14758,5.33484 l -112.88538,0 z m 41.39843,-36.91715 66.7923,0 q 30.9421,0 48.44042,-5.76163 17.71168,-5.76164 28.16796,-16.21793 14.7242,-14.72417 22.83316,-39.47788 8.3224,-24.96708 8.3224,-60.39046 0,-49.08063 -16.21798,-75.32807 -16.00452,-26.46085 -39.05108,-35.42337 -16.64472,-6.40184 -53.56187,-6.40184 l -65.72531,0 0,239.00118 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:139.04925537px;line-height:125%;font-family:arial;-inkscape-font-specification:arial;letter-spacing:0px;word-spacing:0px;fill:#ff7f2a;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="path3417"
+         inkscape:connector-curvature="0" />
+      <path
+         d="m 744.60753,525.53276 39.69127,4.90806 q -9.38934,34.78322 -34.78321,53.98866 -25.39388,19.20547 -64.87174,19.20547 -49.72078,0 -78.95578,-30.51534 -29.02157,-30.72873 -29.02157,-85.99775 0,-57.18957 29.44836,-88.77187 29.44837,-31.5823 76.39501,-31.5823 45.45293,0 74.26109,30.9421 28.80819,30.94214 28.80819,87.06473 0,3.4143 -0.2134,10.24293 l -169.00798,0 q 2.13394,37.34392 21.12601,57.18957 18.99207,19.84561 47.37344,19.84561 21.12601,0 36.06358,-11.09647 14.93757,-11.09648 23.68673,-35.4234 z m -126.11582,-62.09761 126.54259,0 q -2.56071,-28.59479 -14.51078,-42.8922 -18.35187,-22.19296 -47.58685,-22.19296 -26.46082,0 -44.59932,17.71168 -17.92508,17.71171 -19.84564,47.37348 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:139.04925537px;line-height:125%;font-family:arial;-inkscape-font-specification:arial;letter-spacing:0px;word-spacing:0px;fill:#ff7f2a;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="path3419"
+         inkscape:connector-curvature="0" />
+      <path
+         d="m 807.13199,598.51347 82.79682,-117.79343 -76.6084,-108.8309 48.01364,0 34.78318,53.13508 q 9.81614,15.151 15.79115,25.39388 9.38934,-14.08401 17.28492,-24.96709 l 38.19751,-53.56187 45.87969,0 -78.31557,106.69696 84.29057,119.92737 -47.16003,0 -46.51987,-70.42 -12.37683,-18.99203 -59.53692,89.41203 -46.51986,0 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:139.04925537px;line-height:125%;font-family:arial;-inkscape-font-specification:arial;letter-spacing:0px;word-spacing:0px;fill:#ff7f2a;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="path3421"
+         inkscape:connector-curvature="0" />
+      <path
+         d="m 1048.0537,329.85054 0,-44.17255 38.4109,0 0,44.17255 -38.4109,0 z m 0,268.66293 0,-226.62433 38.4109,0 0,226.62433 -38.4109,0 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:139.04925537px;line-height:125%;font-family:arial;-inkscape-font-specification:arial;letter-spacing:0px;word-spacing:0px;fill:#ff7f2a;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="path3423"
+         inkscape:connector-curvature="0" />
+      <path
+         d="m 1300.2853,525.53276 39.6913,4.90806 q -9.3893,34.78322 -34.7832,53.98866 -25.3939,19.20547 -64.8717,19.20547 -49.7208,0 -78.9558,-30.51534 -29.0215,-30.72873 -29.0215,-85.99775 0,-57.18957 29.4483,-88.77187 29.4484,-31.5823 76.395,-31.5823 45.4529,0 74.2611,30.9421 28.8082,30.94214 28.8082,87.06473 0,3.4143 -0.2134,10.24293 l -169.008,0 q 2.1339,37.34392 21.126,57.18957 18.992,19.84561 47.3734,19.84561 21.126,0 36.0636,-11.09647 14.9376,-11.09648 23.6867,-35.4234 z m -126.1158,-62.09761 126.5426,0 q -2.5607,-28.59479 -14.5108,-42.8922 -18.3518,-22.19296 -47.5868,-22.19296 -26.4608,0 -44.5993,17.71168 -17.9251,17.71171 -19.8457,47.37348 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:139.04925537px;line-height:125%;font-family:arial;-inkscape-font-specification:arial;letter-spacing:0px;word-spacing:0px;fill:#ff7f2a;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="path3425"
+         inkscape:connector-curvature="0" />
+      <path
+         d="m 1399.3001,598.51347 0,-43.74573 43.7458,0 0,43.74573 -43.7458,0 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:139.04925537px;line-height:125%;font-family:arial;-inkscape-font-specification:arial;letter-spacing:0px;word-spacing:0px;fill:#ff7f2a;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="path3427"
+         inkscape:connector-curvature="0" />
+      <path
+         d="m 1509.4114,330.27734 0,-44.59935 38.4109,0 0,44.59935 -38.4109,0 z m -48.6538,356.15444 7.2554,-32.64929 q 11.5232,2.98754 18.1385,2.98754 11.7366,0 17.4983,-7.89557 5.7616,-7.6822 5.7616,-38.8377 l 0,-238.14762 38.4109,0 0,239.00119 q 0,41.82521 -10.8831,58.25656 -13.8706,21.33938 -46.0931,21.33938 -15.5777,0 -30.0885,-4.05449 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:139.04925537px;line-height:125%;font-family:arial;-inkscape-font-specification:arial;letter-spacing:0px;word-spacing:0px;fill:#ff7f2a;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="path3429"
+         inkscape:connector-curvature="0" />
+      <path
+         d="m 1591.568,530.86761 37.9841,-5.97502 q 3.201,22.83315 17.7117,34.9966 14.7242,12.16344 40.9717,12.16344 26.4609,0 39.2645,-10.66968 12.8035,-10.88308 12.8035,-25.39388 0,-13.01703 -11.3098,-20.48583 -7.8955,-5.12144 -39.2645,-13.01702 -42.252,-10.6697 -58.6834,-18.35187 -16.2179,-7.8956 -24.7536,-21.55278 -8.3224,-13.87062 -8.3224,-30.51534 0,-15.15098 6.8287,-27.9546 7.042,-13.01705 18.992,-21.55278 8.9626,-6.61521 24.327,-11.0965 15.5776,-4.69466 33.2894,-4.69466 26.6741,0 46.7332,7.68217 20.2725,7.6822 29.8753,20.91262 9.6026,13.01702 13.2303,34.9966 l -37.5573,5.12145 q -2.5607,-17.49831 -14.9377,-27.31443 -12.1634,-9.81611 -34.5697,-9.81611 -26.4609,0 -37.7708,8.74915 -11.3098,8.74915 -11.3098,20.4858 0,7.46879 4.6946,13.44384 4.6947,6.18842 14.7243,10.24289 5.7616,2.13394 33.9296,9.81614 40.7582,10.88307 56.7627,17.92508 16.218,6.82861 25.394,20.05904 9.1758,13.2304 9.1758,32.86267 0,19.20544 -11.3099,36.27695 -11.0965,16.85813 -32.2225,26.24744 -21.1258,9.17596 -47.8001,9.17596 -44.1726,0 -67.4325,-18.3519 -23.0466,-18.35187 -29.4484,-54.41544 z"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:139.04925537px;line-height:125%;font-family:arial;-inkscape-font-specification:arial;letter-spacing:0px;word-spacing:0px;fill:#ff7f2a;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="path3431"
+         inkscape:connector-curvature="0" />
+    </g>
+  </g>
+</svg>

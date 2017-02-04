@@ -128,3 +128,52 @@ img.dexie-logo-icon {
 	}
 	
 }
+
+.docs-page {
+	margin-bottom: 10px;
+	font-size: 16px;
+}
+
+.docs-page code {
+	float: none;
+	margin: 0;
+}
+
+.docs-page-subheader {
+	border-bottom: 1px solid #f6f6f6;
+}
+
+.docs-page-subtitle {
+	font-size: 18px;
+	margin-top: 10px;
+}
+
+.docs-page-subheader h1 {
+	margin: 0 0 10px 0;
+}
+
+.docs-toc-wrapper {
+	height: 400px;
+	overflow: auto;
+	border: 1px solid #dddddd;
+	border-radius: 4px;
+	border-right: none;
+}
+
+.docs-toc {
+	padding: 10px;
+}
+
+.docs-toc li {
+	list-style: none;
+}
+
+.docs-page-jumbotron {
+	background-color: #266fc1;
+	color: white;
+}
+
+.btn-edit-doc-page {
+	font-size: 18px;
+	line-height: 1.33;
+}

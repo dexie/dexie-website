@@ -1,26 +1,26 @@
 ---
 layout: docs
-title: 'Dexie.OpenFailedError'
+title: 'Dexie.InvalidTableError'
 ---
 
 ### Inheritance Hierarchy
 
 * [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
-  * [Dexie.DexieError](DexieError)
-    * Dexie.OpenFailedError
+  * [Dexie.DexieError](/docs/DexieErrors/DexieError)
+    * Dexie.InvalidTableError
 
 ### Description 
 
-Happens when a db operation has failed due to that database couldn't be opened.
+Happens when trying to access a table that does not exist or is not part of current transaction.
 
 ### Sample using Promise.catch()
 
 ```javascript
-doSomeDatabaseWork().then(function(){
+doSomeDatabaseWork().then(function() {
     // Success
-}).catch(Dexie.OpenFailedError, function (e) {
-    // Failed with OpenFailedError
-    console.error ("open failed: " + e.message);
+}).catch(Dexie.InvalidTableError, function (e) {
+    // Failed with InvalidTableError
+    console.error ("InvalidTable error: " + e.message);
 }).catch(Error, funtion (e) {
     // Any other error derived from standard Error
     console.error ("Error: " + e.message);
@@ -31,21 +31,23 @@ doSomeDatabaseWork().then(function(){
 ```
 
 ### Sample: switch(error.name)
+
 ```javascript
 db.on('error', function (error) {
     switch (error.name) {
-        case Dexie.errnames.OpenFailed:
-            console.log ("open failed");
+        // errnames.InvalidTable ==="InvalidTableError"
+        case Dexie.errnames.InvalidTable:
+            console.error ("InvalidTable error");
             break;
         default:
-            console.log ("error: " + e.message);
+            console.error ("error: " + e);
     }
 });
 ```
 ### Properties
 
 <table>
-<tr><td>name</td><td>Will always be Dexie.errnames.OpenFailed === "OpenFailedError"</tr>
+<tr><td>name</td><td>Will always be Dexie.errnames.InvalidTable === "InvalidTableError"</td></tr>
 <tr><td>message</td><td>Detailed message</td></tr>
 <tr><td>inner?</td><td>Inner exception instance (if any)</td></tr>
 <tr><td>stack</td><td>Can be present if the error was thown. If signaled, there wont be any call stack.</td></tr>

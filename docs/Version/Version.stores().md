@@ -2,23 +2,28 @@
 layout: docs
 title: 'Version.stores()'
 ---
+
 ### Syntax
 
-    version.stores(schemaDefinition);
+```javascript
+version.stores(schemaDefinition);
+```
 
 ### Parameters
+
 <table>
-<tr><td width=200>schemaDefinition : Object</td><td>Object where each key represents the name of an object store and each value represents its schema</td></tr>
+<tr><td>schemaDefinition : Object</td><td>Object where each key represents the name of an object store and each value represents its schema</td></tr>
 </table>
 
 ### Return Value
 
-[Version](Version)
+[Version](/docs/Version/Version)
 
 ### Description 
+
 Specifies tables to be added, altered or deleted in this version. Each key in the schemaDefinition argument represents a table name and each value represents the primary key followed by the list of indexed properties. Note that unlike SQL, you don't need to specify all properties but only the one you wish to index.
 
-Please refer to [Database Versioning](Design#database-versioning) that explains how to add, alter or remove a table using the Versioning framework in Dexie.
+Please refer to [Database Versioning](/docs/Tutorial/Design#database-versioning) that explains how to add, alter or remove a table using the Versioning framework in Dexie.
 
 ### Schema Syntax
 

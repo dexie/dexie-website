@@ -7,11 +7,14 @@ Define a javascript constructor that will be mapped to this object store.
 
 ### Syntax
 
-    table.defineClass(structure)
+```javascript
+table.defineClass(structure)
+```
 
 ### Parameters
+
 <table>
-<tr><td>structure: Object</td><td>Definition of the properties available on instances of the class and their types.</td><td></td></tr>
+<tr><td>structure: Object</td><td>Definition of the properties available on instances of the class and their types.</td></tr>
 </table>
 
 ### Return Value
@@ -26,39 +29,42 @@ If calling this method before db.open() call, intelligent javascript editors lik
 
 ### Sample
 
-    var db = new Dexie("FriendsDB");
+```javascript
+var db = new Dexie("FriendsDB");
 
-    // The stores() method just specify primary key and indexes
-    db.version(1).stores({
-        friends: "++id,name,shoeSize"
-    });
+// The stores() method just specify primary key and indexes
+db.version(1).stores({
+    friends: "++id,name,shoeSize"
+});
 
-    // When using defineClass(), you may specify non-indexed properties as well and their types
-    var Friend = db.friends.defineClass ({
-        name: String,
-        shoeSize: Number,
-        cars: [Car],
-        address: {
-            street: String,
-            city: String,
-            country: String
-        }        
-    });
+// When using defineClass(), you may specify
+// non-indexed properties as well and their types
+var Friend = db.friends.defineClass ({
+    name: String,
+    shoeSize: Number,
+    cars: [Car],
+    address: {
+        street: String,
+        city: String,
+        country: String
+    }        
+});
 
-    function Car() {}
+function Car() {}
 
-    Friend.prototype.log = function () {
-        console.log(JSON.stringify(this));
-    }
+Friend.prototype.log = function () {
+    console.log(JSON.stringify(this));
+}
 
-    db.open();
+db.open();
 
-    db.friends.where("name").startsWithIgnoreCase("d").each(function(friend) {
-        friend.log();
-    }).catch(function (e) {
-        console.error(e);
-    });
+db.friends.where("name").startsWithIgnoreCase("d").each(function(friend) {
+    friend.log();
+}).catch(function (e) {
+    console.error(e);
+});
+```
 
 ### See Also
 
-[Table.mapToClass()](Table.mapToClass())
+[Table.mapToClass()](/docs/Table/Table.mapToClass())

@@ -7,17 +7,20 @@ Delete all objects from the store.
 
 ### Syntax
 
-    table.clear()
+```javascript
+table.clear()
+```
 
 ### Return Value
 
-[Promise](Promise)
+[Promise](/docs/Promise/Promise)
 
 ### Remarks
 
 Deletes all objects and resolves or rejects the returned promise when done.
 
 ### See Also
-[Collection.delete()](Collection.delete())
 
-[Dexie.delete()](Dexie.delete())
+[Collection.delete()](/docs/Collection/Collection.delete())
+
+[Dexie.delete()](/docs/Dexie/Dexie.delete())

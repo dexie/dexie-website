@@ -3,11 +3,12 @@ layout: docs
 title: 'Dexie.on.populate'
 ---
 
-_API changed since 0.9.8 but is still backward compatible. To view the old documenation, see [Dexie.on.populate (old version)](Dexie.on.populate (old version)). The difference is that there is no more need to provide a [Transaction](Transaction) instance as argument to the callback. But for backward compatibility we still do._
+_API changed since 0.9.8 but is still backward compatible. To view the old documentation, see [Dexie.on.populate (old version)](/docs/Dexie/Dexie.on.populate-(old-version)). The difference is that there is no more need to provide a [Transaction](/docs/Transaction/Transaction) instance as argument to the callback. But for backward compatibility we still do._
 
 ### Syntax
+
 ```javascript
-    db.on("populate", function () {});
+db.on("populate", function () {});
 ```
 
 ### Description
@@ -21,12 +22,12 @@ The populate event is fired during an onupgradeneeded event and before db.open()
 ### Sample
 
 ```javascript
-    var db = new Dexie("MyDB");
-    db.version(1).stores({friends: "id++,name,gender"});
-    db.on("populate", function() {
-        db.friends.add({name: "Josephina", gender: "unisex"});
-    });
-    db.open();
+var db = new Dexie("MyDB");
+db.version(1).stores({friends: "id++,name,gender"});
+db.on("populate", function() {
+    db.friends.add({name: "Josephina", gender: "unisex"});
+});
+db.open();
 ```
 
 ### Limitations
@@ -36,99 +37,104 @@ The transaction running when the populate event is firing is an upgrade transact
 If your aim is to populate the database from an ajax- or other asyncronic request, the only bullet-proof way to do that is by using the on('ready') event rather than on('populate'). See a working (and fully tested) sample below:
 
 #### Ajax Populate Sample
+
 This sample shows how to populate your database from an ajax call. Note that on('populate') is not suitable for that and instead we are using on('ready'):
 
 ```javascript
-    var db = new Dexie('someDB');
-    db.version(1).stores({
-        someTable: "++id,someIndex"
-    });
+var db = new Dexie('someDB');
+db.version(1).stores({
+    someTable: "++id,someIndex"
+});
 
-    // Populate from AJAX:
-    db.on('ready', function () {
-        // on('ready') event will fire when database is open but 
-        // before any other queued operations start executing.
-        // By returning a Promise from this event,
-        // the framework will wait until promise completes before
-        // resuming any queued database operations.
-        // Let's start by using the count() method to detect if 
-        // database has already been populated.
-        return db.someTable.count(function (count) {
-            if (count > 0) {
-                console.log("Already populated");
-            } else {
-                console.log("Database is empty. Populating from ajax call...");
-                // We want framework to continue waiting, so we encapsulate
-                // the ajax call in a Dexie.Promise that we return here.
-                return new Dexie.Promise(function (resolve, reject) {
-                    $.ajax(url, {
-                        type: 'get',
-                        dataType: 'json',
-                        error: function (xhr, textStatus) {
-                            // Rejecting promise to make db.open() fail.
-                            reject(textStatus);
-                        },
-                        success: function (data) {
-                            // Resolving Promise will launch then() below.
-                            resolve(data);
-                        }
-                    });
-                }).then(function (data) {
-                    console.log("Got ajax response. We'll now add the objects.");
-                    // By returning the db.transaction() promise, framework will keep
-                    // waiting for this transaction to commit before resuming other
-                    // db-operations.
-                    return db.transaction('rw', db.someTable, function () {
-                        data.someInitArrayOfObjects.forEach(function (item) {
-                            console.log("Adding object: " + JSON.stringify(item));
-                            db.someTable.add(item);
-                        });
-                    });
-                }).then(function () {
-                    console.log ("Transaction committed");
+// Populate from AJAX:
+db.on('ready', function () {
+    // on('ready') event will fire when database is open but 
+    // before any other queued operations start executing.
+    // By returning a Promise from this event,
+    // the framework will wait until promise completes before
+    // resuming any queued database operations.
+    // Let's start by using the count() method to detect if 
+    // database has already been populated.
+    return db.someTable.count(function (count) {
+        if (count > 0) {
+            console.log("Already populated");
+        } else {
+            console.log("Database is empty. Populating from ajax call...");
+            // We want framework to continue waiting, so we encapsulate
+            // the ajax call in a Dexie.Promise that we return here.
+            return new Dexie.Promise(function (resolve, reject) {
+                $.ajax(url, {
+                    type: 'get',
+                    dataType: 'json',
+                    error: function (xhr, textStatus) {
+                        // Rejecting promise to make db.open() fail.
+                        reject(textStatus);
+                    },
+                    success: function (data) {
+                        // Resolving Promise will launch then() below.
+                        resolve(data);
+                    }
                 });
-            }
-        });
+            }).then(function (data) {
+                console.log("Got ajax response. We'll now add the objects.");
+                // By returning the db.transaction() promise, framework will keep
+                // waiting for this transaction to commit before resuming other
+                // db-operations.
+                return db.transaction('rw', db.someTable, function () {
+                    data.someInitArrayOfObjects.forEach(function (item) {
+                        console.log("Adding object: " + JSON.stringify(item));
+                        db.someTable.add(item);
+                    });
+                });
+            }).then(function () {
+                console.log ("Transaction committed");
+            });
+        }
     });
+});
 
-    db.open(); // Will resolve when data is fully populated (or fail if error)
+db.open(); // Will resolve when data is fully populated (or fail if error)
 
-    // Following operation will be queued until we're finished populating data:
-    db.someTable.each(function (obj) {
-        // When we come here, data is fully populated and we can log all objects.
-        console.log("Found object: " + JSON.stringify(obj));
-    }).then(function () {
-        console.log("Finished.");
-    }).catch(function (error) {
-        // In our each() callback above fails, OR db.open() fails due to any reason,
-        // including our ajax call failed, this operation will fail and we will get
-        // the error here!
-        console.error(error.stack || error);
-        // Note that we could also have catched it on db.open() but in this sample,
-        // we show it here.
-    });
+// Following operation will be queued until we're finished populating data:
+db.someTable.each(function (obj) {
+    // When we come here, data is fully populated and we can log all objects.
+    console.log("Found object: " + JSON.stringify(obj));
+}).then(function () {
+    console.log("Finished.");
+}).catch(function (error) {
+    // In our each() callback above fails, OR db.open() fails due to any reason,
+    // including our ajax call failed, this operation will fail and we will get
+    // the error here!
+    console.error(error.stack || error);
+    // Note that we could also have catched it on db.open() but in this sample,
+    // we show it here.
+});
 ```
 
 Console Output on first run:
 
-    Database is empty. Populating from ajax call...
-    Got ajax response. We'll now add the objects.
-    Adding object: {"someIndex":"item1"}
-    Adding object: {"someIndex":"item2"}
-    Transaction committed
-    Found object: {"someIndex":"item1","id":1}
-    Found object: {"someIndex":"item2","id":2}
-    Finished. 
+```
+Database is empty. Populating from ajax call...
+Got ajax response. We'll now add the objects.
+Adding object: {"someIndex":"item1"}
+Adding object: {"someIndex":"item2"}
+Transaction committed
+Found object: {"someIndex":"item1","id":1}
+Found object: {"someIndex":"item2","id":2}
+Finished. 
+```
 
 Console Output when data is already populated:
 
-    Already populated
-    Found object: {"someIndex":"item1","id":1}
-    Found object: {"someIndex":"item2","id":2}
-    Finished. 
+```
+Already populated
+Found object: {"someIndex":"item1","id":1}
+Found object: {"someIndex":"item2","id":2}
+Finished. 
+```
 
 [Watch the full HTML source](https://github.com/dfahlander/Dexie.js/blob/master/samples/ajax-populate/populateFromAjaxCall.html), or [view it in your browser](https://cdn.rawgit.com/dfahlander/Dexie.js/2446b378ccf28da657f68a9954a8e4227c3ebf3b/samples/ajax-populate/populateFromAjaxCall.html)
 
 ### See Also
 
-[The Populate Event](Design#the-populate-event)
+[The Populate Event](/docs/Tutorial/Design#the-populate-event)

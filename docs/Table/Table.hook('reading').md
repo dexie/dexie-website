@@ -5,9 +5,11 @@ title: "Table.hook('reading')"
 
 ### Syntax
 
-    db.[tableName].hook('reading', function (obj) {
-        // You may return another object or modify existing object.
-    });
+```javascript
+db.[tableName].hook('reading', function (obj) {
+    // You may return another object or modify existing object.
+});
+```
 
 ### Parameters
 <table>
@@ -26,20 +28,22 @@ db.[tableName].hook('reading').unsubscribe(yourListenerFunction)
 
 ### Description
 
-This event is called whenever an object is about to be returned from database to the caller of Table.get() or any [Collection](Collection) method that yields database objects, but not methods with a filtering or modification purpose such as [Table.filter()](Table.filter()) or [Table.modify()](Table.modify()). Specifically, hook('reading') will filter objects returned by:
-* [Table.get()](Table.get())
-* [Table.toArray()](Table.toArray())
-* [Table.each()](Table.each())
-* [Collection.toArray()](Collection.toArray())
-* [Collection.sortBy()](Collection.sortBy())
-* [Collection.each()](Collection.each())
-* [Collection.first()](Collection.first())
-* [Collection.last()](Collection.last())
+This event is called whenever an object is about to be returned from database to the caller of Table.get() or any [Collection](/docs/Collection/Collection) method that yields database objects, but not methods with a filtering or modification purpose such as [Table.filter()](/docs/Table/Table.filter()) or [Table.modify()](/docs/Table/Table.modify()). Specifically, hook('reading') will filter objects returned by:
+
+* [Table.get()](/docs/Table/Table.get())
+* [Table.toArray()](/docs/Table/Table.toArray())
+* [Table.each()](/docs/Table/Table.each())
+* [Collection.toArray()](/docs/Collection/Collection.toArray())
+* [Collection.sortBy()](/docs/Collection/Collection.sortBy())
+* [Collection.each()](/docs/Collection/Collection.each())
+* [Collection.first()](/docs/Collection/Collection.first())
+* [Collection.last()](/docs/Collection/Collection.last())
 
 But not for:
-* [Table.filter()](Table.filter())
-* [Collection.and()](Collection.and()) 
-* [Collection.modify()](Collection.modify())
+
+* [Table.filter()](/docs/Table/Table.filter())
+* [Collection.and()](/docs/Collection/Collection.and()) 
+* [Collection.modify()](/docs/Collection/Collection.modify())
 
 ### Error Handling
 
@@ -53,16 +57,16 @@ Dexie CRUD events can be used to implement several addons to Dexie such as:
 * Full-text search or other custom ways of indexing properties
 * Manipulation of returned objects
 
-The add-ons [Dexie.Observable.js](Dexie.Observable.js) and [Dexie.Syncable.js](Dexie.Syncable.js) uses  `hook('creating')`, `hook('updating')` and `hook('deleting')` to make the database locally observable as well as syncable with a remote server.
+The add-ons [Dexie.Observable.js](/docs/Observable/Dexie.Observable.js) and [Dexie.Syncable.js](/docs/Syncable/Dexie.Syncable.js) uses  `hook('creating')`, `hook('updating')` and `hook('deleting')` to make the database locally observable as well as syncable with a remote server.
 
-The `hook('reading')` is used internally by Dexie.js by the methods [Table.defineClass()](Table.defineClass()) and [Table.mapToClass()](Table.mapToClass()) in order to make all objects retrieved from database inherit a given class using prototypal inheritance.
+The `hook('reading')` is used internally by Dexie.js by the methods [Table.defineClass()](/docs/Table/Table.defineClass()) and [Table.mapToClass()](.docs/Table/Table.mapToClass()) in order to make all objects retrieved from database inherit a given class using prototypal inheritance.
 
 ### See Also
 
-[Table.hook('creating')](Table.hook('creating'))
+[Table.hook('creating')](/docs/Table/Table.hook('creating'))
 
-[Table.hook('updating')](Table.hook('updating'))
+[Table.hook('updating')](/docs/Table/Table.hook('updating'))
 
-[Table.hook('deleting')](Table.hook('deleting'))
+[Table.hook('deleting')](/docs/Table/Table.hook('deleting'))
 
-[Dexie.Observable.js](Dexie.Observable.js)
+[Dexie.Observable.js](/docs/Observable/Dexie.Observable.js)

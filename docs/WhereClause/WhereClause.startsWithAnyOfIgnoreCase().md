@@ -2,22 +2,27 @@
 layout: docs
 title: 'WhereClause.startsWithAnyOfIgnoreCase()'
 ---
+
 _Since v1.3.0_
+
 ### Syntax
 
-    table.where(indexOrPrimKey).startsWithAnyOfIgnoreCase(array) or
-    table.where(indexOrPrimKey).startsWithAnyOfIgnoreCase(str1, str2, strN, ...)
+```javascript
+table.where(indexOrPrimKey).startsWithAnyOfIgnoreCase(array) or
+table.where(indexOrPrimKey).startsWithAnyOfIgnoreCase(str1, str2, strN, ...)
+```
 
 ### Parameters
+
 <table>
-<tr><td>indexOrPrimKey: String</td><td>Name of an index or primary key registered in <a href="Version.stores()">Version.stores()</a></td></tr>
+<tr><td>indexOrPrimKey: String</td><td>Name of an index or primary key registered in <a href="/docs/Version/Version.stores()">Version.stores()</a></td></tr>
 <tr><td>array</td><td>Array of prefixes (strings) to look for</td></tr>
 <tr><td>str1, str2, strN</td><td>Prefixes (strings) to look for</td></tr>
 </table>
 
 ### Return Value
 
-[Collection](Collection)
+[Collection](/docs/Collection/Collection)
 
 ### Remarks
 
@@ -46,5 +51,4 @@ db.friends.where('lastName').startsWithAnyOfIgnoreCase(['foo','bar'])
   .toArray(function(result) {
       console.log("Found: " + result.lastName);
   });
-
 ```

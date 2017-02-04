@@ -2,21 +2,24 @@
 layout: docs
 title: 'WhereClause.anyOf()'
 ---
+
 ### Syntax
 
-    table.where(indexOrPrimKey).anyOf(array) or
-    table.where(indexOrPrimKey).anyOf(key1, key2, keyN, ...)
+```javascript
+table.where(indexOrPrimKey).anyOf(array) or
+table.where(indexOrPrimKey).anyOf(key1, key2, keyN, ...)
+```
 
 ### Parameters
 <table>
-<tr><td>indexOrPrimKey: String</td><td>Name of an index or primary key registered in <a href="Version.stores()">Version.stores()</a></td></tr>
+<tr><td>indexOrPrimKey: String</td><td>Name of an index or primary key registered in <a href="/docs/Version/Version.stores()">Version.stores()</a></td></tr>
 <tr><td>array</td><td>Array of keys to look for</td></tr>
 <tr><td>key1, key2, keyN</td><td>Keys to look for</td></tr>
 </table>
 
 ### Return Value
 
-[Collection](Collection)
+[Collection](/docs/Collection/Collection)
 
 ### Implementation Details
 

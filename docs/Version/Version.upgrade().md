@@ -2,6 +2,7 @@
 layout: docs
 title: 'Version.upgrade()'
 ---
+
 ### Syntax
 
 ```javascript
@@ -17,7 +18,8 @@ version.upgrade (upgraderFunction);
 </table>
 
 ### Return Value
-[Version](Version)
+
+[Version](/docs/Version/Version)
 
 ### Sample
 
@@ -43,4 +45,4 @@ db.open();
 
 ### See Also
 
-[Database Versioning](Design#database-versioning)
+[Database Versioning](/docs/Tutorial/Design#database-versioning)

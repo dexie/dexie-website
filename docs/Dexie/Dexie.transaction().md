@@ -36,7 +36,7 @@ db.transaction(mode, table(s), function() {
   <dt>"r"</dt><dd>READONLY</dd>
   <dt>"rw!","rw?","r!" or "r?"</dt><dd>Specify how to behave when there already is an ongoing transaction. See <a href="#specify-reusage-of-parent-transaction">Specify Reusage of Parent Transaction</a></dd>
 </dl></td></tr>
-<tr><td>table(s)</td><td>Table instances or table names to include in transaction. You may either provide multiple arguments after each other, or you may provide an array of tables. Each argument or array item must be either a <a href="Table">Table</a> instance or a string.</td></tr>
+<tr><td>table(s)</td><td>Table instances or table names to include in transaction. You may either provide multiple arguments after each other, or you may provide an array of tables. Each argument or array item must be either a <a href="/docs/Table/Table">Table</a> instance or a string.</td></tr>
 <tr><td>callback</td><td>Function to execute with the transaction. Note that since number of arguments may vary, the callback argument will always be the last argument provided to this method.</td></tr>
 </table>
 
@@ -67,65 +67,61 @@ db.transaction('rw', db.friends, db.pets, function() {
     //
 
     console.error(err.stack);
-
 });
 ```
 
 ### Return Value
 
-[Promise](Promise) that will resolve when the transaction has committed. It will resolve with the return value of the callback (if any). If transaction fails or is aborted, the promise will reject.
+[Promise](/docs/Promise/Promise) that will resolve when the transaction has committed. It will resolve with the return value of the callback (if any). If transaction fails or is aborted, the promise will reject.
 
 ### Description
 
 Start a database transaction.
 
-When accessing the database within the given scope function, any [Table](Table)-based operation will execute within the current transaction.
+When accessing the database within the given scope function, any [Table](/docs/Table/Table)-based operation will execute within the current transaction.
 
 *NOTE: As of v1.4.0+, the scope function will always be executed asynchronically. In previous versions, the scope function could be executed either directly (synchronically) or asynchronically depending on whether the database was ready, or if a parent transaction was locked. See [Issue #268](https://github.com/dfahlander/Dexie.js/issues/268)*.
 
 ### Transaction Scope
 
-The Transaction Scope is the places in your code where your transaction remains active. I'll sometimes refer to it as the Transaction [*Zone*](Promise.PSD). The obvious scope is of course your callback function to the transaction() method, but the scope will also extend to every callback (such as then(), each(), toArray(), ...) originated from any database operation. Here are some samples that clarifies the scope:
+The Transaction Scope is the places in your code where your transaction remains active. I'll sometimes refer to it as the Transaction [*Zone*](/docs/Promise/Promise.PSD). The obvious scope is of course your callback function to the transaction() method, but the scope will also extend to every callback (such as then(), each(), toArray(), ...) originated from any database operation. Here are some samples that clarifies the scope:
 
 ```javascript
+db.transaction('r', db.friends, db.pets, function() {
 
-    db.transaction('r', db.friends, db.pets, function() {
+    // WITHIN SCOPE / ZONE!
+
+    db.friends.where('name').equals('David').first(function(friend) {
 
         // WITHIN SCOPE / ZONE!
 
-        db.friends.where('name').equals('David').first(function(friend) {
-
+        db.pets.where('daddy').anyOf(friend.pets).each(function(pet) {
+            
             // WITHIN SCOPE / ZONE!
 
-            db.pets.where('daddy').anyOf(friend.pets).each(function(pet) {
-                
-                // WITHIN SCOPE / ZONE!
-
-            });
         });
-
-        setTimeout(function() {
-
-            // NOT WITHIN ZONE! (because Dexie's zone system does not support setTimeout())
-
-        }, 0);
-
-    }).then(function() {
-
-        // Transaction committed. NOT WITHIN ZONE!
-
-    }).catch(function(err) {
-
-        // Transaction aborted. NOT WITHIN ZONE!
-
     });
 
+    setTimeout(function() {
+
+        // NOT WITHIN ZONE! (because Dexie's zone system does not support setTimeout())
+
+    }, 0);
+
+}).then(function() {
+
+    // Transaction committed. NOT WITHIN ZONE!
+
+}).catch(function(err) {
+
+    // Transaction aborted. NOT WITHIN ZONE!
+
+});
 ```
 
 If you call another function, it will also be executing in the current transaction zone:
 
 ```javascript
-
     db.transaction('rw', db.friends, function () {
         externalFunction();
     });
@@ -133,7 +129,6 @@ If you call another function, it will also be executing in the current transacti
     function externalFunction () {
         db.friends.add({name: "my friend"}); // WITHIN ZONE!
     }
-
 ```
 
 _**BUT**_ be aware that zone is lost if using non-indexedDB compatible Promises (like standard Promise):
@@ -153,7 +148,6 @@ db.transaction('rw', db.cars, function () {
         // You'll be outside the zone here, unless you use Dexie.Promise or window.Promise.
         return db.cars.get(3);
     });
-
 }); // Transaction will fail with 'PrematureCommitError' (as of Dexie 2.0.0)
 ```
 
@@ -165,30 +159,28 @@ IndexedDB will commit a transaction as soon as it isn't used within a tick. This
 
 ### Accessing Transaction Object
 
-As long as you are within the transaction zone, the [Transaction](Transaction) object is returned using the [Dexie.currentTransaction](Dexie.currentTransaction) [Promise-static](Promise.PSD) property.
+As long as you are within the transaction zone, the [Transaction](/docs/Transaction/Transaction) object is returned using the [Dexie.currentTransaction](/docs/Dexie/Dexie.currentTransaction) [Promise-static](/docs/Promise/Promise.PSD) property.
 
 ### Nested Transactions
 
 Dexie supports nested transactions. A nested transaction must be in a compatible mode as its main transaction and all tables included in the nested transaction must also be included in its main transaction. Otherwise it will return a rejected promise and abort the parent transaction.
 
 ```javascript
+db.transaction('rw', db.friends, db.pets, db.cars, function () {
 
-    db.transaction('rw', db.friends, db.pets, db.cars, function () {
+    // MAIN TRANSACTION ZONE
 
-        // MAIN TRANSACTION ZONE
+    db.transaction('rw', db.friends, db.cars, function () {
 
-        db.transaction('rw', db.friends, db.cars, function () {
+        // SUB TRANSACTION ZONE
 
-            // SUB TRANSACTION ZONE
+        db.transaction('r', db.friends, function () {
 
-            db.transaction('r', db.friends, function () {
+            // SUB- of SUB-TRANSACTION ZONE
 
-                // SUB- of SUB-TRANSACTION ZONE
-
-            });
         });
     });
-
+});
 ```
 
 #### Limitations with Nested Transactions
@@ -226,12 +218,11 @@ db.transaction('rw', db.friends, function() {
 
 #### The Beauty of Nested Transactions
 
-If you write a library function that does some DB operations within a transaction and then need to reuse that function from a higher level library function, combining it with other tasks, you may gain atomicy for the entire operation. Without nested transactions, you would have to split the operations into several transactions, resulting in the risk of losing data integrity.
+If you write a library function that does some DB operations within a transaction and then need to reuse that function from a higher level library function, combining it with other tasks, you may gain atomicity for the entire operation. Without nested transactions, you would have to split the operations into several transactions, resulting in the risk of losing data integrity.
 
 ##### Sample
 
 ```javascript
-
 // Lower-level function
 function birthday(friendName) {
     db.transaction('rw', db.friends, function () {
@@ -250,8 +241,8 @@ function birthdays(today) {
         });
     });
 }
-
 ```
+
 _Note: The above samples are quite stupid, but samplifies the goodie with nested transactions. If you really wanted to do the above code simpler, you would do_
 
 ```javascript
@@ -272,30 +263,30 @@ _...but that wouldnt visualize the beauty of nested transactions..._
 Let's assume you have a javascript class Car with the method `save()`.
 
 ```javascript
-    function Car (brand, carModel) {
-        this.brand = brand;
-        this.model = carModel;
-    }
+function Car (brand, carModel) {
+    this.brand = brand;
+    this.model = carModel;
+}
 
-    Car.prototype.save = function () {
-        return db.cars.put(this);
-    }
+Car.prototype.save = function () {
+    return db.cars.put(this);
+}
 ```
 
 In a transaction-less code block you could then do:
 
 ```javascript
-    var car = new Car ("Pegeut", "Van Range");
-    car.save();
+var car = new Car ("Pegeut", "Van Range");
+car.save();
 ```
 
 If you call save() from within a transaction block:
 
 ```javascript
-    db.transaction('rw', db.friends, db.pets, db.cars, function () {
-        var car = new Car ("Pegeut", "Van Range");
-        car.save();
-    });
+db.transaction('rw', db.friends, db.pets, db.cars, function () {
+    var car = new Car ("Pegeut", "Van Range");
+    car.save();
+});
 ```
 
 ... then the save method will run the put() operation within your transaction scope. It is quite convenient not having to pass transaction instances around your code - that would easily bloat up the code and make it less reusable. It also makes it easier to switch from non-transactional to transactional code.
@@ -303,12 +294,12 @@ If you call save() from within a transaction block:
 When you write your transaction scope, you must make sure to include all tables that will be needed by the functions you are calling. If you forget to include a table required by a function, the operation will fail and so will the transaction.
 
 ```javascript
-    db.transaction('rw', db.friends, function() {
-        var car = new Car ("Pegeut", "Van Range");
-        car.save(); 
-    }).catch (function (err) {
-        // Will fail with Error ("Table cars not included in parent transaction")
-    });
+db.transaction('rw', db.friends, function() {
+    var car = new Car ("Pegeut", "Van Range");
+    car.save(); 
+}).catch (function (err) {
+    // Will fail with Error ("Table cars not included in parent transaction")
+});
 ```
 
 ### Specify Reusage of Parent Transaction
@@ -317,21 +308,18 @@ When entering a nested transaction block, Dexie will first check that it is comp
 
 The default behavior is to fail with rejection of the transaction promises (both main and nested) if the two are incompatible. 
 
-If your code must be independant on any ongoing transaction, you can override this by adding "!" or "?" to the `mode` argument.
+If your code must be independent on any ongoing transaction, you can override this by adding "!" or "?" to the `mode` argument.
 
 ```javascript
+db.transaction("rw!", db.Table, function () {
+    // Require top-level transaction (ignore ongoing transaction)
+});
 
-    db.transaction("rw!", db.Table, function () {
-        // Require top-level transaction (ignore ongoing transaction)
-    });
-
-    db.transaction("rw?", db.Table, function () {
-        // Use nested transaction only if compatible with ongoing, otherwise
-        // launch a top-level transaction for this scope
-    });
-
+db.transaction("rw?", db.Table, function () {
+    // Use nested transaction only if compatible with ongoing, otherwise
+    // launch a top-level transaction for this scope
+});
 ```
-
 
 <dl>
   <dt>!</dt><dd>Force Top-level Transaction. This will make your code independant on any ongoing transaction and instead always spawn a new transaction at top-level scope.</dd>
@@ -344,40 +332,40 @@ The "?" postfix can be used when your API could be used both internally or exter
 
 ### Sample Using The "!" Postfix
 
-Assume you have an external "Logger" component that is independant on anything else except db and the "logentries" table. Users of the Logger component should not have to worry about how it is implemented or whether a specific table or mode must be used in an ongoing transaction. In those kind of scenarios it is recommended to use a transaction block with the "!" postfix as the following sample shows.
+Assume you have an external "Logger" component that is independent on anything else except db and the "logentries" table. Users of the Logger component should not have to worry about how it is implemented or whether a specific table or mode must be used in an ongoing transaction. In those kind of scenarios it is recommended to use a transaction block with the "!" postfix as the following sample shows.
 
 ```javascript
-	//
-	// "logger.js":
-	//
-	function Logger() {
-		this.log = function (message) {
-            // Use the "!" postfix to ensure we work with our own transaction and never
-            // reuse any ongoing transaction.
-			return db.transaction('rw!', db.logentries, function () {
-				db.logentries.add({message: message, date: new Date()});
-			});
-		}
-	}
-
-    //
-    // Application code:
-    //
-	var logger = new Logger();
-
-	db.transaction('rw', db.friends, function () {
-        logger.log("Now adding hillary...");
-		return db.friends.add({name: "Hillary"}).then(function() {
-			logger.log("Hillary was added");
-		});
-	}).then(function() {
-        logger.log("Transaction successfully committed");
+//
+// "logger.js":
+//
+function Logger() {
+  this.log = function (message) {
+          // Use the "!" postfix to ensure we work with our own transaction and never
+          // reuse any ongoing transaction.
+    return db.transaction('rw!', db.logentries, function () {
+      db.logentries.add({message: message, date: new Date()});
     });
+  }
+}
+
+//
+// Application code:
+//
+var logger = new Logger();
+
+db.transaction('rw', db.friends, function () {
+  logger.log("Now adding hillary...");
+  return db.friends.add({name: "Hillary"}).then(function() {
+    logger.log("Hillary was added");
+  });
+}).then(function() {
+  logger.log("Transaction successfully committed");
+});
 ```
 
-Since the logger component must work independantly of whether a transaction is active or not, the logger compontent must be using the "!" postfix. Otherwise it would fail whenever called from within a transaction scope that did not include the "logentries" table.
+Since the logger component must work independently of whether a transaction is active or not, the logger component must be using the "!" postfix. Otherwise it would fail whenever called from within a transaction scope that did not include the "logentries" table.
 
-Note: This is just a theoretical sample to explain the "!" postfix. In a real world scenario, I would rather recommend to have a dedicated Dexie instance (dedicated db) for logging purpose rather than having it as a table within your app code. In that case you wouldnt have to use the "!" postfix because only you logging component would know about the db and there would never be ongoing transactions for that db.
+Note: This is just a theoretical sample to explain the "!" postfix. In a real world scenario, I would rather recommend to have a dedicated Dexie instance (dedicated db) for logging purpose rather than having it as a table within your app code. In that case you wouldn't have to use the "!" postfix because only you logging component would know about the db and there would never be ongoing transactions for that db.
 
 ### Implementation Details of Nested Transactions
 
@@ -385,11 +373,11 @@ Nested transactions has no out-of-the-box support in IndexedDB. Dexie emulates i
 
 ### Parallell Transactions
 
-At a glance, it could seem like you could only be able to run one transaction at a time. However, that is not the case. [Dexie.currentTransaction](Dexie.currentTransaction) is a [Promise-Local](Promise.PSD) static property (similar to how Thread-local storage works in threaded environments) that makes sure to always return the [Transaction](Transaction) instance that is bound to the transaction scope that initiated the operation.
+At a glance, it could seem like you could only be able to run one transaction at a time. However, that is not the case. [Dexie.currentTransaction](/docs/Dexie/Dexie.currentTransaction) is a [Promise-Local](/docs/Promise/Promise.PSD) static property (similar to how Thread-local storage works in threaded environments) that makes sure to always return the [Transaction](/docs/Transaction/Transaction) instance that is bound to the transaction scope that initiated the operation.
 
 #### Spawning a parallell operation
 
-Once you have entered a transaction, any database operation done in the transaction will reuse the same transaction. If you want to explicitely spawn another top-level transaction from within your current scope, you could either add the "!" postfix to the mode, or use encapsulate the database operation with [Dexie.ignoreTransaction()](Dexie.ignoreTransaction()).
+Once you have entered a transaction, any database operation done in the transaction will reuse the same transaction. If you want to explicitely spawn another top-level transaction from within your current scope, you could either add the "!" postfix to the mode, or use encapsulate the database operation with [Dexie.ignoreTransaction()](/docs/Dexie/Dexie.ignoreTransaction()).
 
 ```javascript
 db.transaction('rw', db.friends, function () {
@@ -401,15 +389,15 @@ db.transaction('rw', db.friends, function () {
 
     // Spawn a transaction-less operation outside our transaction:
     Dexie.ignoreTransaction(function () {
-        db.pets.toArray(function (){}).catch(...); // Will launch in parallell due to Dexie.ignoreTransaction()
+        // Will launch in parallell due to Dexie.ignoreTransaction()
+        db.pets.toArray(function (){}).catch(...);
     });
 });
-
 ```
 
-### Parallell Operations Within Same Transaction
+### Parallel Operations Within Same Transaction
 
-Database operations are launched in parallell by default unless you wait for the previous operation to finish.
+Database operations are launched in parallel by default unless you wait for the previous operation to finish.
 
 Sample:
 
@@ -425,40 +413,38 @@ function logCarModels() {
     
         db.cars
           .where('brand')
-          .equals('Peugeut')
+          .equals('Peugeot')
           .each(function (car) {
-            console.log("Peugeut " + car.model);
+            console.log("Peugeot " + car.model);
         });
     });
 }
 ```
 
-The above operations will run in parallell even though they run withing the same transaction. So you will get a mixture of Volvos and Peugeuts scrambled around in your console log.
+The above operations will run in parallel even though they run withing the same transaction. So you will get a mixture of Volvos and Peugeots scrambled around in your console log.
 
 To make sure that stuff happends in a sequence, you would have to write something like the following:
 
 ```javascript
-
-    // 1. Log Volvos
-    db.cars
-      .where('brand')
-      .equals('Volvo')
-      .each(function (car) {
-          console.log("Volvo " + car.model);
-      }).then (function() {
-          // 2. Log Pegeuts
-          return db.cars
-            .where('brand')
-            .equals('Peugeut')
-            .each(function (car) {
-                console.log("Peugeut " + car.model);
-            });
-      }).then (function (){
-          // 3. Do something more...
-      }).catch (function (e) {
-          ...
-      });
-
+// 1. Log Volvos
+db.cars
+  .where('brand')
+  .equals('Volvo')
+  .each(function (car) {
+      console.log("Volvo " + car.model);
+  }).then (function() {
+      // 2. Log Pegeuts
+      return db.cars
+        .where('brand')
+        .equals('Peugeot')
+        .each(function (car) {
+            console.log("Peugeot " + car.model);
+        });
+  }).then (function (){
+      // 3. Do something more...
+  }).catch (function (e) {
+      ...
+  });
 ```
 
 The example above shows how to run your queries in a sequence and wait for each one to finish. 
@@ -471,9 +457,11 @@ Async functions can be used with Dexie with the following caveats:
 * Some quirks and but's when using Dexie version 1.x, see below:
 
 #### Dexie 1.x
+
 * Need to set `let Promise = Dexie.Promise` at the same level as the async function is defined. Only works with Typescript < v2.0 and older versions of babel.
 
 #### Dexie 2.x
+
 You can use async await without any quirks. It works perfectly well with both native async functions (possible to enable in Edge and Chrome) as well as transpiled async await (Typescript - any version, Babel - any version). For transpiled async await, the end code will survive indexedDB transactions no matter browser (including IE 10). However, when using native async await, the browser will invoke native promises instead of Dexie.Promise. This would break transactions in Safari, IE and Firefox. Luckily though, Edge and Chrome are the only one supporting native async functions and both of them also have compatibility between their indexedDB implementation and their native promises. Dexie can maintain its zones (holding current transaction) between native await expressions as well as between transpiled await expressions.
  
 ```javascript
@@ -487,6 +475,7 @@ await db.transaction('rw', db.friends, async function() {
 The above code works with Dexie v2.0.0 in Typescript or babel with ES2016 preset. Also works in natively in Chrome and Edge when turning on experimental javascript features.
 
 #### Spawn / yield
+
 This is a poor-man's alternative to async functions but it is more widely supported by today's browsers:
 
 * Safari 10
@@ -505,4 +494,4 @@ db.transaction('rw', db.friends, function*() {
 });
 ```
 
-Read more about this in https://github.com/dfahlander/Dexie.js/wiki/Simplify-with-yield
+Read more about this in [Simplify with yield](/docs/Simplify-with-yield)

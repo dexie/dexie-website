@@ -3,7 +3,7 @@ layout: docs
 title: 'Table.where()'
 ---
 
-Start filtering the object store by creating a [WhereClause](WhereClause) instance.
+Start filtering the object store by creating a [WhereClause](/docs/WhereClause/WhereClause) instance.
 
 ### Syntax
 
@@ -18,7 +18,7 @@ table.where({keyPath1: value1, keyPath2: value2, ...});
 
 ### Parameters
 <table>
-<tr><td>indexOrPrimaryKey: String</td><td>Name of an index or primary key registered in <a href="Version.stores()">Version.stores()</a>. The special string ":id" represents the primary key.</td></tr>
+<tr><td>indexOrPrimaryKey: String</td><td>Name of an index or primary key registered in <a href="/docs/Version/Version.stores()">Version.stores()</a>. The special string ":id" represents the primary key.</td></tr>
   <tr>
     <td>keyPathArray</td>
     <td>Strings identifying keyPaths to filter on. Must match a compound index or primary key.</td>
@@ -31,18 +31,20 @@ table.where({keyPath1: value1, keyPath2: value2, ...});
 
 ### Description
 
-If a string, or array of strings was provided (indexes or primary keys), this method returns a [WhereClause](WhereClause) based on given index(es) or primary key(s). The returned WhereClause can be used to build a query on how to extract objects from the database using any of the methods in [WhereClause](WhereClause). An array of strings represents [compound indexes](Compound Index).
+If a string, or array of strings was provided (indexes or primary keys), this method returns a [WhereClause](/docs/WhereClause/WhereClause) based on given index(es) or primary key(s). The returned WhereClause can be used to build a query on how to extract objects from the database using any of the methods in [WhereClause](/docs/WhereClause/WhereClause). An array of strings represents [compound indexes](/docs/Compound-Index).
 
-If a plain object containing criterias was provided, this method returns a [Collection](Collection) filtered using given criterias. If providing a single criteria, the keyPath must match with an index. If providing multiple criterias, it is recommended to have a [compound index](Compound Index) containing all of the keyPath (in arbritary order), but it is not required. If no [compound index](Compound Index), at least one of the keyPaths must match a simple index. If Dexie.debug=true and not having compound index of all provided keyPaths, a console.warn() will give a hint on how to index this query properly.
+If a plain object containing criterias was provided, this method returns a [Collection](/docs/Collection/Collection) filtered using given criterias. If providing a single criteria, the keyPath must match with an index. If providing multiple criterias, it is recommended to have a [compound index](/docs/Compound-Index) containing all of the keyPath (in arbitrary order), but it is not required. If no [compound index](/docs/Compound-Index), at least one of the keyPaths must match a simple index. If `Dexie.debug=true` and not having compound index of all provided keyPaths, a console.warn() will give a hint on how to index this query properly.
 
 ### Return Value
 
-[WhereClause](WhereClause) if string was provided
+[WhereClause](/docs/WhereClause/WhereClause) if string was provided
 
-[Collection](Collection) if object was provided.
+[Collection](/docs/Collection/Collection) if object was provided.
 
 ### Sample
+
 Find friends named david, ignoring case
+
 ```javascript
 db.friends.where("name").equalsIgnoreCase("david").each(function (friend) {
     console.log("Found: " + friend.name + ". Phone: " + friend.phoneNumber);
@@ -50,7 +52,9 @@ db.friends.where("name").equalsIgnoreCase("david").each(function (friend) {
     console.error(error);
 });
 ```
+
 Find friends named David with age between 23 and 43
+
 ```javascript
 db.friends.where(["name", "age"])
   .between(["David", 23], ["David", 43], true, true)
@@ -62,6 +66,7 @@ db.friends.where(["name", "age"])
 ```
 
 Find a friend named David with age 43
+
 ```javascript
 db.friends.where({name: "David", age: 43}).first(friend => {
     console.log("Found David, 43: " + JSON.stringify(friend));
@@ -72,8 +77,8 @@ db.friends.where({name: "David", age: 43}).first(friend => {
 
 ### See Also
 
-[WhereClause](WhereClause)
+[WhereClause](/docs/WhereClause/WhereClause)
 
-[Collection](Collection)
+[Collection](/docs/Collection/Collection)
 
-[API-Reference#query-items](API-Reference#query-items)
+[API-Reference#query-items](/docs/API-Reference#query-items)

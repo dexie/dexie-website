@@ -3,6 +3,8 @@ layout: docs
 title: 'Dexie.Syncable.StatusTexts'
 ---
 
+## Description
+
 ```javascript
 Dexie.Syncable.StatusTexts = {
     "-1": "ERROR",
@@ -16,7 +18,7 @@ Dexie.Syncable.StatusTexts = {
 
 ## See also
 
-[Dexie.Syncable.Statuses](Dexie.Syncable.Statuses)
+[Dexie.Syncable.Statuses](/docs/Syncable/Dexie.Syncable.Statuses)
 
-[Dexie.Syncable.js](Dexie.Syncable.js)
+[Dexie.Syncable.js](/docs/Syncable/Dexie.Syncable.js)
 

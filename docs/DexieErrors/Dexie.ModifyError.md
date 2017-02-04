@@ -6,13 +6,14 @@ title: 'Dexie.ModifyError'
 ### Inheritance Hierarchy
 
 * [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
-  * [Dexie.DexieError](DexieError)
+  * [Dexie.DexieError](/docs/DexieErrors/DexieError)
     * Dexie.ModifyError
 
 ### Description 
-Error that may occur in [Collection.modify()](Collection.modify()) and [Collection.delete()](Collection.delete())
 
-The methods that may throw this error can perform mulpiple operations on a collection.  Therefore this error object will contain an array of the errors the occurred during the failed operations. 
+Error that may occur in [Collection.modify()](/docs/Collection/Collection.modify()) and [Collection.delete()](/docs/Collection/Collection.delete())
+
+The methods that may throw this error can perform multiple operations on a collection.  Therefore this error object will contain an array of the errors the occurred during the failed operations. 
 
 ### Properies
 
@@ -57,5 +58,4 @@ db.transaction('rw', db.friends, function* ()=> {
         }
     }
 });
-
 ```

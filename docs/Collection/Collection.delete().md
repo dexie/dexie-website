@@ -10,12 +10,12 @@ Deletes all objects in the query.
 
 ### Return Value
 
-[Promise](Promise) where result is the Number of deleted records. 
+[Promise](/docs/Promise/Promise) where result is the Number of deleted records. 
 
 ### Error Handling
 If any object fails to be deleted or an exception occurs in a callback function, the entire operation will fail and the transaction will be aborted.
 
-If you catch the returned Promise, the transaction will not abort, and you recieve a [Dexie.MultiModifyError](Dexie.MultiModifyError) error object containing the following properties:
+If you catch the returned Promise, the transaction will not abort, and you recieve a [Dexie.MultiModifyError](/docs/Dexie/Dexie.MultiModifyError) error object containing the following properties:
 
 <table>
 <tr><td>failures</td><td>Array of Error objects for all errors that have occurred</td></tr>
@@ -49,28 +49,27 @@ db.transaction('rw', db.orders, function* () {
         .delete();
 
     console.log ("Successfully deleted " + deleteCount + " items");
-
 }).catch (e => {
     console.error (e);
 });
-
 ```
 
-With Typescript
-```typescript
+With Typescript:
+
+```javascript
 async function myDeleteFunction () {
     let deleteCount = await db.orders
         .where("state").anyOf("finished", "discarded")
         .or("date").below("2014-02-01")
         .delete();
 }
-
 ```
 
 ### Remarks
 
 Collection.delete() is equivalent to:
 
-    Collection.modify(function () {delete this.value;});
-
+```javascript
+Collection.modify(function () {delete this.value;});
+````
 ..but Collection.delete() is much faster than deleting using Collection.modify().

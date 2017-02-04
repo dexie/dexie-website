@@ -14,11 +14,11 @@ db.version(versionNumber)
 <tr><td>versionNumber : Number</td><td>The version to declare</td></tr>
 </table>
 
-Note the backend DB will get the given version number [Dexie.version()](Dexie.version()) multiplied by 10. See [Issue #59](https://github.com/dfahlander/Dexie.js/issues/59) where the reason for this behavior is described.
+Note the backend DB will get the given version number multiplied by 10. See [Issue #59](https://github.com/dfahlander/Dexie.js/issues/59) where the reason for this behavior is described.
 
 ### Return Value
 
-[Version](Version)
+[Version](/docs/Version/Version)
 
 ### Sample
 
@@ -63,7 +63,8 @@ db.version(2).stores({
         delete friend.age;
     });
 });
-// Always keep the declarations previous versions as long as there might be users having them running.
+// Always keep the declarations previous versions
+// as long as there might be users having them running.
 db.version(1).stores({
     friends: "++id,name,age",
     pets: "++id,name,kind"
@@ -73,8 +74,8 @@ db.open();
 
 ### See Also
 
-[Database Versioning](Design#database-versioning)
+[Database Versioning](/docs/Tutorial/Design#database-versioning)
 
-[Version.stores()](Version.stores())
+[Version.stores()](/docs/Version/Version.stores())
 
-[Version.upgrade()](Version.upgrade())
+[Version.upgrade()](/docs/Version/Version.upgrade())

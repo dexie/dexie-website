@@ -2,7 +2,8 @@
 layout: docs
 title: 'Transaction.on.complete'
 ---
-### Syntax
+
+## Syntax
 
 ```javascript
 trans.on("complete", function () {

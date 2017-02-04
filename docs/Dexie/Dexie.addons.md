@@ -15,13 +15,11 @@ export function ForEachAddon (db) {
     
 // Register the addon to be included by default (optional)
 Dexie.addons.push(ForEachAddon);
-
 ```
 
 ES5:
 
 ```javascript
-
 (function(){
 
 	function ForEachAddon (db) {
@@ -33,23 +31,22 @@ ES5:
     Dexie.addons.push(ForEachAddon);
 
 })();
-
 ```
 
 ### Using addons
 
-Addons that register themself to Dexie.addons (For example Dexie.Observable and Dexie.Syncable)
+Addons that register themselves to Dexie.addons (For example Dexie.Observable and Dexie.Syncable)
 
 ```javascript
 import Dexie from 'dexie';
 import 'dexie-syncable';
 
-// db1 will have Dexie.Syncable (and it's dependant module Dexie.Observable) activated.
+// db1 will have Dexie.Syncable
+// (and its dependent module Dexie.Observable) activated.
 var db1 = new Dexie("dbname");
 
 // db2 will not have any addons activated
 var db2 = new Dexie("dbname", {addons: []});
-
 ```
 
 ES5:

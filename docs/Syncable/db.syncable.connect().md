@@ -7,26 +7,32 @@ title: 'db.syncable.connect()'
 
 ```typescript
 db.syncable.connect (
-    protocol: string,
-    url: string,
-    options: Object) : Promise<void>
+  protocol: string,
+  url: string,
+  options: Object
+) : Promise<void>
 ```
 
 ### Parameters
 
 <table>
-<tr><td width=200>protocol : String</td><td>Name of protocol. An Implementation of [ISyncProtocol](Dexie.Syncable.ISyncProtocol) must have been registered using [Dexie.Syncable.registerProtocol()](Dexie.Syncable.registerProtocol())</td></tr>
+<tr>
+  <td>protocol : String</td>
+  <td>
+    Name of protocol. An Implementation of <a href="/docs/Syncable/Dexie.Syncable.ISyncProtocol">ISyncProtocol</a> must have been registered using <a href="/docs/Syncable/Dexie.Syncable.registerSyncProtocol()">Dexie.Syncable.registerSyncProtocol()</a>
+  </td>
+</tr>
 <tr><td>url : String</td><td>URL to connect to</td></tr>
 <tr><td>options : Object</td><td>Options that the registered protocol can handle. Options are specific to each ISyncProtocol implementation</td></tr>
 </table>
 
 ### Return Value
 
-[Promise](Promise)
+[Promise](/docs/Promise/Promise)
 
 ### Description
 
-Connect to given URL using given protocol and options. Returned Promise will resolve when [sync-protocol](Dexie.Syncable.ISyncProtocol) has called its [onSuccess()](Dexie.Syncable.ISyncProtocol#onsuccess--function-continuation) callback. If [sync-protocol](Dexie.Syncable.ISyncProtocol) calls [onError()](Dexie.Syncable.ISyncProtocol#onerror--error-again), the returned promise will reject but the underlying framework may continue to try connecting in the background. If you want to stop this, call [db.syncable.disconnect (url)](db.syncable.disconnect()) in your catch clause.
+Connect to given URL using given protocol and options. Returned Promise will resolve when [sync-protocol](/docs/Syncable/Dexie.Syncable.ISyncProtocol) has called its [onSuccess()](/docs/Syncable/Dexie.Syncable.ISyncProtocol#onsuccess--function-continuation) callback. If [sync-protocol](/docs/Syncable/Dexie.Syncable.ISyncProtocol) calls [onError()](/docs/Syncable/Dexie.Syncable.ISyncProtocol#onerror--error-again), the returned promise will reject but the underlying framework may continue to try connecting in the background. If you want to stop this, call [db.syncable.disconnect (url)](/docs/Syncable/db.syncable.disconnect()) in your catch clause.
 
 Once connected, you will never have to call connect() again. Not even after a reboot. The framework will keep in sync forever with this node until a call to disconnect(), delete() happens, or if an irrepairable error occur on the node (not network down, but a fatal error).
 
@@ -37,7 +43,6 @@ Calling connect() when the node is already connected, will not generate any sync
 ## Sample
 
 ```javascript
-
 import Dexie from 'dexie';
 import 'dexie-observable';
 import 'dexie-syncable';
@@ -82,5 +87,5 @@ db.foo.toArray().then(foos => {
 
 ## See also
 
-[Dexie.Syncable.js](Dexie.Syncable.js)
+[Dexie.Syncable.js](/docs/Syncable/Dexie.Syncable.js)
 

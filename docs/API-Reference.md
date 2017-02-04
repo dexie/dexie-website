@@ -2,41 +2,43 @@
 layout: docs
 title: 'API Reference'
 ---
+
 ### Classes
-* [Dexie](Dexie)
-* [DexieError](DexieError)
-* [Collection](Collection)
-* [IndexSpec](IndexSpec)
-* [ModifyError](Dexie.ModifyError)
-* [Promise](Promise)
-* [Table](Table)
-* [TableSchema](TableSchema)
-* [Transaction](Transaction)
-* [Version](Version)
-* [WhereClause](WhereClause)
+
+* [Dexie](/docs/Dexie/Dexie)
+* [DexieError](/docs/DexieErrors/DexieError)
+* [Collection](/docs/Collection/Collection)
+* [IndexSpec](/docs/IndexSpec)
+* [ModifyError](/docs/Dexie/Dexie.ModifyError)
+* [Promise](/docs/Promise/Promise)
+* [Table](/docs/Table/Table)
+* [TableSchema](/docs/TableSchema)
+* [Transaction](/docs/Transaction/Transaction)
+* [Version](/docs/Version/Version)
+* [WhereClause](/docs/WhereClause/WhereClause)
 
 ### [Cheat Sheet](#quick-reference)
-Jump directly to [Quick Reference](#quick-reference)
-
-### All Methods
-[All Pages](_pages)
 
 ### Operators & filters
-* [WhereClause](WhereClause)
-* [Collection](Collection)
+
+* [WhereClause](/docs/WhereClause/WhereClause)
+* [Collection](/docs/Collection/Collection)
 
 ### Addons, Adapters and Derived Work
-[Derived Work](DerivedWork)
+
+[Derived Work](/docs/DerivedWork)
 
 ### Typescript
-[Using Dexie with Typescript](Typescript)
+
+[Using Dexie with Typescript](/docs/Typescript)
 
 ### Knowledge Base
-[Questions and Answers](Questions-and-Answers)
+[Questions and Answers](/docs/Questions-and-Answers)
 
 # Quick Reference 
 
 #### Declare Database
+
 ```javascript
 var db = new Dexie("MyDatabase");
 db.version(1).stores({
@@ -45,6 +47,7 @@ db.version(1).stores({
 });
 
 ```
+
 #### Schema Syntax
 
 <table>
@@ -54,7 +57,7 @@ db.version(1).stores({
 <tr><td>[A+B]</td><td>Compound index</td></tr>
 </table>
 
-[Complete Syntax Documentation](Version.stores())
+[Complete Syntax Documentation](/docs/Version/Version.stores())
 
 #### Upgrade
 
@@ -79,7 +82,7 @@ db.version(2).stores({
     });
 });
 ```
-[Read more about database versioning](Design#database-versioning)
+[Read more about database versioning](/docs/Tutorial/Design#database-versioning)
 
 #### Class Binding
 ```javascript
@@ -98,7 +101,7 @@ class Friend {
 db.friends.mapToClass(Friend);
 
 ```
-Reference: [Table.mapToClass()](Table.mapToClass())
+Reference: [Table.mapToClass()](/docs/Table/Table.mapToClass())
 
 #### Add Items
 
@@ -106,13 +109,13 @@ Reference: [Table.mapToClass()](Table.mapToClass())
 db.friends.add({name: "Josephine", age: 21});
 ```
 
-Reference: [Table.add()](Table.add())
+Reference: [Table.add()](/docs/Table/Table.add())
 
 ```javascript
 db.people.bulkAdd([{name: "Foo"},{name: "Bar"}]);
 ```
 
-Reference: [Table.bulkAdd()](Table.bulkAdd())
+Reference: [Table.bulkAdd()](/docs/Table/Table.bulkAdd())
 
 
 #### Update Items
@@ -121,7 +124,7 @@ Reference: [Table.bulkAdd()](Table.bulkAdd())
 db.friends.put({id: 4, name: "Foo", age: 33});
 ```
 
-Reference: [Table.put()](Table.put())
+Reference: [Table.put()](/docs/Table/Table.put())
 
 ```javascript
 db.friends.bulkPut([
@@ -130,13 +133,13 @@ db.friends.bulkPut([
 ]);
 ```
 
-Reference: [Table.bulkPut()](Table.bulkPut())
+Reference: [Table.bulkPut()](/docs/Table/Table.bulkPut())
 
 ```javascript
 db.friends.update(4, {name: "Bar"});
 ```
 
-Reference: [Table.update()](Table.update())
+Reference: [Table.update()](/docs/Table/Table.update())
 
 ```javascript
 db.customers
@@ -145,7 +148,7 @@ db.customers
     .modify({discount: 0.5});
 ```
 
-Reference: [Collection.modify()](Collection.modify())
+Reference: [Collection.modify()](/docs/Collection/Collection.modify())
 
 
 #### Delete items
@@ -154,13 +157,13 @@ Reference: [Collection.modify()](Collection.modify())
 db.friends.delete(4);
 ```
 
-Reference: [Table.delete()](Table.delete())
+Reference: [Table.delete()](/docs/Table/Table.delete())
 
 ```javascript
 db.friends.bulkDelete([1,2,4]);
 ```
 
-Reference: [Table.bulkDelete()](Table.bulkDelete())
+Reference: [Table.bulkDelete()](/docs/Table/Table.bulkDelete())
 
 ```javascript
 db.logEntries
@@ -168,7 +171,7 @@ db.logEntries
     .delete();
 ```
 
-Reference: [Collection.delete()](Collection.delete())
+Reference: [Collection.delete()](/docs/Collection/Collection.delete())
 
 #### Query Items
 ```javascript
@@ -201,7 +204,7 @@ db.friends
     });
 ```
 
-References: [Table.where()](Table.where()), [WhereClause](WhereClause), [Collection](Collection)
+References: [Table.where()](/docs/Table/Table.where()), [WhereClause](/docs/WhereClause/WhereClause), [Collection](/docs/Collection/Collection)
 
 ```javascript
 db.friends
@@ -210,7 +213,7 @@ db.friends
     .modify({discount: 0.5});
 ```
 
-References: [Table.where()](Table.where()), [WhereClause](WhereClause), [Collection.modify()](Collection.modify())
+References: [Table.where()](/docs/Table/Table.where()), [WhereClause](/docs/WhereClause/WhereClause), [Collection.modify()](/docs/Collection/Collection.modify())
 
 ```javascript
 db.friends
@@ -220,7 +223,7 @@ db.friends
         ...
     });
 ```
-Reference: [Table.filter()](Table.filter())
+Reference: [Table.filter()](/docs/Table/Table.filter())
 
 ```javascript
 db.friends
@@ -231,7 +234,7 @@ db.friends
         ...
     });
 ```
-[Read more about compound index](Compound Index)
+[Read more about compound index](/docs/Compound-Index)
 
 In Dexie 2.0, you could do the above query a little simpler:
 
@@ -272,7 +275,7 @@ db.friends
     .modify(friend => friend.tags.push("marketing-target"));
 ```
 
-Reference: [Collection.or()](Collection.or())
+Reference: [Collection.or()](/docs/Collection/Collection.or())
 
 #### Retrieve TOP-X items
 
@@ -288,7 +291,7 @@ db.gameSessions
             sessions.map(function (s) { return s.date }));
     });
 ```
-References: [Table.orderBy()](Table.orderBy()), [Collection.reverse()](Collection.reverse()), [Collection.limit()](Collection.limit())
+References: [Table.orderBy()](/docs/Table/Table.orderBy()), [Collection.reverse()](/docs/Collection/Collection.reverse()), [Collection.limit()](/docs/Collection/Collection.limit())
 
 #### Joining
 ```javascript
@@ -300,18 +303,20 @@ db.version(1).stores({
 });
 
 function getBandsStartingWithA () {
-
     // Query
-    return db.bands.where('name').startsWith('A').toArray(bands => {
-        return Promise.all (bands.map (band =>
-          Promise.all([
-            db.genres.get (band.genreId),
-            db.albums.where('id').anyOf(band.albumIds).toArray()
-          ]).then (result => {
-            // Set genre and albums as direct properties on each result
-            [band.genre, band.albums] = result;
-            return band;
-          });
+    return db.bands
+        .where('name')
+        .startsWith('A')
+        .toArray(bands => {
+          return Promise.all (bands.map (band =>
+            Promise.all([
+              db.genres.get (band.genreId),
+              db.albums.where('id').anyOf(band.albumIds).toArray()
+            ]).then (result => {
+              // Set genre and albums as direct properties on each result
+              [band.genre, band.albums] = result;
+              return band;
+            })
         ));
     });
 }
@@ -319,7 +324,7 @@ function getBandsStartingWithA () {
 
 #### Yielding Promises
 
-[spawn()](Dexie.spawn())
+[spawn()](/docs/Dexie/Dexie.spawn())
 ```javascript
 Dexie.spawn(function*() {
 
@@ -335,7 +340,7 @@ Dexie.spawn(function*() {
         var primaryKeys = yield db.friends.where('age').above(8).primaryKeys();
         return yield Dexie.Promise.all(
             // Add a new dog and set its foreign key to the friend in question.
-            primaryKeys.map(friendId => db.pets.add({kind: 'dog', ownerId: friendId})
+            primaryKeys.map(friendId => db.pets.add({kind: 'dog', ownerId: friendId}))
         );
     });
 
@@ -344,7 +349,8 @@ Dexie.spawn(function*() {
 });
 ```
 
-[async()](Dexie.async())
+[async()](/docs/Dexie/Dexie.async())
+
 ```javascript
 var birthday = Dexie.async(function* (friendId) {
     yield db.friends
@@ -356,7 +362,6 @@ var birthday = Dexie.async(function* (friendId) {
 });
 
 birthDay(2).catch(err => console.error(err.stack));
-
 ```
 
 #### Ongoing Transaction
@@ -391,7 +396,7 @@ function spreadYourLove() {
 
 *The above code snippet shows that you can reuse "transactionless" code (function goodFriends() and addComment()) but execute it within a transaction (spreadYourLove()).*
 
-Reference: [Dexie.transaction()](Dexie.transaction())
+Reference: [Dexie.transaction()](/docs/Dexie/Dexie.transaction())
 
 #### Parent Transaction
 
@@ -406,26 +411,30 @@ db.transaction('rw', db.friends, db.diary, function*() {
 });
 
 ```
+
 *The above snippet shows that you can also reuse code that is indeed transaction-aware, but encapsulate several such functions in an overall umbrella-transaction.*
 
-Reference: [Dexie.transaction()](Dexie.transaction())
+Reference: [Dexie.transaction()](/docs/Dexie/Dexie.transaction())
 
 #### Working with Asynchronic APIs
+
 Dexie.js is an asynchronic API. In synchronic APIs, errors are normally handled using exceptions. This is very convinient because you code on without doing error checking everywhere and instead catch exceptions on a higher level. Asynchronic APIs normally use success- and error events to signal back when operation complete. Since indexedDB uses a combination of exceptions and error events to notify the caller, it is quite cumbersome to code against it using correct error handling - you need both to do try..catch and request.onerror for each and every request. Dexie.js solves this by working with ECMAScript6 compliant [Promises](http://www.html5rocks.com/en/tutorials/es6/promises/) making error handling as easy as it is on a synchronous API with try..catch error handling.
 
 #### Working with Promises
-Promise based APIs (such as Dexie.js) will look more like synchronous APIs than event based APIs, but instead of returning the result, it will return an instance of [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). ECMAScript6 promises has two methods: [then()](Promise.then) and [catch()](Promise.catch). These methods expects a callback to call when the operation succeeds or fails respectively. All asynchronic methods in Dexie returns a Promise instance and this makes the API way more easy to use, as you will see in our examples.
+Promise based APIs (such as Dexie.js) will look more like synchronous APIs than event based APIs, but instead of returning the result, it will return an instance of [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). ECMAScript6 promises has two methods: [then()](/docs/Promise/Promise.then) and [catch()](/docs/Promise/Promise.catch). These methods expects a callback to call when the operation succeeds or fails respectively. All asynchronic methods in Dexie returns a Promise instance and this makes the API way more easy to use, as you will see in our examples.
 
 #### Promise Compatibility
+
 Dexie Promises are A+ / ES6 compliant and play magically well with other Promise libraries, such as bluebird, Q or native Promise. It can be used in async / await code in Typescript or ES7. However, it is important to stick to only using `Dexie.Promise` (in Dexie 1.x) while doing operations within a transaction. Otherwise the underlying transaction will commit too early due to a limitation within indexedDB itself. However, the final result of the transaction (final Promise returned by db.transaction()) can be safely mixed with or converted to any other Promise lib.
 
-*In Dexie 2.0.0-beta and later, the global Promise can be safely used within transactions as the global Promise will be patched within the transaction [zone](Promise.PSD).*
+*In Dexie 2.0.0-beta and later, the global Promise can be safely used within transactions as the global Promise will be patched within the transaction [zone](/docs/Promise/Promise.PSD).*
 
 #### Promise-Specific Data (zone)
-Dexie Promises supports a pattern similar to [Thread-local storage](http://en.wikipedia.org/wiki/Thread-local_storage) where it is possible to have static properties that is bound to the executing promise and all it's child-promises. This is similar Angular's [zone.js](https://github.com/angular/zone.js/) but only for Promises and without having to modify globals. Dexie.js and it's transaction API heavily depends on it since it enables code to be aware of the currently executing transaction without having to pass transaction objects around. [Promise-Specific Data doc](Promise.PSD).
+Dexie Promises supports a pattern similar to [Thread-local storage](http://en.wikipedia.org/wiki/Thread-local_storage) where it is possible to have static properties that is bound to the executing promise and all it's child-promises. This is similar Angular's [zone.js](https://github.com/angular/zone.js/) but only for Promises and without having to modify globals. Dexie.js and it's transaction API heavily depends on it since it enables code to be aware of the currently executing transaction without having to pass transaction objects around. [Promise-Specific Data doc](/docs/Promise/Promise.PSD).
 
 #### Exception Handling
-With Dexie, in contrary to indexedDB, there is one single way to catch exceptions - through the Promise.catch() method. Nowhere do you need to do a standard try..catch(). The reason for this is to not enforce the caller to need to think about several ways of error handling. When you work with transactions, you will also get the benefit of being able to catch all errors in one single place - at the end of the transaction, instead of having to catch() every promise of each database operation. Any uncatuch error (no matter error events, exception or miss-spelled variable in your code) will abort the ongoing [Transaction](Transaction) and trigger its returned [Promise](Promise) to reject, waking up any catch() clause attached to the transaction scope.
+
+With Dexie, in contrary to indexedDB, there is one single way to catch exceptions - through the Promise.catch() method. Nowhere do you need to do a standard try..catch(). The reason for this is to not enforce the caller to need to think about several ways of error handling. When you work with transactions, you will also get the benefit of being able to catch all errors in one single place - at the end of the transaction, instead of having to catch() every promise of each database operation. Any uncatuch error (no matter error events, exception or miss-spelled variable in your code) will abort the ongoing [Transaction](/docs/Transaction/Transaction) and trigger its returned [Promise](/docs/Promise/Promise) to reject, waking up any catch() clause attached to the transaction scope.
 
 ```javascript
 db.transaction('rw', db.friends, function() {
@@ -442,7 +451,7 @@ db.transaction('rw', db.friends, function() {
 });
 ```
 
-All transaction promises should either be catched or returned to its caller. If this pattern isn't followed, [Promise.on('error')](Promise.on.error) will trigger. 
+All transaction promises should either be catched or returned to its caller. If this pattern isn't followed, [Promise.on('error')](/docs/Promise/Promise.on.error) will trigger. 
 
 ```javascript
 Dexie.Promise.on('error', function (err) {
@@ -466,6 +475,7 @@ db.transaction('rw', db.friends, function() {
 ```
 
 #### Working With Transactions
+
 Whenever you want to do more than a single operation, you simplify your code by using transactions. By working with transactions, you get the following benefits:
 * If modifying database and any error occur - error event or exception of any kind - then transaction will abort and every modification will be rolled back.
 * No need to handle promises if you don't like. Everything is encapsulated in the transaction so you can handle that instead.
@@ -493,7 +503,7 @@ db.transaction('rw', db.friends, db.pets, function () {
 });
 ```
 Notes:
-* 'friends' and 'pets' are objectStores registered using [Version.stores()](Version.stores()) method.
+* 'friends' and 'pets' are objectStores registered using [Version.stores()](/docs/Version/Version.stores()) method.
 * `"rw"` should be replaced with `"r"` if you are just going to do read operations.
 * Also errors from chained database operations within the transaction, or plain exceptions happening in any then() callback of any chained operation will be catched by the transaction's catch() method.
 * It is possible to prohibit the transaction from being aborted if a failing DB operation is catched explicitely:
@@ -559,7 +569,7 @@ The sample above shows that there's no need to wait for the add() operations to 
 
 IndexedDB will commit a transaction as soon as it isn't used within the same task. This means that you MUST NOT call any other async API (at least not wait for it to finish) within a transaction scope. If you do, you will get a TransactionInactiveError thrown at you as soon as you try to continue using the transaction. This cannot be worked around by encapsulating the call with Dexie.Promise since it is a behaviour of IndexedDB.
 
-*News in Dexie 2.0.0-beta.6: You can now wait for other async APIs and still hold the transaction active, using [Dexie.waitFor()](Dexie.waitFor())*
+*News in Dexie 2.0.0-beta.6: You can now wait for other async APIs and still hold the transaction active, using [Dexie.waitFor()](/docs/Dexie/Dexie.waitFor())*
 
 #### Nested IndexedDB Transactions
 
@@ -576,4 +586,4 @@ db.transaction('rw', db.friends, db.pets, function () {
 
 The power with nested transactions is that functions that use a transaction can be reused by higher-level code that surrounds all of its calls into a bigger transaction.
 
-See also [Dexie.transaction()](Dexie.transaction()) for more information on how to use transactions.
+See also [Dexie.transaction()](/docs/Dexie/Dexie.transaction()) for more information on how to use transactions.

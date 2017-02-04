@@ -4,7 +4,9 @@ title: 'Collection.distinct()'
 ---
 ### Syntax
 
-    collection.distinct()
+```javascript
+collection.distinct()
+```
 
 ### Return Value
 
@@ -12,4 +14,4 @@ This Collection instance (**this**)
 
 ### Remarks
 
-Removes any duplicates of primary keys in the collection. Useful only when working with multi valued indexes, see [Version.stores()](Version.stores())
+Removes any duplicates of primary keys in the collection. Useful only when working with multi valued indexes, see [Version.stores()](/docs/Version/Version.stores())

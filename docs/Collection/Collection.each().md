@@ -2,6 +2,7 @@
 layout: docs
 title: 'Collection.each()'
 ---
+
 ### Syntax
 
 ```javascript
@@ -9,6 +10,7 @@ collection.each(callback)
 ```
 
 ### Parameters
+
 <table>
   <tr>
     <td>callback: Function</td>
@@ -17,6 +19,7 @@ collection.each(callback)
 </table>
 
 ### Callback Parameters
+
 <table>
   <tr>
     <td>item: Object</td>
@@ -30,10 +33,10 @@ collection.each(callback)
 
 ### Return Value
 
-[Promise](Promise)
+[Promise](/docs/Promise/Promise)
 
 ### Remarks
 
-When iteration finishes, the returned Promise will resolve with `undefined`, calling any [Promise.then()](Promise.then()) callback.
+When iteration finishes, the returned Promise will resolve with `undefined`, calling any [Promise.then()](/docs/Promise/Promise.then()) callback.
 
-If the operation fails, the returned Promise will reject, calling any [Promise.catch()](Promise.catch()) callback.
+If the operation fails, the returned Promise will be rejected, calling any [Promise.catch()](/docs/Promise/Promise.catch()) callback.

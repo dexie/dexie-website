@@ -5,9 +5,12 @@ title: 'Dexie.on.ready'
 
 ### Syntax
 
-    db.on("ready", function callback () {}, bSticky);
+```javascript
+db.on("ready", function callback () {}, bSticky);
+```
 
 ### Parameters
+
 <table>
 <tr><td>callback: Function</td><td>Callback to execute when database has successfully opened.</td></tr>
 <tr><td>bSticky: Boolean</td><td>Optional. If truthy, the subscriber will survive db.close();db.open();</td></tr>
@@ -15,7 +18,9 @@ title: 'Dexie.on.ready'
 
 ### Sample
 
-    db.on("ready", function() { alert ("Database ready"); });
+```javascript
+db.on("ready", function() { alert ("Database ready"); });
+```
 
 ### Description
 
@@ -27,13 +32,15 @@ In case database is already open, the event will trigger immediately. If not ope
 
 This use case is similar to jQuery('document').ready() - if subscribing to the event *before* database is open, the subscriber will be queued and executed once database is ready, but if database is already open when subscribing to the event, the subscriber will be executed immediately. This use case is typically a one-shot subscription. In case database is closed and reopened, the subscriber will not be called again.
 
-    db.on("ready", function () {
-        // Will trigger once and only once.
-    });
+```javascript
+db.on("ready", function () {
+    // Will trigger once and only once.
+});
+```
 
 #### Use Case 2: Block db.open() until done
 
-An example of this use case is when you want to [Ajax Populate Sample](Dexie.on.populate#ajax-populate-sample).
+An example of this use case is when you want to [Ajax Populate Sample](/docs/Dexie/Dexie.on.populate#ajax-populate-sample).
 
 In case you want to initialize your database with contents before any operation executes, you may do so by subscribing to db.on('ready') within the same tick as you are calling db.open() and return a Promise. 
 
@@ -41,7 +48,8 @@ In case you want to initialize your database with contents before any operation 
 
 If you are building a plugin that will extend the open procedure, you may want to use the bSticky parameter to tell Dexie to let your subscriber not be a one-shot subscriber but survice calls to db.close() / db.open(). This is a rare use case for application code, since a database is typically opened only once in the application's life time.
 
-    db.on("ready", function () {
-        // Will trigger each time db is successfully opened.
-    }, true);
-
+```javascript
+db.on("ready", function () {
+    // Will trigger each time db is successfully opened.
+}, true);
+```

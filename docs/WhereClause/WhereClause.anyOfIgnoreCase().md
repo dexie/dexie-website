@@ -2,25 +2,29 @@
 layout: docs
 title: 'WhereClause.anyOfIgnoreCase()'
 ---
+
 *Since v1.3.0*
 
 ### Syntax
 
-    table.where(indexOrPrimKey).anyOfIgnoreCase(array) or
-    table.where(indexOrPrimKey).anyOfIgnoreCase(key1, key2, keyN, ...)
+```javascript
+table.where(indexOrPrimKey).anyOfIgnoreCase(array) or
+table.where(indexOrPrimKey).anyOfIgnoreCase(key1, key2, keyN, ...)
+```
 
 ### Parameters
 <table>
-<tr><td>indexOrPrimKey: String</td><td>Name of an index or primary key registered in <a href="Version.stores()">Version.stores()</a></td></tr>
+<tr><td>indexOrPrimKey: String</td><td>Name of an index or primary key registered in <a href="/docs/Version/Version.stores()">Version.stores()</a></td></tr>
 <tr><td>array: string[]</td><td>Array of strings to look for</td></tr>
 <tr><td>key1, key2, keyN</td><td>Keys to look for</td></tr>
 </table>
 
 ### Return Value
 
-[Collection](Collection)
+[Collection](/docs/Collection/Collection)
 
 ### Remarks
+
 Search an index for keys that matches any of given strings, ignoring case differences.
 
 ### Implementation Details

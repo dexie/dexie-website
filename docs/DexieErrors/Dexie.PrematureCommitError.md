@@ -7,10 +7,11 @@ title: 'Dexie.PrematureCommitError'
 *Since 2.0.0*
 
 * [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
-  * [Dexie.DexieError](DexieError)
+  * [Dexie.DexieError](/docs/DexieErrors/DexieError)
     * Dexie.PrematureCommitError
 
 ### Description 
+
 This exception will be thrown when the indexedDB transaction commits before the promise returned by your transaction scope is resolved or rejected.
 
 ### Solution:
@@ -19,6 +20,7 @@ This exception will be thrown when the indexedDB transaction commits before the 
 2. Always use the global Promise (or Dexie.Promise) inside transactions.
 
 #### NOT OK:
+
 ```javascript
 db.transaction ('rw', db.friends, () => {
     return fetch(someUrl); // fetch() is a non-indexedDB async API.
@@ -30,10 +32,12 @@ db.transaction ('rw', db.friends, () => {
     });
 });
 ```
+
 *Dont call setTimeout() or any other async API from inside a transaction.*
 
 
 #### NOT OK:
+
 ```javascript
 let Promise = require('bluebird');
 db.transaction('r', db.friends, () => {
@@ -42,9 +46,11 @@ db.transaction('r', db.friends, () => {
     });
 });
 ```
-*Don't use 3-rd part promises within transactions. Must only use Dexie.Promise or the built-in promise (window.Promise / self.Promise / global.Promise) within transactions.*
+
+*Don't use 3-rd party promises within transactions. Must only use Dexie.Promise or the built-in promise (window.Promise / self.Promise / global.Promise) within transactions.*
 
 #### THIS IS OK (in Dexie 2.0.0 and above):
+
 ```javascript
 db.transaction('r', db.friends, function () {
     // In Dexie 2.0, it's ok to use the global Promise (window.Promise)
@@ -56,6 +62,7 @@ db.transaction('r', db.friends, function () {
 ```
 
 #### THIS IS ALSO OK:
+
 ```javascript
 db.transaction('r', db.friends, async () => {
     // In Dexie 2.0, it's ok to use the global Promise (window.Promise)
@@ -69,6 +76,7 @@ db.transaction('r', db.friends, async () => {
 Since Dexie 2.0, you may use the global Promise within transactions, since it will always be temporary patched within the transaction zone. But interactions with non-Dexie API:s must only be done outside transactions. For example if you need to fetch data from a REST API, do that before entering the transaction. And if you need to call REST API based on a database query, do that when your transaction completes.
 
 #### THIS IS OK:
+
 ```javascript
 async function sample() {
 
@@ -90,11 +98,12 @@ async function sample() {
     await fetch(someUrl, {method: 'POST', body: dbResult});
 }
 ```
+
 In this trivial sync-sample, the fetch() API is only called from outside the transaction. The sample applies also to XMLHttpRequest, jQuery Ajax and any other asynchronic API except the Dexie API.
 
-### Parallell transactions
+### Parallel transactions
 
-It's also OK to run several different database transactions in parallell. Transactions are maintained using [zones](Promise.PSD).
+It's also OK to run several different database transactions in parallell. Transactions are maintained using [zones](/docs/Promise/Promise.PSD).
 
 #### THIS IS OK:
 
@@ -118,11 +127,11 @@ let [drdree, snoopy] = await Promise.all([
             });
         });
     })
-
 ]);
 
 console.log(JSON.stringify(drdree));
 console.log(JSON.stringify(snoopy));
 ```
-*The two transactions can run in parallell. [Zones](Promise.PSD) will make sure that each time someone uses a table, it will be invoked using that current transaction of that particular flow of async calls.*
+
+*The two transactions can run in parallel. [Zones](/docs/Promise/Promise.PSD) will make sure that each time someone uses a table, it will be invoked using that current transaction of that particular flow of async calls.*
 

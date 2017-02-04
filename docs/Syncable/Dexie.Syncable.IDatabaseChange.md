@@ -3,7 +3,7 @@ layout: docs
 title: 'Dexie.Syncable.IDatabaseChange'
 ---
 
-##### Interface Definition
+## Interface Definition
 
 ```typescript
 enum DatabaseChangeType {
@@ -33,37 +33,41 @@ interface IDeleteChange {
 }
 
 type IDatabaseChange = ICreateChange | IUpdateChange | IDeleteChange; 
-
 ```
 
-### Description
-Javascript interface of a database change. The property 'type' tells whether the change is a creation (1), update (2) or deletion (3) of the given key in the given table.
+## Description
 
-If change is a creation, 'obj' will contain the created object. 
+Javascript interface of a database change. The property `type` tells whether the change is a creation (1), update (2) or deletion (3) of the given key in the given table.
 
-If change is an update, 'mods' will contain a set of property paths and their altered values. A property path is the name of the property for root-properties. For nestled properties, the property path will be a dot-based path to the changed property.
+If change is a creation, `obj` will contain the created object. 
 
-#### Sample
+If change is an update, `mods` will contain a set of property paths and their altered values. A property path is the name of the property for root-properties. For nestled properties, the property path will be a dot-based path to the changed property.
+
+## Sample
+
 Given the following object:
 
-    {
-        id: "faec7477-aaff-4525-a2d8-b817f8197bf7",
-        address: {
-            street: "Elm Street",
-            city: "New York"
-        }
+```javascript
+{
+    id: "faec7477-aaff-4525-a2d8-b817f8197bf7",
+    address: {
+        street: "Elm Street",
+        city: "New York"
     }
+}
+```
+
 _Assuming that 'id' is the primary key and the name of the table is "table"_
 
 If street has been changed to "East 13:th Street", the IUpdateChange would look like this:
 
-    {
-        type: 2, // UPDATE
-        table: "table",
-        key: "faec7477-aaff-4525-a2d8-b817f8197bf7",
-        mods: {
-            "address.street": "East 13:th Street"
-        }
+```javascript
+{
+    type: 2, // UPDATE
+    table: "table",
+    key: "faec7477-aaff-4525-a2d8-b817f8197bf7",
+    mods: {
+        "address.street": "East 13:th Street"
     }
-
-
+}
+```

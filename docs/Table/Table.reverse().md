@@ -5,11 +5,13 @@ title: 'Table.reverse()'
 
 ### Syntax
 
-    table.reverse()
+```javascript
+table.reverse()
+```
 
 ### Return Value
 
-[Collection](Collection)
+[Collection](/docs/Collection/Collection)
 
 ### Remarks
 

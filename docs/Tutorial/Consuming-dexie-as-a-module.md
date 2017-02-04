@@ -2,6 +2,7 @@
 layout: docs
 title: 'Consuming Dexie as a module'
 ---
+
 Dexie is written in ES6 and distributed in the UMD format. It can be consumed either as a plain script tag, required as a CJS, AMD or ES6 module.
 
 Vanilla scripts are nice when testing out something. But a module-based approach is better in the long term and package manager helps you keep track of your dependencies. There are lots of combinations of package- and module systems to choose from. For web apps, `npm + webpack` works perfectly well so let's start with that alternative.
@@ -12,7 +13,7 @@ With NPM you keep track of versions and dependencies for your app. It's also a p
 
 Assuming you've already installed nodejs that bundles `npm` with it. Start by initing your new npm package. CD to a brand new dir and do:
 
-```
+```bash
 mkdir hello-dexie
 cd hello-dexie
 npm init
@@ -31,11 +32,12 @@ db.version(1).stores({
     tasks: '++id,date,description,done'
 });
 
-// Don't be confused over Dexie.spawn() and yield here. It's not required for using Dexie,
-// but it really simplifies the code. If you're a Promise Ninja, use vanilla promise
-// style instead.
+// Don't be confused over Dexie.spawn() and yield here. It's not required for
+// using Dexie, but it really simplifies the code.
+// If you're a Promise Ninja, use vanilla promise style instead.
 Dexie.spawn(function*() {
-    var id = yield db.tasks.put({date: Date.now(), description: 'Test Dexie', done: 0});
+    var id = yield db.tasks
+      .put({date: Date.now(), description: 'Test Dexie', done: 0});
     console.log("Got id " + id);
     // Now lets add a bunch of tasks
     yield db.tasks.bulkPut([
@@ -68,7 +70,8 @@ Dexie.spawn(function*() {
     console.error ("Uh oh! " + err.stack);
 });
 ```
-*This script uses Dexie.spawn() and yield. You need a modern browser to open it. Note that Dexie does not require using the yield keyword, but it simplifies your code a lot if you do. Read more about this on [Simplify with yield](https://github.com/dfahlander/Dexie.js/wiki/Simplify-with-yield).*
+
+*This script uses Dexie.spawn() and yield. You need a modern browser to open it. Note that Dexie does not require using the yield keyword, but it simplifies your code a lot if you do. Read more about this on [Simplify with yield](/docs/Simplify-with-yield).*
 
 Now, create a HTML page:
 
@@ -86,13 +89,13 @@ index.html
 
 As you can see, the page just includes a file called bundle.js. That is the file that webpack will generate when doing the following command:
 
-```
+```bash
 webpack ./index.js bundle.js
 ```
 
-Now your done to open your web page in a browser. If you're on the Edge browser, you cant just open the page from your file system because it would block indexedDB. You could use the nice module `http-server` to start a local web server and access it from there.
+Now your done to open your web page in a browser. If you're on the Edge browser, you cant just open the page from your file system because it would block indexedDB. You could use the nice module [http-server](https://www.npmjs.com/package/http-server) to start a local web server and access it from there.
 
-```
+```bash
 npm install -g http-server
 http-server .
 ```
@@ -109,13 +112,16 @@ import Dexie from 'dexie';
 var db = new Dexie('mydb');
 db.version(1).stores({foo: 'id'});
 
-db.foo.put({id: 1, bar: 'hello rollup'}).then(id => {
+db.foo.put({id: 1, bar: 'hello rollup'})
+  .then(id => {
     return db.foo.get(id);
-}).then (item => {
+  })
+  .then (item => {
     alert ("Found: " + item.bar);
-}).catch (err => {
+  })
+  .catch (err => {
     alert ("Error: " + (err.stack || err));
-});
+  });
 ```
 
 index.html
@@ -131,20 +137,20 @@ index.html
 ```
 
 Shell:
-```
+
+```bash
 npm install dexie --save
 npm install rollup -g
 rollup main.js -o bundle.js
 ```
 
-The es6 version is located on https://npmcdn.com/dexie@latest/src/Dexie.js but rollup will read the jsnext:main attribute in package.json, so it's enough to just import 'dexie'.
-
+The es6 version is located on [https://npmcdn.com/dexie@latest/src/Dexie.js](https://npmcdn.com/dexie@latest/src/Dexie.js) but rollup will read the `jsnext:main` attribute in package.json, so it's enough to just import 'dexie'.
 
 ### Bower
 
 Dexie can also be installed via bower.
 
-```
+```bash
 bower install dexie --save
 ```
 
@@ -172,7 +178,7 @@ requirejs(['dexie'], function (Dexie) {
 
 System.js is also not that magic as npm and webpack. You need to configure both its location and its module type. Here's how to do that:
 
-```
+```bash
 npm install dexie --save
 ```
 
@@ -229,22 +235,23 @@ db.open().catch(err => {
 });
 
 ```
+
 That's it! Typings are delivered with the package. **DON'T**:use tsd or typings to add dexie's type definitions. They are bundled with the lib and pointed out via package.json's `typings` property.
 
-See also [Dexie Typescript Tutorial](Typescript)
+See also [Dexie Typescript Tutorial](/docs/Typescript)
 
 ### Next steps
 
-#### [Architectural Overview](https://github.com/dfahlander/Dexie.js/wiki/Design)
+#### [Architectural Overview](/docs/Design)
 
 or
 
-#### [Look at some samples](https://github.com/dfahlander/Dexie.js/wiki/Samples)
+#### [Look at some samples](/docs/Samples/Samples)
 
 or
 
-#### [Migrating existing DB to Dexie](Migrating-existing-DB-to-Dexie)
+#### [Migrating existing DB to Dexie](/docs/Tutorial/Migrating-existing-DB-to-Dexie)
 
 or
 
-#### [Back to Tutorial](https://github.com/dfahlander/Dexie.js/wiki/Tutorial)
+#### [Back to Tutorial](/docs/Tutorial)

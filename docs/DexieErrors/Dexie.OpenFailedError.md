@@ -1,26 +1,26 @@
 ---
 layout: docs
-title: 'Dexie.MissingAPIError'
+title: 'Dexie.OpenFailedError'
 ---
 
 ### Inheritance Hierarchy
 
 * [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
-  * [Dexie.DexieError](DexieError)
-    * Dexie.MissingAPIError
+  * [Dexie.DexieError](/docs/DexieErrors/DexieError)
+    * Dexie.OpenFailedError
 
 ### Description 
 
-Happens when indexedDB API could not be found when trying to open database.
+Happens when a db operation has failed due to that database couldn't be opened.
 
 ### Sample using Promise.catch()
 
 ```javascript
-doSomeDatabaseWork().then(function() {
+doSomeDatabaseWork().then(function(){
     // Success
-}).catch(Dexie.MissingAPIError, function (e) {
-    // Failed with MissingAPIError
-    console.error ("MissingAPI error: " + e.message);
+}).catch(Dexie.OpenFailedError, function (e) {
+    // Failed with OpenFailedError
+    console.error ("open failed: " + e.message);
 }).catch(Error, funtion (e) {
     // Any other error derived from standard Error
     console.error ("Error: " + e.message);
@@ -31,21 +31,22 @@ doSomeDatabaseWork().then(function() {
 ```
 
 ### Sample: switch(error.name)
+
 ```javascript
 db.on('error', function (error) {
     switch (error.name) {
-        case Dexie.errnames.MissingAPI: // errnames.MissingAPI ==="MissingAPIError"
-            console.error ("MissingAPI error");
+        case Dexie.errnames.OpenFailed:
+            console.log ("open failed");
             break;
         default:
-            console.error ("error: " + e);
+            console.log ("error: " + e.message);
     }
 });
 ```
 ### Properties
 
 <table>
-<tr><td>name</td><td>Will always be Dexie.errnames.MissingAPI === "MissingAPIError"</tr>
+<tr><td>name</td><td>Will always be Dexie.errnames.OpenFailed === "OpenFailedError"</td></tr>
 <tr><td>message</td><td>Detailed message</td></tr>
 <tr><td>inner?</td><td>Inner exception instance (if any)</td></tr>
 <tr><td>stack</td><td>Can be present if the error was thown. If signaled, there wont be any call stack.</td></tr>

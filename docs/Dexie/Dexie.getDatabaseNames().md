@@ -11,7 +11,7 @@ Dexie.getDatabaseNames(function callback(names){})
 
 ### Return Value
 
-[Promise<String[]>](Promise);
+[Promise<string[]>](/docs/Promise/Promise)
 
 ### Parameters
 
@@ -23,11 +23,13 @@ Returns an array of database names at current host.
 
 ### Sample
 
-    Dexie.getDatabaseNames(function (databases) {
-        for (var i=0; i<databases.length; ++i) {
-            console.log(databases[i]);
-        }
-    });
+```javascript
+Dexie.getDatabaseNames(function (databases) {
+    for (var i=0; i<databases.length; ++i) {
+        console.log(databases[i]);
+    }
+});
+```
 
 ### Browser Specific Info
 
@@ -37,18 +39,20 @@ This means that on Opera and Chrome, the method will work no matter if the datab
 
 ### Not reliable in workers
 
-Currently we use localStorage for maintaining the list of databasenames in non-chromium browsers. Since localStorage is not available from workers, Dexie.getDatabaseNames() will yield an empty array when called from there. Moreover, databases that are created in a worker will never be registered into the localStorage key.
+Currently we use localStorage for maintaining the list of database names in non-chromium browsers. Since localStorage is not available from workers, Dexie.getDatabaseNames() will yield an empty array when called from there. Moreover, databases that are created in a worker will never be registered into the localStorage key.
 
 ### Detecting When Databases Are Added Or Deleted
 
 In earlier versions of Dexie, it was possible to listen to changes on added/removed database names by using the following piece of code:
 
-    window.addEventListener('storage', function (event) {
-        if (event.key === "Dexie.DatabaseNames") {
-            console.log("A database was added or removed");
-            console.log("Old list: " + event.oldValue);
-            console.log("New list: " + event.newValue);
-        }
-    });
+```javascript
+window.addEventListener('storage', function (event) {
+    if (event.key === "Dexie.DatabaseNames") {
+        console.log("A database was added or removed");
+        console.log("Old list: " + event.oldValue);
+        console.log("New list: " + event.newValue);
+    }
+});
+```
 
 This code will now only work for non chromium browser since [this commit](https://github.com/dfahlander/Dexie.js/commit/2b029321f97072b096fa08799d61c0a7e78f99a8) removes the use of localStorage for Opera and Chrome. A future version of Dexie may enable a Dexie event to subscribe to for the same purpose that would work the same as before. If this is of interest for you, please file an issue and we'll try fix it.

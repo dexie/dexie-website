@@ -2,53 +2,54 @@
 layout: docs
 title: 'Design'
 ---
+
 ### The Dexie Class
 
 Dexie is both a class and a namespace. An instance of Dexie will represent a database connection. As namespace, it is used as an export area for functions, utilities, and classes. In a simple HTML browser environment this means that including "Dexie.js" will only add one property to window: window.Dexie. If you are utilizing a module environment like webpack or require.js, Dexie will be what you get when requiring it. Here's an example how to use Dexie once you've included it:
 
 ```javascript
-    // Create your instance
-    var db = new Dexie("MyDatabase"); 
+// Create your instance
+var db = new Dexie("MyDatabase"); 
 
-    // Define your schema
-    db.version(1).stores({
-        myObjectStore1: "primaryKey, index1, index2, ...",
-        myObjectStore2: "primaryKey, index1, index2, ...",
-        ...
-    });
+// Define your schema
+db.version(1).stores({
+    myObjectStore1: "primaryKey, index1, index2, ...",
+    myObjectStore2: "primaryKey, index1, index2, ...",
+    ...
+});
 
-    // Open the database
-    db.open().catch(function (e) {
-        console.error("Open failed: " + e);
-    });
+// Open the database
+db.open().catch(function (e) {
+    console.error("Open failed: " + e);
+});
 ```
 
 Dexie, as its backend indexedDB implementation, is an asynchronous database, meaning that any operation that requires a result won't be returned directly. Instead all such operations will return a [Promise](http://www.html5rocks.com/en/tutorials/es6/promises/).
 
 Dexie also supports queuing operations, meaning you can start using the database directly after db.open() has been called even if open() has not finished yet. In case open() fails, queued operations will immediately fail with the error event from the open request. This means that you don't need to do catch() on db.open() since the error will be caught by any request towards the database.
 
-### The Table Classes
+### The Table Class
 
-[Table](Table) represents an object store. On your Dexie instance you will have direct access to instances of Table for each object store you have [defined in your schema](Version.stores()).
+[Table](/docs/Table/Table) represents an object store. On your Dexie instance you will have direct access to instances of Table for each object store you have [defined in your schema](/docs/Version/Version.stores()).
 
 ```javascript
-    var db = new Dexie("FriendsAndPetsDB");
-    
-    db.version(1).stores({
-        friends: "++id,name,isCloseFriend",
-        pets: "++id,name,kind"
-    });
-    db.open();
-    db.friends.add({name: "Ingemar Bergman", isCloseFriend: 0});
-    db.pets.add({name: "Josephina", kind: "dog", fur: "too long right now"});
+var db = new Dexie("FriendsAndPetsDB");
+
+db.version(1).stores({
+    friends: "++id,name,isCloseFriend",
+    pets: "++id,name,kind"
+});
+db.open();
+db.friends.add({name: "Ingemar Bergman", isCloseFriend: 0});
+db.pets.add({name: "Josephina", kind: "dog", fur: "too long right now"});
 ```
 
 _Note: `++id` (or `id++`) on the primary key means that it will be auto-incremented_
 _Note2: You only need to specify properties that you wish to index. The object store will allow any properties on your stored objects but you can only query them by indexed properties_
 
-As you can see, `db.friends` and `db.pets` are instances of [Table](Table) that you can operate on directly.
+As you can see, `db.friends` and `db.pets` are instances of [Table](/docs/Table/Table) that you can operate on directly.
 
-[Table](Table) is the entry points for doing all operations to your object stores, such as querying, adding, putting, deleting, clearing and modifying your data.
+[Table](/docs/Table/Table) is the entry points for doing all operations to your object stores, such as querying, adding, putting, deleting, clearing and modifying your data.
 
 If you are using Visual Studio 2013 or 2015, you'll get marvelous code completion when using Dexie because Visual Studio will run the code in background and detect everything that Dexie puts on its api. You can see some benefits of coding if you start to type:
 
@@ -64,7 +65,7 @@ If you're using webstorm, vscode, sublime or atom, you won't get this superb cod
 
 ### Transactions
 
-Whenever you are going to do more than a single operation on your database in a sequence, you would normally use a transaction. [Transaction](Transaction) represents a full [ACID](http://en.wikipedia.org/wiki/ACID) transaction. When working with transactions you get the following benefits:
+Whenever you are going to do more than a single operation on your database in a sequence, you would normally use a transaction. [Transaction](/docs/Transaction/Transaction) represents a full [ACID](http://en.wikipedia.org/wiki/ACID) transaction. When working with transactions you get the following benefits:
 
 * If modifying database and any error occur, every modification will be rolled back.
 * You may do all write operations synchronously without the need to wait for it to finish before starting the next one.
@@ -74,25 +75,25 @@ Whenever you are going to do more than a single operation on your database in a 
 Here is how you enter a transaction block:
 
 ```javascript
-    db.transaction("rw", db.friends, db.pets, function() {
-        // Any database error event that occur will abort transaction and be sent to
-        // the catch() method below.
-        // The exact same rule if any exception is thrown whatsoever.
-    }).catch(function (error) {
-        // Log or display the error
-    });
+db.transaction("rw", db.friends, db.pets, function() {
+    // Any database error event that occur will abort transaction and be sent to
+    // the catch() method below.
+    // The exact same rule if any exception is thrown whatsoever.
+}).catch(function (error) {
+    // Log or display the error
+});
 ```
 
 Notes:
-* 'friends' and 'pets' are objectStores registered using the [version()](Dexie.version()) method.
+* 'friends' and 'pets' are objectStores registered using the [version()](/docs/Dexie/Dexie.version()) method.
 * Replace `"rw"` with `"r"` if you are just going to read from the stores.
 * Also errors occurring in nested callbacks in the block will be catched by the catch() method.
-* It is also possible to prohibit the transaction from being aborted by [catching](Promise#catch) specific errors. (See [Dexie.transaction()](Dexie.transaction()) ).
+* It is also possible to prohibit the transaction from being aborted by [catching](/docs/Promise/Promise.catch) specific errors. (See [Dexie.transaction()](/docs/Transaction/Dexie.transaction()) ).
 
 #### Transaction Lifetime
 
 A transaction is auto-committed once you do not do anything with it. So, if you do `setTimeout(cb, 0)` anywhere, don't expect your transaction to live when the callback comes back! The only way of keeping a transaction alive between ticks is to perform a database operation on it. Then it will live until that operation fails (catch()) or succeeds (then()). You can then do another operation to keep it alive some more time, etc. There might be situations where you would interact with other async APIs within a transaction (WebCrypto, fetch, $.ajax, etc). In that situation, it is often better to think twice if you should keep the transaction ongoing through the other async call. If you however decide that you need this, there's a new method in Dexie v2: Dexie.waitFor() that may keep the current transaction
-alive until given Promise is fulfilled. See [Dexie.waitFor()](Dexie.waitFor()).
+alive until given Promise is fulfilled. See [Dexie.waitFor()](/docs/Dexie/Dexie.waitFor()).
 
 There is no commit() method on transactions, because it is not needed since it will auto-commit if no errors occur. You can abort() it however.
 
@@ -103,19 +104,19 @@ Thanks to the backend architecture of indexedDB, database versioning is essentia
 Lets say you initially have the following database schema:
 
 ```javascript
-    var db = new Dexie("FriendsDB");
-    db.version(1).stores({friends: "++id,name"});
+var db = new Dexie("FriendsDB");
+db.version(1).stores({friends: "++id,name"});
 ```
 
 This schema only specifies a primary key "id" that is auto-incremented, and an index on the property "name". Your app may store other properties as well, such as `phone`, `email` etc but it will not be indexed:
 
 ```javascript
-    db.friends.put({
-        name: "Arnold",
-        phone: "123456",
-        email: "arnold@abc.com",
-        shoeSize: 88
-    });
+db.friends.put({
+    name: "Arnold",
+    phone: "123456",
+    email: "arnold@abc.com",
+    shoeSize: 88
+});
 ```
 
 Let's say that you publish your app and people starts using it. After a while, your user requests a new feature - to be able to search for friends with a certain shoeSize. But you have not indexed shoeSize in your schema, so how do you add that index to the next version of your app? Here's how:
@@ -186,76 +187,74 @@ Error handling: If any error occur in any upgrade function in the sequence, the 
 
 With Dexie it's possible to control and monitor each database change. No matter which method is being used for data manipulation, Dexie may tell whether a CREATE, UPDATE or DELETE is about to happen and offer the hook callbacks to manipulate the change if requested. It is also possible to hook into READ operations; to provide a proxy function that will be called whenever an object has been read from database and is about to be delivered to caller.
 
-#### The CRUD Hooks ([CREATE](Table.hook('creating')), [READ](Table.hook('reading')), [UPDATE](Table.hook('updating')), [DELETE](Table.hook('deleting')))
+#### The CRUD Hooks ([CREATE](/docs/Table/Table.hook('creating')), [READ](/docs/Table/Table.hook('reading')), [UPDATE](/docs/Table/Table.hook('updating')), [DELETE](/docs/Table/Table.hook('deleting')))
 
 CRUD hooks that enables application code or addons to get involved in any of the CRUD operations taking place underhood. Whenever database is about to be read from or modified, they allow hook implementation to modify what will happen, or just react on the event.
 
 The CRUD hooks could be quite powerful. It is possible to write Dexie addons that performs synchronization, observation, custom advanced indexes, foreignKey implementations, views etc.
 
 #### Hooks Documentation
-* [hook('creating')](Table.hook('creating'))
-* [hook('reading')](Table.hook('reading'))
-* [hook('updating')](Table.hook('updating'))
-* [hook('deleting')](Table.hook('deleting'))
+* [hook('creating')](/docs/Table/Table.hook('creating'))
+* [hook('reading')](/docs/Table/Table.hook('reading'))
+* [hook('updating')](/docs/Table/Table.hook('updating'))
+* [hook('deleting')](/docs/Table/Table.hook('deleting'))
 
-### The [populate](Dexie.on.populate) Event
+### The [populate](/docs/Dexie/Dexie.on.populate) Event
 
 In case your database need initial data in order to work - data that must only be populated on database creation and never more, you can subscribe to the populate event. This will only be called in case the database is initially created - not when it is upgraded.
 
 ```javascript
-    var db = new Dexie("MyTicketDB");
+var db = new Dexie("MyTicketDB");
 
-    db.version(1).stores({
-        tickets: "++id,headline,description,statusId",
-        statuses: "++id,name,openess"
-    });
+db.version(1).stores({
+    tickets: "++id,headline,description,statusId",
+    statuses: "++id,name,openess"
+});
 
-    db.on("populate", function() {
-        // Init your DB with some default statuses:
-        db.statuses.add({id: 1, name: "opened", openess: true});
-        db.statuses.add({id: 2, name: "closed", openess: false});
-        db.statuses.add({id: 3, name: "resolved", openess: false});
-        db.statuses.add({id: 4, name: "wontfix", openess: false});
-    });
+db.on("populate", function() {
+    // Init your DB with some default statuses:
+    db.statuses.add({id: 1, name: "opened", openess: true});
+    db.statuses.add({id: 2, name: "closed", openess: false});
+    db.statuses.add({id: 3, name: "resolved", openess: false});
+    db.statuses.add({id: 4, name: "wontfix", openess: false});
+});
 ```
 
-Here's also an example of how to populate data from an ajax call: [Ajax Populate Sample](Dexie.on.populate#ajax-populate-sample) 
+Here's also an example of how to populate data from an ajax call: [Ajax Populate Sample](/docs/Dexie/Dexie.on.populate#ajax-populate-sample) 
 
 ### Promises
 
-Dexie comes with its own implementation of [Promise](Promise) based on [promise-light](https://github.com/taylorhakes/promise-light) by [Taylor Hakes](https://github.com/taylorhakes) that is Promise/A+ and ECMAScript 6 compliant. A Promise has a then() method which is called when operation completes or fails. The first argument to the then() method is the `complete` callback and the second is the `fail` callback. In ECMAScript 6, a catch() method is added as a shortcut for then(null, fn) - catching failures - this makes it possible to utilize then() as a success-method only and catch() as an error method only, making your code more readable. Dexie's implementation of Promise also has a finally() method that is called whether or not the operation fails or completes. All asynchronous methods in Dexie returns a Promise instance and this makes the API way more easy to use and makes error handling more robust.
+Dexie comes with its own implementation of [Promise](/docs/Promise/Promise) based on [promise-light](https://github.com/taylorhakes/promise-light) by [Taylor Hakes](https://github.com/taylorhakes) that is Promise/A+ and ECMAScript 6 compliant. A Promise has a then() method which is called when operation completes or fails. The first argument to the then() method is the `complete` callback and the second is the `fail` callback. In ECMAScript 6, a catch() method is added as a shortcut for then(null, fn) - catching failures - this makes it possible to utilize then() as a success-method only and catch() as an error method only, making your code more readable. Dexie's implementation of Promise also has a finally() method that is called whether or not the operation fails or completes. All asynchronous methods in Dexie returns a Promise instance and this makes the API way more easy to use and makes error handling more robust.
 
 How to use Promise line by line:
 
 ```javascript
-    var arrayPromise = db.friends.where('name').startsWithIgnoreCase('arnold').toArray();
-    arrayPromise.then(function(a) { console.log(a.length); });
-    arrayPromise.catch(function(err) { console.error(err); );
+var arrayPromise = db.friends.where('name').startsWithIgnoreCase('arnold').toArray();
+arrayPromise.then(function(a) { console.log(a.length); });
+arrayPromise.catch(function(err) { console.error(err); });
 ```
 
 But Dexie gives you a little shortcut in all methods returning a promise with a value, so the above code will be equal to:
 
 ```javascript
-    db.friends.where('name').startsWithIgnoreCase('arnold').toArray(function(a) {
-        console.log(a.length);
-    }).catch(function(err) {
-        console.error(err);
-    });
+db.friends.where('name').startsWithIgnoreCase('arnold').toArray(function(a) {
+    console.log(a.length);
+}).catch(function(err) {
+    console.error(err);
+});
 ```
 
-<i>Note: Promises are returned from all methods in Dexie that perform asynchronous work. Also, most methods that has a value result, such as `toArray()`, also provide a shortcut for `then()` - you can pass in your callback directly to the method instead of calling then():
-</i>
+_Note: Promises are returned from all methods in Dexie that perform asynchronous work. Also, most methods that has a value result, such as `toArray()`, also provide a shortcut for `then()` - you can pass in your callback directly to the method instead of calling then():
+_
 
 ```javascript
-    db.friends.toArray().then (function (result) {
-    });
+db.friends.toArray().then (function (result) {});
 ```
 
 is equivalent to:
 
 ```javascript
-    db.friends.toArray(function (result) {
-    });
+db.friends.toArray(function (result) {});
 ```
 
 ### Catching Certain Exception Classes
@@ -263,56 +262,63 @@ is equivalent to:
 With Dexie's implementation of Promise.catch() enables you to catch certain exception classes as you would do on java or C#:
 
 ```javascript
-    db.friends.where('name').startsWithIgnoreCase('arnold').toArray(function(a) {
-        console.log(a.length);
-    }).catch(DOMError, function(e) {
-        console.error("DOMError occurred: " + err);
-    }).catch(TypeError, function(e) {
-        console.error("TypeError occurred: " + err);
-    }).catch(function(err) {
-        console.error("Unknown error occurred: " + err);
-    }).finally(function(){
-        console.log("Finally the query succeeded or failed.");
-    });
+db.friends.where('name').startsWithIgnoreCase('arnold').toArray(function(a) {
+    console.log(a.length);
+}).catch(DOMError, function(e) {
+    console.error("DOMError occurred: " + err);
+}).catch(TypeError, function(e) {
+    console.error("TypeError occurred: " + err);
+}).catch(function(err) {
+    console.error("Unknown error occurred: " + err);
+}).finally(function(){
+    console.log("Finally the query succeeded or failed.");
+});
 ```
 
 ##### More about Promises
-* http://www.html5rocks.com/en/tutorials/es6/promises/
-* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
-* http://promises-aplus.github.io/promises-spec/
+
+* [http://www.html5rocks.com/en/tutorials/es6/promises/](http://www.html5rocks.com/en/tutorials/es6/promises/)
+* [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
+* [http://promises-aplus.github.io/promises-spec/](http://promises-aplus.github.io/promises-spec/)
 
 ### WhereClause
 
-You can retrieve objects from you [Table](Table) instances using two methods:
+You can retrieve objects from you [Table](/docs/Table/Table) instances using two methods:
 
-* [Table.get()](Table.get()) - retrieve an object by its primary key.
-* [Table.where()](Table.where()) - do an advanced query.
+* [Table.get()](/docs/Table/Table.get()) - retrieve an object by its primary key.
+* [Table.where()](/docs/Table/Table.where()) - do an advanced query.
 
 Example of a get() query:
 
-    db.friends.get(2).then(function(friend) {
-        console.log("Friend number 2: " + JSON.stringify(friend));
-    }
+```javascript
+db.friends.get(2).then(function(friend) {
+  console.log("Friend number 2: " + JSON.stringify(friend));
+});
+```
 
 Example of a simple where() query:
 
-    db.friends.where('shoeSize').above(37).count(function(count) {
-        console.log("I have " + count + " friends with shoesize above 37!");
-    });
+```javascript
+db.friends.where('shoeSize').above(37).count(function(count) {
+    console.log("I have " + count + " friends with shoesize above 37!");
+});
+```
 
 Example of an advanced where() query:
 
-    db.friends.where('shoeSize')
-        .between(37, 40)
-        .or('name')
-        .anyOf(['Arnold','Ingemar'])
-        .and(function(friend) { return friend.isCloseFriend; })
-        .limit(10)
-        .each(function(friend){
-            console.log(JSON.stringify(friend));
-        });
+```javascript
+db.friends.where('shoeSize')
+    .between(37, 40)
+    .or('name')
+    .anyOf(['Arnold','Ingemar'])
+    .and(function(friend) { return friend.isCloseFriend; })
+    .limit(10)
+    .each(function(friend){
+        console.log(JSON.stringify(friend));
+    });
+```
 
-### [AND](Collection.and()) and [OR](Collection.or())
+### [AND](/docs/Collection/Collection.and()) and [OR](/docs/Collection/Collection.or())
 
 Native indexedDB has no support for logical AND or OR operations. Dexie implements this in two different manner, which makes sense for their different purposes in regard to performance. Dexie implements logical OR by executing two different requests simultaneously and act on the union of these request (more about this in [this article](http://www.codeproject.com/Articles/744986/How-to-do-some-magic-with-indexedDB) ).
 
@@ -323,4 +329,4 @@ So why is and() and or() implemented differently? The reason is that:
 * Logical OR _cannot_ be done by filtering - we must query the database with two queries to get it.
 * We would gain no performance by letting the database handle Logical AND (launching two separate queries and the filter away entries that don't exist in both collections). The best pick for AND is undoubtedly a plain javascript filter. It also makes it obvious for the caller that it is important to pick a good index in the `where()` method and filter out the rest in the `and()` filter.
 
-### [Back to Tutorial](https://github.com/dfahlander/Dexie.js/wiki/Tutorial)
+### [Back to Tutorial](/docs/Tutorial/Tutorial)

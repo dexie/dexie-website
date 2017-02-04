@@ -7,31 +7,35 @@ Represents an ECMAScript 6 compliant Promise/A+ implementation. All Dexie method
 
 ### Syntax
 
-    return new Dexie.Promise(function (resolve, reject) {
-        // Do something and call resolve / reject when done.
-    }).then(function (result) {
-        // This code is called if resolve() was called in the Promise constructor
-    }).catch(function (error) {
-        // This code is called if reject() was called in the Promise constructor, or
-        // if an exception was thrown in either constructor or previous then() call.
-    }).finally(function () {
-        // This code will be called no matter if an error occurred or not.
-    });
+```javascript
+return new Dexie.Promise(function (resolve, reject) {
+    // Do something and call resolve / reject when done.
+}).then(function (result) {
+    // This code is called if resolve() was called in the Promise constructor
+}).catch(function (error) {
+    // This code is called if reject() was called in the Promise constructor, or
+    // if an exception was thrown in either constructor or previous then() call.
+}).finally(function () {
+    // This code will be called no matter if an error occurred or not.
+});
+```
 
 ### Description
 
 Implementation of a Promise/A+ documented at <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise>.
 
-See also [Best Practices - Understand Promises](https://github.com/dfahlander/Dexie.js/wiki/Best-Practices#1-understand-promises.)
+See also [Best Practices - Understand Promises](/docs/Tutorial/Best-Practices#1-understand-promises.)
 
 ### Why we don't use native Promise
+
 Native promises are not compliant with indexedDB transactions on Safari nor Firefox (as of October 2016). On IE11 there is no native promise, so bundling a Dexie.Promise makes Dexie possible to run on IE without polyfilling Promise. In a future when IE browser reaches a very low usage and both Firefox and Safari has an IndexedDB transaction handling that is compatible with its native Promise, Dexie will switch to use native Promise.
 
 ### Interopability
 
-[Dexie.Promise](Promise) can be used in conjunction with the standard Promise implementation in ES6 as well as Q- and other A+ compatible Promise implementations in both directions. It can also cope with simple [thenables](https://promisesaplus.com/#point-7) in one direction.
+[Dexie.Promise](/docs/Promise/Promise) can be used in conjunction with the standard Promise implementation in ES6 as well as Q- and other A+ compatible Promise implementations in both directions. It can also cope with simple [thenables](https://promisesaplus.com/#point-7) in one direction.
 
 ##### Mix with any [thenable](https://promisesaplus.com/#point-7) implementation:
+
 ```javascript
 db.cars.where('brand').equals('Volvo').then( function(cars) {
     // Post my cars to the server:
@@ -63,7 +67,7 @@ new window.Promise(function(resolve, reject) {
 });
 ```
 
-##### ...but avoid it within [transactions](Dexie.transaction()):
+##### ...but avoid it within [transactions](/docs/Dexie/Dexie.transaction()):
 
 ```javascript
 db.transaction('rw', db.cars, function () {
@@ -80,19 +84,18 @@ db.transaction('rw', db.cars, function () {
         // will fail with "Transaction Inactive" error.
         return db.cars.get(3); // WILL FAIL WITH TRANSACTION INACTIVE!
     });
-
 });
 ```
 
-The main reason for not using it within transactions is due to an [incompatibility between the IndexedDB specification and the Promise specification](https://github.com/promises-aplus/promises-spec/issues/45). Another reason is that only [Dexie.Promise](Promise) has the capability to keep track of the currently executing transaction between calls (See [Promise.PSD](Promise.PSD)).
+The main reason for not using it within transactions is due to an [incompatibility between the IndexedDB specification and the Promise specification](https://github.com/promises-aplus/promises-spec/issues/45). Another reason is that only [Dexie.Promise](/docs/Promise/Promise) has the capability to keep track of the currently executing transaction between calls (See [Promise.PSD](/docs/Promise/Promise.PSD)).
 
 ### Methods
 
 #### [then()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
-#### [catch()](Promise.catch())
+#### [catch()](/docs/Promise/Promise.catch())
 
-#### [finally()](Promise.finally())
+#### [finally()](/docs/Promise/Promise.finally())
 
 ### Static Methods
 
@@ -104,19 +107,19 @@ The main reason for not using it within transactions is due to an [incompatibili
 
 #### [Promise.race()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 
-#### [Promise.newPSD()](Promise.PSD)
+#### [Promise.newPSD()](/docs/Promise/Promise.PSD)
 
 ### Static Properties
 
-#### [PSD](Promise.PSD)
+#### [PSD](/docs/Promise/Promise.PSD)
 
 ### Events
 
-#### [onuncatched](Promise.onuncatched)
-*Deprecated. Use [window.addEventListener('unhandledrejection')](unhandledrejection event)*
+#### [onuncatched](/docs/Promise/Promise.onuncatched)
+*Deprecated. Use [window.addEventListener('unhandledrejection')](/docs/Promise/unhandledrejection-event)*
 
-#### [Promise.on('error')](Promise.on.error)
-*Deprecated. Use [window.addEventListener('unhandledrejection')](unhandledrejection event)*
+#### [Promise.on('error')](/docs/Promise/Promise.on.error)
+*Deprecated. Use [window.addEventListener('unhandledrejection')](/docs/Promise/unhandledrejection-event)*
 
 ### Implementation Details
 

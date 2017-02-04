@@ -27,7 +27,7 @@ db.[tableName].hook('creating', function (primKey, obj, transaction) {
   </tr>
   <tr>
     <td>transaction</td>
-    <td><a href="Transaction">Transaction</a> instance.</td>
+    <td><a href="/docs/Transaction/Transaction">Transaction</a> instance.</td>
   </tr>
   <tr>
     <td>&lt;<i>this</i> context&gt;</td>
@@ -47,7 +47,7 @@ db.[tableName].hook('creating').unsubscribe(yourListenerFunction)
 
 ### Description
 
-This event is called whenever an object is being added into the database no matter which method is used. When calling [Table.add()](Table.add()), it will always be called. But when calling [Table.put()](Table.put()) it will only be called if the operation results in an object creation. If it would result in replacing an existing object, hook('updating') will be triggered.
+This event is called whenever an object is being added into the database no matter which method is used. When calling [Table.add()](/docs/Table/Table.add()), it will always be called. But when calling [Table.put()](/docs/Table/Table.put()) it will only be called if the operation results in an object creation. If it would result in replacing an existing object, hook('updating') will be triggered.
 
 A subscriber may use the given `transaction` object to do additional operations on the database. The chain of operations can be considered atomic since the subscriber can work on the same transaction as being used for creating the object. If any exception or database error event occur, the entire transaction will abort.
 
@@ -67,9 +67,9 @@ Dexie CRUD events can be used to implement several addons to Dexie such as:
 * Full-text search or other custom ways of indexing properties
 * Manipulation of returned objects
 
-The add-ons [Dexie.Observable.js](Dexie.Observable.js) and [Dexie.Syncable.js](Dexie.Syncable.js) uses `hook('creating')`, `hook('updating')` and `hook('deleting')` to make the database locally observable as well as syncable with a remote server.
+The add-ons [Dexie.Observable.js](/docs/Observable/Dexie.Observable.js) and [Dexie.Syncable.js](/docs/Syncable/Dexie.Syncable.js) uses `hook('creating')`, `hook('updating')` and `hook('deleting')` to make the database locally observable as well as syncable with a remote server.
 
-The `hook('reading')` is used internally by Dexie.js by the methods [Table.defineClass()](Table.defineClass()) and [Table.mapToClass()](Table.mapToClass()) in order to make all objects retrieved from database inherit a given class using prototypal inheritance.
+The `hook('reading')` is used internally by Dexie.js by the methods [Table.defineClass()](/docs/Table/Table.defineClass()) and [Table.mapToClass()](/docs/Table/Table.mapToClass()) in order to make all objects retrieved from database inherit a given class using prototypal inheritance.
 
 ### Sample: Full-text search
 
@@ -78,7 +78,9 @@ This example is a simple implementation of full-text search index based on multi
 ```javascript
 var db = new Dexie("FullTextSample");
 
-db.version(1).stores({emails: "++id,subject,from,*to,*cc,*bcc,message,*messageWords"});
+db.version(1).stores({
+  emails: "++id,subject,from,*to,*cc,*bcc,message,*messageWords"
+});
 
 // Add hooks that will index "message" for full-text search:
 db.emails.hook("creating", function (primKey, obj, trans) {
@@ -86,27 +88,28 @@ db.emails.hook("creating", function (primKey, obj, trans) {
 });
 
 db.emails.hook("updating", function (mods, primKey, obj, trans) {
-    if (mods.hasOwnProperty("message")) {
-        // "message" property is being updated
-        if (typeof mods.message == 'string') {
-            // "message" property was updated to another valid value. Re-index messageWords:
-            return { messageWords: getAllWords(mods.message) };
-        } else {
-            // "message" property was deleted (typeof mods.message === 'undefined') or
-            // changed to an unknown type. Remove indexes:
-            return { messageWords: [] };
-        }
+  if (mods.hasOwnProperty("message")) {
+    // "message" property is being updated
+    if (typeof mods.message == 'string') {
+        // "message" property was updated to another valid value.
+        // Re-index messageWords:
+        return { messageWords: getAllWords(mods.message) };
+    } else {
+        // "message" property was deleted (typeof mods.message === 'undefined') or
+        // changed to an unknown type. Remove indexes:
+        return { messageWords: [] };
     }
+  }
 });
 
 function getAllWords(text) {
-    /// <param name="text" type="String"></param>
-    var allWordsIncludingDups = text.split(' ');
-    var wordSet = allWordsIncludingDups.reduce(function (prev, current) {
-        prev[current] = true;
-        return prev;
-    }, {});
-    return Object.keys(wordSet);
+  /// <param name="text" type="String"></param>
+  var allWordsIncludingDups = text.split(' ');
+  var wordSet = allWordsIncludingDups.reduce(function (prev, current) {
+      prev[current] = true;
+      return prev;
+  }, {});
+  return Object.keys(wordSet);
 }
 
 // Open database to allow application code using it.
@@ -117,20 +120,23 @@ db.open();
 //
 
 db.transaction('rw', db.emails, function () {
-    // Add an email:
-    db.emails.add({
-        subject: "Testing full-text search",
-        from: "david@abc.com",
-        to: ["test@abc.com"],
-        message: "Here is my very long message that I want to write"
-    });
+  // Add an email:
+  db.emails.add({
+      subject: "Testing full-text search",
+      from: "david@abc.com",
+      to: ["test@abc.com"],
+      message: "Here is my very long message that I want to write"
+  });
 
-    // Search for emails:
-    db.emails.where("messageWords").startsWithIgnoreCase("v").distinct().toArray(function (a) {
-        alert("Found " + a.length + " emails containing a word starting with 'v'");
-    });
+  // Search for emails:
+  db.emails.where("messageWords")
+    .startsWithIgnoreCase("v")
+    .distinct()
+    .toArray(function (a) {
+      alert("Found " + a.length + " emails containing a word starting with 'v'");
+  });
 }).catch(function (e) {
-    alert(e.stack || e);
+  alert(e.stack || e);
 });
 ```
 
@@ -143,10 +149,10 @@ Sample Source Locations:
 
 ### See Also
 
-[Table.hook('reading')](Table.hook('reading'))
+[Table.hook('reading')](/docs/Table/Table.hook('reading'))
 
-[Table.hook('updating')](Table.hook('updating'))
+[Table.hook('updating')](/docs/Table/Table.hook('updating'))
 
-[Table.hook('deleting')](Table.hook('deleting'))
+[Table.hook('deleting')](/docs/Table/Table.hook('deleting'))
 
-[Dexie.Observable.js](Dexie.Observable.js)
+[Dexie.Observable.js](/docs/Observable/Dexie.Observable.js)

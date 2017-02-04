@@ -2,17 +2,17 @@
 layout: docs
 title: 'Migrating existing DB to Dexie'
 ---
-Dexie can open any indexedDB database, no matter if you've created it via raw indexedDB or another indexedDB wrapper. It's very simple:
+
+Dexie can open any indexedDB database, no matter if you've created it via raw indexedDB or another indexedDB wrapper.
 
 # How to migrate
 
-1. Publish [this HTML page](https://github.com/dfahlander/Dexie.js/blob/master/samples/open-existing-db/dump-databases.html) somewhere in the same origin as your app resides (such as http://locahost:8080/dump-databases.html).
+1. Publish [this HTML page](https://github.com/dfahlander/Dexie.js/blob/master/samples/open-existing-db/dump-databases.html) somewhere in the same origin as your app resides in (such as http://locahost:8080/dump-databases.html).
 2. Use Chrome or Opera to navigate to your existing app (to ensure it will create the database your way). Then just navigate to the dump-database.html page and copy the generated code from the output and your with your app.
 
 That's all. After that, you may even use Dexie and your own raw indexedDB code / other wrapper in parallell if you like.
 
 *NOTE: Dexie will use the version number divided by 10. Nothing to be afraid of. It just is like that. [Here's an explanation](https://github.com/dfahlander/Dexie.js/issues/59).*
-
 
 # What you will see
 
@@ -29,8 +29,8 @@ db.version(0.2).stores({
 
 Finished dumping databases
 ==========================
-
 ```
+
 Just copy that code into your app and start querying your existing data with Dexie.
 
 # Demigration
@@ -41,4 +41,4 @@ If demigrating, just be aware of the [version multiplied by 10](https://github.c
 
 Happy migration!
 
-#### [Back to tutorial](Tutorial)
+#### [Back to tutorial](/docs/Tutorial)

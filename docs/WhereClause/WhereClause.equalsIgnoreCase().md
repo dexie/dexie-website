@@ -2,19 +2,22 @@
 layout: docs
 title: 'WhereClause.equalsIgnoreCase()'
 ---
+
 ### Syntax
 
-    table.where(indexOrPrimKey).equalsIgnoreCase(key)
+```javascript
+table.where(indexOrPrimKey).equalsIgnoreCase(key)
+```
 
 ### Parameters
 <table>
-<tr><td>indexOrPrimKey: String</td><td>Name of an index or primary key registered in <a href="Version.stores()">Version.stores()</a></td></tr>
+<tr><td>indexOrPrimKey: String</td><td>Name of an index or primary key registered in <a href="/docs/Version/Version.stores()">Version.stores()</a></td></tr>
 <tr><td>key</td><td>Key to compare with. Must be a string</td></tr>
 </table>
 
 ### Return Value
 
-[Collection](Collection)
+[Collection](/docs/Collection/Collection)
 
 ### Implementation Details
 

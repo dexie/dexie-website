@@ -2,25 +2,24 @@
 layout: docs
 title: Docs Home
 ---
-[API Reference](API Reference)
 
-[About](Dexie.js)
+[API Reference](/docs/API-Reference)
 
-[Tutorial](Tutorial)
+[About](/docs/Dexie.js)
 
-[Samples](Samples)
+[Tutorial](/docs/Tutorial)
 
-[Questions And Answers](Questions-and-Answers)
+[Samples](/docs/Samples)
 
-[Addons, Adapters and Derived Work](DerivedWork)
+[Questions And Answers](/docs/Questions-and-Answers)
+
+[Addons, Adapters and Derived Work](/docs/DerivedWork)
 
 ****
 
 [![Click to download](https://dl.dropboxusercontent.com/u/8907080/dexie/download-button.png)](Download)
 
 ****
-
-[All Pages](_pages)
 
 [stackoverflow questions tagged [dexie]](http://stackoverflow.com/questions/tagged/dexie)
 

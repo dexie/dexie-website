@@ -27,15 +27,15 @@ collection.count(callback)
 
 ### Return Value
 
-[Promise](Promise)
+[Promise](/docs/Promise/Promise)
 
 ### Remarks
 
-If callback is omitted and operation succeeds, returned Promise will resolve with the result of the operation, calling any [Promise.then()](Promise.then()) callback.
+If callback is omitted and operation succeeds, returned Promise will resolve with the result of the operation, calling any [Promise.then()](/docs/Promise/Promise.then()) callback.
 
 If callback is specified and operation succeeds, given callback will be called and the returned Promise will resolve with the return value of given callback.
 
-If operation fails, returned promise will reject, calling any [Promise.catch()](Promise.catch()) callback.
+If operation fails, returned promise will reject, calling any [Promise.catch()](/docs/Promise/Promise.catch()) callback.
 
 ### Performance Notes
 
@@ -52,7 +52,7 @@ db.[table].where(index).between(a,b).count()
 db.[table].where(index).startsWith(value).count()
 ```
 
-The reason it is fast in above samples is that they map to basic [`IDBKeyRange`](https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange) methods [`only()`](https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange/only), [`lowerBound()`](https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange/lowerBound), [`upperBound()`](https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange/upperBound), and [`bound()`](https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange/bound).
+The reason it is fast in above samples is that they map to basic [IDBKeyRange](https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange) methods [only()](https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange/only), [lowerBound()](https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange/lowerBound), [upperBound()](https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange/upperBound), and [bound()](https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange/bound).
  
 #### Examples where `count()` will have to count manually:
 

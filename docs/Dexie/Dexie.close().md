@@ -13,7 +13,7 @@ db.close();
 
 Closes the database. This operation completes immediately and there is no returned Promise.
 
-#### Remarks
+### Remarks
 
 In a typical web application, you would not need to think about calling this method. It can be used in more advanced scenarios, such as unit testing or custom upgrade handling.
 

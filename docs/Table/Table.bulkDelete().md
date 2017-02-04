@@ -8,12 +8,12 @@ title: 'Table.bulkDelete()'
 ### Syntax
 
 ```javascript
-db.table.bulkDelete(keys : Array)
+db.table.bulkDelete(keys)
 ```
 
 ### Return Value
 
-Promise
+[Promise](/docs/Promise/Promise)
 
 ### Remarks
 
@@ -21,10 +21,10 @@ Deletes given keys and returns a Promise that resolves when keys are deleted.
 
 ### See also
 
-[Table.bulkAdd()](Table.bulkAdd())
+[Table.bulkAdd()](/docs/Table/Table.bulkAdd())
 
-[Table.bulkPut()](Table.bulkPut())
+[Table.bulkPut()](/docs/Table/Table.bulkPut())
 
-[Table.delete()](Table.delete())
+[Table.delete()](/docs/Table/Table.delete())
 
-[Collection.delete()](Collection.delete())
+[Collection.delete()](/docs/Collection/Collection.delete())

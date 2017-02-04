@@ -27,7 +27,7 @@ table.put(item, [key])
 
 ### Return Value
 
-[Promise](Promise)
+[Promise](/docs/Promise/Promise)
 
 ### Remarks
 
@@ -36,8 +36,9 @@ If an object with the same primary key already exist, it will be replaced with t
 If the operation succeeds then the returned Promise resolves to the key under which the object was stored in the Table.
 
 ### See Also
-[Table.update()](Table.update())
 
-[Table.add()](Table.add())
+[Table.update()](/docs/Table/Table.update())
 
-[Collection.modify()](Collection.modify())
+[Table.add()](/docs/Table/Table.add())
+
+[Collection.modify()](/docs/Collection/Collection.modify())

@@ -5,9 +5,12 @@ title: 'Dexie.on()'
 
 ### Syntax
 
-    db.on(eventType, subscriberFunction);
+```javascript
+db.on(eventType, subscriberFunction);
+```
 
 ### Parameters
+
 <table>
 <tr><td>eventType: String</td><td>The event to subscribe to</td></tr>
 <tr><td>subscriberFunction: Function</td><td>Function called when event is triggered</td></tr>
@@ -15,17 +18,17 @@ title: 'Dexie.on()'
 
 ### Return Value
 
-[Dexie](Dexie)
+[Dexie](/docs/Dexie/Dexie)
 
 ### Events
 
-["ready"](Dexie.on.ready)
+["ready"](/docs/Dexie/Dexie.on.ready)
 
-["error"](Dexie.on.error)
+["error"](/docs/Dexie/Dexie.on.error)
 
-["populate"](Dexie.on.populate)
+["populate"](/docs/Dexie/Dexie.on.populate)
 
-["blocked"](Dexie.on.blocked)
+["blocked"](/docs/Dexie/Dexie.on.blocked)
 
-["versionchange"](Dexie.on.versionchange)
+["versionchange"](/docs/Dexie/Dexie.on.versionchange)
 

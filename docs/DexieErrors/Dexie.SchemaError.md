@@ -1,26 +1,26 @@
 ---
 layout: docs
-title: 'Dexie.UpgradeError()'
+title: 'Dexie.SchemaError'
 ---
 
 ### Inheritance Hierarchy
 
 * [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
-  * [Dexie.DexieError](DexieError)
-    * Dexie.UpgradeError
+  * [Dexie.DexieError](/docs/DexieErrors/DexieError)
+    * Dexie.SchemaError
 
 ### Description 
 
-Happens when the database could not be upgraded.
+Happens when the database schema has errors.
 
 ### Sample using Promise.catch()
 
 ```javascript
 doSomeDatabaseWork().then(function(){
     // Success
-}).catch(Dexie.UpgradeError, function (e) {
-    // Failed with UpgradeError
-    console.error ("Upgrade error: " + e.message);
+}).catch(Dexie.SchemaError, function (e) {
+    // Failed with SchemaError
+    console.error ("Schema error: " + e.message);
 }).catch(Error, funtion (e) {
     // Any other error derived from standard Error
     console.error ("Error: " + e.message);
@@ -30,22 +30,23 @@ doSomeDatabaseWork().then(function(){
 });
 ```
 
-### Sample: switch(error.name)
+### Sample using switch(error.name)
+
 ```javascript
 db.on('error', function (error) {
     switch (error.name) {
-        case Dexie.errnames.Upgrade: // errnames.Upgrade ==="UpgradeError"
-            console.error ("Upgrade error");
+        case Dexie.errnames.Schema:
+            console.error ("Schemad error");
             break;
         default:
-            console.error ("error: " + e);
+            console.error ("error: " + e.message);
     }
 });
 ```
 ### Properties
 
 <table>
-<tr><td>name</td><td>Will always be Dexie.errnames.Upgrade === "UpgradeError"</tr>
+<tr><td>name</td><td>Will always be Dexie.errnames.Schema === "SchemaError"</td></tr>
 <tr><td>message</td><td>Detailed message</td></tr>
 <tr><td>inner?</td><td>Inner exception instance (if any)</td></tr>
 <tr><td>stack</td><td>Can be present if the error was thown. If signaled, there wont be any call stack.</td></tr>

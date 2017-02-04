@@ -4,7 +4,7 @@ title: 'Transaction.abort()'
 ---
 Abort the transaction.
 
-### Sample
+## Sample
 
 ```javascript
 db.transaction("rw", db.friends, db.pets, function () {

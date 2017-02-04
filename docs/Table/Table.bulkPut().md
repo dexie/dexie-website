@@ -14,20 +14,18 @@ table.bulkPut(items, keys?)
   <tr>
     <td><code>items</code></td>
     <td>Array of objects to put</td>
-    <td></td>
   </tr>
   <tr>
     <td><code>keys</code> (optional)</td>
     <td>Array of primary keys that corresponds to given items array</td>
-    <td></td>
   </tr>
 </table>
 
 #### When to use the keys argument
 
-* If your primary key is [inbound](inbound), you MUST NOT provide the `keys` argument.
-* If primary key is non-[inbound](inbound) but auto-incremented, `keys` argument is optional.
-* If primary key is non-[inbound](inbound) and non-auto-incremented, `keys` argument is compulsory.
+* If your primary key is [inbound](/docs/inbound), you MUST NOT provide the `keys` argument.
+* If primary key is non-[inbound](/docs/inbound) but auto-incremented, `keys` argument is optional.
+* If primary key is non-[inbound](/docs/inbound) and non-auto-incremented, `keys` argument is compulsory.
 
 ```javascript
 var db = new Dexie("test");
@@ -40,14 +38,14 @@ db.version(1).stores({
 
 ### Return Value
 
-[Promise<LastKey>](Promise) 
+[Promise&lt;LastKey&gt;](/docs/Promise/Promise) 
 
 Returns with the resulting primary key of the object that was last in given array.
 
 ### Errors
 
 If some operations fail, `bulkPut()` will ignore those failures but return a rejected Promise with a 
-[Dexie.BulkError](Dexie.BulkError) referencing failures. If caller does not catch that error, transaction will abort. If caller wants to ignore the failures, the `bulkPut()` operations must be caught. NOTE: If you call `bulkPut()` outside a transaction scope and an error occur on one of the operations, the successful operations will still be persisted to DB! If this is not desired, surround your call to `bulkPut()` in a transaction and do not catch the `bulkPut()` operation but just the transaction promise!**
+[Dexie.BulkError](/docs/DexieErrors/Dexie.BulkError) referencing failures. If caller does not catch that error, transaction will abort. If caller wants to ignore the failures, the `bulkPut()` operations must be caught. NOTE: If you call `bulkPut()` outside a transaction scope and an error occur on one of the operations, the successful operations will still be persisted to DB! If this is not desired, surround your call to `bulkPut()` in a transaction and do not catch the `bulkPut()` operation but just the transaction promise!**
 
 ### Remarks
 
@@ -79,8 +77,8 @@ db.raindrops.bulkPut(drops).then(function(lastKey) {
 
 ### See Also
 
-[Table.bulkAdd()](Table.bulkAdd())
+[Table.bulkAdd()](/docs/Table/Table.bulkAdd())
 
-[Table.bulkDelete()](Table.bulkDelete())
+[Table.bulkDelete()](/docs/Table/Table.bulkDelete())
 
-[Table.put()](Table.put())
+[Table.put()](/docs/Table/Table.put())

@@ -2,7 +2,8 @@
 layout: docs
 title: 'Transaction.on.error'
 ---
-### Syntax
+
+## Syntax
 
 ```javascript
 trans.on("error", function () {

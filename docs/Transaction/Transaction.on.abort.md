@@ -2,7 +2,8 @@
 layout: docs
 title: 'Transaction.on.abort'
 ---
-### Syntax
+
+## Syntax
 
 ```javascript
 trans.on("abort", function () {
@@ -10,7 +11,7 @@ trans.on("abort", function () {
 });
 ```
 
-### Example
+## Example
 
 ```javascript
 db.transaction('rw', db.friends, function() {

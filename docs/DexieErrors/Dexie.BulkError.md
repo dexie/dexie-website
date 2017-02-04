@@ -6,15 +6,15 @@ title: 'Dexie.BulkError'
 ### Inheritance Hierarchy
 
 * [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
-  * [Dexie.DexieError](DexieError)
+  * [Dexie.DexieError](/docs/DexieErrors/DexieError)
     * Dexie.BulkError
 
 ### Description 
-Error that may occur in [Table.bulkAdd()](Table.bulkAdd()).
+Error that may occur in [Table.bulkAdd()](/docs/Table/Table.bulkAdd()).
 
-The method that may throw this error can perform multiple operations on a table.  Therefore this error object will contain an array of the errors the occurred during the failed operations. 
+The method that may throw this error can perform multiple operations on a table. Therefore this error object will contain an array of the errors the occurred during the failed operations. 
 
-### Properies
+### Properties
 
 <table>
 <tr><td>failures</td><td>Array of Error objects of all errors that have occurred</td></tr>

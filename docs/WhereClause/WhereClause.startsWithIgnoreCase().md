@@ -2,19 +2,23 @@
 layout: docs
 title: 'WhereClause.startsWithIgnoreCase()'
 ---
+
 ### Syntax
 
-    table.where(indexOrPrimKey).startsWithIgnoreCase(prefix)
+```javascript
+table.where(indexOrPrimKey).startsWithIgnoreCase(prefix)
+```
 
 ### Parameters
+
 <table>
-<tr><td>indexOrPrimKey: String</td><td>Name of an index or primary key registered in <a href="Version.stores()">Version.stores()</a></td></tr>
+<tr><td>indexOrPrimKey: String</td><td>Name of an index or primary key registered in <a href="/docs/Version/Version.stores()">Version.stores()</a></td></tr>
 <tr><td>prefix</td><td>Prefix to look for. Must be a string</td></tr>
 </table>
 
 ### Return Value
 
-[Collection](Collection)
+[Collection](/docs/Collection/Collection)
 
 ### Implementation Details
 

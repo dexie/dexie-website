@@ -2,6 +2,7 @@
 layout: docs
 title: 'Best Practices'
 ---
+
 ### 1. Understand Promises
 
 Make sure you learn at least the basic practices of A+ promises before diving too deep into Dexie.
@@ -24,10 +25,11 @@ function doSomething() {
 
 Was there any of the "Understand" parts that you didn't understand? Then you would benefit from learning a little about promises. This will be useful knowledge whatever lib you'll be using. Some links to dive into:
 
-* http://www.html5rocks.com/en/tutorials/es6/promises/
-* https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html
+* [http://www.html5rocks.com/en/tutorials/es6/promises/](http://www.html5rocks.com/en/tutorials/es6/promises/)
+* [https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html](https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html)
 
 ### 2. Be wise when catching promises!
+
 Short Version:
 
 ```
@@ -80,7 +82,7 @@ function myDataOperations() {
 }
 ```
 
-But on an event handler or other root-level scope, always catch! Why?! Because you are the last one to catch it since you are NOT returning Promise! You have no caller that expects a promise and you are the sole responsible of catching and informing the user about any error. If you don't catch it anywhere, an error will end-up in the global [Dexie.Promise.on.error](Promise.on.error) handler and logged to the console as a warning (unless you override [Dexie.Promise.on.error](Promise.on.error)).
+But on an event handler or other root-level scope, always catch! Why?! Because you are the last one to catch it since you are NOT returning Promise! You have no caller that expects a promise and you are the sole responsible of catching and informing the user about any error. If you don't catch it anywhere, an error will end-up in the global [Dexie.Promise.on.error](/docs/Promise/Promise.on.error) handler and logged to the console as a warning (unless you override [Dexie.Promise.on.error](/docs/Promise/Promise.on.error)).
 
 ```javascript
 somePromiseReturningFunc().catch(function (err) {
@@ -92,15 +94,21 @@ somePromiseReturningFunc().catch(function (err) {
 Sometimes you really WANT to handle an explicit error because you know it can happen and you have a way to work around it.
 ```javascript
 function getHillary() {
-    return db.friends.where('[firstName+lastName]').equals(['Hillary', 'Clinton']).toArray()
-          .catch('DataError', function (err) {
-              // May fail in IE/Edge because it lacks support for compound keys.
-              // Use a fallback method:
-              return db.friends.where('firstName').equals('Hillary')
-                       .and(function (friend) { return friend.lastName == 'Clinton'; });
-          });
+  return db.friends
+    .where('[firstName+lastName]')
+    .equals(['Hillary', 'Clinton'])
+    .toArray()
+    .catch('DataError', function (err) {
+      // May fail in IE/Edge because it lacks support for compound keys.
+      // Use a fallback method:
+      return db.friends
+        .where('firstName')
+        .equals('Hillary')
+        .and(function (friend) {
+          return friend.lastName == 'Clinton';
+        });
     });
-});
+}
 ```
 In the above exampe, we are handling the error because we know it may happen and we have a way to solve that.
 
@@ -121,10 +129,10 @@ function myFunc() {
     }).then (function() {
         ...
     });
-});
+};
 ```
 
-All uncaught Dexie.Promises will by default be logged to the console (using console.warn()). You can override this behavior by subscribing to [Dexie.Promise.on('error')](Promise.on.error):
+All uncaught Dexie.Promises will by default be logged to the console (using console.warn()). You can override this behavior by subscribing to [Dexie.Promise.on('error')](/docs/Promise/Promise.on.error):
 
 ```javascript
 Dexie.Promise.on('error', function(err) {
@@ -142,7 +150,7 @@ IndexedDB will commit a transaction as soon as it isn't used within a tick. This
 
 ### 4. Stick to Dexie.Promise and never use another Promises within transactions!
 
-[Dexie.Promise](Promise) is ES6 and A+ compliant, meaning that you can use any favourite promise together with Dexie. However, within transactions, DO NOT use any other promise implementation than Dexie.Promise! Otherwise the effective transaction will be gone.
+[Dexie.Promise](/docs/Promise/Promise) is ES6 and A+ compliant, meaning that you can use any favourite promise together with Dexie. However, within transactions, DO NOT use any other promise implementation than Dexie.Promise! Otherwise the effective transaction will be gone.
 
 For example, if you want to use `Promise.all()` or `Promise.resolve()`, make sure to use those methods from `Dexie.Promise` instead:
 
@@ -156,11 +164,11 @@ db.transaction('rw', db.friends, db.pets, function () {
             db.friends.add({name: 'foo'}),
             db.friends.add({name: 'bar'})
         ]);
-    }).then (friendIds) {
+    }).then((friendIds) => {
         return Promise.all(friendIds.map(function (id) {
             // Give a cat to each added friend:
             return db.pets.add({kind: "Cat", friendId: id});
-        });
+        }));
     });
 });
 ```
@@ -210,7 +218,7 @@ db.transaction("rw", db.friends, db.pets, function() {
 ```
 
 Notes:
-* `friends` and `pets` are objectStores registered using [Version.stores()](Version.stores()) method.
+* `friends` and `pets` are objectStores registered using [Version.stores()](/docs/Version/Version.stores()) method.
 * `"rw"` should be replaced with `"r"` if you are just going to read from database.
 * Also errors occurring in nested callbacks in the block will be catched by the catch() method.
 
@@ -249,8 +257,8 @@ When you declare your object stores (`db.version(1).stores({...})`), you only sp
 
 There are two different methods available to accomplish this. Use whichever you prefer:
 
-1. [mapToClass()](Table.mapToClass()) - map an existing class to an objectStore
-2. [defineClass()](Table.defineClass()) - let Dexie declare a class for you
+1. [mapToClass()](/docs/Table/Table.mapToClass()) - map an existing class to an objectStore
+2. [defineClass()](/docs/Table/Table.defineClass()) - let Dexie declare a class for you
 
 Whichever method you use, your database will return real instances of your mapped class, so that the expression
 
@@ -264,7 +272,7 @@ Class.prototype.method = function(){}
 ```
 .
 
-##### Method 1: Use [mapToClass()](Table.mapToClass()) (map existing class)
+##### Method 1: Use [mapToClass()](/docs/Table/Table.mapToClass()) (map existing class)
 
 ```javascript
 var db = new Dexie("MyAppDB");
@@ -296,10 +304,9 @@ File.prototype.save = function () {
 
 db.folders.mapToClass(Folder);
 db.files.mapToClass(File);
-
 ```
 
-##### Method 2: Use [defineClass()](Table.defineClass())
+##### Method 2: Use [defineClass()](/docs/Table/Table.defineClass())
 
 ```javascript
 var db = new Dexie("MyAppDB");
@@ -333,4 +340,4 @@ File.prototype.save = function () {
 
 ```
 
-### [Back to Tutorial](https://github.com/dfahlander/Dexie.js/wiki/Tutorial)
+### [Back to Tutorial](/docs/Tutorial)

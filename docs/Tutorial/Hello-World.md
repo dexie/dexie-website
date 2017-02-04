@@ -2,6 +2,7 @@
 layout: docs
 title: 'Hello World'
 ---
+
 ```javascript
 var db = new Dexie("FriendDatabase");
 

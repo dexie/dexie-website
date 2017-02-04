@@ -5,19 +5,22 @@ title: 'Table.bulkAdd()'
 
 ### Syntax
 
-    table.bulkAdd(items, keys?)
+```typescript
+table.bulkAdd(items, keys?);
+```
 
 ### Parameters
+
 <table>
-<tr><td>items</td><td>Array of objects to add</td><td></td></tr>
-<tr><td>keys (optional)</td><td>Array of primary keys that corresponds to given items array</td><td></td></tr>
+<tr><td>items</td><td>Array of objects to add</td></tr>
+<tr><td>keys (optional)</td><td>Array of primary keys that corresponds to given items array</td></tr>
 </table>
 
 #### When to use the keys argument
 
-* If your primary key is [inbound](inbound), you MUST NOT provide the `keys` argument.
-* If primary key is non-[inbound](inbound) but auto-incremented, `keys` argument is optional.
-* If primary key is non-[inbound](inbound) and non-auto-incremented, `keys` argument is compulsory.
+* If your primary key is [inbound](/docs/inbound), you MUST NOT provide the `keys` argument.
+* If primary key is non-[inbound](/docs/inbound) but auto-incremented, `keys` argument is optional.
+* If primary key is non-[inbound](/docs/inbound) and non-auto-incremented, `keys` argument is compulsory.
 
 ```javascript
 var db = new Dexie("test");
@@ -30,13 +33,13 @@ db.version(1).stores({
 
 ### Return Value
 
-[Promise<LastKey>](Promise) 
+[Promise&lt;LastKey&gt;](/docs/Promise/Promise) 
 
 Returns with the resulting primary key of the object that was last in given array.
 
 ### Errors
 If some operations fail, bulkAdd will ignore those failures but return a rejected Promise with a 
-[Dexie.BulkError](Dexie.BulkError) referencing failures. If caller does not catch that error, transaction will abort. If caller wants to ignore the failes, the bulkAdd() operations must be catched. **NOTE: If you call bulkAdd() outside a transaction scope and an error occur on one of the operations, the successful operations will still be persisted to DB! If this is not desired, surround your call to bulkAdd() in a transaction and do not catch the bulkAdd() operation but just the transaction promise!**
+[Dexie.BulkError](/docs/DexieErrors/Dexie.BulkError) referencing failures. If caller does not catch that error, transaction will abort. If caller wants to ignore the failes, the bulkAdd() operations must be catched. **NOTE: If you call bulkAdd() outside a transaction scope and an error occur on one of the operations, the successful operations will still be persisted to DB! If this is not desired, surround your call to bulkAdd() in a transaction and do not catch the bulkAdd() operation but just the transaction promise!**
 
 ### Remarks
 
@@ -67,10 +70,10 @@ db.raindrops.bulkAdd(drops).then(function(lastKey) {
 
 ```
 ### See Also
-[Table.bulkPut()](Table.bulkPut())
+[Table.bulkPut()](/docs/Table/Table.bulkPut())
 
-[Table.bulkDelete()](Table.bulkDelete())
+[Table.bulkDelete()](/docs/Table/Table.bulkDelete())
 
-[Table.add()](Table.add())
+[Table.add()](/docs/Table/Table.add())
 
 

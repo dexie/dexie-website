@@ -5,7 +5,8 @@ title: 'Dexie.Observable.DatabaseChange'
 
 Structure of database change object.
 
-#### Properties
+## Properties
+
 <table>
 <tr><td>rev : Number</td><td>The revision of this change</td></tr>
 <tr><td>type: Number</td><td>Type of change. 1=CREATED, 2=UPDATED, 3=DELETED</td></tr>
@@ -17,8 +18,6 @@ Structure of database change object.
 <tr><td>source : any</td><td>(Optional) Source of the modification. If the ´source´ property of the <a href="Transaction">Transaction</a> object was set to a value while performing a database operation, this value will be put in the change object. Can be used to ignore certain changes that origin from self.</td></tr>
 </table>
 
-#### See Also
+## See Also
 
-##### [Dexie.Observable.js](Dexie.Observable.js)
-
-
+[Dexie.Observable.js](/docs/Observable/Dexie.Observable.js)

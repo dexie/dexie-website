@@ -6,7 +6,8 @@ title: 'Dexie.Observable'
 Observe changes to database - even when they happen in another browser window.
 
 ### Install
-```
+
+```bash
 npm install dexie-observable
 ```
 
@@ -20,9 +21,9 @@ import 'dexie-observable';
 
 ### Dependency Tree
 
- * [Dexie.Syncable.js](Dexie.Syncable.js)
+ * [Dexie.Syncable.js](/docs/Syncable/Dexie.Syncable.js)
    * **Dexie.Observable.js**
-     * [Dexie.js](Dexie.js)
+     * [Dexie.js](/docs/Dexie/Dexie.js)
        * [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API)
 
 ### Source
@@ -33,14 +34,15 @@ import 'dexie-observable';
 
 Dexie.Observable is an add-on to Dexie.js makes it possible to listen for changes on the database even if the changes are made in a foreign window. The addon provides a "storage" event for IndexedDB, much like the storage event (onstorage) for localStorage.
 
-In contrary to the [Dexie CRUD hooks](Design#the-crud-hooks-create-read-update-delete), this event reacts not only on changes made on the current db instance but also on changes occurring on db instances in other browser windows. <u>This enables a Web Apps to react to database changes and update their views accordingly.</u>
+In contrary to the [Dexie CRUD hooks](/docs/Tutorial/Design#the-crud-hooks-create-read-update-delete), this event reacts not only on changes made on the current db instance but also on changes occurring on db instances in other browser windows. <u>This enables a Web Apps to react to database changes and update their views accordingly.</u>
 
-Dexie.Observable is also the base of [Dexie.Syncable.js](Dexie.Syncable.js) - an add-on that enables two-way replication with a remote server.
+Dexie.Observable is also the base of [Dexie.Syncable.js](/docs/Syncable/Dexie.Syncable.js) - an add-on that enables two-way replication with a remote server.
 
 ### Extended Methods, Properties and Events
 
 #### UUID key generator
-When defining your stores in [Version.stores()](Version.stores()) you may use the $$ (double dollar) prefix to your primary key. This will make it auto-generated to a UUID string. See sample below.
+
+When defining your stores in [Version.stores()](/docs/Version/Version.stores()) you may use the $$ (double dollar) prefix to your primary key. This will make it auto-generated to a UUID string. See sample below.
 
 #### Dexie.Observable.createUUID()
 A static method added to Dexie that creates a UUID. This method is used internally when using the $$ prefix to primary keys. To change the format of $$ primary keys, just override Dexie.createUUID by setting it to your desired function instead.
@@ -51,53 +53,53 @@ Subscribe to any database changes no matter if they occur locally or in other br
 Parameters to your callback:
 
 <table>
-<tr><td>changes : Array&lt;<a href="Dexie.Observable.DatabaseChange">DatabaseChange</a>&gt;</td><td>Array of changes that have occured in database (locally or in other window) since last time event was triggered, or the time of starting subscribing to changes.</td></tr>
+<tr><td>changes : Array&lt;<a href="/docs/Observable/Dexie.Observable.DatabaseChange">DatabaseChange</a>&gt;</td><td>Array of changes that have occured in database (locally or in other window) since last time event was triggered, or the time of starting subscribing to changes.</td></tr>
 <tr><td>partial: Boolean</td><td>True in case the array does not contain all changes. In this case, your callback will soon be called again with the additional changes and partial=false when all changes are delivered.</td></tr>
 </table>
 
 #### Example:
+
 ```html
 <html>
-    <head>
-    <script src="dexie.min.js"></script>
-    <script src="dexie-observable.min.js"></script> <!-- Enable DB observation -->
-    <script>
-        var db = new Dexie("ObservableTest");
-        db.version(1).stores({
-            friends: "$$uuid,name"
-        });
-        db.on('changes', function (changes) {
-            changes.forEach(function (change) {
-                switch (change.type) {
-                    case 1: // CREATED
-                        console.log('An object was created: ' + JSON.stringify(change.obj));
-                        break;
-                    case 2: // UPDATED
-                        console.log('An object with key ' + change.key + ' was updated with modifications: ' + JSON.stringify(change.mods));
-                        break;
-                    case 3: // DELETED
-                        console.log('An object was deleted: ' + JSON.stringify(change.oldObj));
-                        break;
-                }
-            });
-        });
-        db.open();
-        // Make an initial put() - will result in a CREATE-change:
-        db.friends.put({name: "Kalle"}).then(function(primKey) {
-            // Call put() with existing primary key - will result in an UPDATE-change:
-            db.friends.put({uuid: primKey, name: "Olle"}).then (function () {
-                // Call delete() will result in a DELETE-change:
-                db.friends.delete(primKey);
-            });
-        });
+<head>
+  <script src="dexie.min.js"></script>
+  <script src="dexie-observable.min.js"></script> <!-- Enable DB observation -->
+  <script>
+    var db = new Dexie("ObservableTest");
+    db.version(1).stores({
+        friends: "$$uuid,name"
+    });
+    db.on('changes', function (changes) {
+      changes.forEach(function (change) {
+        switch (change.type) {
+          case 1: // CREATED
+            console.log('An object was created: ' + JSON.stringify(change.obj));
+            break;
+          case 2: // UPDATED
+            console.log('An object with key ' + change.key + ' was updated with modifications: ' + JSON.stringify(change.mods));
+            break;
+          case 3: // DELETED
+            console.log('An object was deleted: ' + JSON.stringify(change.oldObj));
+            break;
+        }
+      });
+    });
+    db.open();
+    // Make an initial put() - will result in a CREATE-change:
+    db.friends.put({name: "Kalle"}).then(function(primKey) {
+      // Call put() with existing primary key - will result in an UPDATE-change:
+      db.friends.put({uuid: primKey, name: "Olle"}).then (function () {
+        // Call delete() will result in a DELETE-change:
+        db.friends.delete(primKey);
+      });
+    });
 
-        // Result that will be logged:
-        // An object was created: {"uuid": "23bada36-d27a-4e78-a978-1ab3c4129cd0", name: "Kalle"}
-        // An object with key: 23bada36-d27a-4e78-a978-1ab3c4129cd0 was updated with modifications: {"name": "Olle"}
-        // An object was deleted: {"uuid": "23bada36-d27a-4e78-a978-1ab3c4129cd0", name: "Olle"}
-    </script>
-    </head>
-    <body>
-    </body>
+    // Result that will be logged:
+    // An object was created: {"uuid": "23bada36-d27a-4e78-a978-1ab3c4129cd0", name: "Kalle"}
+    // An object with key: 23bada36-d27a-4e78-a978-1ab3c4129cd0 was updated with modifications: {"name": "Olle"}
+    // An object was deleted: {"uuid": "23bada36-d27a-4e78-a978-1ab3c4129cd0", name: "Olle"}
+  </script>
+</head>
+<body></body>
 </html>
 ```

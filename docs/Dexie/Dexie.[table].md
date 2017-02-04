@@ -10,13 +10,13 @@ var db = new Dexie(dbName);
 db.version(1).stores({table1: "...", table2: "..."});
 db.open();
 
-assert (db.table1 instanceOf db.Table);
-assert (db.table2 instanceOf db.Table);
+assert(db.table1 instanceof db.Table);
+assert(db.table2 instanceof db.Table);
 ```
 `
 ### Type
 
-[Table](Table)
+[Table](/docs/Table/Table)
 
 ### Sample
 

@@ -3,6 +3,8 @@ layout: docs
 title: 'Dexie.Syncable.Statuses'
 ---
 
+## Description
+
 ```typescript
 enum SyncStatus {
     /** An irrepairable error occurred and the sync provider is dead. */
@@ -28,4 +30,4 @@ enum SyncStatus {
 
 ## See also
 
-[Dexie.Syncable.js](Dexie.Syncable.js)
+[Dexie.Syncable.js](/docs/Syncable/Dexie.Syncable.js)

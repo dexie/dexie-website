@@ -6,6 +6,7 @@ title: "db.syncable.on('statusChanged')"
 Event that triggers when status is changed
 
 ## Syntax
+
 ```typescript
 db.syncable.on('statusChanged', callback: (status, url) => void);
 ```
@@ -28,4 +29,4 @@ Url https://remote.server.com/syncRoute is now CONNECTED
 
 ## See Also
 
-[Dexie.Syncable.js](Dexie.Syncable.js)
+[Dexie.Syncable.js](/docs/Syncable/Dexie.Syncable.js)

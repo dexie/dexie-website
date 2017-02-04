@@ -5,20 +5,22 @@ title: "Table.hook('deleting')"
 
 ### Syntax
 
-    db.[tableName].hook('deleting', function (primKey, obj, transaction) {
-        // You may do additional database operations using given transaction object.
-        // You may set this.onsuccess = callback when delete operation completes.
-        // You may set this.onerror = callback if delete operation fails.
-        // Any modification to obj is ignored.
-        // Any return value is ignored.
-        // throwing exception will make the db operation fail.
-    });
+```javascript
+db.[tableName].hook('deleting', function (primKey, obj, transaction) {
+    // You may do additional database operations using given transaction object.
+    // You may set this.onsuccess = callback when delete operation completes.
+    // You may set this.onerror = callback if delete operation fails.
+    // Any modification to obj is ignored.
+    // Any return value is ignored.
+    // throwing exception will make the db operation fail.
+});
+```
 
 ### Parameters
 <table>
 <tr><td>primKey</td><td>The primary key of the object being deleted</td></tr>
 <tr><td>obj</td><td>Object that is about to be deleted. Modification of obj will NOT affect the operation.</td></tr>
-<tr><td>transaction</td><td><a href="Transaction">Transaction</a> instance.</td></tr>
+<tr><td>transaction</td><td><a href="/docs/Transaction/Transaction">Transaction</a> instance.</td></tr>
 <tr><td>&lt;<i>this</i> context&gt;</td><td>Possibility to be notified when the delete operation succeeds or fails. Done by setting this.onsuccess = function(){} or this.onerror = function(){}</td></tr>
 </table>
 
@@ -54,16 +56,16 @@ Dexie CRUD events can be used to implement several addons to Dexie such as:
 * Full-text search or other custom ways of indexing properties
 * Manipulation of returned objects
 
-The add-ons [Dexie.Observable.js](Dexie.Observable.js) and [Dexie.Syncable.js](Dexie.Syncable.js) uses  `hook('creating')`, `hook('updating')` and `hook('deleting')` to make the database locally observable as well as syncable with a remote server.
+The add-ons [Dexie.Observable.js](/docs/Observable/Dexie.Observable.js) and [Dexie.Syncable.js](/docs/Syncable/Dexie.Syncable.js) uses  `hook('creating')`, `hook('updating')` and `hook('deleting')` to make the database locally observable as well as syncable with a remote server.
 
-The `hook('reading')` is used internally by Dexie.js by the methods [Table.defineClass()](Table.defineClass()) and [Table.mapToClass()](Table.mapToClass()) in order to make all objects retrieved from database inherit a given class using prototypal inheritance.
+The `hook('reading')` is used internally by Dexie.js by the methods [Table.defineClass()](/docs/Table/Table.defineClass()) and [Table.mapToClass()](/docs/Table/Table.mapToClass()) in order to make all objects retrieved from database inherit a given class using prototypal inheritance.
 
 ### See Also
 
-[Table.hook('creating')](Table.hook('creating'))
+[Table.hook('creating')](/docs/Table/Table.hook('creating'))
 
-[Table.hook('reading')](Table.hook('reading'))
+[Table.hook('reading')](/docs/Table/Table.hook('reading'))
 
-[Table.hook('updating')](Table.hook('updating'))
+[Table.hook('updating')](/docs/Table/Table.hook('updating'))
 
-[Dexie.Observable.js](Dexie.Observable.js)
+[Dexie.Observable.js](/docs/Observable/Dexie.Observable.js)

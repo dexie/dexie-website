@@ -7,90 +7,90 @@ The Table class represents an IDBObjectStore.
 
 ### Properties
 
-#### [name](Table.name)
+#### [name](/docs/Table/Table.name)
 The name of the object store represented by this Table instance.
 
-#### [schema](Table.schema)
+#### [schema](/docs/Table/Table.schema)
 The table schema of this object store.
 
 ### Events
 
-#### [hook('creating')](Table.hook('creating'))
+#### [hook('creating')](/docs/Table/Table.hook('creating'))
 Atomic CRUD hook called when object is about to be created in db.
 
-#### [hook('reading')](Table.hook('reading'))
+#### [hook('reading')](/docs/Table/Table.hook('reading'))
 Atomic CRUD hook called when object has been read from db and is about to be delivered to caller.
 
-#### [hook('updating')](Table.hook('updating'))
+#### [hook('updating')](/docs/Table/Table.hook('updating'))
 Atomic CRUD hook called when object is about to be modified in db.
 
-#### [hook('deleting')](Table.hook('deleting'))
+#### [hook('deleting')](/docs/Table/Table.hook('deleting'))
 Atomic CRUD hook called when object is about to be deleted from db.
 
 ### Methods
 
-#### [add()](Table.add())
+#### [add()](/docs/Table/Table.add())
 Insert an object into store.
 
-#### [bulkAdd()](Table.bulkAdd())
+#### [bulkAdd()](/docs/Table/Table.bulkAdd())
 Same as add() but takes array arguments and is optimized for adding a large number of objects.
 
-#### [bulkDelete()](Table.bulkDelete())
+#### [bulkDelete()](/docs/Table/Table.bulkDelete())
 Same as delete() but takes and array of keys and is optimized for deleting a large number of objects.
 
-#### [bulkPut()](Table.bulkPut())
+#### [bulkPut()](/docs/Table/Table.bulkPut())
 Same as put() but takes array arguments and is optimized for putting a large number of objects.
 
-#### [clear()](Table.clear())
+#### [clear()](/docs/Table/Table.clear())
 Clear all objects in store.
 
-#### [count()](Table.count())
+#### [count()](/docs/Table/Table.count())
 Count all objects.
 
-#### [defineClass()](Table.defineClass())
+#### [defineClass()](/docs/Table/Table.defineClass())
 Define a javascript constructor function and map to this table.
 
-#### [delete()](Table.delete())
+#### [delete()](/docs/Table/Table.delete())
 Delete an object from store.
 
-#### [each()](Table.each())
+#### [each()](/docs/Table/Table.each())
 Iterate all objects in store.
 
-#### [filter()](Table.filter())
+#### [filter()](/docs/Table/Table.filter())
 Apply javascript filter on all items in the object store
 
-#### [get()](Table.get())
+#### [get()](/docs/Table/Table.get())
 Retrieve object by primary key.
 
-#### [limit()](Table.limit())
+#### [limit()](/docs/Table/Table.limit())
 Return a Collection ordered by primary key, limited to N items.
 
-#### [mapToClass()](Table.mapToClass())
+#### [mapToClass()](/docs/Table/Table.mapToClass())
 Map this table to javascript constructor function.
 
-#### [orderBy()](Table.orderBy())
+#### [orderBy()](/docs/Table/Table.orderBy())
 Returns a Collection instance ordered by given index.
 
-#### [offset()](Table.offset())
+#### [offset()](/docs/Table/Table.offset())
 Return a Collection ordered by primary key, where the first N items in the table are ignored.
 
-#### [put()](Table.put())
+#### [put()](/docs/Table/Table.put())
 Replace or insert object.
 
-#### [reverse()](Table.reverse())
+#### [reverse()](/docs/Table/Table.reverse())
 Returns a Collection instance with reversed order of the primary key.
 
-#### [toArray()](Table.toArray())
+#### [toArray()](/docs/Table/Table.toArray())
 Get an array containing all objects in store.
 
-#### [toCollection()](Table.toCollection())
-Get a [Collection](Collection) containing all objects in store.
+#### [toCollection()](/docs/Table/Table.toCollection())
+Get a [Collection](/docs/Collection/Collection) containing all objects in store.
 
-#### [update()](Table.update())
+#### [update()](/docs/Table/Table.update())
 Apply given changes to an existing object.
 
-#### [where()](Table.where())
+#### [where()](/docs/Table/Table.where())
 Retrieve objects using a query.
 
 ### See Also
-#### [Collection](Collection)
+#### [Collection](/docs/Collection/Collection)

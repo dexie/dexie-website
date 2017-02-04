@@ -7,13 +7,15 @@ Return a collection of all items in table.
 
 ### Syntax
 
-    table.toCollection()
+```javascript
+table.toCollection()
+```
 
 ### Return Value
 
-[Collection](Collection)
+[Collection](/docs/Collection/Collection)
 
 ### Remarks
 
-Returns an unfiltered Collection instance containing all objects in the store.
+Returns a unfiltered Collection instance containing all objects in the store.
 

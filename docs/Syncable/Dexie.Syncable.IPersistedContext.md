@@ -3,7 +3,7 @@ layout: docs
 title: 'Dexie.Syncable.IPersistentContext'
 ---
 
-### Interface
+## Interface
 
 ```typescript
 interface IPersistedContext {
@@ -11,20 +11,21 @@ interface IPersistedContext {
 }
 ```
 
-### Description
-Context that the [ISyncProtocol](Dexie.Syncable.ISyncProtocol) implementor may use to store persistant state info within.
+## Description
 
-[ISyncProtocol](Dexie.Syncable.ISyncProtocol) may store any custom properties on the persistedContext and call save() to persist them.
+Context that the [ISyncProtocol](/docs/Syncable/Dexie.Syncable.ISyncProtocol) implementor may use to store persistent state info within.
+
+[ISyncProtocol](/docs/Syncable/Dexie.Syncable.ISyncProtocol) may store any custom properties on the persistedContext and call save() to persist them.
 
 Typically, this context could be used to save an identifyer for this particular local node agains the remote node. The remote node may then mark the changes applied by this node so that those changes are ignored when sending back its changes to you. In case the local database is deleted, 
 
 The context is saved in a special internal table within the same local database as you are syncing. If the database is deleted, so will you context be.
 
-### Methods
+## Methods
 
-#### save()
+### save()
 
 Persist your context object to local database. When done, the returned promise will resolve. You may only store primitive types, objects and arrays in this context. You may not store functions or DomNodes.
 
-##### Return Value
-[Promise](Promise)
+#### Return Value
+[Promise](/docs/Promise/Promise)

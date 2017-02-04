@@ -3,7 +3,7 @@ layout: docs
 title: 'Dexie.spawn()'
 ---
 
-_NOTE: In old version (0.9.8) there was another method Dexie.spawn() with a different meaning. That method has been renamed to [Dexie.ignoreTransaction()](Dexie.ignoreTransaction())_
+_NOTE: In old version (0.9.8) there was another method Dexie.spawn() with a different meaning. That method has been renamed to [Dexie.ignoreTransaction()](/docs/Dexie/Dexie.ignoreTransaction())_
 
 ### Syntax
 
@@ -16,29 +16,22 @@ Dexie.spawn(function* () {
 
 ### Return Value
 
-[Promise](Promise)
+[Promise](/docs/Promise/Promise)
 
 ### Description
 
 Makes it possible to use async functions with modern browsers (Chrome, Firefox, Opera and Edge) without the need of a transpiler.
 
 Table below shows how this maps to ES7 async / await.
-```
-                         +--------------------------------+--------------------------+
-                         | Using function*() and yield    | Using async / await      |
-                         +--------------------------------+--------------------------+
-Declare async function   | Dexie.async(function* () {});  | async function() {}      |
-                         +--------------------------------+--------------------------+
-Declare+execute function | Dexie.spawn(function* () {});  | (async function() {})()  |
-                         +--------------------------------+--------------------------+
-Await a Promise          | yield p;                       | await p;                 |
-                         +--------------------------------+--------------------------+
-Declare Promise Generator| function* f (){}               | N/A                      |
-                         +-----------------------------------------------------------+
-Await Promise Generator  | yield* f();                    | N/A                      |
-                         +-----------------------------------------------------------+
 
-```
+<table>
+  <tr><td></td><td>Using function*() and yield</td><td>Using async / await</td></tr>
+  <tr><td>Declare async function</td><td>Dexie.async(function* () {});</td><td>async function() {}</td></tr>
+  <tr><td>Declare+execute function</td><td>Dexie.spawn(function* () {});</td><td>(async function() {})()</td></tr>
+  <tr><td>Await a Promise</td><td>yield p;</td><td>await p;</td></tr>
+  <tr><td>Declare Promise Generator</td><td>function* f (){}</td><td>N/A</td></tr>
+  <tr><td>Await Promise Generator</td><td>yield* fn();</td><td>N/A</td></tr>
+</table>
 
 ### Sample
 
@@ -59,5 +52,5 @@ Dexie.spawn(function* () {
 
 ```
 ### See Also
-[Dexie.async()](Dexie.async())
+[Dexie.async()](/docs/Dexie/Dexie.async())
 

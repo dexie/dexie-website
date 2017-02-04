@@ -12,5 +12,6 @@ db.syncable.disconnect(url);
 ```
 
 ## Remarks
-Suspend syncing with the remote server at given URL but keep the sync state to be prepared for resuming sync again using [db.syncable.connect()](/docs/db.syncable.connect()).
+
+Suspend syncing with the remote server at given URL but keep the sync state to be prepared for resuming sync again using [db.syncable.connect()](/docs/Syncable/db.syncable.connect()).
 

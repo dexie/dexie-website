@@ -5,7 +5,9 @@ title: 'Table.name'
 
 ### Syntax
 
-    table.name
+```javascript
+table.name
+```
 
 ### Type
 
@@ -13,7 +15,9 @@ title: 'Table.name'
 
 ### Sample
 
-    var db = new Dexie("MyDB");
-    db.version(1).stores({friends: "++id"});
+```javascript
+var db = new Dexie("MyDB");
+db.version(1).stores({friends: "++id"});
 
-    alert (db.friends.name); // Will alert ("friends");
+alert (db.friends.name); // Will alert ("friends");
+```

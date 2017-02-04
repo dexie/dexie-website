@@ -5,15 +5,19 @@ title: 'Table.schema'
 
 ### Syntax
 
-    db.[tableName].schema
+```javascript
+db.[tableName].schema
+```
 
 ### Type
 
-[TableSchema](TableSchema)
+[TableSchema](/docs/TableSchema)
 
 ### Sample
 
-    var db = new Dexie("MyDB");
-    db.version(1).stores({friends: "++id,name"});
+```javascript
+var db = new Dexie("MyDB");
+db.version(1).stores({friends: "++id,name"});
 
-    alert ("Primary key: " + db.friends.schema.primKey.keyPath); // Will alert ("id");
+alert ("Primary key: " + db.friends.schema.primKey.keyPath); // Will alert ("id");
+```

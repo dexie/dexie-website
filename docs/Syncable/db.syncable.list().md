@@ -13,14 +13,12 @@ db.syncable.list()
 
 ## Return Value
 
-```typescript
-Promise<string[]>
-```
+[Promise&lt;string[]&gt;](/docs/Promise/Promise)
 
 ## Remarks
-List remote URLs that we are connected or have been connected to. An URL will be listed even after disconnected. To remove an URL completely from this list, [db.syncable.delete(url)](db.syncable.delete()) should be used.
+List remote URLs that we are connected or have been connected to. An URL will be listed even after disconnected. To remove an URL completely from this list, [db.syncable.delete(url)](/docs/Syncable/db.syncable.delete()) should be used.
 
-To see the state of the URL, use [db.syncable.getStatus()](db.syncable.getStatus())
+To see the state of the URL, use [db.syncable.getStatus()](/docs/Syncable/db.syncable.getStatus())
 
 ## Example
 

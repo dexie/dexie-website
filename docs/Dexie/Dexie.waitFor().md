@@ -13,11 +13,11 @@ Dexie.waitFor(promise, timeout=60000)
 
 ### Return Value
 
-[Promise](Promise)
+[Promise](/docs/Promise/Promise)
 
 ### Description
 
-This method makes it possible execute asynchronic non-indexedDB work while still keeping current transaction alive. Use with causion as it may put unnecessary CPU load on the browser. A separate task will keep the transaction alive by propagating dummy-requests on the transaction while the given promise is being executed.
+This method makes it possible execute asynchronic non-indexedDB work while still keeping current transaction alive. Use with caution as it may put unnecessary CPU load on the browser. A separate task will keep the transaction alive by propagating dummy-requests on the transaction while the given promise is being executed.
 
 This method kind of implements an anti-pattern of how not to use indexedDB transactions. On the other hand, it works, is stable across all browsers, and is totally in line with the new [indexeddb-promises](https://github.com/inexorabletash/indexeddb-promises) proposal where this will be possible. So in a future version if the proposal goes live, Dexie will start ride upon that new API if the browser supports it.
 
@@ -29,7 +29,6 @@ As of current state of the [indexeddb-promises](https://github.com/inexorabletas
 ### Sample 1
 
 ```javascript
-
 function sleep (ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -40,10 +39,10 @@ await db.transaction('rw', db.friends, async ()=> {
     let theMan = await db.friends.get(1);
     alert (`I still got the man: ${theMan.name}`);
 });
-
 ```
 
-### Sample 1 in plain old ES5
+### Sample 1 in plain old ES5 + ES6 Promise
+
 ```javascript
 function sleep (ms) {
     return new Promise(function (resolve) { setTimeout(resolve, ms); });
@@ -59,13 +58,12 @@ db.transaction('rw', db.friends, function () {
         alert ('I still got the man: ' + theMan.name);
     });
 })
-
 ```
 
 The above samples shows that you can wait for non-IndexedDB Promises to complete while still keeping transaction alive. You can replace sleep() with WebCrypto calls, fetch() or $.ajax(). When `Dexie.waitFor()` resolves it is guaranteed that the transaction will be in an active state and possible to continue working on. Note however that while the given promise is being executed, the transaction may not be guaranteed to be in an active state (may temporarily be inactive), so the operation must NOT involve operations on the transaction. But when the waitFor() promise resolves, the transaction is guaranteed to be in active state again.
 
 ```javascript
-await db.transaction('rw', db.friends, async ()=> {
+await db.transaction('rw', db.friends, async () => {
     await Dexie.waitFor(mixedOperations());
 
     async function mixedOperations () {
@@ -78,8 +76,6 @@ await db.transaction('rw', db.friends, async ()=> {
 
     await db.friends.get(1); // Will succeed though.
 });
-
-
 ```
 
 What to keep in mind is this:
@@ -88,7 +84,6 @@ What to keep in mind is this:
 * Just access non-IndexedDB work, OR another transaction separate from your own. For example, you MAY start a new top-level transaction or wait on other databases
 
 ```javascript
-
 // We are only locking db.friends initially. But then later in the flow,
 // we also lock db.pets to include it as we need it as well.
 db.transaction('r', db.friends, () => {
@@ -105,7 +100,6 @@ db.transaction('r', db.friends, () => {
         // is an array of the pets that is owned by Bert.
     });
 });
-
 ```
 
 ### Behavior of Dexie.waitFor() when not in a transaction

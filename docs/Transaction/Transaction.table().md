@@ -2,15 +2,17 @@
 layout: docs
 title: 'Transaction.table()'
 ---
-### Syntax
+
+## Syntax
 
 ```javascript
 trans.table(nameName)
 ```
 
-### Return Type
+## Return Type
 
-[Table](Table)
+[Table](/docs/Table/Table)
 
-### Description
-Get a transaction-bound [Table](Table) instance representing one of your object stores specified in [Dexie.version](Dexie.version).
+## Description
+
+Get a transaction-bound [Table](/docs/Table/Table) instance representing one of your object stores specified in [Dexie.version](/docs/Dexie/Dexie.version).

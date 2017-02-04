@@ -7,24 +7,30 @@ Returns a Collection limited to N items.
 
 ### Syntax
 
-    db.[table].limit(N)
+```javascript
+db.[table].limit(N)
+```
 
 ### Return Value
 
-[Collection](Collection)
+[Collection](/docs/Collection/Collection)
 
 ### Remarks
 
 This method is equivalent to:
 
-    db.[table].toCollection().limit(N)
+```javascript
+db.[table].toCollection().limit(N)
+```
 
 or:
 
-    db.[table].orderBy(':id').limit(N)
+```javascript
+db.[table].orderBy(':id').limit(N)
+```
 
 ### See Also
 
-#### [Collection.limit()](Collection.limit())
+[Collection.limit()](/docs/Collection/Collection.limit())
 
-#### [Table.offset()](Table.offset())
+[Table.offset()](/docs/Table/Table.offset())

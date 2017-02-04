@@ -5,27 +5,29 @@ title: 'Dexie.defineClass()'
 
 ### Syntax
 
-    var Class = Dexie.defineClass(structure);
+```javascript
+var Class = Dexie.defineClass(structure);
+```
 
 ### Sample
 
-    var Friend = Dexie.defineClass({
-        name: String,
-        shoeSize: Number
-    });
+```javascript
+var Friend = Dexie.defineClass({
+    name: String,
+    shoeSize: Number
+});
 
-    Friend.prototype.sayHi = function () {
-        alert ("Hi, my name is " + this.name);
-    }
+Friend.prototype.sayHi = function () {
+    alert ("Hi, my name is " + this.name);
+}
 
-    var db = new Dexie("FriendsDB");
-    db.version(1).stores({friends: "++id,name"});
-    db.friends.mapToClass (Friend);
-
+var db = new Dexie("FriendsDB");
+db.version(1).stores({friends: "++id,name"});
+db.friends.mapToClass (Friend);
+```
 
 ### See Also
 
-[Table.defineClass()](Table.defineClass())
+[Table.defineClass()](/docs/Table/Table.defineClass())
 
-[Table.mapToClass()](Table.mapToClass())
-
+[Table.mapToClass()](/docs/Table/Table.mapToClass())

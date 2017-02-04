@@ -3,35 +3,49 @@ layout: docs
 title: 'Dexie'
 ---
 
-Dexie.js (Official home page: [dexie.org](http://dexie.org)) is a library that makes it super simple to use [indexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) - the standard client-side database in browsers. Read more about dexie on it's [README](https://github.com/dfahlander/Dexie.js/blob/master/README.md) or at the [home page](http://dexie.org).
+Dexie.js (Official home page: [dexie.org](http://dexie.org)) is a library that makes it super simple to use [indexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) - the standard client-side database in browsers. Read more about Dexie on it's [README](https://github.com/dfahlander/Dexie.js/blob/master/README.md) or at the [home page](http://dexie.org).
 
 `Dexie` is the main class and the default export of the library. An instance of this class represents an indexedDB database connection.
 
 ### Syntax
+
 ```javascript
-var db = new Dexie (databaseName, options?);
+var db = new Dexie(databaseName, options?);
 ```
 
 ### Parameters
+
 <table>
-<tr><td>dbName : String</td><td>Database name</tdAPIr>
-<tr><td>options: Object (optional)</td><td>Options</td></tr>
+<tr><td>dbName : String</td><td>Database name</td></tr>
+<tr><td>options: Object (optional)</td><td>API Options</td></tr>
 </table>
 
 ### Options
 
 <table>
-<tr><td>addons: Array&lt;DexieAddon&gt;</td><td>Explicitly define the addons to activate for this db instance</td></tr>
-<tr><td>autoOpen: boolean</td><td>Default true. Whether database will open automatically on first query.</td></tr>
-<tr><td>indexedDB: <a href="https://developer.mozilla.org/en-US/docs/Web/API/IDBFactory">IDBFactory</a></td><td>Supply an alternate implementation of indexedDB. If supplying this, also supply IDBKeyRange that works with that implementation.</td></tr>
-<tr><td>IDBKeyRange: <a href="https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange">IDBKeyRange</a></td><td>An implementation of the IDBKeyRange interface that works with provided indexedDB implementation.</td></tr>
+  <tr>
+    <td>addons: Array&lt;DexieAddon&gt;</td>
+    <td>Explicitly define the addons to activate for this db instance</td>
+  </tr>
+  <tr>
+    <td>autoOpen: boolean</td>
+    <td>Default true. Whether database will open automatically on first query.</td>
+  </tr>
+  <tr>
+    <td>indexedDB: <a href="https://developer.mozilla.org/en-US/docs/Web/API/IDBFactory">IDBFactory</a></td>
+    <td>Supply an alternate implementation of indexedDB. If supplying this, also supply IDBKeyRange that works with that implementation.</td>
+  </tr>
+  <tr>
+    <td>IDBKeyRange: <a href="https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange">IDBKeyRange</a></td>
+    <td>An implementation of the IDBKeyRange interface that works with provided indexedDB implementation.</td>
+  </tr>
 </table>
 
-If the 'addons' option is omitted, it will default to the value of [Dexie.addons](Dexie.addons).
+If the 'addons' option is omitted, it will default to the value of [Dexie.addons](/docs/Dexie/Dexie.addons).
 
 ### Return Value
 
-[Dexie](Dexie)
+[Dexie](/docs/Dexie/Dexie)
 
 ### Sample
 
@@ -49,8 +63,10 @@ db.version(1).stores({
 db.transaction('rw', db.friends, db.notes, function* () {
 
     // Let's add some data to db:
-    var friend1Id = yield db.friends.add({name: 'Camilla', age: 25, isCloseFriend: 1});
-    var friend2Id = yield db.friends.add({name: 'Ban Ki-moon', age: 70, isCloseFriend: 0});
+    var friend1Id = yield db.friends
+      .add({name: 'Camilla', age: 25, isCloseFriend: 1});
+    var friend2Id = yield db.friends
+      .add({name: 'Ban Ki-moon', age: 70, isCloseFriend: 0});
 
     var noteId = yield db.notes.add({
         title: 'Shop tomorrow',
@@ -75,9 +91,9 @@ db.transaction('rw', db.friends, db.notes, function* () {
 
     // Catch any error event or exception and log it:
     console.error(err.stack || err);
-
 });
 ```
+
 [Open sample in jsfiddle](https://jsfiddle.net/dfahlander/qmr9L6L8/)
 
 ### Sample: Open existing database 'as is'
@@ -98,9 +114,11 @@ new Dexie('MyDatabase').open().then(function (db) {
     console.error ("Oh uh: " + e);
 });
 ```
+
 [Open sample in jsfiddle](https://jsfiddle.net/dfahlander/b8Levamm/)
 
 ### Sample: Instantiate a Dexie with custom addon
+
 ```javascript
 
 // Define the addon
@@ -113,7 +131,6 @@ function myForEachAddon(db) {
 }
 // Register it (optional)
 Dexie.addons.push(myForEachAddon);
-
 
 // Use it:
 var db = new Dexie('dbname');
@@ -131,10 +148,10 @@ db.transaction('rw', db.friends, function () {
 }).catch(ex => {
     console.error(ex);
 });
-
 ```
 
 How *options* tells how to apply addons:
+
 ```javascript
 // Open normally. Registered addons will be invoked automatically.
 var db1 = new Dexie('dbname');
@@ -144,119 +161,117 @@ var db2 = new Dexie('dbname', {addons: []});
 
 // Explicitely tell Dexie to use just your set of addons:
 var db3 = new Dexie('dbname', {addons: [myForEachAddon]});
-
 ```
 
 ### Methods
 
-#### [version()](Dexie.version())
+#### [version()](/docs/Dexie/Dexie.version())
 Specify the database schema (object stores and indexes) for a certain version.
 
-#### [on()](Dexie.on())
+#### [on()](/docs/Dexie/Dexie.on())
 Subscribe to events
 
-#### [open()](Dexie.open())
+#### [open()](/docs/Dexie/Dexie.open())
 Open database and make it start functioning.
 
-#### [table()](Dexie.table())
+#### [table()](/docs/Dexie/Dexie.table())
 Returns an object store to operate on
 
-#### [transaction()](Dexie.transaction())
+#### [transaction()](/docs/Dexie/Dexie.transaction())
 Start a database transaction
 
-#### [close()](Dexie.close())
+#### [close()](/docs/Dexie/Dexie.close())
 Close the database
 
-#### [delete()](Dexie.delete())
+#### [delete()](/docs/Dexie/Dexie.delete())
 Delete the database
 
-#### [isOpen()](Dexie.isOpen())
+#### [isOpen()](/docs/Dexie/Dexie.isOpen())
 Returns true if database is open.
 
-#### [hasFailed()](Dexie.hasFailed())
+#### [hasFailed()](/docs/Dexie/Dexie.hasFailed())
 Returns true if database failed to open.
 
-#### [backendDB()](Dexie.backendDB())
+#### [backendDB()](/docs/Dexie/Dexie.backendDB())
 Returns the native IDBDatabase instance.
 
-#### [vip()](Dexie.vip())
+#### [vip()](/docs/Dexie/Dexie.vip())
 Enable on('ready') subscribers to use db before open() is complete.
 
 ### Properties
 
-#### [name](Dexie.name)
+#### [name](/docs/Dexie/Dexie.name)
 The database name.
 
-#### [&#91;table&#93;](Dexie.[table])
-Each object store defined in [version().stores()](Version.stores()) gets a [Table](Table) instance named by the object store.
+#### [&#91;table&#93;](/docs/Dexie/Dexie.[table])
+Each object store defined in [version().stores()](/docs/Version/Version.stores()) gets a [Table](/docs/Table/Table) instance named by the object store.
 
-#### [tables](Dexie.tables)
+#### [tables](/docs/Dexie/Dexie.tables)
 Javascript Array containing all Table instances.
 
-#### [verno](Dexie.verno)
+#### [verno](/docs/Dexie/Dexie.verno)
 Version of current database
 
 #### Static Methods
 
-#### [Dexie.async()](Dexie.async())
+#### [Dexie.async()](/docs/Dexie/Dexie.async())
 Declare an async function in today's modern browsers (2015) without the need for a transpiler.
 
-#### [Dexie.spawn()](Dexie.spawn())
+#### [Dexie.spawn()](/docs/Dexie/Dexie.spawn())
 Spawn an async function in today's modern browsers (2015) without the need for a transpiler.
 
-#### [Dexie.delete()](Dexie.delete())
+#### [Dexie.delete()](/docs/Dexie/Dexie.delete())
 Delete a database.
 
-#### [Dexie.getDatabaseNames()](Dexie.getDatabaseNames())
+#### [Dexie.getDatabaseNames()](/docs/Dexie/Dexie.getDatabaseNames())
 List all database names at current origin.
 
-#### [Dexie.exists()](Dexie.exists())
+#### [Dexie.exists()](/docs/Dexie/Dexie.exists())
 Detect whether a database with the given name exists.
 
-#### [Dexie.getByKeyPath()](Dexie.getByKeyPath())
+#### [Dexie.getByKeyPath()](/docs/Dexie/Dexie.getByKeyPath())
 Retrieve a property from an object given a key path.
 
-#### [Dexie.setByKeyPath()](Dexie.setByKeyPath())
+#### [Dexie.setByKeyPath()](/docs/Dexie/Dexie.setByKeyPath())
 Modify a property in an object given a key path and value.
 
-#### [Dexie.delByKeyPath()](Dexie.delByKeyPath())
+#### [Dexie.delByKeyPath()](/docs/Dexie/Dexie.delByKeyPath())
 Delete a property from an object given a key path.
 
-#### [Dexie.shallowClone()](Dexie.shallowClone())
+#### [Dexie.shallowClone()](/docs/Dexie/Dexie.shallowClone())
 Shallow clones an object.
 
-#### [Dexie.deepClone()](Dexie.deepClone())
+#### [Dexie.deepClone()](/docs/Dexie/Dexie.deepClone())
 Deep clones an object.
 
-#### [Dexie.ignoreTransaction()](Dexie.ignoreTransaction())
+#### [Dexie.ignoreTransaction()](/docs/Dexie/Dexie.ignoreTransaction())
 Create a a new scope where current transaction is ignored.
 
-#### [Dexie.override()](Dexie.override())
+#### [Dexie.override()](/docs/Dexie/Dexie.override())
 Override existing method and be able to call the original method.
 
-#### [Dexie.defineClass()](Dexie.defineClass())
+#### [Dexie.defineClass()](/docs/Dexie/Dexie.defineClass())
 Creates a function and populates its prototype with given structure.
 
-#### [Dexie.derive()](Dexie.derive())
+#### [Dexie.derive()](/docs/Dexie/Dexie.derive())
 Fixes the prototype chain for OOP inheritance.
 
-#### [Dexie.extend()](Dexie.extend())
+#### [Dexie.extend()](/docs/Dexie/Dexie.extend())
 Set given additional properties into given object.
 
-#### [Dexie.Events()](Dexie.Events())
+#### [Dexie.Events()](/docs/Dexie/Dexie.Events())
 Create a set of events to subscribe to and fire.
 
 ### Static Properties
 
-#### [addons](Dexie.addons)
+#### [addons](/docs/Dexie/Dexie.addons)
 Array of extended constructors.
 
-#### [debug](Dexie.debug)
+#### [debug](/docs/Dexie/Dexie.debug)
 Get / set debug mode.
 
-#### [semVer](Dexie.semVer)
+#### [semVer](/docs/Dexie/Dexie.semVer)
 Contains the semantic version string from package.json.
 
-#### [version](Dexie.version)
+#### [version](/docs/Dexie/Dexie.version)
 Contains the version number of Dexie as a numeric comparable decimal value.
-

@@ -9,9 +9,11 @@ Enables overriding existing functions and still be able to call the original fun
 
 The following sample shows how to log to console each time window.open() is called.
 
-        window.open = Dexie.override(window.open, function(origFunc) {
-            return function (url) {
-                console.log("Opening url: " + url);
-                return origFunc.apply(this, arguments);
-            }
-        }
+```javascript
+window.open = Dexie.override(window.open, function(origFunc) {
+    return function (url) {
+        console.log("Opening url: " + url);
+        return origFunc.apply(this, arguments);
+    }
+});
+```

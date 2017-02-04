@@ -8,34 +8,34 @@ Fixes the prototype chain for OOP inheritance.
 ### Sample
 
 ```javascript
-    function Vehicle () {}
-    
-    Vehicle.prototype.move = function() {
-        throw new Error ("Don't know how to move");
+function Vehicle () {}
+
+Vehicle.prototype.move = function() {
+    throw new Error ("Don't know how to move");
+}
+
+function Car() {}
+
+Dexie.derive(Car).from(Vehicle).extend(function() {
+    //
+    // Private closure scope for private methods
+    //
+    function privFunc() {
+        alert ("The wheels are rolling");
     }
-    
-    function Car() {}
-    
-    Dexie.derive(Car).from(Vehicle).extend(function() {
+
+    return {
         //
-        // Private closure scope for private methods
+        //  Public methods here (all methods are put on Car.prototype)
         //
-        function privFunc() {
-            alert ("The wheels are rolling");
+
+        move: function() {
+            privFunc();
         }
+    };
+});
 
-        return {
-            //
-            //  Public methods here (all methods are put on Car.prototype)
-            //
-
-            move: function() {
-                privFunc();
-            }
-        };
-    });
-
-    var car = new Car();
-    alert (car instanceof Vehicle); // alerts 'true'
-    car.move();
+var car = new Car();
+alert (car instanceof Vehicle); // alerts 'true'
+car.move();
 ``` 

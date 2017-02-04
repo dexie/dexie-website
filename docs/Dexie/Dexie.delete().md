@@ -13,7 +13,7 @@ Dexie.delete('database_name');
 
 ### Return Value
 
-[Promise](Promise)
+[Promise](/docs/Promise/Promise)
 
 ### Description
 

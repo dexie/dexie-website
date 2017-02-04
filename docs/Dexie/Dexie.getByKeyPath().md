@@ -16,6 +16,6 @@ var obj = {
     }
 };
 
-alert (Dexie.getByKeyPath(obj, "name")); // Will alert ("Kalle");
-alert (Dexie.getByKeyPath(obj, "address.street")); // Will alert ("East 13th Street");
+alert (Dexie.getByKeyPath(obj, "name")); // Will alert "Kalle";
+alert (Dexie.getByKeyPath(obj, "address.street")); // Will alert "East 13th Street";
 ```

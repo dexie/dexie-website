@@ -129,6 +129,10 @@ Event triggered when sync status changes.
 ##### [db.syncable.getStatus (url)](/docs/Syncable/db.syncable.getStatus())
 Get sync status for given URL.
 
+##### [db.syncable.getOptions (url)](/docs/Syncable/db.syncable.getOptions())
+
+Get the options object for the given URL.
+
 ### Source
 
 [Dexie.Syncable.js](https://github.com/dfahlander/Dexie.js/blob/master/addons/Dexie.Syncable/src/Dexie.Syncable.js)

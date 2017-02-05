@@ -10,7 +10,7 @@ This is a guide on how to use Dexie with Typescript. If you just want to see wor
 ## Download and install dexie
 
 ```bash
-npm install dexie --save
+npm install dexie@^2.0.0-beta --save
 ```
 
 ## Import dexie

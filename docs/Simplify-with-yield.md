@@ -13,7 +13,7 @@ The principle is simple:
 2. Use Dexie.spawn() or Dexie.async() to enable a synchronous-like programming style.
 3. Each method that returns a Promise can be awaited using **yield**.
 
-Exactly the same way as ES7's async/await is going to work.
+Exactly the same way as ES7's async/await works (but unlike async/await this works in current modern browsers without transpilation).
 
 ## Sample use
 

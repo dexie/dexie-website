@@ -3,7 +3,28 @@ layout: docs
 title: 'Consuming Dexie as a module'
 ---
 
-Dexie is written in ES6 and distributed in the UMD format. It can be consumed either as a plain script tag, required as a CJS, AMD or ES6 module.
+## Short Version
+
+```javascript
+import Dexie from 'dexie';
+
+const db = new Dexie('myDb');
+db.version(1).stores({
+    friends: `name, age`
+});
+
+export default db;
+```
+
+Save the above code to for example `mydatabase.js` and import it from another module:
+
+```javascript
+import db from './mydatabase';
+```
+
+## Long Version
+
+Dexie is written in ES6 and distributed in both the [UMD](http://davidbcalhoun.com/2014/what-is-amd-commonjs-and-umd/) and [ES](https://strongloop.com/strongblog/an-introduction-to-javascript-es6-modules/) formats. It can be consumed either as a plain script tag, required as a CJS, AMD or imported as an ES module.
 
 Vanilla scripts are nice when testing out something. But a module-based approach is better in the long term and package manager helps you keep track of your dependencies. There are lots of combinations of package- and module systems to choose from. For web apps, `npm + webpack` works perfectly well so let's start with that alternative.
 
@@ -25,6 +46,7 @@ npm install webpack -g
 Write your javascript file (index.js or whatever) that uses dexie:
 
 index.js
+
 ```javascript
 var Dexie = require('dexie');
 var db = new Dexie('hellodb');
@@ -32,12 +54,11 @@ db.version(1).stores({
     tasks: '++id,date,description,done'
 });
 
-// Don't be confused over Dexie.spawn() and yield here. It's not required for
-// using Dexie, but it really simplifies the code.
-// If you're a Promise Ninja, use vanilla promise style instead.
+// Don't be confused over Dexie.spawn() and yield here. It's not required for using Dexie,
+// but it really simplifies the code. If you're a Promise Ninja, use vanilla promise
+// style instead.
 Dexie.spawn(function*() {
-    var id = yield db.tasks
-      .put({date: Date.now(), description: 'Test Dexie', done: 0});
+    var id = yield db.tasks.put({date: Date.now(), description: 'Test Dexie', done: 0});
     console.log("Got id " + id);
     // Now lets add a bunch of tasks
     yield db.tasks.bulkPut([
@@ -99,6 +120,7 @@ Now your done to open your web page in a browser. If you're on the Edge browser,
 npm install -g http-server
 http-server .
 ```
+
 Now start a browser towards [http://localhost:8080/](http://localhost:8080/) and press F12 to view the console log output.
 
 Done.
@@ -106,22 +128,20 @@ Done.
 ### NPM and rollup
 
 main.js:
+
 ```javascript
 import Dexie from 'dexie';
 
 var db = new Dexie('mydb');
 db.version(1).stores({foo: 'id'});
 
-db.foo.put({id: 1, bar: 'hello rollup'})
-  .then(id => {
+db.foo.put({id: 1, bar: 'hello rollup'}).then(id => {
     return db.foo.get(id);
-  })
-  .then (item => {
+}).then (item => {
     alert ("Found: " + item.bar);
-  })
-  .catch (err => {
+}).catch (err => {
     alert ("Error: " + (err.stack || err));
-  });
+});
 ```
 
 index.html
@@ -137,14 +157,14 @@ index.html
 ```
 
 Shell:
-
 ```bash
 npm install dexie --save
 npm install rollup -g
 rollup main.js -o bundle.js
 ```
 
-The es6 version is located on [https://npmcdn.com/dexie@latest/src/Dexie.js](https://npmcdn.com/dexie@latest/src/Dexie.js) but rollup will read the `jsnext:main` attribute in package.json, so it's enough to just import 'dexie'.
+The es6 version is located on [https://npmcdn.com/dexie@latest/src/Dexie.js](https://npmcdn.com/dexie@latest/src/Dexie.js) but rollup will read the jsnext:main attribute in package.json, so it's enough to just import 'dexie'.
+
 
 ### Bower
 
@@ -184,7 +204,6 @@ npm install dexie --save
 
 systemjs.config.js
 ```javascript
-
 System.config({
     map: {
         'dexie': 'node_modules/dexie/dist/dexie.js'
@@ -212,8 +231,8 @@ import Dexie from 'dexie';
 class MyDatabase extends Dexie {
     contacts: Dexie.Table<IContact, number>;
 
-    constructor () {
-        super("myDb");
+    constructor (databaseName) {
+        super(databaseName);
         this.version(1).stores({
             contacts: '++id,first,last'
         });
@@ -233,7 +252,6 @@ var db = new MyDatabase('myDb');
 db.open().catch(err => {
     console.error(`Open failed: ${err.stack}`);
 });
-
 ```
 
 That's it! Typings are delivered with the package. **DON'T**:use tsd or typings to add dexie's type definitions. They are bundled with the lib and pointed out via package.json's `typings` property.

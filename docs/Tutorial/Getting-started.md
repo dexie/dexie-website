@@ -26,13 +26,6 @@ Dexie.js can be consumed as a module. But let's skip that for now and just show 
           });
 
           //
-          // Open it
-          //
-          db.open().catch(function (e) {
-              alert ("Open failed: " + e);
-          });
-
-          //
           // Put some data into it
           //
           db.friends.put({name: "Nicolas", shoeSize: 8}).then (function(){

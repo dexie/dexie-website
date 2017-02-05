@@ -3,11 +3,13 @@ layout: docs
 title: 'Design'
 ---
 
-### The Dexie Class
+### The Dexie class
 
-Dexie is both a class and a namespace. An instance of Dexie will represent a database connection. As namespace, it is used as an export area for functions, utilities, and classes. In a simple HTML browser environment this means that including "Dexie.js" will only add one property to window: window.Dexie. If you are utilizing a module environment like webpack or require.js, Dexie will be what you get when requiring it. Here's an example how to use Dexie once you've included it:
+Dexie is both a class and a namespace. An instance of Dexie will represent a database connection. As namespace, it is used as an export area for functions, utilities, and classes. In a simple HTML browser environment this means that including "Dexie.js" will only add one property to window: window.Dexie. If you are utilizing a module environment like commonjs or ES modules, Dexie will be the default export that you get when requiring it. Here's an example how to use Dexie once you've included it:
 
 ```javascript
+import Dexie from 'dexie';
+
 // Create your instance
 var db = new Dexie("MyDatabase"); 
 
@@ -26,7 +28,9 @@ db.open().catch(function (e) {
 
 Dexie, as its backend indexedDB implementation, is an asynchronous database, meaning that any operation that requires a result won't be returned directly. Instead all such operations will return a [Promise](http://www.html5rocks.com/en/tutorials/es6/promises/).
 
-Dexie also supports queuing operations, meaning you can start using the database directly after db.open() has been called even if open() has not finished yet. In case open() fails, queued operations will immediately fail with the error event from the open request. This means that you don't need to do catch() on db.open() since the error will be caught by any request towards the database.
+Dexie also supports queuing operations, meaning you can start using the database directly after having defined it. In case open() hasn't been called, it will open it automatically and enqueue the operation to execute as soon as the database is finished opening. If open fails, queued operations will immediately fail with the error event from the open request.
+
+Notice also that you don't need to care for whether the database has been created or not. It all be created automatically first time use. You always define your schema and let the runtime decide whether to use that definition for creating the database or just for populating the table properties onto your db instance. 
 
 ### The Table Class
 

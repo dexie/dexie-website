@@ -61,7 +61,7 @@ title: 'Samples'
 
 * [Source](https://github.com/dfahlander/Dexie.js/tree/master/samples/browserify)
 
-#### Great simplification using ES6 yield
+#### Great simplification using ES6 yield (a poor man's async/await)
 
 * [Simplify with yield](Simplify-with-yield)
 * [Fiddle](https://jsfiddle.net/dfahlander/b7axqyjw/)

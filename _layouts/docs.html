@@ -24,7 +24,8 @@ layout: default
     <h2 class="text-center">Table of Contents</h2>
     <div class="docs-toc-wrapper">
       <ul class="docs-toc">
-        {% for page in site.pages %}
+        {% assign pages = site.pages | sort:"title"  %}
+        {% for page in pages %}
           {% if page.layout == 'docs' %}
             <li>
               <a href="{{ page.url }}">{{ page.title }}</a>

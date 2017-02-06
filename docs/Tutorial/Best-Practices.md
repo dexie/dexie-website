@@ -43,6 +43,7 @@ catching them, unless:
 Long Version:
 
 It's bad practice to do this everywhere:
+
 ```javascript
 function somePromiseReturningFunc() {
     return db.friends.add({
@@ -53,7 +54,9 @@ function somePromiseReturningFunc() {
     });
 }
 ```
+
 It's much better to do just this:
+
 ```javascript
 function somePromiseReturningFunc() {
     return db.friends.add({
@@ -64,6 +67,7 @@ function somePromiseReturningFunc() {
     // We are returning a Promise, aren't we? Let caller catch it instead!
 }
 ```
+
 If you catch a promise, your resulting promise will be considered successful. It's like doing try..catch in a function where it should be done from the caller, or caller's caller instead. Your flow would continue even after the error has occured.
 
 In transaction scopes, it is even more important to NOT catch promises because if you do, transaction will commit! Catching a promise should mean you have a way to handle the error gracefully. If you don't have that, don't catch it!

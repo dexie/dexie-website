@@ -27,15 +27,18 @@ db.open().then(function (db) {
 
 ## Understanding the flow
 
+### First time
 First time a browser hits the appdb.js code the following happens:
 
 1. Database is being created
 2. If [on('populate')](/docs/Dexie/Dexie.on.populate.html) is triggered to populate ground data.
 3. db.open() promise resolves.
 
-Second time
+### Second time
 
 1. Database is just opened and promise resolves.
+
+### Modify Schema
 
 And when you need to modify the schema, you keep current schema but just add a new version instead.
 
@@ -48,6 +51,8 @@ db.version(2).stores({
     pets: 'name'
 });
 ```
+
+### Migrate Data
 
 And if you need to migrate existing data, you add an upgrade function to the new version.
 

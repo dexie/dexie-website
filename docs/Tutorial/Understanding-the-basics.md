@@ -8,8 +8,7 @@ title: 'Understanding the basics'
 IndexedDB (and Dexie) has a built-in system for db installation and schema upgrades. This is something that many users have had problems to understand. I get the same questions over and over. People try to do these things manually.
 
 ## Declarative Schema 
-The database schema is declarative, not imperative 
-appdb.js:
+The database schema is declarative, not imperative. 
 
 ```javascript
 var db = new Dexie('dbname');

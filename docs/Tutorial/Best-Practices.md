@@ -67,6 +67,7 @@ function somePromiseReturningFunc() {
 If you catch a promise, your resulting promise will be considered successful. It's like doing try..catch in a function where it should be done from the caller, or caller's caller instead. Your flow would continue even after the error has occured.
 
 In transaction scopes, it is even more important to NOT catch promises because if you do, transaction will commit! Catching a promise should mean you have a way to handle the error gracefully. If you don't have that, don't catch it!
+
 ```javascript
 function myDataOperations() {
     return db.transaction('rw', db.friends, db.pets, function(){
@@ -92,6 +93,7 @@ somePromiseReturningFunc().catch(function (err) {
 ```
 
 Sometimes you really WANT to handle an explicit error because you know it can happen and you have a way to work around it.
+
 ```javascript
 function getHillary() {
   return db.friends

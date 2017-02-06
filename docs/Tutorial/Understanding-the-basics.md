@@ -37,6 +37,39 @@ Second time
 
 1. Database is just opened and promise resolves.
 
-## Conclusion
+And when you need to modify the schema, you keep current schema but just add a new version instead.
 
-You do never need to check whether the database need to be created. Your code is just declarative.
+```javascript
+db.version(1).stores({
+    friends: 'name, age'
+});
+db.version(2).stores({
+    friends: 'name, age, firstName, lastName',
+    pets: 'name'
+});
+```
+
+And if you need to migrate existing data, you add an upgrade function to the new version.
+
+```javascript
+db.version(1).stores({
+    friends: 'name, age'
+});
+db.version(2).stores({
+    friends: 'name, age, firstName, lastName',
+    pets: 'name'
+}).upgrade(function () {
+    return db.friends.toCollection().modify(function (friend) {
+        friend.firstName = friend.name.split(' ')[0];
+        friend.lastName = friend.name.split(' ')[1];
+    });
+});
+```
+
+
+## Conclusions
+
+* You do never need to check whether the database need to be created. Your code is just declarative.
+* Don't edit schemas. Add new versions.
+* Keep previous versions as long as there are people out there that may have it installed.
+

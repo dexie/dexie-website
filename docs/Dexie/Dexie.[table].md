@@ -13,7 +13,7 @@ db.open();
 assert(db.table1 instanceof db.Table);
 assert(db.table2 instanceof db.Table);
 ```
-`
+
 ### Type
 
 [Table](/docs/Table/Table)

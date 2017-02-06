@@ -78,4 +78,4 @@ db.version(2).stores({
 * Don't edit schemas. Add new versions instead.
 * Keep previous versions as long as there are people out there that may have it installed.
 
-*NOTE: In an upcoming Dexie version, you will no longer need to keep old versions unless they have upgraders associated, but for now (as of Dexie 2.0.0-beta.10, this is still the way to do it*
+*NOTE: In an upcoming Dexie version, you will no longer need to keep old versions unless they have upgraders associated, but for now (as of Dexie 2.0.0-beta.10), this is still the way to do it*

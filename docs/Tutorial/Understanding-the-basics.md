@@ -18,12 +18,25 @@ var db = new Dexie('dbname');
 db.version(1).stores({
     friends: 'name, age'
 });
+db.open().then(function (db) {
+    // Database openeded successfully
+}).catch (function (err) {
+    // Error occurred
+});
 ```
 
 ## Understanding the flow
 
 First time a browser hits the appdb.js code the following happens:
 
-1. TBD...
+1. Database is being created
+2. If [on('populate')](/docs/Dexie/Dexie.on.populate.html) is triggered to populate ground data.
+3. db.open() promise resolves.
 
-Second time ...
+Second time
+
+1. Database is just opened and promise resolves.
+
+## Conclusion
+
+You do never need to check whether the database need to be created. Your code is just declarative.

@@ -10,50 +10,42 @@ Only for lead contributors with access to publish on npm.
 ## Preparation
 
 * Have a dedicated master clone on your hard drive, for example `/c/repos/dexie-release`
-* Have nescessary npm packages installed globally (if any?... FIXTHIS)
 
 ## Release Procedure
 
-Before releasing:
+### Before Releasing
 
-1. Check if you have anything to push from develop to master. If so,
-  
-* First run unit tests if uncertain, then,
-* commit any changes to local develop branch, then:
+1. Have a dedicated 'dexie-release' clone of master
 
 ```bash
-git push origin develop
+cd /c/repos/dexie-release # or dexie-release-1 for maintainance releases o 1.x.
+git status # Make sure your working directory is clean
+git checkout master # Or master-1 for maintainance release of 1.x.
+git pull # Pull latest
+git status # Make sure your working directory is still clean.
+npm install # Makes sure to install added deps
 ```
 
-Then, create pull request on [https://github.com/dfahlander/Dexie.js/tree/develop](https://github.com/dfahlander/Dexie.js/tree/develop), confirm and merge it.
+2. Are you releasing addons together with dexie? If so, make sure to bump addons versions in their package.json and commit that before proceeding. The release script will release the addons if their version differs from their released version on npm.
 
-1. CD to your development clone of the develop branch and update from master.
+3. Make sure to have BROWSER_STACK_USERNAME and BROWSER_STACK_ACCESS_KEY environment variables set! Otherwise the full test suite will be unable to run.
 
-```bash
-git checkout develop
-git merge master develop
-```
+### Releasing
 
-2. Run unit tests in IE (or Edge), chrome (or opera) and firefox. TODO: Automate this throw browserstack.
-3. Run the unit test addons/Dexie.Observable/test/test-observable-dexie-tests.html in chrome at least. One test fails and explains why. TODO: Make the test succeed and make sure to automate this as well.
-
-Releasing:
-
-4. CD to your dedicated 'dexie-release' location.
+1. CD to your dedicated 'dexie-release' location.
 
 ```bash
-git checkout master
-git pull
-git status      # should be clean
 tools/release.sh
 # enter new version number. If prerelase, use a pre-release version
-# such as "1.3.5-beta"
+# such as "2.0.0-beta.10"
+# If addons have version bumps, you will be asked whether to release
+# them as well.
 ```
 
-Tests will run via karma.
+Tests will run via karma. It will test the full suite on browserstack.
 Script will publish on npm and checkin dist builded files into github/releases branch.
 
-5. Browse to https://github.com/dfahlander/Dexie.js/releases and edit the new tag so that it becomes a release. Write release notes based on the commit history.
+2. Browse to https://github.com/dfahlander/Dexie.js/releases and edit the new tag so that it becomes a release. Write release notes based on the commit history.
 
 ### If release.sh fails...
 
@@ -62,3 +54,5 @@ git reset --hard origin/master
 ```
 
 Then, fix problems and re-run tools/release.sh
+
+*NOTE: IE and Edge have some general indexedDB instability that periodically makes arbritary tests timeout or fail. When this happens, you might need to re-run the whole procedure again.*

@@ -21,11 +21,11 @@ table.where({keyPath1: value1, keyPath2: value2, ...});
 <tr><td>indexOrPrimaryKey: String</td><td>Name of an index or primary key registered in <a href="/docs/Version/Version.stores()">Version.stores()</a>. The special string ":id" represents the primary key.</td></tr>
   <tr>
     <td>keyPathArray</td>
-    <td>Strings identifying keyPaths to filter on. Must match a compound index or primary key.</td>
+    <td>(Dexie 2.x only) String identifying keyPaths to filter on. Must match a compound index or primary key.</td>
   </tr>
   <tr>
     <td>{keyPath1: value1, keyPath2: value2, ...}</td>
-    <td>Criterias to filter</td>
+    <td>(Dexie 2.x only) Criterias to filter</td>
   </tr>
 </table>
 

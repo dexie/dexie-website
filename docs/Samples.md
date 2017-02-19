@@ -3,7 +3,7 @@ layout: docs
 title: 'Samples'
 ---
 
-### Sample in the Dexie repository
+### Samples in the Dexie repository
 
 #### React + Dexie
 

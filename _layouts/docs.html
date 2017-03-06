@@ -28,7 +28,7 @@ layout: default
         {% for page in pages %}
           {% if page.layout == 'docs' %}
             <li>
-              <a href="{{ page.id }}">{{ page.title }}</a>
+              <a href="{{ page.url }}">{{ page.title }}</a>
             </li>
           {% endif %}
         {% endfor %}

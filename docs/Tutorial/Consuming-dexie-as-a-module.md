@@ -260,7 +260,7 @@ See also [Dexie Typescript Tutorial](/docs/Typescript)
 
 ### Next steps
 
-#### [Architectural Overview](/docs/Design)
+#### [Architectural Overview](/docs/Tutorial/Design)
 
 or
 

@@ -264,7 +264,7 @@ See also [Dexie Typescript Tutorial](/docs/Typescript)
 
 or
 
-#### [Look at some samples](/docs/Samples/Samples)
+#### [Look at some samples](/docs/Samples)
 
 or
 

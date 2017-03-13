@@ -20,8 +20,8 @@ title: 'Tutorial'
 
 [Building Addons](/docs/Tutorial/Building-Addons)
 
-[Questions and Answers](/docs/Tutorial/Questions-and-Answers)
+[Questions and Answers](/docs/Questions-and-Answers)
 
-[API Reference (with quick reference)](/docs/Tutorial/API-Reference)
+[API Reference (with quick reference)](/docs/API-Reference)
 
 [Understanding the basics](/docs/Tutorial/Understanding-the-basics)

@@ -37,8 +37,7 @@ Assuming you've already installed nodejs that bundles `npm` with it. Start by in
 ```bash
 mkdir hello-dexie
 cd hello-dexie
-npm init
-# Just press enter on all questions to generate your package.json
+npm init --yes
 npm install dexie --save
 npm install webpack -g
 ```

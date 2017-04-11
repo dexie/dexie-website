@@ -255,7 +255,7 @@ db.transaction("rw", db.friends, function () {
 ```
 If not rethrowing the error, Nils would be successfully added and transaction would commit since the error is regarded as handled when you catch the database operation.
 
-An alternate way of rethrowing the error is to replace `throw error;` with `return Promise.reject(error)`.
+An alternate way of rethrowing the error is to replace `throw error;` with `return Dexie.Promise.reject(error)`.
 
 ### 7. (Optionally:) Declare Classes
 

@@ -451,14 +451,7 @@ db.transaction('rw', db.friends, function() {
 });
 ```
 
-All transaction promises should either be catched or returned to its caller. If this pattern isn't followed, [Promise.on('error')](/docs/Promise/Promise.on.error) will trigger. 
-
-```javascript
-Dexie.Promise.on('error', function (err) {
-    // Catch all uncatched DB-related errors and exceptions
-    console.error(err);
-});
-```
+All transaction promises should either be catched or returned to its caller.
 
 #### Catching means Handling!
 If you catch a Promise from a database operation within a transaction, it will be considered to be handled and the transaction will not be aborted. This could be a common pitfall when people catch promises within transactions just to log  it but expecting the transaction to abort. Solution: re-throw the errors that you don't handle!

@@ -430,7 +430,7 @@ Dexie Promises are A+ / ES6 compliant and play magically well with other Promise
 *In Dexie 2.0.0-beta and later, the global Promise can be safely used within transactions as the global Promise will be patched within the transaction [zone](/docs/Promise/Promise.PSD).*
 
 #### Promise-Specific Data (zone)
-Dexie Promises supports a pattern similar to [Thread-local storage](http://en.wikipedia.org/wiki/Thread-local_storage) where it is possible to have static properties that is bound to the executing promise and all it's child-promises. This is similar Angular's [zone.js](https://github.com/angular/zone.js/) but in an unobtrusive way (no requirement of including a monkey-patching script). Dexie.js and it's transaction API heavily depends on it's transaction zones since it enables code to be aware of the currently executing transaction without having to pass transaction objects around. [Promise-Specific Data doc](/docs/Promise/Promise.PSD).
+Dexie Promises supports a pattern similar to [Thread-local storage](http://en.wikipedia.org/wiki/Thread-local_storage) where it is possible to have static properties that is bound to the executing promise and all it's child-promises. This is similar Angular's [zone.js](https://github.com/angular/zone.js/) but in an unobtrusive way (no requirement of including any monkey-patching script). Dexie.js and it's transaction API heavily depends on it's transaction zones since it enables code to be aware of the currently executing transaction without having to pass transaction objects around. [Promise-Specific Data doc](/docs/Promise/Promise.PSD).
 
 #### Exception Handling
 

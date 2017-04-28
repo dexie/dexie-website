@@ -17,7 +17,7 @@ title: Docs Home
 
 ****
 
-[![Click to download](https://dl.dropboxusercontent.com/u/8907080/dexie/download-button.png)](Download)
+[![Click to download](/assets/images/download-button.png)](Download)
 
 ****
 

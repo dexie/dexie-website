@@ -72,6 +72,6 @@ Obsolete since: v2.0.0-beta.11
 
 Reason: According to best-practices of IndexedDBShim, it should auto-invoke by itself and Dexie should only rely on the shim to do its job.
 
-Workaround: Only if you expect the shim to fix IE/Edge lack of compound keys, you will need to call `__useShim()` explicitely after Dexie v2.0.0-beta.11 according to the docs at https://www.npmjs.com/package/indexeddbshim#shimindexeddb__useshim
+Workaround: Only if you expect the shim to fix IE/Edge lack of compound keys, you will need to call `__useShim()` explicitely after Dexie v2.0.0-beta.11 according to the docs at [indexeddbshim npm page](https://www.npmjs.com/package/indexeddbshim#shimindexeddb__useshim)
 
 

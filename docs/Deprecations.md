@@ -70,8 +70,7 @@ Workaround: For normal apps, this has no complications at all, but if you're wri
 
 Obsolete since: v2.0.0-beta.11
 
-Reason: According to best-practices of IndexedDBShim, it should auto-invoke by itself and Dexie should only rely on the shim to do its job.
+Reason: According to best-practices of IndexedDBShim, it should auto-invoke by itself and Dexie should only rely on the shim to do its job. This change is to the better, as the shim won't be used anymore when not needed. However, if you used to include the shim unconditionally before including Dexie, the shim was previously picked up on all browsers that supported WebSQL even though they also supported the full IndexedDB spec. The effect can be that user's data was stored in WebSQL before Dexie 2.0.0-beta.11 so that when beta.11 is used, the DB is empty.
 
-Workaround: Only if you expect the shim to fix IE/Edge lack of compound keys, you will need to call `__useShim()` explicitely after Dexie v2.0.0-beta.11 according to the docs at [indexeddbshim npm page](https://www.npmjs.com/package/indexeddbshim#shimindexeddb__useshim)
-
+Workaround: If you just want previous behavior, call [shimIndexedDB.__useShim();](https://www.npmjs.com/package/indexeddbshim#shimindexeddb__useshim) before including dexie.
 

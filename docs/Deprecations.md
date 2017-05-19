@@ -65,3 +65,13 @@ Obsolete since: v2.0.0
 Reason: Part of general diet of the dexie code base. There's no point of separating Writeable- from non-Writeable Tables and Collections. Rationale: If you're in a readonly transaction and access a method like put(), add() etcs, it is better you get a rejected Promise than just a runtime error about the non-exitance of that method.
 
 Workaround: For normal apps, this has no complications at all, but if you're writing an addon that extends WriteableTable or WriteableCollection, you'll need to change that to extend Table and Collection instead. This will work on older Dexie's as well.
+
+## Automatic use of IndexedDBShim
+
+Obsolete since: v2.0.0-beta.11
+
+Reason: According to best-practices of IndexedDBShim, it should auto-invoke by itself and Dexie should only rely on the shim to do its job.
+
+Workaround: Only if you expect the shim to fix IE/Edge lack of compound keys, you will need to call `__useShim()` explicitely after Dexie v2.0.0-beta.11 according to the docs at https://www.npmjs.com/package/indexeddbshim#shimindexeddb__useshim
+
+

@@ -23,7 +23,7 @@ import 'dexie-observable';
 
 In case you want to use Dexie.Observable with your existing database, you will have to do a schema upgrade. Without it Dexie.Observable will not be able to properly work.
 
-```
+```javascript
 import Dexie from 'dexie';
 import 'dexie-observable';
 

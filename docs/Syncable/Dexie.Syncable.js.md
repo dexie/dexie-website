@@ -19,7 +19,7 @@ Enables two-way synchronization with a remote server of any kind.
      * [Dexie.js](/docs/Dexie/Dexie.js)
        * [IndexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API)
    * _An implementation of [ISyncProtocol](/docs/Syncable/Dexie.Syncable.ISyncProtocol)_
- 
+
 ### Tutorial
 
 #### 1. Include Required Sources
@@ -60,7 +60,7 @@ Or if using plain html:
 
 In case you want to use Dexie.Syncable with your existing database, but do not want to use UUID based Primary Keys as described below, you will have to do a schema upgrade. Without it Dexie.Syncable will not be able to properly work.
 
-```
+```javascript
 import Dexie from 'dexie';
 import 'dexie-observable';
 import 'dexie-syncable';
@@ -134,7 +134,7 @@ Create a presistend a two-way sync connection with given URL.
 Stop syncing with given URL but keep revision states until next connect.
 
 ##### [db.syncable.delete(url)](/docs/Syncable/db.syncable.delete())
-Delete all states and change queue for given URL 
+Delete all states and change queue for given URL
 
 ##### [db.syncable.list()](/docs/Syncable/db.syncable.list())
 List the URLs of each remote node we have a state saved for.

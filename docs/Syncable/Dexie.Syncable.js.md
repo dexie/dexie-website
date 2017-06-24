@@ -56,10 +56,26 @@ Or if using plain html:
 </html>
 ```
 
+##### Usage with existing DB
+
+In case you want to use Dexie.Syncable with your existing database, but do not want to use UUID based Primary Keys as described below, you will have to do a schema upgrade. Without it Dexie.Syncable will not be able to properly work.
+
+```
+import Dexie from 'dexie';
+import 'dexie-observable';
+import 'dexie-syncable';
+import 'your-sync-protocol-implementation';
+
+var db = new Dexie('myExistingDb');
+db.version(1).stores(... existing schema ...);
+
+// Now, add another version, just to trigger an upgrade for Dexie.Syncable
+db.version(2).stores({}); // No need to add / remove tables. This is just to allow the addon to install its tables.
+```
 
 #### 2. Use UUID based Primary Keys ($$)
 
-Two way replication requires not to use auto-incremented keys if any sync node should be able to create objects no matter offline or online. Dexie.Syncable comes with a new syntax when defining your store schemas: the double-dollar prefix ($$). Similary to the ++ prefix in Dexie (meaining auto-incremented primary key), the double-dollar prefix means that the key will be given a universally unique identifier (UUID), in string format (For example "9cc6768c-358b-4d21-ac4d-58cc0fddd2d6").
+Two way replication requires not to use auto-incremented keys if any sync node should be able to create objects no matter offline or online. Dexie.Syncable comes with a new syntax when defining your store schemas: the double-dollar prefix ($$). Similar to the ++ prefix in Dexie (meaning auto-incremented primary key), the double-dollar prefix means that the key will be given a universally unique identifier (UUID), in string format (For example "9cc6768c-358b-4d21-ac4d-58cc0fddd2d6").
 
 ```javascript
 var db = new Dexie("MySyncedDB");

@@ -1,6 +1,6 @@
 self.importScripts('dexie.js');
 
-//debugger;
+debugger;
 var db = new Dexie('testdb');
 db.version(1).stores({
   items: 'id',

@@ -1,6 +1,6 @@
-self.importScripts('https://unpkg.com/dexie@latest/dist/dexie.js');
+self.importScripts('https://unpkg.com/dexie@next/dist/dexie.js');
 
-var db = new Dexie('db');
+var db = new Dexie('testdb');
 db.version(1).stores({
   items: 'id',
 });

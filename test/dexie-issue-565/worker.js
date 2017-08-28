@@ -9,7 +9,7 @@ db.open().then(()=>{
   debugger;
   return db.items.put({id: 1, name: "foo"});
 }).then(()=> {
-  return db.items.toArray().then(result => {
+  return db.items.filter(x => true).toArray().then(result => {
     debugger;
   });
 });

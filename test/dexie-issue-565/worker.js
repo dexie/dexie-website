@@ -1,5 +1,6 @@
 self.importScripts('https://unpkg.com/dexie@next/dist/dexie.js');
 
+debugger;
 var db = new Dexie('testdb');
 db.version(1).stores({
   items: 'id',

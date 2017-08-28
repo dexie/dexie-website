@@ -5,6 +5,13 @@ var db = new Dexie('testdb');
 db.version(1).stores({
   items: 'id',
 });
-db.items.toArray();
+db.open().then(()=>{
+  debugger;
+  return db.items.put({id: 1, name: "foo"});
+}).then(()=> {
+  return db.items.toArray().then(result => {
+    debugger;
+  });
+});
 
-console.log('worker started')
+//console.log('worker started')

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html><head>
+  <title>Firefox bug binary keys</title>
+  <script src="https://unpkg.com/dexie@2.0.0-beta.11"></script>
+  <style>
+    table, td, th {
+      border: 1px solid #444;
+      border-collapse: collapse;
+    }
+
+    td:first-child > span:after {
+      content: 'testing...'
+    }
+
+    td.fail {
+      color: red;
+    }
+    td.fail > span:after {
+      content: 'failed';
+    }
+
+    td.success {
+      color: green;
+    }
+    td.success > span:after {
+      content: 'success';
+    }
+  </style>
+</head><body>
+  <table>
+  <thead>
+    <tr><th>Status</th><th>Test</th></tr>
+  </thead><tbody>
+  <tr><td id="idb0"><span></span></td><td>put() and query (avoid get() and delete())</td></tr>
+  <tr><td id="idb1"><span></span></td><td>IDBObjectStore.get(TypedArray)</td></tr>
+  <tr><td id="idb2"><span></span></td><td>IDBObjectStore.get(ArrayBuffer)</td></tr>
+  <tr><td id="idb3"><span></span></td><td>IDBObjectStore.delete(TypedArray)</td></tr>
+  <tr><td id="idb4"><span></span></td><td>IDBObjectStore.delete(ArrayBuffer)</td></tr>
+  </tbody></table>
+
+  <script src="test.js"></script>
+  
+</body>
+</html>

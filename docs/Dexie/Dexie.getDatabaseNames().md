@@ -48,4 +48,4 @@ window.addEventListener('storage', function (event) {
 });
 ```
 
-This code will now only work for non chromium browser since [this commit](https://github.com/dfahlander/Dexie.js/commit/2b029321f97072b096fa08799d61c0a7e78f99a8) removes the use of localStorage for Opera and Chrome. A future version of Dexie may enable a Dexie event to subscribe to for the same purpose that would work the same as before. If this is of interest for you, please file an issue and we'll try fix it.
+This code will not work on Dexie 2.x due that localStorage is no longer used to keep track of database names. A future version of Dexie may enable a Dexie event to subscribe to for the same purpose that would work the same as before. If this is of interest for you, please file an issue and we'll try fix it.

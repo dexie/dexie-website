@@ -24,11 +24,8 @@ Returns an array of database names at current host.
 ### Sample
 
 ```javascript
-Dexie.getDatabaseNames(function (databases) {
-    for (var i=0; i<databases.length; ++i) {
-        console.log(databases[i]);
-    }
-});
+const databases = await Dexie.getDatabaseNames();
+console.log(databases);
 ```
 
 ### Browser Specific Info
@@ -36,10 +33,6 @@ Dexie.getDatabaseNames(function (databases) {
 This method is an extension to the native indexedDB API which does not support listing of database names. Chrome and Opera has implemented webkitGetDatabaseNames() but neither IE, Edge, Mozilla or Safari supports it. This method will check if webkitGetDatabaseNames() is present and use it if so. Otherwise it will return a list maintained by Dexie by using the localStorage API. The key in localStorage used for this, is "Dexie.DatabaseNames" pointing out a JSON representation of a string array.
 
 This means that on Opera and Chrome, the method will work no matter if the database was created using Dexie or not, but on IE and Firefox, the method will only see databases created using Dexie.
-
-### Not reliable in workers
-
-Currently we use localStorage for maintaining the list of database names in non-chromium browsers. Since localStorage is not available from workers, Dexie.getDatabaseNames() will yield an empty array when called from there. Moreover, databases that are created in a worker will never be registered into the localStorage key.
 
 ### Detecting When Databases Are Added Or Deleted
 

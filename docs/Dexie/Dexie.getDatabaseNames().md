@@ -6,7 +6,7 @@ title: 'Dexie.getDatabaseNames()'
 ### Syntax
 
 ```javascript
-Dexie.getDatabaseNames(function callback(names){})
+const promise = Dexie.getDatabaseNames([callback]);
 ```
 
 ### Return Value

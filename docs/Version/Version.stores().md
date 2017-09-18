@@ -81,7 +81,7 @@ db.version(1).stores({
 });
 db.open().catch(function (e) {
     console.error("Open failed: " + e.stack);
-}
+})
 
 db.transaction('rw', db.users, function () {
 

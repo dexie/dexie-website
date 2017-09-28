@@ -87,7 +87,7 @@ function myDataOperations() {
 }
 ```
 
-But on an event handler or other root-level scope, always catch! Why?! Because you are the last one to catch it since you are NOT returning Promise! You have no caller that expects a promise and you are the sole responsible of catching and informing the user about any error. If you don't catch it anywhere, an error will end-up in the global [Dexie.Promise.on.error](/docs/Promise/Promise.on.error) handler and logged to the console as a warning (unless you override [Dexie.Promise.on.error](/docs/Promise/Promise.on.error)).
+But on an event handler or other root-level scope, always catch! Why?! Because you are the last one to catch it since you are NOT returning Promise! You have no caller that expects a promise and you are the sole responsible of catching and informing the user about any error. If you don't catch it anywhere, an error will end-up in the standard [unhandledrejection](http://dexie.org/docs/Promise/unhandledrejection-event.html) event.
 
 ```javascript
 somePromiseReturningFunc().catch(function (err) {
@@ -122,7 +122,7 @@ What about if you want to log stuff for debugging purpose? Just remember to reth
 
 ```javascript
 function myFunc() {
-    return Dexie.Promise.resolve().then(function(){
+    return Promise.resolve().then(function(){
         return db.friends.add({name: 'foo'});
     }).catch(function (err) {
         console.error("Failed to add foo!: " + err);
@@ -138,46 +138,17 @@ function myFunc() {
 };
 ```
 
-All uncaught Dexie.Promises will by default be logged to the console (using console.warn()). You can override this behavior by subscribing to [Dexie.Promise.on('error')](/docs/Promise/Promise.on.error):
+### 3. Avoid using other async APIs inside transactions
 
-```javascript
-Dexie.Promise.on('error', function(err) {
-    // Log to console or show en error indicator somewhere in your GUI...
-    console.error('Uncaught Promise: ' + (err.stack || err));
-    $('#appErrorLabel').text(err.message || err);
-    return false; // Don't call the default handler.
-});
-```
-Subscribing to this event overrides the default handler (that logs to console) if you return false from your handler. Note that when this event is triggered, your code has failed to catch a promise at the top of its chain, for example in an event handler that does not return a promise itself.
+IndexedDB will commit a transaction as soon as it isn't used within a tick. This means that you MUST NOT call any other async API (at least not wait for it to finish) within a transaction scope. If you do, you will get a TransactionInactiveError thrown at you as soon as you try to use the transaction after having waited for the other async API.
 
-### 3. Don't use other async APIs inside transactions!
+In case you really need to call a short-lived async-API, Dexie 2.0 can actually keep your transaction alive for you if you use [Dexie.waitFor()](http://dexie.org/docs/Dexie/Dexie.waitFor()).
 
-IndexedDB will commit a transaction as soon as it isn't used within a tick. This means that you MUST NOT call any other async API (at least not wait for it to finish) within a transaction scope. If you do, you will get a TransactionInactiveError thrown at you as soon as you try to use the transaction after having waited for the other async API. This is a behaviour of IndexedDB that is hard to do anything about.
+### ~~4. Stick to Dexie.Promise and never use another Promises within transactions!~~
 
-### 4. Stick to Dexie.Promise and never use another Promises within transactions!
+~~[Dexie.Promise](/docs/Promise/Promise) is ES6 and A+ compliant, meaning that you can use any favourite promise together with Dexie. However, within transactions, DO NOT use any other promise implementation than Dexie.Promise! Otherwise the effective transaction will be gone.~~
 
-[Dexie.Promise](/docs/Promise/Promise) is ES6 and A+ compliant, meaning that you can use any favourite promise together with Dexie. However, within transactions, DO NOT use any other promise implementation than Dexie.Promise! Otherwise the effective transaction will be gone.
-
-For example, if you want to use `Promise.all()` or `Promise.resolve()`, make sure to use those methods from `Dexie.Promise` instead:
-
-```javascript
-
-var Promise = Dexie.Promise; // Have this line where you do transactions
-
-db.transaction('rw', db.friends, db.pets, function () {
-    return Promise.resolve().then(function () {
-        return Promise.all([
-            db.friends.add({name: 'foo'}),
-            db.friends.add({name: 'bar'})
-        ]);
-    }).then((friendIds) => {
-        return Promise.all(friendIds.map(function (id) {
-            // Give a cat to each added friend:
-            return db.pets.add({kind: "Cat", friendId: id});
-        }));
-    });
-});
-```
+This part is no more relevant with Dexie 2.0. Instead, make sure to use the **global** promise (window.Promise) everywhere (don't use an imported Promise from a 3rd part Promise lib. You may use a Promise polyfill for old browsers like IE10/IE11, but just make sure to put it on window.Promise.
 
 ### 5. Use transaction() scopes wherever you gonna make more than one operation
 Whenever you are going to do more than a single operation on your database in a sequence, use a transaction. This will not only encapsulate your changes into an atomic operation, but also optimize your code! Internally, non-transactional operations also use a transaction but it is only used in the single operation, so if you surround your code within a transaction, you will perform less costly operations in total.

@@ -151,11 +151,11 @@ db.transaction('rw', db.cars, function () {
 }); // Transaction will fail with 'PrematureCommitError' (as of Dexie 2.0.0)
 ```
 
-so make sure to only use Dexie.Promise within a transaction zone. In Dexie 2.0, it's ok to use the global Promise within transaction zones, because it is patched for transaction-safety within the zone.
+so make sure to only use the global Promise (window.Promise), or Dexie.Promise within a transaction zone.
 
 ### The Auto-Commit Behavior of IndexedDB Transactions
 
-IndexedDB will commit a transaction as soon as it isn't used within a tick. This means that you MUST NOT call any other async API (at least not wait for it to finish) within a transaction scope. If you do, you will get a TransactionInactiveError thrown at you. This cannot be worked around by encapsulating the call with Dexie.Promise.
+IndexedDB will commit a transaction as soon as it isn't used within a tick. This means that you MUST NOT call any other async API (at least not wait for it to finish) within a transaction scope. If you do, you will get a TransactionInactiveError thrown at you. To avoid this, you may use [Dexie.waitFor()](http://dexie.org/docs/Dexie/Dexie.waitFor()), but use it with causion.
 
 ### Accessing Transaction Object
 
@@ -451,18 +451,7 @@ The example above shows how to run your queries in a sequence and wait for each 
 
 ### Async and Await
 
-Async functions can be used with Dexie with the following caveats:
-
-* Natively supported only by latest versions of Chrome and Edge and only if turning on experimental javascript features.
-* Some quirks and but's when using Dexie version 1.x, see below:
-
-#### Dexie 1.x
-
-* Need to set `let Promise = Dexie.Promise` at the same level as the async function is defined. Only works with Typescript < v2.0 and older versions of babel.
-
-#### Dexie 2.x
-
-You can use async await without any quirks. It works perfectly well with both native async functions (possible to enable in Edge and Chrome) as well as transpiled async await (Typescript - any version, Babel - any version). For transpiled async await, the end code will survive indexedDB transactions no matter browser (including IE 10). However, when using native async await, the browser will invoke native promises instead of Dexie.Promise. This would break transactions in Safari, IE and Firefox. Luckily though, Edge and Chrome are the only one supporting native async functions and both of them also have compatibility between their indexedDB implementation and their native promises. Dexie can maintain its zones (holding current transaction) between native await expressions as well as between transpiled await expressions.
+You can use async await without any quirks. It works perfectly well with both native async functions (tested in Edge, Chrome and Safari) as well as transpiled async await (Typescript - any version, Babel - any version). For transpiled async await, the end code will survive indexedDB transactions no matter browser (including IE 10 and Firefox). However, when using native async await, the browser will invoke native promises instead of Dexie.Promise. This would break transactions in IE and Firefox. Dexie can maintain its zones (holding current transaction) between native await expressions as well as between transpiled await expressions.
  
 ```javascript
 await db.transaction('rw', db.friends, async function() {
@@ -472,26 +461,5 @@ await db.transaction('rw', db.friends, async function() {
 });
 ```
 
-The above code works with Dexie v2.0.0 in Typescript or babel with ES2016 preset. Also works in natively in Chrome and Edge when turning on experimental javascript features.
+The above code works with Dexie v2.0.0 in Typescript or babel with ES2016 preset. Also works in natively in Chrome, Edge, Safari and Opera.
 
-#### Spawn / yield
-
-This is a poor-man's alternative to async functions but it is more widely supported by today's browsers:
-
-* Safari 10
-* Edge
-* Chrome
-* Opera
-* Firefox
-
-All these browsers support the `yield` keyword natively, so you can use it without any transpiling step:
-
-```javascript
-db.transaction('rw', db.friends, function*() {
-    var friendId = yield db.friends.add({name: "New Friend"});
-    var petId = yield db.pets.add({name: "New Pet", kind: "snake"});
-    //...    
-});
-```
-
-Read more about this in [Simplify with yield](/docs/Simplify-with-yield)

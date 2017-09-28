@@ -101,6 +101,10 @@ async function sample() {
 
 In this trivial sync-sample, the fetch() API is only called from outside the transaction. The sample applies also to XMLHttpRequest, jQuery Ajax and any other asynchronic API except the Dexie API.
 
+### Dexie.waitFor()
+
+You can also keep a transaction alive using [Dexie.waitFor()](http://dexie.org/docs/Dexie/Dexie.waitFor()) within a transaction, but I would only recommend it when using definitive short-lived operations, such as the crypto API - and avoid using it on ajax calls as they may take long time to complete - and your transaction would be locked for a long time if so.
+
 ### Parallel transactions
 
 It's also OK to run several different database transactions in parallell. Transactions are maintained using [zones](/docs/Promise/Promise.PSD).

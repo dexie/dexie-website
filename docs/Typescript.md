@@ -133,8 +133,7 @@ export class Contact implements IContact {
   }
   
   loadEmailsAndPhones() {
-    return Dexie.Promise
-      .all(
+    return Promise.all(
         db.emails
         .where('contactId').equals(this.id)
         .toArray(emails => this.emails = emails),
@@ -147,10 +146,10 @@ export class Contact implements IContact {
   
   save() {
     return db.transaction('rw', db.contacts, db.emails, db.phones, () => {
-      Dexie.Promise.all(
+      return Promise.all(
         // Save existing arrays
-        Dexie.Promise.all(this.emails.map(email => db.emails.put(email))),
-        Dexie.Promise.all(this.phones.map(phone => db.phones.put(phone)))
+        Promise.all(this.emails.map(email => db.emails.put(email))),
+        Promise.all(this.phones.map(phone => db.phones.put(phone)))
       )
       .then(results => {
         // Remove items from DB that is was not saved here:

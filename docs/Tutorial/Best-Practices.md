@@ -182,6 +182,17 @@ db.transaction(..., ()=>{
 })
 ```
 
+In the case you write a library (not an app) and you want your library to work on old browsers without requiring a Promise polyfill, it is still safe to use Dexie.Promise:
+
+#### STILL ALSO OK:
+```javascript
+db.transaction(..., ()=>{
+    Dexie.Promise.all()
+    Dexie.Promise.race()
+    new Dexie.Promise((resolve, reject) => { ... })
+})
+```
+
 ### 5. Use transaction() scopes wherever you gonna make more than one operation
 Whenever you are going to do more than a single operation on your database in a sequence, use a transaction. This will not only encapsulate your changes into an atomic operation, but also optimize your code! Internally, non-transactional operations also use a transaction but it is only used in the single operation, so if you surround your code within a transaction, you will perform less costly operations in total.
 
@@ -240,7 +251,7 @@ When you catch database operations explicitely for logging purpose, transaction 
 
 ```javascript
 db.transaction("rw", db.friends, function () {
-    return Dexie.Promise.all([
+    return Promise.all([
         db.friends.add ({name: "Måns", isCloseFriend: 1})
           .catch(function (error) {
               console.error("Couldnt add Måns to the database");
@@ -258,7 +269,7 @@ db.transaction("rw", db.friends, function () {
 ```
 If not rethrowing the error, Nils would be successfully added and transaction would commit since the error is regarded as handled when you catch the database operation.
 
-An alternate way of rethrowing the error is to replace `throw error;` with `return Dexie.Promise.reject(error)`.
+An alternate way of rethrowing the error is to replace `throw error;` with `return Promise.reject(error)`.
 
 ### 7. (Optionally:) Declare Classes
 

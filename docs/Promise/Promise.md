@@ -28,7 +28,7 @@ See also [Best Practices - Understand Promises](/docs/Tutorial/Best-Practices#1-
 
 ### Why we don't use native Promise
 
-Native promises are not compliant with indexedDB transactions on Safari nor Firefox (as of October 2016). On IE11 there is no native promise, so bundling a Dexie.Promise makes Dexie possible to run on IE without polyfilling Promise. In a future when IE browser reaches a very low usage and both Firefox and Safari has an IndexedDB transaction handling that is compatible with its native Promise, Dexie will switch to use native Promise.
+Native promises are not compliant with indexedDB transactions on all browers (as of September 2017). On IE11 there is no native promise, so bundling a Dexie.Promise makes Dexie possible to run on IE without polyfilling Promise. In a future when IE browser reaches a very low usage and Firefox has an IndexedDB transaction handling that is compatible with its native Promise, Dexie may switch to use native Promise.
 
 ### Interopability
 
@@ -76,7 +76,7 @@ db.transaction('rw', db.cars, function () {
     //
     db.cars.put({id: 3}).then (function() {
         // Avoid returning other kinds of promises here:
-        return new window.Promise(function(resolve, reject){
+        return new Bluebird(function(resolve, reject){
             resolve();
         });
     }).then(function() {
@@ -88,6 +88,8 @@ db.transaction('rw', db.cars, function () {
 ```
 
 The main reason for not using it within transactions is due to an [incompatibility between the IndexedDB specification and the Promise specification](https://github.com/promises-aplus/promises-spec/issues/45). Another reason is that only [Dexie.Promise](/docs/Promise/Promise) has the capability to keep track of the currently executing transaction between calls (See [Promise.PSD](/docs/Promise/Promise.PSD)).
+
+window.Promise is always safe to use within transactions, as Dexie will patch the global Promise within the transaction zone, but leave it untouched outside the zone.
 
 ### Methods
 

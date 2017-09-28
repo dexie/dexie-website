@@ -48,16 +48,16 @@ If operation fails, returned promise will reject, calling any [Promise.catch()](
 ### Sample
 
 ```javascript
-db.transaction('r', db.friends, function*(){
-//
-// A simple logical AND operation based on multiple indices.
-// Note: This sample is just for showing an example using primaryKeys() method.
-// In real life, it would be better to use a compound index
-// of [firstName+lastName] to resolve this kind of query!
-//
+db.transaction('r', db.friends, async () => {
+  //
+  // A simple logical AND operation based on multiple indices.
+  // Note: This sample is just for showing an example using primaryKeys() method.
+  // In real life, it would be better to use a compound index
+  // of [firstName+lastName] to resolve this kind of query!
+  //
 
-// Search for friends where firstName = "hillary" and lastName = "clinton"
-  var keys = yield Dexie.Promise.all([
+  // Search for friends where firstName = "hillary" and lastName = "clinton"
+  const keys = await Promise.all([
     db.friends.where('firstName').equalsIgnoreCase('hillary').primaryKeys(),
     db.friends.where('lastName').equalsIgnoreCase('clinton').primaryKeys()
   ]);
@@ -66,6 +66,6 @@ db.transaction('r', db.friends, function*(){
   var intersection = keys[0].filter(key => keys[1].indexOf(key) !== -1);
 
   // At last look up the actual objects from these primary keys:
-  return yield db.friends.where(':id').anyOf(intersection).toArray();
+  return await db.friends.where(':id').anyOf(intersection).toArray();
 });
 ```

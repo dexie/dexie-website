@@ -61,8 +61,8 @@ db.on('ready', function () {
         } else {
             console.log("Database is empty. Populating from ajax call...");
             // We want framework to continue waiting, so we encapsulate
-            // the ajax call in a Dexie.Promise that we return here.
-            return new Dexie.Promise(function (resolve, reject) {
+            // the ajax call in a Promise that we return here.
+            return new Promise(function (resolve, reject) {
                 $.ajax(url, {
                     type: 'get',
                     dataType: 'json',

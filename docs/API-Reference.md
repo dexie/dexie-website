@@ -322,48 +322,6 @@ function getBandsStartingWithA () {
 }
 ```
 
-#### Yielding Promises
-
-[spawn()](/docs/Dexie/Dexie.spawn())
-```javascript
-Dexie.spawn(function*() {
-
-    var id = yield db.friends.add({name: 'Simon', age: 3});
-    console.log("Simon got id: " + id);
-
-    var oldFriends = yield db.friends.where('age').above(75).toArray();
-    console.log("Old friends: " + oldFriends.map(f => f.name));
-
-    // Give a dog to all friends over 8 years old:
-    var addedPetIds = yield db.transaction('rw', db.friends, function* () {
-        // Get primary keys to all friends that should get a dog:
-        var primaryKeys = yield db.friends.where('age').above(8).primaryKeys();
-        return yield Dexie.Promise.all(
-            // Add a new dog and set its foreign key to the friend in question.
-            primaryKeys.map(friendId => db.pets.add({kind: 'dog', ownerId: friendId}))
-        );
-    });
-
-}).catch (function (err) {
-    console.error (err.stack);
-});
-```
-
-[async()](/docs/Dexie/Dexie.async())
-
-```javascript
-var birthday = Dexie.async(function* (friendId) {
-    yield db.friends
-        .where('id')
-        .equals(friendId)
-        .modify(friend => {
-            friend.age++;
-        });
-});
-
-birthDay(2).catch(err => console.error(err.stack));
-```
-
 #### Ongoing Transaction
 
 ```javascript
@@ -373,8 +331,8 @@ function goodFriends() {
         .equals('close-friend');
 }
 
-function addComment(friendId, comment) {
-    return db.friends
+async function addComment(friendId, comment) {
+    await db.friends
         .where('id')
         .equals(friendId)
         .modify(friend => {
@@ -382,11 +340,11 @@ function addComment(friendId, comment) {
         });
 }
 
-function spreadYourLove() {
+async function spreadYourLove() {
     // Make an atomic change:
-    return db.transaction('rw', db.friends, function* () {
-        var goodFriendKeys = yield goodFriends().primaryKeys();
-        yield Dexie.Promise.all(
+    await db.transaction('rw', db.friends, async () => {
+        const goodFriendKeys = await goodFriends().primaryKeys();
+        await Promise.all(
             goodFriendKeys.map(id => addComment(id, "I like you!"))
         );
     });
@@ -403,9 +361,9 @@ Reference: [Dexie.transaction()](/docs/Dexie/Dexie.transaction())
 ```javascript
 // Make one large atomic change that calls other
 // functions that already use a transaction.
-db.transaction('rw', db.friends, db.diary, function*() {
-    yield spreadYourLove();
-    yield db.diary.log({date: Date.now(), text: "Today I successfully spread my love"});
+db.transaction('rw', db.friends, db.diary, async () => {
+    await spreadYourLove();
+    await db.diary.log({date: Date.now(), text: "Today I successfully spread my love"});
 }).catch (err => {
     console.error ("I failed to spread my love :( " + err.stack);
 });
@@ -413,6 +371,8 @@ db.transaction('rw', db.friends, db.diary, function*() {
 ```
 
 *The above snippet shows that you can also reuse code that is indeed transaction-aware, but encapsulate several such functions in an overall umbrella-transaction.*
+
+**NOTE: The code above may look like it could only execute this transaction one-at-a-time, but with thanks to [zone](https://blog.kwintenp.com/how-the-hell-do-zones-really-work/) technology, this code can work in parallell with other transactions. (Dexie implements its own zone system and is not dependent on zone.js)**
 
 Reference: [Dexie.transaction()](/docs/Dexie/Dexie.transaction())
 
@@ -422,12 +382,6 @@ Dexie.js is an asynchronic API. In synchronic APIs, errors are normally handled 
 
 #### Working with Promises
 Promise based APIs (such as Dexie.js) will look more like synchronous APIs than event based APIs, but instead of returning the result, it will return an instance of [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). ECMAScript6 promises has two methods: [then()](/docs/Promise/Promise.then) and [catch()](/docs/Promise/Promise.catch). These methods expects a callback to call when the operation succeeds or fails respectively. All asynchronic methods in Dexie returns a Promise instance and this makes the API way more easy to use, as you will see in our examples.
-
-#### Promise Compatibility
-
-Dexie Promises are A+ / ES6 compliant and play magically well with other Promise libraries, such as bluebird, Q or native Promise. It can be used in async / await code in Typescript or ES7. However, it is important to stick to only using `Dexie.Promise` (in Dexie 1.x) while doing operations within a transaction. Otherwise the underlying transaction will commit too early due to a limitation within indexedDB itself. However, the final result of the transaction (final Promise returned by db.transaction()) can be safely mixed with or converted to any other Promise lib.
-
-*In Dexie 2.0.0-beta and later, the global Promise can be safely used within transactions as the global Promise will be patched within the transaction [zone](/docs/Promise/Promise.PSD).*
 
 #### Promise-Specific Data (zone)
 Dexie Promises supports a pattern similar to [Thread-local storage](http://en.wikipedia.org/wiki/Thread-local_storage) where it is possible to have static properties that is bound to the executing promise and all it's child-promises. This is similar Angular's [zone.js](https://github.com/angular/zone.js/) but in an unobtrusive way (no requirement of including any monkey-patching script). Dexie.js and it's transaction API heavily depends on it's transaction zones since it enables code to be aware of the currently executing transaction without having to pass transaction objects around. [Promise-Specific Data doc](/docs/Promise/Promise.PSD).
@@ -511,7 +465,7 @@ db.transaction('rw', db.friends, function() {
         // transaction in a managed way. If you still want to abort
         // the transaction, just do Dexie.currentTransaction.abort(),
         // throw an exception, or just:
-        // return Dexie.Promise.reject(err);
+        // return Promise.reject(err);
     });
 }).then (function () {
     alert ("Transaction successfully completed");

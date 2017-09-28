@@ -148,9 +148,11 @@ In case you really need to call a short-lived async-API, Dexie 2.0 can actually 
 
 ~~[Dexie.Promise](/docs/Promise/Promise) is ES6 and A+ compliant, meaning that you can use any favourite promise together with Dexie. However, within transactions, DO NOT use any other promise implementation than Dexie.Promise! Otherwise the effective transaction will be gone.~~
 
-This part is no more relevant with Dexie 2.0. Instead, make sure to use the **global** promise (window.Promise) everywhere (don't use an imported Promise from a 3rd part Promise lib. You may use a Promise polyfill for old browsers like IE10/IE11, but just make sure to put it on window.Promise in your page bootstrap. Instead:
+This part is no more relevant with Dexie 2.0. Instead:
 
 ### 4. Stick to using global Promise within transactions!
+
+Make sure to use the **global** promise (window.Promise) within transactions (don't use an imported Promise from a 3rd part Promise lib. You may use a Promise polyfill for old browsers like IE10/IE11, but just make sure to put it on window.Promise in your page bootstrap.
 
 #### OK:
 ```javascript

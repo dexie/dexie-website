@@ -152,7 +152,7 @@ This part is no more relevant with Dexie 2.0. Instead:
 
 ### 4. Stick to using global Promise within transactions!
 
-Make sure to use the **global** promise (window.Promise) within transactions (don't use an imported Promise from a 3rd part Promise lib. You may use a Promise polyfill for old browsers like IE10/IE11, but just make sure to put it on window.Promise in your page bootstrap.
+Make sure to use the **global** promise (window.Promise) within transactions. You may use a Promise polyfill for old browsers like IE10/IE11, but just make sure to put it on window.Promise in your page bootstrap.
 
 #### OK:
 ```javascript
@@ -170,6 +170,8 @@ db.transaction(..., ()=>{
     new Promise((resolve, reject) => { ... })
 })
 ```
+
+*NOTE: You may still use Dexie.Promise within transaction. No need to update existing code!*
 
 #### NOT OK:
 ```javascript

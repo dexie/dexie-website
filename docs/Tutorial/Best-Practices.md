@@ -148,7 +148,30 @@ In case you really need to call a short-lived async-API, Dexie 2.0 can actually 
 
 ~~[Dexie.Promise](/docs/Promise/Promise) is ES6 and A+ compliant, meaning that you can use any favourite promise together with Dexie. However, within transactions, DO NOT use any other promise implementation than Dexie.Promise! Otherwise the effective transaction will be gone.~~
 
-This part is no more relevant with Dexie 2.0. Instead, make sure to use the **global** promise (window.Promise) everywhere (don't use an imported Promise from a 3rd part Promise lib. You may use a Promise polyfill for old browsers like IE10/IE11, but just make sure to put it on window.Promise.
+This part is no more relevant with Dexie 2.0. Instead, make sure to use the **global** promise (window.Promise) everywhere (don't use an imported Promise from a 3rd part Promise lib. You may use a Promise polyfill for old browsers like IE10/IE11, but just make sure to put it on window.Promise in your page bootstrap.
+
+#### OK:
+```javascript
+import Bluebird from 'bluebird';
+window.Promise = Bluebird;
+
+...
+
+Promise.all()
+Promise.race()
+new Promise((resolve, reject) => { ... })
+
+```
+
+#### NOT OK:
+```javascript
+import Promise form 'bluebird';
+
+Promise.all()
+Promise.race()
+new Promise((resolve, reject) => { ... })
+
+```
 
 ### 5. Use transaction() scopes wherever you gonna make more than one operation
 Whenever you are going to do more than a single operation on your database in a sequence, use a transaction. This will not only encapsulate your changes into an atomic operation, but also optimize your code! Internally, non-transactional operations also use a transaction but it is only used in the single operation, so if you surround your code within a transaction, you will perform less costly operations in total.

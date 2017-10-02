@@ -7,6 +7,7 @@
 <body>
 <h1>Testing Safari issue with IDBObjectStore.getAll()</h1>
 <p>Status: <span id="statusText"></span></p>
+<p>Status from browser window: <span id="statusBrowserText"></span></p>
 <p>navigator.userAgent: <span id="uaText"></span></p>
 <p>navigator.vendor: <span id="vendorText"></span></p>
 <p>navigator.appVersion: <span id="appVersionText"></span></p>
@@ -20,6 +21,21 @@
       localStorage.setItem("lastStatusText", ev.data);
       document.getElementById('statusText').innerText = ev.data;
     }
+
+    var db = new Dexie('testdbBrowser');
+    db.version(1).stores({
+      items: 'id',
+    });
+    db.open().then(()=>{
+      return db.items.put({id: 1, name: "foo"});
+    }).then(()=> {
+      return db.items.toArray();
+    }).then(()=>{
+      document.getElementById("statusBrowserText").innerText="OK to call getAll() from browser (not worker!)";
+    }).catch(err => {
+      document.getElementById("statusBrowserText").innerText="FAILED to call getAll() from browser";
+    });
+    
   } else {
     var lastStatusText = localStorage.getItem("lastStatusText");
     document.getElementById('statusText').innerText = "Preventing eternal reload. Last status was: " + lastStatusText;

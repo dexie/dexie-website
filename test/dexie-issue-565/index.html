@@ -2,33 +2,33 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-
-    <script type="text/javascript">
-
-      // Prevent eternal reloading of the page
-      var lastPageLoad = localStorage.getItem("pageLoad");
-      if (!lastPageLoad || parseInt(lastPageLoad) < Date.now() - 2000) {
-        localStorage.setItem("pageLoad", ''+Date.now());
-        var w = new Worker("worker.js");
-        w.onmessage = ev => {
-          localStorage.setItem("lastStatusText", ev.data);
-          document.getElementById('statusText').innerText = ev.data;
-        }
-      } else {
-        var lastStatusText = localStorage.getItem("lastStatusText");
-        document.getElementById('statusText').innerText = "Preventing eternal reload. Last status was: " + lastStatusText;
-      }
-      
-      document.getElementById('uaText').innerText = navigator.userAgent;
-      document.getElementById('vendorText').innerText = navigator.vendor;
-      document.getElementById('appVersionText').innerText = navigator.appVersion;
-    </script>
+    <title>Testing Safari issue with IDBObjectStore.getAll()</title>
 </head>
 <body>
+<h1>Testing Safari issue with IDBObjectStore.getAll()</h1>
 <p>Status: <span id="statusText"></span></p>
 <p>navigator.userAgent: <span id="uaText"></span></p>
 <p>navigator.vendor: <span id="vendorText"></span></p>
 <p>navigator.appVersion: <span id="appVersionText"></span></p>
+<script type="text/javascript">  
+  // Prevent eternal reloading of the page
+  var lastPageLoad = localStorage.getItem("pageLoad");
+  if (!lastPageLoad || parseInt(lastPageLoad) < Date.now() - 2000) {
+    localStorage.setItem("pageLoad", ''+Date.now());
+    var w = new Worker("worker.js");
+    w.onmessage = ev => {
+      localStorage.setItem("lastStatusText", ev.data);
+      document.getElementById('statusText').innerText = ev.data;
+    }
+  } else {
+    var lastStatusText = localStorage.getItem("lastStatusText");
+    document.getElementById('statusText').innerText = "Preventing eternal reload. Last status was: " + lastStatusText;
+  }
+  
+  document.getElementById('uaText').innerText = navigator.userAgent;
+  document.getElementById('vendorText').innerText = navigator.vendor;
+  document.getElementById('appVersionText').innerText = navigator.appVersion;
+</script>
+  
 </body>
 </html>

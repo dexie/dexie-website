@@ -7,11 +7,17 @@
     <script type="text/javascript">
 
       var w = new Worker("worker.js");
+      w.onmessage = ev => document.getElementById('statusText').innerText = ev.data;
       
-        
+      document.getElementById('uaText').innerText = navigator.userAgent;
+      document.getElementById('vendorText').innerText = navigator.vendor;
+      document.getElementById('appVersionText').innerText = navigator.appVersion;
     </script>
 </head>
 <body>
-aaa
+<p>Status: <span id="statusText"></span></p>
+<p>navigator.userAgent: <span id="uaText"></span></p>
+<p>navigator.vendor: <span id="vendorText"></span></p>
+<p>navigator.appVersion: <span id="appVersionText"></span></p>
 </body>
 </html>

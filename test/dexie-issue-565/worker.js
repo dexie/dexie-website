@@ -1,17 +1,19 @@
 self.importScripts('dexie.js');
 
-debugger;
 var db = new Dexie('testdb');
 db.version(1).stores({
   items: 'id',
 });
 db.open().then(()=>{
-  debugger;
+  postMessage("Could open. Now putting an item into DB");
   return db.items.put({id: 1, name: "foo"});
 }).then(()=> {
-  return db.items.filter(x => true).toArray().then(result => {
-    debugger;
-  });
+  postMessage("Could put item. Now trying IDBObjectStore.getAll()");
+  return db.items.toArray();
+}).then(()=>{
+  postMessage("Successfully called IDBObjectStore.getAll()");
+}).catch(err => {
+  postMessage("Fail calling IDBObjectStore.getAll() from a worker. Error: " + err);
 });
 
 //console.log('worker started')

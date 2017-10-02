@@ -32,6 +32,7 @@
       localStorage.setItem("statusBrowserText", msg)
       document.getElementById("statusBrowserText").innerText=msg;
     }).catch(err => {
+      localStorage.setItem("statusBrowserText", "FAIL");
       document.getElementById("statusBrowserText").innerText="FAILED to call getAll() from browser";
     }).then(()=>{
       var w = new Worker("worker.js");
@@ -45,7 +46,7 @@
     var lastStatusText = localStorage.getItem("lastStatusText");
     document.getElementById('statusText').innerText = "Preventing eternal reload. Last status was: " + lastStatusText;
     var lastStatusTextBrowser = localStorage.getItem("statusBrowserText");
-    document.getElementById('statusBrowserText', "Last status from browser: " + lastStatusTextBrowser);
+    document.getElementById('statusBrowserText').innerText = "Last status from browser: " + lastStatusTextBrowser;
   }
   
   document.getElementById('uaText').innerText = navigator.userAgent;

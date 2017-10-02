@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>Testing Safari issue with IDBObjectStore.getAll()</h1>
-<p>Status: <span id="statusText"></span></p>
+<p>Status from worker: <span id="statusText"></span></p>
 <p>Status from browser window: <span id="statusBrowserText"></span></p>
 <p>navigator.userAgent: <span id="uaText"></span></p>
 <p>navigator.vendor: <span id="vendorText"></span></p>
@@ -25,9 +25,12 @@
     db.open().then(()=>{
       return db.items.put({id: 1, name: "foo"});
     }).then(()=> {
+      localStorage.setItem("statusBrowserText", "Not yet verified getAll() works from browser window...");
       return db.items.toArray();
     }).then(()=>{
-      document.getElementById("statusBrowserText").innerText="OK to call getAll() from browser (not worker!)";
+      var msg = "OK to call getAll() from browser window";
+      localStorage.setItem("statusBrowserText", msg)
+      document.getElementById("statusBrowserText").innerText=msg;
     }).catch(err => {
       document.getElementById("statusBrowserText").innerText="FAILED to call getAll() from browser";
     }).then(()=>{
@@ -41,6 +44,8 @@
   } else {
     var lastStatusText = localStorage.getItem("lastStatusText");
     document.getElementById('statusText').innerText = "Preventing eternal reload. Last status was: " + lastStatusText;
+    var lastStatusTextBrowser = localStorage.getItem("statusBrowserText");
+    document.getElementById('statusBrowserText', "Last status from browser: " + lastStatusTextBrowser);
   }
   
   document.getElementById('uaText').innerText = navigator.userAgent;

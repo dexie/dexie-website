@@ -28,7 +28,7 @@
       localStorage.setItem("statusBrowserText", "Not yet verified getAll() works from browser window...");
       return db.items.toArray();
     }).then(()=>{
-      var msg = "OK to call getAll() from browser window";
+      var msg = "OK to call getAll() from browser window. isWorker: " + (self instanceof self.WorkerGlobalScope);
       localStorage.setItem("statusBrowserText", msg)
       document.getElementById("statusBrowserText").innerText=msg;
     }).catch(err => {

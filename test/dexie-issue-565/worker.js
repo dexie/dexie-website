@@ -11,7 +11,7 @@ db.open().then(()=>{
   postMessage("Could put item. Now trying IDBObjectStore.getAll()");
   return db.items.toArray();
 }).then(()=>{
-  postMessage("Successfully called IDBObjectStore.getAll(). navigator.vendor from worker is: " + navigator.vendor);
+  postMessage("Successfully called IDBObjectStore.getAll(). navigator.userAgent from worker is: " + navigator.userAgent);
 }).catch(err => {
   postMessage("Fail calling IDBObjectStore.getAll() from a worker. Error: " + err);
 });

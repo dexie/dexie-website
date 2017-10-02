@@ -6,8 +6,19 @@
 
     <script type="text/javascript">
 
-      var w = new Worker("worker.js");
-      w.onmessage = ev => document.getElementById('statusText').innerText = ev.data;
+      // Prevent eternal reloading of the page
+      var lastPageLoad = localStorage.getItem("pageLoad");
+      if (!lastPageLoad || parseInt(lastPageLoad) < Date.now() - 2000) {
+        localStorage.setItem("pageLoad", ''+Date.now());
+        var w = new Worker("worker.js");
+        w.onmessage = ev => {
+          localStorage.setItem("lastStatusText", ev.data);
+          document.getElementById('statusText').innerText = ev.data;
+        }
+      } else {
+        var lastStatusText = localStorage.getItem("lastStatusText");
+        document.getElementById('statusText').innerText = "Preventing eternal reload. Last status was: " + lastStatusText;
+      }
       
       document.getElementById('uaText').innerText = navigator.userAgent;
       document.getElementById('vendorText').innerText = navigator.vendor;

@@ -11,7 +11,7 @@ db.open().then(()=>{
   postMessage("Could put item. Now trying IDBObjectStore.getAll()");
   return db.items.toArray();
 }).then(()=>{
-  postMessage("Successfully called IDBObjectStore.getAll(). isWorker: " + (self instanceof self.WorkerGlobalScope));
+  postMessage("Successfully called IDBObjectStore.getAll(). isWorker: " + (self.WorkerGlobalScope && self instanceof self.WorkerGlobalScope));
 }).catch(err => {
   postMessage("Fail calling IDBObjectStore.getAll() from a worker. Error: " + err);
 });

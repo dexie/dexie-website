@@ -365,7 +365,7 @@ async function playWithBinaryPrimKey() {
     // Retrieve by binary search
     const friend = await db.friends.get(
         new Uint8Array([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]));
-        
+
     if (friend) {
         console.log(`Found friend: ${friend.name}`);
     } else {
@@ -425,7 +425,7 @@ db.transaction('rw', db.friends, db.diary, async () => {
 
 *The above snippet shows that you can also reuse code that is indeed transaction-aware, but encapsulate several such functions in an overall umbrella-transaction.*
 
-**NOTE: The code above may look like it could only execute this transaction one-at-a-time, but with thanks to [zone](https://blog.kwintenp.com/how-the-hell-do-zones-really-work/) technology, this code can work in parallell with other transactions. (Dexie implements its own zone system and is not dependent on zone.js)**
+**NOTE: The code above may look like it could only execute this transaction one-at-a-time, but with thanks to [zone](https://github.com/domenic/zones) technology, this code can work in parallell with other transactions. (Dexie implements its own zone system and is not dependent on zone.js)**
 
 Reference: [Dexie.transaction()](/docs/Dexie/Dexie.transaction())
 

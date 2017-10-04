@@ -322,7 +322,7 @@ function getBandsStartingWithA () {
 }
 ```
 
-#### Storing binary data
+#### Storing Binary Data
 
 ```javascript
 var db = new Dexie("MyImgDb");

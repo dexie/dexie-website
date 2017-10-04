@@ -322,6 +322,57 @@ function getBandsStartingWithA () {
 }
 ```
 
+#### Storing binary data
+
+```javascript
+var db = new Dexie("MyImgDb");
+db.version(1).stores({
+    friends: "name"
+});
+
+// Download and store an image
+async function downloadAndStoreImage() {
+    const res = await fetch("some-url-to-an-image.png");
+    const blob = await res.blob();
+    // Store the binary data in indexedDB:
+    await db.friends.put({
+        name: "David",
+        image: blob
+    });
+}
+
+```
+
+#### Indexing Binary Data (IndexedDB 2.0)
+IndexedDB 2.0 contains support for indexing binary data. This spec is supported by Chrome and Safari
+and partially Firefox (Firefox has a bug when using binary primary key, but works well with binary index).
+
+```javascript
+var db = new Dexie("MyImgDb");
+db.version(1).stores({
+    friends: "id, name" // use binary UUID as id
+});
+
+// IndexedDB 2.0 allows indexing ArrayBuffer and XXXArray
+// (typed arrays) (but not Blobs)
+async function playWithBinaryPrimKey() {
+    // Store the binary data in indexedDB:
+    await db.friends.put({
+        id: new Uint8Array([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]),
+        name: "David"
+    });
+
+    // Retrieve by binary search
+    const friend = await db.friends.get(new Uint8Array([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16]));
+    if (friend) {
+        console.log(`Found friend: ${friend.name}`);
+    } else {
+        console.log(`Friend not found`);
+    }
+}
+
+```
+
 #### Ongoing Transaction
 
 ```javascript

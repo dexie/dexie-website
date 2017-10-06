@@ -34,7 +34,7 @@ async function sample() {
     
     // Show result
     console.log ("Foobar: ", fooBar.id, fooBar.firstName, fooBar.lastName);
-});
+}
 
 ```
 

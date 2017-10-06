@@ -14,7 +14,7 @@ db.version(1).stores({
 });
 ```
 
-In the above sample, records containing valid keys in the *firstName* and *lastName* properties will be indexed. If having stored an object with properties `{firstName: 'foo', lastName: 'bar'}`, it can be efficiently looked up using `db.people.where('[firstName+lastName]').equals(['foo', 'bar'])` or in Dexie 2.0,  `db.people.where({firstName: 'foo', lastName: 'bar')`.
+In the above sample, records containing valid keys in the *firstName* and *lastName* properties will be indexed. If having stored an object with properties `{firstName: 'foo', lastName: 'bar'}`, it can be efficiently looked up using `db.people.where('[firstName+lastName]').equals(['foo', 'bar'])` or in Dexie 2.0,  `db.people.where({firstName: 'foo', lastName: 'bar'})`.
 
 ```javascript
 async function sample() {

@@ -17,15 +17,22 @@ db.version(1).stores({
 In the above sample, records containing valid keys in the *firstName* and *lastName* properties will be indexed. If having stored an object with properties `{firstName: 'foo', lastName: 'bar'}`, it can be efficiently looked up using `db.people.where('[firstName+lastName]').equals(['foo', 'bar'])`.
 
 ```javascript
-db.put({
-    id: 1,
-    firstName: 'foo',
-    lastName: 'bar'
-})
-.then(() => {
-    return db.people.where('[firstName+lastName]').equals(['foo', 'bar']).first();
-})
-.then(fooBar) => {
+async function sample() {
+
+    // Store person
+    await db.people.put({
+        id: 1,
+        firstName: 'foo',
+        lastName: 'bar'
+    });
+    
+    // Query person:
+    const fooBar = await db.people.get({
+      firstName: 'foo',
+      lastName: 'bar
+    });
+    
+    // Show result
     console.log ("Foobar: ", fooBar.id, fooBar.firstName, fooBar.lastName);
 });
 
@@ -46,7 +53,7 @@ The above sample uses a compound primary key containing four properties: date, f
 
 # Browser limitations
 
-Internet Explorer, Edge and Safari <= 9 does not support compound indexes or primary keys.
+Internet Explorer, Edge and Safari < v10 does not support compound indexes or primary keys.
 
 # Using with orderBy()
 

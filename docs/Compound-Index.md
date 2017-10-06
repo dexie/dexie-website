@@ -29,7 +29,7 @@ async function sample() {
     // Query person:
     const fooBar = await db.people.get({
       firstName: 'foo',
-      lastName: 'bar
+      lastName: 'bar'
     });
     
     // Show result

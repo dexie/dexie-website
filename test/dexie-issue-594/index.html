@@ -1,0 +1,38 @@
+<!doctype HTML>
+<html>
+  <head>
+    <script src="https://unpkg.com/dexie@2.0.1"></script>
+  </head>
+  <body>
+    <textarea id="log" style="width: 100%; height: 500px;"></textarea>
+    <script>
+      const logger = document.getElementById('log');
+      function log(txt) {
+        if (typeof txt !== 'string') txt = JSON.stringify(txt, null, 2);
+        logger.value += (txt + "\n");
+      }
+
+      const db = new Dexie('testdb');
+      db.version(1).stores({
+        items: '++id,objectProperty'
+      });
+
+      (async ()=>{
+        await db.items.bulkPut([
+          {id: 1, objectProperty: 1},
+          {id: 2, objectProperty: 2},
+          {id: 3, objectProperty: 2},
+          {id: 4, objectProperty: 3},
+          {id: 5, objectProperty: 4},
+          {id: 6, objectProperty: 2}
+        ]);
+
+        const myValue = 2;
+        const table = db.items;
+        log((await table.where('objectProperty').equals(myValue).toArray()).length);
+        log(await table.where('objectProperty').equals(myValue).modify((object) => { object.anotherProperty = 'test'; }));
+      })().catch(e => log(e));
+
+    </script>
+  </body>
+</html>

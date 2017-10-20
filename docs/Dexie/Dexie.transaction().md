@@ -43,14 +43,15 @@ db.transaction(mode, table(s), function() {
 ### Sample
 
 ```javascript
-db.transaction('rw', db.friends, db.pets, function() {
+db.transaction('rw', db.friends, db.pets, async ()=>{
 
     //
     // Transaction Scope
     //
 
-    db.friends.add({name: "New Friend"});
-    db.pets.add({name: "New Pet", kind: "snake"});
+    const friend = await db.friends.get({name: "David"});
+    ++friend.age;
+    await db.friends.put(friend);
 
 }).then(function() {
 
@@ -87,15 +88,15 @@ When accessing the database within the given scope function, any [Table](/docs/T
 The Transaction Scope is the places in your code where your transaction remains active. I'll sometimes refer to it as the Transaction [*Zone*](/docs/Promise/Promise.PSD). The obvious scope is of course your callback function to the transaction() method, but the scope will also extend to every callback (such as then(), each(), toArray(), ...) originated from any database operation. Here are some samples that clarifies the scope:
 
 ```javascript
-db.transaction('r', db.friends, db.pets, function() {
+db.transaction('r', db.friends, db.pets, () => {
 
     // WITHIN SCOPE / ZONE!
 
-    db.friends.where('name').equals('David').first(function(friend) {
+    return db.friends.get({name: 'David'}).then(friend => {
 
         // WITHIN SCOPE / ZONE!
 
-        db.pets.where('daddy').anyOf(friend.pets).each(function(pet) {
+        return db.pets.where({master: friend.id}).each(pet => {
             
             // WITHIN SCOPE / ZONE!
 
@@ -131,17 +132,17 @@ If you call another function, it will also be executing in the current transacti
     }
 ```
 
-_**BUT**_ be aware that zone is lost if using non-indexedDB compatible Promises (like standard Promise):
+_**BUT**_ be aware that zone is lost if using non-indexedDB compatible Promises:
 
 ```javascript
 let Bluebird = require('bluebird');
-db.transaction('rw', db.cars, function () {
+db.transaction('rw', db.cars, () => {
     //
     // Transaction block
     //
-    return db.cars.put({id: 3}).then (function() {
+    return db.cars.put({id: 3}).then (() => {
         // Avoid returning other kinds of promises here:
-        return new Bluebird(function(resolve, reject){
+        return new Bluebird((resolve, reject) => {
             resolve();
         });
     }).then(function() {
@@ -166,15 +167,15 @@ As long as you are within the transaction zone, the [Transaction](/docs/Transact
 Dexie supports nested transactions. A nested transaction must be in a compatible mode as its main transaction and all tables included in the nested transaction must also be included in its main transaction. Otherwise it will return a rejected promise and abort the parent transaction.
 
 ```javascript
-db.transaction('rw', db.friends, db.pets, db.cars, function () {
+db.transaction('rw', db.friends, db.pets, db.cars, () => {
 
     // MAIN TRANSACTION ZONE
 
-    db.transaction('rw', db.friends, db.cars, function () {
+    db.transaction('rw', db.friends, db.cars, () => {
 
         // SUB TRANSACTION ZONE
 
-        db.transaction('r', db.friends, function () {
+        db.transaction('r', db.friends, () => {
 
             // SUB- of SUB-TRANSACTION ZONE
 
@@ -190,13 +191,13 @@ Rollback support in nested transactions rely on the rollback support of the pare
 ```javascript
 
 // Topmost transaction:
-db.transaction('rw', db.friends, function() {
+db.transaction('rw', db.friends, () => {
 
     // Sub transaction:
-    db.transaction('rw', db.friends, function () {
+    db.transaction('rw', db.friends, () => {
 
         db.friends.add({id: 1})
-            .catch(function (err) {
+            .catch(err => {
                 // This catch() would successfully prohibit abort from happening.
             });
 
@@ -204,14 +205,14 @@ db.transaction('rw', db.friends, function() {
 
         db.friends.add({id: 1}); // will reject...
 
-    }).catch (function (err) {
+    }).catch (err => {
         // Catching sub-transaction promise.
         // This will NOT prohibit parent transaction from aborting.
     });
 
-}).then(function () {
+}).then(() => {
 
-}).catch(function (err) {
+}).catch(err => {
     // Transaction Failed!
 });
 ```
@@ -225,34 +226,28 @@ If you write a library function that does some DB operations within a transactio
 ```javascript
 // Lower-level function
 function birthday(friendName) {
-    db.transaction('rw', db.friends, function () {
-        db.friends.where('name').equals(friendName).first(function (friend) {
-            ++friend.age;
-            db.friends.put(friend);
-        });
+    return db.transaction('rw', db.friends, async () => {
+        const friend = await db.friends.get({name: friendName});
+        ++friend.age;
+        await db.friends.put(friend);
     });
 }
 
 // Higher-level function
 function birthdays(today) {
-    db.transaction('rw', db.friends, function() {
-        db.friends.where('birthdate').equals(today).each(function (friend) {
+    return db.transaction('rw', db.friends, async () => {
+        await db.friends.where({birthdate: today}).each(function (friend) {
             birthday(friend.name);
         });
     });
 }
 ```
 
-_Note: The above samples are quite stupid, but samplifies the goodie with nested transactions. If you really wanted to do the above code simpler, you would do_
+_Note: The above samples can be done easier using [Collection.modify()](/docs/Collection/Collection.modify()), but the above sample shows the goodie with nested transactions. If you really wanted to do the above code simpler, you would do_
 
 ```javascript
-function birthday (friendName) {
-    db.friends
-      .where('name')
-      .equals(friendName)
-      .modify(function(friend) {
-        ++friend.age;
-    });
+async function birthday (friendName) {
+    await db.friends.where({name: friendName}).modify(friend => ++friend.age);
 }
 ```
 
@@ -263,14 +258,17 @@ _...but that wouldnt visualize the beauty of nested transactions..._
 Let's assume you have a javascript class Car with the method `save()`.
 
 ```javascript
-function Car (brand, carModel) {
-    this.brand = brand;
-    this.model = carModel;
+class Car {
+    constructor (brand, carModel) {
+        this.brand = brand;
+        this.model = carModel;
+    }
+
+    save() {
+        return db.cars.put(this);
+    }
 }
 
-Car.prototype.save = function () {
-    return db.cars.put(this);
-}
 ```
 
 In a transaction-less code block you could then do:
@@ -311,11 +309,11 @@ The default behavior is to fail with rejection of the transaction promises (both
 If your code must be independent on any ongoing transaction, you can override this by adding "!" or "?" to the `mode` argument.
 
 ```javascript
-db.transaction("rw!", db.Table, function () {
+db.transaction("rw!", db.Table, () => {
     // Require top-level transaction (ignore ongoing transaction)
 });
 
-db.transaction("rw?", db.Table, function () {
+db.transaction("rw?", db.Table, () => {
     // Use nested transaction only if compatible with ongoing, otherwise
     // launch a top-level transaction for this scope
 });
@@ -454,7 +452,7 @@ The example above shows how to run your queries in a sequence and wait for each 
 You can use async await without any quirks. It works perfectly well with both native async functions (tested in Edge, Chrome and Safari) as well as transpiled async await (Typescript - any version, Babel - any version). For transpiled async await, the end code will survive indexedDB transactions no matter browser (including IE 10 and Firefox). However, when using native async await, the browser will invoke native promises instead of Dexie.Promise. This would break transactions in IE and Firefox. Dexie can maintain its zones (holding current transaction) between native await expressions as well as between transpiled await expressions.
  
 ```javascript
-await db.transaction('rw', db.friends, async function() {
+await db.transaction('rw', db.friends, async () => {
     let friendId = await db.friends.add({name: "New Friend"});
     let petId = await db.pets.add({name: "New Pet", kind: "snake"});
     //...

@@ -6,19 +6,19 @@ title: 'Dexie.transaction()'
 ### Syntax
 
 ```javascript
-db.transaction(mode, table(s), function() {
+db.transaction(mode, table(s), () => {
 
     //
     // Transaction Scope
     //
 
-}).then(function(result) {
+}).then(result => {
 
     //
     // Transaction Committed
     //
 
-}).catch(function(error) {
+}).catch(error => {
 
     //
     // Transaction Failed

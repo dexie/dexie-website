@@ -53,7 +53,7 @@ db.transaction('rw', db.friends, db.pets, async ()=>{
     ++friend.age;
     await db.friends.put(friend);
 
-}).then(function() {
+}).then(() => {
 
     //
     // Transaction Complete
@@ -61,7 +61,7 @@ db.transaction('rw', db.friends, db.pets, async ()=>{
 
     console.log("Transaction committed");
 
-}).catch(function(err) {
+}).catch(err => {
 
     //
     // Transaction Failed
@@ -103,17 +103,17 @@ db.transaction('r', db.friends, db.pets, () => {
         });
     });
 
-    setTimeout(function() {
+    setTimeout(() => {
 
         // NOT WITHIN ZONE! (because Dexie's zone system does not support setTimeout())
 
     }, 0);
 
-}).then(function() {
+}).then(() => {
 
     // Transaction committed. NOT WITHIN ZONE!
 
-}).catch(function(err) {
+}).catch(err => {
 
     // Transaction aborted. NOT WITHIN ZONE!
 
@@ -123,7 +123,7 @@ db.transaction('r', db.friends, db.pets, () => {
 If you call another function, it will also be executing in the current transaction zone:
 
 ```javascript
-    db.transaction('rw', db.friends, function () {
+    db.transaction('rw', db.friends, () => {
         externalFunction();
     });
 
@@ -145,7 +145,7 @@ db.transaction('rw', db.cars, () => {
         return new Bluebird((resolve, reject) => {
             resolve();
         });
-    }).then(function() {
+    }).then(() => {
         // You'll be outside the zone here, unless you use Dexie.Promise or window.Promise.
         return db.cars.get(3);
     });

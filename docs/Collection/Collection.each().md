@@ -37,7 +37,7 @@ collection.each(callback)
 
 ### Remarks
 
-Iterate through all objects in the collection in a readonly mode. If you need to modify or delete items from within the callback, use [Collection.modify()](http://dexie.org/docs/Collection/Collection.modify()) in place of Collection.each(). Another way is to surround your call in a [READWRITE transaction](http://dexie.org/docs/Dexie/Dexie.transaction()).
+Iterate through all objects in the collection in an implicit single readonly [transaction](http://dexie.org/docs/Dexie/Dexie.transaction()). If you need to modify or delete items from within the callback, you could use [Collection.modify()](http://dexie.org/docs/Collection/Collection.modify()) in place of Collection.each(), since it will use a readwrite transaction rather than a readonly transaction. You could also explicitely surround your call in a [READWRITE transaction](http://dexie.org/docs/Dexie/Dexie.transaction()).
 
 When iteration finishes, the returned Promise will resolve with `undefined`, calling any [Promise.then()](/docs/Promise/Promise.then()) callback.
 

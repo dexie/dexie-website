@@ -44,6 +44,8 @@ When iteration finishes, the returned Promise will resolve with `undefined`, cal
 If the operation fails, the returned Promise will be rejected, calling any [Promise.catch()](/docs/Promise/Promise.catch()) callback.
 
 ### NOTES:
+* The operation will implicitely be called from within a READONLY transaction unless you already surround your code with a transaction.
+* The callback should not modify the database. If that is required, use [Collection.modify()](http://dexie.org/docs/Collection/Collection.modify()) instead.
 * The return value from you callback is ignored, so returning a Promise from it will have no effect.
 * In many cases, it is better and more optimized to use any of the following methods when reading from a Table or Collection:
   * [Collection.toArray()](/docs/Collection/Collection.toArray())

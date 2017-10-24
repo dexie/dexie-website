@@ -49,7 +49,10 @@ If the operation fails, the returned Promise will be rejected, calling any [Prom
 const db = new Dexie('dbname');
 
 db.version(1).stores({
-  friends: 'id,name,age'
+  friends: `
+    id,
+    name,
+    age`
 });
 
 // Populate table

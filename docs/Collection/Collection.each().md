@@ -43,6 +43,13 @@ When iteration finishes, the returned Promise will resolve with `undefined`, cal
 
 If the operation fails, the returned Promise will be rejected, calling any [Promise.catch()](/docs/Promise/Promise.catch()) callback.
 
+### NOTES:
+* The return value from you callback is ignored, so returning a Promise from it will have no effect.
+* In many cases, it is better and more optimized to use any of the following methods when reading from a Table or Collection:
+  * [Collection.toArray()](/docs/Collection/Collection.toArray())
+  * [Collection.primaryKeys()](/docs/Collection/Collection.primaryKeys())
+  * [Collection.keys()](/docs/Collection/Collection.keys())
+
 ### Sample
 
 ```javascript

@@ -57,11 +57,17 @@ db.friends.bulkPut([
   {id: 1, name: "Foo", age: 33},
   {id: 2, name: "Bar", age: 44},
   {id: 3, name: "Someone", age: 1}
-]).then(()=>{
+]).then(() => {
   // Iterate all friends, ordered by id:
+  console.log("All my friends, ordered by id:");
   return db.friends.each(friend => console.log(friend.name));
-}).then(()=> {
+}).then(() => {
+  // Iterate all friends, ordered by age:
+  console.log("All my friends, ordeded by age:");
+  return db.friends.orderBy('age').each(friend => console.log(friend.name));
+}).then(() => {
   // Iterate all friends where age is above 30.
+  console.log("Friends over 30 years old:");
   return db.friends.where('age').above(30).each(friend => console.log(friend.name));
 }).catch (err => {
   console.error (err);

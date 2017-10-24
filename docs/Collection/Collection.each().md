@@ -47,6 +47,7 @@ If the operation fails, the returned Promise will be rejected, calling any [Prom
 
 ```javascript
 const db = new Dexie('dbname');
+
 db.version(1).stores({
   friends: 'id,name,age'
 });
@@ -57,7 +58,6 @@ db.friends.bulkPut([
   {id: 2, name: "Bar", age: 44},
   {id: 3, name: "Someone", age: 1}
 ]).then(()=>{
-
   // Iterate all friends, ordered by id:
   return db.friends.each(friend => console.log(friend.name));
 }).then(()=> {

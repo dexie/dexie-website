@@ -42,3 +42,29 @@ Iterate through all objects in the collection in a readonly mode. If you need to
 When iteration finishes, the returned Promise will resolve with `undefined`, calling any [Promise.then()](/docs/Promise/Promise.then()) callback.
 
 If the operation fails, the returned Promise will be rejected, calling any [Promise.catch()](/docs/Promise/Promise.catch()) callback.
+
+### Sample
+
+```javascript
+const db = new Dexie('dbname');
+db.version(1).stores({
+  friends: 'id,name,age'
+});
+
+// Populate table
+db.friends.bulkPut([
+  {id: 1, name: "Foo", age: 33},
+  {id: 2, name: "Bar", age: 44},
+  {id: 3, name: "Someone", age: 1}
+]).then(()=>{
+
+  // Iterate all friends, ordered by id:
+  return db.friends.each(friend => console.log(friend.name));
+}).then(()=> {
+  // Iterate all friends where age is above 30.
+  return db.friends.where('age').above(30).each(friend => console.log(friend.name));
+}).catch (err => {
+  console.error (err);
+});
+
+```

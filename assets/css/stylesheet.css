@@ -172,11 +172,6 @@ table tr:nth-child(2n) {
 }
 
 .docs-toc-wrapper {
-	height: 400px;
-	overflow: auto;
-	border: 1px solid #dddddd;
-	border-radius: 4px;
-	border-right: none;
 }
 
 .docs-toc {

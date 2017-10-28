@@ -2,37 +2,43 @@
 layout: default
 ---
 
-<div class="row docs-page-subheader">
-  <h1 class="col-xs-12 col-md-10">{{ page.title }}</h1>
-  <div class="col-xs-6 col-md-2 text-right">
-    <a class="btn btn-primary btn-edit-doc-page" href="https://github.com/dfahlander/dexie.js-web/edit/gh-pages/{{ page.path }}">
-      <span class="glyphicon glyphicon-edit"></span>&nbsp;
-      Edit
-    </a>
-  </div>
-</div>
-<div class="row docs-page-subtitle">
-  <div class="col-xs-12">
-    {{page.subtitle}}
-  </div>
-</div>
-<div class="row docs-page">
+<div class="row">
   <div class="col-xs-12 col-md-8">
-    {{ content }}
+    <div class="row docs-page-subheader">
+      <h1 class="col-xs-12 col-md-10">{{ page.title }}</h1>
+      <div class="hidden-xs col-md-2">
+        <a class="btn btn-primary btn-edit-doc-page" href="https://github.com/dfahlander/dexie.js-web/edit/gh-pages/{{ page.path }}">
+          <span class="glyphicon glyphicon-edit"></span>&nbsp; Edit
+        </a>
+      </div>
+    </div>
+
+    <div class="row docs-page-subtitle">
+      <div class="col-xs-12">
+        {{page.subtitle}}
+      </div>
+    </div>
+    <div class="row docs-page">
+      <div class="col-xs-12">
+        {{ content }}
+      </div>
+    </div>
   </div>
   <div class="col-xs-12 col-md-4">
-    <h2 class="text-center">Table of Contents</h2>
-    <div class="docs-toc-wrapper">
-      <ul class="docs-toc">
-        {% assign pages = site.pages | sort:"title"  %}
-        {% for page in pages %}
-          {% if page.layout == 'docs' %}
-            <li>
-              <a href="{{ page.url }}">{{ page.title }}</a>
-            </li>
-          {% endif %}
-        {% endfor %}
-      </ul>
+    <div class="row docs-page-subheader">
+      <h3>Table of Contents</h3>
+      <div class="docs-toc-wrapper">
+        <ul class="docs-toc">
+          {% assign pages = site.pages | sort:"title"  %}
+          {% for page in pages %}
+            {% if page.layout == 'docs' %}
+              <li>
+                <a href="{{ page.url }}">{{ page.title }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
     </div>
-</div>
+  </div>
 </div>

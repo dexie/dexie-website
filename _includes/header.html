@@ -21,14 +21,14 @@
   // Without this workaround, the github star button iframe will load the entire 
   // dexie.org page instead of its src attribute, when navigating back to the page.
   if (window.MutationObserver) {
-    var starButton = $('#star-button');
+    var starButton = document.getElementById('star-button');
     var o = new MutationObserver(function(){
-      var iframe = starButton.find('iframe');
+      var iframe = starButton.getElementsByTagName('iframe');
       if (iframe.length > 0) {
         o.disconnect();
         iframe[0].src = iframe[0].src;
       }
     });
-    o.observe(starButton[0], {subtree: true, attributes: true});
+    o.observe(starButton, {subtree: true, attributes: true});
   }
 </script>

@@ -9,7 +9,6 @@ title: 'API Reference'
 * [DexieError](/docs/DexieErrors/DexieError)
 * [Collection](/docs/Collection/Collection)
 * [IndexSpec](/docs/IndexSpec)
-* [ModifyError](/docs/Dexie/Dexie.ModifyError)
 * [Promise](/docs/Promise/Promise)
 * [Table](/docs/Table/Table)
 * [TableSchema](/docs/TableSchema)

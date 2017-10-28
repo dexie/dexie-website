@@ -4,7 +4,31 @@
       <a href="/">
         <img src="/assets/images/dexie-logo-icon.svg" class="dexie-logo-icon" />
         <h1>Dexie.js Docs</h1>
+        <!-- Github star button -->
+        <div id="star-button">
+          <!-- Place this tag where you want the button to render. -->
+          <a class="github-button" href="https://github.com/dfahlander/Dexie.js" data-icon="octicon-star" data-style="mega" data-count-href="/dfahlander/Dexie.js/stargazers" data-count-api="/repos/dfahlander/Dexie.js#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star dfahlander/Dexie.js on GitHub">Star</a>
+        </div>
+        <!-- Place this tag right after the last button or just before your close body tag. -->
+        <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
       </a>
     </div>
   </div>
 </header>
+<script>
+  // Workaround for chromium issue "loading incorrect iframe content on back"
+  // https://bugs.chromium.org/p/chromium/issues/detail?id=395791
+  // Without this workaround, the github star button iframe will load the entire 
+  // dexie.org page instead of its src attribute, when navigating back to the page.
+  if (window.MutationObserver) {
+    var starButton = $('#star-button');
+    var o = new MutationObserver(function(){
+      var iframe = starButton.find('iframe');
+      if (iframe.length > 0) {
+        o.disconnect();
+        iframe[0].src = iframe[0].src;
+      }
+    });
+    o.observe(starButton[0], {subtree: true, attributes: true});
+  }
+</script>

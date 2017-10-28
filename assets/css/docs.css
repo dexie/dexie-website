@@ -1,0 +1,9 @@
+header.site-header {
+  position: relative;
+}
+#star-button {
+	position: absolute;
+	bottom: 2px;
+	right: 6px;
+	z-index: 90;
+}

@@ -20,6 +20,7 @@ title: 'Download'
 npm install dexie --save
 ```
 &nbsp;&nbsp;or
+
 ```bash
 yarn add dexie --save
 ```

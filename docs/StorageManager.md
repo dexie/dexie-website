@@ -1,9 +1,9 @@
 ---
 layout: docs
-title: 'The StorageManager API'
+title: 'How To Use the StorageManager API'
 ---
 
-<img src="/assets/images/disc.jpg" style="float:left;margin:24px;padding-right:16px;" />
+<img src="/assets/images/disc.jpg" style="float:right;margin:24px;" />
 
 Even though IndexedDB is a fully functional client-side database for the web, it cannot be used as a relyable, persistent storage by default. IndexedDB without [StorageManager](https://developer.mozilla.org/en-US/docs/Web/API/StorageManager), is like a very advanced cookie store and nothing more. A user can delete your data at any time, and the browser can delete it without noticing the user in case it believes that your database is taking up too much disk space on a device.
 
@@ -54,8 +54,7 @@ isStoragePersisted().then(async isPersisted => {
 
 ## What is "storage" and how does it apply to Dexie?
 
-Dexie is just a wrapper for IndexedDB and enables the creation of (and access to) client databases in your browser. These databases are bound to a certain origin - the part of the URL before its path starts (for example, http://dexie.org is the origin of this page).
-Each origin can contain various storages, for example localStorage, indexedDB databases, etc. All of these APIs put their data in a common [box](https://storage.spec.whatwg.org/#introduction) that is bound to the origin of the page. This box has a  mode that can be either "persistent" or "best-effort".
+Dexie is just a wrapper for IndexedDB and enables the creation of (and access to) client databases in your browser. StorageManager is a way to configure how IndexedDB will store its data for any database at on your web-site or app. 
 
 ## Prohibit Unwanted Dialogs?
 

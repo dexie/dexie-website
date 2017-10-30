@@ -28,7 +28,8 @@ To check whether your IndexedDB database is successfully persisted, inspect the 
 ```javascript
 
 async function isStoragePersisted() {
-  return await navigator.storage && navigator.storage.persisted && navigator.storage.persisted();
+  return await navigator.storage && navigator.storage.persisted &&
+    navigator.storage.persisted();
 }
 
 ```

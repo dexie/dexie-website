@@ -43,6 +43,7 @@ db.on('error', function (error) {
     }
 });
 ```
+
 ### Properties
 
 <table>

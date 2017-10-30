@@ -6,7 +6,7 @@ title: 'IndexedDB on Safari'
 ## Safari versions below 8
 
 * No support for indexedDB
-* There's a shim that builds indexedDB support on top of WebSQL: [IndexedDBShim](https://github.com/axemclion/IndexedDBShim/tree/master/dist). This shim is not bug free either though but under [constant development](https://github.com/axemclion/IndexedDBShim/)
+* There's a shim that builds indexedDB support on top of WebSQL: [IndexedDBShim](https://github.com/axemclion/IndexedDBShim).
 
 ## Safari version 8.x
 
@@ -16,10 +16,12 @@ title: 'IndexedDB on Safari'
   3. Compound indexes or primary keys are not supported.
   4. MultiEntry indexes not supported.
 
+## Safari version >= 10.1 and 11.0
+
+Native and almost bug free support for IndexedDB 2.0. There is still [one known issue](https://bugs.webkit.org/show_bug.cgi?id=178380) with version 10 and 11 that affects Dexie's [Collection.modify()](/docs/Collection/Collection.modify()) in Dexie versions <= 2.0. A new workaround for this Safari issue will likely to be included in Dexie version > 2.0. The progress of this can be followed up in [issue #594](https://github.com/dfahlander/Dexie.js/issues/594).
+
 ## Chrome and Opera on IOS
 
 Thanks to Apples restricted policies for iOS, Chrome and Opera running on iOS is actually a Safari browser in the backend pretending to be Chrome or Opera. Thus, it suffers from all the indexedDB bugginess that comes with the native indexedDB support in Safari. See Issue [#110](https://github.com/dfahlander/Dexie.js/issues/110).
 
-If your application will target any iOS platform or Safari browser, it is still recommended to include the indexedDB shim before requiring/including Dexie.js on iOS systems independantly on which browser is running, and on all Safari browsers, independently on whether they have native indexedDB support or not.
-
-If IndexedDBShim is included before Dexie, Dexie will prefer the Shim over any native indexedDB implementation. This is because it must be possible to use the shim instead of the native and buggy safari indexedDB implementation.
+If your application must target iPhone 6 or below, it is recommended to include the indexedDB shim before requiring/including Dexie.js. iPhone 7 users will have a Safari engine of version >= 10.3 with a functional IndexedDB support.

@@ -10,7 +10,7 @@ title: 'Dexie.BulkError'
     * Dexie.BulkError
 
 ### Description 
-Error that may occur in [Table.bulkAdd()](/docs/Table/Table.bulkAdd()).
+Error that may occur in [Table.bulkAdd()](/docs/Table/Table.bulkAdd()), [Table.bulkPut()](/docs/Table/Table.bulkPut()) or [Table.bulkDelete()](/docs/Table/Table.bulkDelete()).
 
 The method that may throw this error can perform multiple operations on a table. Therefore this error object will contain an array of the errors the occurred during the failed operations. 
 

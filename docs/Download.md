@@ -5,8 +5,6 @@ title: 'Download'
 
 #### Direct download
 
-[![NPM Version][npm-image]][npm-url][![Tested with Browserstack](http://dexie.org/assets/images/tested-with-browserstack2.png)](https://www.browserstack.com) 
-
 &nbsp;&nbsp;[https://npmcdn.com/dexie/dist/dexie.js](https://npmcdn.com/dexie/dist/dexie.js)
 
 &nbsp;&nbsp;[https://npmcdn.com/dexie/dist/dexie.min.js](https://npmcdn.com/dexie/dist/dexie.min.js)
@@ -23,13 +21,12 @@ npm install dexie --save
 ```
 &nbsp;&nbsp;or
 ```bash
-bower install dexie --save
+yarn add dexie --save
 ```
 
 ## Test directly in your browser
 
 * Dexie Fiddle: [https://jsfiddle.net/dfahlander/3tf5r0cu/](https://jsfiddle.net/dfahlander/3tf5r0cu/)
-* Dexie with yield: [https://jsfiddle.net/dfahlander/b7axqyjw/](https://jsfiddle.net/dfahlander/b7axqyjw/)
 
 ## Samples
 

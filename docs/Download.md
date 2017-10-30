@@ -17,7 +17,7 @@ title: 'Download'
 #### Install using a package manager
 
 ```bash
-npm install dexie --save
+npm install dexie
 ```
 &nbsp;&nbsp;or
 

@@ -32,8 +32,8 @@ The method that may throw this error can perform multiple operations on a table.
 db.friends.bulkAdd([
     {id: "shouldBeUnique", name: "Foo", age: 99},
     {id: "shouldBeUnique", name: "Bar", age 21}])
-.catch(Dexie.BulkError, function (err) {
-    err.failures.forEach(function (failure) {
+.catch('BulkError', err => {
+    err.failures.forEach(failure => {
         console.error (failure.message);
     });
 });

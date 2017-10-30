@@ -33,7 +33,7 @@ layout: default
           {% for page in pages %}
             {% if page.layout == 'docs' %}
               <li>
-                <a href="{{ page.url }}">{{ page.title }}</a>
+                <a href="{{ page.url | replace: '.html', ''}}">{{ page.title }}</a>
               </li>
             {% endif %}
           {% endfor %}

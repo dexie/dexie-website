@@ -22,7 +22,7 @@ npm install dexie --save
 &nbsp;&nbsp;or
 
 ```bash
-yarn add dexie --save
+yarn add dexie
 ```
 
 ## Test directly in your browser

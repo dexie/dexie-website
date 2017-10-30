@@ -21,6 +21,6 @@ title: Docs Home
 
 ****
 
-[stackoverflow questions tagged [dexie]](http://stackoverflow.com/questions/tagged/dexie)
+[stackoverflow questions tagged [dexie]](https://stackoverflow.com/questions/tagged/dexie?sort=newest)
 
 ****

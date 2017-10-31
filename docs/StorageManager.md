@@ -5,7 +5,7 @@ title: 'How To Use the StorageManager API'
 
 <img src="/assets/images/disc.jpg" style="float:right;margin:24px;" />
 
-Even though IndexedDB is a fully functional client-side database for the web, it cannot be used as a relyable, persistent storage by default. IndexedDB without [StorageManager](https://developer.mozilla.org/en-US/docs/Web/API/StorageManager), is like a very advanced cookie store and nothing more. A user can delete your data at any time, and the browser can delete it without noticing the user in case it believes that your database is taking up too much disk space on a device.
+Even though IndexedDB is a fully functional client-side database for the web, it is not a persistent storage by default. IndexedDB without [StorageManager](https://developer.mozilla.org/en-US/docs/Web/API/StorageManager) is just a "best-effort" database that can be erased at any time. The browser may delete your database without noticing the user in case it believes that your database is taking up too much disk space on a device.
 
 If you are syncing your data towards a server, these limitations are ok to live with, as a resync would restore your data. If not syncing, or in case your app requires a large quota, you should consider using the [StorageManager API](https://developer.mozilla.org/en-US/docs/Web/API/StorageManager) to control how your database is stored and protected.
 
@@ -194,4 +194,13 @@ async function initStoragePersistence() {
 
 If the result was "prompt" you could show your own view where you explain the reason for persistence along with a button to enable it.
 When user presses the button, you call `navigator.storage.persist()`.
+
+
+### References
+
+https://developer.mozilla.org/en-US/docs/Web/API/StorageManager
+
+https://developers.google.com/web/updates/2016/06/persistent-storage
+
+https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Browser_storage_limits_and_eviction_criteria
 

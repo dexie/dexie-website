@@ -7,3 +7,28 @@ header.site-header {
 	right: 6px;
 	z-index: 90;
 }
+
+.anchorlink {
+	float: left;
+	padding-left: 1.2em;
+	margin-left: -2.4em;
+	max-width: 0;
+	max-height: 0;
+	overflow: hidden;
+	opacity: 0;
+	font-weight: normal;
+	transition: opacity 0.5s;
+	color: #444;
+}
+
+.anchorable {
+	padding-left: 1.2em;
+	margin-left: -1.2em;
+}
+
+.anchorable:hover > .anchorlink,
+.anchorlink:hover {
+	max-width: unset;
+	max-height: unset;
+	opacity: 0.9;
+}

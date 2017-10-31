@@ -62,7 +62,9 @@ Dexie is just a wrapper for IndexedDB and enables the creation of (and access to
 
 ## Prohibit Unwanted Dialogs?
 
-Using navigator.storage.persist() may prompt the current user for permission. Personally, I would not like a webapp to ask for a permission the first thing it did. I would rather provide my own GUI to advertise that based on my app's criterias. For example, when the user seems to get more involved with the application, I could advertise and explain that the app might need to ensure that the data will not be accidentially cleared without user's notice.
+Using navigator.storage.persist() may prompt the end user for permission. Personally, I would not like a webapp to ask for a permission the first thing it did. I would rather provide my own GUI to advertise that based on my app's criterias. For example, when the user seems to get more involved with the application, I could advertise and explain that the app might need to ensure that the data will not be accidentially cleared without user's notice. Or it could be turned on in a *Settings* menu for your app.
+
+Chrome and Firefox also implements this differently. In Chrome, the "persistent" or "best-effort" mode is not decided by the end user but the based on how the user has interacted with the application, so it might actually be the case that your application is already allowed to be "persistent" without promting the user for that permission.
 
 Luckily, this has been thought of in the specification and can be accomplished, as you may convert existing databases (or rather origins containing all kinds of storages, including IndexedDB databases) to become persisted. There is also a [permissions](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/permissions) API that lets you ask whether a certain permission needs to be prompted for or not. User may have configured the browser to allow this already, or your app is run in installed mode and get the permissions implicitely. See [Summary](#summary) for a sample on how to control user dialogs.
 

@@ -5,11 +5,11 @@ title: 'How To Use the StorageManager API'
 
 <img src="/assets/images/disc.jpg" style="float:right;margin:24px;" />
 
-Even though IndexedDB is a fully functional client-side database for the web, it is not a persistent storage by default. IndexedDB without [StorageManager](https://developer.mozilla.org/en-US/docs/Web/API/StorageManager) is just a "best-effort" database that can be erased in situations of low disk space on a device. The browser may delete your database without noticing the user in case it needs to free up space for other website's data that was used more recently than yours.
+Even though IndexedDB is a fully functional client-side database for the web, it is not a persistent storage by default. IndexedDB without [StorageManager](https://developer.mozilla.org/en-US/docs/Web/API/StorageManager) is just a "best-effort" database that can be erased in situations of low disk space on a device. The browser may delete your database without notifying the user in case it needs to free up space for other website's data that was used more recently than yours.
 
 Actually, this is a good thing for most cases as the end-users may not want everything to be stored forever on each site they visit. But if IndexedDB is critical for your application to work, this browser-behavior might scare you a bit.
 
-If you are syncing your data towards a server, this "best-effort" behavior could actully be ok to live with, as a resync would restore your data. But if you are not syncing, or require offline functionality after long periods of the app being not used (for example an offline music player), you should consider using the [StorageManager API](https://developer.mozilla.org/en-US/docs/Web/API/StorageManager) to make sure your data is persisted.
+If you are syncing your data with a server, this "best-effort" behavior might actually be ok to live with, as a resync would restore your data. But if you are not syncing, or require offline functionality after long periods of the app being not used (for example an offline music player), you should consider using the [StorageManager API](https://developer.mozilla.org/en-US/docs/Web/API/StorageManager) to make sure your data is persisted.
 
 ## Controlling Persistence
 
@@ -24,9 +24,9 @@ async function persist() {
 
 ```
 
-This does not guarantee you be allowed to make the database "persistent" (in contrary of default "best-effort"). The browser may pop up a dialog to the user, asking for the permission to persist the storage and the user may say no. On many browsers without the StorageManager API the function will not do anything, as it initially checks for the existance of the StorageManager API and it's persist method.
+This does not guarantee you be allowed to make the database "persistent" (in contrary of default "best-effort"). The browser may pop up a dialog to the user, asking for the permission to persist the storage and the user may say no. On many browsers without the StorageManager API the function will not do anything, as it initially checks for the existence of the StorageManager API and its persist method.
 
-To check whether your IndexedDB database is successfully persisted, inspect the returned promise returned by persist(), or use the following function to query it without trying to persist:
+To check whether your IndexedDB database is successfully persisted, inspect the promise returned by `persist()`, or use the following function to query it without trying to persist:
 
 ```javascript
 
@@ -58,15 +58,15 @@ isStoragePersisted().then(async isPersisted => {
 
 ## What is "storage" and how does it apply to Dexie?
 
-Dexie is just a wrapper for IndexedDB and enables the creation of (and access to) client databases in your browser. StorageManager is a way to configure how IndexedDB will store its data for any database at on your web-site or app. 
+Dexie is just a wrapper for IndexedDB and enables the creation of (and access to) client databases in your browser. StorageManager is a way to configure how IndexedDB will store its data for any database on your website or app. 
 
 ## Prohibit Unwanted Dialogs?
 
-Using navigator.storage.persist() may prompt the end user for permission. Personally, I would not like a webapp to ask for a permission the first thing it did. I would rather provide my own GUI to advertise that based on my app's criterias. For example, when the user seems to get more involved with the application, I could advertise and explain that the app might need to ensure that the data will not be accidentially cleared without user's notice. Or it could be turned on in a *Settings* menu for your app.
+Using `navigator.storage.persist()` may prompt the end user for permission. Personally, I would not like a webapp to ask for a permission as the first thing it does. I would rather provide my own GUI to advertise that based on my app's criteria. For example, when the user seems to get more involved with the application, I could advertise and explain that the app might need to ensure that the data will not be accidentially cleared without user's notice. Or it could be turned on in a *Settings* menu for your app.
 
-Chrome and Firefox also implements this differently. In Chrome, the "persistent" or "best-effort" mode is not decided by the end user but is based on how the user has interacted with the application, so it might actually be the case that your application is already allowed to be "persistent" without promting the user for that permission. And the opposite - persist() may return false without ever prompting the user...
+Chrome and Firefox also implement this differently. In Chrome, the "persistent" or "best-effort" mode is not decided by the end user but is based on how the user has interacted with the application, so it might actually be the case that your application is already allowed to be "persistent" without prompting the user for that permission. And the opposite - `persist()` may return false without ever prompting the user...
 
-Luckily, the [Storage](https://storage.spec.whatwg.org) standard has taken into consideration the case when apps do not want to show dialogs initially as it is possible to convert existing storages to become persistent. There is also a [permissions](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/permissions) API that lets you ask whether a certain permission needs to be prompted for or not. User may have configured the browser to allow this already, or your app is run in installed mode and get the permissions implicitely. See [Summary](#summary) for a sample on how to control user dialogs.
+Luckily, the [Storage](https://storage.spec.whatwg.org) standard has taken into consideration the case when apps do not want to show dialogs initially as it is possible to convert existing storages to become persistent. There is also a [permissions](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/permissions) API that lets you ask whether a certain permission needs to be prompted for or not. Users may have configured the browser to allow this already, or your app is run in installed mode and gets the permissions implicitly. See [Summary](#summary) for a sample on how to control user dialogs.
 
 
 ## How Much Data Can Be Stored?
@@ -91,7 +91,7 @@ async function showEstimatedQuota() {
 
 Some things to consider:
 
-* Your app must be served over HTTPS, as the StorageManager() is only available in secure contexts.
+* Your app must be served over HTTPS, as the StorageManager() is only available in a secure context.
 * StorageManager API is still considered an experimental technology but is already available on Chrome, Firefox and Opera (as of October 30, 2017).
 
 ## Workers
@@ -100,7 +100,7 @@ Web Workers and Service Workers access the storage API the same way as web pages
 
 ## Summary
 
-If you are storing critical data with Dexie (or in IndexedDB generally), you might consider using [StorageManager](https://developer.mozilla.org/en-US/docs/Web/API/StorageManager) to ensure the data can be persistently stored, and not just "best-effort". For user experience, some apps may want to wait with enabling the persistend mode until the user seems to be repeatingly using the application, or maybe using certain parts of the application where persisted storage is critical.
+If you are storing critical data with Dexie (or in IndexedDB generally), you might consider using [StorageManager](https://developer.mozilla.org/en-US/docs/Web/API/StorageManager) to ensure the data can be persistently stored, and not just "best-effort". For user experience, some apps may want to wait with enabling the persistent mode until the user seems to be repeatingly using the application, or maybe using certain parts of the application where persisted storage is critical.
 
 In summary, here are some handy functions to use:
 

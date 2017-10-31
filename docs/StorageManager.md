@@ -139,11 +139,11 @@ async function showEstimatedQuota() {
 
 /** Tries to persist storage without ever prompting user.
   @returns {Promise<string>}
-    "never" In case persisting is not ever possible. Caller don't bother asking user for
-    permission.
+    "never" In case persisting is not ever possible. Caller don't bother
+      asking user for permission.
     "prompt" In case persisting would be possible if prompting user first.
-    "persisted" In case this call successfully silently persisted the storage, or if it
-    was already persisted.
+    "persisted" In case this call successfully silently persisted the storage,
+      or if it was already persisted.
 */
 async function tryPersistWithoutPromtingUser() {
   if (!navigator.storage || !navigator.storage.persisted) {

@@ -201,9 +201,10 @@ When user presses the button, you call `navigator.storage.persist()`.
 
 ### References
 
-https://developer.mozilla.org/en-US/docs/Web/API/StorageManager
+[StorageManager on MDN](https://developer.mozilla.org/en-US/docs/Web/API/StorageManager)
 
-https://developers.google.com/web/updates/2016/06/persistent-storage
+[Persistent Storage on developers.google.com](https://developers.google.com/web/updates/2016/06/persistent-storage)
 
-https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Browser_storage_limits_and_eviction_criteria
+[Limits and eviction criteria on MDN](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Browser_storage_limits_and_eviction_criteria)
 
+[Storage Standard](https://storage.spec.whatwg.org)

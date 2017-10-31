@@ -20,4 +20,4 @@ Structure of database change object.
 
 ## See Also
 
-[Dexie.Observable.js](/docs/Observable/Dexie.Observable.js)
+[Dexie.Observable.js](/docs/Observable/Dexie.Observable)

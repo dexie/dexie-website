@@ -5,9 +5,11 @@ title: 'How To Use the StorageManager API'
 
 <img src="/assets/images/disc.jpg" style="float:right;margin:24px;" />
 
-Even though IndexedDB is a fully functional client-side database for the web, it is not a persistent storage by default. IndexedDB without [StorageManager](https://developer.mozilla.org/en-US/docs/Web/API/StorageManager) is just a "best-effort" database that can be erased at any time. The browser may delete your database without noticing the user in case it believes that your database is taking up too much disk space on a device.
+Even though IndexedDB is a fully functional client-side database for the web, it is not a persistent storage by default. IndexedDB without [StorageManager](https://developer.mozilla.org/en-US/docs/Web/API/StorageManager) is just a "best-effort" database that can be erased in situations of low disk space on a device. The browser may delete your database without noticing the user in case it needs to free up space for other website's data that was used more recently than yours.
 
-If you are syncing your data towards a server, these limitations are ok to live with, as a resync would restore your data. If not syncing, or in case your app requires a large quota, you should consider using the [StorageManager API](https://developer.mozilla.org/en-US/docs/Web/API/StorageManager) to control how your database is stored and protected.
+Actually, this is a good thing for most cases as the end-users may not want everything to be stored forever on each site they visit. But if IndexedDB is critical for your application to work, they might scare you a bit.
+
+If you are syncing your data towards a server, this "best-effort" behavior could actully be ok to live with, as a resync would restore your data. But if you are not syncing, or require offline functionality after long periods of the app being not used (for example an offline music player), you should consider using the [StorageManager API](https://developer.mozilla.org/en-US/docs/Web/API/StorageManager) to make sure your data is persisted.
 
 ## Controlling Persistence
 
@@ -67,8 +69,7 @@ Luckily, this has been thought of in the specification and can be accomplished, 
 
 ## How Much Data Can Be Stored?
 
-If you successfully made your storage persistent, the quota it is allowed to use may vary depending on device. Typically, persisted storages will be allowed to use a larger quota than non-persisted storages.
-You might want to show your user how much storage is available, or you might want to take actions when storage reaches a certain percent of available storage. This can be accomplished using [StorageManager.estimate()](https://developer.mozilla.org/en-US/docs/Web/API/StorageManager/estimate) as shown in the sample below:
+If you successfully made your storage persistent, the quota it is allowed to use may vary depending on device. You might want to show your user how much storage is available, or you might want to take actions when storage reaches a certain percent of available storage. This can be accomplished using [StorageManager.estimate()](https://developer.mozilla.org/en-US/docs/Web/API/StorageManager/estimate) as shown in the sample below:
 
 ```javascript
 

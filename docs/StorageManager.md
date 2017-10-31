@@ -16,7 +16,8 @@ If you need to prohibit the user from accidentally getting the data deleted, you
 ```javascript
 
 async function persist() {
-  await navigator.storage && navigator.storage.persist && navigator.storage.persist();
+  return await navigator.storage && navigator.storage.persist &&
+    navigator.storage.persist();
 }
 
 ```

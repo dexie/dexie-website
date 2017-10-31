@@ -7,7 +7,7 @@ title: 'How To Use the StorageManager API'
 
 Even though IndexedDB is a fully functional client-side database for the web, it is not a persistent storage by default. IndexedDB without [StorageManager](https://developer.mozilla.org/en-US/docs/Web/API/StorageManager) is just a "best-effort" database that can be erased in situations of low disk space on a device. The browser may delete your database without noticing the user in case it needs to free up space for other website's data that was used more recently than yours.
 
-Actually, this is a good thing for most cases as the end-users may not want everything to be stored forever on each site they visit. But if IndexedDB is critical for your application to work, they might scare you a bit.
+Actually, this is a good thing for most cases as the end-users may not want everything to be stored forever on each site they visit. But if IndexedDB is critical for your application to work, this browser-behavior might scare you a bit.
 
 If you are syncing your data towards a server, this "best-effort" behavior could actully be ok to live with, as a resync would restore your data. But if you are not syncing, or require offline functionality after long periods of the app being not used (for example an offline music player), you should consider using the [StorageManager API](https://developer.mozilla.org/en-US/docs/Web/API/StorageManager) to make sure your data is persisted.
 

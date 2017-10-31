@@ -24,7 +24,7 @@ async function persist() {
 
 ```
 
-This does not guarantee you be allowed to persist the database. The browser may pop up a dialog to the user, asking for the permission to persist the storage. On older browsers without the StorageManager API the function will not do anything, as it initially checks for the existance of the StorageManager API and it's persist method.
+This does not guarantee you be allowed to make the database "persistent" (in contrary of default "best-effort"). The browser may pop up a dialog to the user, asking for the permission to persist the storage and the user may say no. On many browsers without the StorageManager API the function will not do anything, as it initially checks for the existance of the StorageManager API and it's persist method.
 
 To check whether your IndexedDB database is successfully persisted, inspect the returned promise returned by persist(), or use the following function to query it without trying to persist:
 

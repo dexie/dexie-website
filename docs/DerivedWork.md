@@ -9,7 +9,7 @@ Did you write something based on Dexie? Feel free to list it here.
 
 ## Known Addons
 
-* [Dexie.Observable](/docs/Observable/Dexie.Observable.js)
+* [Dexie.Observable](/docs/Observable/Dexie.Observable)
 * [Dexie.Syncable](/docs/Syncable/Dexie.Syncable.js)
 * [Dexie-mongoify](https://github.com/YuriSolovyov/Dexie-mongoify) *MongoDB style API for Dexie*
 * [dexie-relationships](https://github.com/ignasbernotas/dexie-relationships) *Declare and query data with foreign keys*

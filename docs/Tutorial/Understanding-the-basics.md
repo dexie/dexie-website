@@ -16,7 +16,7 @@ db.version(1).stores({
     friends: 'name, age'
 });
 db.open().then(function (db) {
-    // Database openeded successfully
+    // Database opened successfully
 }).catch (function (err) {
     // Error occurred
 });

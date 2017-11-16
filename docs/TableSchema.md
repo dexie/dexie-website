@@ -27,7 +27,7 @@ List of indexes properties.
 #### instanceTemplate : Object
 Object populated with indexed properties. In case [Table.defineClass()](/docs/Table/Table.defineClass()) or [Table.mapToClass()](/docs/Table/Table.mapToClass()) has been used, also non-indexed properties will be part of the template.
 
-This property is used internally by Dexoe to help out IDE with code completion.
+This property is used internally by Dexie to help out IDE with code completion.
 
 #### mappedClass : Function
 

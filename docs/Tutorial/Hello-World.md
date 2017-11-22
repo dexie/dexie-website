@@ -39,9 +39,9 @@ title: 'Hello World'
         alert ("Friends in reverse age order: " +
 		friends.map(friend => `${friend.name} ${friend.age}`));
 
-    }).catch (function (e) {
+    }).catch (err => {
 
-        alert ("Ouch... " + e.stack);
+        alert ("Ouch... " + err);
 
     });
  

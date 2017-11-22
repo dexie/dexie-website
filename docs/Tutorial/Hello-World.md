@@ -3,39 +3,48 @@ layout: docs
 title: 'Hello World'
 ---
 
-```javascript
-var db = new Dexie("FriendDatabase");
+```html
+<!DOCTYPE html>
+<html>
+ <head>
+  <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
+  <script>
+  
+    var db = new Dexie("FriendDatabase");
 
-db.version(1).stores({
-    friends: "id, name, age"
-});
+    db.version(1).stores({
+        friends: "id, name, age"
+    });
 
-db.friends.bulkPut([
-    {id: 1, name: "Josephine", age: 21},
-    {id: 2, name: "Per", age: 75},
-    {id: 3, name: "Simon", age: 5}
-]).then(() => {
+    db.friends.bulkPut([
+        {id: 1, name: "Josephine", age: 21},
+        {id: 2, name: "Per", age: 75},
+        {id: 3, name: "Simon", age: 5}
+    ]).then(() => {
 
-    return db.friends.where("age").between(0, 25).toArray();
-    
-}).then(friends => {
+        return db.friends.where("age").between(0, 25).toArray();
 
-    alert ("Found young friends: " + JSON.stringify(friends));
-    
-    return db.friends
-             .orderBy("age")
-             .reverse()
-             .toArray();
-             
-}).then(friends => {
+    }).then(friends => {
 
-    alert ("Friends in reverse age order: " + JSON.stringify(friends));
-    
-}).catch (function (e) {
+        alert ("Found young friends: " + JSON.stringify(friends));
 
-    alert ("Ouch... " + e.stack);
-    
-});
+        return db.friends
+                 .orderBy("age")
+                 .reverse()
+                 .toArray();
+
+    }).then(friends => {
+
+        alert ("Friends in reverse age order: " + JSON.stringify(friends));
+
+    }).catch (function (e) {
+
+        alert ("Ouch... " + e.stack);
+
+    });
+  </script>
+ </head>
+</html>
 
 ```
 

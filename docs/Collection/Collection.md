@@ -3,7 +3,7 @@ layout: docs
 title: 'Collection'
 ---
 
-Represents a collection of database objects. Note that it will not contain any objects by itself. Instead, it yields a preparation for how to execute a DB query. A query will be executed when calling methods that returns a Promise, such as [toArray()](/docs/Collection/Collection.toArray()), [keys()](/docs/Collection/Collection.keys()), [count()](/docs/Collection/Collection.count()] or [each()](/docs/Collection/Collection.each()).
+Represents a collection of database objects. Note that it will not contain any objects by itself. Instead, it yields a preparation for how to execute a DB query. A query will be executed when calling methods that returns a Promise, such as [toArray()](/docs/Collection/Collection.toArray()), [keys()](/docs/Collection/Collection.keys()), [count()](/docs/Collection/Collection.count()) or [each()](/docs/Collection/Collection.each()).
 
 ### Construction
 

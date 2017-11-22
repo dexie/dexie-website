@@ -13,13 +13,14 @@ title: 'Hello World'
     var db = new Dexie("FriendDatabase");
 
     db.version(1).stores({
-        friends: "id, age" // Use "id" as primary key and let "age" be indexed.
+        friends: "id, name, age" // Use "id" as primary key and let "name" and "age" be indexed.
     });
 
     db.friends.bulkPut([
         {id: 1, name: "Josephine", age: 21},
         {id: 2, name: "Per", age: 75},
-        {id: 3, name: "Simon", age: 5}
+        {id: 3, name: "Simon", age: 5},
+		{id: 4, name: "Sara", age: 50}
     ]).then(() => {
 
         return db.friends.where("age").between(0, 25).toArray();
@@ -38,6 +39,12 @@ title: 'Hello World'
 
         alert ("Friends in reverse age order: " +
 		friends.map(friend => `${friend.name} ${friend.age}`));
+	
+	return db.friends.where('name').startsWith("S").keys();
+
+    }).then(friendNames => {
+
+        alert ("Friends on 'S': " + friendNames);
 
     }).catch (err => {
 

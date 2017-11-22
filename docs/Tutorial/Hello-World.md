@@ -13,7 +13,7 @@ title: 'Hello World'
     var db = new Dexie("FriendDatabase");
 
     db.version(1).stores({
-        friends: "id, name, age"
+        friends: "id, age"
     });
 
     db.friends.bulkPut([

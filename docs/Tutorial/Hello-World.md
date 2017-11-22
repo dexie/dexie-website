@@ -27,7 +27,7 @@ title: 'Hello World'
     }).then(friends => {
 
         alert ("Found young friends: " +
-			friends.map(friend => friend.name));
+		friends.map(friend => friend.name));
 
         return db.friends
                  .orderBy("age")
@@ -37,8 +37,7 @@ title: 'Hello World'
     }).then(friends => {
 
         alert ("Friends in reverse age order: " +
-			friends
-				.map(friend => `${friend.name} ${friend.age}`));
+		friends.map(friend => `${friend.name} ${friend.age}`));
 
     }).catch (function (e) {
 

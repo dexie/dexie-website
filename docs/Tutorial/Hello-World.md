@@ -33,7 +33,7 @@ db.friends.bulkPut([
     
 }).catch (function (e) {
 
-    alert ("Whoops!: " + e.stack);
+    alert ("Ouch... " + e.stack);
 });
 
 ```

@@ -34,6 +34,7 @@ db.friends.bulkPut([
 }).catch (function (e) {
 
     alert ("Ouch... " + e.stack);
+    
 });
 
 ```

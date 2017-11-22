@@ -13,7 +13,7 @@ title: 'Hello World'
     var db = new Dexie("FriendDatabase");
 
     db.version(1).stores({
-      friends: "id, name, age" // Use "id" as primary key and let "name" and "age" be indexed.
+      friends: "id, name, age" // Use "id" as primary key, index "name" and "age"
     });
 
     db.friends.bulkPut([

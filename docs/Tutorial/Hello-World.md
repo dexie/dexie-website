@@ -7,27 +7,32 @@ title: 'Hello World'
 var db = new Dexie("FriendDatabase");
 
 db.version(1).stores({
-    friends: "++id,name,age"
+    friends: "id, name, age"
 });
 
-db.open().catch (function (e) {
-    alert ("Oh oh: " + e.stack);
-});
+db.friends.bulkPut([
+    {id: 1, name: "Josephine", age: 21},
+    {id: 2, name: "Per", age: 75},
+    {id: 3, name: "Simon", age: 5}
+]).then(() => {
 
-db.friends.add({name: "Josephine", age: 21}).then(function(){
-    return db.friends.where("age").between(20, 30).toArray();
-}).then(function(friends) {
+    return db.friends.where("age").between(0, 25).toArray();
+    
+}).then(friends => {
+
     alert ("Found young friends: " + JSON.stringify(friends));
-    return db.friends.add({name: "Simon", age: 3});
-}).then(function (id) {
-    alert ("Simon got ID: " + id);
+    
     return db.friends
              .orderBy("age")
              .reverse()
              .toArray();
-}).then(function (friends) {
+             
+}).then(friends => {
+
     alert ("Friends in reverse age order: " + JSON.stringify(friends));
+    
 }).catch (function (e) {
+
     alert ("Whoops!: " + e.stack);
 });
 

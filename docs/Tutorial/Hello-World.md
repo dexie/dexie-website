@@ -42,6 +42,7 @@ title: 'Hello World'
         alert ("Ouch... " + e.stack);
 
     });
+ 
   </script>
  </head>
 </html>

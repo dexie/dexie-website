@@ -20,7 +20,7 @@ title: 'Hello World'
         {id: 1, name: "Josephine", age: 21},
         {id: 2, name: "Per", age: 75},
         {id: 3, name: "Simon", age: 5},
-		{id: 4, name: "Sara", age: 50}
+	{id: 4, name: "Sara", age: 50}
     ]).then(() => {
 
         return db.friends.where("age").between(0, 25).toArray();

@@ -6,54 +6,54 @@ title: 'Hello World'
 ```html
 <!DOCTYPE html>
 <html>
- <head>
+<head>
   <script src="https://unpkg.com/dexie/dist/dexie.js"></script>
   <script>
-  
+
     var db = new Dexie("FriendDatabase");
 
     db.version(1).stores({
-        friends: "id, name, age" // Use "id" as primary key and let "name" and "age" be indexed.
+      friends: "id, name, age" // Use "id" as primary key and let "name" and "age" be indexed.
     });
 
     db.friends.bulkPut([
-	{id: 1, name: "Josephine", age: 21},
-	{id: 2, name: "Per", age: 75},
-	{id: 3, name: "Simon", age: 5},
-	{id: 4, name: "Sara", age: 50}
+      { id: 1, name: "Josephine", age: 21 },
+      { id: 2, name: "Per", age: 75 },
+      { id: 3, name: "Simon", age: 5 },
+      { id: 4, name: "Sara", age: 50 }
     ]).then(() => {
 
-        return db.friends.where("age").between(0, 25).toArray();
+      return db.friends.where("age").between(0, 25).toArray();
 
     }).then(friends => {
 
-        alert ("Found young friends: " +
-		friends.map(friend => friend.name));
+      alert("Found young friends: " +
+        friends.map(friend => friend.name));
 
-        return db.friends
-                 .orderBy("age")
-                 .reverse()
-                 .toArray();
+      return db.friends
+        .orderBy("age")
+        .reverse()
+        .toArray();
 
     }).then(friends => {
 
-        alert ("Friends in reverse age order: " +
-		friends.map(friend => `${friend.name} ${friend.age}`));
-	
-	return db.friends.where('name').startsWith("S").keys();
+      alert("Friends in reverse age order: " +
+        friends.map(friend => `${friend.name} ${friend.age}`));
+
+      return db.friends.where('name').startsWith("S").keys();
 
     }).then(friendNames => {
 
-        alert ("Friends on 'S': " + friendNames);
+      alert("Friends on 'S': " + friendNames);
 
-    }).catch (err => {
+    }).catch(err => {
 
-        alert ("Ouch... " + err);
+      alert("Ouch... " + err);
 
     });
- 
+
   </script>
- </head>
+</head>
 </html>
 ```
 

@@ -8,7 +8,7 @@ Same as [toArray()](/docs/Collection/Collection.toArray()) but with manual sorti
 ### Syntax
 
 ```javascript
-collection.sortBy(keyPath, callback)
+collection.sortBy(keyPath, callback?)
 ```
 
 ### Parameters

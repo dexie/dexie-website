@@ -28,12 +28,18 @@
       (async ()=>{
         log("Opening testdbPlain...");
         await dbPlain.open();
-        log("Success.");
+        log("open Success.");
+        await dbPlain.items.put({id: 1, name: "foo"});
+        const item = await dbPlain.items.get(1);
+        log("Write / Read success");
         dbPlain.close();
         log("Opening testdb_underscore...");
         try {
           await dbUnderscore.open();
-          log("Success.");
+          log("open Success.");
+          await dbUnderscore.items.put({id: 1, name: "foo"});
+          const item = await dbUnderscore.items.get(1);
+          log("Write / Read success");
           dbUnderscore.close();
         } catch (err) {
           log("Error: " + err);
@@ -41,7 +47,10 @@
         log("Opening testdb-dash...");
         try {
           await dbDash.open();
-          log("Success.");
+          log("open Success.");
+          await dbDash.items.put({id: 1, name: "foo"});
+          const item = await dbDash.items.get(1);
+          log("Write / Read success");
           dbDash.close();
         } catch (err) {
           log("Error: " + err);

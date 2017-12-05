@@ -1,0 +1,53 @@
+<!doctype HTML>
+<html>
+  <head>
+    <script src="https://unpkg.com/dexie@2.0.1"></script>
+  </head>
+  <body>
+    <textarea id="log" style="width: 100%; height: 500px;"></textarea>
+    <script>
+      const logger = document.getElementById('log');
+      function log(txt) {
+        if (typeof txt !== 'string') txt = JSON.stringify(txt, null, 2);
+        logger.value += (txt + "\n");
+      }
+
+      const dbPlain = new Dexie('testdbPlain');
+      dbPlain.version(1).stores({
+        items: 'id'
+      });
+      const dbDash = new Dexie('testdb-dash');
+      dbDash.version(1).stores({
+        items: 'id'
+      });
+      const dbUnderscore = new Dexie('testdb_underscore');
+      dbUnderscore.version(1).stores({
+        items: 'id'
+      });
+
+      (async ()=>{
+        log("Opening testdbPlain...");
+        await dbPlain.open();
+        log("Success.");
+        dbPlain.close();
+        log("Opening testdb_underscore...");
+        try {
+          await dbUnderscore.open();
+          log("Success.");
+          dbUnderscore.close();
+        } catch (err) {
+          log("Error: " + err);
+        }
+        log("Opening testdb-dash...");
+        try {
+          await dbDash.open();
+          log("Success.");
+          dbDash.close();
+        } catch (err) {
+          log("Error: " + err);
+        }
+      })().catch(e => log(`Error: ${e}`));
+
+    </script>
+  </body>
+</html>

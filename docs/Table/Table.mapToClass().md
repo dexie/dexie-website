@@ -14,7 +14,7 @@ table.mapToClass(constructor[, structure])
 ### Parameters
 <table>
 <tr><td>constructor: Function</td><td>Javascript constructor function</td><td></td></tr>
-<tr><td>structure: Object</td><td>Definition of the properties available on instances of the class</td><td><i>deprecated, optional</i></td></tr>
+<tr><td><i>structure: Object !Deprecated</i></td><td>Definition of the properties available on instances of the class</td><td><i>deprecated, optional</i></td></tr>
 </table>
 
 ### Return Value

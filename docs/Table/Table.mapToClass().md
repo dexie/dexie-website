@@ -14,7 +14,7 @@ table.mapToClass(constructor[, structure])
 ### Parameters
 <table>
 <tr><td>constructor: Function</td><td>Javascript constructor function</td><td></td></tr>
-<tr><td>structure: Object</td><td>Definition of the properties available on instances of the class</td><td><i>optional</i></td></tr>
+<tr><td>structure: Object</td><td>Definition of the properties available on instances of the class</td><td><i>deprecated, optional</i></td></tr>
 </table>
 
 ### Return Value
@@ -31,7 +31,7 @@ Notably does not apply to any of the hook functions ([Table.hook('creating')](/d
 
 ### NOTICE!
 
- * Structure argument only helps with code completion and documentation of the class. It will not instantiate properties on the instances returned from the database.
+ * Structure argument (deprecated) only helps with code completion and documentation of the class. It will not instantiate properties on the instances returned from the database.
  * Given constructor function wont be invoked for instances returned from database. Only the inheritance chain will be applied so that methods attached to constructor.prototype can be called upon and the `instanceof` operator will return true for the constructor.
 
 ### Sample (ES6)
@@ -54,45 +54,6 @@ db.friends.mapToClass (Friend);
 
 db.friends.where("name").startsWithIgnoreCase("d").each(function(friend) {
     assert (friend instanceof Friend);
-    friend.log();
-}).catch(function (e) {
-    console.error(e);
-});
-```
-
-### Sample (ES5 with type structure)
-
-```javascript
-function Friend() {
-}
-
-Friend.prototype.log = function () {
-    console.log(JSON.stringify(this));
-}
-
-var db = new Dexie("FriendsDB");
-
-// The stores() method just specify primary key and indexes
-db.version(1).stores({
-    friends: "++id,name,shoeSize,address.city"
-});
-
-// Using a structure, you may specify non-indexed properties as well and their types
-db.friends.mapToClass (Friend, {
-    name: String,
-    shoeSize: Number,
-    cars: [{
-        brand: String,
-        model: String
-    }],
-    address: {
-        street: String,
-        city: String,
-        country: String
-    }        
-});
-
-db.friends.where("name").startsWithIgnoreCase("d").each(function(friend) {
     friend.log();
 }).catch(function (e) {
     console.error(e);
@@ -142,6 +103,3 @@ db.friends.where("name").startsWithIgnoreCase("d").each(function(friend) {
 });
 ```
 
-### See Also
-
-[Table.defineClass()](/docs/Table/Table.defineClass())

@@ -14,6 +14,7 @@ Acts as the base class for exceptions that can be returned in rejected Dexie pro
 * [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
   * [SyntaxError](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError)
   * [TypeError](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError)
+  * [RangeError](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError)
   * Dexie.DexieError
     * [Dexie.AbortError](/docs/DexieErrors/Dexie.AbortError)
     * [Dexie.BulkError](/docs/DexieErrors/Dexie.BulkError)

@@ -26,7 +26,7 @@ db.version(1).stores({
 });
 
 db.foo.put({id: null}); // fails with DataError because null is not indexable.
-db.foo.put({id: 1, bar: null}); // succeeds but fails silently to be indexed by "bar" index.
+db.foo.put({id: 1, bar: null}); // succeeds but fails silently to be indexed by "id" index.
 db.foo.where('bar').equals(undefined).toArray(); // Fails with DataError as undefined is not indexable.
 
 ```

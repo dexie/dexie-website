@@ -53,7 +53,7 @@ db.version(1).stores({
 <tr><td>++</td><td>Auto-incremented primary key</td></tr>
 <tr><td>&amp;</td><td>Unique</td></tr>
 <tr><td>*</td><td><a href="/docs/MultiEntry-Index">Multi-entry</a> index</td></tr>
-<tr><td>[A+B]</td><td><a href="/docs/MultiEntry-Index">Compound index</a></td></tr>
+<tr><td>[A+B]</td><td><a href="/docs/Compound-Index">Compound index</a></td></tr>
 </table>
 
 [Complete Syntax Documentation](/docs/Version/Version.stores())

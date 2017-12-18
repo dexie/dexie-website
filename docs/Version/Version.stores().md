@@ -31,7 +31,7 @@ Please refer to [Database Versioning](/docs/Tutorial/Design#database-versioning)
 <tr><td>++</td><td>Auto-incremented primary key</td></tr>
 <tr><td>&amp;</td><td>Unique index</td></tr>
 <tr><td>*</td><td><a href="/docs/MultiEntry-Index">Multi-entry</a> index</td></tr>
-<tr><td>[A+B]</td><td><a href="/docs/MultiEntry-Index">Compound index or primary key</a></td></tr>
+<tr><td>[A+B]</td><td><a href="/docs/Compound-Index">Compound index or primary key</a></td></tr>
 </table>
 
 *Detail: Primary keys are implicitly marked as unique.*

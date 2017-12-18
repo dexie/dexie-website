@@ -14,7 +14,7 @@ title: 'IndexedDB on Safari'
   1. Transactions can only target a single object store at a time.
   2. Primary keys must be unique **across** different objects stores.
   3. Compound indexes or primary keys are not supported.
-  4. MultiEntry indexes not supported.
+  4. [MultiEntry](/docs/MultiEntry-Index) indexes not supported.
 
 ## Safari version >= 10.1 and 11.0
 

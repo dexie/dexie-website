@@ -46,9 +46,23 @@ function getSciFiBooks() {
 
 When querying multiEntry indexes, chances are that one may get multiple results of the same objects, if there are multiple index matches for the same item. It is therefore a good practice to always use [Collection.distinct()](/docs/Collection/Collection.distinct()) in queries on multiEntry indexes.
 
-## Query Examples
+## Samples in Summary
 
 ```javascript
+
+// Define DB
+var db = new Dexie('dbname');
+db.version(1).stores ({
+  books: 'id, author, name, *categories'
+});
+
+// Insert a book of multiple categories
+db.books.put({
+  id: 1,
+  name: 'Under the Dome', 
+  author: 'Stephen King',
+  categories: ['sci-fi', 'thriller']
+});
 
 // Query all sci-fi books:
 function getSciFiBooks() {

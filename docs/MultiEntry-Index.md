@@ -60,9 +60,18 @@ function getSciFiBooks() {
 // Query all books of category 'sci-fi' or 'romance'
 function getSciFiOrRomanceBooks() {
   return db.books
-    .where('category').anyOf('sci-fi', 'romance')
+    .where('categories').anyOf('sci-fi', 'romance')
     .distinct() // Never show 2 results of same book with both romance and sci-fi
     .toArray()
+}
+
+// Complex query
+function complexQuery() {
+  return db.books
+    .where('categories').startsAnyOfWithIgnoreCase('sci', 'ro')
+    .or('author').equalsIgnoreCase('stephen king')
+    .distinct()
+    .toArray();
 }
 
 ```

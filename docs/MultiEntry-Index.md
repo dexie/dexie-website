@@ -68,7 +68,7 @@ function getSciFiOrRomanceBooks() {
 // Complex query
 function complexQuery() {
   return db.books
-    .where('categories').startsAnyOfWithIgnoreCase('sci', 'ro')
+    .where('categories').startsWithAnyOfIgnoreCase('sci', 'ro')
     .or('author').equalsIgnoreCase('stephen king')
     .distinct()
     .toArray();

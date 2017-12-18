@@ -53,7 +53,7 @@ When querying multiEntry indexes, chances are that one may get multiple results 
 // Query all sci-fi books:
 function getSciFiBooks() {
   return db.books
-    .where({categories: 'sci-fi'})
+    .where('categories').equals('sci-fi')
     .toArray ();
 }
 

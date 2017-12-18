@@ -69,8 +69,8 @@ function getSciFiOrRomanceBooks() {
 
 # Limitations
 
-* MultiEntry indexes cannot be combined with [compound indexes](/docs/Compound-Index). The limitation lies withing indexedDB itself.
-* Of natural reasons, primary keys cannot be MultiEntry.
+* The same property can not be marked as both MultiEntry and [compound](/docs/Compound-Index). The limitation lies withing indexedDB itself.
+* Of natural reasons, primary keys cannot be marked MultiEntry.
 
 # Browser limitations
 

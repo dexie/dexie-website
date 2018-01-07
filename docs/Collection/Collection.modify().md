@@ -89,7 +89,7 @@ db.transaction("rw", db.friends, function () {
 
 ```javascript
 // Convert all shoeSize from european to american size:
-db.friends.modify(function(friend) {
+db.friends.toCollection().modify(function(friend) {
     friend.shoeSize *= 0.31; // (very approximate formula...., but anyway...)
 });
 ```

@@ -3,6 +3,8 @@ layout: docs
 title: Docs Home
 ---
 
+[Quick Reference](/API-Reference#quick-reference)
+
 [API Reference](/docs/API-Reference)
 
 [About](/docs/Dexie.js)

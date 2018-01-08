@@ -39,16 +39,16 @@ db.version(1).stores({
 
 // Add some values
 db.friends.bulkAdd([{
-    firstName: "Foo",
+    firstName: "Fool",
     lastName: "Barfly"
 },{
     firstName: "Bart",
     lastName: "Foofie"
-}]);
-
-// Query values
-db.friends.where('lastName').startsWithAnyOfIgnoreCase(['foo','bar'])
-  .toArray(function(result) {
-      console.log("Found: " + result.lastName);
-  });
+}]).then(()=>{
+  // Query values
+  db.friends.where('lastName').startsWithAnyOfIgnoreCase(['foo','bar'])
+    .toArray(function(result) {
+        console.log("Found: " + result.lastName);
+    });
+});
 ```

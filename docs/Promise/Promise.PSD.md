@@ -3,7 +3,7 @@ layout: docs
 title: 'Promise.PSD'
 ---
 
-Dexie.Promise.PSD is a custom [Zone system](https://github.com/domenic/zones) to maintain ongoing database [transactions](/docs/Transaction/Dexie.transaction()). Unlike other zone implementations, Dexie's zones are unobtrusive, meaning that the zone system does not require monkey-patching of your entire application. Dexie is not dependant on zone.js or any other zone implementation.
+Dexie.Promise.PSD is a custom [Zone system](https://github.com/domenic/zones) to maintain ongoing database [transactions](/docs/Dexie/Dexie.transaction()). Unlike other zone implementations, Dexie's zones are unobtrusive, meaning that the zone system does not require monkey-patching of your entire application. Dexie is not dependant on zone.js or any other zone implementation.
 
 As of Dexie 2.0.0-beta.4, this zone system is also capable of maintaining zones between await expressions (both transpiled and browser-native. The zone system has been tested agains native await with Chrome 55 beta and Edge 14. Transpiled support has been tested with babel and typescript).
 

@@ -26,6 +26,8 @@ db.people.where('[firstName+lastName]').equals(['foo', 'bar'])
 db.people.where({firstName: 'foo', lastName: 'bar'})`
 ```
 
+The latter version is a special case that only works in Dexie >=2.0 and that can match by multiple properties, no matter whether your browser supports compound queries or not.
+
 ## Sample
 
 ```javascript
@@ -54,9 +56,7 @@ async function playWithCompoundIndex() {
 A compound index can be viewed as the index of a concatenation of two properties. They are expressed as "[prop1+prop2]" both when declaring them and when referring to them in where()-clauses. It's not exactly just a string-concatenation, since the properties may be of different types, but it's one way to think about them.
 
 ## Matching First Part Only
-It's generally not nescessary to have both "[firstName+lastName]" and a bare "firstName" index declared, since the compound index already contains the nescessary indexing needed for firstName alone, even though you would have to use the between() method instead of equals() to use it.
-
-To find all friends with `firstName="foo"` using a compound index of "[firstName+lastName]" only, use:
+To find all friends with `firstName='foo'` but has an arbritary lastName, we actually do not need to use a normal index - a compound index who's first part is 'firstName' can also perform this query. For the compound index '[firstName+lastName]', the query should be expressed as follows:
 
 ```javascript
 db.people.where('[firstName+lastName]').between(["foo", Dexie.minKey], ["foo", Dexie.maxKey]).toArray();

@@ -81,7 +81,16 @@ The above sample uses a compound primary key containing four properties: date, f
 
 # Browser limitations
 
-Internet Explorer, Edge and Safari < v10 does not support compound indexes or primary keys.
+Internet Explorer, Edge and Safari < v10 does not support compound indexes or primary keys. You can declare them, but you'd get an error when trying to use them, unless you pass an object to where() method:
+
+```javascript
+table.where({
+   prop1: value1,
+   prop2: value2,
+   ...
+})
+```
+Using this way to query it, Dexie will find out whether it can utilize the compound index or not. If user is on IE/Edge/old safari, it will still perform the query without utilizing compound index (just not as performant).
 
 # Using with orderBy()
 

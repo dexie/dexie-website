@@ -81,7 +81,7 @@ The above sample uses a compound primary key containing four properties: date, f
 
 # Browser limitations
 
-Internet Explorer, Edge and Safari < v10 does not support compound indexes or primary keys. You can declare compound indexes, but you'd get an error when trying to use them in a plain where('[x+y]') manner. But Dexie 2.0's new version of where() wherer you can pass an object to it will work on all browsers and only utilize the compound index if browser supports it, otherwise fallback to using a simple index, or even just a full table scan to filter it out:
+Internet Explorer, Edge and Safari < v10 does not support compound indexes or primary keys. You can declare compound indexes, but you'd get an error when trying to use them in a plain where('[x+y]') manner. But if passing an object to Table.where() (as samplified multiple times on this page), the query will work on all browsers and only utilize the compound index if browser supports it, otherwise fallback to using a simple index, or even just a full table scan to filter it out:
 
 ```javascript
 table.where({

@@ -14,7 +14,19 @@ db.version(1).stores({
 });
 ```
 
-In the above sample, records containing valid keys in the *firstName* and *lastName* properties will be indexed. If having stored an object with properties `{firstName: 'foo', lastName: 'bar'}`, it can be efficiently looked up using `db.people.where('[firstName+lastName]').equals(['foo', 'bar'])` or in Dexie 2.0,  `db.people.where({firstName: 'foo', lastName: 'bar'})`.
+In the above sample, records containing valid keys in the *firstName* and *lastName* properties will be indexed. If having stored an object with properties `{firstName: 'foo', lastName: 'bar'}`, it can be efficiently looked up using:
+
+```javascript
+db.people.where('[firstName+lastName]').equals(['foo', 'bar'])
+```
+
+...which can also be expressed as:
+
+```javascript
+db.people.where({firstName: 'foo', lastName: 'bar'})`
+```
+
+## Sample
 
 ```javascript
 async function playWithCompoundIndex() {
@@ -36,6 +48,18 @@ async function playWithCompoundIndex() {
     console.log ("Foobar: ", fooBar.id, fooBar.firstName, fooBar.lastName);
 }
 
+```
+
+## How Compound Index Works
+A compound index can be viewed as the index of a concatenation of two properties. They are expressed as "[prop1+prop2]" both when declaring them and when referring to them in where()-clauses. It's not exactly just a string-concatenation, since the properties may be of different types, but it's one way to think about them.
+
+## Matching First Part Only
+It's generally not nescessary to have both "[firstName+lastName]" and a bare "firstName" index declared, since the compound index already contains the nescessary indexing needed for firstName alone, even though you would have to use the between() method instead of equals() to use it.
+
+To find all friends with `firstName="foo"` using a compound index of "[firstName+lastName]" only, use:
+
+```javascript
+db.people.where('[firstName+lastName]').between(["foo", Dexie.minKey], ["foo", Dexie.maxKey]).toArray();
 ```
 
 # Compound Primary Key

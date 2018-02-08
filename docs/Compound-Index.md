@@ -66,6 +66,19 @@ db.people
   .toArray();
 ```
 
+## Matching Multiple Values
+To find specific people using both their first and last name, we can use [WhereClause.anyOf()](/docs/WhereClause/WhereClause.anyOf()). This allows us to have multiple criteria for on the properties that are part of the compound index. The syntax should be as follows:
+
+```javascript
+db.people
+  .where('[firstName+lastName]').anyOf([
+    ["foo", "bar"],
+    ["baz", "qux"]
+  ]).toArray();
+```
+
+This will yield both "Mr. foo bar" and "Mrs. baz qux".
+
 # Compound Primary Key
 
 A primary key can also be compound in the same manner as indexes. However, a compound primary key cannot be auto-incremented of natural reasons.

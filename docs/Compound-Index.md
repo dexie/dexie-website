@@ -67,7 +67,8 @@ db.people
 ```
 
 ## Matching Multiple Values
-To find specific people using both their first and last name, we can use [WhereClause.anyOf()](/docs/WhereClause/WhereClause.anyOf()). This allows us to have multiple criteria for on the properties that are part of the compound index. The syntax should be as follows:
+
+To find specific people using both their first and last name, we can use [WhereClause.anyOf()](/docs/WhereClause/WhereClause.anyOf()). This allows us to have multiple criteria for the properties that are part of the compound index. The syntax should be as follows:
 
 ```javascript
 db.people

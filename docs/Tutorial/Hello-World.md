@@ -12,9 +12,9 @@ title: 'Hello World'
 
     var db = new Dexie("FriendDatabase");
 
+    // DB with single table "friends" with primary key "id" and
+    // indexes on properties "name" and "age"
     db.version(1).stores({
-      // Table "friends" with key "id"
-      // that indexes properties "name" and "age"
       friends: `
         id,
         name,

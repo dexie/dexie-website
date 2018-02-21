@@ -13,14 +13,20 @@ title: 'Hello World'
     var db = new Dexie("FriendDatabase");
 
     db.version(1).stores({
-      friends: "id, name, age" // Use "id" as primary key, index "name" and "age"
+      // Table "friends" with key "id"
+      // that indexes properties "name" and "age"
+      friends: `
+        id,
+        name,
+        age`,
     });
 
+    // Now add some values.
     db.friends.bulkPut([
       { id: 1, name: "Josephine", age: 21 },
       { id: 2, name: "Per", age: 75 },
       { id: 3, name: "Simon", age: 5 },
-      { id: 4, name: "Sara", age: 50 }
+      { id: 4, name: "Sara", age: 50, notIndexedProperty: 'foo' }
     ]).then(() => {
 
       return db.friends.where("age").between(0, 25).toArray();

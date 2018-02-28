@@ -9,7 +9,7 @@ title: "Table.hook('updating')"
 db.[tableName].hook('updating', function (modifications, primKey, obj, transaction) {
     // You may use transaction to do additional database operations.
     // You may not do any modifications on any of the given arguments.
-    // You may set this.onsuccess = callback when update operation completes.
+    // You may set this.onsuccess = function (updatedObj){} when update operation completes.
     // You may set this.onerror = callback if update operation fails.
     // If you want to make additional modifications,
     // return another modifications object

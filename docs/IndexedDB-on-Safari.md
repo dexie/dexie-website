@@ -20,6 +20,12 @@ title: 'IndexedDB on Safari'
 
 Native and almost bug free support for IndexedDB 2.0. There is still [one known issue](https://bugs.webkit.org/show_bug.cgi?id=178380) with version 10 and 11 that affects Dexie's [Collection.modify()](/docs/Collection/Collection.modify()) in Dexie versions <= 2.0. A new workaround for this Safari issue will likely to be included in Dexie version > 2.0. The progress of this can be followed up in [issue #594](https://github.com/dfahlander/Dexie.js/issues/594).
 
+Some new severe issues regarding binary keys (An IndexedDB2.0 feature) in Safari 10 and 11 has also been reported to Dexie:
+
+* [Chrashed Page on Safari](https://github.com/dfahlander/Dexie.js/issues/668)
+* [Safari save Uint8Array in DB](https://github.com/dfahlander/Dexie.js/issues/656)
+
+
 ## Chrome and Opera on IOS
 
 Thanks to Apples restricted policies for iOS, Chrome and Opera running on iOS is actually a Safari browser in the backend pretending to be Chrome or Opera. Thus, it suffers from all the indexedDB bugginess that comes with the native indexedDB support in Safari. See Issue [#110](https://github.com/dfahlander/Dexie.js/issues/110).

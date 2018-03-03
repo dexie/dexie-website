@@ -33,6 +33,6 @@ Native support for IndexedDB 2.0. Lots of issues solved and performance boosted.
 
 ## Chrome and Opera on IOS
 
-Due to Apples restricted policies for iOS, Chrome and Opera running on iOS is actually a Safari browser in the backend pretending to be Chrome or Opera. Thus, it's IndexedDB is actually provided by Safari even on Chrome, Opera or Firefox.
+Due to Apples restricted policies for iOS, Chrome and Opera running on iOS is actually a Safari browser in the backend pretending to be Chrome or Opera. Thus, it's IndexedDB is actually provided by Safari even on Chrome, Opera or Firefox, see [issue #110](https://github.com/dfahlander/Dexie.js/issues/110).
 
 If your application must target iPhone 6 or below, it is recommended to include the indexedDB shim before requiring/including Dexie.js. iPhone 7 users will have a Safari engine of version >= 10.3.

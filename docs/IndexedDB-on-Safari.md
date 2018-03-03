@@ -23,7 +23,6 @@ Native support for IndexedDB 2.0. Lots of issues solved and performance boosted.
 * [Database opening hangs in Safari 10.1](https://github.com/dfahlander/Dexie.js/issues/508). [Reported to bugs.webkit.org](https://bugs.webkit.org/show_bug.cgi?id=171049)
 * [Crash when using with fastClickjs](https://github.com/dfahlander/Dexie.js/issues/559)
 * Solved: [Crash issue with getAll() on Safari 10.1](https://github.com/dfahlander/Dexie.js/issues/565). Worked around in Dexie and solved in Safari 11.
-* [Can't add File to database](https://github.com/dfahlander/Dexie.js/issues/577)
 * [Safari and CryptoKeys](https://github.com/dfahlander/Dexie.js/issues/585)
 * MAJOR: [Safari + where + modify = only one updated](https://github.com/dfahlander/Dexie.js/issues/594) 
 * [Safari Upgrade issue: Can't create Dexie database in Safari 11.0.1 (11604.3.5.1.1)](https://github.com/dfahlander/Dexie.js/issues/616)

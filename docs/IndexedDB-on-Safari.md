@@ -18,7 +18,7 @@ title: 'IndexedDB on Safari'
 
 ## Safari version >= 10.1 and 11.0
 
-Native and better support for IndexedDB 2.0. Dexie users are though still struggeling with both stability- and compliance issues in Safari 10.1 and Safari 11, see issue list below.
+Native support for IndexedDB 2.0. Lots of issues solved and performance boosted. Still, Dexie users keep struggeling with some stability- and compliance issues in Safari 10.1 and Safari 11:
 
 * [Database opening hangs in Safari 10.1](https://github.com/dfahlander/Dexie.js/issues/508). [Reported to bugs.webkit.org](https://bugs.webkit.org/show_bug.cgi?id=171049)
 * [Crash when using with fastClickjs](https://github.com/dfahlander/Dexie.js/issues/559)

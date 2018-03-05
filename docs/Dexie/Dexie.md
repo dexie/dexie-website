@@ -94,7 +94,7 @@ db.transaction('rw', db.friends, db.notes, function* () {
 });
 ```
 
-[Open sample in jsfiddle](https://jsfiddle.net/dfahlander/qmr9L6L8/)
+[Open sample in jsfiddle](https://fiddle.jshell.net/dfahlander/qmr9L6L8/)
 
 ### Sample: Open existing database 'as is'
 
@@ -115,7 +115,7 @@ new Dexie('MyDatabase').open().then(function (db) {
 });
 ```
 
-[Open sample in jsfiddle](https://jsfiddle.net/dfahlander/b8Levamm/)
+[Open sample in jsfiddle](https://fiddle.jshell.net/dfahlander/b8Levamm/)
 
 ### Sample: Instantiate a Dexie with custom addon
 

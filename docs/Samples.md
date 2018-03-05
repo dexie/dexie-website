@@ -65,7 +65,7 @@ title: 'Samples'
 #### Simplification using ES6 yield (a poor man's async/await)
 
 * [Simplify with yield](http://dexie.org/docs/Simplify-with-yield.html)
-* [Fiddle](https://jsfiddle.net/dfahlander/b7axqyjw/)
+* [Fiddle](https://fiddle.jshell.net/dfahlander/b7axqyjw/)
 * [Examples](https://github.com/dfahlander/Dexie.js/blob/master/test/tests-yield.js)
 
 #### Simple Demo from [Codeproject](http://www.codeproject.com/Articles/744986/How-to-do-some-magic-with-indexedDB) and [Mozilla Hacks](https://hacks.mozilla.org/2014/06/breaking-the-borders-of-indexeddb/) Articles:
@@ -93,9 +93,9 @@ title: 'Samples'
 
 ### Various jsfiddles
 
-* Dexie Fiddle: [https://jsfiddle.net/dfahlander/3tf5r0cu/](https://jsfiddle.net/dfahlander/3tf5r0cu/)
-* Dexie with yield: [https://jsfiddle.net/dfahlander/b7axqyjw/](https://jsfiddle.net/dfahlander/b7axqyjw/)
-* Sample from wiki: [https://jsfiddle.net/dfahlander/qmr9L6L8/](https://jsfiddle.net/dfahlander/qmr9L6L8/)
-* Open existing DB: [https://jsfiddle.net/dfahlander/b8Levamm/](https://jsfiddle.net/dfahlander/b8Levamm/)
-* Storing Binary Data: [https://jsfiddle.net/dfahlander/kgsbbhca/](https://jsfiddle.net/dfahlander/kgsbbhca/)
-* Preserving custom types using [typeson](https://www.npmjs.com/package/typeson): [https://jsfiddle.net/dfahlander/qacL14tu/](https://jsfiddle.net/dfahlander/qacL14tu/)
+* Dexie Fiddle: [https://fiddle.jshell.net/dfahlander/3tf5r0cu/](https://fiddle.jshell.net/dfahlander/3tf5r0cu/)
+* Dexie with yield: [https://fiddle.jshell.net/dfahlander/b7axqyjw/](https://fiddle.jshell.net/dfahlander/b7axqyjw/)
+* Sample from wiki: [https://fiddle.jshell.net/dfahlander/qmr9L6L8/](https://fiddle.jshell.net/dfahlander/qmr9L6L8/)
+* Open existing DB: [https://fiddle.jshell.net/dfahlander/b8Levamm/](https://fiddle.jshell.net/dfahlander/b8Levamm/)
+* Storing Binary Data: [https://fiddle.jshell.net/dfahlander/kgsbbhca/](https://fiddle.jshell.net/dfahlander/kgsbbhca/)
+* Preserving custom types using [typeson](https://www.npmjs.com/package/typeson): [https://fiddle.jshell.net/dfahlander/qacL14tu/](https://fiddle.jshell.net/dfahlander/qacL14tu/)

@@ -28,12 +28,13 @@ Specifies tables to be added, altered or deleted in this version. Each key in th
 
 ```js
 db.version(1).stores({
-  friends: '++id, name, age'
+  friends: '++id, name, age' // don't index "picture"
 });
+
 db.friends.put({
   name: 'Camilla',
   age: 25,
-  picture: getBlob('camilla.png')
+  picture: getBlob('camilla.png') // but store it, and it will be included in results.
 });
 ```
 *Example how the "picture" property is stored without being indexed.*

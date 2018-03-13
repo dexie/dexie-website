@@ -39,7 +39,7 @@ db.friends.put({
 ```
 *Example how the "picture" property is stored without being indexed.*
 
-*Writing this because there have been some issues on github where people index images or movies without really understanding the purpose of indexing fields. A rule of thumb 1) Are you going to put your property in a where() clause? If yes, index it, if not, dont. Rule of Thumb 2) If your data is larger than 256 bytes, it should probably NOT be indexed.*
+*Writing this because there have been some issues on github where people index images or movies without really understanding the purpose of indexing fields. A rule of thumb 1) Are you going to put your property in a where() clause? If yes, index it, if not, dont. Large indexes will affect database performance and in extreme cases make it unstable. *
 
 ### Changing the Schema
 

@@ -46,6 +46,7 @@ db.version(1).stores({
 });
 
 ```
+**NOTE: Don't declare all columns like in SQL. You only declare properties you want to index, that is properties you want to use in a where(...) query.**
 
 #### Schema Syntax
 

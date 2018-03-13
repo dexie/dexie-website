@@ -34,7 +34,7 @@ db.version(1).stores({
 db.friends.put({
   name: 'Camilla',
   age: 25,
-  picture: getBlob('camilla.png') // but store it, and it will be included in results.
+  picture: await getBlob('camilla.png') // but store it, and it will be included in results.
 });
 ```
 *Example how the "picture" property is stored without being indexed.*

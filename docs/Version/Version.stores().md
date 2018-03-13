@@ -23,6 +23,9 @@ version.stores(schemaDefinition);
 
 Specifies tables to be added, altered or deleted in this version. Each key in the schemaDefinition argument represents a table name and each value represents the primary key followed by the list of indexed properties. **NOTE: Unlike SQL, you don't need to specify all properties but only the one you wish to index.**
 
+### WARNING
+**Never index properties containing images, movies or large strings. Store them in IndexedDB, yes! but just don't index them! Writing this because there have been some issues on github where people index images or movies without really understanding the purpose of indexing fields.**
+
 Please refer to [Database Versioning](/docs/Tutorial/Design#database-versioning) that explains how to add, alter or remove a table using the Versioning framework in Dexie.
 
 ### Schema Syntax

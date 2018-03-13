@@ -75,22 +75,21 @@
 
 	/*
 	|----------------------------|
-	| Make a database connection |
+	| Declare your databse       |
 	|----------------------------|
 	*/
 
-	var db = new Dexie('MyDatabase');
+	const db = new Dexie('MyDatabase');
 
-	// Define a schema
+	// Declare tables, IDs and indexes
 	db.version(1).stores({
-		friends: 'name, age'
+		friends: '++id, name, age'
 	});
 
 
-	// Open the database
-	db.open().catch(function(error) {
-		alert('Uh oh : ' + error);
-	});
+
+
+
 
 	
 
@@ -106,18 +105,17 @@
 	*/
 
 	// Find some old friends
-	db.friends
+	await db.friends
 		.where('age')
 		.above(75)
-		.each (function (friend) {
-			console.log (friend.name);
-		});
+		.toArray();
 
 	// or make a new one
-	db.friends.add({
+	await db.friends.add({
 		name: 'Camilla',
 		age: 25,
-		anotherProperty: 'not all properties needs to be indexed'
+		street: 'East 13:th Street',
+		picture: await getBlob('camilla.png')
 	});
 
 					</code>
@@ -154,7 +152,7 @@
 
 		<div class='container'>
 			<footer>
-				<p>&copy; 2014-2017 Dexie.js is the creation of David Fahlander.</p>
+				<p>&copy; 2014-2018 Dexie.js is the creation of David Fahlander.</p>
 			</footer>
 		</div>
 

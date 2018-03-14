@@ -199,7 +199,7 @@ await table
 page = await Promise.all(pageKeys.map(id => table.get(id)));
     
 ```
-The algorithm used here is common among most database engines. Ordered pages of OR queries is a problem for SQL databases as well and they will do the same algorithm internally as we do here. Current version of Dexie just don't have a built-in query planner to do this yet, so that's why you need to write this code to do it.
+Ordered pages of OR queries is a problem for all databases and they will do the same algorithm internally as we do here. Current version of Dexie just don't have a built-in query planner to do this yet, so that's why you need to write this code to do it.
 
 CONS:
   * Has to query all primary keys before starting to retrieve values.

@@ -144,16 +144,16 @@ Here's what can be done to optimize that in a manner that mirrors what many othe
 //
 //
 
-// Whatever Dexie query here:
+// Query:
 const query = db.friends
   .where('age').above(25)
-  .or('name').startsWith('X'); 
+  .or('name').startsWith('X'); // Whatever Dexie query here...
 
 // Page size:
 const PAGE_SIZE = 10;
 
-// Use any index for ordering the result:
-const ORDER_BY = "name";
+// order-index (choose any index - does not need to be part of query)
+const ORDER_BY = "shoeSize";
 
 //
 //

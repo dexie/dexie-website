@@ -138,6 +138,12 @@ Here's what can be done to optimize that in a manner that mirrors what many othe
 
 ```javascript
 
+//
+//
+// --- Here goes the parameters ---
+//
+//
+
 // Whatever Dexie query here:
 const query = db.friends
   .where('age').above(25)

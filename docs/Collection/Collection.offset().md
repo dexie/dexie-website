@@ -145,7 +145,7 @@ Here's what can be done to optimize that in a manner that mirrors what many othe
 //
 
 // Query:
-const query = db.friends
+const collection = db.friends
   .where('age').above(25)
   .or('shoeSize').below(10)
   .or('firstName').startsWith('X'); // Whatever Dexie query here...
@@ -163,7 +163,7 @@ const ORDER_BY = "lastName";
 //
 
 // Record all matching primary keys
-const primaryKeySet = new Set(await query.primaryKeys());
+const primaryKeySet = new Set(await collection.primaryKeys());
   
 //
 // Query first page

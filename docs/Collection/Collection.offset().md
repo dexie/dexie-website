@@ -58,3 +58,100 @@ db.[table].where(index).startsWithIgnoreCase(value).offset(N)
 db.[table].where(index).anyOf(valueArray).offset(N)
 db.[table].where(index).above(value).and(filterFunction).offset(N)
 ```
+
+### A better paging approach
+
+Paging can generally be done more efficiently by adapting the query to the last result instead of using offset/limit.
+
+```javascript
+const PAGE_SIZE = 10;
+
+const page1 = await db.friends
+  .orderBy('age')
+  .limit(PAGE_SIZE)
+  .toArray();
+
+// Now, prepare next page by picking last entry
+const lastEntry = page1[page1.length-1];
+
+const page2 = await db.friends
+  .orderBy('age')
+  .limit(PAGE_SIZE);
+  .toArray();
+
+...
+```
+
+In case you have a where()-clause, the index on which it is used will also be the sort order, so:
+
+```javascript
+
+const PAGE_SIZE = 10;
+const page1 = await db.friends
+  .where('age').above(25) // keyrange query (affects result order)
+  .filter(friend => /nice/.test(friend.notes)) // Some custom filter...
+  .limit(PAGE_SIZE)
+  .toArray();
+
+// Now, prepare next page by picking last entry
+const lastEntry = page1[page1.length-1];
+
+
+const page2 = await db.friends
+  .where('age').above(lastEntry.age)
+  .filter(friend => /nice/.test(friend.notes)) // Some custom filter...
+  .limit(PAGE_SIZE);
+  .toArray();
+...
+
+```
+
+OR-queries, however, will not be able to be paged like this, as the resulting order is undefined. With OR-queries and paging, you would have to do a more complex query:
+
+```javascript
+
+const PAGE_SIZE = 10;
+const ORDER_BY = "name";
+
+const primaryKeySet = new Set(await db.friends
+  .where('age').above(25)
+  .or('name').startsWith('X')
+  .primaryKeys());
+  
+const page1 = [];
+await db.friends
+  .orderBy(ORDER_BY)
+  .until(page1.length === PAGE_SIZE)
+  .eachPrimaryKey(id => {
+    if (primaryKeySet.has(id)) {
+      page1.push(id);
+    }
+  });
+  
+let lastEntry = page1[page1.length-1];
+  
+const page2 = [];
+await db.friends
+  .where(ORDER_BY).above(lastEntry[ORDER_BY])
+  .until(page2.length === PAGE_SIZE)
+  .eachPrimaryKey(id => {
+    if (primaryKeySet.has(id)) {
+      page2.push(id);
+    }
+  });
+  
+...
+
+lastEntry = prevPage[prevPage.length-1];
+  
+const pageX = [];
+await db.friends
+  .where(ORDER_BY).above(lastEntry[ORDER_BY])
+  .until(pageX.length === PAGE_SIZE)
+  .eachPrimaryKey(id => {
+    if (primaryKeySet.has(id)) {
+      pageX.push(id);
+    }
+  });
+    
+```

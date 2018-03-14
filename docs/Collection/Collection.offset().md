@@ -145,7 +145,8 @@ Here's what can be done to optimize that in a manner that mirrors what many othe
 //
 
 // Query:
-const collection = db.friends
+const table = db.friends;
+const collection = table
   .where('age').above(25)
   .or('shoeSize').below(10)
   .or('firstName').startsWith('X'); // Whatever Dexie query here...

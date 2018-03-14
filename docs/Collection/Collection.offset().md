@@ -135,45 +135,42 @@ OR-queries, however, will not be able to be paged like this, as the resulting or
 const PAGE_SIZE = 10;
 const ORDER_BY = "name";
 
+// Record all matching primary keys
 const primaryKeySet = new Set(await db.friends
   .where('age').above(25)
   .or('name').startsWith('X')
   .primaryKeys());
   
-const page1 = [];
+//
+// Query first page
+//
+let pageKeys = [];
 await db.friends
   .orderBy(ORDER_BY)
-  .until(page1.length === PAGE_SIZE)
+  .until(pageKeys.length === PAGE_SIZE)
   .eachPrimaryKey(id => {
     if (primaryKeySet.has(id)) {
-      page1.push(id);
+      pageKeys.push(id);
     }
   });
-  
-let lastEntry = page1[page1.length-1];
-  
-const page2 = [];
-await db.friends
-  .where(ORDER_BY).above(lastEntry[ORDER_BY])
-  .until(page2.length === PAGE_SIZE)
-  .eachPrimaryKey(id => {
-    if (primaryKeySet.has(id)) {
-      page2.push(id);
-    }
-  });
-  
+let page = await Promise.all(pageKeys.map(id => db.friends.get(id)));
 ...
 
-lastEntry = prevPage[prevPage.length-1];
-  
-const pageX = [];
+//
+// Query page N
+//
+if (page.length < PAGE_SIZE) return; // Done
+lastEntry = page[page.length-1];
+
+pageKeys = [];
 await db.friends
   .where(ORDER_BY).above(lastEntry[ORDER_BY])
-  .until(pageX.length === PAGE_SIZE)
+  .until(pageKeys.length === PAGE_SIZE)
   .eachPrimaryKey(id => {
     if (primaryKeySet.has(id)) {
-      pageX.push(id);
+      pageKeys.push(id);
     }
   });
+page = await Promise.all(pageKeys.map(id => db.friends.get(id)));
     
 ```

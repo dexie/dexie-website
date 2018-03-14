@@ -34,7 +34,7 @@ In current version of Dexie (v2.0), it is not possible to do:
 ```javascript
 db.friends
   .where('age').above(25)
-  .orderBy('name')
+  .orderBy('name') // Not possible in Dexie 1.x or 2.x.
 ```
 ... and there is a simple reason for that: No database can do this query easily as it can only operate on one btree at a time. However, most databases yet supports, but involving set matching of primary keys and a full index scans on the ordered query.
 

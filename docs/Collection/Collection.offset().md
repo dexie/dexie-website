@@ -75,7 +75,7 @@ const page1 = await db.friends
 const lastEntry = page1[page1.length-1];
 
 const page2 = await db.friends
-  .orderBy('age')
+  .where('age').above(lastEntry.age)
   .limit(PAGE_SIZE);
   .toArray();
 

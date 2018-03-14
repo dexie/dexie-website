@@ -66,20 +66,37 @@ Paging can generally be done more efficiently by adapting the query to the last 
 ```javascript
 const PAGE_SIZE = 10;
 
-const page1 = await db.friends
+//
+// Query First Page
+//
+let page = await db.friends
   .orderBy('age')
   .limit(PAGE_SIZE)
   .toArray();
 
-// Now, prepare next page by picking last entry
-const lastEntry = page1[page1.length-1];
-
-const page2 = await db.friends
+//
+// Page 2
+//
+if (page.length < PAGE_SIZE) return; // Done
+let lastEntry = page[page.length-1];
+page = await db.friends
   .where('age').above(lastEntry.age)
   .limit(PAGE_SIZE);
   .toArray();
 
 ...
+
+//
+// Page N
+//
+if (page.length < PAGE_SIZE) return; // Done
+lastEntry = page[page.length-1];
+page = await db.friends
+  .where('age').above(lastEntry.age)
+  .limit(PAGE_SIZE);
+  .toArray();
+
+
 ```
 
 In case you have a where()-clause, the index on which it is used will also be the sort order, so:
@@ -87,22 +104,27 @@ In case you have a where()-clause, the index on which it is used will also be th
 ```javascript
 
 const PAGE_SIZE = 10;
-const page1 = await db.friends
-  .where('age').above(25) // keyrange query (affects result order)
+
+//
+// First Page
+//
+let page = await db.friends
+  .where('age').between(25, 100) // keyrange query (affects result order)
   .filter(friend => /nice/.test(friend.notes)) // Some custom filter...
   .limit(PAGE_SIZE)
   .toArray();
-
-// Now, prepare next page by picking last entry
-const lastEntry = page1[page1.length-1];
-
-
-const page2 = await db.friends
-  .where('age').above(lastEntry.age)
-  .filter(friend => /nice/.test(friend.notes)) // Some custom filter...
+  
+...
+//
+// Page N
+//
+if (page.length < PAGE_SIZE) return; // Done
+lastEntry = page[page.length-1];
+page = await db.friends
+  .where('age').between(lastEntry.age, 100)
+  .filter(friend => /nice/.test(friend.notes))
   .limit(PAGE_SIZE);
   .toArray();
-...
 
 ```
 

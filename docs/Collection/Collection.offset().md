@@ -128,6 +128,8 @@ page = await db.friends
 
 ```
 
+### Paged OR-queries
+
 OR-queries, however, will not be able to be paged like this, as the resulting order is undefined. With OR-queries and paging, you would have to do a more complex query:
 
 ```javascript

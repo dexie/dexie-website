@@ -188,6 +188,7 @@ CONS:
   
 PROS:
   * Will have equal performance for page 1 and page 100.
+  * Does it the way an SQL database would do it.
   * Does not need to load all values (which would be the case if using sortBy()) - just all primary keys.
   * Does not require the use of Array.sort() (which can be very slow on large arrays)
 

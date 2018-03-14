@@ -179,6 +179,7 @@ The algorithm used here is common among most database engines. Ordered pages of 
 CONS:
   * Has to query all primary keys before starting to retrieve values.
   * Has to do a full index scan on the ordered index
+  
 PROS:
   * Will have equal performance for page 1 and page 100.
   * Does not need to load all values (which would be the case if using sortBy()), just all primary keys.

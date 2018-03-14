@@ -130,7 +130,11 @@ page = await db.friends
 
 ### Paged OR-queries
 
-OR-queries, however, will not be able to be paged like this, as the resulting order is undefined. With OR-queries and paging, you would have to do a more complex query:
+OR-queries, however, will not be able to be paged like this, as the resulting order is undefined. With OR-queries and paging, you would have to do a more complex query.
+
+Let's say you have an arbritary query, containing both a where()-clause, one or more or() clauses, and possible some JS filter on top of that. And you want to order and page the result any index of your choice. Let's assume also that your database values contains 10,000 of records with large images on each record. Then using sortBy() and slice the result is just not an appropriate way to go.
+
+Here's what can be done to optimize that in a manner that mirrors what many other databases does internally:
 
 ```javascript
 

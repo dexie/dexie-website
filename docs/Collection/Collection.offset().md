@@ -170,7 +170,7 @@ const primaryKeySet = new Set(await collection.primaryKeys());
 // Query first page
 //
 let pageKeys = [];
-await db.friends
+await table
   .orderBy(ORDER_BY)
   .until(pageKeys.length === PAGE_SIZE)
   .eachPrimaryKey(id => {
@@ -178,7 +178,7 @@ await db.friends
       pageKeys.push(id);
     }
   });
-let page = await Promise.all(pageKeys.map(id => db.friends.get(id)));
+let page = await Promise.all(pageKeys.map(id => table.get(id)));
 ...
 
 //
@@ -188,7 +188,7 @@ if (page.length < PAGE_SIZE) return; // Done
 lastEntry = page[page.length-1];
 
 pageKeys = [];
-await db.friends
+await table
   .where(ORDER_BY).above(lastEntry[ORDER_BY])
   .until(pageKeys.length === PAGE_SIZE)
   .eachPrimaryKey(id => {
@@ -196,7 +196,7 @@ await db.friends
       pageKeys.push(id);
     }
   });
-page = await Promise.all(pageKeys.map(id => db.friends.get(id)));
+page = await Promise.all(pageKeys.map(id => table.get(id)));
     
 ```
 The algorithm used here is common among most database engines. Ordered pages of OR queries is a problem for SQL databases as well and they will do the same algorithm internally as we do here. Current version of Dexie just don't have a built-in query planner to do this yet, so that's why you need to write this code to do it.

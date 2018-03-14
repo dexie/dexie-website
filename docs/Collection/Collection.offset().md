@@ -138,14 +138,20 @@ Here's what can be done to optimize that in a manner that mirrors what many othe
 
 ```javascript
 
+// Whatever Dexie query here:
+const query = db.friends
+  .where('age').above(25)
+  .or('name').startsWith('X'); 
+
+// Page size:
 const PAGE_SIZE = 10;
+
+// Use any index for ordering the result:
 const ORDER_BY = "name";
 
+
 // Record all matching primary keys
-const primaryKeySet = new Set(await db.friends
-  .where('age').above(25)
-  .or('name').startsWith('X')
-  .primaryKeys());
+const primaryKeySet = new Set(await query.primaryKeys());
   
 //
 // Query first page

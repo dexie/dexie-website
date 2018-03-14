@@ -192,4 +192,4 @@ PROS:
   * Does not need to load all values (which would be the case if using sortBy()) - just all primary keys.
   * Does not require the use of Array.sort() (which can be very slow on large arrays)
 
-*A future version of Dexie (probably version 4.0) will support this natively, and will do it even more efficient than the example used here (will use a Bloom filter instead of a Set, and query the primary keys more memory-efficient, using paging internally also there).*
+*A future version of Dexie (probably version 4.0) will support this natively, and will do it even more efficient than the example used here with the use of a paged primary key aggregation, and a bloom filter instead of a Set.*

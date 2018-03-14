@@ -149,6 +149,11 @@ const PAGE_SIZE = 10;
 // Use any index for ordering the result:
 const ORDER_BY = "name";
 
+//
+//
+// --- Here goes the algorithm ---
+//
+//
 
 // Record all matching primary keys
 const primaryKeySet = new Set(await query.primaryKeys());

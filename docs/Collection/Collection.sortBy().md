@@ -53,5 +53,5 @@ db.friends
 
 [Table.orderBy()](/docs/Table/Table.orderBy())
 
-[A better paging approach](https://github.com/dfahlander/dexie.js-web/blob/gh-pages/docs/Collection/Collection.offset().md#a-better-paging-approach)
+[A better paging approach](http://dexie.org/docs/Collection/Collection.offset()#a-better-paging-approach)
 

@@ -126,7 +126,7 @@ img.dexie-logo-icon {
 	.getstarted {
 		width: 260px;
 	}
-	
+
 }
 
 table {
@@ -172,10 +172,12 @@ table tr:nth-child(2n) {
 }
 
 .docs-toc-wrapper {
+	padding-left: 10px;
 }
 
 .docs-toc {
-	padding: 10px;
+	padding-left: 10px;
+	padding-bottom: 10px;
 }
 
 .docs-toc li {

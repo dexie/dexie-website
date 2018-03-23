@@ -1,0 +1,19 @@
+{% comment %}
+  Use first item as index
+{% endcomment %}
+{% assign index = include.items | first %}
+{% assign pages = include.items | shift %}
+
+<h{{ include.level }}>
+  <a href="{{ index.url }}">
+    {{ index.title }}
+  </a>
+</h{{ include.level }}>
+
+<ul class="docs-toc">
+  {% for page in pages %}
+  <li>
+    <a href="{{ page.url }}">{{ page.title }}</a>
+  </li>
+  {% endfor %}
+</ul>

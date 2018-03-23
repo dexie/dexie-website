@@ -30,16 +30,7 @@ layout: default
       <div class="docs-toc-wrapper">
 
         {% assign pages = site.tutorial | sort: 'weight' %}
-        {% assign index = pages | first %}
-        {% assign pages = pages | shift %}
-        <h4><a href="{{ index.url }}">{{ index.title }}</a></h4>
-        <ul class="docs-toc">
-          {% for page in pages %}
-            <li>
-              <a href="{{ page.url }}">{{ page.title }}</a>
-            </li>
-          {% endfor %}
-        </ul>
+        {% include nav-index.html items=pages level=4 %}
 
         {% assign pages = site.misc | sort: "title" %}
         <h4>Misc</h4>
@@ -55,16 +46,7 @@ layout: default
         {% assign groups = site.api_ref | group_by_exp: "item", "item.relative_path | split: '/' | shift | first" %}
         {% for group in groups %}
           {% assign pages = group.items | sort: "title" | sort: "index", "last" %}
-          {% assign index = pages | first %}
-          {% assign pages = pages | shift %}
-          <h5><a href="{{ index.url }}">{{ index.title }}</a></h5>
-          <ul class="docs-toc">
-            {% for page in pages %}
-            <li>
-              <a href="{{ page.url }}">{{ page.title }}</a>
-            </li>
-            {% endfor %}
-          </ul>
+          {% include nav-index.html items=pages level=5 %}
         {% endfor %}
       </div>
     </div>

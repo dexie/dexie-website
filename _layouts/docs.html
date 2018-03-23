@@ -52,13 +52,18 @@ layout: default
         </ul>
 
         <h4><a href="{% link docs/API-Reference.md %}">API Reference</a></h4>
-        <ul class="docs-toc">
-          {% for page in site.api_ref %}
+        {% assign groups = site.api_ref | group_by_exp: "item", "item.relative_path | split: '/' | shift | first" %}
+        {% for group in groups %}
+          <h5>{{ group.name }}</h5>
+          <ul class="docs-toc">
+            {% assign pages = group.items | sort: "title" %}
+            {% for page in pages %}
             <li>
               <a href="{{ page.url }}">{{ page.title }}</a>
             </li>
-          {% endfor %}
-        </ul>
+            {% endfor %}
+          </ul>
+        {% endfor %}
       </div>
     </div>
   </div>

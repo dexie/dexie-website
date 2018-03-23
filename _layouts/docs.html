@@ -26,16 +26,35 @@ layout: default
   </div>
   <div class="col-xs-12 col-md-4">
     <div class="row docs-page-subheader">
-      <h3>Table of Contents</h3>
+      <h3><a href="{% link docs/index.md %}">Dexie Docs</a></h3>
       <div class="docs-toc-wrapper">
+
+        <!-- TODO: Link -->
+        <h4>Tutorial</h4>
         <ul class="docs-toc">
-          {% assign pages = site.pages | sort:"title"  %}
+          {% for page in site.tutorial %}
+            <li>
+              <a href="{{ page.url }}">{{ page.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+
+        {% assign pages = site.misc | sort: "title" %}
+        <h4>Misc</h4>
+        <ul class="docs-toc">
           {% for page in pages %}
-            {% if page.layout == 'docs' %}
-              <li>
-                <a href="{{ page.url | replace: '.html', ''}}">{{ page.title }}</a>
-              </li>
-            {% endif %}
+            <li>
+              <a href="{{ page.url }}">{{ page.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+
+        <h4><a href="{% link docs/API-Reference.md %}">API Reference</a></h4>
+        <ul class="docs-toc">
+          {% for page in site.api_ref %}
+            <li>
+              <a href="{{ page.url }}">{{ page.title }}</a>
+            </li>
           {% endfor %}
         </ul>
       </div>

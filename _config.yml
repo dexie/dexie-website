@@ -24,3 +24,14 @@ gfm_quirks: paragraph_end
 
 # Build settings
 markdown: kramdown
+
+collections:
+  tutorial:
+    output: true
+    permalink: /docs/Tutorial/:path/
+  api_ref:
+    output: true
+    permalink: /docs/:path/
+  misc:
+    output: true
+    permalink: /docs/:path/

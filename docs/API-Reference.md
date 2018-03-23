@@ -1,6 +1,7 @@
 ---
 layout: docs
 title: 'API Reference'
+permalink: /docs/API-Reference/
 ---
 
 ### Classes

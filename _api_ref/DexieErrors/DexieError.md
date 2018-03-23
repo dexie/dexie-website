@@ -1,6 +1,7 @@
 ---
 layout: docs
 title: 'DexieError'
+index: yes
 ---
 *since v.1.3.3*
 

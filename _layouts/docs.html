@@ -29,10 +29,12 @@ layout: default
       <h3><a href="{% link docs/index.md %}">Dexie Docs</a></h3>
       <div class="docs-toc-wrapper">
 
-        <!-- TODO: Link -->
-        <h4>Tutorial</h4>
+        {% assign pages = site.tutorial | sort: 'weight' %}
+        {% assign index = pages | first %}
+        {% assign pages = pages | shift %}
+        <h4><a href="{{ index.url }}">{{ index.title }}</a></h4>
         <ul class="docs-toc">
-          {% for page in site.tutorial %}
+          {% for page in pages %}
             <li>
               <a href="{{ page.url }}">{{ page.title }}</a>
             </li>

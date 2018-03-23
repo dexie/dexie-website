@@ -1,6 +1,7 @@
 ---
 layout: docs
 title: 'Understanding the basics'
+weight: 120
 ---
 
 ## Creating Database vs opening existing

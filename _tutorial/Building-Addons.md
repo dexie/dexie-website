@@ -2,6 +2,7 @@
 layout: docs
 title: 'Building Addons'
 subtitle: Dexie is designed for being extended by addons.
+weight: 90
 ---
 
 ## Methods for Extending Dexie

@@ -1,6 +1,7 @@
 ---
 layout: docs
 title: 'Tutorial'
+permalink: /docs/Tutorial/
 ---
 [Getting started](/docs/Tutorial/Getting-started)
 

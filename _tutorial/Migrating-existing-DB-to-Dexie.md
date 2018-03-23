@@ -1,6 +1,7 @@
 ---
 layout: docs
 title: 'Migrating existing DB to Dexie'
+weight: 60
 ---
 
 Dexie can open any indexedDB database, no matter if you've created it via raw indexedDB or another indexedDB wrapper.

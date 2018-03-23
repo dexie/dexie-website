@@ -1,6 +1,7 @@
 ---
 layout: docs
 title: 'Consuming Dexie as a module'
+weight: 20
 ---
 
 ## Short Version

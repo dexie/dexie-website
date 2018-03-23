@@ -1,6 +1,7 @@
 ---
 layout: docs
 title: 'Design'
+weight: 30
 ---
 
 ### The Dexie class

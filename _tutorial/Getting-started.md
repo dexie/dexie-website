@@ -1,6 +1,7 @@
 ---
 layout: docs
 title: 'Getting Started'
+weight: 10
 ---
 
 Dexie.js can be consumed as a module. But let's skip that for now and just show the simplest possible setup. You will just need a text editor and a web browser.

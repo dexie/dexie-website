@@ -1,6 +1,7 @@
 ---
 layout: docs
 title: 'Best Practices'
+weight: 50
 ---
 
 ### 1. Understand Promises

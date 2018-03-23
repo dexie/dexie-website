@@ -1,6 +1,7 @@
 ---
 layout: docs
 title: 'Hello World'
+weight: 150
 ---
 
 ```html

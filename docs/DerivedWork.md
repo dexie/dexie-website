@@ -26,7 +26,6 @@ Did you write something based on Dexie? Feel free to list it here.
 
 ## Known Adapters
 
-* [Dexie-mongoify](https://github.com/YuriSolovyov/Dexie-mongoify)
 * [ngDexie](https://github.com/FlussoBV/NgDexie)
 * [angular-dexie-bind](https://github.com/nhahn/angular-dexie-bind)
 

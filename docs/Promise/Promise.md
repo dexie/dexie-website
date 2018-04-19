@@ -3,7 +3,7 @@ layout: docs
 title: 'Promise'
 ---
 
-Represents an ECMAScript 6 compliant Promise/A+ implementation. All Dexie methods that returns a Promise will return a Dexie.Promise rather than native Promise.
+Represents an ECMAScript 6 compliant Promise/A+ implementation. All Dexie methods that return a Promise will return a Dexie.Promise rather than native Promise.
 
 ### Syntax
 

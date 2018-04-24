@@ -40,3 +40,5 @@ Did you write something based on Dexie? Feel free to list it here.
 * [Minbrowser](https://minbrowser.github.io/min/)
 * [Wire](https://wire.com)
 * [Medical Physics Quality Assurance Tool](http://electrons.simonbiggs.net/) -- Built with Typescript2, Angular2, Dexie2, Bokehjs, on Github Pages (Client) and Heroku (RestAPI). [Source Code](https://github.com/SimonBiggs/electroninserts-webapp).
+* [Memex](https://worldbrain.io)
+

@@ -25,6 +25,7 @@ Did you write something based on Dexie? Feel free to list it here.
 
 * [sync-client](https://www.npmjs.com/package/sync-client) *A batteries-included Dexie with sync built-in*
 * [sync-server](https://www.npmjs.com/package/sync-server) *A backend for [sync_client](https://www.npmjs.com/package/sync-client)*
+* [vue-idb](https://www.npmjs.com/package/vue-idb) - IndexedDB wrapper for Vuejs based on Dexie
 
 ## Blogs and Samples
 

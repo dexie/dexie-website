@@ -5,7 +5,9 @@ title: 'Understanding the basics'
 
 ## Creating Database vs opening existing
 
-IndexedDB (and Dexie) has a built-in system for db installation and schema upgrades. This is something that many users have had problems to understand. I get the same questions over and over. People try to do these things manually.
+IndexedDB (and Dexie) has a built-in system for db installation and schema upgrades. Many people think they will have to check if database needs to be created and run different code depending on whether the database was installed on the client or not. This is not neeeded. Your dexie code can be declarative (you declare what tables and schemas you have in current and previously released versions and you let Dexie / indexedDB handle the situation where a database wasn't created yet, needs upgrade or is already on latest version).
+
+IndexedDB is designed for handling database creation and upgrades through the `onupgradeneeded` event, and define the schema there. There is no native method for checking whether a database exists or not. Dexie adds a declarative schema syntax on top of that so that you don't need to subscribe to the `onupgradeneeded` event either. 
 
 ## Declarative Schema 
 The database schema is declarative, not imperative. 

@@ -34,7 +34,7 @@ db.version(2).stores({
     friends: "++id,name,birthdate,sex"
 }).upgrade (trans => {
     var YEAR = 365 * 24 * 60 * 60 * 1000;
-    trans.friends.toCollection().modify (friend => {
+    return trans.friends.toCollection().modify (friend => {
         friend.birthdate = new Date(Date.now() - (friend.age * YEAR));
         delete friend.age;
     });

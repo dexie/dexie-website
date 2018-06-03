@@ -12,12 +12,11 @@ var db = new Dexie("FriendsAndPetsDatabase");
 db.version(2).stores({
   friends: "++id,name,birthdate,sex",
   pets: "++id,name,kind"
-}).upgrade (function (trans) {
+}).upgrade (trans => {
   var YEAR = 365 * 24 * 60 * 60 * 1000;
-  trans.friends.each (function (friend, cursor) {
+  return trans.friends.toCollection().modify (friend => {
     friend.birthdate = new Date(Date.now() - (friend.age * YEAR));
     delete friend.age;
-    cursor.update (friend);
   });
 });
 // Always keep the declarations previous versions as long as there might be users having them running.

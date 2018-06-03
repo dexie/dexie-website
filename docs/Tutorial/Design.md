@@ -136,9 +136,9 @@ OK, that's nice. But what if you'd need to change the **data architecture**? Let
 var db = new Dexie("FriendsDB");
 db.version(1).stores({friends: "++id,name"});
 db.version(2).stores({friends: "++id,name,shoeSize"});
-db.version(3).stores({friends: "++id,shoeSize,firstName,lastName"}).upgrade(function(t) {
+db.version(3).stores({friends: "++id,shoeSize,firstName,lastName"}).upgrade(tx => {
     // An upgrade function for version 3 will upgrade data based on version 2.
-    return t.friends.toCollection().modify(function(friend) {
+    return tx.friends.toCollection().modify(friend => {
         // Modify each friend:
         friend.firstName = friend.name.split(' ')[0];
         friend.lastName = friend.name.split(' ')[1];

@@ -56,9 +56,9 @@ var db = new Dexie("FriendsAndPetsDatabase");
 db.version(2).stores({
     friends: "++id,name,birthdate,sex",
     pets: "++id,name,kind"
-}).upgrade (function () {
+}).upgrade (tx => {
     var YEAR = 365 * 24 * 60 * 60 * 1000;
-    db.friends.toCollection().modify (function (friend) {
+    return tx.friends.toCollection().modify (friend => {
         friend.birthdate = new Date(Date.now() - (friend.age * YEAR));
         delete friend.age;
     });

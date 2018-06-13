@@ -36,7 +36,7 @@
                     <span class='widescreen'>Get started in 30 seconds</span>
 					<span class='slimscreen'>Get started</span>
                 </a>
-                <a class='btn btn-primary btn-lg' href='https://fiddle.jshell.net/dfahlander/3tf5r0cu/' role='button'>
+                <a class='btn btn-primary btn-lg' href='https://jsfiddle.net/dfahlander/3tf5r0cu' role='button'>
                     <span class='glyphicon glyphicon-edit'></span>
                     <span>Fiddle</span>
                 </a>
@@ -58,7 +58,7 @@
 				<div class='col-md-4'>
 					<h2>Performant</h2>
 					<p>Dexie has an near-native performance. It's' bulk operations utilize a rarely used feature in indexedDB - to ignore success callbacks when possible.</p>
-					<p><a class='btn btn-success' href='https://fiddle.jshell.net/dfahlander/xf2zrL4p/' role='button'>See it in action &raquo;</a></p>
+					<p><a class='btn btn-success' href='https://jsfiddle.net/dfahlander/xf2zrL4p' role='button'>See it in action &raquo;</a></p>
 				</div>
 			</div>
 		</div>
@@ -175,7 +175,7 @@
 		<!-- Place this tag right after the last button or just before your close body tag. -->
 		<script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
 		<script>
-			// Workaround for chromium issue "loading incorrect iframe content on back"
+			// Workaround for chromium issue "loading incorrect iframe content on back-button"
 			// https://bugs.chromium.org/p/chromium/issues/detail?id=395791
 			// Without this workaround, the github star button iframe will load the entire 
 			// dexie.org page instead of its src attribute, when navigating back to the page.
@@ -189,6 +189,17 @@
 					}
 				});
 				o.observe(starButton[0], {subtree: true, attributes: true});
+			}
+
+			// Workaround for Safari not allowing jsfiddle to iframe Dexie:
+			if (/Safari/.test(navigator.userAgent) && (
+				!/(Chrome\/|Edge\/)/.test(navigator.userAgent) ||
+				/Mobile/.test(navigator.userAgent)))
+			{
+				var prefix = "https://jsfiddle.net/";
+				$("a[href^='"+prefix+"']").each((idx, a) => $(a).attr({
+					href: "https://fiddle.jshell.net/" + a.href.substr(prefix.length) + "/show"
+				}));
 			}
 		</script>
 	</body>

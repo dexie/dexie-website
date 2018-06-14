@@ -85,15 +85,23 @@ function changeSchema(db, schemaChanges) {
 }
 
 // Open database dynamically:
-let db = await new Dexie('FriendsDatabase').open();
+async function playAround() {
+    let db = new Dexie ('FriendsDatabase');
+    if (!(await Dexie.exists(db.name))) {
+        db.version(1).stores({});
+    }
+    await db.open();
 
-// Add a table with some indexes:
-db = await changeSchema(db, {friends: 'id, name'});
+    // Add a table with some indexes:
+    db = await changeSchema(db, {friends: 'id, name'});
 
-// Add another index in the friends table
-db = await changeSchema(db, {friends: 'id, name, age'});
+    // Add another index in the friends table
+    db = await changeSchema(db, {friends: 'id, name, age'});
 
-// Remove the friends table
-db = await changeSchema(db, {friends: null});
+    // Remove the friends table
+    db = await changeSchema(db, {friends: null});
+}
+
+playAround().catch(err => console.error(err));
 
 ```

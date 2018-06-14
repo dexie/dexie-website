@@ -25,7 +25,7 @@ This method is only needed if one of the following are true:
 
 When open is called, your Dexie instance start interacting with the backend indexedDB code. In case upgrade is needed, your registered stores will be created or modified accordingly and any registered upgrader function will run. When all is finished the return Promise instance will resolve and any pending db operation you have initiated after the call to open() will resume. In case an error occur, the returned Promise will reject and any pending db operation will resume and fail too.
 
-### Dynamic Mode
+#### Dynamic Mode
 
 If db.version() was never called prior to calling db.open(), the database will open in dynamic mode. This means that it will adapt to the current installed version.
 
@@ -56,7 +56,7 @@ db.friends.add({name: "Josephine", age: 21, isCloseFriend: true}).then(function(
 });
 ```
 
-### Samply (Dynamic Mode)
+### Sample (Dynamic Mode)
 
 This sample shows how to open a database without specifying version.
 

@@ -98,6 +98,9 @@ async function playAround() {
     // Add another index in the friends table
     db = await changeSchema(db, {friends: 'id, name, age'});
 
+    // Remove the age index again:
+    db = await changeSchema(db, {friends: 'id, name'})
+
     // Remove the friends table
     db = await changeSchema(db, {friends: null});
 }

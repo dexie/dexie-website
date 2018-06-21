@@ -12,7 +12,7 @@ table.where(indexOrPrimKey).equals(key)
 ### Parameters
 <table>
 <tr><td>indexOrPrimKey: String</td><td>Name of an index or primary key registered in <a href="/docs/Version/Version.stores()">Version.stores()</a></td></tr>
-<tr><td>key</td><td>Key to compare with. The key MUST be a Number, String, Date or Array instance. Booleans are not accepted as valid keys. String comparisons are case sensitive.</td></tr>
+<tr><td>key</td><td>Key to compare with. The key MUST be a Number, String, Date, Array, ArrayBuffer or typed array (such as Uint8Array) instance. Booleans, null and undefined are not accepted as valid keys. String comparisons are case sensitive.</td></tr>
 </table>
 
 ### Return Value

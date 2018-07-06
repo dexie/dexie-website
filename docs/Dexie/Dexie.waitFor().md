@@ -3,7 +3,7 @@ layout: docs
 title: 'Dexie.waitFor()'
 ---
 
-*Since Dexie 2.0.0-beta.5*
+*Since Dexie 2.0*
 
 ### Syntax
 

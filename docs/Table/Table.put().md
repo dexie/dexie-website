@@ -31,7 +31,7 @@ table.put(item, [key])
 
 ### Remarks
 
-If an object with the same primary key already exist, it will be replaced with the given object. If it does not exist, it will be added.
+If an object with the same primary key already exists, it will be replaced with the given object. If it does not exist, it will be added.
 
 If the operation succeeds then the returned Promise resolves to the key under which the object was stored in the Table.
 

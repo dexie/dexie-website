@@ -28,7 +28,7 @@ Dexie.Promise.newPSD (function () {
 
 ### Description
 
-Analogous to [Thread-specific data](http://en.wikipedia.org/wiki/Thread-Specific_Data), Promise-specific data contains static data bound to the execution flow of a Promise.
+Analogous to [Thread-specific data](http://en.wikipedia.org/wiki/Thread-Specific_Data), Promise-specific data contains static data bound to the execution flow of a Promise flow or tree.
 
 ### Purpose
 

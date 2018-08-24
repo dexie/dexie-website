@@ -20,7 +20,7 @@ Dexie.Promise.newPSD (function () {
     new Dexie.Promise(function (resolve, reject) {
         setTimeout(resolve, 1000);
     }).then (function () {
-        // then() will have same PSD as Promise constructor
+        // This callback will get same PSD instance as was active when .then() was called
         assert (Dexie.Promise.PSD.promiseSpecificVariable == 3);
     });
 });

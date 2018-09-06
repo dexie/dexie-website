@@ -11,7 +11,7 @@ Did you write something based on Dexie? Feel free to list it here.
 
 * [WhatsApp](https://www.whatsapp.com) - The market leader chat app use Dexie for storage in its KaiOs and Web clients.
 * [Microsoft TODO](https://todo.microsoft.com) - The new app to replace the popular Microsoft-aquired [Wunderlist](https://www.wunderlist.com).
-* [Minbrowser](https://minbrowser.github.io/min/) - "A smarter browser"
+* [Minbrowser](https://minbrowser.github.io/min/) - "A smarter browser" - browse without distractions
 * [Wire](https://wire.com) - An end-to-end encrypted chat application.
 * [Medical Physics Quality Assurance Tool](http://electrons.simonbiggs.net/) -- Built with Typescript2, Angular2, Dexie2, Bokehjs, on Github Pages (Client) and Heroku (RestAPI). [Source Code](https://github.com/SimonBiggs/electroninserts-webapp).
 * [Memex](https://worldbrain.io) - Open source browser extension providing full-text search on bookmarks and history.

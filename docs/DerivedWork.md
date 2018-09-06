@@ -7,6 +7,15 @@ As a response to [this post](https://groups.google.com/forum/#!topic/dexiejs/set
 
 Did you write something based on Dexie? Feel free to list it here.
 
+## Products That Use Dexie (what we know of...)
+
+* [WhatsApp](https://www.whatsapp.com) - The market leader chat app use Dexie for storage in its KaiOs and Web clients.
+* [Microsoft TODO](https://todo.microsoft.com) - The new app to replace the popular Microsoft-aquired [Wunderlist](https://www.wunderlist.com).
+* [Minbrowser](https://minbrowser.github.io/min/)
+* [Wire](https://wire.com)
+* [Medical Physics Quality Assurance Tool](http://electrons.simonbiggs.net/) -- Built with Typescript2, Angular2, Dexie2, Bokehjs, on Github Pages (Client) and Heroku (RestAPI). [Source Code](https://github.com/SimonBiggs/electroninserts-webapp).
+* [Memex](https://worldbrain.io) - Open source browser extension providing full-text search on bookmarks and history.
+
 ## Known Addons
 
 * [Dexie.Observable](/docs/Observable/Dexie.Observable)
@@ -36,13 +45,4 @@ Did you write something based on Dexie? Feel free to list it here.
 * [Beatiful Angular 2 Todo app](https://www.angularattack.com/entries/1729-invincible)
 * [Investigations of Query Binding for AngularJS and IndexedDB](http://www.pauleveritt.org/angular-dexie-todo/)
 * [Full Text Search sample using lunr](https://gist.github.com/nolanlawson/6f69f4a573c1da862e92)
-
-## Products
-
-* [WhatsApp](https://www.whatsapp.com) - The market leader chat app use Dexie for storage in its KaiOs and Web clients.
-* [Microsoft TODO](https://todo.microsoft.com) - The new app to replace the popular Microsoft-aquired [Wunderlist](https://www.wunderlist.com).
-* [Minbrowser](https://minbrowser.github.io/min/)
-* [Wire](https://wire.com)
-* [Medical Physics Quality Assurance Tool](http://electrons.simonbiggs.net/) -- Built with Typescript2, Angular2, Dexie2, Bokehjs, on Github Pages (Client) and Heroku (RestAPI). [Source Code](https://github.com/SimonBiggs/electroninserts-webapp).
-* [Memex](https://worldbrain.io) - Open source browser extension providing full-text search on bookmarks and history.
 

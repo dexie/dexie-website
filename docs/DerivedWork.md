@@ -39,6 +39,7 @@ Did you write something based on Dexie? Feel free to list it here.
 
 ## Products
 
+* [WhatsApp](https://www.whatsapp.com) - The market leader chat app use Dexie for storage in its KaiOs and Web clients.
 * [Microsoft TODO](https://todo.microsoft.com) - The new app to replace the popular Microsoft-aquired [Wunderlist](https://www.wunderlist.com).
 * [Minbrowser](https://minbrowser.github.io/min/)
 * [Wire](https://wire.com)

@@ -7,7 +7,6 @@ title: 'Questions and Answers'
 
 1. [[dexie] on stackoverflow](http://stackoverflow.com/questions/tagged/dexie)
 2. [github issues marked as questions](https://github.com/dfahlander/Dexie.js/issues?utf8=✓&q=is%3Aissue%20label%3Aquestion)
-3. [Visit our google group](https://groups.google.com/forum/#!forum/dexiejs)
 
 ## Ask a Question
 

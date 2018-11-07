@@ -3,7 +3,7 @@ layout: docs
 title: 'Table.orderBy()'
 ---
 
-Return a collection of all items in table ordered by given index.
+Return a collection of all items in table where the property is set to an [indexable type](https://dexie.org/docs/Indexable-Type) ordered by given indexed property. Objects where the property is not set to an [indexable type](https://dexie.org/docs/Indexable-Type) will not be included in the result.
 
 ### Syntax
 

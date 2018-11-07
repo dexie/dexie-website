@@ -108,13 +108,13 @@ Reference: [Table.mapToClass()](/docs/Table/Table.mapToClass())
 #### Add Items
 
 ```javascript
-db.friends.add({name: "Josephine", age: 21});
+await db.friends.add({name: "Josephine", age: 21});
 ```
 
 Reference: [Table.add()](/docs/Table/Table.add())
 
 ```javascript
-db.people.bulkAdd([{name: "Foo"},{name: "Bar"}]);
+await db.people.bulkAdd([{name: "Foo"},{name: "Bar"}]);
 ```
 
 Reference: [Table.bulkAdd()](/docs/Table/Table.bulkAdd())
@@ -123,13 +123,13 @@ Reference: [Table.bulkAdd()](/docs/Table/Table.bulkAdd())
 #### Update Items
 
 ```javascript
-db.friends.put({id: 4, name: "Foo", age: 33});
+await db.friends.put({id: 4, name: "Foo", age: 33});
 ```
 
 Reference: [Table.put()](/docs/Table/Table.put())
 
 ```javascript
-db.friends.bulkPut([
+await db.friends.bulkPut([
     {id: 4, name: "Foo2", age: 34},
     {id: 5, name: "Bar2", age: 44}
 ]);
@@ -138,13 +138,13 @@ db.friends.bulkPut([
 Reference: [Table.bulkPut()](/docs/Table/Table.bulkPut())
 
 ```javascript
-db.friends.update(4, {name: "Bar"});
+await db.friends.update(4, {name: "Bar"});
 ```
 
 Reference: [Table.update()](/docs/Table/Table.update())
 
 ```javascript
-db.customers
+await db.customers
     .where("age")
     .inAnyRange([ [0, 18], [65, Infinity] ])
     .modify({discount: 0.5});
@@ -156,19 +156,19 @@ Reference: [Collection.modify()](/docs/Collection/Collection.modify())
 #### Delete items
 
 ```javascript
-db.friends.delete(4);
+await db.friends.delete(4);
 ```
 
 Reference: [Table.delete()](/docs/Table/Table.delete())
 
 ```javascript
-db.friends.bulkDelete([1,2,4]);
+await db.friends.bulkDelete([1,2,4]);
 ```
 
 Reference: [Table.bulkDelete()](/docs/Table/Table.bulkDelete())
 
 ```javascript
-db.logEntries
+await db.logEntries
     .where('timestamp').below(Date.now() - 100000)
     .delete();
 ```
@@ -177,39 +177,31 @@ Reference: [Collection.delete()](/docs/Collection/Collection.delete())
 
 #### Query Items
 ```javascript
-db.friends
+const someFriends = await db.friends
     .where("age").between(20, 25)
-    .offset(150)
-    .limit(25)
-    .toArray()
-    .then(function (friends) {
-        // 
+    .offset(150).limit(25)
+    .toArray();
+```
+
+```javascript
+await db.friends
+    .where("name").equalsIgnoreCase("josephine")
+    .each(friend => {
+        console.log("Found Josephine", friend);
     });
 ```
 
 ```javascript
-db.friends
-    .where("name").equalsIgnoreCase("josephine")
-    .each(function(friend) {
-        console.log("Found Josephine: " + JSON.stringify(friend));
-    })
-    .then(...);
-```
-
-```javascript
-db.friends
+const abcFriends = await db.friends
     .where("name")
     .startsWithAnyOfIgnoreCase(["a", "b", "c"])
-    .toArray()
-    .then (function (friends) {
-        ...
-    });
+    .toArray();
 ```
 
 References: [Table.where()](/docs/Table/Table.where()), [WhereClause](/docs/WhereClause/WhereClause), [Collection](/docs/Collection/Collection)
 
 ```javascript
-db.friends
+await db.friends
     .where('age')
     .inAnyRange([[0,18], [65, Infinity]])
     .modify({discount: 0.5});
@@ -218,59 +210,47 @@ db.friends
 References: [Table.where()](/docs/Table/Table.where()), [WhereClause](/docs/WhereClause/WhereClause), [Collection.modify()](/docs/Collection/Collection.modify())
 
 ```javascript
-db.friends
+const friendsContainingLetterA = await db.friends
     .filter(friend => /a/i.test(friend.name))
-    .toArray()
-    .then(function (friendsContainingLetterA) {
-        ...
-    });
+    .toArray();
 ```
 Reference: [Table.filter()](/docs/Table/Table.filter())
 
 ```javascript
-db.friends
+const forbundsKansler = await db.friends
     .where('[firstName+lastName]')
     .equals(["Angela", "Merkel"])
-    .first()
-    .then(function (forbundskansler) {
-        ...
-    });
+    .first();
 ```
 [Read more about compound index](/docs/Compound-Index)
 
 In Dexie 2.0, you could do the above query a little simpler:
 
 ```javascript
-db.friends.where({
+const forbundsKansler = await db.friends.where({
     firstName: "Angela",
     lastName: "Merkel"
-}).first().then(function (forbundsKansler) {
-    ...
-})
+}).first();
 ```
 Or simply:
 ```javascript
-db.friends.get({
+const forbundsKansler = await db.friends.get({
     firstName: "Angela",
     lastName: "Merkel"
-}).then(function (forbundsKansler) {
-    ...
 });
 ```
 
 ```javascript
-db.friends
+// This query is equal to:
+//   select * from friends where firstName='Angela' order by lastName
+const angelasSortedByLastName = await db.friends
     .where('[firstName+lastName]')
     .between([["Angela", ""], ["Angela", "\uffff"])
     .toArray()
-    .then(function (angelasSortedByLastName) {
-        // This query is equal to:
-        //   "select * from friends where firstName='Angela' order by lastName"
-    });
 ```
 
 ```javascript
-db.friends
+await db.friends
     .where('age').above(25)
     .or('shoeSize').below(8)
     .or('interests').anyOf('sports', 'pets', 'cars')
@@ -282,15 +262,10 @@ Reference: [Collection.or()](/docs/Collection/Collection.or())
 #### Retrieve TOP 5 items
 
 ```javascript
-db.gameSessions
+const best5GameSession = await db.gameSessions
     .orderBy("score").reverse()
     .limit(5)
-    .toArray()
-    .then(function(sessions) {
-        console.log (
-            "My 5 top sessions: " +
-            sessions.map(function (s) { return s.date }));
-    });
+    .toArray();
 ```
 References: [Table.orderBy()](/docs/Table/Table.orderBy()), [Collection.reverse()](/docs/Collection/Collection.reverse()), [Collection.limit()](/docs/Collection/Collection.limit())
 

@@ -112,10 +112,13 @@ await db.friends.add({name: "Josephine", age: 21});
 ```
 
 ```javascript
-await db.people.bulkAdd([{name: "Foo"},{name: "Bar"}]);
+await db.friends.bulkAdd([
+  {name: "Foo", age: 31},
+  {name: "Bar", age: 32}
+]);
 ```
 
-Reference: [Table.add()](/docs/Table/Table.add()) [Table.bulkAdd()](/docs/Table/Table.bulkAdd())
+*Reference: [Table.add()](/docs/Table/Table.add()) [Table.bulkAdd()](/docs/Table/Table.bulkAdd())*
 
 
 #### Update Items
@@ -124,8 +127,6 @@ Reference: [Table.add()](/docs/Table/Table.add()) [Table.bulkAdd()](/docs/Table/
 await db.friends.put({id: 4, name: "Foo", age: 33});
 ```
 
-Reference: [Table.put()](/docs/Table/Table.put())
-
 ```javascript
 await db.friends.bulkPut([
     {id: 4, name: "Foo2", age: 34},
@@ -133,13 +134,9 @@ await db.friends.bulkPut([
 ]);
 ```
 
-Reference: [Table.bulkPut()](/docs/Table/Table.bulkPut())
-
 ```javascript
 await db.friends.update(4, {name: "Bar"});
 ```
-
-Reference: [Table.update()](/docs/Table/Table.update())
 
 ```javascript
 await db.customers
@@ -148,7 +145,7 @@ await db.customers
     .modify({discount: 0.5});
 ```
 
-*Reference: [Collection.modify()](/docs/Collection/Collection.modify())*
+*Reference: [Table.put()](/docs/Table/Table.put()), [Table.bulkPut()](/docs/Table/Table.bulkPut()), [Table.update()](/docs/Table/Table.update()), [Collection.modify()](/docs/Collection/Collection.modify())*
 
 
 #### Delete items

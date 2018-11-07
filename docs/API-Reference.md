@@ -276,7 +276,9 @@ async function getBandsStartingWithA () {
         .where('name')
         .startsWith('A')
         .toArray();
-        
+    
+    // Attach resolved properies "genre" and "albums" on each band
+    // using parallell queries:
     await Promise.all (bands.map (async band => {
       [band.genre, band.albums] = await Promise.all([
         db.genres.get (band.genreId),

@@ -270,23 +270,21 @@ db.version(1).stores({
     bands: '++id,name,*albumIds,genreId'
 });
 
-function getBandsStartingWithA () {
+async function getBandsStartingWithA () {
     // Query
-    return db.bands
+    const bands = await db.bands
         .where('name')
         .startsWith('A')
-        .toArray(bands => {
-          return Promise.all (bands.map (band =>
-            Promise.all([
-              db.genres.get (band.genreId),
-              db.albums.where('id').anyOf(band.albumIds).toArray()
-            ]).then (result => {
-              // Set genre and albums as direct properties on each result
-              [band.genre, band.albums] = result;
-              return band;
-            })
-        ));
+        .toArray();
+        
+    await Promise.all (bands.map (async band => {
+      [band.genre, band.albums] = await Promise.all([
+        db.genres.get (band.genreId),
+        db.albums.where('id').anyOf(band.albumIds).toArray()
+      ]);
     });
+    
+    return bands;
 }
 ```
 

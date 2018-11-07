@@ -111,13 +111,11 @@ Reference: [Table.mapToClass()](/docs/Table/Table.mapToClass())
 await db.friends.add({name: "Josephine", age: 21});
 ```
 
-Reference: [Table.add()](/docs/Table/Table.add())
-
 ```javascript
 await db.people.bulkAdd([{name: "Foo"},{name: "Bar"}]);
 ```
 
-Reference: [Table.bulkAdd()](/docs/Table/Table.bulkAdd())
+Reference: [Table.add()](/docs/Table/Table.add()) [Table.bulkAdd()](/docs/Table/Table.bulkAdd())
 
 
 #### Update Items
@@ -150,7 +148,7 @@ await db.customers
     .modify({discount: 0.5});
 ```
 
-Reference: [Collection.modify()](/docs/Collection/Collection.modify())
+*Reference: [Collection.modify()](/docs/Collection/Collection.modify())*
 
 
 #### Delete items
@@ -159,13 +157,9 @@ Reference: [Collection.modify()](/docs/Collection/Collection.modify())
 await db.friends.delete(4);
 ```
 
-Reference: [Table.delete()](/docs/Table/Table.delete())
-
 ```javascript
 await db.friends.bulkDelete([1,2,4]);
 ```
-
-Reference: [Table.bulkDelete()](/docs/Table/Table.bulkDelete())
 
 ```javascript
 await db.logEntries
@@ -173,7 +167,8 @@ await db.logEntries
     .delete();
 ```
 
-Reference: [Collection.delete()](/docs/Collection/Collection.delete())
+*Reference: [Table.delete()](/docs/Table/Table.delete()), [Table.bulkDelete()](/docs/Table/Table.bulkDelete()), [Collection.delete()](/docs/Collection/Collection.delete())*
+
 
 #### Query Items
 ```javascript
@@ -198,7 +193,7 @@ const abcFriends = await db.friends
     .toArray();
 ```
 
-References: [Table.where()](/docs/Table/Table.where()), [WhereClause](/docs/WhereClause/WhereClause), [Collection](/docs/Collection/Collection)
+*References: [Table.where()](/docs/Table/Table.where()), [WhereClause](/docs/WhereClause/WhereClause), [Collection](/docs/Collection/Collection)*
 
 ```javascript
 await db.friends
@@ -207,14 +202,14 @@ await db.friends
     .modify({discount: 0.5});
 ```
 
-References: [Table.where()](/docs/Table/Table.where()), [WhereClause](/docs/WhereClause/WhereClause), [Collection.modify()](/docs/Collection/Collection.modify())
+*References: [Table.where()](/docs/Table/Table.where()), [WhereClause](/docs/WhereClause/WhereClause), [Collection.modify()](/docs/Collection/Collection.modify())*
 
 ```javascript
 const friendsContainingLetterA = await db.friends
     .filter(friend => /a/i.test(friend.name))
     .toArray();
 ```
-Reference: [Table.filter()](/docs/Table/Table.filter())
+*Reference: [Table.filter()](/docs/Table/Table.filter())*
 
 ```javascript
 const forbundsKansler = await db.friends
@@ -257,7 +252,7 @@ await db.friends
     .modify(friend => friend.tags.push("marketing-target"));
 ```
 
-Reference: [Collection.or()](/docs/Collection/Collection.or())
+*Reference: [Collection.or()](/docs/Collection/Collection.or())*
 
 #### Retrieve TOP 5 items
 

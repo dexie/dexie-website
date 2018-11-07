@@ -343,9 +343,27 @@ async function playWithBinaryPrimKey() {
 
 ```
 
+#### Transaction
+
+```javascript
+
+await db.transaction('rw', [db.friends], async () => {
+  const friend = await db.friends.get(1);
+  ++friend.age;
+  await db.friends.put(friend);
+});
+
+```
+
 #### Ongoing Transaction
 
 ```javascript
+const db = new Dexie("MyImgDb");
+
+db.version(1).stores({
+    friends: "id, name, *tags"
+});
+
 function goodFriends() {
     return db.friends
         .where('tags')

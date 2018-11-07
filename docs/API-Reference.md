@@ -279,12 +279,11 @@ db.friends
 
 Reference: [Collection.or()](/docs/Collection/Collection.or())
 
-#### Retrieve TOP-X items
+#### Retrieve TOP 5 items
 
 ```javascript
 db.gameSessions
-    .orderBy("score")
-    .reverse()
+    .orderBy("score").reverse()
     .limit(5)
     .toArray()
     .then(function(sessions) {

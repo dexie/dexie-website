@@ -105,7 +105,7 @@
 	*/
 
 	// Find some old friends
-	await db.friends
+	const oldFriends = await db.friends
 		.where('age')
 		.above(75)
 		.toArray();

@@ -106,8 +106,7 @@
 
 	// Find some old friends
 	const oldFriends = await db.friends
-		.where('age')
-		.above(75)
+		.where('age').above(75)
 		.toArray();
 
 	// or make a new one
@@ -118,6 +117,7 @@
 		picture: await getBlob('camilla.png')
 	});
 
+						
 					</code>
 				</div>
 			</div>

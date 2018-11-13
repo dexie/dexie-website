@@ -159,8 +159,9 @@ await db.friends.bulkDelete([1,2,4]);
 ```
 
 ```javascript
+const lastHour = new Date(Date.now() - 60*60*1000);
 await db.logEntries
-    .where('timestamp').below(Date.now() - 100000)
+    .where('timestamp').below(lastHour)
     .delete();
 ```
 

@@ -6,7 +6,7 @@ title: 'Dexie.transaction()'
 ### Syntax
 
 ```javascript
-db.transaction(mode, table(s), () => {
+db.transaction(mode, table(s), tx => {
 
     //
     // Transaction Scope
@@ -38,6 +38,7 @@ db.transaction(mode, table(s), () => {
 </dl></td></tr>
 <tr><td>table(s)</td><td>Table instances or table names to include in transaction. You may either provide multiple arguments after each other, or you may provide an array of tables. Each argument or array item must be either a <a href="/docs/Table/Table">Table</a> instance or a string.</td></tr>
 <tr><td>callback</td><td>Function to execute with the transaction. Note that since number of arguments may vary, the callback argument will always be the last argument provided to this method.</td></tr>
+    <tr><td>tx</td><td><a href="../Transaction/Transaction">Transaction</a> instance</td></tr>
 </table>
 
 ### Sample

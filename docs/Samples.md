@@ -36,7 +36,7 @@ title: 'Samples'
 #### Full Text Search
 
 * [Source](https://github.com/dfahlander/Dexie.js/blob/master/samples/full-text-search/FullTextSearch.js)
-* [Using lunr](https://gist.github.com/nolanlawson/6f69f4a573c1da862e92)
+* [Using lunr](https://gist.github.com/nolanlawson/6f69f4a573c1da862e92) *NOTE: This sample may be outdated, There's an updated sample linked [from this issue](https://github.com/dfahlander/Dexie.js/issues/775#event-1981309238)*
 * [Finding documents containing multiple words](https://github.com/dfahlander/Dexie.js/issues/281)
 
 #### Full Text Search (IE compatible)

@@ -333,4 +333,4 @@ So why is and() and or() implemented differently? The reason is that:
 * Logical OR _cannot_ be done by filtering - we must query the database with two queries to get it.
 * We would gain no performance by letting the database handle Logical AND (launching two separate queries and the filter away entries that don't exist in both collections). The best pick for AND is undoubtedly a plain javascript filter. It also makes it obvious for the caller that it is important to pick a good index in the `where()` method and filter out the rest in the `and()` filter.
 
-### [Back to Tutorial](/docs/Tutorial/Tutorial)
+### [Back to Tutorial](/docs/Tutorial)

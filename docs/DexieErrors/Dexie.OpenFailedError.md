@@ -38,7 +38,7 @@ doSomeDatabaseWork().then(function(){
 db.on('error', function (error) {
     switch (error.name) {
         case Dexie.errnames.OpenFailed:
-            console.log ("open failed");
+            console.log ("open failed due to " + error.inner);
             break;
         default:
             console.log ("error: " + e.message);

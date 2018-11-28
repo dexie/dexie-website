@@ -23,8 +23,9 @@ console log for earlier exceptions to see the reason behind it.
 doSomeDatabaseWork().then(result => {
     // Success
 }).catch('AbortError', e => {
-    // Failed with AbortError. Inspect inner error to find the reason behind why the transaction was aborted.
+    // Failed with AbortError.
     if (e.inner) {
+        // Inspect inner error to find the reason behind why the transaction was aborted.
         if (e.inner.name === 'QuotaExceededError') {
             console.error ("Transaction aborted due to QuotaExceededError");
         } else {

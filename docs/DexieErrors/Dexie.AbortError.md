@@ -17,48 +17,31 @@ console log for earlier exceptions to see the reason behind it.
 
 **NOTICE!** When catching AbortError, always inspect the property `inner` to gain more information about the reason why the transaction was aborted.
 
-### Sample using Promise.catch()
+### Sample
 
 ```javascript
 doSomeDatabaseWork().then(result => {
     // Success
-}).catch('AbortError', e => {
-    // Failed with AbortError.
-    if (e.inner) {
-        // Inspect inner error to find the reason behind why the transaction was aborted.
-        if (e.inner.name === 'QuotaExceededError') {
-            console.error ("Transaction aborted due to QuotaExceededError");
-        } else {
-            console.error ("Abort error due to " + e.inner);
-        }
-    } else {
-        console.error ("Abort error " + e.message);
-    }
-}).catch(Error, e => {
-    // Any other error derived from standard Error
-    console.error ("Error: " + e.message);
 }).catch(e => {
-    // Other error such as a string was thrown
-    console.error (e);
+    return handleError(e);
 });
-```
 
-### Sample: switch(error.name)
-
-```javascript
-db.on('error', function (error) {
-    switch (error.inner ? error.inner.name : error.name) {
-        // errnames.Abort ==="AbortError"
-        case Dexie.errnames.Abort:
-            console.error ("Abort error");
-            break;
-        case Dexie.errnames.QuotaExceededError:
-            console.error ("Quota exceeded");
-            break;
-        default:
-            console.error ("error: " + e);
+function handleError(e) {
+    switch (e.name) {
+      case "AbortError":
+        if (e.inner) {
+          return handleError(e.inner);
+        }
+        console.error ("Abort error " + e.message);
+        break;
+      case "QuotaExceededError":
+        console.error ("QuotaExceededError " + e.message);
+        break;
+      default:
+        console.error (e);
+        break;
     }
-});
+ }
 ```
 
 ### Properties

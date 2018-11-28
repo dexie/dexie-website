@@ -13,6 +13,8 @@ title: 'Dexie.QuotaExceededError'
 
 The storage quota for the current origin was exceeded. To learn more about storage quota, see [Storage Manager API](/docs/StorageManager).
 
+**NOTICE** This error may occur as the **inner** exception of an [AbortError](Dexie.AbortError) on some browsers, as the transaction is aborted instead of onerror being signaled. To catch this error properly, always inspect `error.inner` on [AbortError](Dexie.AbortError).
+
 ### Sample
 
 ```javascript

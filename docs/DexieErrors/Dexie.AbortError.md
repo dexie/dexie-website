@@ -11,9 +11,11 @@ title: 'Dexie.AbortError'
 
 ### Description 
 
-Happens when the transaction was aborted. When this happens, it can be a result of an earlier uncaught exception that made the transaction abort.
+Happens when the transaction was aborted. When this happens, it can be a result of an earlier uncaught exception that made the transaction abort. 
 It will also happen when calling [Transaction.abort()](/docs/Transaction/Transaction.abort()). To find out more about the abort reason, try look in the
 console log for earlier exceptions to see the reason behind it.
+
+**NOTICE!** When catching AbortError, always inspect the property `inner` to gain more information about the reason why the transaction was aborted.
 
 ### Sample using Promise.catch()
 
@@ -21,8 +23,12 @@ console log for earlier exceptions to see the reason behind it.
 doSomeDatabaseWork().then(result => {
     // Success
 }).catch('AbortError', e => {
-    // Failed with AbortError
-    console.error ("Abort error: " + e.message);
+    // Failed with AbortError. Inspect inner error to find the reason behind why the transaction was aborted.
+    if (e.inner) {
+        console.error ("Abort error due to " + e.inner);
+    } else {
+        console.error ("Abort error " + e.message);
+    }
 }).catch(Error, e => {
     // Any other error derived from standard Error
     console.error ("Error: " + e.message);

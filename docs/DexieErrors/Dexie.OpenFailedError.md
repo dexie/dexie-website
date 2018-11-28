@@ -13,6 +13,8 @@ title: 'Dexie.OpenFailedError'
 
 Happens when a db operation has failed due to that database couldn't be opened.
 
+**NOTICE!** Always inspect the `inner` property of a OpenFailedError, which will hold the reason why the call to db.open() has failed.
+
 ### Sample using Promise.catch()
 
 ```javascript
@@ -20,7 +22,7 @@ doSomeDatabaseWork().then(function(){
     // Success
 }).catch(Dexie.OpenFailedError, function (e) {
     // Failed with OpenFailedError
-    console.error ("open failed: " + e.message);
+    console.error ("open failed due to: " + e.inner);
 }).catch(Error, funtion (e) {
     // Any other error derived from standard Error
     console.error ("Error: " + e.message);

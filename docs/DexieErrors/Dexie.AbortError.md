@@ -25,7 +25,11 @@ doSomeDatabaseWork().then(result => {
 }).catch('AbortError', e => {
     // Failed with AbortError. Inspect inner error to find the reason behind why the transaction was aborted.
     if (e.inner) {
-        console.error ("Abort error due to " + e.inner);
+        if (e.inner.name === 'QuotaExceededError') {
+           console.error ("Transaction aborted due to QuotaExceededError');
+        } else {
+          console.error ("Abort error due to " + e.inner);
+        }
     } else {
         console.error ("Abort error " + e.message);
     }
@@ -42,10 +46,13 @@ doSomeDatabaseWork().then(result => {
 
 ```javascript
 db.on('error', function (error) {
-    switch (error.name) {
+    switch (error.inner ? error.inner.name : error.name) {
         // errnames.Abort ==="AbortError"
         case Dexie.errnames.Abort:
             console.error ("Abort error");
+            break;
+        case Dexie.errnames.QuotaExceededError:
+            console.error ("Quota exceeded");
             break;
         default:
             console.error ("error: " + e);

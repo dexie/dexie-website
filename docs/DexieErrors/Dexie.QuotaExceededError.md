@@ -13,34 +13,20 @@ title: 'Dexie.QuotaExceededError'
 
 The storage quota for the current origin was exceeded. To learn more about storage quota, see [Storage Manager API](/docs/StorageManager).
 
-### Sample using Promise.catch()
+### Sample
 
 ```javascript
 doSomeDatabaseWork().then(result => {
     // Success
-}).catch('QuotaExceededError', e => {
-    // Failed with QuotaExceededError
-    console.error ("QuotaExceeded error: " + e.message);
-}).catch(Error, e => {
-    // Any other error derived from standard Error
-    console.error ("Error: " + e.message);
 }).catch(e => {
-    // Other error such as a string was thrown
-    console.error (e);
-});
-```
-
-### Sample: switch(error.name)
-
-```javascript
-db.on('error', function (error) {
-    switch (error.name) {
-        // errnames.QuotaExceeded ==="QuotaExceededError"
-        case Dexie.errnames.QuotaExceeded:
-            console.error ("QuotaExceeded error");
-            break;
-        default:
-            console.error ("error: " + e);
+    if ((e.name === 'QuotaExceededError') ||
+        (e.inner && e.inner.name === 'QuotaExceededError'))
+    {
+      // QuotaExceededError may occur as the inner error of an AbortError
+      console.error ("QuotaExceeded error!");
+    } else {
+      // Any other error
+      console.error (e);
     }
 });
 ```

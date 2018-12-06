@@ -20,7 +20,7 @@ db.[tableName].hook('updating', function (modifications, primKey, obj, transacti
 
 ### Parameters
 <table>
-<tr><td>modifications</td><td>An <i>Object</i> where property names are the key-paths to the properties being modified and values are the new values being set. Deletions of properties are represented by a value of <i>undefined</i>, i.e. modifications.hasOwnPropert(propName) will be true, but the value will be <i>undefined</i>. You must not make changes to this object. Instead, you can return a new modifications object containing the additional modifications you want to apply.</td></tr>
+<tr><td>modifications</td><td>An <i>Object</i> where property names are the key-paths to the properties being modified and values are the new values being set. Deletions of properties are represented by a value of <i>undefined</i>, i.e. modifications.hasOwnProperty(propName) will be true, but the value will be <i>undefined</i>. You must not make changes to this object. Instead, you can return a new modifications object containing the additional modifications you want to apply.</td></tr>
 <tr><td>primKey</td><td>The primary key of the object being updated</td></tr>
 <tr><td>obj</td><td>Object that is about to be updated. This object must not be modified. Instead return a new modification object containing additional or replaced modifications to make.</td></tr>
 <tr><td>transaction</td><td><a href="/docs/Transaction/Transaction">Transaction</a> instance.</td></tr>

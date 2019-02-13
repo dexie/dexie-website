@@ -33,13 +33,13 @@ db.version(1).stores({
 
 ### Return Value
 
-[Promise&lt;LastKey&gt;](/docs/Promise/Promise) 
+[Promise&lt;LastKey&gt;](/docs/Promise/Promise)
 
 Returns with the resulting primary key of the object that was last in given array.
 
 ### Errors
-If some operations fail, bulkAdd will ignore those failures but return a rejected Promise with a 
-[Dexie.BulkError](/docs/DexieErrors/Dexie.BulkError) referencing failures. If caller does not catch that error, transaction will abort. If caller wants to ignore the failes, the bulkAdd() operations must be catched. **NOTE: If you call bulkAdd() outside a transaction scope and an error occur on one of the operations, the successful operations will still be persisted to DB! If this is not desired, surround your call to bulkAdd() in a transaction and do not catch the bulkAdd() operation but just the transaction promise!**
+If some operations fail, bulkAdd will ignore those failures but return a rejected Promise with a
+[Dexie.BulkError](/docs/DexieErrors/Dexie.BulkError) referencing failures. If caller does not catch that error, transaction will abort. If caller wants to ignore the failes, the bulkAdd() operations must be catched. **NOTE: If you call bulkAdd() outside a transaction scope and an error occur on one of the operations, the successful operations will still be persisted to DB! If this is not desired, surround your call to `bulkAdd()` in a transaction and catch the transaction's promise instead of the `bulkAdd()` operation.**
 
 ### Remarks
 
@@ -75,5 +75,3 @@ db.raindrops.bulkAdd(drops).then(function(lastKey) {
 [Table.bulkDelete()](/docs/Table/Table.bulkDelete())
 
 [Table.add()](/docs/Table/Table.add())
-
-

@@ -90,7 +90,7 @@ async function changeSchema(db, schemaChanges) {
       return await newDb.open();
     }
 
-		// Extract current schema in dexie format:
+    // Extract current schema in dexie format:
     const currentSchema = db.tables.reduce((result,{name, schema}) => {
     	result[name] = [
       	schema.primKey.src,

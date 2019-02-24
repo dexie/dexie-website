@@ -36,6 +36,9 @@ class MyAppDatabase extends Dexie {
             contacts: '++id, first, last',
             //...other tables goes here...
         });
+        // The following line is needed if your typescript
+        // is compiled using babel instead of tsc:
+        this.contacts = this.table("contacts");
     }
 }
 
@@ -84,6 +87,11 @@ export class MyAppDatabase extends Dexie {
       emails: '++id, contactId, type, email',
       phones: '++id, contactId, type, phone',
     });
+    
+    // The following lines are needed for it to work across typescipt using babel-preset-typescript:
+    this.contacts = this.table("contacts");
+    this.emails = this.table("emails");
+    this.phones = this.table("phones");
   }
 }
 

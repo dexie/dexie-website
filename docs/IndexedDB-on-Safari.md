@@ -18,17 +18,11 @@ title: 'IndexedDB on Safari'
 
 ## Safari version >= 10.1 and 11.0
 
-Native support for IndexedDB 2.0. Lots of issues solved and performance boosted. Still, Dexie users keep struggeling with some stability- and compliance issues in Safari 10.1 and Safari 11:
+Native support for IndexedDB 2.0. Lots of issues solved and performance boosted. For the most stable Safari support, use Dexie 3.0-alpha (`npm install dexie@next`). It works around the most major Safari issue and it continously runs its unit tests on Safari browsers in browserstack for every commit.
 
-* [Database opening hangs in Safari 10.1](https://github.com/dfahlander/Dexie.js/issues/508). [Reported to bugs.webkit.org](https://bugs.webkit.org/show_bug.cgi?id=171049)
-* [Crash when using with fastClickjs](https://github.com/dfahlander/Dexie.js/issues/559)
-* Solved: [Crash issue with getAll() on Safari 10.1](https://github.com/dfahlander/Dexie.js/issues/565). Worked around in Dexie and solved in Safari 11.
-* [Safari and CryptoKeys](https://github.com/dfahlander/Dexie.js/issues/585)
-* MAJOR: [Safari + where + modify = only one updated](https://github.com/dfahlander/Dexie.js/issues/594) 
-* [Safari Upgrade issue: Can't create Dexie database in Safari 11.0.1 (11604.3.5.1.1)](https://github.com/dfahlander/Dexie.js/issues/616)
-* [Safari 11 add blob becomes null](https://github.com/dfahlander/Dexie.js/issues/618)
-* MAJOR: [Safari save Uint8Array in DB](https://github.com/dfahlander/Dexie.js/issues/656)
-* [Chrashed Page on Safari](https://github.com/dfahlander/Dexie.js/issues/668)
+A list of Safari related issues that has been reported can be found [here](safari-issues.md)
+
+
 
 ## Chrome and Opera on IOS
 

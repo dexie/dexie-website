@@ -23,8 +23,8 @@
 			</div>
 			<!-- Github star button -->
 			<div id="star-button">
-				<!-- Place this tag where you want the button to render. -->
-				<a class="github-button" href="https://github.com/dfahlander/Dexie.js" data-icon="octicon-star" data-style="mega" data-count-href="/dfahlander/Dexie.js/stargazers" data-count-api="/repos/dfahlander/Dexie.js#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star dfahlander/Dexie.js on GitHub">Star</a>
+				<iframe src="https://ghbtns.com/github-btn.html?user=dfahlander&repo=Dexie.js&type=star&count=true&size=large"
+				frameborder="0" scrolling="0" width="146px" height="30px"></iframe>
 			</div>
 			<div class='container'>
                 <img src="assets/images/dexie-logo-icon.svg" class="dexie-logo-icon" />
@@ -172,25 +172,7 @@
 			ga('send', 'pageview');
 		</script>
 		<script async defer src='//unpkg.com/dexie'></script>
-		<!-- Place this tag right after the last button or just before your close body tag. -->
-		<script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
 		<script>
-			// Workaround for chromium issue "loading incorrect iframe content on back-button"
-			// https://bugs.chromium.org/p/chromium/issues/detail?id=395791
-			// Without this workaround, the github star button iframe will load the entire 
-			// dexie.org page instead of its src attribute, when navigating back to the page.
-			if (window.MutationObserver) {
-				var starButton = $('#star-button');
-				var o = new MutationObserver(function(){
-					var iframe = starButton.find('iframe');
-					if (iframe.length > 0) {
-						o.disconnect();
-						iframe[0].src = iframe[0].src;
-					}
-				});
-				o.observe(starButton[0], {subtree: true, attributes: true});
-			}
-
 			// Workaround for Safari not allowing jsfiddle to iframe Dexie:
 			if (/Safari/.test(navigator.userAgent) && (
 				!/(Chrome\/|Edge\/)/.test(navigator.userAgent) ||

@@ -40,7 +40,7 @@ body {
 
 #parallax #star-button {
 	position: absolute;
-	bottom: 2px;
+	bottom: 6px;
 	right: 6px;
 	z-index: 90;
 }

@@ -16,7 +16,7 @@ title: 'IndexedDB on Safari'
   3. Compound indexes or primary keys are not supported.
   4. [MultiEntry](/docs/MultiEntry-Index) indexes not supported.
 
-## Safari version >= 10.1 and 11.0
+## Safari version >= 10.1
 
 Native support for IndexedDB 2.0. Lots of issues solved and performance boosted. For the most stable Safari support, use Dexie 3.0-alpha (`npm install dexie@next`). It works around the most major Safari issue and it continously runs its unit tests on Safari browsers in browserstack for every commit.
 

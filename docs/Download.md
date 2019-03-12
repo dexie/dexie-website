@@ -33,6 +33,12 @@ yarn add dexie
 
 [Visit our samples page](/docs/Samples)
 
-## Previous Releases
+## Next Version Releases
 
-[Previous Releases](https://github.com/dfahlander/Dexie.js/releases)
+```
+npm install dexie@next
+```
+
+[Releases on GitHub](https://github.com/dfahlander/Dexie.js/releases)
+
+

@@ -27,7 +27,7 @@ yarn add dexie
 
 ## Test directly in your browser
 
-* Dexie Fiddle: [https://fiddle.jshell.net/dfahlander/3tf5r0cu/](https://fiddle.jshell.net/dfahlander/3tf5r0cu/)
+* Dexie Fiddle: [https://jsfiddle.net/dfahlander/3tf5r0cu/](https://jsfiddle.net/dfahlander/3tf5r0cu/)
 
 ## Samples
 

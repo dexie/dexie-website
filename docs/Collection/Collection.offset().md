@@ -59,10 +59,9 @@ db.[table].where(index).anyOf(valueArray).offset(N)
 db.[table].where(index).above(value).and(filterFunction).offset(N)
 ```
 
-### A better paging approach
+### A better paging approach using a unique property
 
-Paging can generally be done more efficiently by adapting the query to the last result instead of using offset/limit.
-
+Paging can generally be done more efficiently by adapting the query to the uniqueness of the last result instead of using offset/limit.
 ```javascript
 const PAGE_SIZE = 10;
 
@@ -70,7 +69,7 @@ const PAGE_SIZE = 10;
 // Query First Page
 //
 let page = await db.friends
-  .orderBy('age')
+  .orderBy('friendID')
   .limit(PAGE_SIZE)
   .toArray();
 
@@ -80,7 +79,7 @@ let page = await db.friends
 if (page.length < PAGE_SIZE) return; // Done
 let lastEntry = page[page.length-1];
 page = await db.friends
-  .where('age').above(lastEntry.age)
+  .where('friendID').above(lastEntry.friendID)
   .limit(PAGE_SIZE);
   .toArray();
 
@@ -92,7 +91,7 @@ page = await db.friends
 if (page.length < PAGE_SIZE) return; // Done
 lastEntry = page[page.length-1];
 page = await db.friends
-  .where('age').above(lastEntry.age)
+  .where('friendID').above(lastEntry.friendID)
   .limit(PAGE_SIZE);
   .toArray();
 
@@ -109,7 +108,7 @@ const PAGE_SIZE = 10;
 // First Page
 //
 let page = await db.friends
-  .where('age').between(25, 100) // keyrange query (affects result order)
+  .where('friendID').between(25, 100) // keyrange query (affects result order)
   .filter(friend => /nice/.test(friend.notes)) // Some custom filter...
   .limit(PAGE_SIZE)
   .toArray();
@@ -121,7 +120,7 @@ let page = await db.friends
 if (page.length < PAGE_SIZE) return; // Done
 lastEntry = page[page.length-1];
 page = await db.friends
-  .where('age').between(lastEntry.age, 100)
+  .where('friendID').between(lastEntry.friendID, 100)
   .filter(friend => /nice/.test(friend.notes))
   .limit(PAGE_SIZE);
   .toArray();
@@ -154,8 +153,8 @@ const collection = table
 // Page size:
 const PAGE_SIZE = 10;
 
-// order by (choose any indexed property)
-const ORDER_BY = "lastName";
+// order by (choose any primary key or unique indexed property)
+const ORDER_BY = "friendID";
 
 //
 //

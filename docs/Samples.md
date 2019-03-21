@@ -87,6 +87,9 @@ title: 'Samples'
 * [Source](https://github.com/matthew-andrews/offline-todo-dexie/blob/gh-pages/application.js)
 * [Run in browser](https://rawgit.com/matthew-andrews/offline-todo-dexie/gh-pages/index.html)
 
+#### GraphQL
+* [Large Offline Datasets with Apollo Client](https://codeburst.io/large-offline-datasets-with-apollo-client-c19c987e4a98)
+
 #### Angular 2 + ng2-redux + Dexie
 
 * [Source](https://github.com/jsperts/workshop_unterlagen/tree/master/angular2/examples/Redux)

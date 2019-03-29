@@ -14,10 +14,10 @@ title: 'Samples'
 
 * [Source](https://github.com/dfahlander/Dexie.js/tree/master/samples/react-redux)
 
-#### Using Dexie with Typescript
+#### Dexie with Typescript
 
 * Simple example: [Source](https://github.com/dfahlander/Dexie.js/tree/master/samples/typescript-simple)
-* More complex example [Stackblitz](https://stackblitz.com/edit/typescript-dexie-appdemo?file=index.ts)
+* [Stackblitz sample](https://stackblitz.com/edit/typescript-dexie-appdemo?file=index.ts)
 * [Tutorial about Dexie with Typescript](http://dexie.org/docs/Typescript.html)
 
 #### Angular + Dexie

@@ -5,6 +5,8 @@ title: 'Typescript'
 
 This is a guide on how to use Dexie with Typescript. If you just want to see working code, download or fork [the source](https://github.com/dfahlander/Dexie.js/archive/releases.zip) and cd to [samples/typescript-simple](https://github.com/dfahlander/Dexie.js/tree/master/samples/typescript-simple) or [samples/typescript](https://github.com/dfahlander/Dexie.js/tree/master/samples/typescript) and follow the README there.
 
+**[To see it in action, watch this stackblitz sample!](https://stackblitz.com/edit/typescript-dexie-appdemo?file=index.ts)**
+
 **NOTE: Dexie 2.x requires Typescript 2.x.**
 
 ## Download and install dexie

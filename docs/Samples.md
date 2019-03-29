@@ -14,7 +14,13 @@ title: 'Samples'
 
 * [Source](https://github.com/dfahlander/Dexie.js/tree/master/samples/react-redux)
 
-#### Angular2 + Dexie
+#### Using Dexie with Typescript
+
+* Simple example: [Source](https://github.com/dfahlander/Dexie.js/tree/master/samples/typescript-simple)
+* More complex example [Stackblitz](https://stackblitz.com/edit/typescript-dexie-appdemo?file=index.ts)
+* [Tutorial about Dexie with Typescript](http://dexie.org/docs/Typescript.html)
+
+#### Angular + Dexie
 
 * [Source](https://github.com/dfahlander/Dexie.js/tree/master/samples/angular2)
 * [Run in browser](http://rawgit.com/dfahlander/Dexie.js/demo/samples/angular2/dist/)
@@ -42,12 +48,6 @@ title: 'Samples'
 #### Full Text Search (IE compatible)
 
 * [Source](https://github.com/dfahlander/Dexie.js/blob/master/samples/full-text-search/FullTextSearch2.js)
-
-#### Using Dexie with Typescript
-
-* Simple example: [Source](https://github.com/dfahlander/Dexie.js/tree/master/samples/typescript-simple)
-* More complex example [Stackblitz](https://stackblitz.com/edit/typescript-dexie-appdemo?file=index.ts)
-* [Tutorial about Dexie with Typescript](http://dexie.org/docs/Typescript.html)
 
 #### Including Dexie as an AMD module
 

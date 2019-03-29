@@ -46,7 +46,7 @@ title: 'Samples'
 #### Using Dexie with Typescript
 
 * Simple example: [Source](https://github.com/dfahlander/Dexie.js/tree/master/samples/typescript-simple)
-* More complex example [Source](https://github.com/dfahlander/Dexie.js/tree/master/samples/typescript)
+* More complex example [Stackblitz](https://stackblitz.com/edit/typescript-dexie-appdemo?file=index.ts)
 * [Tutorial about Dexie with Typescript](http://dexie.org/docs/Typescript.html)
 
 #### Including Dexie as an AMD module

@@ -11,6 +11,12 @@ title: 'Table.bulkDelete()'
 db.table.bulkDelete(keys)
 ```
 
+### Parameters
+
+<table>
+<tr><td>keys</td><td>Array of primary keys of the objects to delete</td></tr>
+</table>
+
 ### Return Value
 
 [Promise](/docs/Promise/Promise)

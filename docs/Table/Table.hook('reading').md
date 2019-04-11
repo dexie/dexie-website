@@ -41,9 +41,9 @@ This event is called whenever an object is about to be returned from database to
 
 But not for:
 
-* [Table.filter()](/docs/Table/Table.filter())
-* [Collection.and()](/docs/Collection/Collection.and()) 
-* [Collection.modify()](/docs/Collection/Collection.modify())
+* The callback given to [Table.filter()](/docs/Table/Table.filter())
+* The callback given to [Collection.and()](/docs/Collection/Collection.and()) 
+* The callback given to [Collection.modify()](/docs/Collection/Collection.modify())
 
 ### Error Handling
 

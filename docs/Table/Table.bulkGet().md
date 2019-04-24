@@ -54,7 +54,11 @@ async function test() {
   assert (nonExisting === undefined);
 }
 
-test().catch(console.error);
+test().then(()=>{
+  console.log("success");
+}).catch(error => {
+  console.error(error);
+});
 ```
 
 ### See also

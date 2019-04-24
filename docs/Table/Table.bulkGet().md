@@ -32,7 +32,16 @@ For those keys that does not exist in the database, undefined will be returned i
 ```javascript
 
 async function test() {
-  await db.friends.bulkAdd([{id: 1, name: "Foo"}, {id: 2, name: "Bar"}]);
+  // Add two friends:
+  await db.friends.bulkAdd([{
+    id: 1,
+    name: "Foo"
+  }, {
+    id: 2,
+    name: "Bar"
+  }]);
+  
+  // Call bulkGet() to lookup values from given keys in the order of the requested array:
   const [foo, nonExisting, bar] = await db.friends.bulkGet([1, 777, 2]);
   assert (foo.name === "Foo");
   assert (bar.name === "Bar");

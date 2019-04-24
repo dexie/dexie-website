@@ -23,7 +23,7 @@ db.table.bulkGet(keys)
 
 ### Remarks
 
-Requests the objects of the given keys and returns a Promise that resolves with an array of results. The resulting array will always have the same length as the given array of keys. Every position in given key array will correspond to the same position in the resulting array.
+Request an array of keys and retrieve a Promise of an array of results. The resulting array will always have the same length as the given array of keys. Every position in given key array will correspond to the same position in the resulting array.
 
 For those keys that does not exist in the database, undefined will be returned in their place.
 

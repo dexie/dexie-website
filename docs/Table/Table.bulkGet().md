@@ -31,6 +31,12 @@ For those keys that does not exist in the database, undefined will be returned i
 
 ```javascript
 
+// Define DB
+const db = new Dexie('foobardb');
+db.version(1).stores({
+  friends: 'id'
+});
+
 async function test() {
   // Add two friends:
   await db.friends.bulkAdd([{

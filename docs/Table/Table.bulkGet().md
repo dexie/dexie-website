@@ -54,6 +54,7 @@ async function test() {
   assert (nonExisting === undefined);
 }
 
+test().catch(console.error);
 ```
 
 ### See also

@@ -27,6 +27,18 @@ Request an array of keys and retrieve a Promise of an array of results. The resu
 
 For those keys that does not exist in the database, undefined will be returned in their place.
 
+### Example
+
+```javascript
+
+await db.friends.bulkAdd([{id: 1, name: "Foo"}, {id: 2, name: "Bar"}]);
+const [foo, nonExisting, bar] = await db.friends.bulkGet([1, 777, 2]);
+assert (foo.name === "Foo");
+assert (bar.name === "Bar");
+assert (nonExisting === undefined);
+
+```
+
 ### See also
 
 [Table.bulkAdd()](/docs/Table/Table.bulkAdd())

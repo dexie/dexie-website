@@ -24,7 +24,7 @@ import db from './mydatabase';
 
 ## Long Version
 
-Dexie is written in ES6 and distributed in both the [UMD](http://davidbcalhoun.com/2014/what-is-amd-commonjs-and-umd/) and [ES](https://strongloop.com/strongblog/an-introduction-to-javascript-es6-modules/) formats. It can be consumed either as a plain script tag, required as a CJS, AMD or imported as an ES module.
+Dexie is written in Typescript/ES6 and distributed in both the [UMD](http://davidbcalhoun.com/2014/what-is-amd-commonjs-and-umd/) and [ES](https://strongloop.com/strongblog/an-introduction-to-javascript-es6-modules/) formats. It can be consumed either as a plain script tag, required as a CJS, AMD or imported as an ES module.
 
 Vanilla scripts are nice when testing out something. But a module-based approach is better in the long term and package manager helps you keep track of your dependencies. There are lots of combinations of package- and module systems to choose from. For web apps, `npm + webpack` works perfectly well so let's start with that alternative.
 

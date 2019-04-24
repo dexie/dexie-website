@@ -77,6 +77,8 @@ db.raindrops.bulkPut(drops).then(function(lastKey) {
 
 ### See Also
 
+[Table.bulkGet()](/docs/Table/Table.bulkGet())
+
 [Table.bulkAdd()](/docs/Table/Table.bulkAdd())
 
 [Table.bulkDelete()](/docs/Table/Table.bulkDelete())

@@ -27,6 +27,8 @@ Deletes given keys and returns a Promise that resolves when keys are deleted.
 
 ### See also
 
+[Table.bulkGet()](/docs/Table/Table.bulkGet())
+
 [Table.bulkAdd()](/docs/Table/Table.bulkAdd())
 
 [Table.bulkPut()](/docs/Table/Table.bulkPut())

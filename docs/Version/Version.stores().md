@@ -57,7 +57,7 @@ Please refer to [Database Versioning](/docs/Tutorial/Design#database-versioning)
 *Detail: Primary keys are implicitly marked as unique.*
 
 ### Indexable Types
-Only properties of [certain types](/docs/Indexable-Type) can be indexed. This includes string, number, Date and Array **but NOT boolean, null or undefined**.
+Only properties of [certain types](/docs/Indexable-Type) can be indexed. This includes string, number, Date and Array **but NOT boolean, null or undefined**. Indexing a property path that turns out to hold a non-indexable type will have no effect. And using orderBy() with that property will NOT list that object.
 
 ### Detailed Schema Syntax
 The first entry in the schema string will always represent the primary key.

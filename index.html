@@ -1,6 +1,15 @@
 ﻿<!DOCTYPE html>
 <html>
 	<head>
+		<script type="text/javascript" async>
+			if ('serviceWorker' in navigator) {
+				navigator.serviceWorker.register('/sw.js').then(function (registration) {
+					console.log('Service Worker registration successful with scope: ', registration.scope);
+				}).catch(function (err) {
+					console.log('Service Worker registration failed: ', err);
+				});
+			}
+		</script>
 		<title>Dexie.js - Minimalistic IndexedDB Wrapper</title>
 		<meta charset='utf-8'>
 		<meta http-equiv='X-UA-Compatible' content='IE=edge'>

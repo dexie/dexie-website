@@ -14,7 +14,7 @@
     "categories": "developer-tools",
     "icons": [
       {
-        "src": "/assets/logo-dexie.svg",
+        "src": "/assets/images/logo-dexie.svg",
         "sizes": "1920x1080",
         "type": "image/svg+xml"
       }

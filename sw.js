@@ -7,6 +7,10 @@ layout: null
 const raw = [
 
     "/",
+    "https://ghbtns.com/github-btn.html?user=dfahlander&repo=Dexie.js&type=star&count=true",
+    "https://buttons.github.io/buttons.js",
+    "https://unpkg.com/dexie",
+    "http://www.google-analytics.com/analytics.js",
     {% for page in site.html_pages %}
     "{{ page.url }}",
     {% endfor %}
@@ -17,28 +21,6 @@ const raw = [
 ];
 
 const CACHE_NAME = 'dexiejs-offline-cache';
-
-function isValidExt(ext){
-   return [
-       '.css', '.eot', '.html', 
-       '.jpg', '.js', '.otf', 
-       '.pdn', '.png', '.svg', 
-       '.ttf', '.webmanifest',
-       '.woff'
-   ].includes(ext);
-}
-
-function basename(path){
-    const base = path.match(/([^\/]+)$/g);
-    if (base) return base[0];
-    return ''; 
-}
-
-function ext(path){
-    const extention = path.match(/\.([^.]+)$/g);
-    if (extention) return extention[0];
-    return '';
-}
 
 async function addUrl(url, cache) {
     let response;
@@ -61,15 +43,33 @@ async function addUrl(url, cache) {
     return response;
 }
 
+async function waitForAll(promises){
+    return new Promise( resolve => {
+        let rc = { success: 0, failure:0 };
+        for (let i=0; i < promises.length; i++) {
+            promises[i]
+            .then(()=>{
+                rc.success++;
+                if (rc.success+rc.failure === promises.length) resolve(rc);
+            }).catch(err => {
+                rc.failure++;
+                if (rc.success+rc.failure === promises.length) resolve(rc);
+                console.error(`error occurred ${err}`);
+            });
+        }
+    });
+}
+
 self.addEventListener('install', function (event) {
     event.waitUntil(
         caches.delete(CACHE_NAME)
         .then(() => caches.open(CACHE_NAME))
         .then(async cache => {
             console.log('Opened cache');
-            for (let i = 0; i < raw.length; i++) {
-                await addUrl(raw[i], cache);
-            }
+            do {
+                const sliceDice = raw.splice(0,10);
+                await waitForAll(sliceDice.map(url => addUrl(url, cache)));
+            } while(raw.length > 0);
             return true;
         })
     );
@@ -108,7 +108,7 @@ self.addEventListener('fetch', function (event) {
             // return or fetch over network if not found and put in cache
             if (response) return response;
             // return 404 if it is same origin
-            if (isCurrentSIte(event.request.url)) {
+            if (isCurrentSite(event.request.url)) {
                 const data = `This url ${event.request.url} is not part of the offline`
                 return new Response(data, {
                     status: 404,

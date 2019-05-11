@@ -36,9 +36,21 @@ async function addUrl(url, cache) {
         return;
     }
     try {
-        await cache.put(url, response.clone());
+        let responseFinal;
+        if (isCurrentSite(response.url) && response.url.endsWith('/')){
+            const blob = await response.clone().blob();
+            responseFinal = new Response(blob, {
+                status:response.status,
+                statusText:response.statusText,
+                headers: new Headers(response.headers)
+            });
+        }
+        else {
+            responseFinal = response.clone();
+        }
+        await cache.put(url, responseFinal);
     } catch (err) {
-        console.error(`err: ${err}, could not put`, response);
+        console.error(`err: ${err}, could not put`, responseFinal);
     }
     return response;
 }
@@ -60,21 +72,6 @@ async function waitForAll(promises){
     });
 }
 
-self.addEventListener('install', function (event) {
-    event.waitUntil(
-        caches.delete(CACHE_NAME)
-        .then(() => caches.open(CACHE_NAME))
-        .then(async cache => {
-            console.log('Opened cache');
-            do {
-                const sliceDice = raw.splice(0,10);
-                await waitForAll(sliceDice.map(url => addUrl(url, cache)));
-            } while(raw.length > 0);
-            return true;
-        })
-    );
-});
-
 function isCurrentSite(url){
     const u  = new URL(url);
     if (self.location.origin === u.origin){
@@ -83,33 +80,79 @@ function isCurrentSite(url){
     return false;
 }
 
+function shortIfLocal(url){
+    const u  = new URL(url);
+    if (isCurrentSite(u)) {
+        return u.pathname;
+    }
+    return u.href;
+}
+
+function correctUrlForLocal(url){
+    // try to construct url
+    let temp;
+    try{
+       temp = new URL(url);
+    } catch (err) {
+        try {
+            temp = new URL(self.location.origin+url);
+        }
+        catch(err2){
+            temp = undefined;
+        }
+    } 
+    if (!temp) return url;   
+    if (!isCurrentSite(temp)) return temp;
+    temp.pathname = temp.pathname.replace(/\/$/,'');
+    return temp;
+}
+
+self.addEventListener('install', function (event) {
+    event.waitUntil(
+        caches.delete(CACHE_NAME)
+        .then(() => caches.open(CACHE_NAME))
+        .then(async cache => {
+            console.log('Opened cache');
+            const leadingSlashRemoved = raw.map(correctUrlForLocal);
+            do {
+                // cache in batches of 10
+                const sliceDice = leadingSlashRemoved.splice(0, 50);
+                await waitForAll(sliceDice.map(url => addUrl(shortIfLocal(url), cache)));
+            } while(leadingSlashRemoved.length > 0);
+            return true;
+        })
+    );
+});
+
+
+
 
 self.addEventListener('fetch', function (event) {
-    
     const promise = caches.open(CACHE_NAME).then(async function (cache) {
-        
-        const cacheResult = await cache.match(new URL(event.request.url).pathname,{ignoreSearch: true});
+        // correct url but only if it comes from the local site
+        const url = correctUrlForLocal(event.request.url);
+        const cacheResult = await cache.match(url.pathname,{ignoreSearch: true});
         if (cacheResult) return cacheResult;
 
-        if (!isCurrentSite(event.request.url)){
+        if (!isCurrentSite(url)){
             try {
-                const response = await addUrl(event.request.url, cache);
+                const response = await addUrl(url.href, cache);
                 return response;
             }
             catch(err){
-                console.error(`Error fetching offsite url:${eevent.request.url} err: ${err}`);
+                console.error(`Error fetching offsite url:${event.request.url} err: ${err}`);
             }  
             return '';
         }
 
-        promiseMatch = cache.match(new URL(event.request.url).pathname,{ignoreSearch: true});
+        promiseMatch = cache.match(url.pathname,{ignoreSearch: true});
 
         return promiseMatch.then(async function (response) {
-            // return or fetch over network if not found and put in cache
+            // found in cache
             if (response) return response;
             // return 404 if it is same origin
-            if (isCurrentSite(event.request.url)) {
-                const data = `This url ${event.request.url} is not part of the offline`
+            if (isCurrentSite(url)) {
+                const data = `This url ${url} is not part of the offline`
                 return new Response(data, {
                     status: 404,
                     statusText: 'Not found',
@@ -120,11 +163,11 @@ self.addEventListener('fetch', function (event) {
                 });
             }
             try {
-              const response = addUrl(event.request.url, cache);
+              const response = addUrl(`${url}`, cache);
               return response;
             }
             catch(err){
-                console.error(`Error fetching offsite url:${eevent.request.url} err: ${err}`);
+                console.error(`Error fetching offsite url:${url} err: ${err}`);
             }  
         });
     })

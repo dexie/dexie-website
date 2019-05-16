@@ -87,6 +87,13 @@ async function showEstimatedQuota() {
 
 ```
 
+## Eviction Limits
+These limits are specific to each browser and its underlying data storage implementation. When the limit is reached, either non peristent data will get evicted, depending on persistence, or new data will fail to be written to the storage. 
+
+When the browser tries to perform an operation that would cause the application to exceed its storage quota, it will throw a `DOMException` with a `QuotaExceededError` or similiar depending on the browser.
+
+More information regarding browser storage limits and eviction criterias can be found on the [Mozilla Developer Portal](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Browser_storage_limits_and_eviction_criteria)
+
 ## Caveats
 
 Some things to consider:

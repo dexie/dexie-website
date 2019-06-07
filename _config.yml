@@ -24,3 +24,4 @@ gfm_quirks: paragraph_end
 
 # Build settings
 markdown: kramdown
+permalink: short-urls-jekyll

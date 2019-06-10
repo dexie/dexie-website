@@ -414,7 +414,7 @@ db.transaction('rw', db.friends, db.diary, async () => {
 
 *The above snippet shows that you can also reuse code that is indeed transaction-aware, but encapsulate several such functions in an overall umbrella-transaction.*
 
-**NOTE: The code above may look like it could only execute this transaction one-at-a-time, but with thanks to [zone](http://dexie.org/docs/Promise/Promise.PSD.html) technology, this code can work in parallell with other transactions. (Dexie implements its own zone system and is not dependent on zone.js)**
+**NOTE: The code above may look like it could only execute this transaction one-at-a-time, but with thanks to [zone](https://dexie.org/docs/Promise/Promise.PSD.html) technology, this code can work in parallell with other transactions. (Dexie implements its own zone system and is not dependent on zone.js)**
 
 Reference: [Dexie.transaction()](/docs/Dexie/Dexie.transaction())
 

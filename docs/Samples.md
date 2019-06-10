@@ -18,7 +18,7 @@ title: 'Samples'
 
 * Simple example: [Source](https://github.com/dfahlander/Dexie.js/tree/master/samples/typescript-simple)
 * [Stackblitz sample](https://stackblitz.com/edit/typescript-dexie-appdemo?file=index.ts)
-* [Tutorial about Dexie with Typescript](http://dexie.org/docs/Typescript.html)
+* [Tutorial about Dexie with Typescript](https://dexie.org/docs/Typescript.html)
 
 #### Angular + Dexie
 
@@ -31,7 +31,7 @@ title: 'Samples'
 
 #### Populate From Ajax
 
-* [Source](http://dexie.org/docs/Dexie/Dexie.on.populate.html#ajax-populate-sample)
+* [Source](https://dexie.org/docs/Dexie/Dexie.on.populate.html#ajax-populate-sample)
 * [Run in browser](https://rawgit.com/dfahlander/Dexie.js/releases/samples/ajax-populate/populateFromAjaxCall.html)
 
 #### Open Existing Databases
@@ -64,7 +64,7 @@ title: 'Samples'
 
 #### Simplification using ES6 yield (a poor man's async/await)
 
-* [Simplify with yield](http://dexie.org/docs/Simplify-with-yield.html)
+* [Simplify with yield](https://dexie.org/docs/Simplify-with-yield.html)
 * [Fiddle](https://jsfiddle.net/dfahlander/b7axqyjw/)
 * [Examples](https://github.com/dfahlander/Dexie.js/blob/master/test/tests-yield.js)
 
@@ -77,7 +77,7 @@ title: 'Samples'
 
 * Ajax: [Source](https://github.com/dfahlander/Dexie.js/tree/master/samples/remote-sync/ajax)
 * Websockets: [Source](https://github.com/dfahlander/Dexie.js/tree/master/samples/remote-sync/websocket)
-* [dexie-syncable](http://dexie.org/docs/Syncable/Dexie.Syncable.js.html)
+* [dexie-syncable](https://dexie.org/docs/Syncable/Dexie.Syncable.js.html)
 
 
 ### Samples from external sources

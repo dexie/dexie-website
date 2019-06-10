@@ -87,7 +87,7 @@ function myDataOperations() {
 }
 ```
 
-But on an event handler or other root-level scope, always catch! Why?! Because you are the last one to catch it since you are NOT returning Promise! You have no caller that expects a promise and you are the sole responsible of catching and informing the user about any error. If you don't catch it anywhere, an error will end-up in the standard [unhandledrejection](http://dexie.org/docs/Promise/unhandledrejection-event.html) event.
+But on an event handler or other root-level scope, always catch! Why?! Because you are the last one to catch it since you are NOT returning Promise! You have no caller that expects a promise and you are the sole responsible of catching and informing the user about any error. If you don't catch it anywhere, an error will end-up in the standard [unhandledrejection](https://dexie.org/docs/Promise/unhandledrejection-event.html) event.
 
 ```javascript
 somePromiseReturningFunc().catch(function (err) {
@@ -142,7 +142,7 @@ function myFunc() {
 
 IndexedDB will commit a transaction as soon as it isn't used within a tick. This means that you MUST NOT call any other async API (at least not wait for it to finish) within a transaction scope. If you do, you will get a TransactionInactiveError thrown at you as soon as you try to use the transaction after having waited for the other async API.
 
-In case you really need to call a short-lived async-API, Dexie 2.0 can actually keep your transaction alive for you if you use [Dexie.waitFor()](http://dexie.org/docs/Dexie/Dexie.waitFor()).
+In case you really need to call a short-lived async-API, Dexie 2.0 can actually keep your transaction alive for you if you use [Dexie.waitFor()](https://dexie.org/docs/Dexie/Dexie.waitFor()).
 
 ### ~~4. Stick to Dexie.Promise and never use another Promises within transactions!~~
 

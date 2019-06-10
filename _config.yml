@@ -10,7 +10,7 @@ title: Dexie.js - Minimalistic IndexedDB Wrapper
 email: david.fahlander@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   Dexie.js documentation.
-url: "http://dexie.org" # the base hostname & protocol for your site
+url: "https://dexie.org" # the base hostname & protocol for your site
 twitter_username: dfahlander
 github_username:  dfahlander
 include: ['docs']

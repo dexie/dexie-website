@@ -3,7 +3,7 @@ layout: docs
 title: 'Dexie'
 ---
 
-Dexie.js (Official home page: [dexie.org](http://dexie.org)) is a library that makes it super simple to use [indexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) - the standard client-side database in browsers. Read more about Dexie on it's [README](https://github.com/dfahlander/Dexie.js/blob/master/README.md) or at the [home page](http://dexie.org).
+Dexie.js (Official home page: [dexie.org](https://dexie.org)) is a library that makes it super simple to use [indexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) - the standard client-side database in browsers. Read more about Dexie on it's [README](https://github.com/dfahlander/Dexie.js/blob/master/README.md) or at the [home page](https://dexie.org).
 
 `Dexie` is the main class and the default export of the library. An instance of this class represents an indexedDB database connection.
 

@@ -37,7 +37,7 @@ collection.each(callback)
 
 ### Remarks
 
-Iterate through all objects in the collection in an implicit single readonly [transaction](http://dexie.org/docs/Dexie/Dexie.transaction()). If you need to modify or delete items from within the callback, you could use [Collection.modify()](http://dexie.org/docs/Collection/Collection.modify()) in place of Collection.each(), since it will use a readwrite transaction rather than a readonly transaction. You could also explicitely surround your call in a [READWRITE transaction](http://dexie.org/docs/Dexie/Dexie.transaction()).
+Iterate through all objects in the collection in an implicit single readonly [transaction](https://dexie.org/docs/Dexie/Dexie.transaction()). If you need to modify or delete items from within the callback, you could use [Collection.modify()](https://dexie.org/docs/Collection/Collection.modify()) in place of Collection.each(), since it will use a readwrite transaction rather than a readonly transaction. You could also explicitely surround your call in a [READWRITE transaction](https://dexie.org/docs/Dexie/Dexie.transaction()).
 
 When iteration finishes, the returned Promise will resolve with `undefined`, calling any [Promise.then()](/docs/Promise/Promise.then()) callback.
 
@@ -45,7 +45,7 @@ If the operation fails, the returned Promise will be rejected, calling any [Prom
 
 ### NOTES:
 * The operation will implicitely be called from within a READONLY transaction unless you already surround your code with a transaction.
-* The callback should not modify the database. If that is required, use [Collection.modify()](http://dexie.org/docs/Collection/Collection.modify()) instead.
+* The callback should not modify the database. If that is required, use [Collection.modify()](https://dexie.org/docs/Collection/Collection.modify()) instead.
 * The return value from you callback is ignored, so returning a Promise from it will have no effect.
 * In many cases, it is better and more optimized to use any of the following methods when reading from a Table or Collection:
   * [Collection.toArray()](/docs/Collection/Collection.toArray())

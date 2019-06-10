@@ -10,7 +10,7 @@ const raw = [
     "https://ghbtns.com/github-btn.html?user=dfahlander&repo=Dexie.js&type=star&count=true",
     "https://buttons.github.io/buttons.js",
     "https://unpkg.com/dexie",
-    "http://www.google-analytics.com/analytics.js",
+    "https://www.google-analytics.com/analytics.js",
     {% for page in site.html_pages %}
     "{{ page.url }}",
     {% endfor %}

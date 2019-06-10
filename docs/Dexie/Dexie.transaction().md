@@ -157,7 +157,7 @@ so make sure to only use the global Promise (window.Promise), or Dexie.Promise w
 
 ### The Auto-Commit Behavior of IndexedDB Transactions
 
-IndexedDB will commit a transaction as soon as it isn't used within a tick. This means that you MUST NOT call any other async API (at least not wait for it to finish) within a transaction scope. If you do, you will get a TransactionInactiveError thrown at you. To avoid this, you may use [Dexie.waitFor()](http://dexie.org/docs/Dexie/Dexie.waitFor()), but use it with causion.
+IndexedDB will commit a transaction as soon as it isn't used within a tick. This means that you MUST NOT call any other async API (at least not wait for it to finish) within a transaction scope. If you do, you will get a TransactionInactiveError thrown at you. To avoid this, you may use [Dexie.waitFor()](https://dexie.org/docs/Dexie/Dexie.waitFor()), but use it with causion.
 
 ### Accessing Transaction Object
 

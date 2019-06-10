@@ -1,0 +1,22 @@
+{
+    "name": "Dexie JS | A Minimalistic Wrapper for IndexedDB",
+    "short_name": "Dexie JS",
+    "theme_color": "#712870",
+    "background_color": "#903076",
+    "display": "minimal-ui",
+    "Scope": "/",
+    "start_url": "/",
+    "serviceworker": {
+      "src":"ws.js",
+      "scope":"/",
+      "update_via_cache": "none"
+    },
+    "categories": "developer-tools",
+    "icons": [
+      {
+        "src": "/assets/images/logo-dexie.svg",
+        "sizes": "1920x1080",
+        "type": "image/svg+xml"
+      }
+    ]
+  }

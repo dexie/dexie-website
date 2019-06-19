@@ -40,7 +40,7 @@ If the value is a function, the function will be called for each object so that 
 
 ### WARNING
 
-**Safari 10 and 11 has an [issue](https://bugs.webkit.org/show_bug.cgi?id=178380) that basically makes this method stop working on queries utilizing indexes (As with dexie where clauses). This issue is being discussed in [Dexie issue 594](https://github.com/dfahlander/Dexie.js/issues/594)**
+**Safari 10 and 11 has an [issue](https://bugs.webkit.org/show_bug.cgi?id=178380) that basically makes this method stop working on queries utilizing indexes (As with dexie where clauses) if using dexie@2. Dexie@3 works around this issue. This issue is being discussed in [Dexie issue 594](https://github.com/dfahlander/Dexie.js/issues/594)**
 
 ### Error Handling
 

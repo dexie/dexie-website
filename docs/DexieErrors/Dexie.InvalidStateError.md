@@ -40,7 +40,7 @@ db.on('error', function (error) {
             console.error ("InvalidState error");
             break;
         default:
-            console.error ("error: " + e);
+            console.error ("error: " + error);
     }
 });
 ```

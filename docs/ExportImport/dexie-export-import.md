@@ -17,8 +17,6 @@ npm install dexie-export-import
 
 Here's the basic usage. There's a lot you can do by supplying optional `[options]` arguments. The available options are described later on in this README (See Typescript interfaces below).
 
-*NOTE:* Typescript users using dexie@2.x will get compilation errors if using the static import method `Dexie.import()`. 
-
 ```js
 import Dexie from "dexie";
 import {importDB, exportDB, importInto} from "dexie-export-import";
@@ -40,6 +38,8 @@ await importInto(db, blob, [options]);
 
 ```
 Note that you can also import the package as follows:
+
+*NOTE:* Typescript users using dexie@2.x will get compilation errors if using the static import method `Dexie.import()`. 
 
 ```ts
 import Dexie from "dexie";

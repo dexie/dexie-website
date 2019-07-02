@@ -3,11 +3,9 @@ layout: docs
 title: 'Export and Import Database'
 ---
 
-# Export and Import IndexedDB Database
-
 Export / Import IndexedDB <---> Blob
 
-The npm package `dexie-export-import` extends Dexie with the capability to export and import databases to and from Blobs.
+The npm package [dexie-export-import](https://www.npmjs.com/package/dexie-export-import) extends Dexie with the capability to export and import databases to and from Blobs.
 
 # Install
 ```

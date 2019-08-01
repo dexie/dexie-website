@@ -39,7 +39,7 @@ Did you write something based on Dexie? Feel free to list it here.
 
 * [IndexedDB programming with Dexie.js](https://golb.hplar.ch/2018/01/IndexedDB-programming-with-Dexie-js.html) by [Ralph Schaer](https://github.com/ralscha)
 * [Using Dexie.js in a Typescript application](https://golb.hplar.ch/2018/01/Using-Dexie-js-in-a-TypeScript-application.html) by [Ralph Schaer](https://github.com/ralscha)
-* [Dexie.js - Because IndexedDB should be Awesome](http://blogs.bytecode.com.au/glen/2016/01/11/dexie.html) by [Glen Smith](http://blogs.bytecode.com.au/glen/about/)
+* [Dexie.js - Because IndexedDB should be Awesome](http://blogs.bytecode.com.au/glen/2016/01/10/dexie.html) by [Glen Smith](http://blogs.bytecode.com.au/glen/about/)
 * [IndexedDB and Dexie](http://blog.marcoliceti.xyz/indexeddb-and-dexie-js/) by [Marco Liceti](http://blog.marcoliceti.xyz/author/marco/)
 * [Beatiful Angular 2 Todo app](https://www.angularattack.com/entries/1729-invincible)
 * [Investigations of Query Binding for AngularJS and IndexedDB](http://www.pauleveritt.org/angular-dexie-todo/)

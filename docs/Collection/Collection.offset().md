@@ -171,7 +171,7 @@ const primaryKeySet = new Set(await collection.primaryKeys());
 let pageKeys = [];
 await table
   .orderBy(ORDER_BY)
-  .until(pageKeys.length === PAGE_SIZE)
+  .until(() => pageKeys.length === PAGE_SIZE)
   .eachPrimaryKey(id => {
     if (primaryKeySet.has(id)) {
       pageKeys.push(id);

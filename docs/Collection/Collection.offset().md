@@ -189,7 +189,7 @@ lastEntry = page[page.length-1];
 pageKeys = [];
 await table
   .where(ORDER_BY).above(lastEntry[ORDER_BY])
-  .until(pageKeys.length === PAGE_SIZE)
+  .until(() => pageKeys.length === PAGE_SIZE)
   .eachPrimaryKey(id => {
     if (primaryKeySet.has(id)) {
       pageKeys.push(id);

@@ -4,7 +4,16 @@
       <a href="/">
         <img src="/assets/images/dexie-logo-icon.svg" class="dexie-logo-icon" />
         <h1>Dexie.js Docs</h1>
-        <!-- Github star button -->
+        <div id="offline-switch">
+          Available offline <label class="switch">
+            <input id="offline-checkbox" type="checkbox" onchange="setOffline(event.target.checked)">
+            <span class="slider round"></span>
+          </label>
+          <script>
+            updateSwitchFromStorage();
+          </script>
+      </div>
+      <!-- Github star button -->
         <div id="star-button">
           <iframe src="https://ghbtns.com/github-btn.html?user=dfahlander&repo=Dexie.js&type=star&count=true"
           frameborder="0" scrolling="0" width="94px" height="20px"></iframe>

@@ -128,49 +128,26 @@ self.addEventListener('install', function (event) {
 
 
 self.addEventListener('fetch', function (event) {
-    const promise = caches.open(CACHE_NAME).then(async function (cache) {
-        // correct url but only if it comes from the local site
-        const url = correctUrlForLocal(event.request.url);
-        const cacheResult = await cache.match(url.pathname,{ignoreSearch: true});
-        if (cacheResult) return cacheResult;
+    if (!event.request.url.startsWith("https://www.google-analytics.com/")) {
+        event.respondWith(caches.open(CACHE_NAME).then(async function (cache) {
+            // correct url but only if it comes from the local site
+            const url = correctUrlForLocal(event.request.url);
+            const cacheResult = await cache.match(url.pathname,{ignoreSearch: true});
+            if (cacheResult) return cacheResult;
 
-        if (!isCurrentSite(url)){
-            try {
-                const response = await addUrl(url.href, cache);
-                return response;
+            if (!isCurrentSite(url)){
+                
+                try {
+                    const response = await addUrl(url.href, cache);
+                    return response;
+                }
+                catch(err){
+                    console.error(`Error fetching offsite url:${event.request.url} err: ${err}`);
+                }
+                return fetch(event.request);
             }
-            catch(err){
-                console.error(`Error fetching offsite url:${event.request.url} err: ${err}`);
-            }  
-            return '';
-        }
 
-        promiseMatch = cache.match(url.pathname,{ignoreSearch: true});
-
-        return promiseMatch.then(async function (response) {
-            // found in cache
-            if (response) return response;
-            // return 404 if it is same origin
-            if (isCurrentSite(url)) {
-                const data = `This url ${url} is not part of the offline`
-                return new Response(data, {
-                    status: 404,
-                    statusText: 'Not found',
-                    headers: new Headers({
-                        'Content-Type': 'text/plain',
-                        'Content-Length': data.length
-                    }),
-                });
-            }
-            try {
-              const response = addUrl(`${url}`, cache);
-              return response;
-            }
-            catch(err){
-                console.error(`Error fetching offsite url:${url} err: ${err}`);
-            }  
-        });
-    })
-
-    event.respondWith(promise);
+            return fetch(event.request);
+        }));
+    }
 });

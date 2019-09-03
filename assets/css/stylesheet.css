@@ -222,6 +222,16 @@ table tr:nth-child(2n) {
 	opacity: 0.6;
 	transition: opacity .4s;
 }
+#offline-switch #offlineOnHeading {
+	display: none;
+}
+#offline-switch.checked #offlineOnHeading {
+	display: inline;
+}
+#offline-switch.checked #offlineOffHeading {
+	display: none;
+}
+
 #offline-switch.checked {
 	opacity: 1;
 	font-style: inherit;

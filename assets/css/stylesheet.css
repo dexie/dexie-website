@@ -219,7 +219,7 @@ table tr:nth-child(2n) {
 	z-index: 90;
 	font-size: 10pt;
 	font-style: italic;
-	opacity: 0.5;
+	opacity: 0.6;
 	transition: opacity .4s;
 }
 #offline-switch.checked {

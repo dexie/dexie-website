@@ -18,42 +18,9 @@ const raw = [
     {%for file in site.static_files %}
     "{{ file.path }}",
     {% endfor %}
-];
+].filter(file => !file.startsWith("/test") && !file.includes("analytics.js"));
 
 const CACHE_NAME = 'dexiejs-offline-cache';
-
-async function addUrl(url, cache) {
-    let response;
-    try {
-      response = await fetch(url);
-      if (!response.ok) {
-          console.error(`not ok`, response);
-          return; // skip
-      }
-    }
-    catch(err){
-        console.error(`could not fetch ${url}, because ${err}`);
-        return;
-    }
-    try {
-        let responseFinal;
-        if (isCurrentSite(response.url) && response.url.endsWith('/')){
-            const blob = await response.clone().blob();
-            responseFinal = new Response(blob, {
-                status:response.status,
-                statusText:response.statusText,
-                headers: new Headers(response.headers)
-            });
-        }
-        else {
-            responseFinal = response.clone();
-        }
-        await cache.put(url, responseFinal);
-    } catch (err) {
-        console.error(`err: ${err}, could not put`, responseFinal);
-    }
-    return response;
-}
 
 async function waitForAll(promises){
     return new Promise( resolve => {
@@ -72,6 +39,7 @@ async function waitForAll(promises){
     });
 }
 
+/*
 function isCurrentSite(url){
     const u  = new URL(url);
     if (self.location.origin === u.origin){
@@ -105,7 +73,7 @@ function correctUrlForLocal(url){
     if (!isCurrentSite(temp)) return temp;
     temp.pathname = temp.pathname.replace(/\/$/,'');
     return temp;
-}
+}*/
 
 self.addEventListener('install', function (event) {
     event.waitUntil(
@@ -113,41 +81,31 @@ self.addEventListener('install', function (event) {
         .then(() => caches.open(CACHE_NAME))
         .then(async cache => {
             console.log('Opened cache');
-            const leadingSlashRemoved = raw.map(correctUrlForLocal);
+            const leadingSlashRemoved = raw.map(url => url);
             do {
                 // cache in batches of 10
                 const sliceDice = leadingSlashRemoved.splice(0, 50);
-                await waitForAll(sliceDice.map(url => addUrl(shortIfLocal(url), cache)));
+                await waitForAll(sliceDice.map(async url => cache.put(url, await fetch((url)))));
             } while(leadingSlashRemoved.length > 0);
             return true;
         })
     );
 });
 
-
-
+async function respondFromCache(cache, origRes, req, origError) {
+    const cacheResult = await cache.match(req);
+    if (cacheResult) return cacheResult;
+    if (origError) throw origError;
+    return origRes;
+}
 
 self.addEventListener('fetch', function (event) {
-    if (!event.request.url.startsWith("https://www.google-analytics.com/")) {
-        event.respondWith(caches.open(CACHE_NAME).then(async function (cache) {
-            // correct url but only if it comes from the local site
-            const url = correctUrlForLocal(event.request.url);
-            const cacheResult = await cache.match(url.pathname,{ignoreSearch: true});
-            if (cacheResult) return cacheResult;
-
-            if (!isCurrentSite(url)){
-                
-                try {
-                    const response = await addUrl(url.href, cache);
-                    return response;
-                }
-                catch(err){
-                    console.error(`Error fetching offsite url:${event.request.url} err: ${err}`);
-                }
-                return fetch(event.request);
-            }
-
-            return fetch(event.request);
-        }));
-    }
+    event.respondWith(fetch(event.request).then(async res => {
+        const cache = await caches.open(CACHE_NAME);
+        if (!res.ok) return respondFromCache(cache, res, event.request);
+        cache.put(event.request, res.clone());
+        return res;
+    }, async error => {
+        return respondFromCache(await caches.open(CACHE_NAME), null, event.request, error);
+    }));
 });

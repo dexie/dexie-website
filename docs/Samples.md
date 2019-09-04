@@ -8,7 +8,7 @@ title: 'Samples'
 #### React + Dexie
 
 * [Source](https://github.com/dfahlander/Dexie.js/tree/master/samples/react)
-* [Run in browser](https://cdn.statically.io/gh/dfahlander/Dexie.js/demo/samples/react/build/)
+* [Run in browser](https://raw.githack.com/dfahlander/Dexie.js/demo/samples/react/build/)
 
 #### React + Redux + Dexie
 
@@ -23,7 +23,7 @@ title: 'Samples'
 #### Angular + Dexie
 
 * [Source](https://github.com/dfahlander/Dexie.js/tree/master/samples/angular2)
-* [Run in browser](https://cdn.statically.io/gh/dfahlander/Dexie.js/demo/samples/angular2/dist/)
+* [Run in browser](https://raw.githack.com/dfahlander/Dexie.js/demo/samples/angular2/dist/)
 
 #### Dexie with Electron
 
@@ -32,12 +32,12 @@ title: 'Samples'
 #### Populate From Ajax
 
 * [Source](https://dexie.org/docs/Dexie/Dexie.on.populate.html#ajax-populate-sample)
-* [Run in browser](https://cdn.statically.io/gh/dfahlander/Dexie.js/releases/samples/ajax-populate/populateFromAjaxCall.html)
+* [Run in browser](https://raw.githack.com/dfahlander/Dexie.js/releases/samples/ajax-populate/populateFromAjaxCall.html)
 
 #### Open Existing Databases
 
 * [Source](https://github.com/dfahlander/Dexie.js/blob/master/samples/open-existing-db/dump-databases.html)
-* [Run in browser](https://cdn.statically.io/gh/dfahlander/Dexie.js/releases/samples/open-existing-db/dump-databases.html)
+* [Run in browser](https://raw.githack.com/dfahlander/Dexie.js/releases/samples/open-existing-db/dump-databases.html)
 
 #### Full Text Search
 
@@ -52,11 +52,11 @@ title: 'Samples'
 #### Including Dexie as an AMD module
 
 * [Source](https://github.com/dfahlander/Dexie.js/tree/master/samples/requirejs)
-* [See it in action](https://cdn.statically.io/gh/dfahlander/Dexie.js/master/samples/requirejs/app.html)
+* [See it in action](https://raw.githack.com/dfahlander/Dexie.js/master/samples/requirejs/app.html)
 
 * With addons
   * [Source](https://github.com/dfahlander/Dexie.js/tree/master/samples/requirejs-with-addons)
-  * [See it in action](https://cdn.statically.io/gh/dfahlander/Dexie.js/master/samples/requirejs-with-addons/app.html)
+  * [See it in action](https://raw.githack.com/dfahlander/Dexie.js/master/samples/requirejs-with-addons/app.html)
 
 #### Including Dexie with Browserify
 
@@ -71,7 +71,7 @@ title: 'Samples'
 #### Simple Demo from [Codeproject](http://www.codeproject.com/Articles/744986/How-to-do-some-magic-with-indexedDB) and [Mozilla Hacks](https://hacks.mozilla.org/2014/06/breaking-the-borders-of-indexeddb/) Articles:
 
 * [Source](https://github.com/dfahlander/Dexie.js/blob/master/samples/codeproject-article/DexieAlgorithmsSamples.html)
-* [Run in browser](https://cdn.statically.io/gh/dfahlander/Dexie.js/releases/samples/codeproject-article/DexieAlgorithmsSamples.html)
+* [Run in browser](https://raw.githack.com/dfahlander/Dexie.js/releases/samples/codeproject-article/DexieAlgorithmsSamples.html)
 
 #### Remote Synchronization with dexie-syncable
 
@@ -85,7 +85,7 @@ title: 'Samples'
 #### Simple todo (by [Matt Andrews](https://mattandre.ws))
 
 * [Source](https://github.com/matthew-andrews/offline-todo-dexie/blob/gh-pages/application.js)
-* [Run in browser](https://cdn.statically.io/gh/matthew-andrews/offline-todo-dexie/gh-pages/index.html)
+* [Run in browser](https://raw.githack.com/matthew-andrews/offline-todo-dexie/gh-pages/index.html)
 
 #### GraphQL
 * [Large Offline Datasets with Apollo Client](https://codeburst.io/large-offline-datasets-with-apollo-client-c19c987e4a98)

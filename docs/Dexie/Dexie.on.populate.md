@@ -77,23 +77,17 @@ db.on('ready', function () {
                 });
             }).then(function (data) {
                 console.log("Got ajax response. We'll now add the objects.");
-                // By returning the db.transaction() promise, framework will keep
-                // waiting for this transaction to commit before resuming other
+                // By returning the a promise, framework will keep
+                // waiting for this promise to complete before resuming other
                 // db-operations.
-                return db.transaction('rw', db.someTable, function () {
-                    data.someInitArrayOfObjects.forEach(function (item) {
-                        console.log("Adding object: " + JSON.stringify(item));
-                        db.someTable.add(item);
-                    });
-                });
+                console.log("Calling bulkAdd() to insert objects...");
+                return db.someTable.bulkAdd(data.someInitArrayOfObjects);
             }).then(function () {
-                console.log ("Transaction committed");
+                console.log ("Done populating.");
             });
         }
     });
 });
-
-db.open(); // Will resolve when data is fully populated (or fail if error)
 
 // Following operation will be queued until we're finished populating data:
 db.someTable.each(function (obj) {
@@ -116,12 +110,11 @@ Console Output on first run:
 ```
 Database is empty. Populating from ajax call...
 Got ajax response. We'll now add the objects.
-Adding object: {"someIndex":"item1"}
-Adding object: {"someIndex":"item2"}
-Transaction committed
+Calling bulkAdd() to insert objects...
+Done populating.
 Found object: {"someIndex":"item1","id":1}
 Found object: {"someIndex":"item2","id":2}
-Finished. 
+Finished.
 ```
 
 Console Output when data is already populated:
@@ -130,10 +123,10 @@ Console Output when data is already populated:
 Already populated
 Found object: {"someIndex":"item1","id":1}
 Found object: {"someIndex":"item2","id":2}
-Finished. 
+Finished.
 ```
 
-[Watch the full HTML source](https://github.com/dfahlander/Dexie.js/blob/master/samples/ajax-populate/populateFromAjaxCall.html), or [view it in your browser](https://cdn.rawgit.com/dfahlander/Dexie.js/2446b378ccf28da657f68a9954a8e4227c3ebf3b/samples/ajax-populate/populateFromAjaxCall.html)
+[Watch the full HTML source](https://github.com/dfahlander/Dexie.js/blob/master/samples/ajax-populate/populateFromAjaxCall.html), or [view it in your browser](https://raw.githack.com/dfahlander/Dexie.js/master/samples/ajax-populate/populateFromAjaxCall.html)
 
 ### See Also
 

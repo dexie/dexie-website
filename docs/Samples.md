@@ -32,12 +32,12 @@ title: 'Samples'
 #### Populate From Ajax
 
 * [Source](https://dexie.org/docs/Dexie/Dexie.on.populate.html#ajax-populate-sample)
-* [Run in browser](https://raw.githack.com/dfahlander/Dexie.js/releases/samples/ajax-populate/populateFromAjaxCall.html)
+* [Run in browser](https://raw.githack.com/dfahlander/Dexie.js/master/samples/ajax-populate/populateFromAjaxCall.html)
 
 #### Open Existing Databases
 
 * [Source](https://github.com/dfahlander/Dexie.js/blob/master/samples/open-existing-db/dump-databases.html)
-* [Run in browser](https://raw.githack.com/dfahlander/Dexie.js/releases/samples/open-existing-db/dump-databases.html)
+* [Run in browser](https://raw.githack.com/dfahlander/Dexie.js/master/samples/open-existing-db/dump-databases.html)
 
 #### Full Text Search
 

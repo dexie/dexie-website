@@ -30,9 +30,9 @@ console.log(databases);
 
 ### Browser Specific Info
 
-This method is an extension to the native indexedDB API which does not support listing of database names. Chrome and Opera has implemented webkitGetDatabaseNames() but neither IE, Edge, Mozilla or Safari supports it. This method will check if webkitGetDatabaseNames() is present and use it if so. Otherwise it will return a list maintained by Dexie by using a dedicated database for keeping track of other database names.
+This method is an extension to the native indexedDB API which does not support listing of database names. Chrome and Opera did have a native API we could use, webkitGetDatabaseNames() but since Chrome release 60 (2018), this API was removed, so Dexie can now only rely on its own tracking of database names (tracked in a database named `__dbnames`).
 
-This means that on Opera and Chrome, the method will work no matter if the database was created using Dexie or not, but on IE and Firefox, the method will only see databases created using Dexie.
+This means that on older versions of Opera and Chrome, the method used to work no matter if the database was created using Dexie or not, but on other browsers, and on newer versions of Chrome and Opera, the method will only see databases created using Dexie.
 
 ### Detecting When Databases Are Added Or Deleted
 

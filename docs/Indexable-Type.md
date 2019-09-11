@@ -8,9 +8,9 @@ The following javascript types are possible to index:
 * string
 * number
 * Date
-* Arrays of strings, numbers, Dates or a mix of those.
-* ArrayBuffer (IndexedDB 2.0 only)
-* Typed arrays (IndexedDB 2.0 only)
+* ArrayBuffer
+* Typed arrays (Uint8Array, Float32Array, ..., etc)
+* Arrays of (strings, numbers, Dates, ArrayBuffer, Typed array) or a mix of those.
 
 Note that all other types are non-indexable, including:
 

@@ -97,5 +97,8 @@ function complexQuery() {
 
 # Browser limitations
 
-Internet Explorer, Edge and Safari < v10 does not support multiEntry indexes.
+The following browsers does not support multiEntry indexes:
 
+* Internet Explorer 10, 11
+* Non-chromium based Microsoft Edge browsers
+* Safari 8, 9.

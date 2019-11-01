@@ -37,9 +37,9 @@ In combination with the [or()](/dexie/Collection/Collection.or()) method, the of
 
 ### Performance Notes
 
-If executed on simple queries, the native IDBCursor.advance() method will be used (fast execution). If advanced queries are used, the implementation have to execute a query to iterate all items and ignore N items using a JS filter.
+For simple queries (see examples below) offset() is implemented using the native IDBCursor.advance() method. To implement offset() for advanced queries, Dexie iterates over all items and ignores N of them using a JS filter. offset() is therefore much faster on simple queries than on advanced queries, but note that in both cases the time taken by offset(N) will be proportional to N. This means that offset() is not well-suited to paging in general.
 
-#### Examples where offset() will be fast
+#### Simple queries - IDBCursor.advance() is used
 
 ```javascript
 db.[table].offset(N)
@@ -50,7 +50,7 @@ db.[table].where(index).between(value).offset(N)
 db.[table].where(index).startsWith(value).offset(N)
 ```
 
-#### Examples where offset() will have to iterate the collection:
+#### Advanced queries - JS iteration is used
 
 ```javascript
 db.[table].where(index).equalsIgnoreCase(value).offset(N)

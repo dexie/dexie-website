@@ -11,7 +11,7 @@ db.on("versionchange", function (event) {});
 
 ### Description
 
-The "versionchange" event occurs if another indexedDB database instance needs to upgrade or delete the database. If you do not subscribe to this event, Dexie has a built-in default implementation that will close the database immediately and fire a [VersionChangeError](/docs/DexieErrors/Dexie.VersionChangeError) error event to db.on('error'). This will resume the upgrading process of the other page.
+The "versionchange" event occurs if another indexedDB database instance needs to upgrade or delete the database. If you do not subscribe to this event, Dexie has a built-in default implementation that will close the database immediately and log to console. This will resume the upgrading process of the other page.
 
 To override the default behavior, your subscriber function must return false.
 

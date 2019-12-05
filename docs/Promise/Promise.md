@@ -28,7 +28,7 @@ See also [Best Practices - Understand Promises](/docs/Tutorial/Best-Practices#1-
 
 ### Why we don't use native Promise
 
-Native promises are not compliant with indexedDB transactions on all browers (as of September 2017). On IE11 there is no native promise, so bundling a Dexie.Promise makes Dexie possible to run on IE without polyfilling Promise. In a future when IE browser reaches a very low usage and Firefox has an IndexedDB transaction handling that is compatible with its native Promise, Dexie may switch to use native Promise.
+As of May 2018, all modern browsers started supporting Promises withing IndexedDB transactions. So the inital reason for introducing an alternate Promise implemnetation is not as accurate as before. At least in the long term as users move away from old browsers. However, we also use Dexie.Promise to interact with native promises in order to maintain transaction zones, so we still need to have Dexie.Promise accomplish that for us.
 
 ### Interopability
 
@@ -129,7 +129,7 @@ This implementation is a fork of promise-light (<https://github.com/taylorhakes/
 
 Modified by David Fahlander to be indexedDB compliant (See discussion: <https://github.com/promises-aplus/promises-spec/issues/45>).
 
-This implementation executes a virtual Micro Task engine when possible, that replaces the need for calling setImmediate (), setTimeout(), etc.. This is a must when dealing with indexedDB transactions since native promises don't cope with indexedDB transactions in neither Firefox, Edge or Safari (as of September 2016). It does this without sacrificing A+ compliance since the microtick engine can be considered part of the host system and is invisible and undetectable from the user. Libraries providing promises must explicitly opt in for the virtual microtick engine. Consumers need not to know about it.
+This implementation executes a virtual Micro Task engine when possible, that replaces the need for calling setImmediate (), setTimeout(), etc.. This is needed only when dealing with indexedDB transactions in older browsers where native promises don't cope with indexedDB transactions [See issue #317](github.com/dfahlander/Dexie.js/issues/317). It does this without sacrificing A+ compliance since the microtick engine can be considered part of the host system and is invisible and undetectable from the user. 
 
 This topic was also discussed in the following thread: <https://github.com/promises-aplus/promises-spec/issues/45>.
 

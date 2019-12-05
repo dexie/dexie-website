@@ -450,7 +450,7 @@ The example above shows how to run your queries in a sequence and wait for each 
 
 ### Async and Await
 
-You can use async await without any quirks. It works perfectly well with both native async functions (tested in Edge, Chrome and Safari) as well as transpiled async await (Typescript - any version, Babel - any version). For transpiled async await, the end code will survive indexedDB transactions no matter browser (including IE 10 and Firefox). However, when using native async await, the browser will invoke native promises instead of Dexie.Promise. This would break transactions in Firefox. Dexie can maintain its zones (holding current transaction) between native await expressions as well as between transpiled await expressions.
+You can use async await without any quirks. It works perfectly well with both native async functions (tested in Edge, Chrome, Safari and Firefox) as well as transpiled async await (Typescript - any version, Babel - any version). For transpiled async await, the end code will survive indexedDB transactions no matter browser (including IE 10 and Firefox <  60). However, when using native async await, the browser will invoke native promises instead of Dexie.Promise. This would break transactions in older browsers. Dexie can maintain its zones (holding current transaction) between native await expressions as well as between transpiled await expressions.
  
 ```javascript
 await db.transaction('rw', db.friends, async () => {

@@ -92,7 +92,7 @@ function complexQuery() {
 
 # Limitations
 
-* A [compound index](/docs/Compound-Index) cannot be marked MultiEntry. The limitation lies withing indexedDB itself.
+* A [compound index](/docs/Compound-Index) cannot be marked MultiEntry. The limitation lies within indexedDB itself.
 * Of natural reasons, primary keys cannot be marked MultiEntry.
 
 # Browser limitations

@@ -41,6 +41,7 @@ Did you write something based on Dexie? Feel free to list it here.
 * [IndexedDB programming with Dexie.js](https://golb.hplar.ch/2018/01/IndexedDB-programming-with-Dexie-js.html) by [Ralph Schaer](https://github.com/ralscha)
 * [Using Dexie.js in a Typescript application](https://golb.hplar.ch/2018/01/Using-Dexie-js-in-a-TypeScript-application.html) by [Ralph Schaer](https://github.com/ralscha)
 * [Dexie.js - Because IndexedDB should be Awesome](http://blogs.bytecode.com.au/glen/2016/01/10/dexie.html) by [Glen Smith](http://blogs.bytecode.com.au/glen/about/)
+* [One-to-many relationships with Dexie](https://medium.com/@ole.ersoy/one-to-many-relationships-with-dexie-48449c50d6b3)
 * [Having Fun with DexieJS and Typescript](https://medium.com/@ole.ersoy/having-fun-with-dexiejs-and-typescript-1c52514a090)
 * [Storage: One of the Final Frontiers](https://biancadanforth.github.io/git/2017/08/11/storage-one-of-the-final-frontiers.html)
 * [IndexedDB and Dexie](http://blog.marcoliceti.xyz/indexeddb-and-dexie-js/) by [Marco Liceti](http://blog.marcoliceti.xyz/author/marco/)

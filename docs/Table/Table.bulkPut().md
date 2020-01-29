@@ -14,6 +14,7 @@ table.bulkPut(items, keys?)
   <tr>
     <td><code>items</code></td>
     <td>Array of objects to put</td>
+    <tr><td>options (optional)</td><td><i>Since 3.0.0-rc.2:</i><br/><br/><code>{allKeys?: boolean}</code> If specifying {allKeys: true} the return value will be an array of resulting primary keys instead of just the primary key of the last add. If the table use inbound keys, the options can be given as the second argument. API will know if the second argument represents the options or the keys array by type inspection.</td></tr>
   </tr>
   <tr>
     <td><code>keys</code> (optional)</td>
@@ -38,9 +39,15 @@ db.version(1).stores({
 
 ### Return Value
 
-[Promise&lt;LastKey&gt;](/docs/Promise/Promise) 
+If options argument is omitted, or options is {allKeys: false}, the return value is a promise resolving with the resulting primary key of the object that was last in given array:
 
-Returns with the resulting primary key of the object that was last in given array.
+[Promise&lt;LastKey&gt;](/docs/Promise/Promise)
+
+
+*Since 3.0.0-rc.2*: If options argument is provided in second or thirs argument with {allKeys: true}, the return value is a promise resulting with an array of resulting primary keys. The resulting array will have the same length as given array of objects to put.
+
+[Promise&lt;Key[]&gt;](/docs/Promise/Promise)
+
 
 ### Errors
 

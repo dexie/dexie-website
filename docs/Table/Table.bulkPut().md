@@ -14,11 +14,11 @@ table.bulkPut(items, keys?)
   <tr>
     <td><code>items</code></td>
     <td>Array of objects to put</td>
-    <tr><td>options (optional)</td><td><i>Since 3.0.0-rc.2:</i><br/><br/><code>{allKeys?: boolean}</code> If specifying {allKeys: true} the return value will be an array of resulting primary keys instead of just the primary key of the last add. If the table use inbound keys, the options can be given as the second argument. API will know if the second argument represents the options or the keys array by type inspection.</td></tr>
-  </tr>
   <tr>
     <td><code>keys</code> (optional)</td>
     <td>Array of primary keys that corresponds to given items array</td>
+  </tr>
+  <tr><td>options (optional)</td><td><i>Since 3.0.0-rc.2:</i><br/><br/><code>{allKeys?: boolean}</code> If specifying {allKeys: true} the return value will be an array of resulting primary keys instead of just the primary key of the last add. If the table use inbound keys, the options can be given as the second argument. API will know if the second argument represents the options or the keys array by type inspection.</td></tr>
   </tr>
 </table>
 

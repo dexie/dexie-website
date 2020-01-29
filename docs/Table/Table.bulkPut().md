@@ -51,8 +51,8 @@ If options argument is omitted, or options is {allKeys: false}, the return value
 
 ### Errors
 
-If some operations fail, `bulkPut()` will ignore those failures but return a rejected Promise with a 
-[Dexie.BulkError](/docs/DexieErrors/Dexie.BulkError) referencing failures. If caller does not catch that error, transaction will abort. If caller wants to ignore the failures, the `bulkPut()` operations must be caught. **NOTE: If you call `bulkPut()` outside a transaction scope and an error occur on one of the operations, the successful operations will still be persisted to DB! If this is not desired, surround your call to `bulkPut()` in a transaction and catch transaction's promise instead of the `bulkPut()` operation.**
+If some operations fail, `bulkPut()` will ignore those failures and return a rejected Promise with a
+[Dexie.BulkError](/docs/DexieErrors/Dexie.BulkError) referencing the failures. If the caller does not catch the error, the transaction will abort. If the caller wants to ignore the failures, the `bulkPut()` operations must be caught. **NOTE: If you call `bulkPut()` outside a transaction scope and an error occur on one of the operations, the successful operations will still be persisted to DB! If this is not desired, surround your call to `bulkPut()` in a transaction and catch transaction's promise instead of the `bulkPut()` operation.**
 
 ### Remarks
 

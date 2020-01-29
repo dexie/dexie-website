@@ -59,7 +59,7 @@ Find friends named David with age between 23 and 43
 db.friends.where(["name", "age"])
   .between(["David", 23], ["David", 43], true, true)
   .each(friend => {
-      console.log("Found David, 43: " + JSON.stringify(friend));
+      console.log("Found: " + JSON.stringify(friend));
   }).catch(error => {
       console.error(error.stack || error);
   });

@@ -6,7 +6,7 @@ title: 'Table.bulkAdd()'
 ### Syntax
 
 ```typescript
-table.bulkAdd(items, keys?);
+table.bulkAdd(items, keys?, options?);
 ```
 
 ### Parameters
@@ -14,6 +14,7 @@ table.bulkAdd(items, keys?);
 <table>
 <tr><td>items</td><td>Array of objects to add</td></tr>
 <tr><td>keys (optional)</td><td>Array of primary keys that corresponds to given items array</td></tr>
+<tr><td>options (optional)</td><td><i>Since 3.0.0-rc.2:</i><br/><br/><code>{allKeys?: boolean}</code> If specifying {allKeys: true} the return value will be an array of resulting primary keys instead of just the primary key of the last add. If the table use inbound keys, the options can be given as the second argument. API will know if the second argument represents the options or the keys array by type inspection.</td></tr>
 </table>
 
 #### When to use the keys argument
@@ -33,9 +34,15 @@ db.version(1).stores({
 
 ### Return Value
 
+If options argument is omitted, or options is {allKeys: false}, the return value is a promise resolving with the resulting primary key of the object that was last in given array:
+
 [Promise&lt;LastKey&gt;](/docs/Promise/Promise)
 
-Returns with the resulting primary key of the object that was last in given array.
+
+*Since 3.0.0-rc.2*: If options argument is provided in second or thirs argument with {allKeys: true}, the return value is a promise resulting with an array of resulting primary keys. The resulting array will have the same length as given array of objects to add.
+
+[Promise&lt;Key[]&gt;](/docs/Promise/Promise)
+
 
 ### Errors
 If some operations fail, bulkAdd will ignore those failures but return a rejected Promise with a

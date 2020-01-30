@@ -6,7 +6,7 @@ title: 'Table.bulkPut()'
 ### Syntax
 
 ```javascript
-table.bulkPut(items, keys?)
+table.bulkPut(items, keys?, options?)
 ```
 
 ### Parameters

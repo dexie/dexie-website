@@ -2,7 +2,7 @@
 layout: docs
 title: 'Collection.modify()'
 ---
-Modifies all objects in the collection
+Modifies all objects that matches the subset of the Table represented by this Collection instance.
 
 ### Syntax
 

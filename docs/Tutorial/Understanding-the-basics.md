@@ -107,5 +107,4 @@ db.version(4).stores({
 * New versions only need to specify the tables that differs from previous version
 * To delete a table, add a new version specifying the table as *null*.
 
-*NOTE: In an upcoming Dexie version, you will no longer need to keep old versions unless they have upgraders associated, but for now (as of Dexie 2.0.0-beta.10), this is still the way to do it*
-
+*NOTE: Since Dexie 3.0.0-rc.3 and [PR 959](https://github.com/dfahlander/Dexie.js/pull/959), you will no longer need to keep old versions unless you have upgraders attached. You still need to increase the version number, but Dexie will find out the schema differencies from the installed version instead of looking at the previous declaration. If an upgrader is attached to a certain version, keep that version plus its direct preceeding version.*

@@ -61,27 +61,26 @@ If you want to log the error but still abort the transaction, you must encapsula
 ### Sample
 
 ```javascript
-db.transaction("rw", db.friends, function () {
+db.transaction("rw", db.friends, async () => {
 
     // Mark bigfoots:
-    db.friends.where("shoeSize").aboveOrEqual(47).modify({isBigfoot: 1});
+    await db.friends.where("shoeSize").aboveOrEqual(47).modify({isBigfoot: 1});
 
     // Log all bigfoots.
     // Since in transaction, and prev operation is a write-operation, the below
     // operation will be stalled until above operation completes, ensuring we
     // get the result after the modification.
 
-    db.friends.where("isBigfoot").equals(1).each(function(friend) {
-        console.log(friend.name);
-    });
+    const bigfoots = await db.friends.where({isBigfoot: 1}).toArray();
+    console.log("Bigfoots:", bigfoots);
 
-}).catch (Dexie.ModifyError, function (e) {
+}).catch (Dexie.ModifyError, error => {
 
     // ModifyError did occur
-    console.error(e.failures.length + " items failed to modify");
+    console.error(error.failures.length + " items failed to modify");
 
-}).catch (function (e) {
-    console.error("Generic error: " + e);
+}).catch (error => {
+    console.error("Generic error: " + error);
 });
 ```
 
@@ -89,7 +88,7 @@ db.transaction("rw", db.friends, function () {
 
 ```javascript
 // Convert all shoeSize from european to american size:
-db.friends.toCollection().modify(function(friend) {
+db.friends.toCollection().modify(friend => {
     friend.shoeSize *= 0.31; // (very approximate formula...., but anyway...)
 });
 ```
@@ -141,7 +140,7 @@ db.friends.where("hasBeenMeanToMe").equals("yes").delete();
 In this sample, we modify a property that is a nested key (a key in a nested object). We include the schema and an example object in this example just to clarify how nested objects are used.
 
 ```javascript
-var db = new Dexie("FriendsDB");
+const db = new Dexie("FriendsDB");
 db.version(1).stores({ friends: "++id, name, props.shoeSize, props.bigfoot"});
 db.on("populate", function () {
     db.friends.add({
@@ -152,12 +151,11 @@ db.on("populate", function () {
         }
     });
 });
-db.open();
 
-db.transaction("rw", db.friends, function () {
+db.transaction("rw", db.friends, async () => {
 
     // Mark bigfoots:
-    db.friends
+    await db.friends
       .where("props.shoeSize").aboveOrEqual(47)
       .modify({"props.bigfoot": "yes"});
 
@@ -166,7 +164,7 @@ db.transaction("rw", db.friends, function () {
     // below operation will be stalled until above operation completes, 
     // ensuring we get the result after the modification.
 
-    db.friends.where("props.bigfoot").equals("yes").each(function(friend) {
+    await db.friends.where("props.bigfoot").equals("yes").each(friend => {
         console.log("Found bigfoot: " + friend.name);
     });
 

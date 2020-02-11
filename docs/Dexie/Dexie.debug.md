@@ -5,7 +5,39 @@ title: 'Dexie.debug'
 
 *Since 1.4.0*
 
-Gets or sets whether exception's stacks will have long-stack support. This is really useful when debugging your app, but can decrease performance a little in production. It is strongly recommended to turn this on while developing / debugging your application. The reason for this is that exceptions thrown by async code, like Dexie, will have a stack property that doesn't tell you very much about what actually caused the issue. With Dexie.debug turned on, the `stack` property of any error will tell you where the issue occurred and what happened before that. If you are using chromium's debugger, you can log the stack to console.error and and get very nice links pointing directly in to the code that caused the error and also points in your code that was executed before the exception occurred.
+Gets or sets whether exception's stacks will have long-stack support. This is can be useful when debugging your app, but can decrease performance a little in production. It is strongly recommended to turn this on while developing / debugging your application. The reason for this is that exceptions thrown by async code, like Dexie, will have a stack property that doesn't tell you very much about what actually caused the issue. With Dexie.debug turned on, the `stack` property of any error will tell you where the issue occurred and what happened before that. If you are using chromium's debugger, you can log the stack to console.error and and get very nice links pointing directly in to the code that caused the error and also points in your code that was executed before the exception occurred.
+
+### Syntax
+
+```javascript
+Dexie.debug = true | false | "dexie";
+```
+
+### Explanation
+
+| Value | Meaning |
+| ----- | ------- |
+| false | Turned off (Production mode) |
+| true  | Debug mode for app developers - ignore stack frames within 'dexie' module from Error.stack |
+| "dexie" | Debug mode for dexie developers - include all async stack frames in Error.stack |
+
+### Default Value
+
+If served from localhost: true, else false.
+
+Explicitely turn off debug mode:
+
+```javascript
+import Dexie from "dexie";
+Dexie.debug = false;
+```
+
+Explicitely turn on debug mode:
+
+```javascript
+import Dexie from "dexie";
+Dexie.debug = true;
+```
 
 ### Hosted web apps
 
@@ -16,25 +48,6 @@ The auto-detection of debug mode is perfect when developing internet-hosted web 
 ### Electron apps
 
 Electron apps are served from `file:///` - urls, no matter whether it is development or production. So Dexie.debug will default to false. Therefore, you should always set `Dexie.debug = true;` in your Electron app while developing it, but not in production if performance bothers you much. Use a build step to set Dexie.debug to true/false depending on debug / production build.
-
-### Build-step sample for Electron apps
-
-Somewhere in your app:
-
-```javascript
-require('dexie').debug = require('some-path/dexie-debug.json');
-```
-
-Then in your build-step, overwrite 'dexie-debug' with `false` or `true` depending on the value of process.env.NODE_ENV.
-
-```javascript
-fs.writeFile(
-    'some-path/dexie-debug.json',
-    process.env.NODE_ENV === 'production' ? "false" : "true",
-    err => {
-        if (err) throw err;
-    });
-```
 
 ## Dexie.debug = 'dexie'
 

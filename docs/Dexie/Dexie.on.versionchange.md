@@ -17,7 +17,7 @@ To override the default behavior, your subscriber function must return false.
 
 ### NOTE
 
-After an upgrade has been made from another window, your current window will run on code that targets an old database schema. Your app will not know what tables there are and how to use the database in this newer version. Therefore, a webapp should typically update itself when this event occur. For a singe-page application this normally means reloading the current location to refresh the HTML and JS code from server.
+After an upgrade has been made from another window, your current window will run on code that targets an old database schema. Your app will not know what tables there are and how to use the database in this newer version. Therefore, a webapp should typically update itself when this event occurs. For a single-page application this normally means reloading the current location to refresh the HTML and JS code from server.
 
 ### Sample
 

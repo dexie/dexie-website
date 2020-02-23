@@ -62,7 +62,7 @@ db.version(2).stores({
     friends: 'name, age, firstName, lastName',
     pets: 'name'
 }).upgrade(tx => {
-    return tx.friends.toCollection().modify(friend => {
+    return tx.table("friends").toCollection().modify(friend => {
         friend.firstName = friend.name.split(' ')[0];
         friend.lastName = friend.name.split(' ')[1];
     });

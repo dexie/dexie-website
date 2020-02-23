@@ -58,7 +58,7 @@ db.version(2).stores({
     pets: "++id,name,kind"
 }).upgrade (tx => {
     var YEAR = 365 * 24 * 60 * 60 * 1000;
-    return tx.friends.toCollection().modify (friend => {
+    return tx.table("friends").toCollection().modify (friend => {
         friend.birthdate = new Date(Date.now() - (friend.age * YEAR));
         delete friend.age;
     });

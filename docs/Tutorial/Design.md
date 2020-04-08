@@ -55,18 +55,6 @@ As you can see, `db.friends` and `db.pets` are instances of [Table](/docs/Table/
 
 [Table](/docs/Table/Table) is the entry points for doing all operations to your object stores, such as querying, adding, putting, deleting, clearing and modifying your data.
 
-If you are using Visual Studio 2013 or 2015, you'll get marvelous code completion when using Dexie because Visual Studio will run the code in background and detect everything that Dexie puts on its api. You can see some benefits of coding if you start to type:
-
-![Code completion in VS2012 IDE](https://dl.dropboxusercontent.com/u/8907080/dexie/codecompletion1.png)
-
-And when typing ahead to friends, the IDE will guide you further:
-
-![Code completion in VS2012 IDE](https://dl.dropboxusercontent.com/u/8907080/dexie/codecompletion2.png)
-
-This also goes for Promise callbacks where your IDE will know the type of your input arguments to your callbacks.
-
-If you're using webstorm, vscode, sublime or atom, you won't get this superb code completion unless you are coding typescript :(. Hope to improve this with using jsdoc in the dexie soure in a future version. Code completion makes you code faster and better, so I'm eager to fix it. Pull request anyone ;)
-
 ### Transactions
 
 Whenever you are going to do more than a single operation on your database in a sequence, you would normally use a transaction. [Transaction](/docs/Transaction/Transaction) represents a full [ACID](http://en.wikipedia.org/wiki/ACID) transaction. When working with transactions you get the following benefits:
@@ -125,6 +113,13 @@ db.friends.put({
 
 Let's say that you publish your app and people starts using it. After a while, your user requests a new feature - to be able to search for friends with a certain shoeSize. But you have not indexed shoeSize in your schema, so how do you add that index to the next version of your app? Here's how:
 
+In Dexie &gt;= 3.0:
+* Just increase the version number and add shoeSize along the indexes:
+  ```js
+  db.version(2).stores({friends: "++id,name,shoeSize"});
+  ```
+
+In Dexie &lt; 3.0:
 1. Keep the line `db.version(1).stores({friends: "++id,name"});` - **Never touch it as long as there are users out there with that version running!**
 2. Instead, add a new line to your code: `db.version(2).stores({friends: "++id,name,shoeSize"});`.
 
@@ -147,12 +142,13 @@ db.version(3).stores({friends: "++id,shoeSize,firstName,lastName"}).upgrade(tx =
 });
 ```
 
-That's it. Your data will automatically upgrade for existing users.
+That's it. Your data will automatically upgrade for existing users. A version with an upgrader attached must never be altered. Further changes to the schema should be done by adding a new version declaration before or after the existing one (order doesn't matter). This holds true for both Dexie 3.0 and older versions.
 
 So what are the rules to be aware of?
 
-* Keep old versions as long as there are code out there with them installed.
-* Create/drop/alter indexes or tables by adding a new `version(x)` with an updated `stores({...})` spec.
+* Dexie &lt;3: Keep old versions as long as there are code out there with them installed.
+* Dexie &gt;=3: You only need to keep versions that have an upgrader as long as there are code out there that use a version lower than the upgrader-attached version.
+* Create/drop/alter indexes or tables by adding a new `version(x)` with an updated `stores({...})` spec. If you are on Dexie &gt;=3 you can just increase the version number of existing declaration and modify the tables and indexes of it.
 * Tables are not deleted unless you specify `null` as the stores-specification for that table in a new version.
 * New versions need only to specify changed tables.
 
@@ -183,7 +179,7 @@ Description of the open / upgrade sequence:
 1. User code calls db.open();
 2. If database is not present, or an earlier version was present, indexedDB's `onupgradeneeded` event is fired and taken care of by Dexie.
 3. Dexie inspects what version is currently used. If no database present, Dexie initializes the last version directly by parsing the stores schema syntax and adding stores and indexes accordingly. No upgrade() functions run in this case.
-4. If a previous version is installed, Dexie will filter out the diff between each version and add/remove stores and indexes sequentially. So also with any registered upgrader function.
+4. If a previous version is installed, Dexie will filter out the diff between each version and add/remove stores and indexes sequentially. So also with any registered upgrader function. A new feature in Dexie 3 is that it relies on the installed schema rather than the declared, so the diff will be computed between the actual installed schema and the next version rather than the declared schema of the current version and next version. This means two things: First of all that if the declaration of current schema is not in sync with the actual, it does not matter. Second, that Dexie can open a new version from on a device with an old version installed also when the old version is not present in the declaration.
 
 Error handling: If any error occur in any upgrade function in the sequence, the upgrade transaction will roll back and db.open() will fail. This means that data will under no circumstances be left half-upgraded.
 

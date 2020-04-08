@@ -63,13 +63,11 @@ db.version(2).stores({
         delete friend.age;
     });
 });
-// Always keep the declarations previous versions
-// as long as there might be users having them running.
+// If you are on Dexie < 3.0, also keep the declarations previous versions
 db.version(1).stores({
     friends: "++id,name,age",
     pets: "++id,name,kind"
 });
-db.open();
 ```
 
 ### See Also

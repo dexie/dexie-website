@@ -39,14 +39,19 @@ First time a browser hits the appdb.js code the following happens:
 
 ### Modify Schema
 
-When you need to modify the schema of existing tables, you keep current schema but just add a new version instead.
+When you need to modify the schema of existing tables, you add a new version declaration:
+
+```javascript
+db.version(2).stores({
+    friends: 'name, age, firstName, lastName',
+});
+```
+
+If you are on Dexie &lt;3.0, you must not also keep all previous version declarations side by side with the new:
 
 ```javascript
 db.version(1).stores({
     friends: 'name, age'
-});
-db.version(2).stores({
-    friends: 'name, age, firstName, lastName',
 });
 ```
 
@@ -98,6 +103,57 @@ db.version(4).stores({
     pets: null // Will delete 'pets' table
 });
 ```
+
+### Improvements in Dexie 3.0
+Since version 3.0, you do not need to keep old versions anymore unless those that you've attached an upgrade function to. It is still safe to keep the old versions if you like. You just don't have to.
+
+Basically, this means that the only thing you need to do to trigger an upgrade, is to increment the version number. By doing that, the changes made to the schema will be applied no matter the version installed, as long as that version number is less than the one you provide. Dexie will figure out the changes needed to migrate the schema to the one you've declared.
+
+### Example of a Dexie 3.0 migration
+
+Initially:
+```js
+const db = new Dexie('dbname');
+db.version(1).stores({
+    friends: 'id, name'
+});
+```
+
+Add the age index:
+```js
+const db = new Dexie('dbname');
+db.version(2).stores({
+    friends: 'id, name, age'
+});
+```
+
+Remove the name index:
+```js
+const db = new Dexie('dbname');
+db.version(2).stores({
+    friends: 'id, age'
+});
+```
+
+Add a table
+```js
+const db = new Dexie('dbname');
+db.version(3).stores({
+    friends: 'id, age',
+    pets: 'id'
+});
+```
+
+Remove a table
+```js
+const db = new Dexie('dbname');
+db.version(4).stores({
+    friends: null,
+    pets: 'id'
+});
+```
+
+Notice the lack of keeping old versions. Of course, if you've attached upgraders to some of the previous versions, you should keep those version declarations along with their upgraders. 
 
 ## Conclusions
 

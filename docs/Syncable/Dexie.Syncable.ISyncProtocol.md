@@ -117,7 +117,7 @@ The 'clear' argument is another optional Boolean. As of current version (0.9.1),
 
 #### Parameters to applyRemoteChanges()
  
- * changes : Array<[IDatabaseChange](/docs/Syncable/IDatabaseChange)> - Remote changes to apply locally
+ * changes : Array<[IDatabaseChange](/docs/Syncable/Dexie.Syncable.IDatabaseChange)> - Remote changes to apply locally
  * lastRevision : **_any_** - Revision of last change in given changes.
  * partial : Boolean - If true, framework wont commit these changes yet
  * clear : Boolean - Not yet used. In future version, when this flag is true, framework will clear all local data prior to applying changes.

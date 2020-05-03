@@ -9,7 +9,7 @@ title: 'Dexie.use()'
 db.use({stack, name?, create})
 ```
 
-### Parameters
+### Properties of the parameter
 <table>
   <tr>
     <td>stack : String</td>
@@ -27,9 +27,7 @@ db.use({stack, name?, create})
 
 # Remarks
 
-Your provided `create` function takes a [DBCore](https://github.com/dfahlander/Dexie.js/blob/master/src/public/types/dbcore.d.ts) and should return modified [DBCore](https://github.com/dfahlander/Dexie.js/blob/master/src/public/types/dbcore.d.ts). This could seem somewhat abstract, but in practice you can just clone the given DBCore and alter its `table` function to return your own version of `table`.
-
-## 
+Your provided `create` function takes a [DBCore](/docs/DBCore/DBCore) and should return another plain JS object confirming to the [DBCore](/docs/DBCore/DBCore) interface.
 
 # Example
 

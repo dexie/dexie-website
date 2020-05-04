@@ -9,7 +9,7 @@ DBCore is a middleware-approach for Dexie that is superior to the [hooks API](..
 2. It allows the injector to take actions both before and after the forwarded call.
 3. It covers more use cases, such as when a transaction is created, allow custom index proxies etc.
 
-From Dexie 3.0, all *runtime* calls to IndexedDB goes via DBCore. The hooks API is still there and backward compatible with Dexie 2.0, but it is implemented using a DBCore middleware.
+From Dexie 3.0, all *runtime* calls to IndexedDB goes via DBCore. The hooks API is still there and backward compatible with Dexie 2.0, but its internal implementation is now done using a DBCore middleware.
 
 Not all access to IndexedDB go via DBCore still. Upgrade handling and opening the database are performed directly towards the provided IndexedDB implementation which defaults to *global*.indexedDB. In a future version, also these calls may become intercepted by a similar middleware architecture.
 

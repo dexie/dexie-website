@@ -10,3 +10,6 @@ export interface DBCoreTransactionRequest {
 }
 ```
 Input argument to [DBCore](DBCore).transaction().
+
+See also:
+* [DBCoreTransactionMode](DBCoreTransactionMode)

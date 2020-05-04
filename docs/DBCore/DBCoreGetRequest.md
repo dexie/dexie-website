@@ -9,3 +9,5 @@ export interface DBCoreGetRequest {
   key: Key;  
 }
 ```
+
+Used as input parameter to [DBCoreTable](DBCoreTable).get()

@@ -9,3 +9,4 @@ export interface DBCoreTransactionRequest {
   mode: DBCoreTransactionMode;
 }
 ```
+Input argument to [DBCore](DBCore).transaction().

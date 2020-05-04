@@ -11,3 +11,4 @@ export interface MutateResponse {
   results?: Key[]; // Present on AddRequest and PutRequest if request.wantResults is truthy.
 }
 ```
+Result value from [DBCoreTable](DBCoreTable).mutate().

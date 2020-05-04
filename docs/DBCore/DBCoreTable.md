@@ -16,3 +16,16 @@ export interface DBCoreTable<TQuery=DBCoreQuery> {
   count(req: DBCoreCountRequest<TQuery>): Promise<number>;
 }
 ```
+
+See also:
+* [DBCoreQuery](DBCoreQuery)
+* [DBCoreTableSchema](DBCoreTableSchema)
+* [MutateRequest](MutateRequest)
+* [MutateResponse](MutateResponse)
+* [DBCoreGetRequest](DBCoreGetRequest)
+* [DBCoreGetManyRequest](DBCoreGetManyRequest)
+* [DBCoreQueryRequest](DBCoreQueryRequest)
+* [DBCoreQueryResponse](DBCoreQueryResponse)
+* [DBCoreOpenCursorRequest](DBCoreOpenCursorRequest)
+* [DBCoreCursor](DBCoreCursor)
+* [DBCoreCountRequest](DBCoreCountRequest)

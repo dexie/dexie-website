@@ -11,3 +11,4 @@ export interface DBCoreTableSchema {
   readonly getIndexByKeyPath: (keyPath: null | string | string[]) => DBCoreIndex | undefined;
 }
 ```
+Table schema structure in [DBCoreSchema](DBCoreSchema).

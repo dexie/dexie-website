@@ -14,3 +14,7 @@ export interface KeyRange {
 }
 ```
 
+Represents a DBCore KeyRange in [DeleteRangeRequest](DeleteRangeRequest) and [DBCoreQuery](DBCoreQuery).
+
+See also
+* [RangeType](RangeType).

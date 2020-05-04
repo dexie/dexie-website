@@ -11,3 +11,4 @@ export interface DBCoreQueryRequest<TQuery=DBCoreQuery> {
   query: TQuery;
 }
 ```
+Input parameter to [DBCoreTable](DBCoreTable).query()

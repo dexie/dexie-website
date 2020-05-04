@@ -9,3 +9,4 @@ export interface DBCoreCountRequest<TQuery=DBCoreQuery> {
   query: TQuery;
 }
 ```
+Used as input parameter to [DBCoreTable](DBCoreTable).count()

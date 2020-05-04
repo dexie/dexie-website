@@ -11,3 +11,7 @@ export const enum RangeType {
   Never = 4
 }
 ```
+Represents a range type for DBCore [KeyRange](KeyRange).
+
+See also:
+* [KeyRange](KeyRange)

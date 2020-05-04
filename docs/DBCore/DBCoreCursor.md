@@ -19,3 +19,6 @@ export interface DBCoreCursor<TResult=any> {
   fail(error: Error): void;
 }
 ```
+
+Represents a cursor. Represents a thin layer around [IDBCursor](https://developer.mozilla.org/en-US/docs/Web/API/IDBCursor). To be used by [DBCore](DBCore) middlewares.
+

@@ -9,3 +9,5 @@ export interface DBCoreQuery {
   range: KeyRange;
 }
 ```
+See [DBCoreTable](DBCoreTable)
+

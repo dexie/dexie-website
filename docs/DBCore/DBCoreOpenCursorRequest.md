@@ -12,3 +12,4 @@ export interface DBCoreOpenCursorRequest<TQuery=DBCoreQuery> {
   query: TQuery;
 }
 ```
+Input parameter to [DBCoreTable](DBCoreTable).openCursor()

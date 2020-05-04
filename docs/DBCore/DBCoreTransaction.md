@@ -8,3 +8,4 @@ export interface DBCoreTransaction {
   abort(): void;
 }
 ```
+Represents a transaction in [DBCore](DBCore).

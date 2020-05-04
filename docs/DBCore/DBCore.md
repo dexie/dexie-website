@@ -11,12 +11,18 @@ export interface DBCore<TQuery=DBCoreQuery> {
 
   // Utility methods
   cmp(a: any, b: any) : number;
-  //rangeIncludes(range: KeyRange): (key: Key) => boolean;
-  //comparer(table: string, index: string | null): (a: any, b: any) => number;
-  //readonly schema: DBCoreSchema;
   readonly MIN_KEY: Key;
   readonly MAX_KEY: Key;
   readonly schema: DBCoreSchema;
   table(name: string): DBCoreTable<TQuery>;
 }
 ```
+
+See [Dexie.use()](../Dexie/Dexie.use())
+
+See also:
+* [DBCoreTransactionRequest](DBCoreTransactionRequest)
+* [DBCoreTransaction](DBCoreTransaction)
+* [DBCoreSchema](DBCoreSchema)
+* [DBCoreTable](DBCoreTable)
+* [DBCoreQuery](DBCoreQuery)

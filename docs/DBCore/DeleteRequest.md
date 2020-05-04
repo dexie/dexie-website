@@ -10,3 +10,4 @@ export interface DeleteRequest {
   keys: Key[];
 }
 ```
+Input argument to [DBCoreTable](DBCoreTable).mutate(). See [DBCoreMutateRequest](DBCoreMutateRequest).

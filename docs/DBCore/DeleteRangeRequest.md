@@ -10,3 +10,5 @@ export interface DeleteRangeRequest {
   range: KeyRange;
 }
 ```
+Input argument to [DBCoreTable](DBCoreTable).mutate(). See [DBCoreMutateRequest](DBCoreMutateRequest).
+

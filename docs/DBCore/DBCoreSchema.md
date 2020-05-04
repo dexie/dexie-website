@@ -9,3 +9,5 @@ export interface DBCoreSchema {
   tables: DBCoreTableSchema[];
 }
 ```
+Schema structure in [DBCore](DBCore).
+

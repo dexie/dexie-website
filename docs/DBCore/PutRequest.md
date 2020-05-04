@@ -12,3 +12,4 @@ export interface PutRequest {
   wantResults?: boolean;
 }
 ```
+Input argument to [DBCoreTable](DBCoreTable).mutate(). See [DBCoreMutateRequest](DBCoreMutateRequest).

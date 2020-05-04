@@ -12,3 +12,6 @@ export interface AddRequest {
   wantResults?: boolean;
 }
 ```
+
+See [MutateRequest](MutateRequest) and [DBCoreTable](DBCoreTable).
+

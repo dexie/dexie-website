@@ -25,6 +25,6 @@ export interface DBCoreIndex {
   readonly extractKey: (value: any) => Key;
 }
 ```
-Represents an index or primary key.
+Represents an index or primary key in [DBCoreTableSchema](DBCoreTableSchema).
 
-See [DBCore](DBCore)
+See also [DBCore](DBCore)

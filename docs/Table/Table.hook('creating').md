@@ -3,7 +3,7 @@ layout: docs
 title: "Table.hook('creating')"
 ---
 
-*NOTE: Since Dexie 3.0, there is a new API superior to this hooks API in [DBCore](/docs/DBCore/DBCore)*
+*NOTE: Since Dexie 3.0, there is a new API superior to this hooks API: [DBCore](/docs/DBCore/DBCore)*
 
 ### Syntax
 

@@ -81,3 +81,7 @@ async function foo() {
     console.log(firstFriend);
 }
 ```
+
+### See Also
+
+[Table.bulkGet()](Table.bulkGet())

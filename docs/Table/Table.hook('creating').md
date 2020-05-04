@@ -3,6 +3,8 @@ layout: docs
 title: "Table.hook('creating')"
 ---
 
+*NOTE: Since Dexie 3.0, there is a new API superior to this hooks API in [DBCore](/docs/DBCore/DBCore)*
+
 ### Syntax
 
 ```javascript
@@ -156,3 +158,4 @@ Sample Source Locations:
 [Table.hook('deleting')](/docs/Table/Table.hook('deleting'))
 
 [Dexie.Observable.js](/docs/Observable/Dexie.Observable.js)
+

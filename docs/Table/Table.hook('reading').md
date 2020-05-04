@@ -3,6 +3,8 @@ layout: docs
 title: "Table.hook('reading')"
 ---
 
+*NOTE: Since Dexie 3.0, there is a new API superior to this hooks API: [DBCore](/docs/DBCore/DBCore)*
+
 ### Syntax
 
 ```javascript

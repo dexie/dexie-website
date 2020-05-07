@@ -30,9 +30,7 @@ console.log(databases);
 
 ### Browser Specific Info
 
-This method is an extension to the native indexedDB API which does not support listing of database names. Chrome and Opera did have a native API we could use, webkitGetDatabaseNames() but since Chrome release 60 (2018), this API was removed, so Dexie can now only rely on its own tracking of database names (tracked in a database named `__dbnames`).
-
-This means that on older versions of Opera and Chrome, the method used to work no matter if the database was created using Dexie or not, but on other browsers, and on newer versions of Chrome and Opera, the method will only see databases created using Dexie.
+This method is an extension to the native indexedDB API which does not support listing of database names. Chrome and Opera did have a native API we could use, webkitGetDatabaseNames() but since Chrome release 60 (2018), this API was removed. Dexie prior to version 3.0.1, tried to use webkitGetDatabaseNames() if present. A newer API has arrived since then, IDBFactory.databases(), used by newest Chromium browsers. From Dexie 3.0.1 and forward, Dexie tries to use that new API to list database names if present. If the API is not present, it will fallback to its own tracking of database names (tracked in a database named `__dbnames`).
 
 ### Detecting When Databases Are Added Or Deleted
 
@@ -48,4 +46,4 @@ window.addEventListener('storage', function (event) {
 });
 ```
 
-This code will not work on Dexie 2.x due that localStorage is no longer used to keep track of database names. A future version of Dexie may enable a Dexie event to subscribe to for the same purpose that would work the same as before. If this is of interest for you, please file an issue and we'll try fix it.
+This code will not work on Dexie 2.x or 3.x due that localStorage is no longer used to keep track of database names. A future version of Dexie may enable a Dexie event to subscribe to for the same purpose that would work the same as before. If this is of interest for you, please file an issue and we'll try fix it.

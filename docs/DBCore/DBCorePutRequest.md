@@ -1,13 +1,15 @@
 ---
 layout: docs
-title: 'DeleteRequest'
+title: 'DBCorePutRequest'
 ---
 
 ```ts
-export interface DeleteRequest {
-  type: 'delete';
+export interface DBCorePutRequest {
+  type: 'put';
   trans: DBCoreTransaction;
-  keys: Key[];
+  values: any[];
+  keys?: any[];
+  wantResults?: boolean;
 }
 ```
 Input argument to [DBCoreTable](DBCoreTable).mutate(). See [DBCoreMutateRequest](DBCoreMutateRequest).

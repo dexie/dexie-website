@@ -4,9 +4,9 @@ title: 'DBCoreCountRequest'
 ---
 
 ```ts
-export interface DBCoreCountRequest<TQuery=DBCoreQuery> {
+export interface DBCoreCountRequest {
   trans: DBCoreTransaction;
-  query: TQuery;
+  query: DBCoreQuery;
 }
 ```
 Used as input parameter to [DBCoreTable](DBCoreTable).count()

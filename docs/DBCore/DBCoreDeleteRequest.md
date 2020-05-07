@@ -1,14 +1,13 @@
 ---
 layout: docs
-title: 'DeleteRangeRequest'
+title: 'DBCoreDeleteRequest'
 ---
 
 ```ts
-export interface DeleteRangeRequest {
-  type: 'deleteRange';
+export interface DBCoreDeleteRequest {
+  type: 'delete';
   trans: DBCoreTransaction;
-  range: KeyRange;
+  keys: any[];
 }
 ```
 Input argument to [DBCoreTable](DBCoreTable).mutate(). See [DBCoreMutateRequest](DBCoreMutateRequest).
-

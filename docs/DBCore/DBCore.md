@@ -23,23 +23,23 @@ Not all access to IndexedDB go via DBCore still. Upgrade handling and opening th
 ## Definition
 
 ```ts
-export interface DBCore<TQuery=DBCoreQuery> {
+export interface DBCore {
   stack: "dbcore";
   // Transaction and Object Store
   transaction(req: DBCoreTransactionRequest): DBCoreTransaction;
 
   // Utility methods
   cmp(a: any, b: any) : number;
-  readonly MIN_KEY: Key;
-  readonly MAX_KEY: Key;
+  readonly MIN_KEY: any;
+  readonly MAX_KEY: any;
   readonly schema: DBCoreSchema;
-  table(name: string): DBCoreTable<TQuery>;
+  table(name: string): DBCoreTable;
 }
 ```
 
 See [Dexie.use()](../Dexie/Dexie.use())
 
-See also:
+## See Also
 * [DBCoreTransactionRequest](DBCoreTransactionRequest)
 * [DBCoreTransaction](DBCoreTransaction)
 * [DBCoreSchema](DBCoreSchema)

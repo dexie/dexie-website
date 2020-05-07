@@ -6,7 +6,7 @@ title: 'DBCoreGetManyRequest'
 ```ts
 export interface DBCoreGetManyRequest {
   trans: DBCoreTransaction;
-  keys: Key[];
+  keys: any[];
 }
 ```
 Used as input parameter to [DBCoreTable](DBCoreTable).getMany()

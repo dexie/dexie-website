@@ -22,7 +22,7 @@ export interface DBCoreIndex {
   /** Whether index is multiEntry. */
   readonly multiEntry?: boolean;
   /** Extract (using keyPath) a key from given value (object) */
-  readonly extractKey: (value: any) => Key;
+  readonly extractKey: (value: any) => any;
 }
 ```
 Represents an index or primary key in [DBCoreTableSchema](DBCoreTableSchema).

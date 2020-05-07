@@ -4,12 +4,16 @@ title: 'DBCoreOpenCursorRequest'
 ---
 
 ```ts
-export interface DBCoreOpenCursorRequest<TQuery=DBCoreQuery> {
+export interface DBCoreOpenCursorRequest {
   trans: DBCoreTransaction;
   values?: boolean;
   unique?: boolean;
   reverse?: boolean;
-  query: TQuery;
+  query: DBCoreQuery;
 }
 ```
 Input parameter to [DBCoreTable](DBCoreTable).openCursor()
+
+## See Also
+* [DBCoreTransaction](DBCoreTransaction)
+* [DBCoreQuery](DBCoreQuery)

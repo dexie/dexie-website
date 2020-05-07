@@ -4,24 +4,24 @@ title: 'DBCoreTable'
 ---
 
 ```ts
-export interface DBCoreTable<TQuery=DBCoreQuery> {
+export interface DBCoreTable {
   readonly name: string;
   readonly schema: DBCoreTableSchema;
 
-  mutate(req: MutateRequest): Promise<MutateResponse>;
+  mutate(req: DBCoreMutateRequest): Promise<DBCoreMutateResponse>;
   get(req: DBCoreGetRequest): Promise<any>;
   getMany(req: DBCoreGetManyRequest): Promise<any[]>;
-  query(req: DBCoreQueryRequest<TQuery>): Promise<DBCoreQueryResponse>;
-  openCursor(req: DBCoreOpenCursorRequest<TQuery>): Promise<DBCoreCursor | null>;
-  count(req: DBCoreCountRequest<TQuery>): Promise<number>;
+  query(req: DBCoreQueryRequest): Promise<DBCoreQueryResponse>;
+  openCursor(req: DBCoreOpenCursorRequest): Promise<DBCoreCursor | null>;
+  count(req: DBCoreCountRequest): Promise<number>;
 }
 ```
 
-See also:
+## See Also
 * [DBCoreQuery](DBCoreQuery)
 * [DBCoreTableSchema](DBCoreTableSchema)
-* [MutateRequest](MutateRequest)
-* [MutateResponse](MutateResponse)
+* [DBCoreMutateRequest](DBCoreMutateRequest)
+* [DBCoreMutateResponse](DBCoreMutateResponse)
 * [DBCoreGetRequest](DBCoreGetRequest)
 * [DBCoreGetManyRequest](DBCoreGetManyRequest)
 * [DBCoreQueryRequest](DBCoreQueryRequest)

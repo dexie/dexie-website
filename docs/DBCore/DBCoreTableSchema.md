@@ -13,5 +13,5 @@ export interface DBCoreTableSchema {
 ```
 Table schema structure in [DBCoreSchema](DBCoreSchema).
 
-See also:
+## See Also
 * [DBCoreIndex](DBCoreIndex)

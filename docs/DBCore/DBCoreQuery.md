@@ -5,9 +5,10 @@ title: 'DBCoreQuery'
 
 ```ts
 export interface DBCoreQuery {
-  index: DBCoreIndex;//keyPath: null | string | string[]; // null represents primary key. string a property, string[] several properties.
+  index: DBCoreIndex;
   range: KeyRange;
 }
 ```
-See [DBCoreTable](DBCoreTable)
-
+## See Also
+* [DBCoreTable](DBCoreTable)
+* [DBCoreIndex](DBCoreIndex)

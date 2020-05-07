@@ -4,17 +4,17 @@ title: 'DBCoreCursor'
 ---
 
 ```ts
-export interface DBCoreCursor<TResult=any> {
+export interface DBCoreCursor {
   readonly trans: DBCoreTransaction;
-  readonly key: Key;
-  readonly primaryKey: Key;
+  readonly key: any;
+  readonly primaryKey: any;
   readonly value?: any;
   readonly done?: boolean;
   continue(key?: any): void;
-  continuePrimaryKey(key: Key, primaryKey: Key): void;
+  continuePrimaryKey(key: any, primaryKey: any): void;
   advance(count: number): void;
-  start(onNext: ()=>void): Promise<TResult>
-  stop(value?: TResult | Promise<TResult>): void;
+  start(onNext: ()=>void): Promise<any>
+  stop(value?: any | Promise<any>): void;
   next(): Promise<DBCoreCursor>;
   fail(error: Error): void;
 }

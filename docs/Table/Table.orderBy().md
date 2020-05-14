@@ -29,16 +29,16 @@ table.orderBy(index)
 Returns an unfiltered collection sorted by the index or primary key given by `index`. Note that `index` can only be an indexed property or the primary key. If you want to sort by an un-indexed property, then use [Collection.sortBy()](/docs/Collection/Collection.sortBy()) instead.
 
 ### OrderBy on Collections
-In current version of Dexie (v2.0), it is not possible to do:
+In current version of Dexie (v3.0), it is not possible to do:
 
 ```javascript
 db.friends
   .where('age').above(25)
-  .orderBy('name') // Not possible in Dexie 1.x or 2.x.
+  .orderBy('name') // Not possible in Dexie 1.x, 2.x or 3.x.
 ```
 ... and there is a simple reason for that: No database can do this query easily as it can only operate on one btree at a time. However, most databases yet supports, but involving set matching of primary keys and a full index scans on the ordered query.
 
-Even though current version of Dexie (v2.0) does not have orderBy() on Collections, the feature will be introduced in a future version, and can already be accomplished without using sortBy() - see [this sample](https://dexie.org/docs/Collection/Collection.offset()#paged-or-queries).
+Even though current version of Dexie (v3.0) does not have orderBy() on Collections, the feature may be introduced in a future version, and can already be accomplished without using sortBy() - see [this sample](https://dexie.org/docs/Collection/Collection.offset()#paged-or-queries).
 
 ### Sample
 

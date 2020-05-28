@@ -41,7 +41,7 @@ db.on('error', function (error) {
             console.error ("DatabaseClosed error");
             break;
         default:
-            console.error ("error: " + e);
+            console.error ("error: " + error);
     }
 });
 ```

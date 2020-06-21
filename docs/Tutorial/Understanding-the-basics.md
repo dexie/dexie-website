@@ -43,7 +43,7 @@ When you need to modify the schema, also update version number. In the sample be
 
 ```javascript
 db.version(2).stores({
-    friends: 'firstName, lastName, age',
+    friends: 'firstName, lastName, age'
 });
 ```
 

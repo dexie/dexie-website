@@ -39,37 +39,41 @@ First time a browser hits the appdb.js code the following happens:
 
 ### Modify Schema
 
-When you need to modify the schema of existing tables, you add a new version declaration:
+When you need to modify the schema, also update version number. In the sample below, we remove the "name" index and added two new indexes "firstName", "lastName" of the friends table. We also modify version from 1 to 2 in order for this change to have effect:
 
 ```javascript
 db.version(2).stores({
-    friends: 'name, age, firstName, lastName',
+    friends: 'firstName, lastName, age',
 });
 ```
 
-If you are on Dexie &lt;3.0, you must not also keep all previous version declarations side by side with the new:
+In older version of Dexie (version &lt;3.0), you had to also keep all previous version declarations side by side with the new:
 
 ```javascript
 db.version(1).stores({
     friends: 'name, age'
+});
+db.version(2).stores({
+    friends: 'firstName, lastName, age',
 });
 ```
 
 ### Migrate Data
 
-And if you need to migrate existing data, you add an upgrade function to the new version.
+When you need to migrate existing data, you need to keep the old version side by side with the new and attach an upgrade function to the new version.
 
 ```javascript
 db.version(1).stores({
     friends: 'name, age'
 });
 db.version(2).stores({
-    friends: 'name, age, firstName, lastName',
-    pets: 'name'
+    friends: 'firstName, lastName, age',
 }).upgrade(tx => {
     return tx.table("friends").toCollection().modify(friend => {
-        friend.firstName = friend.name.split(' ')[0];
-        friend.lastName = friend.name.split(' ')[1];
+        const names = friend.name.split(' ');
+        friend.firstName = names.shift();
+        friend.lastName = names.join(' ');
+        delete friend.name;
     });
 });
 ```
@@ -104,63 +108,12 @@ db.version(4).stores({
 });
 ```
 
-### Improvements in Dexie 3.0
-Since version 3.0, you do not need to keep old versions anymore unless those that you've attached an upgrade function to. It is still safe to keep the old versions if you like. You just don't have to.
-
-Basically, this means that the only thing you need to do to trigger an upgrade, is to increment the version number. By doing that, the changes made to the schema will be applied no matter the version installed, as long as that version number is less than the one you provide. Dexie will figure out the changes needed to migrate the schema to the one you've declared.
-
-### Example of a Dexie 3.0 migration
-
-Initially:
-```js
-const db = new Dexie('dbname');
-db.version(1).stores({
-    friends: 'id, name'
-});
-```
-
-Add the age index:
-```js
-const db = new Dexie('dbname');
-db.version(2).stores({
-    friends: 'id, name, age'
-});
-```
-
-Remove the name index:
-```js
-const db = new Dexie('dbname');
-db.version(2).stores({
-    friends: 'id, age'
-});
-```
-
-Add a table
-```js
-const db = new Dexie('dbname');
-db.version(3).stores({
-    friends: 'id, age',
-    pets: 'id'
-});
-```
-
-Remove a table
-```js
-const db = new Dexie('dbname');
-db.version(4).stores({
-    friends: null,
-    pets: 'id'
-});
-```
-
-Notice the lack of keeping old versions. Of course, if you've attached upgraders to some of the previous versions, you should keep those version declarations along with their upgraders. 
+### Changes in Dexie 3.0
+Before version 3.0, it was not recommended to modify an existing schema, but instead always add a new version with the new declaration. Since Dexie version 3.0, you only have to do that when an upgrader is attached to the new version. In other cases, you only need to edit schema and modify the version number.
 
 ## Conclusions
 
 * You do never need to check whether the database need to be created. Your code is just declarative.
-* Don't edit schemas. Add new versions instead.
-* Keep previous versions as long as there are people out there that may have it installed.
-* New versions only need to specify the tables that differs from previous version
+* Whenever editing schema, also remember to update version number.
+* Historical versions that have upgraders attached should be kept as long as there are people out there that may have it installed.
 * To delete a table, add a new version specifying the table as *null*.
-
-*NOTE: Since Dexie 3.0.0-rc.3 and [PR 959](https://github.com/dfahlander/Dexie.js/pull/959), you will no longer need to keep old versions unless you have upgraders attached. You still need to increase the version number, but Dexie will find out the schema differencies from the installed version instead of looking at the previous declaration. If an upgrader is attached to a certain version, keep that version plus its direct preceeding version. When Dexie 3.0 stable is out, the docs of this page will be updated accordingly.*

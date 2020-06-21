@@ -79,7 +79,7 @@ db.version(2).stores({
 ```
 
 ### Changing a few tables only
-If you are just adding or changing a few tables, you do not need to repeat the schemas of all the old tables.
+If you are just adding or changing a few tables, you do not need to repeat the schemas of all the old tables if those tables are already present in a kept older version.
 
 ```javascript
 db.version(2).stores({

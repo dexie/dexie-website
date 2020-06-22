@@ -318,17 +318,21 @@ Sample provided here:
 
 ```js
 import Dexie from 'dexie';
-import 'dexie-export-import';
+import {importDB, exportDB} from "dexie-export-import";
+
 
 async function exportDatabase(databaseName) {
+  // Open an arbritary IndexedDB database:
   const db = await new Dexie(databaseName).open();
-  const blob = await db.export();
+  // Export it
+  const blob = await exportDB(db);
   return blob;
 }
 
 async function importDatabase(file) {
-  const db = await Dexie.import(file);
-  return db.backendDB();
+  // Import a file into a Dexie instance:
+  const db = await importDB(file);
+  return db.backendDB(); // backendDB() gives you the native IDBDatabase object.
 }
 ```
 

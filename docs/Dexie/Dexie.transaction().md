@@ -368,7 +368,7 @@ Note: This is just a theoretical sample to explain the "!" postfix. In a real wo
 
 ### Implementation Details of Nested Transactions
 
-Nested transactions has no out-of-the-box support in IndexedDB. Dexie emulates it by reusing the parent IDBTransaction within a new Dexie Transaction object with reference count of ongoing requests. The nested transaction will also block any operations made on parent transaction until nested transaction "commits". The nested transaction will "commit" when there are no more ongoing requests on it (exactly as IDB works for main transactions). The "commit" of a nested transaction only means that the tranction Promise will resolve and any pending operations on the main transaction can resume. An error occuring in the parent transaction after a "commit" will still abort the entire transaction including the nested transaction.
+Nested transactions has no out-of-the-box support in IndexedDB. Dexie emulates it by reusing the parent IDBTransaction within a new Dexie Transaction object with reference count of ongoing requests. The nested transaction will also block any operations made on parent transaction until nested transaction "commits". The nested transaction will "commit" when there are no more ongoing requests on it (exactly as IDB works for main transactions). The "commit" of a nested transaction only means that the transaction Promise will resolve and any pending operations on the main transaction can resume. An error occuring in the parent transaction after a "commit" will still abort the entire transaction including the nested transaction.
 
 ### Parallell Transactions
 

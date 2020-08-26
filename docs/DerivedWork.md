@@ -18,7 +18,7 @@ Did you write something based on Dexie? Feel free to list it here.
 * [Medical Physics Quality Assurance Tool](http://electrons.simonbiggs.net/) -- Built with Typescript2, Angular2, Dexie2, Bokehjs, on Github Pages (Client) and Heroku (RestAPI). [Source Code](https://github.com/SimonBiggs/electroninserts-webapp).
 * [Memex](https://worldbrain.io) - Open source browser extension providing full-text search on bookmarks and history.
 * ...and [more than 4000 other repos on GitHub](https://github.com/dfahlander/Dexie.js/network/dependents?package_id=UGFja2FnZS0xMzg0ODIyOQ%3D%3D)...
-* ...see also [w3techs.com's listing of Dexie.js](https://w3techs.com/technologies/details/js-dexiejs)
+* ...see also [w3techs.com's listing of most used JS libraries](https://w3techs.com/technologies/overview/javascript_library)
 
 ## Known Addons
 

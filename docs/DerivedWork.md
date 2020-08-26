@@ -7,6 +7,13 @@ As a response to [this post](https://groups.google.com/forum/#!topic/dexiejs/set
 
 Did you write something based on Dexie? Feel free to list it here.
 
+## Usage stats
+
+[Dexie.js is in w3techs.com's listing of 30 most used JS libraries](https://w3techs.com/technologies/overview/javascript_library)
+
+[Builtwith.com's usage stats](https://trends.builtwith.com/javascript/Dexie.js)
+
+
 ## Products That Use Dexie (what we know of...)
 
 * [WhatsApp](https://www.whatsapp.com) - The market leader chat app use Dexie for storage in its KaiOs and Web clients.
@@ -18,8 +25,6 @@ Did you write something based on Dexie? Feel free to list it here.
 * [Medical Physics Quality Assurance Tool](http://electrons.simonbiggs.net/) -- Built with Typescript2, Angular2, Dexie2, Bokehjs, on Github Pages (Client) and Heroku (RestAPI). [Source Code](https://github.com/SimonBiggs/electroninserts-webapp).
 * [Memex](https://worldbrain.io) - Open source browser extension providing full-text search on bookmarks and history.
 * [more than 4000 other repos on GitHub](https://github.com/dfahlander/Dexie.js/network/dependents?package_id=UGFja2FnZS0xMzg0ODIyOQ%3D%3D)...
-* [w3techs.com's listing of most used JS libraries](https://w3techs.com/technologies/overview/javascript_library)
-* [builtwith.com's usage stats](https://trends.builtwith.com/javascript/Dexie.js)
 
 ## Known Addons
 

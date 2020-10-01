@@ -1,0 +1,122 @@
+---
+prismStyle: 'vscode-dark'
+---
+<!DOCTYPE html>
+<html>
+  {% include head.html %}
+  <body>
+    {% include dexie-cloud-header.html %}
+
+    <main class="container">
+      <div id="callouts">
+        <div class="row">
+          <div class="col-md-3">
+            <h2>Offline First</h2>
+            <p>
+              While online, changes are synced instantly in both directions using WebSocket. When offline,
+              your users can continue using your app without disruptions.
+              Dexie Cloud gives your users a seamless offline/online experience.
+            </p>
+            <p>
+              <a class="btn btn-success" href="offline-first" role="button"
+                >Read more &raquo;</a
+              >
+            </p>
+          </div>
+          <div class="col-md-3">
+            <h2>Authentication</h2>
+            <p>
+              Most apps use a mix of private, shared and public data.
+              Authentication is needed to distinguish what to sync to who. Keep
+              your own authentication if you already have one for your app. If
+              not, Dexie Cloud comes with a dead-simple email OTP
+              authentication.
+            </p>
+            <p>
+              <a class="btn btn-success" href="authentication" role="button"
+                >Read more &raquo;</a
+              >
+            </p>
+          </div>
+          <div class="col-md-3">
+            <h2>Access Control</h2>
+            <p>
+              Access control is enforced in the Dexie Cloud backend. A
+              multi-tenant model lets your users keep their own private data for
+              themselves, or share it with their teams or friends.
+            </p>
+            <p>
+              <a class="btn btn-success" href="access-control" role="button"
+                >Read more &raquo;</a
+              >
+            </p>
+          </div>
+          <div class="col-md-3">
+            <h2>Scale to Millions</h2>
+            <p>
+              Dexie cloud is built to scale both vertically and horizontally. We
+              use an auto-scalable cloud infrastructure and we balance both our
+              and your tenants across a dynamic cluster of shards.
+            </p>
+            <p>
+              <a class="btn btn-success" href="scaling" role="button"
+                >Read more &raquo;</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <h2 id="getting-started">Get started with Dexie Cloud</h2>
+        <div class='row'>
+          <div class='col-md-6'>
+            <pre class="command-line language-bash" data-prompt="$" data-filter-output="(out)"><code>npx dexie-cloud create-db
+(out)Cloud database "ds7h2kdsd78" was successfully created.
+(out)URL and client-ID saved to: ./dexie-cloud.json
+(out)Client Secred saved to:     ./dexie-cloud.secret
+npx dexie-cloud add-client "http://localhost:8080"
+(out)Origin "http://localhost:8080" is now trusted.</code></pre>
+          </div>
+          <div class='col-md-6'>
+            <pre><code class="language-javascript">
+    /*
+    |-----------------------|
+    | Then run some queries |
+    |-----------------------|
+    */
+  
+    // Find some old friends
+    const oldFriends = await db.friends
+      .where('age').above(75)
+      .toArray();
+  
+    // or make a new one
+    await db.friends.add({
+      name: 'Camilla',
+      age: 25,
+      street: 'East 13:th Street',
+      picture: await getBlob('camilla.png')
+    });
+            </code></pre>
+          </div>
+          </div>
+      </div>
+  
+      <hr/>
+        
+      {{ content }}
+    </main>
+
+    {% include footer.html %}
+
+    <script src="/assets/js/prism-2020.js"></script>
+
+    {% include google-analytics.html %}
+
+    <!-- Include dexie for people wanting to open devtools to laborate -->
+    <script async src="https://unpkg.com/dexie"></script>
+
+    <!-- Highlight anchors the same way as github wiki works -->
+    <script defer src="/assets/js/highlight-anchors.js"></script>
+  </body>
+</html>

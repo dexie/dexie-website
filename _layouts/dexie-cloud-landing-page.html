@@ -13,7 +13,7 @@ prismStyle: 'vscode-dark'
           <div class="col-md-3">
             <h2>Offline First</h2>
             <p>
-              While online, changes are synced instantly in both directions using WebSocket. When offline,
+              While online, changes are synced instantly in both directions. When offline,
               your users can continue using your app without disruptions.
               Dexie Cloud gives your users a seamless offline/online experience.
             </p>
@@ -70,34 +70,56 @@ prismStyle: 'vscode-dark'
       <h2 id="getting-started">Get started with Dexie Cloud</h2>
         <div class='row'>
           <div class='col-md-6'>
-            <pre class="command-line language-bash" data-prompt="$" data-filter-output="(out)"><code>npx dexie-cloud create-db
-(out)Cloud database "ds7h2kdsd78" was successfully created.
-(out)URL and client-ID saved to: ./dexie-cloud.json
-(out)Client Secred saved to:     ./dexie-cloud.secret
-npx dexie-cloud add-client "http://localhost:8080"
-(out)Origin "http://localhost:8080" is now trusted.</code></pre>
+            <h3>1. Install dexie-cloud</h3>
+            <p>cd to your dexie-app and install dexie-cloud:</p>
+            <pre class="command-line language-bash" data-prompt="~/my-dexie-app $"><code style="margin:0;">npm install dexie-cloud</code></pre>
+            <h3>2. Create your database in the cloud</h3>
+            <pre class="command-line language-bash" data-prompt="~/my-dexie-app $"><code style="margin:0;">npx dexie-cloud create-db</code></pre>
+            <p>This command will prompt for and verify your email address and then create a new database for you in the cloud.
+            Two new files will be saved locally.</p>
+            <p>The files points out the db URL and authenticates further usage of the <span style="font-family: monospace;">dexie-cloud</span> CLI.
+              The files are not required for the runtime webapp.</p>
+            <pre><code style="margin:0;">~/my-dexie-app $ ls -l
+-rw-r--r--    1 user staff       4  1 Oct 15:38 dexie-cloud.json
+-rw-r--r--    1 user staff       4  1 Oct 15:38 dexie-cloud.secret
+...</code></pre>
+              <p>The json file may be added to git, but never the .secret one.</p>
+              <h3>3. Trust the URLs of your app</h3>
+              <pre class="command-line language-bash" data-prompt="~/my-dexie-app $"><code style="margin:0;">npx dexie-cloud add-client "http://localhost:8080"
+npx dexie-cloud add-client "https://my-app.com"</code></pre>
+            <p>
+              This command white-lists your app URLs (so that <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">CORS</a> headers works).
+            </p>
           </div>
           <div class='col-md-6'>
+            <h3>4. Connect Dexie.js to the cloud</h3>
             <pre><code class="language-javascript">
-    /*
-    |-----------------------|
-    | Then run some queries |
-    |-----------------------|
-    */
-  
-    // Find some old friends
-    const oldFriends = await db.friends
-      .where('age').above(75)
-      .toArray();
-  
-    // or make a new one
-    await db.friends.add({
-      name: 'Camilla',
-      age: 25,
-      street: 'East 13:th Street',
-      picture: await getBlob('camilla.png')
+    import Dexie from "dexie";
+    
+    //
+    // Enable dexie-cloud:
+    //
+    import "dexie-cloud";
+
+    // Declare your Dexie the way you're used to...
+    const db = new Dexie('yourDb');
+    db.version(...).stores({
+      ...your schema // Replace "++"-keys with "$$" to get guids.
     });
-            </code></pre>
+    
+    //
+    // Connect your dexie-cloud database:
+    // This should be done directly after schema creation and
+    // will start to continously sync your database in both directions.
+    //
+    db.cloud.connect("https://&lt;yourdatabase&gt;.dexie.cloud", {
+      requireAuth: true
+    });
+  </code></pre>
+    <h3>5. Done!</h3>
+    Refresh webpage. Enjoy being connected!
+    
+
           </div>
           </div>
       </div>

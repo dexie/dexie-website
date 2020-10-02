@@ -1,31 +1,11 @@
 <header class="site-header">
-  <div class='jumbotron docs-page-jumbotron'>
-    <div class='container'>
+  <div class="jumbotron docs-page-jumbotron">
+    <div class="container">
       <a href="/">
         <img src="/assets/images/dexie-logo-icon.svg" class="dexie-logo-icon" />
         <h1>Dexie.js Docs</h1>
-        <div id="offline-switch"
-          title="Make Dexie documentation available offline">
-          <span id="offlineOffHeading">Make available offline</span>
-				  <span id="offlineOnHeading">Available offline</span> <label class="switch">
-            <input
-              id="offline-checkbox"
-              type="checkbox"
-              onchange="setOffline(event.target.checked)">
-            <span class="slider round"></span>
-          </label>
-          <script>
-            updateSwitchFromStorage();
-          </script>
-        </div>
-        <!-- Github star button -->
-        <div id="star-button">
-          <iframe src="https://ghbtns.com/github-btn.html?user=dfahlander&repo=Dexie.js&type=star&count=true"
-          frameborder="0" scrolling="0" width="94px" height="20px"></iframe>
-        </div>
-        <!-- Place this tag right after the last button or just before your close body tag. -->
-        <script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
       </a>
+      {% include github-star-btn.html %}      
     </div>
-  </div>
+</div>
 </header>

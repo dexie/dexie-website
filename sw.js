@@ -101,7 +101,14 @@ const MAX_WAIT = 300; // If network responds slower than 100 ms, respond with ca
 self.addEventListener('fetch', function (event) {
     // Start reading from cache
     const cachedResponsePromise = caches.match(event.request);
-    const fetchPromise = fetch(event.request);
+    const request = event.request;
+    const fetchPromise = fetch(request);
+    if (/google-analytics/.test(request.url) || request.method === "POST") {
+        fetchPromise.then(res => event.respondWith(res)).catch(err => {
+            console.warn(`Google analytics request failed`, request, "Error:", err);
+        });
+        return;
+    }
     const timeoutPromise = new Promise(resolve => {
         setTimeout(()=>resolve("timedout"), MAX_WAIT);
     });
@@ -114,7 +121,7 @@ self.addEventListener('fetch', function (event) {
             // Could be timeout, a 404, 500 or maybe offline?
             // In case we have an OK response in the cache, respond with that one instead:
             if (cachedResponse && cachedResponse.ok) {
-                if (res === "timedout") console.log("URL", event.request.url, "timedout. Serving it from cache to speed up site");
+                if (res === "timedout") console.log("URL", request.url, "timedout. Serving it from cache to speed up site");
                 return cachedResponse;
             } else if (res === "timedout") {
                 // We don't have anything in cache. Wait for fetch even if it takes time.
@@ -130,7 +137,7 @@ self.addEventListener('fetch', function (event) {
                 // There were no cached response, or "last-modified" headers was changed - keep the cache up-to-date,
                 // so that, when the user goes offline, it will have the latest and greatest, and not revert to old versions
                 const cache = await caches.open(CACHE_NAME);
-                await cache.put(event.request, res.clone());
+                await cache.put(request, res.clone());
             }
         }
         return res;

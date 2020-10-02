@@ -31,3 +31,69 @@ header.site-header {
 	max-height: unset;
 	opacity: 0.9;
 }
+.docs-page-jumbotron {
+	padding: 15px 15px 15px 15px;
+}
+
+.docs-page-jumbotron.dexie-cloud {
+	/*background-color: #9e70d3; */
+	/*background-image: linear-gradient(#6e6cf5 0%, #9e70d3 100%);*/
+	/*background-image: linear-gradient(#8853c5, #9670d3, #707ad3, #5d8fbd);*/
+	background-image: linear-gradient( #5471e9, #1e3fd3,#4b965f);
+	/* background-image: url('../images/dexie-cloud/norrsken-cropped-compressed.jpg'); */
+	color: white;
+}
+
+.dexie-cloud .switch input:checked + .slider {
+  background-color: #6b21f3;
+}
+
+@media screen and (min-width: 768px) {
+	.docs-page-jumbotron {
+		padding: 70px 0 40px 0;
+	}
+}
+
+.dexie-cloud a.getstarted.btn {
+	margin: 0 0 16px 0;
+}
+
+.docs-page-jumbotron p {
+	font-size: 18px;
+	font-weight: normal;
+	font-style: italic;
+}
+
+.dexie-cloud #topnav-menu {
+	position: static;
+	margin-left: 2px;
+}
+
+.dexie-cloud #topnav-menu ul {
+	padding: 0;
+	line-height: 2em;
+}
+
+.dexie-cloud #topnav-menu li {
+	padding: 4px 6px;
+}
+
+#topnav-menu li a {
+	color: rgba(255, 255, 255, 0.648);
+	white-space: nowrap;
+}
+
+#topnav-menu li.selected {
+	/*border: 1px solid black;*/
+	background-color: rgba(255,255,255,1);
+}
+
+a.getstarted.selected {
+	background-color: #fff;
+	color: #222;
+}
+
+#topnav-menu li.selected a {
+	color: #222;
+}
+

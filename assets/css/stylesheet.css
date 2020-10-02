@@ -1,6 +1,35 @@
 body {
 	font-family: Arial, sans-serif;
+/*	padding-top: 46px; */
 }
+
+/* This rule is needed to adjust in-page hash links to body padding-top:
+h1[id]::before, h2[id]::before, h3[id]::before, h4[id]::before, h5[id]::before, h6[id]::before { 
+  display: block; 
+  content: " "; 
+  margin-top: -66px; 
+  height: 66px; 
+  visibility: hidden; 
+  pointer-events: none;
+} */
+
+@media (min-width: 768px) {
+	/*body {
+		padding-top: 28px;
+	}*/
+
+	/* This rule is needed to adjust in-page hash links to body padding-top: */
+	/*h1[id]::before, h2[id]::before, h3[id]::before, h4[id]::before, h5[id]::before, h6[id]::before { 
+		display: block; 
+		content: " "; 
+		margin-top: -48px;
+		height: 48px;
+		visibility: hidden; 
+		pointer-events: none;
+	}*/
+}
+
+
 
 #parallax {
 	height: 400px;
@@ -101,19 +130,28 @@ img.dexie-logo-icon {
     position:absolute; margin-left: -13px; margin-top: 22px; width: 34px; height: 34px; display: none;
 }
 
+img.dexie-logo-icon-menu {
+	position:absolute;
+	transform: translate(-6px,2px);
+}
+
+
 .widescreen {
 	display: none;
 }
 
 @media screen and (min-width: 768px) {
-    img.dexie-logo-icon {
-        position: absolute;
-        margin-left: -21px;
-        margin-top: 25px;
-        width: 57px;
-        height: 57px;
-        display: inherit;
-    }
+	img.dexie-logo-icon {
+			position: absolute;
+			margin-left: -21px;
+			margin-top: 25px;
+			width: 57px;
+			height: 57px;
+			display: inherit;
+	}
+	img.dexie-logo-icon-menu {
+		transform: scale(0.85) translate(-7.5px,2.5px);
+	}
 
 	.widescreen {
 		display: inherit;
@@ -214,14 +252,21 @@ table tr:nth-child(2n) {
 /* Switch */ 
 #offline-switch {
 	position: absolute;
-	top: 20px;
-	right: 12px;
-	z-index: 90;
+	top: 16px;
+	right: 76px;
 	font-size: 10pt;
 	font-style: italic;
 	opacity: 0.6;
 	transition: opacity .4s;
+	color: rgb(240,240,255);
 }
+@media (min-width: 768px) {
+	#offline-switch {
+		top: 5px;
+		right: 8px;
+	}
+}
+
 #offline-switch #offlineOnHeading {
 	display: none;
 }
@@ -297,12 +342,13 @@ table tr:nth-child(2n) {
   border-radius: 50%;
 }
 
-/* menu */
+/* menu 
 #topnav-menu {
 	position: absolute;
-	top: -50px;
-	left: -14px;
+	top: 10px;
+	left: 0px;
 	width: 90%;
+	padding-left: 1em;
 }
 
 #topnav-menu ul {
@@ -321,5 +367,104 @@ table tr:nth-child(2n) {
 }
 
 #topnav-menu li a {
-	color: #aac;
+	color: #ffffff;
+}
+
+*/
+
+.navbar {
+	margin-bottom: 0;
+	min-height: unset;
+}
+
+.navbar-nav>li>a {
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+.nav>li>a {
+	padding: 4px 15px;
+}
+.navbar.navbar-default {
+	background-color: rgb(72, 72, 92);
+	border: 0;
+	box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.25);
+	z-index: 1;
+	width: 100%;
+}
+.navbar.navbar-default .navbar-nav>li>a, .navbar.navbar-default .navbar-brand,
+.navbar-default .navbar-nav>.active>a:hover {
+	color: rgb(240,240,255);
+	fill: rgb(240,240,255);
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus {
+	background-color: unset;
+	color: rgb(240,240,255);
+}
+
+
+@media (max-width: 767px) {
+	/* Remarkade för att måste lägga på klassen navbar-fixed-top eller vad den hette i detta fall */
+	/*body {
+		padding-top: 28px;
+	}*/
+	/* This rule is needed to adjust in-page hash links to body padding-top: 
+	h1[id]::before, h2[id]::before, h3[id]::before, h4[id]::before, h5[id]::before, h6[id]::before { 
+		display: block; 
+		content: " "; 
+		margin-top: -48px;
+		height: 48px;
+		visibility: hidden; 
+		pointer-events: none;
+	}	*/
+}
+
+@media (min-width: 768px) {
+	.navbar.navbar-default {
+		position: absolute;
+		top: 0;
+		left: 0;
+		background-color: rgba(100,100,140,0.2);
+	}
+
+	.navbar-brand {
+		height: unset;
+		font-size: unset;
+		padding: 4px 15px;
+	}	
+  .navbar {
+    border-radius: unset;
+	}
+	.navbar-nav>li>a {
+		padding-top: 4px;
+		padding-bottom: 4px;
+	}
+
+	/*.navbar-default .navbar-nav>.active>a,
+	.navbar-default .navbar-nav>.active>a:hover,
+	.navbar-default .navbar-nav>.active>a:focus {
+		background-color: rgba(115, 134, 243, 0.8);
+	}*/
+
+	.navbar-default .navbar-nav>li>a:hover,
+	.navbar-default .navbar-nav>li>a:focus,
+	.navbar-default .navbar-nav>.active>a:hover,
+	.navbar-default a.navbar-brand:hover  {
+		background-color: rgba(165, 165, 221, 0.5);
+	}
+
+	.navbar-default .navbar-nav>.open>a,
+	.navbar-default .navbar-nav>.open>a:hover,
+	.navbar-default .navbar-nav>.open>a:focus {
+		background-color: rgb(255, 255, 255);
+	}	
+}
+
+.beta {
+	display: inline-block;
+	transform-origin: 12% 25%;
+	transform: scale(0.4);
+	width: 0.5em;
+	max-width: 0.5em;
+	overflow: visible;
 }

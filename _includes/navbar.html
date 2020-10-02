@@ -1,0 +1,85 @@
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <!-- <a class="navbar-brand" href="/" style="background-image: url('/assets/images/dexie-logo-icon-menu-dark-bkgimg.svg'); background-repeat: no-repeat; background-position: 7px 8px;">Dexie.js</a> -->
+      <a class="navbar-brand" href="/"><img src="/assets/images/dexie-logo-icon-menu-dark-img.svg" class="dexie-logo-icon-menu" />Dexie.js</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Docs <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/docs/">Dexie.js Docs</a></li>
+            <li><a href="/docs/API-Reference#quick-reference">Dexie.js Quick Reference</a></li>
+            <li><a href="/docs/Samples">Dexie.js Samples</a></li>
+            <li><a href="https://jsfiddle.net/3tf5r0cu/">Dexie.js Fiddle</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/cloud/docs/">Dexie Cloud Docs</a></li>
+            <li><a href="/cloud/rest-api">Dexie Cloud REST API</a></li>
+            <li><a href="/cloud/cli">Dexie Cloud CLI</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Questions <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="http://stackoverflow.com/questions/tagged/dexie">Dexie Questions on StackOverflow</a></li>
+            <li><a href="https://github.com/dfahlander/Dexie.js/issues?utf8=%E2%9C%93&q=is%3Aissue%20label%3Aquestion">Questions on GitHub</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="http://stackoverflow.com/questions/ask?tags=dexie">Ask new question on Stackoverflow (best chance for a reply)</a></li>
+            <li><a href="https://github.com/dfahlander/Dexie.js/issues/new">File a GitHub issue on Dexie.js</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Who use Dexie? <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="https://www.whatsapp.com/">WhatsApp</a></li>
+            <li><a href="https://todo.microsoft.com/">Microsoft To Do</a></li>
+            <li><a href="https://desktop.github.com/">Github Desktop</a></li>
+            <li><a href="https://www.flightradar24.com/">Flightradar24</a></li>
+            <li><a href="https://github.com/dfahlander/Dexie.js/issues/new?title=Please%20list%20my%20app&labels=question">...request to be listed here</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="https://w3techs.com/technologies/overview/javascript_library">Dexie.js: A Top 30 JS library (w3techs.com)</a></li>
+            <li><a href="https://trends.builtwith.com/javascript/Dexie.js">Builtwith.com's usage stats for Dexie.js</a></li>
+          </ul>
+        </li>
+        <li><a href="/cloud/"><img src="/assets/images/dexie-logo-icon-menu-dark-img.svg" class="dexie-logo-icon-menu" />Dexie Cloud<span class="beta">BETA</span></a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+
+    <div id="offline-switch" title="Make Dexie documentation available offline">
+      <span id="offlineOffHeading">Make available offline</span>
+      <span id="offlineOnHeading">Available offline</span>
+      <label class="switch">
+        <input
+          id="offline-checkbox"
+          type="checkbox"
+          onchange="setOffline(event.target.checked)"
+        />
+        <span class="slider round"></span>
+      </label>
+      <script>
+        updateSwitchFromStorage();
+      </script>
+    </div>
+    
+  </div><!-- /.container-fluid -->
+</nav>		
+<script>
+    document.querySelectorAll('nav.navbar ul>li>a').forEach(function (a) {
+      var href = a.getAttribute('href');
+      href = href && href.split('#')[0];
+      if (href && location.pathname === href) {
+        //console.log("Selected: ", a.href);
+        a.closest('li').className += ' active';
+      }
+    });
+</script>

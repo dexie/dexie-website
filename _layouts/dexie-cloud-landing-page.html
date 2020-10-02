@@ -5,6 +5,7 @@ prismStyle: 'vscode-dark'
 <html>
   {% include head.html %}
   <body>
+		{% include navbar.html %}
     {% include dexie-cloud-header.html %}
 
     <main class="container">
@@ -13,9 +14,9 @@ prismStyle: 'vscode-dark'
           <div class="col-md-3">
             <h2>Offline First</h2>
             <p>
-              While online, changes are synced instantly in both directions. When offline,
+              Create full-blown offline-first apps without ever needing a server. Changes are synced instantly and securely between the browser and the cloud. When offline,
               your users can continue using your app without disruptions.
-              Dexie Cloud gives your users a seamless offline/online experience.
+              Give your users seamless offline/online experience.
             </p>
             <p>
               <a class="btn btn-success" href="offline-first" role="button"
@@ -26,10 +27,10 @@ prismStyle: 'vscode-dark'
           <div class="col-md-3">
             <h2>Authentication</h2>
             <p>
-              Most apps use a mix of private, shared and public data.
+              Most apps needs to store both private, shared and public data.
               Authentication is needed to distinguish what to sync to who. Keep
               your own authentication if you already have one for your app. If
-              not, Dexie Cloud comes with a dead-simple email OTP
+              not, Dexie Cloud comes with a simple and secure email OTP
               authentication.
             </p>
             <p>
@@ -68,56 +69,62 @@ prismStyle: 'vscode-dark'
       </div>
       <hr/>
       <h2 id="getting-started">Get started with Dexie Cloud</h2>
+        <p>This guide assumes you're familiar with using <span style="font-weight: bold;">npm</span> to manage dependencies.
+          If you're unfamiliar with all that, try read <a href="https://webpack.js.org/guides/getting-started/">webpack's get started guide</a>.
+          </p>
         <div class='row'>
           <div class='col-md-6'>
-            <h3>1. Install dexie-cloud</h3>
-            <p>cd to your dexie-app and install dexie-cloud:</p>
-            <pre class="command-line language-bash" data-prompt="~/my-dexie-app $"><code style="margin:0;">npm install dexie-cloud</code></pre>
+            <h3>1. Install dexie and dexie-cloud</h3>
+            <p><span style="font-weight: bold">cd</span> to your web app and install dexie and dexie-cloud:</p>
+            <pre class="command-line language-bash" data-prompt="~/my-dexie-app $"><code style="margin:0;">npm install dexie dexie-cloud</code></pre>
             <h3>2. Create your database in the cloud</h3>
             <pre class="command-line language-bash" data-prompt="~/my-dexie-app $"><code style="margin:0;">npx dexie-cloud create-db</code></pre>
             <p>This command will prompt for and verify your email address and then create a new database for you in the cloud.
-            Two new files will be saved locally.</p>
-            <p>The files points out the db URL and authenticates further usage of the <span style="font-family: monospace;">dexie-cloud</span> CLI.
+            <p>
+              Your database will be given its own unique URL, printed out on the console. Use that URL in step 3.
+              <p>Two new files will also be saved locally.
+            The files points out the db URL and authenticates further usage of the <span style="font-family: monospace;">dexie-cloud</span> CLI.
               The files are not required for the runtime webapp.</p>
-            <pre><code style="margin:0;">~/my-dexie-app $ ls -l
+            <pre><code style="margin:0;">~/my-dexie-app $ npx dexie-cloud create-db
+Enter your E-mail address: foo@bar.com
+Enter OTP (check your email!): x067ae
+Database successfully created.
+Database URL: https://dnsdjknfd.dexie.cloud
+~/my-dexie-app $ ls -l
 -rw-r--r--    1 user staff       4  1 Oct 15:38 dexie-cloud.json
 -rw-r--r--    1 user staff       4  1 Oct 15:38 dexie-cloud.secret
 ...</code></pre>
               <p>The json file may be added to git, but never the .secret one.</p>
-              <h3>3. Trust the URLs of your app</h3>
-              <pre class="command-line language-bash" data-prompt="~/my-dexie-app $"><code style="margin:0;">npx dexie-cloud add-client "http://localhost:8080"
-npx dexie-cloud add-client "https://my-app.com"</code></pre>
-            <p>
-              This command white-lists your app URLs (so that <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">CORS</a> headers works).
-            </p>
           </div>
           <div class='col-md-6'>
-            <h3>4. Connect Dexie.js to the cloud</h3>
-            <pre><code class="language-javascript">
-    import Dexie from "dexie";
-    
-    //
-    // Enable dexie-cloud:
-    //
-    import "dexie-cloud";
+            <h3>3. Code your app</h3>
+            <pre><code class="language-javascript" style="margin:0;">  import Dexie from "dexie";
+  import DexieCloud from "dexie-cloud";
 
-    // Declare your Dexie the way you're used to...
-    const db = new Dexie('yourDb');
-    db.version(...).stores({
-      ...your schema // Replace "++"-keys with "$$" to get guids.
-    });
-    
-    //
-    // Connect your dexie-cloud database:
-    // This should be done directly after schema creation and
-    // will start to continously sync your database in both directions.
-    //
-    db.cloud.connect("https://&lt;yourdatabase&gt;.dexie.cloud", {
-      requireAuth: true
-    });
-  </code></pre>
-    <h3>5. Done!</h3>
-    Refresh webpage. Enjoy being connected!
+  // Declare your DB
+  const db = new Dexie('myDB', {addons: [DexieCloud]});
+  db.version(1).stores({
+    todoItems: '$$id, title, done' // $$ = autogenerated UUID
+  });
+
+  // Connect your dexie-cloud database:
+  db.cloud.connect("https://&lt;yourdatabase&gt;.dexie.cloud", {
+    requireAuth: true
+  });
+
+  document.getElementById('addButton').onclick = async () => {
+    // Create data:
+    await db.todoItems.add({title: "Foo" + Math.random(), done: 0});
+  }
+
+  // Query data:
+  db.todoItems.where({done: 0}).toArray().then(todoItems => {
+    console.log(todoItems);
+  });</code></pre>
+    <h3>4. Done!</h3>
+    <p>Refresh webpage and enjoy bidirectional sync!</p>
+    <p style="font-style: italic;">Read more about how to <a href="access-control">share data between users</a> and
+    <a href="authentication">customize authentication</a>.</p>
     
 
           </div>
@@ -132,6 +139,8 @@ npx dexie-cloud add-client "https://my-app.com"</code></pre>
     {% include footer.html %}
 
     <script src="/assets/js/prism-2020.js"></script>
+		<script src='/assets/js/jquery.min.js'></script>
+		<script src='/assets/js/bootstrap.min.js'></script>
 
     {% include google-analytics.html %}
 

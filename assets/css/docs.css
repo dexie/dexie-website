@@ -64,36 +64,8 @@ header.site-header {
 	font-style: italic;
 }
 
-.dexie-cloud #topnav-menu {
-	position: static;
-	margin-left: 2px;
-}
-
-.dexie-cloud #topnav-menu ul {
-	padding: 0;
-	line-height: 2em;
-}
-
-.dexie-cloud #topnav-menu li {
-	padding: 4px 6px;
-}
-
-#topnav-menu li a {
-	color: rgba(255, 255, 255, 0.648);
-	white-space: nowrap;
-}
-
-#topnav-menu li.selected {
-	/*border: 1px solid black;*/
-	background-color: rgba(255,255,255,1);
-}
-
 a.getstarted.selected {
 	background-color: #fff;
-	color: #222;
-}
-
-#topnav-menu li.selected a {
 	color: #222;
 }
 

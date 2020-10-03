@@ -12,11 +12,10 @@ prismStyle: 'vscode-dark'
       <div id="callouts">
         <div class="row">
           <div class="col-md-3">
-            <h2>Offline First</h2>
+            <h2>Two-way sync</h2>
             <p>
-              Create full-blown offline-first apps without ever needing a server. Changes are synced instantly and securely between the browser and the cloud. When offline,
-              your users can continue using your app without disruptions.
-              Give your users seamless offline/online experience.
+              Keep browser continously in sync with a central cloud-hosted database.
+              You will not need to setup any server - just a one-line npx command to create your DB in the cloud and get going.
             </p>
             <p>
               <a class="btn btn-success" href="offline-first" role="button"
@@ -27,11 +26,8 @@ prismStyle: 'vscode-dark'
           <div class="col-md-3">
             <h2>Authentication</h2>
             <p>
-              Take advantage of the secure and passwordless email OTP
-              that comes with Dexie Cloud. If you don't have a server,
-              this is an easy way to get going. If you prefer, you can also easily integrate
-              with Google or any other 3rd party authentication or your own
-              custom authentication system.
+              No need to setup authentication - Secure passwordless OTP (via email) is included. If you already have authentication - use that instead if you prefer.
+              Anonymous use cases also supported.
             </p>
             <p>
               <a class="btn btn-success" href="authentication" role="button"
@@ -42,9 +38,9 @@ prismStyle: 'vscode-dark'
           <div class="col-md-3">
             <h2>Access Control</h2>
             <p>
-              Access control is enforced in the Dexie Cloud backend. A
-              multi-tenant model lets your users keep their own private data for
-              themselves, or share it with their teams or friends.
+              A per-object access model lets your users keep their synced private data for
+              themselves or shared with their teams or friends. Build your access control models
+              using simple Dexie.js objects.
             </p>
             <p>
               <a class="btn btn-success" href="access-control" role="button"
@@ -76,28 +72,21 @@ prismStyle: 'vscode-dark'
           <div class='col-md-6'>
             <h3>1. Install dexie and dexie-cloud</h3>
             <p><span style="font-weight: bold">cd</span> to your web app and install dexie and dexie-cloud:</p>
-            <pre class="command-line language-bash" data-prompt="~/my-dexie-app $"><code style="margin:0;">npm install dexie dexie-cloud</code></pre>
+            <pre class="command-line language-bash" data-prompt="~/my-web-app $"><code style="margin:0;">npm install dexie dexie-cloud</code></pre>
             <h3>2. Create your database in the cloud</h3>
-            <pre class="command-line language-bash" data-prompt="~/my-dexie-app $"><code style="margin:0;">npx dexie-cloud create-db</code></pre>
+            <pre class="command-line language-bash" data-prompt="~/my-web-app $"><code style="margin:0;">npx dexie-cloud create-db</code></pre>
             <p>This command will prompt for and verify your email address and then create a new database for you in the cloud.
             <p>
               Your database will be given its own unique URL, printed out on the console. Use that URL in step 3.
               <p>Two new files will also be saved locally.
             The files points out the db URL and authenticates further usage of the <span style="font-family: monospace;">dexie-cloud</span> CLI.
               The files are not required for the runtime webapp.</p>
-            <pre><code style="margin:0;">~/my-dexie-app $ npx dexie-cloud create-db
-Enter your E-mail address: foo@bar.com
-Enter OTP (check your email!): x067ae
-Database successfully created.
-Database URL: https://dnsdjknfd.dexie.cloud
-~/my-dexie-app $ ls -l
--rw-r--r--    1 user staff       4  1 Oct 15:38 dexie-cloud.json
--rw-r--r--    1 user staff       4  1 Oct 15:38 dexie-cloud.secret
-...</code></pre>
-              <p>The json file may be added to git, but never the .secret one.</p>
+            <h3>3. Whitelist webapp URLs</h3>
+            <pre class="command-line language-bash" data-prompt="~/my-web-app $"><code style="margin:0;">npx dexie-cloud whitelist http://localhost:8080</code></pre>
+            <p style="font-style: italic;">...assuming you're app is served from localhost, port 8080.</p>
           </div>
           <div class='col-md-6'>
-            <h3>3. Code your app</h3>
+            <h3>4. Code your app</h3>
             <pre><code class="language-javascript" style="margin:0;">  import Dexie from "dexie";
   import DexieCloud from "dexie-cloud";
 
@@ -110,19 +99,10 @@ Database URL: https://dnsdjknfd.dexie.cloud
   // Connect your dexie-cloud database:
   db.cloud.connect("https://&lt;yourdatabase&gt;.dexie.cloud", {
     requireAuth: true
-  });
-
-  document.getElementById('addButton').onclick = async () => {
-    // Create data:
-    await db.todoItems.add({title: "Foo" + Math.random(), done: 0});
-  }
-
-  // Query data:
-  db.todoItems.where({done: 0}).toArray().then(todoItems => {
-    console.log(todoItems);
   });</code></pre>
-    <h3>4. Done!</h3>
-    <p>Refresh webpage and enjoy bidirectional sync!</p>
+    <h3>5. Done!</h3>
+    <p>Enjoy continous sync as your app adds, updates and queries <span style="font-weight: bold; font-family: monospace;">db.todoItems</span>
+    like it would do in any Dexie.js application (see <a href="/docs/API-Reference#add-items">Dexie.js Quick Reference</a>) </p>
     <p style="font-style: italic;">Read more about how to <a href="access-control">share data between users</a> and
     <a href="authentication">customize authentication</a>.</p>
     

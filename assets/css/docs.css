@@ -35,11 +35,35 @@ header.site-header {
 	padding: 15px 15px 15px 15px;
 }
 
+div.video-parent {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	min-width: 100%;
+	height: 100%;
+	min-height: 100%;
+	overflow: hidden;
+	z-index: -1;
+}
+video.banner-video {
+	position: absolute;
+  left: 0;
+	top: 0;
+	width: 100%;
+	min-width: 100%;
+	height: 100%;
+	object-fit: cover;
+	pointer-events: none;
+	z-index: -1;
+}
+
 .docs-page-jumbotron.dexie-cloud {
 	/*background-color: #9e70d3; */
 	/*background-image: linear-gradient(#6e6cf5 0%, #9e70d3 100%);*/
 	/*background-image: linear-gradient(#8853c5, #9670d3, #707ad3, #5d8fbd);*/
-	background-image: linear-gradient( #5471e9, #1e3fd3,#4b965f);
+	/*background-image: linear-gradient( #5471e9, #1e3fd3,#4b965f);*/
+	background: transparent; /* rgba(63, 34, 145, 0.3); */
 	/* background-image: url('../images/dexie-cloud/norrsken-cropped-compressed.jpg'); */
 	color: white;
 }

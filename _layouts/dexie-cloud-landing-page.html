@@ -12,21 +12,22 @@ prismStyle: 'vscode-dark'
       <div id="callouts">
         <div class="row">
           <div class="col-md-3">
-            <h2>Two-way sync</h2>
+            <h2>Database Sync</h2>
             <p>
-              Keep browser continously in sync with a central cloud-hosted database.
-              You will not need to setup any server - just a one-line npx command to create your DB in the cloud and get going.
+              Keep your Dexie databases continously in sync with a central cloud-hosted database.
+              You will not need to setup any server - create your <span style="font-weight: bold;">db</span> in the cloud by entering an <span style="font-weight: bold;">npx</span> command and get going.
             </p>
             <p>
-              <a class="btn btn-success" href="offline-first" role="button"
-                >Read more &raquo;</a
+              <a class="btn btn-success" href="#getting-started" role="button"
+                >Get started &raquo;</a
               >
             </p>
           </div>
           <div class="col-md-3">
             <h2>Authentication</h2>
             <p>
-              No need to setup authentication - Secure passwordless OTP (via email) is included. If you already have authentication - use that instead if you prefer.
+              Secure OTP is part of the service so you don't have to deal with setting up auth.
+              Also easily integrated with your existing auth if you prefer.
               Anonymous use cases also supported.
             </p>
             <p>
@@ -51,9 +52,9 @@ prismStyle: 'vscode-dark'
           <div class="col-md-3">
             <h2>Scale to Millions</h2>
             <p>
-              Dexie cloud is built to scale both vertically and horizontally. We
-              use an auto-scalable cloud infrastructure and we balance both our
-              and your tenants across a dynamic cluster of shards.
+              Dexie cloud is built to scale both horizontally and vertically.
+              A cloud infrastructure enables us to auto-scale disk and resources
+              as well as adding new shards when popularity explode.
             </p>
             <p>
               <a class="btn btn-success" href="scaling" role="button"

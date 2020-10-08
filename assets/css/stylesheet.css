@@ -245,8 +245,10 @@ table tr:nth-child(2n) {
 }
 
 .btn-edit-doc-page {
-	font-size: 18px;
+	font-size: 10px;
 	line-height: 1.33;
+	float: right;
+	margin-top: 9px;
 }
 
 /* Switch */ 

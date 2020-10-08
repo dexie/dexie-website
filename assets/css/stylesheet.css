@@ -441,8 +441,8 @@ table tr:nth-child(2n) {
 	display: inline-block;
 	transform-origin: 12% 25%;
 	transform: scale(0.4);
-	width: 0.5em;
-	max-width: 0.5em;
+	width: 0.6em;
+	max-width: 0.6em;
 	overflow: visible;
 }
 

@@ -1,9 +1,7 @@
 ---
-layout: dexie-cloud
-title: 'Sharding and Scalability'
+layout: docs-dexie-cloud
+title: 'Authentication'
 ---
-
-# Sharding and Scalability
 
 Blahoj blaha!
 

@@ -1,6 +1,6 @@
 ---
-layout: dexie-cloud
-title: 'Get Started'
+layout: docs-dexie-cloud
+title: 'Get Started with Dexie Cloud'
 ---
 ## 1. Create your database
 ```

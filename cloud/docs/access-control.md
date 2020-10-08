@@ -1,9 +1,7 @@
 ---
-layout: dexie-cloud
-title: 'Authentication'
+layout: docs-dexie-cloud
+title: 'Access Control'
 ---
-
-# Authentication
 
 Blahoj blaha!
 

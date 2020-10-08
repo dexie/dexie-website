@@ -32,7 +32,7 @@ prismStyle: 'ghcolors'
         <ul class="docs-toc">
           {% assign pages = site.pages | sort:"title"  %}
           {% for page in pages %}
-            {% if page.layout == 'docs' %}
+            {% if page.layout == 'docs' or page.layout == 'docs-dexie-cloud' %}
               <li>
                 <a href="{{ page.url | replace: '.html', ''}}">{{ page.title }}</a>
               </li>

@@ -1,9 +1,7 @@
 ---
-layout: dexie-cloud
-title: 'Access Control'
+layout: docs-dexie-cloud
+title: 'Sharding and Scalability'
 ---
-
-# Access Control
 
 Blahoj blaha!
 

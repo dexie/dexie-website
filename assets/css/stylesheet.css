@@ -42,7 +42,7 @@ h1[id]::before, h2[id]::before, h3[id]::before, h4[id]::before, h5[id]::before, 
 	background: #2E0854;
 }
 
-#parallax .btn {
+#parallax .btn, #star-button {
 	text-shadow: none;
 }
 
@@ -366,6 +366,11 @@ table tr:nth-child(2n) {
 	color: rgb(240,240,255);
 	fill: rgb(240,240,255);
 }
+@media (max-width: 767px) {
+	.navbar-default .navbar-nav .open .dropdown-menu>li>a {
+			color: rgb(190, 190, 218)
+	}
+}
 
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus {
 	background-color: unset;
@@ -437,4 +442,42 @@ table tr:nth-child(2n) {
 	width: 0.5em;
 	max-width: 0.5em;
 	overflow: visible;
+}
+
+.shoutouts {
+	max-width: 100vw;
+	padding: 0;
+	margin: 0 0;
+	font-size:20pt;
+	text-align: center;
+	font-variant: small-caps;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+@media (max-width: 767px) {
+	.shoutouts { font-size: 12pt; }
+}
+
+.shoutouts p { padding: 1vw 0; display: none; }
+.shoutouts p.shouting { display: unset; }
+.shoutouts .letter {
+	display: inline-block;
+	line-height: 1em;
+}
+
+#form-prompts, #signup-form {
+	max-width: 500px;
+}
+
+p.prompts-message {
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+p.prompts-message.prompts-sub-message {
+	font-weight: bold;
+	font-size: 12pt;
+	margin-bottom: 5px;
+	margin-top: 20px;
 }

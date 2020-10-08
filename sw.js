@@ -8,6 +8,8 @@ const raw = [
 
     "/",
     "https://ghbtns.com/github-btn.html?user=dfahlander&repo=Dexie.js&type=star&count=true",
+    "https://api.github.com/repos/dfahlander/Dexie.js",
+    "https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js",
     "https://buttons.github.io/buttons.js",
     "https://unpkg.com/dexie",
     "https://www.google-analytics.com/analytics.js",
@@ -18,7 +20,11 @@ const raw = [
     {%for file in site.static_files %}
     "{{ file.path }}",
     {% endfor %}
-].filter(file => !file.startsWith("/test") && !file.includes("analytics.js"));
+].filter(file =>
+    !file.startsWith("/test") &&
+    !file.includes("analytics.js") &&
+    !file.endsWith(".sh") &&
+    !file.startsWith("/assets/movies/"));
 
 const CACHE_NAME = 'dexiejs-offline-cache';
 
@@ -87,7 +93,7 @@ self.addEventListener('install', function (event) {
                 const sliceDice = leadingSlashRemoved.splice(0, 50);
                 await waitForAll(sliceDice.map(async url => {
                     const response = await fetch(url);
-                    //console.log("URL", url, response);
+                    console.log("URL", url, response);
                     await cache.put(url, response);
                 }));
             } while(leadingSlashRemoved.length > 0);
@@ -99,21 +105,25 @@ self.addEventListener('install', function (event) {
 const MAX_WAIT = 300; // If network responds slower than 100 ms, respond with cache instead
 
 self.addEventListener('fetch', function (event) {
-    // Start reading from cache
-    const cachedResponsePromise = caches.match(event.request);
     const request = event.request;
+    // Don't take over if it's not a GET, HEAD or OPTIONS request
+    if (request.method !== 'GET' && request.method !== "HEAD" && request.method !== "OPTIONS") return;
+    // Don't cache google analytics requests:
+    if (/google-analytics/.test(request.url)) return;
+
+    // Start reading from cache
+    const cachedResponsePromise = caches.match(request, {ignoreVary: true});
     const fetchPromise = fetch(request);
-    if (/google-analytics/.test(request.url) || request.method === "POST") {
-        fetchPromise.then(res => event.respondWith(res)).catch(err => {
-            console.warn(`Google analytics request failed`, request, "Error:", err);
-        });
-        return;
-    }
+    let timeoutHandle;
     const timeoutPromise = new Promise(resolve => {
-        setTimeout(()=>resolve("timedout"), MAX_WAIT);
+        timeoutHandle = setTimeout(()=>{
+            timeoutHandle = null;
+            resolve("timedout");
+        }, MAX_WAIT)
     });
     // Start fetching in parallell
     event.respondWith(Promise.race([fetchPromise, timeoutPromise]).then(async res => {
+        if (timeoutHandle) clearTimeout(timeoutHandle);
         // Fetch successful, probably online. See if we also have the cached response:
         const cachedResponse = await cachedResponsePromise.catch(err => null);
         if (res === "timedout" || !res.ok) {
@@ -122,27 +132,37 @@ self.addEventListener('fetch', function (event) {
             // In case we have an OK response in the cache, respond with that one instead:
             if (cachedResponse && cachedResponse.ok) {
                 if (res === "timedout") console.log("URL", request.url, "timedout. Serving it from cache to speed up site");
+                // Either timeout or unsuccessful response from server.
+                // But we have a successful response in cache, so let's respond with that:
                 return cachedResponse;
             } else if (res === "timedout") {
                 // We don't have anything in cache. Wait for fetch even if it takes time.
                 res = await fetchPromise;
+                if (!res.ok) {
+                    // Response not successful. Respond with it without trying to cache it.
+                    return res;
+                }
+                // else, the slow response was successful. Let it continue further down
+                // so we can cache this slow response.
             } else {
+                // res not ok. Don't cache it but return it.
                 return res;
             }
         }
 
-        if (res.ok) {
-            // Should we update the cache with this fresh version?
-            if (!cachedResponse || (cachedResponse.headers.get("last-modified") !== res.headers.get("last-modified"))) {
-                // There were no cached response, or "last-modified" headers was changed - keep the cache up-to-date,
-                // so that, when the user goes offline, it will have the latest and greatest, and not revert to old versions
-                const cache = await caches.open(CACHE_NAME);
-                await cache.put(request, res.clone());
-            }
+        // We come here if the real fetch was successful.
+        // Should we update the cache with this fresh version?
+        if (!cachedResponse || (cachedResponse.headers.get("last-modified") !== res.headers.get("last-modified"))) {
+            // There were no cached response, or "last-modified" headers was changed - keep the cache up-to-date,
+            // so that, when the user goes offline, it will have the latest and greatest, and not revert to old versions
+            const cache = await caches.open(CACHE_NAME);
+            await cache.put(request, res.clone());
         }
         return res;
     }, async error => {
         const cachedResponse = await cachedResponsePromise.catch(err => null);
+        console.log("sw: Finding in cache:", request.url, cachedResponse);
+        console.log("sw: ok?:", cachedResponse && cachedResponse.ok);
         if (cachedResponse && cachedResponse.ok) {
             return cachedResponse;
         }

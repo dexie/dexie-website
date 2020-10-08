@@ -1,0 +1,39 @@
+<div id="signup-form" style="display: none;">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Want to try Dexie Cloud<span class="beta">BETA</span> &nbsp; ?</h3>
+      <br/>
+      <label for="emailAddressInput">Your email address</label>
+      <div class="input-group input-group-lg">
+        <span class="input-group-addon">@</span>
+        <input id="emailAddressInput" type="text" class="form-control" placeholder="you@example.com">
+      </div>
+      <div id="emailAddrAlert" class="alert alert-warning" role="alert" style="display: none;">
+        Invalid email address
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <p>We will not share your email with anyone else.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <button class="btn btn-primary mb-2" id="applyBetaBtn"><span class="glyphicon glyphicon-ok"></span> Apply for the beta program</button>
+    </div>
+  </div>
+  <hr/>
+</div>
+<div id="form-prompts" style="display: none;">
+  <div id="form-prompts-spinner">
+    <div>
+      <img src="/assets/images/ellipsis-loader.svg" style="padding: 0; margin: 8px; border: 0" />
+      Please wait...
+    </div>
+  </div>
+  <div id="form-prompts-area">          
+  </div>
+  <hr/>
+</div>
+<script src="/assets/js/form-prompts.js"></script>

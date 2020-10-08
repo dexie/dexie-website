@@ -1,3 +1,6 @@
+---
+prismStyle: 'vscode-dark'
+---
 <!DOCTYPE html>
 <html>
 
@@ -9,6 +12,7 @@
     {% include dexie-cloud-header.html %}
 
     <main class="container">
+      {% include signup-forms.html %}
       {{ content }}
     </main>
 
@@ -16,7 +20,8 @@
 
     <script src='/assets/js/prism-2020.js'></script>
 		<script src='/assets/js/jquery.min.js'></script>
-		<script src='/assets/js/bootstrap.min.js'></script>
+    <script src='/assets/js/bootstrap.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"></script>    
 
     {% include google-analytics.html %}
 

@@ -5,16 +5,43 @@ prismStyle: 'vscode-dark'
 <html>
   {% include head.html %}
   <body>
-		{% include navbar.html %}
+    {% include navbar.html %}
     {% include dexie-cloud-header.html %}
 
     <main class="container">
+      {% include signup-forms.html %}
+      <div class="shoutouts">
+        <p>
+          Create awesome offline-first apps
+        </p>
+        <p>
+          Eager sync and collaboration when online
+        </p>
+        <p>
+          You won't need a server
+        </p>
+        <p>
+          ...to be released in Q1/2021.
+        </p>
+        <!-- <ul>
+            <li>Online collaboration</li>
+            <li>Offline email clients</li>
+            <li>Calendars</li>
+            <li>Enterprise collaboration</li>
+            <li>Offline Warehousing</li>
+            <li>Diaries</li>
+            <li>Todos</li>
+            <li>Games</li>
+            <li>...and more</li>
+          </ul>-->
+      </div>
       <div id="callouts">
         <div class="row">
+
           <div class="col-md-3">
-            <h2>Database Sync</h2>
+            <h2>Sync</h2>
             <p>
-              Keep your Dexie databases continously in sync with a central cloud-hosted database.
+              Keep your Dexie database continously in sync with a central cloud-hosted database.
               You will not need to setup any server - create your <span style="font-weight: bold;">db</span> in the cloud by entering an <span style="font-weight: bold;">npx</span> command and get going.
             </p>
             <p>
@@ -26,7 +53,7 @@ prismStyle: 'vscode-dark'
           <div class="col-md-3">
             <h2>Authentication</h2>
             <p>
-              Secure OTP is part of the service so you don't have to deal with setting up auth.
+              Email OTP is part of the service so you don't have to deal with setting up auth.
               Also easily integrated with your existing auth if you prefer.
               Anonymous use cases also supported.
             </p>
@@ -65,26 +92,19 @@ prismStyle: 'vscode-dark'
         </div>
       </div>
       <hr/>
-      <h2 id="getting-started">Get started with Dexie Cloud</h2>
+      <h2 id="getting-started">Get Started</h2>
         <p>This guide assumes you're familiar with using <span style="font-weight: bold;">npm</span> to manage dependencies.
           If you're unfamiliar with all that, try read <a href="https://webpack.js.org/guides/getting-started/">webpack's get started guide</a>.
           </p>
         <div class='row'>
           <div class='col-md-6'>
             <h3>1. Install dexie and dexie-cloud</h3>
-            <p><span style="font-weight: bold">cd</span> to your web app and install dexie and dexie-cloud:</p>
             <pre class="command-line language-bash" data-prompt="~/my-web-app $"><code style="margin:0;">npm install dexie dexie-cloud</code></pre>
-            <h3>2. Create your database in the cloud</h3>
+            <h3 class="widescreen">2. Create your database in the cloud</h3>
+            <h3 class="slimscreen">2. Create your db in the cloud</h3>
             <pre class="command-line language-bash" data-prompt="~/my-web-app $"><code style="margin:0;">npx dexie-cloud create-db</code></pre>
-            <p>This command will prompt for and verify your email address and then create a new database for you in the cloud.
-            <p>
-              Your database will be given its own unique URL, printed out on the console. Use that URL in step 3.
-              <p>Two new files will also be saved locally.
-            The files points out the db URL and authenticates further usage of the <span style="font-family: monospace;">dexie-cloud</span> CLI.
-              The files are not required for the runtime webapp.</p>
-            <h3>3. Whitelist webapp URLs</h3>
-            <pre class="command-line language-bash" data-prompt="~/my-web-app $"><code style="margin:0;">npx dexie-cloud whitelist http://localhost:8080</code></pre>
-            <p style="font-style: italic;">...assuming you're app is served from localhost, port 8080.</p>
+            <h3>3. Whitelist your app URLs</h3>
+            <pre class="command-line language-bash" data-prompt="~/my-web-app $"><code style="margin:0;">npx dexie-cloud whitelist &lt;URL&gt;</code></pre>
           </div>
           <div class='col-md-6'>
             <h3>4. Code your app</h3>
@@ -101,15 +121,18 @@ prismStyle: 'vscode-dark'
   db.cloud.connect("https://&lt;yourdatabase&gt;.dexie.cloud", {
     requireAuth: true
   });</code></pre>
-    <h3>5. Done!</h3>
-    <p>Enjoy continous sync as your app adds, updates and queries <span style="font-weight: bold; font-family: monospace;">db.todoItems</span>
-    like it would do in any Dexie.js application (see <a href="/docs/API-Reference#add-items">Dexie.js Quick Reference</a>) </p>
-    <p style="font-style: italic;">Read more about how to <a href="access-control">share data between users</a> and
-    <a href="authentication">customize authentication</a>.</p>
-    
-
           </div>
           </div>
+          <h3>5. Done!</h3>
+          <p>Enjoy.</p>
+          <p>With this setup, users will have to login using email OTP the first time they go to your app. If you already have another authentication in place,
+            or want to integrate with the authentication of your choice, this can be defined in the options object passed to db.cloud.connect(). The API
+            docs for Dexie Cloud will provide more details when released...
+          </p>
+          <p>Your app will now instantly sync changes with the cloud. If offline, changes are queued until next time you are online.</p>
+          <p>Your app can now use Dexie as you normally would do in Dexie.js - add, update, delete and query <span style="font-weight: bold; font-family: monospace;">db.todoItems</span>.
+          </p>
+  
       </div>
   
       <hr/>
@@ -121,7 +144,9 @@ prismStyle: 'vscode-dark'
 
     <script src="/assets/js/prism-2020.js"></script>
 		<script src='/assets/js/jquery.min.js'></script>
-		<script src='/assets/js/bootstrap.min.js'></script>
+    <script src='/assets/js/bootstrap.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"></script>
+    <script src="/assets/js/shoutouts.js"></script>
 
     {% include google-analytics.html %}
 

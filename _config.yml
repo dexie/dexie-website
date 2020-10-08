@@ -13,7 +13,8 @@ description: > # this means to ignore newlines until "baseurl:"
 url: "https://dexie.org" # the base hostname & protocol for your site
 twitter_username: dfahlander
 github_username:  dfahlander
-include: ['docs']
+include: ['docs/','cloud/']
+exclude: ['*.sh']
 kramdown:
   input: GFM
   hard_wrap: false

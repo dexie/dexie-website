@@ -98,12 +98,11 @@ h1[id]::before, h2[id]::before, h3[id]::before, h4[id]::before, h5[id]::before, 
 	margin-bottom: 20px;
 }
 
-code {
+/*code {
 	float: left;
 	width: 100%;
-	margin-bottom: 20px;
 	overflow: auto;
-}
+}*/
 
 code::-webkit-scrollbar {
     width: 10px;

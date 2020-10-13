@@ -6,7 +6,7 @@ title: 'Access Control'
 Blahoj blaha!
 
 ```
-npx dexie-cloud create-db
+npx dexie-cloud create
 ```
 
 

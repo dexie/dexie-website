@@ -6,7 +6,7 @@ title: 'Sharding and Scalability'
 Blahoj blaha!
 
 ```
-npx dexie-cloud create-db
+npx dexie-cloud create
 ```
 
 

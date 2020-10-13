@@ -4,7 +4,7 @@ title: 'Get Started with Dexie Cloud'
 ---
 ## 1. Create your database
 ```
-$ npx dexie-cloud create-db
+$ npx dexie-cloud create
 Enter your email address: foo@bar.com
 Enter OTP: sud723
 Creating database...
@@ -13,12 +13,12 @@ Successfully created new database!
 We created two new local files for you:
 =======================================
 dexie-cloud.json - URL to database
-dexie-cloud.key - contains client ID and secret
+dexie-cloud.secrets - contains client ID and secret
 ```
 
 ## 2. White-list your app
 ```
-$ npx dexie-cloud white-list http://localhost:3000
+$ npx dexie-cloud whitelist http://localhost:3000
 ```
 
 

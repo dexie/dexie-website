@@ -4,7 +4,7 @@ title: 'Dexie Cloud'
 ---
 ## Start Coding Your App Today
 
-Start creating your awesome offline-first app **today**. While waiting for Dexie Cloud, use plain Dexie.js to create the model and the app. When Dexie Cloud is relased you can just hook it on to it!
+Start creating your awesome offline-first app **today**. While waiting for Dexie Cloud, use plain Dexie.js to create the app. It won't sync (yet), but all app logic can be coded in advance. When Dexie Cloud is relased you can just hook it on to it.
 
 To prepare your app for Dexie Cloud:
 
@@ -17,7 +17,7 @@ When launching your app, our extremely simple [pricing](/cloud/pricing) makes it
 
 <hr/>
 
-## That's all folks! 
-Now go make something magnificent.
+## Want to know more?
+Check out [Dexie Cloud Docs](/cloud/docs) (still under construction)
 
 <br/>

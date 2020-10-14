@@ -27,7 +27,7 @@ prismStyle: 'vscode-dark'
           Eager sync and collaboration when online
         </p>
         <p>
-          Periodic sync while inactive
+          Periodic sync when app not nactive
         </p>
         <p>
           ...to be released in Q1-Q2/2021.
@@ -104,15 +104,14 @@ prismStyle: 'vscode-dark'
       <hr/>
       <h2 id="getting-started">Get Started</h2>
         <p>This guide assumes your existing app use dexie and maintain dependencies via <span style="font-weight: bold;">npm</span>.
-          If you're unfamiliar with all that, try read <a href="/docs/getting-started">Dexie.js getting started guide</a> and <a href="https://webpack.js.org/guides/getting-started/">webpack's get started guide</a>.
+          If you're unfamiliar with all that, try read <a href="/docs/Tutorial/Getting-started">Dexie.js getting started guide</a> and <a href="https://webpack.js.org/guides/getting-started/">webpack's get started guide</a>.
           </p>
         <div class='row'>
           <div class='col-md-6'>
             <h3 class="widescreen">1. Create your database in the cloud</h3>
             <h3 class="slimscreen">1. Create your db in the cloud</h3>
-            <pre class="command-line language-bash" data-prompt="~/my-web-app $" data-filter-output="(out)"><code style="margin:0;">npx dexie-cloud create
-(out)Successfully created database "d73kdb1".
-(out)URL: "https://d73kdb1.dexie.cloud"</code></pre>
+            <pre class="command-line language-bash" data-prompt="~/my-web-app $" data-filter-output="(out)"><code style="margin:0;">npx dexie-cloud create</code></pre>
+            <p>The URL of your database will output to the console.</p>
             <h3>2. Whitelist your app origin(s)</h3>
             <pre class="command-line language-bash" data-prompt="~/my-web-app $"><code style="margin:0;">npx dexie-cloud whitelist http://localhost:8080</code></pre>
             <h3>3. Install dexie-cloud-addon</h3>
@@ -134,6 +133,7 @@ prismStyle: 'vscode-dark'
   db.cloud.connect("https://&lt;yourdatabase&gt;.dexie.cloud", {
     requireAuth: true
   });</code></pre>
+          <p>Use the URL that was printed out in step 1.</p>
           </div>
           </div>
           <h3>5. Done!</h3>

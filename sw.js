@@ -9,7 +9,6 @@ const raw = [
     "/",
     "https://ghbtns.com/github-btn.html?user=dfahlander&repo=Dexie.js&type=star&count=true",
     "https://api.github.com/repos/dfahlander/Dexie.js",
-    "https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js",
     "https://buttons.github.io/buttons.js",
     "https://unpkg.com/dexie",
     "https://www.google-analytics.com/analytics.js",

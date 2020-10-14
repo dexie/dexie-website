@@ -23,7 +23,7 @@
         opacity: [1, 0],
         easing: "easeInExpo",
         duration: 500,
-        delay: (el, i) => 3000 + 20 * i
+        delay: (el, i) => 2000 + 20 * i
       });
     anim.finished.then(()=>{
       currentShout = (currentShout + 1) % shoutouts.length;

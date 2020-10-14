@@ -1,11 +1,24 @@
 <header class="site-header">
   <div class="jumbotron docs-page-jumbotron">
     <div class="container">
+      <!-- <div style="position:relative; margin:0;padding:0; width: 100%;">
+        <a href="/cloud/" style="position: absolute; top: 0; right: 200px;">
+          <h1>Need Sync?</h1>
+        </a>
+      </div> -->
       <a href="/">
         <img src="/assets/images/dexie-logo-icon.svg" class="dexie-logo-icon" />
         <h1>Dexie.js Docs</h1>
       </a>
-      {% include github-star-btn.html %}      
+      <a href="/cloud/" id="cloud-promoter">
+        <div class="shoutouts">
+          <p>Need sync?</p>
+          <p>Coming soon: Dexie Cloud</p>
+        </div>
+      </a>  
+    {% include github-star-btn.html %}      
     </div>
 </div>
 </header>
+<script src="/assets/js/anime.min.js"></script>
+<script src="/assets/js/shoutouts.js"></script>

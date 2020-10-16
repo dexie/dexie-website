@@ -5,7 +5,7 @@ title: "Dexie Cloud Pricing"
 
 # Pricing
 
-Free forever for development and demos.
+Free forever for development, tests and demos.
 
 |                                       | Free       | Production &nbsp;       | Premium Software License                |
 | ------------------------------------- | ---------- | ----------------------- | --------------------------------------- |

@@ -111,6 +111,8 @@ h1[id]::before, h2[id]::before, h3[id]::before, h4[id]::before, h5[id]::before, 
 
 code {
 	overflow: auto;
+	float: left;
+	width: 100%;
 }
 
 code::-webkit-scrollbar {
@@ -119,12 +121,12 @@ code::-webkit-scrollbar {
 }
 
 code::-webkit-scrollbar-track {
-	background: rgba(255, 255, 255, .1);
+	background: rgba(128, 128, 128, .1);
 }
 
 code::-webkit-scrollbar-thumb {
-	background: rgba(255, 255, 255, .2);
-	border: 1px solid rgba(255, 255, 255, .15);
+	background: rgba(128, 128, 128, .2);
+	border: 1px solid rgba(128, 128, 128, .15);
 	border-radius: 1px;
 }
 

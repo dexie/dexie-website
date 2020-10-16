@@ -27,7 +27,7 @@ prismStyle: 'vscode-dark'
           Eager sync and collaboration when online
         </p>
         <p>
-          Periodic sync when app not nactive
+          Periodic sync when app not active
         </p>
         <p>
           ...to be released in Q1-Q2/2021.
@@ -49,10 +49,10 @@ prismStyle: 'vscode-dark'
         <div class="row">
 
           <div class="col-md-3">
-            <h2>Sync</h2>
+            <h2>Almost Zero Config</h2>
             <p>
-              Keep your Dexie database continously in sync with a central cloud-hosted database.
-              Extremely easy to setup - just create your <span style="font-weight: bold;">db</span> in the cloud by entering a simple <span style="font-weight: bold;">npx</span> command and get going.
+              Create your <span style="font-weight: bold;">db</span> in the cloud by just running a simple <span style="font-weight: bold;">npx</span> command!
+              Use the new Dexie Cloud addon to connect your Dexie database with the cloud and enjoy multi-user bidirectional sync.
             </p>
             <p>
               <a class="btn btn-success" href="#getting-started" role="button"
@@ -64,7 +64,7 @@ prismStyle: 'vscode-dark'
             <h2>Authentication</h2>
             <p>
               Passwordless email OTP is part of the service so you don't have to deal with setting up auth.
-              Also easily integrated with your existing auth if you prefer.
+              Replace with your existing auth if you prefer.
               Anonymous use cases also supported.
             </p>
             <p>
@@ -102,7 +102,7 @@ prismStyle: 'vscode-dark'
         </div>
       </div>
       <hr/>
-      <h2 id="getting-started">Get Started</h2>
+      <h2 id="getting-started">Get started</h2>
         <p>This guide assumes your existing app use dexie and maintain dependencies via <span style="font-weight: bold;">npm</span>.
           If you're unfamiliar with all that, try read <a href="/docs/Tutorial/Getting-started">Dexie.js getting started guide</a> and <a href="https://webpack.js.org/guides/getting-started/">webpack's get started guide</a>.
           </p>
@@ -141,15 +141,15 @@ prismStyle: 'vscode-dark'
           <p>Your db facing code will continue work like before: query and update the <span font-weight="bold">db</span>
             as you normally do with plain Dexie.js.
           </p>
+          <p>Your app will instantly sync changes with the cloud. When offline, changes are queued until next time you are online.
+            When online, changes will be synced eagerly in both directions, allowing also things like online collaboration.
+            If user is idle for a time, the client will go over to period sync strategy instead of the eager sync.
+            As soon as user starts interact with the application (mouse moves or key strokes), the app will go over to eager sync mode again.
+          </p>
           <p>
             With this setup, users will be requested to login using passwordless email OTP the very first time they visit your app
-            from a device or browser.
-            If you already have another authentication in place,
-            or want to integrate with the authentication of your choice, this
-            can be defined in the options object passed to db.cloud.connect(). The API
-            docs for Dexie Cloud will provide more details when released...
-          </p>
-          <p>Your app will now instantly sync changes with the cloud. If offline, changes are queued until next time you are online.</p>
+            from a device or browser. Learn how to customize <a href="/cloud/docs/authentication">authentication</a> if already have another authentication in place,
+            or want to integrate with the authentication of your choice.
           </p>
           <p>Without taking advantage of the built-in <a href="/cloud/docs/access-control">access control</a> tables, all data
             will be regarded private for the end user and stored on a per-user basis.

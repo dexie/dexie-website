@@ -5,11 +5,11 @@ document.addEventListener('DOMContentLoaded', ()=>{
       $('#applyBetaBtn').click();
     }
   });
-  $('#get-started-btn').on("click", ()=>{
+  $('#sign-up-beta-btn').on("click", ()=>{
     $('#signup-form').slideDown(()=>$('#emailAddressInput').focus());
   });
   $('#applyBetaBtn').on('click', ()=>{
-    $('#get-started-btn').prop("disabled", true);
+    $('#sign-up-beta-btn').prop("disabled", true);
     $('#applyBetaBtn').prop("disabled", true);
     const emailInput = $('#emailAddressInput');
     const email = emailInput.val();
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     if (completed) {
       const doneBtn = $('<button autofocus class="btn btn-success">Done</button>')
         .on('click', ()=>{
-          $('#get-started-btn').html(`
+          $('#sign-up-beta-btn').html(`
             <span class='glyphicon glyphicon-ok'></span>
             <span>Signed up</span>`
           )

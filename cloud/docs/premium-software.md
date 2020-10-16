@@ -12,14 +12,14 @@ Dexie Cloud is available both as a cloud service and as a premium licensed softa
 
 ## Software Architecture
 
-Dexie Cloud consists of a Node.js app and a Postgresql database. A typical cloud setup (like our own) also includes load balancing, auto-scaling, DoS protection ([Amazon Elastic beanstalk](https://aws.amazon.com/elasticbeanstalk/) or [Azure Webapps for Node.js](docs.microsoft.com/en-us/azure/app-service/quickstart-nodejs)). The Postgres service can typically run as a managed database service on [Amazon RDS for Postgresql](https://aws.amazon.com/rds/postgresql/) or [Azure Database for Postgresql](https://azure.microsoft.com/en-us/services/postgresql/). No matter your choice of cloud provider, the managed app and database services are very easy to get up running with, scalable and take advantage of best-practice architecture for apps and databases. You still got a cloud hosted solution but you will have more control over it and for exploding businesses, the total cost for the software becomes minimal compared to the business revenues.
+Dexie Cloud consists of a Node.js app and a Postgresql database. A typical cloud setup (like our own) also includes load balancing, auto-scaling, DoS protection ([Amazon Elastic beanstalk](https://aws.amazon.com/elasticbeanstalk/) or [Azure Webapps for Node.js](docs.microsoft.com/en-us/azure/app-service/quickstart-nodejs)). The Postgres service can typically run as a managed database service on [Amazon RDS for Postgresql](https://aws.amazon.com/rds/postgresql/) or [Azure Database for Postgresql](https://azure.microsoft.com/en-us/services/postgresql/). No matter your choice of cloud provider, the managed app and database services are very easy to get up running with, scalable and take advantage of best-practice architecture for apps and databases. You still got a cloud hosted solution but you will have more control over it and for exploding businesses, the total cost for the software becomes minimal compared to hosted version since there is no per-user cost.
 
 ## Deploy in Azure
 
-1. Follow the guide [Azure Database for PostgreSQL](https://azure.microsoft.com/en-us/services/postgresql/)
+1. Follow the guide [Azure Database for PostgreSQL](https://azure.microsoft.com/en-us/services/postgresql/) to create a Postgresql database.
 2. Clone the dexie-cloud repo from the URL you got with your premium software license.
 3. cd packages/dexie-cloud-server && npm install
-4. Follow the guide [Azure Webapps for Node.js](docs.microsoft.com/en-us/azure/app-service/quickstart-nodejs))
+4. Follow the guide [Azure Webapps for Node.js](docs.microsoft.com/en-us/azure/app-service/quickstart-nodejs)
 5. In azure portal, go to settings/configuration of your node app in azure and:
    - Add a new SQL Connection string DEXIE_CLOUD pointing out the postgres you set up in earlier steps.
    - Add a new application setting DXC_SECRET and set it to a long random string.

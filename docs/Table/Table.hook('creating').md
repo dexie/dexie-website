@@ -46,6 +46,21 @@ If return value of given subscriber is other than `undefined`, the return value 
 ```javascript
 db.[tableName].hook('creating').unsubscribe(yourListenerFunction)
 ```
+*yourListenerFunction* refers to the same function instance that you have passed to Table.hook('creating'). If you will need to unsubscribe, you can't inline that function as we do in the main sample. Instead keep a reference to it in a closure or on a class property.
+
+```javascript
+function listenerFunction (primKey, obj, transaction) {
+  // Do your stuff...
+}
+
+// Subscribe:
+db.[tableName].hook('creating', listenerFunction);
+
+// Unsubscribe:
+db.[tableName].hook('creating').unsubscribe(listenerFunction);
+```
+
+
 
 ### Description
 

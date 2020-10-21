@@ -109,7 +109,7 @@ h1[id]::before, h2[id]::before, h3[id]::before, h4[id]::before, h5[id]::before, 
 	margin-bottom: 20px;
 }
 
-code {
+pre > code {
 	overflow: auto;
 	float: left;
 	width: 100%;

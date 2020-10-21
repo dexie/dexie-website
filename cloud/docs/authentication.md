@@ -3,12 +3,9 @@ layout: docs-dexie-cloud
 title: 'Authentication'
 ---
 
-Blahoj blaha!
+## Default Authentication
 
-```
-npx dexie-cloud create
-```
+## Custom GUI for Default Authentication
 
+## Custom Authentication
 
-## Header 2
-### Header 3

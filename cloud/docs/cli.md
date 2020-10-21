@@ -90,6 +90,12 @@ npx dexie-cloud whitelist &lt;app origin&gt; [--delete]
 
 ## remove-replica
 
+TODO: Fixthis!
+
 ## replicas
 
+TODO: Fixthis!
+
 ## stats
+
+TODO: Fixthis!

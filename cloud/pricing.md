@@ -3,7 +3,7 @@ layout: dexie-cloud-pricing
 title: "Dexie Cloud Pricing"
 ---
 
-# Pricing
+# Dexie Cloud Pricing
 
 Free forever for development, tests and demos.
 

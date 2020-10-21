@@ -120,28 +120,39 @@ prismStyle: 'vscode-dark'
           <div class='col-md-6'>
             <h3>4. Update your DB declaration</h3>
             <pre><code class="language-javascript" style="margin:0;">  import Dexie from "dexie";
-  import DexieCloud from "dexie-cloud-addon";
+  import dexieCloud from "dexie-cloud-addon";
 
   // Declare your DB
-  const db = new Dexie('mySyncedDB', {addons: [DexieCloud]});
+  const db = new Dexie('mySyncedDB', {addons: [dexieCloud]});
   db.version(1).stores({
-    todoLists: '$$id, title',
-    todoItems: '$$id, title, done, todoListId'
+    todoLists: 'id, title',
+    todoItems: 'id, title, done, todoListId'
   });
 
   // Connect your dexie-cloud database:
   db.cloud.connect("https://&lt;yourdatabase&gt;.dexie.cloud", {
     requireAuth: true
   });</code></pre>
-          <p>Use the URL that was printed out in step 1.</p>
+          <p style="font-style: italic;">The URL "https://&lt;yourDatabase&gt;.dexie.cloud" is the one printed out in step 1.</p>
           </div>
           </div>
           <h3>5. Done!</h3>
           <p>Enjoy.</p>
-          <p>Your db facing code will continue work like before: query and update the <span font-weight="bold">db</span>
-            as you normally do with plain Dexie.js.
+          <p>Use your <span style="font-family: monospace">db</span> with the simple Dexie API you are used to.
+            Just make sure the IDs you generate are globally unique and don't use auto-incremented primary keys.
+            There's a helper function <a href="/cloud/docs/newId()">newId()</a> in <a href="https://npmjs.com/dexie-cloud-helpers">dexie-cloud-helpers</a> that generates
+            globally unique strings for you.
           </p>
-          <p>Your app will instantly sync changes with the cloud. When offline, changes are queued until next time you are online.
+          <pre class="command-line language-bash" data-prompt="~/my-web-app $"><code style="margin:0;">npm install dexie-cloud-helpers</code></pre>
+          <pre><code class="language-javascript" style="margin:0;">import { newId } from "dexie-cloud-helpers";
+
+// Create objects
+db.todoLists.add({
+  id: newId(),
+  title
+});</code></pre>
+          <p style="font-style: italic;">Use the same Dexie.js <a href="/docs/API-Reference">API reference</a> you are used to for manipulating and querying data.</p>
+          <p>Changes sync instantly with the cloud in both directions. When offline, changes are queued until next time you are online.
             When online, changes will be synced eagerly in both directions, allowing also things like online collaboration.
             If user is idle for a time, the client will go over to period sync strategy instead of the eager sync.
             As soon as user starts interact with the application (mouse moves or key strokes), the app will go over to eager sync mode again.

@@ -255,10 +255,11 @@ table tr:nth-child(2n) {
 }
 
 .btn-edit-doc-page {
-	font-size: 10px;
 	line-height: 1.33;
 	float: right;
-	margin-top: 9px;
+	margin-top: 4px;
+	padding: 6pt;
+	font-size: 10pt;	
 }
 
 /* Switch */ 

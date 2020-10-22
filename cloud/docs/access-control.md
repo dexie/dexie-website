@@ -1,42 +1,59 @@
 ---
 layout: docs-dexie-cloud
-title: 'Access Control'
+title: "Access Control"
 ---
 
-The server endpoint of Dexie Cloud controls access to data for every sync request, so that each user can maintain a copy of the part of the database that is accessible for that user.
+This page describes the access control model in Dexie Cloud.
 
-This page describes the access control model in Dexie Cloud. If you prefer to jump right in to samples, here some shortcuts:
+If you are new to Dexie Cloud, please visit the [Dexie Cloud landing page](/cloud/).
 
-* [Share a ToDo list](#example-share-a-todo-list)
-* [Simple project managment model](#example-a-simple-project-management-model)
+If you prefer to jump right in to samples, here some shortcuts:
+
+- [Sharable ToDo list](#example-sharable-todo-list)
+- [Simple project managment model](#example-a-simple-project-management-model)
+
+
+## Introduction
+
+The server endpoint of Dexie Cloud controls access to data for every sync request, so that each user maintains a copy of the part of the database that is accessible for that user.
+
+The whole idea with Dexie Cloud is to create applications that work the same when user is offline as when it is online. This means that the application logic needs to stay on the client as much as possible. A ToDo app must be able to add items while offline, a IAN scanner must work offline and store scanned codes in the offline database. Dexie Cloud is also for building interactive apps, like chat apps, project management apps etc.
+
+Dexie Cloud comes with an access control model that has the same security benefits as a server side app, but the creation of the objects that control access happens in your client side app. How is this possible? It must all start with a user creating a realm. At first, this realm is nothing that affects other users. It does not harm anyone. The realm owner can create roles and invite members to the realm and connect the application model objects to the realm (or several different realms). Users that accepts the invitations will gain the access that the realm owner has given and the model continues to work with water-proof isolation between users and customers.
 
 ## Realms
 
-A realm is an access controlled bucket of data. All objects in your database sits on a realm. By default, it sits on the private realm for the user that creates the object. Realms can be created by anyone. Users with manage permissions on the realm can create roles and invite members to the realm.
+A realm is an access controlled bucket of data. All objects in your database sits on a realm. Every user has a default realm that is private for that user only. By default, a newly created object will sit on the private realm for the user that creates the object.
+
+New realms can be created by anyone but they are of little use unless that user invites members and the members accepts the invitation.
+
+For enterprise use cases, Dexie Cloud also has a server side REST API that enables realm and bulk member management without requiring an invititation step. The client of such an API could typically sync users from a directiry with realm members in Dexie Cloud.
 
 ## Reserved property names
 
 In all custom application tables, there are two reserved property names that affect access control:
 
-* realmId - connects the object to a realm, making it visible (synced) for the members in the realm. If realmId is not specified, the current user's email will be used, which is a built-in realm that each user has. However, there are no realm objects representing these built-in realms.
-* owner - connects the object to a user that gains full permissions on it. Ownership implies access to update and delete the object including changing realmId and owner properties, but it does not imply visibility (sync). If a member is removed from a realm, objects connected to that realm that are owned by the user will go out of scope for the user. If owner is not specified, it will default to the current user. If explicitely set to null, it will not have an owner.
+- **realmId** - connects the object to a realm, making it visible (synced) for the members in the realm. If realmId is not specified, the current user's email will be used, which is a built-in realm that each user has. However, there are no realm objects representing these built-in realms.
+- **owner** - connects the object to a user that gains full permissions on it. Ownership implies access to update and delete the object including changing realmId and owner properties, but it does not imply visibility (sync). If a member is removed from a realm, objects connected to that realm that are owned by the user will go out of scope for the user. If owner is not specified, it will default to the current user. If explicitely set to null, it will not have an owner.
 
 ## Default Access Control
 
 In the simplest setup of Dexie Cloud, you do not need to specify anything related to access control. All data that one user creates will be private. It will sync to the cloud but not visible for any other user. This is still a valid use case since the data is continously backed up and possible to access from different devices for the same user.
 
 #### Example: not specifying access control tables
+
 ```js
 import Dexie from "dexie";
 import dexieCloud from "dexie-cloud-addon";
 
-const db = new Dexie('mySyncedDB', {addons: [dexieCloud]});
+const db = new Dexie("mySyncedDB", { addons: [dexieCloud] });
 db.version(1).stores({
-  todoLists: 'id, title',
-  todoItems: 'id, title, done, todoListId'
+  todoLists: "id, title",
+  todoItems: "id, title, done, todoListId",
 });
 ```
-*In this sample, we are only declaring application tables 'todoLists' and 'todoItems'. This is ok. Sync will work for each user, but users will not be able to share their lists with others*
+
+_In this sample, we are only declaring application tables 'todoLists' and 'todoItems'. This is ok. Sync will work for each user, but users will not be able to share their lists with others_
 
 ## Access Control Tables
 
@@ -46,19 +63,20 @@ Access control is defined using the Dexie tables [realms](#table-realms), [membe
 import Dexie from "dexie";
 import dexieCloud from "dexie-cloud-addon";
 
-const db = new Dexie('myDB', {addons: [dexieCloud]});
+const db = new Dexie("myDB", { addons: [dexieCloud] });
 db.version(2).stores({
   // Application tables
-  todoLists: 'id, title',
-  todoItems: 'id, title, done, todoListId',
+  todoLists: "id, title",
+  todoItems: "id, title, done, todoListId",
 
   // Access Control tables
-  realms: 'realmId',
-  members: '[realmId+email]',
-  roles: '[realmId+name]'
+  realms: "realmId",
+  members: "[realmId+email]",
+  roles: "[realmId+name]"
 });
 ```
-*Access Control tables needs to be spelled exactly as in this sample and their primary keys needs to be spelled exactly the same. On top of that, you are free to index those properties you will need to query. The properties of objects in these tables are documented under each table below.*
+
+_Access Control tables needs to be spelled exactly as in this sample and their primary keys needs to be spelled exactly the same. On top of that, you are free to index those properties you will need to query. The properties of objects in these tables are documented under each table below._
 
 We will walk through how to use these tables to share objects to others.
 
@@ -77,52 +95,134 @@ You normal reuse the same realm for multiple objects to easily share all include
 
 ```ts
 interface Realm {
+  /** Primary key of the realm. Must be generated using db.realms.newId().
+   */
   realmId: string;
-  name: string;
+
+  /** The name of the realm.
+   * 
+   * This property is optional but it can be a good practice to name a realm for what it represents.
+   */
+  name?: string;
+
+  /** Contains the email of the owner. An owner has implicit full write-access to the realm
+   * and all obejcts connected to it. Ownership does not imply read (sync) access though,
+   * so realm owners still needs to add themself as a member if they are going to use the realm
+   * themselves.
+  */
   owner?: string;
 }
 ```
 
-#### Example: Share a ToDo list
+#### Example: Sharable ToDo list
 
-This example shows how to share a ToDo list with a friend by creating a realm, share it and moving the existing TodoList and TodoItems into that realm.
+This example shows how to create sharable entities, how to share them and how to connect related entities to it. It consists of three functions:
+
+1. **createTodoList()** creates a sharable ToDo list
+2. **shareTodoList()** shares the list to other users
+3. **addTodoItem()** adds a todoItem related to the shared list
 
 ```js
-await db.transaction('rw', db.todoLists, db.todoItems, db.realms, db.members, async () => {
-  // Generate a globally unique ID for the realm to create
-  const newRealmId = db.realms.newId();
+import Dexie from "dexie";
+import dexieCloud from "dexie-cloud-addon";
 
-  // Create the new realm
-  await db.realms.add({
-    realmId: newRealmId,
-    name: "Shopping list realm"
+//
+// Declare database, tables, keys and indexes
+//
+const db = new Dexie('myToDoDB', {addons: [dexieCloud]});
+db.version(2).stores({
+  // Application tables
+  todoLists: 'id, title',
+  todoItems: 'id, title, done, todoListId',
+
+  // Access Control tables
+  realms: 'realmId',
+  members: '[realmId+email]',
+  roles: '[realmId+name]'
+});
+
+//
+// Example functions
+//
+
+/** Create a sharable ToDo list
+ *
+ * @param {string} listName Name of the ToDo list
+ * @returns {Promise}
+ */
+function createTodoList(listName) {
+  return db.transaction('rw', db.todoLists, db.realms, db.members, () => {
+    // Generate an ID for the new realm
+    const newRealmId = db.realms.newId();
+
+    // Create the new realm
+    db.realms.add({
+      realmId: newRealmId,
+      name: listName
+      // owner will implicitly be set to yourself, giving you full permissions on it.
+    });
+
+    // Give yourself visibility of the realm and its connected objects
+    // (being owner does not imply having the object synced)
+    db.members.add({
+      realmId: newRealmId,
+      email: db.cloud.currentUser.email,
+      name: db.cloud.currentUser.name
+      // invite not needed when sharing to yourself.
+      // permissions not nescessary as you are the realm owner.
+    });
+
+    // Create the new list and connect it to this realm
+    db.todoLists.add({
+      realmId: newRealmId,
+      id: db.todoLists.newId(),
+      title: listName
+    });
   });
+}
 
-  // Move an existing todo-list into this new realm
-  await db.todoLists.update(shoppingTodoListId, {realmId: newRealmId});
-  await db.todoItems
-    .where({todoListId: myTodoListId})
-    .modify({realmId: newRealmId});
-
-  // Invite yourself and a friend
-  await db.members.bulkAdd([{
-    realmId: newRealmId,
-    email: db.cloud.currentUser.email,
-    name: "My own Name",
-    permissions: {
-      manage: "*"
-    }
-    // invite never needed for oneself
-  },{
-    realmId: newRealmId,
-    email: "myfriend@foo.bar",
-    name: "My Friend",
+/** Share an ToDoList with some friends
+ *
+ * @param {Object} todoList
+ * @param {Array.<{name: string, email: string}>} friends
+ * @returns {Promise}
+ */
+function shareTodoList(todoList, ...friends) {
+  return db.members.bulkAdd(friends.map(friend => ({
+    realmId: todoList.realmId,
+    email: friend.email,
+    name: friend.name,
     invite: true, // Generates an invite email from dexie cloud
     permissions: {
-      manage: "*"
+      manage: "*" // Give your friend full permissions within this new realm.
     }
-  }]);
-});
+  })));
+}
+
+/** Unshare ToDoList for given friends
+ *
+ * @param {Object} todoList
+ * @param {Array.<{name: string, email: string}>} ...friends
+ * @returns {Promise}
+ */
+function unshareTodoList(todoList, friends) {
+  return db.members.bulkDelete(friends.map(friend => [todoList.realmId, friend.email]));
+}
+
+/** Add ToDo item within a sharable ToDoList
+ *
+ * @param {Object} todoList The TodoList object to connect the new toDo item to.
+ * @param {string} todoTitle The title of the ToDo item.
+ */
+function addTodoItem(todoList, todoTitle) {
+  return db.todoItems.add({
+    id: db.todoItems.newId(),
+    todoListId: todoList.id, // Connect the item to the todoList
+    realmId: todoList.realmId, // Connect it to the same realm so it gets shared with same people
+    title: todoTitle
+    done: 0
+  });
+}
 ```
 
 ### Table "members"
@@ -144,26 +244,26 @@ interface Member {
   accepted?: number; // date
   roles?: string[];
   permissions?: {
-    add?: string[] | "*";    // array of tables or "*" (all).
+    add?: string[] | "*"; // array of tables or "*" (all).
     update?: {
-      [tableName: string]: string[] | "*" // array of properties or "*" (all).
+      [tableName: string]: string[] | "*"; // array of properties or "*" (all).
     };
     manage?: string[] | "*"; // array of tables or "*" (all).
-  }
+  };
 }
 ```
 
 #### Permissions
 
-__add__
+**add**
 
 Permission to add new objects to given set of tables. If a creator of an object may specify the "owner" property on to own email, the user will keep full permission on the object and be able to delete or update the object later on. If not specifying the "owner" property, the object gets out of ones hand after the creation is done.
 
-__update__
+**update**
 
-Permission to update given set of properties in given set of tables. Allowing "*" will still not allow updating reserved properties `realmId` or `owner`. For example, if you have "update" permission on the "pets" table, you can change the pet's name but not its "owner" or "realmId".
+Permission to update given set of properties in given set of tables. Allowing "\*" will still not allow updating reserved properties `realmId` or `owner`. For example, if you have "update" permission on the "pets" table, you can change the pet's name but not its "owner" or "realmId".
 
-__manage__
+**manage**
 
 Full permissions on objects within the realm in given set of tables.
 
@@ -171,11 +271,10 @@ Full permissions on objects within the realm in given set of tables.
 
 This is the typical flow for the non-enterprise use case in applications with a similar model as Slack, Github and ToDo list applications.
 
-1. Add new object to the 'members' table with {invite: true}.
-2. Email goes out to the invited user.
+1. Client side: Add new object to the 'members' table with {invite: true}.
+2. The changes are synced onto Dexie Cloud backend who will send an invite email to the added member.
 3. User clicks link in email to accept the invitation.
-4. User gains access
-5. Next sync request from a device belonging to the user will start downloading data connected to the newly accepted realm.
+4. User gains access: Next sync request from a device belonging to the user will start downloading data connected to the newly accepted realm.
 
 #### Enterprise membership
 
@@ -185,7 +284,7 @@ Using the Dexie Cloud REST API, it is also possible to manage realms and members
 
 ### Table "roles"
 
-Contains roles for each realm with predefined permissions. Users can then be assigned to roles and gain the permissions that comes with them. 
+Contains roles for each realm with predefined permissions. Users can then be assigned to roles and gain the permissions that comes with them.
 
 | Table Name | "roles" |
 | Primary key | [realmId+name] |
@@ -197,45 +296,44 @@ interface Role {
   realmId: string;
   name: string;
   permissions: {
-    add?: string[] | "*";    // array of tables or "*" (all).
+    add?: string[] | "*"; // array of tables or "*" (all).
     update?: {
-      [tableName: string]: string[] | "*" // array of properties or "*" (all).
+      [tableName: string]: string[] | "*"; // array of properties or "*" (all).
     };
     manage?: string[] | "*"; // array of tables or "*" (all).
-  }
+  };
 }
 ```
 
-*See [Permissions](#permissions)*
+_See [Permissions](#permissions)_
 
 ### Example: A Simple Project Management Model
 
 In this example, we declare a very simplistic project database and use roles to distinguish permissions. We create our own roles "manager", "doer" and "commenter". The function `addProject()` will return a promise of adding a new project, `addMember()` adds a member to it, `addTask()` adds tasks to the project, `markAsDone()` marks a task as done and `addComment()` to add comments on tasks.
 
 ```js
-
 import Dexie from "dexie";
 import dexieCloud from "dexie-cloud-addon";
 
-const db = new Dexie('myProjectDB', {addons: [dexieCloud]});
+const db = new Dexie("myProjectDB", { addons: [dexieCloud] });
 db.version(1).stores({
-  projects: 'id, title',
-  tasks: 'id, projectId, title, done',
-  comments: 'id, taskId, comment',
+  projects: "id, title",
+  tasks: "id, projectId, title, done",
+  comments: "id, taskId, comment",
 
   // Access Control
-  realms: 'realmId',
-  members: '[realmId+email]',
-  roles: '[realmId+name]'
+  realms: "realmId",
+  members: "[realmId+email]",
+  roles: "[realmId+name]",
 });
 
 /** Add project.
- * 
+ *
  * @param {string} projectName
  * @returns {Promise} Promise of string representing the ID of the added project.
  */
 function addProject(projectName) {
-  return db.transaction('rw', db.realms, db.roles, db.projects, () => {
+  return db.transaction("rw", db.realms, db.roles, db.projects, () => {
     // Generate a globally unique ID for the realm to create
     const newRealmId = db.realms.newId();
     const newProjectId = db.projects.newId();
@@ -243,40 +341,44 @@ function addProject(projectName) {
     // Create the new realm
     db.realms.add({
       realmId: newRealmId,
-      name: projectName
+      name: projectName,
     });
 
     // Add two roles for the project realm
-    db.roles.bulkAdd([{
-      // Let managers create, update and delete all objects and fields within the realm.
-      name: "manager",
-      realmId: newRealmId,
-      permissions: {manage: "*"}
-    },{
-      // Let doers only update the "done" field in todoItems
-      name: "doer",
-      realmId: newRealmId,
-      permissions: {
-        update: {
-          todoItems: [
-            "done" // Allow updating "done" property of todoItems connected to this realm.
-          ]
-        }
-      }
-    }, {
-      // Let commenters only add comments
-      // Since the added comments will be owned by the user, a commenter will also
-      // be able to delete or update own comments but not others.
-      name: "commenter",
-      realmId: newRealmId,
-      permissions: { add: ["comments"] }
-    }]);
+    db.roles.bulkAdd([
+      {
+        // Let managers create, update and delete all objects and fields within the realm.
+        name: "manager",
+        realmId: newRealmId,
+        permissions: { manage: "*" },
+      },
+      {
+        // Let doers only update the "done" field in todoItems
+        name: "doer",
+        realmId: newRealmId,
+        permissions: {
+          update: {
+            todoItems: [
+              "done", // Allow updating "done" property of todoItems connected to this realm.
+            ],
+          },
+        },
+      },
+      {
+        // Let commenters only add comments
+        // Since the added comments will be owned by the user, a commenter will also
+        // be able to delete or update own comments but not others.
+        name: "commenter",
+        realmId: newRealmId,
+        permissions: { add: ["comments"] },
+      },
+    ]);
 
     // Create project and put it in the new realm.
     db.projects.add({
       id: newProjectId,
       realmId: newRealmId,
-      name: projectName
+      name: projectName,
     });
 
     return newProjectId;
@@ -284,7 +386,7 @@ function addProject(projectName) {
 }
 
 /** Add project member.
- * 
+ *
  * @param {Object} project The project object.
  * @param {string} email The email address of the member to add.
  * @param {string} name The name of the member to add.
@@ -297,12 +399,12 @@ function addMember(project, email, name, roles) {
     email,
     name,
     roles,
-    invite: true
+    invite: true,
   });
 }
 
 /** Add project task.
- * 
+ *
  * @param {Object} project The project object.
  * @param {string} taskTitle Task title.
  * @param {string} taskDescription Task description.
@@ -316,12 +418,12 @@ function addTask(project, taskTitle, taskDescription) {
     realmId: project.realmId,
     title: taskTitle,
     done: 0,
-    description: taskDescription
+    description: taskDescription,
   });
 }
 
 /** Mark task as done.
- * 
+ *
  * @param {Object} task The task to update.
  */
 function markAsDone(task) {
@@ -329,20 +431,19 @@ function markAsDone(task) {
 }
 
 /** Add a comment to a task.
- * 
+ *
  * @param {Object} task The task to comment.
  * @param {string} taskComment The comment to make.
- * 
+ *
  * @returns {Promise}
- */ 
+ */
 function addComment(task, taskComment) {
   return db.comments.add({
     id: db.comments.newId(),
     taskId: task.id,
     realmId: task.realmId,
     comment: taskComment,
-    timeStamp: Date.now()
+    timestamp: new Date(),
   });
 }
-
 ```

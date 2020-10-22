@@ -138,33 +138,30 @@ prismStyle: 'vscode-dark'
           </div>
           <h3>5. Done!</h3>
           <p>Enjoy.</p>
-          <p>Use your <span style="font-family: monospace">db</span> with the simple Dexie API you are used to.
-            Just make sure the IDs you generate are globally unique and don't use auto-incremented primary keys.
-            There's a helper function <a href="/cloud/docs/newId()">newId()</a> in <a href="https://npmjs.com/dexie-cloud-helpers">dexie-cloud-helpers</a> that generates
-            globally unique strings for you.
-          </p>
-          <pre class="command-line language-bash" data-prompt="~/my-web-app $"><code style="margin:0;">npm install dexie-cloud-helpers</code></pre>
-          <pre><code class="language-javascript" style="margin:0;">import { newId } from "dexie-cloud-helpers";
-
-// Create objects
-db.todoLists.add({
-  id: newId(),
-  title
-});</code></pre>
-          <p style="font-style: italic;">Use the same Dexie.js <a href="/docs/API-Reference">API reference</a> you are used to for manipulating and querying data.</p>
-          <p>Changes sync instantly with the cloud in both directions. When offline, changes are queued until next time you are online.
-            When online, changes will be synced eagerly in both directions, allowing also things like online collaboration.
-            If user is idle for a time, the client will go over to period sync strategy instead of the eager sync.
-            As soon as user starts interact with the application (mouse moves or key strokes), the app will go over to eager sync mode again.
-          </p>
           <p>
             With this setup, users will be requested to login using passwordless email OTP the very first time they visit your app
             from a device or browser. Learn how to customize <a href="/cloud/docs/authentication">authentication</a> if already have another authentication in place,
             or want to integrate with the authentication of your choice.
           </p>
-          <p>Without taking advantage of the built-in <a href="/cloud/docs/access-control">access control</a> tables, all data
+          <pre style="float: left; margin: 4px 8px 4px 0; padding-bottom: 20px; min-width: 400px;"><code class="language-javascript" style="max-width: 300px;">      // Create objects
+      db.todoLists.add({
+        id: db.todoLists.newId(),
+        title
+      });
+</code></pre>
+            <p>Use your <span style="font-family: monospace">db</span> with the simple <a href="/docs/API-Reference">Dexie API</a> you are used to
+            for mutating and querying data.
+            IDs for your synced objects has to be generated using <a href="/cloud/docs/newId()">newId()</a>
+            <span style="font-style: italic">(see example to the left)</span>.
+          </p>
+          <p>Changes sync instantly with the cloud in both directions. When offline, changes are queued until next time you are online.
+            When online, changes will be synced eagerly in both directions, allowing also things like online collaboration.
+            If user is idle for a time, the client will go over to period sync strategy instead of the eager sync.
+            As soon as user starts interact with the application (mouse moves or key strokes), the app will go over to eager sync mode again.
+          </p>
+          <p>Without taking advantage of the <a href="/cloud/docs/access-control">access control</a> features, all data
             will be regarded private for the end user and stored on a per-user basis.
-            Improve your app by allowing users to <a href="/cloud/docs/access-control">share things to their team or friends</a>.
+            Improve your app by allowing users to <a href="/cloud/docs/access-control#example-sharable-todo-list">share things to their team or friends</a>.
           </p>
       </div>
   

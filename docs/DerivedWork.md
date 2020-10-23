@@ -19,7 +19,7 @@ Did you write something based on Dexie? Feel free to list it here.
 * [WhatsApp](https://www.whatsapp.com) - The market leader chat app use Dexie for storage in its KaiOs and Web clients.
 * [Microsoft TODO](https://todo.microsoft.com) - The new app to replace the popular Microsoft-aquired [Wunderlist](https://www.wunderlist.com).
 * [Github Desktop](https://desktop.github.com) - Github's own electron based desktop client.
-* [FlightRadar24](www.flightradar24.com) - Live air traffic.
+* [FlightRadar24](https://www.flightradar24.com) - Live air traffic.
 * [Minbrowser](https://minbrowser.github.io/min/) - "A smarter browser" - browse without distractions
 * [Wire](https://wire.com) - An end-to-end encrypted chat application.
 * [Medical Physics Quality Assurance Tool](http://electrons.simonbiggs.net/) -- Built with Typescript2, Angular2, Dexie2, Bokehjs, on Github Pages (Client) and Heroku (RestAPI). [Source Code](https://github.com/SimonBiggs/electroninserts-webapp).

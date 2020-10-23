@@ -486,7 +486,7 @@ div.shoutouts .letter {
 	line-height: 1em;
 }
 
-#form-prompts-area, #signup-form {
+#form-prompts-area, #signup-form > div.row {
 	max-width: 500px;
 }
 

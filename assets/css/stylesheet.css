@@ -486,7 +486,7 @@ div.shoutouts .letter {
 	line-height: 1em;
 }
 
-#form-prompts, #signup-form {
+#form-prompts-area, #signup-form {
 	max-width: 500px;
 }
 
@@ -500,4 +500,11 @@ p.prompts-message.prompts-sub-message {
 	font-size: 12pt;
 	margin-bottom: 5px;
 	margin-top: 20px;
+}
+
+img.icon {
+	width: 16px;
+	height: 16px;
+	padding: 0;
+	margin: 0;
 }

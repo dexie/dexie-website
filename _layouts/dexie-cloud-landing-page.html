@@ -125,36 +125,33 @@ prismStyle: 'vscode-dark'
   // Declare your DB
   const db = new Dexie('mySyncedDB', {addons: [dexieCloud]});
   db.version(1).stores({
-    todoLists: 'id, title',
-    todoItems: 'id, title, done, todoListId'
+    todoLists: '@id, title', // '@' = generated global ID
+    todoItems: '@id, title, done, todoListId'
   });
 
   // Connect your dexie-cloud database:
   db.cloud.connect("https://&lt;yourdatabase&gt;.dexie.cloud", {
     requireAuth: true
   });</code></pre>
-          <p style="font-style: italic;">The URL "https://&lt;yourDatabase&gt;.dexie.cloud" is the one printed out in step 1.</p>
+          <ul style="padding-left: 16px;">
+            <li style="font-style: italic;">The <span style="color: #ce9178;">'@'</span> makes the primary key auto-generated with universal IDs.</li>
+            <li style="font-style: italic;">The URL <span style="color: #ce9178;">"https://&lt;yourDatabase&gt;.dexie.cloud"</span> is the one printed out in step 1.</li>
+          </ul>
           </div>
           </div>
           <h3>5. Done!</h3>
           <p>Enjoy.</p>
           <p>
-            With this setup, users will be requested to login using passwordless email OTP the very first time they visit your app
+            With this very simple and default setup, users will be requested to login using passwordless email OTP the very first time they visit your app
             from a device or browser. Learn how to customize <a href="/cloud/docs/authentication">authentication</a> if already have another authentication in place,
             or want to integrate with the authentication of your choice.
           </p>
-          <pre style="float: left; margin: 4px 8px 4px 0; padding-bottom: 20px; min-width: 400px;"><code class="language-javascript" style="max-width: 300px;">      // Create objects
-      db.todoLists.add({
-        id: db.todoLists.newId(),
-        title
-      });
-</code></pre>
-            <p>Use your <span style="font-family: monospace">db</span> with the simple <a href="/docs/API-Reference">Dexie API</a> you are used to
+          <p>Use your <span style="font-family: monospace">db</span> with the simple <a href="/docs/API-Reference">Dexie API</a> you are used to
             for mutating and querying data.
-            IDs for your synced objects has to be generated using <a href="/cloud/docs/newId()">newId()</a>
-            <span style="font-style: italic">(see example to the left)</span>.
+            IDs marked <span style="color: #ce9178;">'@'</span> gets auto-generated keys similar to Dexie's <a href="/docs/Version/Version.stores()#schema-syntax">++</a>
+            but with a globally unique string rather than an auto-incremented number.
           </p>
-          <p>Changes sync instantly with the cloud in both directions. When offline, changes are queued until next time you are online.
+          <p>Changes sync instantly with the cloud in both directions. When offline, changes are queued until next time user goes online.
             When online, changes will be synced eagerly in both directions, allowing also things like online collaboration.
             If user is idle for a time, the client will go over to period sync strategy instead of the eager sync.
             As soon as user starts interact with the application (mouse moves or key strokes), the app will go over to eager sync mode again.

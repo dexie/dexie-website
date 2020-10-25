@@ -9,7 +9,7 @@ Free forever for development, tests and demos.
 
 |                                       | Free       | Production &nbsp;       | Premium Software License                |
 | ------------------------------------- | ---------- | ----------------------- | --------------------------------------- |
-| Easy to setup: **npx dexie-cloud create** | &#10003;   | &#10003;            | See [these docs](docs/premium-software) |
+| Easy to setup: **[npx dexie-cloud create](/cloud/#getting-started)** | &#10003;   | &#10003;            | See [these docs](docs/premium-software) |
 | All features included                 | &#10003;   | &#10003;                | &#10003;                                |
 | Vertically scalable                   | &#10003;   | &#10003;                | &#10003;                                |
 | Horizontally scalable                 | &#10003;   | &#10003;                | &#10003;                                |

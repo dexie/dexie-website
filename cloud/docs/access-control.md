@@ -147,19 +147,21 @@ db.version(2).stores({
 /** Create a sharable ToDo list
  *
  * @param {string} listName Name of the ToDo list
- * @returns {Promise}
+ * @returns {Promise} Promise resolving with the ID of the created list.
  */
 function createTodoList(listName) {
   return db.transaction('rw', db.todoLists, db.realms, db.members, async () => {
+
     // Create the new realm
     const newRealmId = await db.realms.add({
-      name: listName
-      // owner will implicitly be set to yourself, giving you full permissions on it.
+      // No required properties (other than the auto-generated key 'realmId')
+      // But it could be wise to give it a name:
+      name: `${listName} realm`
     });
 
     // Give yourself visibility of the realm and its connected objects
     // (being owner does not imply having the object synced)
-    db.members.add({
+    await db.members.add({
       realmId: newRealmId,
       email: db.cloud.currentUser.email,
       name: db.cloud.currentUser.name
@@ -168,10 +170,13 @@ function createTodoList(listName) {
     });
 
     // Create the new list and connect it to this realm
-    db.todoLists.add({
+    const newTodoListId = await db.todoLists.add({
       realmId: newRealmId,
       title: listName
     });
+
+    // Return the ID. This becomes the return value of the transaction.
+    return newTodoListId;
   });
 }
 
@@ -199,11 +204,11 @@ function shareTodoList(todoList, ...friends) {
  * @param {Array.<{name: string, email: string}>} ...friends
  * @returns {Promise}
  */
-function unshareTodoList(todoList, friends) {
+function unshareTodoList(todoList, ...friends) {
   return db.members.bulkDelete(friends.map(friend => [todoList.realmId, friend.email]));
 }
 
-/** Add ToDo item within a sharable ToDoList
+/** Add ToDo item
  *
  * @param {Object} todoList The TodoList object to connect the new toDo item to.
  * @param {string} todoTitle The title of the ToDo item.
@@ -211,7 +216,7 @@ function unshareTodoList(todoList, friends) {
 function addTodoItem(todoList, todoTitle) {
   return db.todoItems.add({
     todoListId: todoList.id, // Connect the item to the todoList
-    realmId: todoList.realmId, // Connect it to the same realm so it gets shared with same people
+    realmId: todoList.realmId, // Connect it to the same realm
     title: todoTitle
     done: 0
   });
@@ -335,7 +340,7 @@ function addProject(projectName) {
     });
 
     // Add two roles for the project realm
-    db.roles.bulkAdd([
+    await db.roles.bulkAdd([
       {
         // Let managers create, update and delete all
         // objects and fields within the realm.

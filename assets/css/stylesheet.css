@@ -83,6 +83,24 @@ h1[id]::before, h2[id]::before, h3[id]::before, h4[id]::before, h5[id]::before, 
 #cloud-promoter > div.shoutouts {
 	overflow: visible;
 	text-align: unset;
+	margin: 25px 0 0 0;
+}
+@keyframes promoter-read-more {
+	0% {color: rgba(255,255,255,0);}
+	75% {color: rgba(255,255,255,0);}
+	100% {color: rgba(255,255,255,1);}
+}
+#cloud-promoter > p {
+	padding: 0;
+	margin: 0;
+	font-size: 10pt;
+	font-variant: small-caps;
+	color: rgba(255,255,255,1);
+	animation-name: promoter-read-more;
+	animation-duration: 4s;
+}
+#cloud-promoter > p:hover {
+	text-decoration: underline;
 }
 
 .getstarted {

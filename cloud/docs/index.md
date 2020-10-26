@@ -3,8 +3,12 @@ layout: docs-dexie-cloud
 title: 'Dexie Cloud Docs'
 ---
 
-TODO: Here!
+This area is for documentation of Dexie Cloud APIs
 
-## Header 2
+* Client-side (dexie-cloud-addon)
+* Server-side (the REST API)
+* The CLI (dexie-cloud package)
 
-### Header 3
+Navigate to the docs using the right part of the page (or in mobile version, the bottom of this page).
+
+*These pages are still under construction*

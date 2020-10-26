@@ -106,6 +106,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
         case "text": {
           const {name, title} = prompt;
           $(area).append($('<div>').append($('<input type="text" />').attr({
+            autocomplete: name,
             name,
             title
           })));

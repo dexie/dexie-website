@@ -180,7 +180,7 @@ function createTodoList(listName) {
   });
 }
 
-/** Share an ToDoList with some friends
+/** Share ToDoList with some friends
  *
  * @param {Object} todoList
  * @param {Array.<{name: string, email: string}>} friends
@@ -191,7 +191,7 @@ function shareTodoList(todoList, ...friends) {
     realmId: todoList.realmId,
     email: friend.email,
     name: friend.name,
-    invite: true, // Generates an invite email from dexie cloud
+    invite: true, // Generates an invite email
     permissions: {
       manage: "*" // Give your friend full permissions within this new realm.
     }
@@ -257,13 +257,40 @@ interface Member {
 
 Permission to add new objects to given set of tables. If a creator of an object may specify the "owner" property on to own email, the user will keep full permission on the object and be able to delete or update the object later on. If not specifying the "owner" property, the object gets out of ones hand after the creation is done.
 
+Example
+
+```js
+{add: ["todoItems", "comments"]}
+```
+
 **update**
 
 Permission to update given set of properties in given set of tables. Allowing "\*" will still not allow updating reserved properties `realmId` or `owner`. For example, if you have "update" permission on the "pets" table, you can change the pet's name but not its "owner" or "realmId".
 
+Example
+
+```js
+{
+  update: {
+    todoLists: ["title"],
+    todoItems: "*",
+  }
+}
+```
+
 **manage**
 
 Full permissions on objects within the realm in given set of tables.
+
+Example
+
+```js
+{manage: ["todoLists", "todoItems"]}
+```
+
+```js
+{manage: "*"}
+```
 
 #### Default Membership flow
 

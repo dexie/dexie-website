@@ -36,22 +36,47 @@ default implementation (next). See the example lower down.
 
 ### Example authPrompt
 
-This example implements an auth prompt using the DOM function `prompt` which is a browser-built-in synchronous prompt.
-The purpose of the sample is to show how an authPrompt can be implemented. In real apps, prefer to fire up a
-dialog using the front-end framework of your own choice.
+This example implements an auth prompt using the a react based dialog assuming you have a function showDialog() that can make your application display a dialog with the JSX content and return a promise of the filled-in paramters.
 
-```js
+```jsx
 db.cloud.connect("<database URL>", {
   requireAuth: true,
   authPrompt: async ({type, title, fields}, next) => {
     if (type === "email") {
-      const email = prompt("Please enter your email address");
+      const {email, cancelled} = await showDialog((submit, cancel) =>
+        <form>
+          <label>Please enter your email address
+            <input type="email" name="email" />
+          </label>
+          <button onClick={submit}>Submit</button>
+          <button onClick={cancel}>Cancel</button>
+        </form>);
       return {
-        result: email !== null ? "ok" : "cancel",
+        result: cancelled ? "cancel" : "ok",
         values: { email }
       }
-    } else if (tyoe === "otp") {
-      const otp = prompt("Check your inbox and enter the OTP");
+    } else if (type === "captcha") {
+      const {captcha, cancelled} = await showDialog((submit, cancel) =>
+        <form>
+          <img src={fields.captcha.value} />
+          <label>Please write the text you see in the box
+            <input type="text" name="captcha" />
+          </label>
+          <button onClick={submit}>Submit</button>
+          <button onClick={cancel}>Cancel</button>
+        </form>);
+      return {
+        result: cancelled ? "cancel" : "ok",
+        values: { captcha }
+      }
+    } else if type === "otp") {
+      const otp = await showDialog((submit, cancel) => <form>
+        <label>Check your inbox and enter the OTP
+          <input type="text" name="otp" />
+        </label>
+        <button onClick={submit}>Submit</button>
+        <button onClick={cancel}>Cancel</button>
+      </form>);
       return {
         result: otp !== null ? "ok" : "cancel",
         values: { otp }
@@ -69,13 +94,15 @@ type AuthPrompt = (authRequest: AuthRequest, next: NextAuthPrompt) => Promise<Au
 type NextAuthPrompt = (authRequest: AuthRequest) => Promise<AuthResponse>;
 
 interface AuthRequest {
-  type: string; // "email", "otp" and "unlockVault"
+  type: string; // "email", "captcha", "otp" and "unlockVault"
   title: string; // Text explaining the prompt type.
-  fields: Array<{
-    name: string,  // Possible fields: "email", "otp" and "encryptionPhrase".
-    type: string,   // Possible types: "email", "text", "password"
-    title: string   // Contains text for the field to optionally show user
-  }>;
+  fields: {
+    [name: string]: { // Possible names: "email", "captcha", "otp" and "encryptionPhrase".
+      type: string,   // Possible types: "email", "captcha", "text" and "password"
+      title: string,  // Contains text for the field to optionally show user
+      value?: string  // Contains the image source for captcha challenge
+    }
+  };
 }
 
 interface AuthResponse {

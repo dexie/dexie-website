@@ -34,6 +34,7 @@ The call to db.cloud.configure() must be done before any requests are put on the
 
 | Parameter   | Type     | Explanation                                        |
 | ----------- | -------- | -------------------------------------------------- |
+| databaseUrl | string   | The URL to your cloud database                     |
 | requireAuth | boolean  | Whether or not to require authentication initially |
 | fetchToken  | function | Custom token fetching callback                     |
 

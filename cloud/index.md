@@ -10,7 +10,7 @@ To prepare your app for Dexie Cloud:
 
 1. Install the alpha version of [dexie-cloud-addon](https://npmjs.com/dexie-cloud-addon) package so you can use <span style="color: #ce9178;">'@'</span>-prefixed IDs (auto-generated global IDs).
 2. Declare the [access control tables](docs/access-control#access-control-tables) in your new db version and use them to support
-   shared objects in teams or between users (like [sharing a ToDo list](/cloud/docs/access-control#example-sharable-todo-list) or [manage projects](/cloud/docs/access-control#example-a-simple-project-management-model)). The access is not yet checked nor synced and their content will be treated as normal app tables for now.
+   shared objects in teams or between users (see [sharing a ToDo list](/cloud/docs/access-control#example-sharable-todo-list) or [manage projects](/cloud/docs/access-control#example-a-simple-project-management-model)). The access is not yet checked nor synced and their content will be treated as normal app tables for now.
 
 You will be able to code and locally test your application, taking advantage of the features in Dexie Cloud once it is released.
 

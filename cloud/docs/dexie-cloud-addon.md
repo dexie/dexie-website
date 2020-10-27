@@ -5,184 +5,35 @@ title: "dexie-cloud-addon"
 
 ## Syntax
 
+```
+npm install dexie-cloud-addon
+```
+
 ```js
 import Dexie from "dexie";
 import dexieCloud from "dexie-cloud-addon";
 
 const db = new Dexie("mydb", {addons: [dexieCloud]});
-db.version(...) // See https://dexie.org how to do this...
-
-db.cloud.connect("<database URL>", {
-  requireAuth: true | false,
-  authPrompt?: customAuthPromptCallback,
-  fetchToken?: customTokenFetcher
+db.version(1).stores({
+  myTable: '@myId, myIndex1, myIndex2, ...'
 });
+
+db.cloud.configure(configOptions);
 ```
+*For configOptions, see [db.cloud.configure()](db.cloud.configure())*
 
-## Parameters
+## Sync Flow
 
-| Parameter   | Type     | Explanation                                        |
-| ----------- | -------- | -------------------------------------------------- |
-| requireAuth | boolean  | Whether or not to require authentication initially |
-| authPrompt  | function | Custom authentication prompt callback              |
-| fetchToken  | function | Custom token fetching callback                     |
+As with vanilla Dexie.js, the behaviour of the library is different when loading your app the very first time on a device - the declaration serves as a template for creating the database locally. For dexie-cloud-addon, the very first time app loads is also the very first time this app will contact the Dexie Cloud database and do an initial sync (after successful authentication).
 
-### authPrompt
+When addon is active, the no requests put onto dexie will respond before there is an established sync with the cloud. In the inital sync, this will involve downloading all data that, according to the access control, is visible for the user.
 
-Implement your own authPrompt to customize the GUI your app shows when dexie-cloud-addons needs to prompt for email address and OTP.
-Your implementation should check if it supports the auth type and inject its own way of
-prompting the user for the fields. If your implementation does not support the given auth type, it may choose to forward the request to the
-default implementation (next). See the example lower down.
+When the user loads your app a second time, this will be pretty much in sync from start, but the yet the addon will make sure that any changes that has happened on the server will be applied on the client before proceeding the any queries to the local database.
 
-### Example authPrompt
+## The '@' prefix
 
-This example implements an auth prompt using the a react based dialog assuming you have a function showDialog() that can make your application display a dialog with the JSX content and return a promise of the filled-in paramters.
+dexie-cloud-addon enables the new '@' prefix in front of primary keys. The prefix makes the primary key auto-generated with a universal ID.
 
-```jsx
-db.cloud.connect("<database URL>", {
-  requireAuth: true,
-  authPrompt: async ({type, title, fields}, next) => {
-    if (type === "email") {
-      const {email, cancelled} = await showDialog((submit, cancel) =>
-        <form>
-          <label>Please enter your email address
-            <input type="email" name="email" />
-          </label>
-          <button onClick={submit}>Submit</button>
-          <button onClick={cancel}>Cancel</button>
-        </form>);
-      return {
-        result: cancelled ? "cancel" : "ok",
-        values: { email }
-      }
-    } else if (type === "captcha") {
-      const {captcha, cancelled} = await showDialog((submit, cancel) =>
-        <form>
-          <img src={fields.captcha.value} />
-          <label>Please write the text you see in the box
-            <input type="text" name="captcha" />
-          </label>
-          <button onClick={submit}>Submit</button>
-          <button onClick={cancel}>Cancel</button>
-        </form>);
-      return {
-        result: cancelled ? "cancel" : "ok",
-        values: { captcha }
-      }
-    } else if type === "otp") {
-      const otp = await showDialog((submit, cancel) => <form>
-        <label>Check your inbox and enter the OTP
-          <input type="text" name="otp" />
-        </label>
-        <button onClick={submit}>Submit</button>
-        <button onClick={cancel}>Cancel</button>
-      </form>);
-      return {
-        result: otp !== null ? "ok" : "cancel",
-        values: { otp }
-      }
-    } else {
-      return await next({type, title, fields});
-    }
-  }
-});
-```
+## See Also
 
-### authPrompt typings
-```ts
-type AuthPrompt = (authRequest: AuthRequest, next: NextAuthPrompt) => Promise<AuthResponse>;
-type NextAuthPrompt = (authRequest: AuthRequest) => Promise<AuthResponse>;
-
-interface AuthRequest {
-  type: string; // "email", "captcha", "otp" and "unlockVault"
-  title: string; // Text explaining the prompt type.
-  fields: {
-    [name: string]: { // Possible names: "email", "captcha", "otp" and "encryptionPhrase".
-      type: string,   // Possible types: "email", "captcha", "text" and "password"
-      title: string,  // Contains text for the field to optionally show user
-      value?: string  // Contains the image source for captcha challenge
-    }
-  };
-}
-
-interface AuthResponse {
-  result: "ok" | "cancel";
-  values: {[fieldName: string]: string};
-}
-```
-
-## fetchToken
-
-Implement your own way of retrieving a dexie-cloud token. By default, this token will be generated by Dexie Cloud server by providing email and OTP to it.
-But your application may have its own way of authenticating users, or integrate with a 3rd part authentication provider. In that case you will need to implement
-your own server-side endpoint on a server that can authenticate your user. That server endpoint (who known your user's identity) can then request a token from Dexie Cloud without requiring the OTP step. This needs to happen server-side because in order to request a token without going through the OTP step will require the REST client to provide your ClientID and ClientSecret  in the request. You have ClientID and ClientSecret in the dexie-cloud.key file that was generated when you created the database. These shall never be used from client side. The key file
-should not be added to git either but be managed in a secure way using the cloud infrastructure of your own choice.
-
-### Example: Integrate Custom Authentication
-
-First you will need to implement a server endpoint that is able to authenticate your user the way you want for your application. This server endpoint should listen for requests from your dexie-cloud client (requested from your `fetchToken` callback), then it should request the token using server-to-server communication towards the Dexie Cloud REST API, and then return the resulting token to your client.
-
-**Node.js server endpoint**
-
-The code below examplifies how to generate tokens if your authentication solution is based on Node.js and [Passport](http://www.passportjs.org){:target="_blank"}. If you have another server-side platform or language for your existing authentication, you would need to translate this example to that language and platform. Note that the authentication platform (Passport or other) can use whatever mechanism to authenticate the user - integrate with OpenIDConnect, Google, Github, facebook etc. For guides for doing so, we refer to other guides on the internet
-that covers this. If you are starting from a white paper and just need a way to get going, we recommend the guides from [auth0](https://auth0.com){:target="_blank"} or [Passport](http://www.passportjs.org){:target="_blank"}.
-
-```js 
-// ...other express / passport imports and setup...
-
-const fetch = require("node-fetch");
-
-const DB_URL = process.env.DEXIE_CLOUD_DB_URL;
-const CLIENT_ID = process.env.DEXIE_CLOUD_CLIENT_ID;
-const CLIENT_SECRET = process.env.DEXIE_CLOUD_CLIENT_SECRET;
-
-// ...other express / passport endpoints here...
-
-// The new endpoint to add:
-app.get('/dexie-cloud-token', async (req, res, next) => {
-  try {
-    // Assume you've configured passport to store user on request:
-    // See http://www.passportjs.org/docs/configure/
-    const {user} = req;
-
-    // Request token from your Dexie Cloud database:
-    const tokenResponse = await fetch(`${DB_URL}/token`, {
-      method: "POST",
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-        "Authorization": `Basic ${
-          Buffer.from(CLIENT_ID + ":" + CLIENT_SECRET).toString('base64')
-        }`
-      },
-      body: JSON.stringify({
-        email: user.email,
-        name: user.name
-      });
-    });
-    if (!tokenResponse.ok) {
-      throw new Error(`Failed to retrieve token from Dexie Cloud`);
-    }
-
-    // Forward token response to your client:
-    const tokenBody = await tokenResponse.json();
-    res.set('Cache-Control', 'no-store');
-    res.json(tokenBody);
-  } catch (error) {
-    return next(error);
-  }
-});
-```
-
-**fetchToken implementation in your client code**
-
-Assuming that your server endpoint will respond to the path "/dexie-cloud-token" as examplified above (using whatever server side technology you have for that),
-the client code to integrate it will be:
-
-```js
-db.cloud.connect("<database URL>", {
-  requireAuth: true,
-  fetchToken: () => fetch("/dexie-cloud-token").then(res => res.json())
-});
-```
-
+[db.cloud.configure()](db.cloud.configure())

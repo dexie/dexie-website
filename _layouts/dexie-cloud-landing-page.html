@@ -129,12 +129,13 @@ prismStyle: 'vscode-dark'
   });
 
   // Connect your dexie-cloud database:
-  db.cloud.connect("https://&lt;yourdatabase&gt;.dexie.cloud", {
+  db.cloud.configure({
+    databaseUrl: "https://&lt;yourdatabase&gt;.dexie.cloud",
     requireAuth: true
   });</code></pre>
-          <ul style="padding-left: 16px;">
-            <li style="font-style: italic;">The <span style="color: #ce9178;">'@'</span> makes the primary key auto-generated with universal IDs.</li>
-            <li style="font-style: italic;">The URL <span style="color: #ce9178;">"https://&lt;yourDatabase&gt;.dexie.cloud"</span> is the one printed out in step 1.</li>
+          <ul style="padding-left: 0; list-style-type: none;">
+            <li style="font-style: italic;"><i class="fa fa-hand-o-right" aria-hidden="true"></i> The <span style="color: #ce9178;">'@'</span> sign makes the primary key auto-generated with universal IDs.</li>
+            <li style="font-style: italic;"><i class="fa fa-hand-o-right" aria-hidden="true"></i> <span style="font-family: monospace; color: #6f9db8;">databaseUrl</span> is the one printed out in step 1.</li>
           </ul>
           </div>
           </div>
@@ -151,7 +152,7 @@ prismStyle: 'vscode-dark'
             but with a globally unique string rather than an auto-incremented number.
           </p>
           <p>Changes sync instantly with the cloud in both directions. When offline, changes are queued until next time user goes online.
-            When online, changes will be synced eagerly in both directions, allowing also things like online collaboration.
+            When online, changes will be synced eagerly in both directions.
             If user is idle for a time, the client will go over to period sync strategy instead of the eager sync.
             As soon as user starts interact with the application (mouse moves or key strokes), the app will go over to eager sync mode again.
           </p>

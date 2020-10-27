@@ -52,7 +52,7 @@ When you've successfully deployed the Dexie Cloud software, the next step is to 
    npx dexie-cloud start-replication --from <URL of the hosted database> --to <URL of the new database on your own installation>
    ```
    After OTP authorization, this will start a replication from the hosted database to your database instance. This may take some time depending on the amount of data you are migrating. To view progress, run `npx dexie-cloud replication-progress`. When it shows "in sync", it's time for the next step.
-3. Point your web app to your new database URL `db.cloud.connect(newURL)` and publish the web app.
+3. Point your web app to your new database URL `db.cloud.configure({databaseUrl: newURL, ...})` and publish the web app.
 4. Now it's time to start redirecting all your users that haven't yet updated their web app to the new database:
    ```
    npx dexie-cloud redirect --from <URL of hosted db> --to <URL of your dexie-cloud-server app>

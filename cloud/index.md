@@ -8,7 +8,7 @@ You can start creating your awesome app based on Dexie Cloud **today** - before 
 
 To prepare your app for Dexie Cloud:
 
-1. Install the alpha version of [dexie-cloud-addon](https://npmjs.com/dexie-cloud-addon) package so you can use <span style="color: #ce9178;">'@'</span>-prefixed IDs (auto-generated global IDs). Don't use db.cloud.connect() yet.
+1. Install the alpha version of [dexie-cloud-addon](https://npmjs.com/dexie-cloud-addon) package so you can use <span style="color: #ce9178;">'@'</span>-prefixed IDs (auto-generated global IDs).
 2. Declare the [access control tables](docs/access-control#access-control-tables) in your new db version and use them to support
    shared objects in teams or between users (like [sharing a ToDo list](/cloud/docs/access-control#example-sharable-todo-list) or [manage projects](/cloud/docs/access-control#example-a-simple-project-management-model)). The access is not yet checked nor synced and their content will be treated as normal app tables for now.
 

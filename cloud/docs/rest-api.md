@@ -12,134 +12,33 @@ This page documents the REST API that every database in Dexie Cloud has.
 | [/authorize](#authorize) | Authorize endpoint |
 | [/token](#token) | Token endpoint |
 
+### /authorize
+
+This endpoint authenticates the user using passwordless email OTP.
+
+| Method | GET |
+| Parameters | redirect_uri, state?, nonce, name?, email? |
+
 ### /token
 
 | Method | POST |
-| Parameters | `{endpointId?: string, name?: string, email?: string, otp?: string}`|
+| Content-Type | application/json |
+| Parameters | `{grant_type, client_id?, client_secret?, code?, name?, email?}`|
 | Authentication | Either Basic or none (see explanation below) |
 
-Request a token for the calling endpoint. This method can be called directly from web clients or from a server. When called from a web client, authorization must always be done using a email verification flow (see below). When called from another server, authentication can be done using an Authorization header with basic authentication from ClientID and ClientSecret.
+Request a token for the calling endpoint. This method can be called directly from web clients or from a server. When called from a web client, grant_type must be "authorization_code" and a valid "code" parameter retrieved from the authorize endpoint must be given. This is all handled by `dexie-cloud-addon`. But when called from one of your own servers, you can make the token endpoint produce a token for a user that your server has already authenticated:
 
-#### Email Verification Flow
+```js
+{
+  grant_type: "client_credentials",
+  client_id: <your client ID>,
+  client_secret: <your client secret>,
+  name: <name of user to impersonate>,
+  email: <email of user to impersonate>
+}
+```
 
-1. Web client:
-   ```http
-   POST /token
-   Content-Type: application/json
+## See Also
 
-   {"endpointId": null}
-   ```
-2. Dexie Cloud responds:
-
-   ```http
-   HTTP/1.1 200 OK
-   Content-Type: application/json
-
-   {
-     "endpointId": "xyz",
-     "type": "email",
-     "title": "Login",
-     "fields": [{
-       "name": "email",
-       "type": "text",
-       "title": "Enter email address"
-     }]
-   }
-   ```
-
-3. Web Client stores the endpointId given to it and
-   prompts user for requested email address and then sends:
-
-   ```http
-   POST /token
-   Content-Type: application/json
-
-   {
-     "endpointId": "xyz",
-     "email": "foo@bar.com"
-   }
-   ```
-
-4. Dexie Cloud optionally requires a captcha challenge:
-
-   ```http
-   HTTP/1.1 200 OK
-   Content-Type: application/json
-
-   {
-     "endpointId": "xyz",
-     "type": "captcha",
-     "title": "Captcha",
-     "fields": [{
-       "name": "captcha",
-       "type": "captcha",
-       "title": "Please repeat the characters on image"
-       "value": "data:image/svg;base64,R0lGODlhEAAQAMQAAORHHOVSKudfOulrSOp3WOyDZu6QdvCchPGolfO0o..."
-     }]
-   }
-   ```
-
-4. Web Client shows captcha image to user and asks for the plain text, then sends:
-
-   ```http
-   POST /token
-   Content-Type: application/json
-
-   {
-     "endpointId": "xyz",
-     "email": "foo@bar.com"
-   }
-   ```
-4. Dexie Cloud generates an OTP "ABC123" and sends it via email.
-   The HTTP response becomes:
-
-   ```http
-   HTTP/1.1 200 OK
-   Content-Type: application/json
-
-   {
-     "endpointId": "xyz",
-     "type": "otp",
-     "title": "OTP",
-     "fields": [{
-       "name": "otp",
-       "type": "text",
-       "title": "Enter OTP"
-     }]
-   }
-   ```
-
-5. Web Client:
-
-   ```http
-   POST /token
-   Content-Type: application/json
-
-   {
-     "endpointId": "xyz",
-     "email": "foo@bar.com",
-     "otp": "ABC123"
-   }
-   ```
-
-6. Dexie Cloud verifies the OTP.
-   On successful verification:
-
-   ```http
-   HTTP/1.1 200 OK
-   Content-Type: application/json
-
-   {
-     "endpointId": "xyz",
-     "type": "otp",
-     "title": "OTP",
-     "fields": [{
-       "name": "otp",
-       "type": "text",
-       "title": "Enter OTP"
-     }]
-   }
-
-   ```
-
-See [Tokens](authentication#tokens)
+- [Tokens](authentication#tokens)
+- [Example auth integration](db.cloud.configure()#example-integrate-custom-authentication)

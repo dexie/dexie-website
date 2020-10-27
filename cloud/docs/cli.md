@@ -43,6 +43,15 @@ dexie-cloud.json
 dexie-cloud.key
 ```
 
+## delete
+Deletes a database from the cloud.
+
+<pre>
+npx dexie-cloud delete &lt;Database-URL&gt;
+</pre>
+
+The user will have to authorize the request using email OTP. The system will prompt for email address, which needs to be an email address of a database owner. It is not nescessary to have the dexie-cloud.json or dexie-cloud.key files to do this command.
+
 ## whitelist
 
 Allow a web app to use the database.
@@ -71,20 +80,10 @@ npx dexie-cloud whitelist https://myapp.company.com
 npx dexie-cloud whitelist http://localhost:8080 --delete
 ```
 
-## delete-db
-Deletes a database from the cloud.
-
-<pre>
-npx dexie-cloud delete-db &lt;Database-URL&gt;
-</pre>
-
-The user will have to authorize the request using email OTP. The system will prompt for email address, which needs to be an email address of a database owner. It is not nescessary to have the dexie-cloud.json or dexie-cloud.key files to do this command.
-
 ## add-replica
 
 <pre>
-npx dexie-cloud add-replica &lt;URL to the dexie cloud 
-npx dexie-cloud whitelist &lt;app origin&gt; [--delete]
+npx dexie-cloud add-replica &lt;URL to the other Dexie Cloud server&gt;
 </pre>
 
 

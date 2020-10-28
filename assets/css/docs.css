@@ -99,10 +99,6 @@ a.getstarted.selected {
 	color: #222;
 }
 
-pre.cli {
-	
-}
-
 pre > code span.token.comment {
 	color: #4b965f;
 }

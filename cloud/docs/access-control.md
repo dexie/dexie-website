@@ -362,8 +362,9 @@ function addProject(projectName) {
   return db.transaction("rw", db.realms, db.roles, db.projects, async () => {
     // Create the new realm
     const newRealmId = await db.realms.add({
-      realmId: newRealmId,
-      name: projectName,
+      // Add some custom optional props on the realm:
+      name: `${projectName} realm`,
+      description: `This realm controls access to the project ${projectName}`
     });
 
     // Add two roles for the project realm

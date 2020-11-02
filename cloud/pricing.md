@@ -15,12 +15,12 @@ Free forever for development, tests and demos.
 | Horizontally scalable                 | &#10003;   | &#10003;                | &#10003;                                |
 | Max Number of databases               | Unlimited  | Unlimited               | Unlimited                               |
 | Demo users                            | 5 included | 5 included              | Unlimited                               |
-| Authenticated users                   | 1 included | \$9.95/mo per 100 users | Unlimited                               |
+| Authenticated users                   | 1 included | USD \$9.95/mo per 100 users | Unlimited                               |
 | Use own authentication                | &#10003;   | &#10003;                | &#10003;                                |
 | Source code of server-part            | -          | -                       | &#10003;                                |
 | Access to private git repo            | -          | -                       | &#10003;                                |
-| One-time license fee                  | 0          | 0                       | \$14,995                                |
-| Yearly support fee                    | 0          | 0                       | \$2,999                                 |
+| One-time license fee                  | 0          | 0                       | USD \$2,495                                |
+| Yearly support fee                    | 0          | 0                       | USD \$499                                 |
 
 _The prices are provisional_.
 
@@ -38,7 +38,7 @@ This edition is hosted and starts with 100 users for a cost of \$9.95 per month.
 
 ### Premium Software License
 
-This edition can be hosted in the cloud of your own choice, or on your own bare metal. All the monthly costs are gone and you only pay once and get access to everything - source code and binaries. The server is easy to publish and on cloud providers like Amazon or Azure. It's a typical app architecture based on Node.JS and PostgreSQL. Support and software updates in one year is included. Yearly cost for support, software updates and continous access to private git is 20% of the upfront license fee.
+Buy the software and serve millions of users without any per-user fee. You get full source code and do what you like with it as long as you do not compete with us. Host it in the cloud of your own choice, or on your own bare metal. The server is easy to publish and on cloud providers like Amazon and Azure. Support and software updates in one year is included. Optionally, pay a yearly support fee for updates and continous access to private git.
 
 <a class='btn btn-primary' href='/cloud/docs/premium-software' role='button'>Read more... &raquo;</a>
 <!-- <a class='btn btn-success' href='/cloud/purchase/software' role='button'>Get it now &raquo;</a> -->

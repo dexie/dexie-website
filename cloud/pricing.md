@@ -38,7 +38,7 @@ This edition is hosted and starts with 100 users for a cost of \$9.95 per month.
 
 ### Premium Software License
 
-Buy the software and serve millions of users without any per-user fee. You get full source code and do what you like with it as long as you do not compete with us. Host it in the cloud of your own choice, or on your own bare metal. The server is easy to publish and on cloud providers like Amazon and Azure. Support and software updates in one year is included. Optionally, pay a yearly support fee for updates and continous access to private git.
+Buy the software and serve millions of users without any per-user fee. You get full source code and do what you like with it as long as you do not compete with us. Host it in the cloud of your own choice, or on your own bare metal. The server is easy to publish and on cloud providers like Amazon and Azure. Support and software updates in one year is included. Optionally, pay a yearly support fee for updates and continous access to our private git repo.
 
 <a class='btn btn-primary' href='/cloud/docs/premium-software' role='button'>Read more... &raquo;</a>
 <!-- <a class='btn btn-success' href='/cloud/purchase/software' role='button'>Get it now &raquo;</a> -->

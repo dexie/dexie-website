@@ -45,6 +45,7 @@ div.video-parent {
 	min-height: 100%;
 	overflow: hidden;
 	z-index: -1;
+	background-image: linear-gradient( rgba(84, 113, 233, 1), rgba(30, 63, 211, 1),rgba(75, 150, 95, 1));
 }
 video.banner-video {
 	position: absolute;
@@ -59,18 +60,11 @@ video.banner-video {
 }
 
 .docs-page-jumbotron.dexie-cloud-docs {
-	background-image: linear-gradient(#6e6cf5 0%, #9e70d3 100%);
-	background-image: linear-gradient(#8853c5, #9670d3, #707ad3, #5d8fbd);
 	background-image: linear-gradient( #5471e9, #1e3fd3,#4b965f);
 }
 
 .docs-page-jumbotron.dexie-cloud {
-	/*background-color: #9e70d3; */
-	/*background-image: linear-gradient(#6e6cf5 0%, #9e70d3 100%);*/
-	/*background-image: linear-gradient(#8853c5, #9670d3, #707ad3, #5d8fbd);*/
-	/*background-image: linear-gradient( #5471e9, #1e3fd3,#4b965f);*/
-	background: transparent; /* rgba(63, 34, 145, 0.3); */
-	/* background-image: url('../images/dexie-cloud/norrsken-cropped-compressed.jpg'); */
+	background: transparent;
 	color: white;
 }
 

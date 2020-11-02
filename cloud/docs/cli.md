@@ -89,12 +89,12 @@ npx dexie-cloud add-replica &lt;URL to the other Dexie Cloud server&gt;
 
 ## remove-replica
 
-TODO: Fixthis!
+TBD
 
 ## replicas
 
-TODO: Fixthis!
+TBD
 
 ## stats
 
-TODO: Fixthis!
+TBD

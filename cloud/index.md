@@ -2,7 +2,7 @@
 layout: dexie-cloud-landing-page
 title: 'Dexie Cloud'
 ---
-## Start coding your app today
+## Start coding your sync-ready app today
 
 You can start creating your awesome app based on Dexie Cloud **today** - before it's even available in beta. Code your app with plain Dexie.js while waiting for Dexie Cloud to be released. It won't sync (yet), but since Dexie Cloud works with the same Dexie API that's already available, all app logic can be coded in advance, and let the multi-user experience with sync, access control and realtime collaboration features start working as soon as Dexie Cloud is available for you.
 

@@ -33,7 +33,7 @@ h1[id]::before, h2[id]::before, h3[id]::before, h4[id]::before, h5[id]::before, 
 
 #parallax {
 	height: 400px;
-	padding: 80px 0 0;
+	padding: 65px 0 0;
 	overflow: hidden;
 	color: #FFF;
 	text-shadow:
@@ -83,7 +83,7 @@ h1[id]::before, h2[id]::before, h3[id]::before, h4[id]::before, h5[id]::before, 
 #cloud-promoter > div.shoutouts {
 	overflow: visible;
 	text-align: unset;
-	margin: 25px 0 0 0;
+	margin: 35px 0 0 0;
 }
 @keyframes promoter-read-more {
 	0% {color: rgba(255,255,255,0);}
@@ -97,7 +97,7 @@ h1[id]::before, h2[id]::before, h3[id]::before, h4[id]::before, h5[id]::before, 
 	font-variant: small-caps;
 	color: rgba(255,255,255,1);
 	animation-name: promoter-read-more;
-	animation-duration: 4s;
+	animation-duration: 2s;
 }
 #cloud-promoter > p:hover {
 	text-decoration: underline;

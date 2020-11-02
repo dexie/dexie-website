@@ -30,48 +30,48 @@ layout: dexie-frontpage-template
 	<div class='row'>
 		<div class='col-md-6'>
 			<pre><code class="language-javascript">
-/*
-|----------------------------|
-| Declare your database      |
-|----------------------------|
-*/
+	/*
+	|----------------------------|
+	| Declare your database      |
+	|----------------------------|
+	*/
 
-const db = new Dexie('MyDatabase');
+	const db = new Dexie('MyDatabase');
 
-// Declare tables, IDs and indexes
-db.version(1).stores({
-friends: '++id, name, age'
-});
-
-
+	// Declare tables, IDs and indexes
+	db.version(1).stores({
+		friends: '++id, name, age'
+	});
 
 
 
 
-			</code></pre>
-		</div>
-		<div class='col-md-6'>
-			<pre><code class="language-javascript">
-/*
-|-----------------------|
-| Then run some queries |
-|-----------------------|
-*/
 
-// Find some old friends
-const oldFriends = await db.friends
-.where('age').above(75)
-.toArray();
 
-// or make a new one
-await db.friends.add({
-name: 'Camilla',
-age: 25,
-street: 'East 13:th Street',
-picture: await getBlob('camilla.png')
-});
-			</code></pre>
-		</div>
+					</code></pre>
+							</div>
+							<div class='col-md-6'>
+								<pre><code class="language-javascript">
+	/*
+	|-----------------------|
+	| Then run some queries |
+	|-----------------------|
+	*/
+
+	// Find some old friends
+	const oldFriends = await db.friends
+		.where('age').above(75)
+		.toArray();
+
+	// or make a new one
+	await db.friends.add({
+		name: 'Camilla',
+		age: 25,
+		street: 'East 13:th Street',
+		picture: await getBlob('camilla.png')
+	});
+								</code></pre>
+					</div>
 	</div>
 </div>
 

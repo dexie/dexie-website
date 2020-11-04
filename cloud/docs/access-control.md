@@ -24,9 +24,19 @@ For enterprise use cases, Dexie Cloud also has a server side REST API that enabl
 
 ## Realms
 
-A realm is an access controlled bucket of data. All objects in your database sits on a realm. Every user has a default realm that is private for that user only. By default, a newly created object will sit on the private realm for the user that creates the object.
+A realm represents an access controlled partition of data. All objects in your database is connected to a realm. Every user has its own unique realm that is private for that user only. By default, a newly created object will be connected to the private realm for the user that creates the object.
 
 New realms can be created by anyone but they are of little use unless that user invites members and the members accepts the invitation.
+
+Realms are managed in the `db.realms` table. A given user will only have the realms they are member of visible for them and synced for offline access. When a realm is shared with new users, those users will get an invitation to join the realm and when users accept the invitation, they will get the realm in their next sync request together with objects that are connected to that realm. Invitations are created using the `db.members` table. Invited members can be given full, limited or no permission to mutate objects connected to the realm. 
+
+## Members
+
+Realms have members. A member connected to a realm will have the realm and all objects connected to it synced locally if the member have accepted the membership. Each member has **permissions** to mutate objects connected to the realm. Zero perissions means readonly access. Member can also be given roles.
+
+## Roles
+
+Instead of giving members direct permissions, a member can be given one or many roles that grants certain permissions. There are no built-in roles. Roles needs to be created and connected to a realm. The role has a name and a set of permission.
 
 ## Reserved property names
 

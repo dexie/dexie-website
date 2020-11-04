@@ -102,15 +102,16 @@ prismStyle: 'vscode-dark'
       </div>
       <hr/>
       <h2 id="getting-started">Get started</h2>
-        <p>This guide assumes you use <span style="font-weight: bold;">npm</span> and <a href="https://webpack.js.org/guides/getting-started/">webpack</a>.
-          If you're unfamiliar with all that, try read <a href="/docs/Tutorial/Getting-started">Dexie.js getting started guide</a> and <a href="https://webpack.js.org/guides/getting-started/">webpack's get started guide</a>.
-          </p>
+        <p>This guide assumes you already have a dexie app and use <span style="font-weight: bold;">npm</span> and <span style="font-weight: bold;">webpack</span> or similar tools.
+        </p>
         <div class='row'>
           <div class='col-md-6'>
             <h3 class="widescreen">1. Create your database in the cloud</h3>
             <h3 class="slimscreen">1. Create your db in the cloud</h3>
             <pre class="command-line language-bash" data-prompt="~/my-web-app $" data-filter-output="(out)"><code style="margin:0;">npx dexie-cloud create</code></pre>
-            <p>The URL of your database will output to the console.</p>
+            <p>You'll be prompted for email verification. Then <span style="font-weight: bold;">the URL of your database</span>
+              will output to the console and stored in a new local file <span style="font-family: monospace;">dexie-cloud.json</span>.
+            <span style="font-style: italic;">See the <a href="/cloud/docs/cli">CLI docs</a>.</span></p>
             <h3>2. Whitelist your app origin(s)</h3>
             <pre class="command-line language-bash" data-prompt="~/my-web-app $"><code style="margin:0;">npx dexie-cloud whitelist http://localhost:8080</code></pre>
             <h3>3. Install dexie-cloud-addon</h3>

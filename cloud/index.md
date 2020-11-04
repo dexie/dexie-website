@@ -4,7 +4,7 @@ title: 'Dexie Cloud'
 ---
 ## Start coding your sync-ready app today
 
-You can start creating your awesome app based on Dexie Cloud **today** - before it's even available in beta. Code your app with plain Dexie.js while waiting for Dexie Cloud to be released. It won't sync (yet), but since Dexie Cloud works with the same Dexie API that's already available, all app logic can be coded in advance, and let the multi-user experience with sync, access control and realtime collaboration features start working as soon as Dexie Cloud is available for you.
+You can start creating your awesome app based on Dexie Cloud **today** - before it's even available in beta. Declare your tables with the '@' prefix and install the addon. Declare the [access control tables](docs/access-control#access-control-tables) and client side wrappers for CRUD operations. Use the same Dexie API you are used to and create your app logic. Let the multi-user experience with sync, access control and realtime collaboration features start working as soon as Dexie Cloud is available for you.
 
 To prepare your app for Dexie Cloud:
 
@@ -19,6 +19,17 @@ When launching your app, our extremely simple [pricing](/cloud/pricing) makes it
 <hr/>
 
 ## Want to know more?
-Check out [Dexie Cloud Docs](/cloud/docs/) (still under construction)
+
+<i class="fa fa-hand-o-right" aria-hidden="true"></i> [Access Control in Dexie Cloud](docs/access-control)
+
+<i class="fa fa-hand-o-right" aria-hidden="true"></i> [Authentication in Dexie Cloud](docs/authentication)
+
+### Examples
+
+<i class="fa fa-code" aria-hidden="true"></i> [Create a sharable ToDo list](docs/access-control#example-sharable-todo-list)
+
+<i class="fa fa-code" aria-hidden="true"></i> [Create a role-based access controlled project management model](docs/example-a-simple-project-management-model)
+
+<i class="fa fa-code" aria-hidden="true"></i> [Integrate with PassportJS authentication](docs/db.cloud.configure/()#example-integrate-custom-authentication)
 
 <br/>

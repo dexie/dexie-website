@@ -2,8 +2,14 @@
 layout: docs-dexie-cloud
 title: "Authentication in Dexie Cloud"
 ---
+<div class="shoutouts" style="text-align: left; margin: 20px 0 35px 0;">
+   <p>Zero config, registrationless, passwordless</p>
+   <p>Easy to replace with your own authentication</p>
+   <p>Long-lived sessions & cryptographically protected tokens</p>
+</div>
+<hr/>
 
-This page describes how to customize authentication in Dexie Cloud.
+This page describes the default authentication in Dexie Cloud, how to replace it with your own authentication and how we protect our access tokens using the latest security standards in web browsers.
 
 If you are new to Dexie Cloud, please visit the [Dexie Cloud landing page](/cloud/).
 
@@ -41,6 +47,11 @@ Since Dexie Cloud tokens are long-lived, we need to handle them with a better se
    If timestamp verification fails, server sends a challenge containing its own current time and expects the client to adjust its time with the diff between server and client and re-send the request.
 6. Sync request is processed successfully.
 
+### Why is this better than server-generated JWT tokens?
+Normal server-generated JWT tokens need to be passed to the server in every API request from the clients to the server. Even though all API calls are TLS encrypted, you will not control the the clients that can access your server unlike server-server communication where you can really rely on the TSL channel as you control the API client. An attacher could copy a JWT from a user if having access to the client somehow, if not using a trojan hourse or malware, it could be copied just using the chrome debugger. If that happens, it is of great value that the JWT is as short-lived as possible.
+
+The tokens that Dexie Cloud use are dependent on a CryptoKey in IndexedDB and not sent over the wire. The CryptoKey is further protected by a secret stored in a secure cookie - to utilize the browser-native protection of secure cookies on hard disk. By signing API requests instead of attaching a plain JWT an attacker will not be able to steal the token from network requests using neither chrome debugger, fake installed CA certs or similar methods.
+
 ### 2 ways of obtaining the tokens
 
 Every Dexie Cloud database URL has a token endpoint that can give out tokens for a client. In order to do so, it will either require an authorization code from a successful authorization flow, OR accept a client_id and client_secret together with the email and name claims. The latter way is the way to use when you want to integrate an existing authentication solution to be able to authenticate users to use Dexie Cloud.
@@ -54,3 +65,19 @@ When the Dexie Cloud server endpoint verifies the user's email itself, you will 
 When you have an existing authentication solution using a server-side framework and programming language of your own choice, and you want to integrate that solution to authenticate users for your Dexie Cloud application, you will need to write a new endpoint into your existing server-side authentication server that, using your client_id and client_secret can request token from Dexie Cloud for the user you have already authenticated.
 
 See [Example auth integration](db.cloud.configure()#example-integrate-custom-authentication).
+
+## Default Authentication from a user's perspective
+
+1. User goes to your webapp the very first time (as authentication lasts for months by default)
+2. User is prompted for email address.
+3. User get an email containing a one-time password such as `ABC123`.
+4. User enters the OTP.
+5. User is in.
+
+Your app may let users edit their *name* and possibly other fields that your app choose to store with the user, either in the *members* table or in a complementary table.
+
+## Replace authentication with custom authentication
+
+The transport security will still be the same if you replace the default authentication - tokens will still be protected by CryptoKeys. The difference is only how the authentication takes place - the step that is required for Dexie Cloud to negotiate the token flow.
+
+To replace authentication, see [the following sample](db.cloud.configure()#example-integrate-custom-authentication).

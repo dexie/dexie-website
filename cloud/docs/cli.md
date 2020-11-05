@@ -3,7 +3,7 @@ layout: docs-dexie-cloud
 title: 'Dexie Cloud CLI'
 ---
 
-The Dexie Cloud command-line interface is a node binary in the same package as the Dexie Cloud addon: dexie-cloud. The CLI is a Node.js executable and works on all Node.js compliant platforms with Node.js installed.
+The Dexie Cloud command-line interface `dexie-cloud` is an executable npm package. It is the CLI for creating and managing sync databases. You do not have to install the package to use it. The only prerequisit is having node.js installed on your system. The `npx` tool that comes with Node.js will download it temporarily from npm when you run any dexie-cloud command, such as `npx dexie-cloud --help`.
 
 ## create
 Creates a database in the cloud.

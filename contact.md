@@ -31,12 +31,15 @@ If you have business related questions, or want to get in touch on non-technical
 
 # Author and contributors
 
-David Fahlander (author):
+David Fahlander
 
 - [Github &raquo;](https://github.com/dfahlander)
 - [Medium &raquo;](https://medium.com/@dfahlander)
 - [Twitter &raquo;](https://twitter.com/dfahlander)
 
-Other Contributors:
+Other contributors
 
-- [Github &raquo;](https://github.com/dfahlander/Dexie.js/graphs/contributors)
+- [Aaron Cicali &raquo;](https://github.com/acicali)
+- [Nikolas Poniros &raquo;](https://poniros.de)
+- [Christopher Hunt &raquo;](https://github.com/chrahunt)
+- [And a bunch more &raquo;](https://github.com/dfahlander/Dexie.js/graphs/contributors)

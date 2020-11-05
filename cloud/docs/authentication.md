@@ -15,6 +15,7 @@ If you are new to Dexie Cloud, please visit the [Dexie Cloud landing page](/clou
 
 If you prefer to jump right in to samples, here some shortcuts:
 
+- [Example zero config setup](#zero-config-setup)
 - [Example auth integration](db.cloud.configure()#example-integrate-custom-authentication)
 
 ## Introduction
@@ -22,6 +23,31 @@ If you prefer to jump right in to samples, here some shortcuts:
 Dexie Cloud is for writing offline capable applications, which means that the typical use case is long-lived authentication sessions that lasts for months or until the user actively logs out from it.
 
 In the default setup, users will only need to authenticate the very first time they visit your app. There is no registration step for your users and they won't need to create any password, as authentication is performed over passwordless email OTP. The authentication step will result in a securely stored, non-exportable crypto key in your indexedDB that can reathenticate future sync calls automatically without having to require further user interaction.
+
+## Zero config setup
+
+If you just enable dexie-cloud-addon the way it is explained on [the landing page](/cloud) you will be using the default authentication and you will not need your own server endpoint. Your app can be hosted on any site, such as a static site on github pages or similar and yet be able to authenticate users and sync data with your cloud database.
+
+## Default Authentication from a user's perspective
+
+1. User goes to your webapp the very first time (as authentication lasts for months by default)
+2. User is prompted for email address.
+3. User get an email containing a one-time password such as `ABC123`.
+4. User enters the OTP.
+5. User is in.
+
+After this initial step, user does not need to reauthenticate for months unless he or she actively logs out from your app. The long session timeout is designed for typical offline-first applications that require this.
+
+## Encrypting your offline data
+
+For more sensitive applications, instead of limiting the session timeout (which by design should be long for offline first apps), your app could choose to encrypt sensitive data and require a password from your user for decryption. There are two dexie compatible open source libraries that adds encryption to Dexie: [dexie-encrypted](https://github.com/mark43/dexie-encrypted) and [dexie-easy-encrypt](https://github.com/jaetask/dexie-easy-encrypt). By encrypting the sensisitve parts of the offline data you protect the data much better than short session timeouts, that would require resync more often.
+
+## Replace authentication with custom authentication
+
+The transport security will still be the same if you replace the default authentication - tokens will still be protected by CryptoKeys. The difference is only how the authentication takes place - the step that is required for Dexie Cloud to negotiate the token flow.
+
+To replace authentication, see [the following sample](db.cloud.configure()#example-integrate-custom-authentication).
+
 
 ## Tokens
 
@@ -65,19 +91,3 @@ When the Dexie Cloud server endpoint verifies the user's email itself, you will 
 When you have an existing authentication solution using a server-side framework and programming language of your own choice, and you want to integrate that solution to authenticate users for your Dexie Cloud application, you will need to write a new endpoint into your existing server-side authentication server that, using your client_id and client_secret can request token from Dexie Cloud for the user you have already authenticated.
 
 See [Example auth integration](db.cloud.configure()#example-integrate-custom-authentication).
-
-## Default Authentication from a user's perspective
-
-1. User goes to your webapp the very first time (as authentication lasts for months by default)
-2. User is prompted for email address.
-3. User get an email containing a one-time password such as `ABC123`.
-4. User enters the OTP.
-5. User is in.
-
-Your app may let users edit their *name* and possibly other fields that your app choose to store with the user, either in the *members* table or in a complementary table.
-
-## Replace authentication with custom authentication
-
-The transport security will still be the same if you replace the default authentication - tokens will still be protected by CryptoKeys. The difference is only how the authentication takes place - the step that is required for Dexie Cloud to negotiate the token flow.
-
-To replace authentication, see [the following sample](db.cloud.configure()#example-integrate-custom-authentication).

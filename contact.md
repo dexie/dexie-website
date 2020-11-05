@@ -34,7 +34,7 @@ If you have business related questions, or want to get in touch on non-technical
 David Fahlander (author):
 
 - [Github &raquo;](https://github.com/dfahlander)
-- [Medium &raquo;](https://medium.com/@davidfahlander)
+- [Medium &raquo;](https://medium.com/@dfahlander)
 - [Twitter &raquo;](https://twitter.com/dfahlander)
 
 Other Contributors:

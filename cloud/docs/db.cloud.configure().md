@@ -2,6 +2,7 @@
 layout: docs-dexie-cloud
 title: "db.cloud.configure()"
 ---
+Configure the URL of the database to keep in sync with.
 
 ## Syntax
 

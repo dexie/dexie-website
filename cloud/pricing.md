@@ -2,10 +2,13 @@
 layout: dexie-cloud-pricing
 title: "Dexie Cloud Pricing"
 ---
-
 # Dexie Cloud Pricing
 
-Free forever for development, tests and demos.
+As you all know, **[Dexie.js](/)** is a completely free [Apache licensed](https://github.com/dfahlander/Dexie.js/blob/master/LICENSE) open source libary! You never pay for **[Dexie.js](/)**!
+
+**Dexie Cloud**<span class="beta" style="font-weight: bold;">BETA</span>&nbsp; on the other hand is a commercial cloud service **that finance further development Dexie.js**.
+
+<br/>
 
 |                                       | Free       | Production &nbsp;       | Premium Software License                |
 | ------------------------------------- | ---------- | ----------------------- | --------------------------------------- |

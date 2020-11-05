@@ -2,10 +2,9 @@
 layout: dexie-frontpage
 title: Contact
 ---
-
 # Contact
 
-We love communicating about Dexie.js on stackoverflow and GitHub! Never hesitate to ask something on [stackoverflow](http://stackoverflow.com/questions/ask?tags=dexie). Also, please [file issues](https://github.com/dfahlander/Dexie.js/issues/new) when you suspect a bug, but please do a bit of research before you do: [search for existing issues](https://github.com/dfahlander/Dexie.js/issues?q=is%3Aissue).
+We love to answer all kinds of questions about Dexie.js on stackoverflow and we try do our best to be fast to respond to and fix issues posted on Github! Never hesitate to ask something on [stackoverflow](http://stackoverflow.com/questions/ask?tags=dexie). Also, please [file issues](https://github.com/dfahlander/Dexie.js/issues/new) when you suspect a bug, but please do a bit of research before you do: [search for existing issues](https://github.com/dfahlander/Dexie.js/issues?q=is%3Aissue).
 
 ## Ask Question
 [Ask dexie question on stackoverflow](http://stackoverflow.com/questions/ask?tags=dexie)

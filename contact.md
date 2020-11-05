@@ -21,7 +21,7 @@ If you really need to get in touch privately, use the following email address:
 
 [privsupport@dexie.org](mailto:privsupport@dexie.org)
 
-**If you contact us for private support, we will be asking you to order a prepaid time block of 10 hours à 150 €.**
+**If you contact us for private support, we will be asking you to pay for the time we spend on it.**
 
 ## Business related questions
 

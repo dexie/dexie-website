@@ -25,7 +25,9 @@ The server endpoint of Dexie Cloud controls access to data for every sync reques
 
 The whole idea with Dexie Cloud is to create applications that work as identically as possible no matter if user is offline or online. This means that the application logic needs to be fully executable on the client. A ToDo app must be able to add items while offline, a barcode scanner app must work offline and store scanned codes in the offline database.
 
-Dexie Cloud comes with an access control model that has the same security benefits as a server side app, but the creation of the objects that control access happens in your client side app. How is this possible? **It must all start with a user creating a realm**. Any user can do that. A realm does not give any new access or affect other users just yet. The realm owner can invite members to the realm and connect the application model objects to the realm (or several different realms). Then, users that accepts the invitations will gain the access that the realm owner has given and the model continues to work with water-proof isolation between users and customers. The invitation step is important because it protects other users from unwillingly starting to see new data showing up in their app without their acceptance - data that could potentially confuse them or delude them to mix it up with authentic data.
+Dexie Cloud comes with an access control model that has the same security benefits as a server side app, but the creation of the objects that control access happens in your client side app. How is this possible? **It must all start with a user creating a realm**. Any user can do that. A realm does not give any new access or affect other users just yet. The realm owner can invite members to the realm and connect the application model objects to the realm (or several different objects to the same realm). Then, users that accepts the invitations will gain the access that the realm owner has given and the model continues to work with water-proof isolation between users and between customers.
+
+The invitation step is important in non-enterprise use cases because it protects other users from unwillingly starting to see new data showing up in their app without their acceptance - data that could potentially confuse them or delude them to mix it up with authentic data.
 
 For enterprise use cases, Dexie Cloud also has a server side REST API that enables realm and bulk member management without requiring an invititation step. The client of such an API could typically sync users from a directiry with realm members in Dexie Cloud.
 
@@ -39,11 +41,11 @@ Realms are managed in the `db.realms` table. A given user will only have the rea
 
 ## Members
 
-Realms have members. A member connected to a realm will have the realm and all objects connected to it synced locally if the member have accepted the membership. Each member has **permissions** to mutate objects connected to the realm. Zero perissions means readonly access. Member can also be given roles.
+Realms have members. A member connected to a realm will have the realm and all objects connected to it synced locally if the member have accepted the membership. Each member can be given **permissions** to mutate objects connected to the realm. Zero perissions means readonly access. Member can also be given roles.
 
 ## Roles
 
-Instead of giving members direct permissions, a member can be given one or many roles that grants certain permissions. There are no built-in roles. Roles needs to be created and connected to a realm. The role has a name and a set of permissions.
+Instead of giving members direct permissions, a member can be given one or many roles that grants certain permissions. Roles needs to be created and connected to a realm. The role has a name and a set of permissions. The roles of a member is defined by the `roles` property of the [member](#properties-of-objects-in-members-table).
 
 ## Reserved property names
 
@@ -270,7 +272,7 @@ interface Member {
   invited?: Date;
   accepted?: Date;
   rejected?: Date;
-  roles?: string[];
+  roles?: string[]; // Array of role names for this user.
   permissions?: {
     add?: string[] | "*"; // array of tables or "*" (all).
     update?: {

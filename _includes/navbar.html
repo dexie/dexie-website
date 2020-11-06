@@ -54,8 +54,10 @@
             <li><a target="_blank" href="https://w3techs.com/technologies/overview/javascript_library"><img class="icon" src="/assets/images/w3techs-icon.ico"> Dexie.js is among the <span style="font-weight: bold">Top-30</span> JS libraries according to w3techs.com</a></li>
           </ul>
         </li>
-        <li><a href="/cloud/pricing">Pricing </a></li>
         <li><a href="/contact">Contact </a></li>
+        {% if page.url contains '/cloud/' %}
+          <li class=""><a href="/cloud/pricing">Pricing </a></li>
+        {% endif %}
         <!-- <li><a href="https://medium.com/dexie-js">Blog </a></li> -->
       </ul>
     </div><!-- /.navbar-collapse -->

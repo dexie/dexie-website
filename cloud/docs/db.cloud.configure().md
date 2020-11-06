@@ -52,7 +52,7 @@ should not be added to git either but be managed in a secure way using the cloud
 
 ### Example: Integrate Custom Authentication
 
-First you will need to implement a server endpoint that is able to authenticate your user the way you want for your application. This server endpoint should listen for requests from your dexie-cloud client (requested from your `fetchToken` callback), then it should request the token using server-to-server communication towards the Dexie Cloud REST API, and then return the resulting token to your client.
+To integrate with custom authentication, you can either integrate with your existing web server or create a new server endpoint using a authentication framework of your choice, such as Node.js and Passportjs. You need to make that authentication solution you have get a new API endpoint that requests tokens from Dexie Cloud via server-to-server communication. The new server endpoint should accept requests from your dexie-cloud client (requested from your `fetchToken` callback), then it should request the token using server-to-server communication towards the Dexie Cloud REST API, and then return the resulting token to your client.
 
 **Node.js server endpoint**
 
@@ -88,6 +88,7 @@ app.get('/dexie-cloud-token', async (req, res, next) => {
         grant_type: "client_credentials",
         client_id: CLIENT_ID,
         client_secret: CLIENT_SECRET,
+        sub: user.userId, // or user.email.
         email: user.email,
         name: user.name
       });

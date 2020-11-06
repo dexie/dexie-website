@@ -1,0 +1,28 @@
+<style>
+  .coming-soon-badge {
+    position: fixed;
+    top: 0px;
+    right: 0;
+    width: 550px;
+    background-color: rgba(226, 221, 235, 1);
+    opacity: 0.20;
+    color: #0f0329;
+    transform-origin: 50% 50%;
+    transform: rotate(45deg) translate(205px, -70px);
+    overflow: hidden;
+    text-align: center;
+    font-size: 16pt;
+    font-family: monospace;
+    font-style: bold;
+    pointer-events: none;
+    z-index: 2;
+  }
+  @media screen and (min-width: 768px) {
+    .coming-soon-badge {
+      opacity: 0.20;
+      font-size: 28pt;
+      transform: rotate(45deg) translate(160px, 0px);
+    }
+  }
+</style>
+<div class="coming-soon-badge coming-soon-big">Coming Soon</div>

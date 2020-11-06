@@ -31,3 +31,68 @@ header.site-header {
 	max-height: unset;
 	opacity: 0.9;
 }
+.docs-page-jumbotron {
+	padding: 15px 15px 15px 15px;
+}
+
+div.video-parent {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	min-width: 100%;
+	height: 100%;
+	min-height: 100%;
+	overflow: hidden;
+	z-index: -1;
+	background-image: linear-gradient( rgba(84, 113, 233, 1), rgba(30, 63, 211, 1),rgba(75, 150, 95, 1));
+}
+video.banner-video {
+	position: absolute;
+  left: 0;
+	top: 0;
+	width: 100%;
+	min-width: 100%;
+	height: 100%;
+	object-fit: cover;
+	pointer-events: none;
+	z-index: -1;
+}
+
+.docs-page-jumbotron.dexie-cloud-docs {
+	background-image: linear-gradient( #5471e9, #1e3fd3,#4b965f);
+}
+
+.docs-page-jumbotron.dexie-cloud {
+	background: transparent;
+	color: white;
+}
+
+.dexie-cloud .switch input:checked + .slider {
+  background-color: #6b21f3;
+}
+
+@media screen and (min-width: 768px) {
+	.docs-page-jumbotron {
+		padding: 70px 0 40px 0;
+	}
+}
+
+.dexie-cloud a.getstarted.btn {
+	margin: 0 0 16px 0;
+}
+
+.docs-page-jumbotron.dexie-cloud-docs p {
+	font-size: 18px;
+	font-weight: normal;
+	font-style: italic;
+}
+
+a.getstarted.selected {
+	background-color: #fff;
+	color: #222;
+}
+
+pre > code span.token.comment {
+	color: #4b965f;
+}

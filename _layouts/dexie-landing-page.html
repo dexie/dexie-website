@@ -1,0 +1,115 @@
+---
+layout: dexie-frontpage-template
+---
+<div class='container' id='callouts'>
+	<div class='row'>
+		<div class='col-md-4'>
+			<h2>Easy to learn</h2>
+			<p>Dexie was written to be straightforward and easy to learn. If you've ever had to work with native IndexedDB then you'll certainly appreciate Dexie's concise API.</p>
+			<p><a class='btn btn-success' href='/docs/Tutorial/' role='button'>Dive right in &raquo;</a></p>
+		</div>
+		<div class='col-md-4'>
+			<h2>Well documented</h2>
+			<p>What good is any development tool without great documentation? Dexie is thoroughly explained, and examples are available to help you on your way.</p>
+			<p><a class='btn btn-success' href='/docs/' role='button'>Check it out &raquo;</a></p>
+		</div>
+		<div class='col-md-4'>
+			<h2>Performant</h2>
+			<p>Dexie has near-native performance. Its bulk operations utilize an often-overlooked feature in IndexedDB, ignoring success callbacks when possible.</p>
+			<p><a class='btn btn-success' href='https://jsfiddle.net/dfahlander/xf2zrL4p' role='button'>See it in action &raquo;</a></p>
+		</div>
+	</div>
+</div>
+
+<div class='container'>
+	<hr/>
+</div>
+
+<div class='container'>
+	<h2>Basic examples</h2>
+	<div class='row'>
+		<div class='col-md-6'>
+			<pre><code class="language-javascript">
+	/*
+	|----------------------------|
+	| Declare your database      |
+	|----------------------------|
+	*/
+
+	const db = new Dexie('MyDatabase');
+
+	// Declare tables, IDs and indexes
+	db.version(1).stores({
+		friends: '++id, name, age'
+	});
+
+
+
+
+
+
+					</code></pre>
+							</div>
+							<div class='col-md-6'>
+								<pre><code class="language-javascript">
+	/*
+	|-----------------------|
+	| Then run some queries |
+	|-----------------------|
+	*/
+
+	// Find some old friends
+	const oldFriends = await db.friends
+		.where('age').above(75)
+		.toArray();
+
+	// or make a new one
+	await db.friends.add({
+		name: 'Camilla',
+		age: 25,
+		street: 'East 13:th Street',
+		picture: await getBlob('camilla.png')
+	});
+								</code></pre>
+					</div>
+	</div>
+</div>
+
+<div class='container'>
+	<hr/>
+</div>
+
+<div class='container' id='callouts'>
+	<div class='row'>
+		<div class='col-md-12'>
+			<h2>Need Sync?</h2>
+			<p>Offline databases are groovy! But without keeping the database in sync with a server, you're missing a great deal.
+			</p>
+			<p><a class='btn btn-success' href="/cloud/">Check out Dexie Cloud<span class="beta">BETA</span>&nbsp;&nbsp; &raquo;</a></p>
+		</div>
+	</div>
+</div>
+
+
+<div class='container'>
+	<hr/>
+</div>
+
+<div class='container'>
+	<div class='row'>
+		<div class='col-md-12'>
+			<p>Thanks to <a href="https://www.browserstack.com"><img src="assets/images/browserstack-logo-fit-text.png" /></a>,
+				we're testing Dexie.js continously on different browsers, OS and devices.
+			</p>
+		</div>
+	</div>
+</div>
+
+<div class='container' id='callouts'>
+	<div class='row'>
+		<div class='col-md-12'>
+			<h2>That's all folks!</h2>
+			<p>Now go make something awesome.</p>
+		</div>
+	</div>
+</div>

@@ -2,6 +2,7 @@
 layout: docs
 title: 'db.syncable.connect()'
 ---
+See also [Dexie Cloud](/cloud/).
 
 ### Syntax
 

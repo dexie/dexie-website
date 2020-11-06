@@ -1,0 +1,187 @@
+---
+prismStyle: 'vscode-dark'
+---
+<!DOCTYPE html>
+<html>
+  {% include head.html %}
+  <body class="dexie-cloud-landing-page">
+    {% include navbar.html %}
+    {% include dexie-cloud-header.html %}
+
+    <main class="container">
+      {% include signup-forms.html %}
+      <div class="shoutouts">
+        <p>
+          Create awesome offline-first apps that syncs
+        </p>
+        <p>
+          Keep writing client-side code. We provide the server.
+        </p>
+        <p>
+          Multi user access control
+        </p>
+        <p>
+          Sharded and scalable
+        </p>
+        <p>
+          Eager sync and collaboration when online
+        </p>
+        <p>
+          Periodic sync when app not active
+        </p>
+        <p>
+          ...to be released in Q2 / 2021.
+        </p>
+        <!-- <ul>
+            <li>Online collaboration</li>
+            <li>Offline email clients</li>
+            <li>Calendars</li>
+            <li>Enterprise collaboration</li>
+            <li>Offline Warehousing</li>
+            <li>Diaries</li>
+            <li>Todos</li>
+            <li>Games</li>
+            <li>...and more</li>
+          </ul>-->
+      </div>
+      <hr />
+      <div id="callouts">
+        <div class="row">
+
+          <div class="col-md-3">
+            <h2>Almost Zero Config</h2>
+            <p>
+              Create your <span style="font-weight: bold;">database</span> in the cloud by just running a simple <span style="font-weight: bold;">npx</span> command!
+              Use the new <span style="font-weight: bold;">dexie-cloud-addon</span> to connect your Dexie database with the cloud and enjoy multi-user bidirectional sync.
+            </p>
+            <p>
+              <a class="btn btn-success" href="#getting-started" role="button"
+                >Get started &raquo;</a
+              >
+            </p>
+          </div>
+          <div class="col-md-3">
+            <h2>Authentication</h2>
+            <p>
+              Passwordless email OTP is part of the service so you don't have to deal with setting up auth.
+              Have auth already? Skip our default auth and use your own instead!
+            </p>
+            <p>
+              <a class="btn btn-success" href="docs/authentication" role="button"
+                >Read more &raquo;</a
+              >
+            </p>
+          </div>
+          <div class="col-md-3">
+            <h2>Access Control</h2>
+            <p>
+              A per-object access model lets your users keep their synced private data for
+              themselves or shared with their teams or friends. Build your access control models
+              using simple javascript objects.
+            </p>
+            <p>
+              <a class="btn btn-success" href="docs/access-control" role="button"
+                >Read more &raquo;</a
+              >
+            </p>
+          </div>
+          <div class="col-md-3">
+            <h2>Scale to Millions</h2>
+            <p>
+              Dexie Cloud is built to scale both horizontally and vertically.
+              A cloud infrastructure enables us to auto-scale disk and resources
+              as well as adding new shards when popularity explode.
+            </p>
+            <p>
+              <a class="btn btn-success" href="docs/scaling" role="button"
+                >Read more &raquo;</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <h2 id="getting-started">Get started</h2>
+        <p>This guide assumes you already have a dexie app and use <span style="font-weight: bold;">npm</span> and <span style="font-weight: bold;">webpack</span> or similar tools.
+        </p>
+        <div class='row'>
+          <div class='col-md-6'>
+            <h3 class="widescreen">1. Create your database in the cloud</h3>
+            <h3 class="slimscreen">1. Create your db in the cloud</h3>
+            <pre class="command-line language-bash" data-prompt="~/my-web-app $" data-filter-output="(out)"><code style="margin:0;">npx dexie-cloud create</code></pre>
+            <p>You'll be prompted for email verification. Then <span style="font-weight: bold;">the URL of your database</span>
+              will output to the console and stored in a new local file <span style="font-family: monospace;">dexie-cloud.json</span>.
+            <span style="font-style: italic;">See the <a href="/cloud/docs/cli">CLI docs</a>.</span></p>
+            <h3>2. Whitelist your app origin(s)</h3>
+            <pre class="command-line language-bash" data-prompt="~/my-web-app $"><code style="margin:0;">npx dexie-cloud whitelist http://localhost:8080</code></pre>
+            <h3>3. Install dexie-cloud-addon</h3>
+            <pre class="command-line language-bash" data-prompt="~/my-web-app $"><code style="margin:0;">npm install dexie-cloud-addon</code></pre>
+          </div>
+          <div class='col-md-6'>
+            <h3>4. Update your DB declaration</h3>
+            <pre><code class="language-javascript" style="margin:0;">  import Dexie from "dexie";
+  import dexieCloud from "dexie-cloud-addon";
+
+  // Declare your DB
+  const db = new Dexie('mySyncedDB', {addons: [dexieCloud]});
+  db.version(1).stores({
+    todoLists: '@id, title', // '@' = generated global ID
+    todoItems: '@id, title, done, todoListId'
+  });
+
+  // Connect your dexie-cloud database:
+  db.cloud.configure({
+    databaseUrl: "https://&lt;yourdatabase&gt;.dexie.cloud",
+    requireAuth: true
+  });</code></pre>
+          <ul style="padding-left: 0; list-style-type: none;">
+            <li style="font-style: italic;"><i class="fa fa-hand-o-right" aria-hidden="true"></i> The <span style="color: #ce9178;">'@'</span> sign makes the primary key auto-generated with universal IDs.</li>
+            <li style="font-style: italic;"><i class="fa fa-hand-o-right" aria-hidden="true"></i> <span style="font-family: monospace; color: #6f9db8;">databaseUrl</span> is the one printed out in step 1.</li>
+          </ul>
+          </div>
+          </div>
+          <h3>5. Done!</h3>
+          <p>Enjoy.</p>
+          <p>
+            With this very simple and default setup, users will be requested to login using passwordless email OTP the very first time they visit your app
+            from a device or browser. Learn how to customize <a href="/cloud/docs/authentication">authentication</a> if you already have another authentication in place,
+            or want to integrate with the authentication of your choice.
+          </p>
+          <p>Use your <span style="font-family: monospace">db</span> with the simple <a href="/docs/API-Reference">Dexie API</a> you are used to
+            for mutating and querying data.
+            IDs marked <span style="color: #ce9178;">'@'</span> gets auto-generated keys similar to Dexie's <a href="/docs/Version/Version.stores()#schema-syntax">++</a>
+            but with a globally unique string rather than an auto-incremented number.
+          </p>
+          <p>Changes sync instantly with the cloud in both directions. When offline, changes are queued until next time user goes online.
+            When online, changes will be synced eagerly in both directions.
+            If user is idle for a time, the client will go over to period sync strategy instead of the eager sync.
+            As soon as user starts interact with the application (mouse moves or key strokes), the app will go over to eager sync mode again.
+          </p>
+          <p>Without taking advantage of the <a href="/cloud/docs/access-control">access control</a> features, all data
+            will be regarded private for the end user and stored on a per-user basis.
+            Improve your app by allowing users to <a href="/cloud/docs/access-control#example-sharable-todo-list">share things to their team or friends</a>.
+          </p>
+      </div>
+  
+      <hr/>
+        
+      {{ content }}
+    </main>
+
+    {% include footer.html %}
+
+    <script src="/assets/js/prism-2020.js"></script>
+		<script src='/assets/js/jquery.min.js'></script>
+    <script src='/assets/js/bootstrap.min.js'></script>
+    <script src="/assets/js/anime.min.js"></script>
+    <script src="/assets/js/shoutouts.js"></script>
+
+    {% include google-analytics.html %}
+
+    <!-- Include dexie for people wanting to open devtools to laborate -->
+    <script async src="https://unpkg.com/dexie"></script>
+
+    <!-- Highlight anchors the same way as github wiki works -->
+    <script defer src="/assets/js/highlight-anchors.js"></script>
+  </body>
+</html>

@@ -2,13 +2,11 @@
 layout: dexie-cloud-pricing
 title: "Dexie Cloud Pricing"
 ---
+**[Dexie Cloud](/cloud/)**<a href="/cloud/" class="beta" style="font-weight: bold;">BETA</a>&nbsp; is a cloud service **that finance further development of the completely free open source project [Dexie.js](/)**.
+
+**[Dexie Cloud](/cloud/)**<a href="/cloud/" class="beta" style="font-weight: bold;">BETA</a>&nbsp; also has a [free](#free) edition for labs and demos.
+
 # Dexie Cloud Pricing
-
-As you all know, **[Dexie.js](/)** is a completely free [Apache licensed](https://github.com/dfahlander/Dexie.js/blob/master/LICENSE) open source libary! You never pay for **[Dexie.js](/)**!
-
-**Dexie Cloud**<span class="beta" style="font-weight: bold;">BETA</span>&nbsp; on the other hand is a commercial cloud service **that finance further development Dexie.js**.
-
-<br/>
 
 |                                       | Free       | Production &nbsp;       | Premium Software License                |
 | ------------------------------------- | ---------- | ----------------------- | --------------------------------------- |
@@ -18,14 +16,14 @@ As you all know, **[Dexie.js](/)** is a completely free [Apache licensed](https:
 | Horizontally scalable                 | &#10003;   | &#10003;                | &#10003;                                |
 | Max Number of databases               | Unlimited  | Unlimited               | Unlimited                               |
 | Demo users                            | 5 included | 5 included              | Unlimited                               |
-| Authenticated users                   | 1 included | USD \$9.95/mo per 100 users | Unlimited                               |
+| Authenticated users                   | 1 included | USD \$10/mo per 100 users | Unlimited                               |
 | Use own authentication                | &#10003;   | &#10003;                | &#10003;                                |
 | Source code of server-part            | -          | -                       | &#10003;                                |
 | Access to private git repo            | -          | -                       | &#10003;                                |
 | One-time license fee                  | 0          | 0                       | USD \$2,495                                |
 | Yearly support fee                    | 0          | 0                       | USD \$499                                 |
 
-_The prices are provisional_.
+_We reserve for future changes in pricing_.
 
 ### Free
 
@@ -35,14 +33,15 @@ This edition is hosted and free forever but limited to a single authenticated us
 
 ### Production
 
-This edition is hosted and starts with 100 users for a cost of \$9.95 per month.
+This edition is hosted and starts with a cost of USD \$10 per month for serving up to 100 users. Additional users cost USD $10 per month per 100 users.
 
 <a class='btn btn-success' href='/cloud/purchase/production' role='button'>Get it now &raquo;</a>
 
 ### Premium Software License
 
-Buy the software and serve millions of users without any per-user fee. You get full source code and do what you like with it as long as you do not compete with us. Host it in the cloud of your own choice, or on your own bare metal. The server is easy to publish and on cloud providers like Amazon and Azure. Support and software updates in one year is included. Optionally, pay a yearly support fee for updates and continous access to our private git repo.
+Buy off the software with full source code and **do whatever you want with it** except competing with our cloud offering. Serve millions of users without any additional fee. Host it in the cloud of your own choice, or on your own bare metal. The server is easy to publish and on cloud providers like Amazon and Azure. Support, private git access and software updates in one year is included. Optionally, pay a yearly support fee for updates and continous support and access to our private git repo.
 
 <a class='btn btn-primary' href='/cloud/docs/premium-software' role='button'>Read more... &raquo;</a>
 <!-- <a class='btn btn-success' href='/cloud/purchase/software' role='button'>Get it now &raquo;</a> -->
 
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>

@@ -45,7 +45,7 @@ div.video-parent {
 	min-height: 100%;
 	overflow: hidden;
 	z-index: -1;
-	background-image: linear-gradient( rgba(84, 113, 233, 1), rgba(30, 63, 211, 1),rgba(75, 150, 95, 1));
+	background-image: linear-gradient( #111, #333);
 }
 video.banner-video {
 	position: absolute;

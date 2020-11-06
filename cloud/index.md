@@ -28,8 +28,8 @@ When launching your app, our extremely simple [pricing](/cloud/pricing) makes it
 
 <i class="fa fa-code" aria-hidden="true"></i> [Create a sharable ToDo list](docs/access-control#example-sharable-todo-list)
 
-<i class="fa fa-code" aria-hidden="true"></i> [Create a role-based access controlled project management model](docs/example-a-simple-project-management-model)
+<i class="fa fa-code" aria-hidden="true"></i> [Create a role-based access controlled project management model](docs/access-control#example-a-simple-project-management-model)
 
-<i class="fa fa-code" aria-hidden="true"></i> [Integrate with PassportJS authentication](docs/db.cloud.configure/()#example-integrate-custom-authentication)
+<i class="fa fa-code" aria-hidden="true"></i> [Integrate with PassportJS authentication](docs/db.cloud.configure()#example-integrate-custom-authentication)
 
 <br/>

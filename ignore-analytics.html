@@ -28,7 +28,7 @@
           document.cookie = "ignoreGA=; domain=dexie.org; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
         } else {
           let expiration_date = new Date();
-          expiration_date.setYear (expiration_date.getYear () + 1);
+          expiration_date.setYear (expiration_date.getFullYear () + 1);
           expiration_date = expiration_date.toGMTString();
           document.cookie = "ignoreGA=1; expires=" + expiration_date + "; domain=dexie.org";
         }

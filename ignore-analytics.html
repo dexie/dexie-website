@@ -30,7 +30,7 @@
           let expiration_date = new Date();
           expiration_date.setYear (expiration_date.getYear () + 1);
           expiration_date = expiration_date.toGMTString();
-          document.cookie = "ignoreGA=1; domain=dexie.org; expires=" + expiration_date;
+          document.cookie = "ignoreGA=1; expires=" + expiration_date + "; domain=dexie.org";
         }
         updateStatus();
       }

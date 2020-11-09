@@ -15,13 +15,14 @@ title: "Dexie Cloud Pricing"
 | Vertically scalable                   | &#10003;   | &#10003;                | &#10003;                                |
 | Horizontally scalable                 | &#10003;   | &#10003;                | &#10003;                                |
 | Max Number of databases               | Unlimited  | Unlimited               | Unlimited                               |
-| Demo users                            | 5 included | 5 included              | Unlimited                               |
-| Authenticated users                   | 1 included | USD \$10/mo per 100 users | Unlimited                               |
+| Demo users                            | 5 included | Unlimited               | Unlimited                               |
+| Authenticated users                   | 1 included | Unlimited               | Unlimited                               |
 | Use own authentication                | &#10003;   | &#10003;                | &#10003;                                |
 | Source code of server-part            | -          | -                       | &#10003;                                |
 | Access to private git repo            | -          | -                       | &#10003;                                |
-| One-time license fee                  | 0          | 0                       | USD \$2,495                                |
-| Yearly support fee                    | 0          | 0                       | USD \$499                                 |
+| Monthly fee                           | 0          | USD $10 per 100 users   | 0                                       |
+| One-time license fee                  | 0          | 0                       | USD \$2,495                             |
+| Yearly support fee                    | 0          | 0                       | USD \$499                               |
 
 _We reserve for future changes in pricing_.
 

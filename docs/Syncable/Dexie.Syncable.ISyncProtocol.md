@@ -29,7 +29,7 @@ interface ISyncProtocol {
     : void;
 }
 ```
-If you are looking for a batteries-included solution, check out [Dexie Cloud](/cloud).
+If you are looking for a batteries-included solution, check out [Dexie Cloud](/cloud/).
 
 Referred Types:
 

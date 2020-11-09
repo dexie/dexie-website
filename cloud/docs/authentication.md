@@ -26,7 +26,7 @@ In the default setup, users will only need to authenticate the very first time t
 
 ## Zero config setup
 
-If you just enable dexie-cloud-addon the way it is explained on [the landing page](/cloud) you will be using the default authentication and you will not need your own server endpoint. Your app can be hosted on any site, such as a static site on github pages or similar and yet be able to authenticate users and sync data with your cloud database.
+If you just enable dexie-cloud-addon the way it is explained on [the landing page](/cloud/) you will be using the default authentication and you will not need your own server endpoint. Your app can be hosted on any site, such as a static site on github pages or similar and yet be able to authenticate users and sync data with your cloud database.
 
 ## Default Authentication from a user's perspective
 

@@ -7,7 +7,7 @@ Enables two-way synchronization with a remote server of any kind.
 
 **If you are looking for a batteries-included sync solution, check out the following alternatives:**
 
-* **[Dexie Cloud](/cloud)** - our cloud based sync service 
+* **[Dexie Cloud](/cloud/)** - our cloud based sync service 
 
 or:
 

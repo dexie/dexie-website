@@ -1,4 +1,10 @@
 <script>
+  if (/disableAnalytics/i.test(location.search)) {
+    let expiration_date = new Date();
+    expiration_date.setYear (expiration_date.getFullYear () + 1);
+    expiration_date = expiration_date.toGMTString();
+    document.cookie = "ignoreGA=1; expires=" + expiration_date + "; domain=dexie.org";
+  }
   if (!/ignoreGA\=1/.test(document.cookie) && !/localhost/.test(location.host)) {
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

@@ -27,7 +27,7 @@ _We reserve for future changes in pricing_.
 
 ### Free
 
-This edition is hosted and free forever but limited to a single authenticated user + 5 demo users. There is no limit of the number of databases you create.
+This edition is hosted and free forever but limited to a single authenticated user + 5 demo users.
 
 <a class='btn btn-success' href='/cloud/#getting-started' role='button'>Get started now &raquo;</a>
 

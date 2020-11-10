@@ -20,7 +20,7 @@ title: "Dexie Cloud Pricing"
 | Use own authentication                | &#10003;   | &#10003;                | &#10003;                                |
 | Source code of server-part            | -          | -                       | &#10003;                                |
 | Access to private git repo            | -          | -                       | &#10003;                                |
-| Monthly fee                           | 0          | USD $10 per 100 users   | 0                                       |
+| Monthly fee                           | 0          | USD $20, includes 100 users.<br/>USD $3 per 100 additional users. | 0                                       |
 | One-time license fee                  | 0          | 0                       | USD \$2,495                             |
 | Yearly support fee                    | 0          | 0                       | USD \$499                               |
 
@@ -34,7 +34,7 @@ This edition is hosted and free forever but limited to a single authenticated us
 
 ### Production
 
-This edition is hosted and starts with USD \$10 per month for serving 100 users. Additional users: USD $10/month per 100 users.
+This edition is hosted and starts with USD \$20 per month for serving up to 100 users. Additional users: USD $3 / month per 100 users. You get an email when you only have 20 users remaining so you may add a new 100-user pack before limit is reached.
 
 <a class='btn btn-success' href='/cloud/purchase/production' role='button'>Get it now &raquo;</a>
 

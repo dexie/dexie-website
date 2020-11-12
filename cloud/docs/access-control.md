@@ -16,6 +16,8 @@ If you are new to Dexie Cloud, please visit the [Dexie Cloud landing page](/clou
 
 If you prefer to jump right in to samples, here some shortcuts:
 
+## Examples
+
 - [Sharable ToDo list](#example-sharable-todo-list)
 - [Simple project managment model](#example-a-simple-project-management-model)
 

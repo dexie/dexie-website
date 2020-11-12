@@ -149,7 +149,7 @@ This example shows how to create sharable entities, how to share them and how to
 
 1. **createTodoList()** creates a sharable ToDo list
 2. **shareTodoList()** shares the list to other users
-3. **addTodoItem()** adds a todoItem related to the shared list
+3. **addTodoItem()** adds a todoItem related to the shared list that also inherits sharing.
 
 ```js
 import Dexie from "dexie";

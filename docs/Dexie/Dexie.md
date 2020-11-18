@@ -39,6 +39,17 @@ var db = new Dexie(databaseName, options?);
     <td>IDBKeyRange: <a href="https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange">IDBKeyRange</a></td>
     <td>An implementation of the IDBKeyRange interface that works with provided indexedDB implementation.</td>
   </tr>
+  <tr>
+    <td>allowEmtpyDB: boolean</td>
+    <td>If opening in <a href="Dexie.open()#dynamic-mode">dynamic mode</a> (not defining a schema)
+        the call to db.open() will normally reject if the database didn't exist and this option is false or not set.
+        By setting this option to true, Dexie.open() will succeed to create a new empty database when opening it dynamically.</td>
+  </tr>
+  <tr>
+    <td>modifyChunkSize: number</td>
+    <td>(since 3.1.0-alpha) Override the default value of 2000 rows per chunk used by Collection.modify(). See <a href="https://github.com/dfahlander/Dexie.js/issues/1152">FR #1152</a>.
+    </td>
+  </tr>
 </table>
 
 If the 'addons' option is omitted, it will default to the value of [Dexie.addons](/docs/Dexie/Dexie.addons).

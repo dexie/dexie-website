@@ -48,7 +48,7 @@ console.log("Database name:", importMeta.data.databaseName);
 console.log("Database version:", importMeta.data.databaseVersion);
 console.log("Database version:", importMeta.data.databaseVersion);
 console.log("Tables:", importMeta.data.tables.map(t =>
-  `${t.name} (${t.rowCount} rows`
+  `${t.name} (${t.rowCount} rows)`
 ).join('\n\t'));
 
 

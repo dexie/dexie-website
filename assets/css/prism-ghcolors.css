@@ -43,8 +43,9 @@
  pre[class*="language-"] {
    padding: 1em;
    margin: .5em 0;
-   overflow: auto;
-   border: 1px solid #dddddd;
+   overflow-y: unset; /* Trying to fix problems on touch screens */ 
+   overflow-x: auto;
+    border: 1px solid #dddddd;
    background-color: white;
  }
  

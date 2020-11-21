@@ -128,7 +128,8 @@ h1[id]::before, h2[id]::before, h3[id]::before, h4[id]::before, h5[id]::before, 
 }
 
 pre > code {
-	overflow: auto;
+	overflow-y: unset; /* Trying to fix problems on touch screens */ 
+	overflow-x: auto;
 	float: left;
 	width: 100%;
 }
@@ -198,7 +199,8 @@ img.dexie-logo-icon-menu {
 table {
 	display: block;
 	width: 100%;
-	overflow: auto;
+	overflow-y: unset; /* Trying to fix problems on touch screens */ 
+	overflow-x: auto;
 	margin-top: 0;
 	margin-bottom: 16px;
 	border-spacing: 0;

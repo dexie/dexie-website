@@ -67,7 +67,8 @@ code[class*="language-"]::selection, code[class*="language-"] ::selection {
 pre[class*="language-"] {
 	padding: 1em;
 	margin: .5em 0;
-	overflow: auto;
+	overflow-y: unset; /* Trying to fix problems on touch screens */ 
+	overflow-x: auto;
 	border-radius: 0.3em;
 }
 

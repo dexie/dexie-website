@@ -20,6 +20,10 @@ title: 'Samples'
 * [Stackblitz sample](https://stackblitz.com/edit/typescript-dexie-appdemo?file=index.ts)
 * [Tutorial about Dexie with Typescript](https://dexie.org/docs/Typescript.html)
 
+#### Vue + Dexie
+
+ * [Source](https://github.com/dfahlander/Dexie.js/tree/master/samples/vue)
+
 #### Angular + Dexie
 
 * [Source](https://github.com/dfahlander/Dexie.js/tree/master/samples/angular2)

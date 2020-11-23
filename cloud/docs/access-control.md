@@ -220,7 +220,7 @@ function shareTodoList(todoList, ...friends) {
     realmId: todoList.realmId,
     email: friend.email,
     name: friend.name,
-    invite: true, // Generates an invite email
+    invite: true, // Generates invite email on server on sync
     permissions: {
       manage: "*" // Give your friend full permissions within this new realm.
     }

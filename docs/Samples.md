@@ -27,6 +27,7 @@ title: 'Samples'
 
 #### Angular + Dexie
 
+* **[Turn promises into observables in dexie@3.1](https://medium.com/dexie-js/awesome-react-integration-coming-f212c2273d05)** *(Blog article)*
 * [Source](https://github.com/dfahlander/Dexie.js/tree/master/samples/angular2)
 * [Run in browser](https://raw.githack.com/dfahlander/Dexie.js/demo/samples/angular2/dist/)
 

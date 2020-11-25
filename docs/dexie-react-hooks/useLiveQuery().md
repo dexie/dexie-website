@@ -30,7 +30,7 @@ export function useLiveQuery<T, TDefault=undefined> (
 
 This example shows that...
 - you can observe the result of an arbritary function that queries Dexie
-- mix it with useState() and let state affect a paremeter to the query.
+- use state variable from useState() in your querier function.
 - you can choose whether to query dexie inline or do it via a callback property.
 - the component will re-render if in-parameter to the query change.
 - the component will re-render if the data you are querying change

@@ -122,5 +122,7 @@ function App () {
 
 # Playground
 
-<iframe src="https://stackblitz.com/edit/dexie-todo-list?embed=1&file=components/TodoListView.tsx"></iframe>
+[Stackblitz example](https://stackblitz.com/edit/dexie-todo-list?file=components/TodoListView.tsx)
+
+
 

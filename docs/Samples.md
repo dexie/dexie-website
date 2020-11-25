@@ -30,7 +30,7 @@ title: 'Samples'
 
 #### Angular + Dexie >= 3.1
 
-* **[Turn promises into observables in dexie@3.1](https://medium.com/dexie-js/awesome-react-integration-coming-f212c2273d05)** *(Blog article)*
+* **[Turn promises into observables in dexie@3.1](https://github.com/dfahlander/Dexie.js/releases/tag/v3.1.0-alpha.1)**
 
 #### Angular + Dexie < 3.1
 * [Source](https://github.com/dfahlander/Dexie.js/tree/master/samples/angular2)

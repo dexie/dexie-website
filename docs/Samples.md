@@ -8,7 +8,7 @@ title: 'Samples'
 #### React + Dexie >= 3.1
 
 * **[React hooks for dexie@3.1](https://medium.com/dexie-js/awesome-react-integration-coming-f212c2273d05)** *(Blog article)*
-* [dexie-react-hooks](https://dexie.org/docs/libs/dexie-react-hooks)
+* [useLiveQuery](/docs/dexie-react-hooks/useLiveQuery())
 
 #### React + Dexie < 3.1
 * [Source](https://github.com/dfahlander/Dexie.js/tree/master/samples/react)

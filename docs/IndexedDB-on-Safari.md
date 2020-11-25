@@ -18,7 +18,7 @@ title: 'IndexedDB on Safari'
 
 ## Safari version >= 10.1
 
-Native support for IndexedDB 2.0. Lots of issues solved and performance boosted. For the most stable Safari support, use Dexie 3.0-alpha (`npm install dexie@next`). It works around the most major Safari issue and it continously runs its unit tests on Safari browsers in browserstack for every commit.
+Native support for IndexedDB 2.0. Lots of issues solved and performance boosted. For the most stable Safari support, use Dexie 3.0 (`npm install dexie@latest`). It works around the most major Safari issue and it continously runs its unit tests on Safari browsers in browserstack for every commit.
 
 A list of Safari related issues that has been reported can be found [here](safari-issues.md)
 

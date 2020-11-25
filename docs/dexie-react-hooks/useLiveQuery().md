@@ -122,7 +122,6 @@ function App () {
 
 # Playground
 
-[Stackblitz example](https://stackblitz.com/edit/dexie-todo-list?file=components/TodoListView.tsx)
-
+[Play around with liveQuery() on Stackblitz](https://stackblitz.com/edit/dexie-todo-list?file=components/TodoListView.tsx)
 
 

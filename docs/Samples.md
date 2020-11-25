@@ -5,9 +5,12 @@ title: 'Samples'
 
 ### Samples in the Dexie repository
 
-#### React + Dexie
+#### React + Dexie >= 3.1
 
 * **[React hooks for dexie@3.1](https://medium.com/dexie-js/awesome-react-integration-coming-f212c2273d05)** *(Blog article)*
+* [dexie-react-hooks](https://dexie.org/docs/libs/dexie-react-hooks)
+
+#### React + Dexie < 3.1
 * [Source](https://github.com/dfahlander/Dexie.js/tree/master/samples/react)
 * [Run in browser](https://raw.githack.com/dfahlander/Dexie.js/demo/samples/react/build/)
 
@@ -25,9 +28,11 @@ title: 'Samples'
 
  * [Source](https://github.com/dfahlander/Dexie.js/tree/master/samples/vue)
 
-#### Angular + Dexie
+#### Angular + Dexie >= 3.1
 
 * **[Turn promises into observables in dexie@3.1](https://medium.com/dexie-js/awesome-react-integration-coming-f212c2273d05)** *(Blog article)*
+
+#### Angular + Dexie < 3.1
 * [Source](https://github.com/dfahlander/Dexie.js/tree/master/samples/angular2)
 * [Run in browser](https://raw.githack.com/dfahlander/Dexie.js/demo/samples/angular2/dist/)
 

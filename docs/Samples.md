@@ -7,7 +7,7 @@ title: 'Samples'
 
 #### React + Dexie
 
-* **[Blog article about the new react hooks for dexie@3.1](https://medium.com/dexie-js/awesome-react-integration-coming-f212c2273d05)**
+* **[React hooks for dexie@3.1](https://medium.com/dexie-js/awesome-react-integration-coming-f212c2273d05)** *(Blog article)*
 * [Source](https://github.com/dfahlander/Dexie.js/tree/master/samples/react)
 * [Run in browser](https://raw.githack.com/dfahlander/Dexie.js/demo/samples/react/build/)
 

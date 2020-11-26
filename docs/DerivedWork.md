@@ -49,6 +49,7 @@ Did you write something based on Dexie? Feel free to list it here.
 
 ## Blogs and Samples
 
+* [Electron app Database with Dexie.js ( indexedDB ) and web worker](https://gauriatiq.medium.com/electron-app-database-with-dexie-js-indexeddb-and-web-worker-570d9a66a47a)
 * [Open source spotlight / BrowserStack](https://www.browserstack.com/blog/open-source-spotlight-dexie-js-david-fahlander/)
 * [IndexedDB programming with Dexie.js](https://golb.hplar.ch/2018/01/IndexedDB-programming-with-Dexie-js.html) by [Ralph Schaer](https://github.com/ralscha)
 * [Using Dexie.js in a Typescript application](https://golb.hplar.ch/2018/01/Using-Dexie-js-in-a-TypeScript-application.html) by [Ralph Schaer](https://github.com/ralscha)

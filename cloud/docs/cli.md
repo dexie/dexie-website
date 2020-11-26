@@ -57,8 +57,8 @@ The user will have to authorize the request using email OTP. The system will pro
 Allow a web app to use the database.
 
 <pre>
-npx dexie-cloud whitelist
-npx dexie-cloud whitelist &lt;app origin&gt; [--delete]
+npx dexie-cloud white-list
+npx dexie-cloud white-list &lt;app origin&gt; [--delete]
 </pre>
 
 The files dexie-cloud.json and dexie-cloud.key has to be in the current or a parent directory.
@@ -70,14 +70,14 @@ The files dexie-cloud.json and dexie-cloud.key has to be in the current or a par
 #### Samples
 ```
 # Lists all whitelisted origins
-npx dexie-cloud whitelist
+npx dexie-cloud white-list
 
 # White-list new origins
-npx dexie-cloud whitelist http://localhost:8080
-npx dexie-cloud whitelist https://myapp.company.com
+npx dexie-cloud white-list http://localhost:8080
+npx dexie-cloud white-list https://myapp.company.com
 
 # Remove http://localhost:8080 from being white-listed
-npx dexie-cloud whitelist http://localhost:8080 --delete
+npx dexie-cloud white-list http://localhost:8080 --delete
 ```
 
 ## add-replica

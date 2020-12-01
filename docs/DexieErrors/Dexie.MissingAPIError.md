@@ -11,45 +11,11 @@ title: 'Dexie.MissingAPIError'
 
 ### Description 
 
-Happens when indexedDB API could not be found when trying to open database.
+Happens when indexedDB API could not be found when trying to open database. This is usually the case when using Dexie from node without indexedDB or IDBKeyRange present on the global object.
 
-### Sample using Promise.catch()
+In a modern browser or worker, window.indexedDB or self.indexedDB is present by default so you don't have to do anything. But if you use Dexie from a node process you will need to provide an indexedDB implementation. For nodejs, you can use fakeIndexedDB or indexedDBShim.
 
-```javascript
-doSomeDatabaseWork().then(function() {
-    // Success
-}).catch(Dexie.MissingAPIError, function (e) {
-    // Failed with MissingAPIError
-    console.error ("MissingAPI error: " + e.message);
-}).catch(Error, function (e) {
-    // Any other error derived from standard Error
-    console.error ("Error: " + e.message);
-}).catch(function (e) {
-    // Other error such as a string was thrown
-    console.error (e);
-});
-```
+* [Using Dexie with fakeIndexedDB](https://github.com/dumbmatter/fakeIndexedDB#with-dexie-and-other-indexeddb-api-wrappers)
+* [Using Dexie with IndexedDBShim](https://github.com/indexeddbshim/IndexedDBShim#node-set-up)
+* [Using Dexie in an electron app](https://gauriatiq.medium.com/electron-app-database-with-dexie-js-indexeddb-and-web-worker-570d9a66a47a)
 
-### Sample: switch(error.name)
-
-```javascript
-db.on('error', function (error) {
-    switch (error.name) {
-        // errnames.MissingAPI ==="MissingAPIError"
-        case Dexie.errnames.MissingAPI:
-            console.error ("MissingAPI error");
-            break;
-        default:
-            console.error ("error: " + e);
-    }
-});
-```
-
-### Properties
-
-<table>
-<tr><td>name</td><td>Will always be Dexie.errnames.MissingAPI === "MissingAPIError"</td></tr>
-<tr><td>message</td><td>Detailed message</td></tr>
-<tr><td>inner?</td><td>Inner exception instance (if any)</td></tr>
-<tr><td>stack</td><td>Can be present if the error was thown. If signaled, there wont be any call stack.</td></tr>
-</table>

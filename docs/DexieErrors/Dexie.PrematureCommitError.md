@@ -18,6 +18,7 @@ This exception will be thrown when the indexedDB transaction commits before the 
 
 1. Make sure to never call other async APIs from within a transaction
 2. Always use the global Promise (or Dexie.Promise) inside transactions.
+3. If using native async/await, avoid awaiting non-promises in loops.
 
 #### NOT OK:
 
@@ -31,7 +32,26 @@ db.transaction ('rw', db.friends, () => {
         setTimeout(resolve, 100); // setTimeout is non-indexedDB async API.
     });
 });
+
+db.transaction ('rw', db.friends, async () => {
+    for (let i=0; i<100; ++i) {
+        await null; // Don't await non-promises.
+    }
+});
 ```
+
+##### OK:
+
+```javascript
+db.transaction ('rw', db.friends, async () => {
+    for (let i=0; i<100; ++i) {
+        // If you need to await something that may be non-promise,
+        // Use Promise.resolve() around it.
+        await Promise.resolve(null); 
+    }
+});
+```
+
 
 *Dont call setTimeout() or any other async API from inside a transaction.*
 
@@ -41,6 +61,7 @@ db.transaction ('rw', db.friends, () => {
 ```javascript
 let Promise = require('bluebird');
 db.transaction('r', db.friends, () => {
+    // Promise is not the global Promise. It might break transactions.
     return new Promise((resolve, reject) => {
         db.friends.get(1).then(resolve, reject);
     });
@@ -68,7 +89,8 @@ db.transaction('r', db.friends, async () => {
     // In Dexie 2.0, it's ok to use the global Promise (window.Promise)
     return await Promise.all([
         db.friends.get(1),
-        db.friends.get(2)
+        db.friends.get(2),
+        Promise.resolve(3) // Encapsulate non-promises with Promise.resolve() when awaiting things.
     ]);
 });
 ```

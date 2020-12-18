@@ -133,6 +133,10 @@ function App () {
 # Playgrounds
 
 [Another sample using useLiveQuery() on Stackblitz](https://stackblitz.com/edit/dexie-todo-list?file=components/TodoListView.tsx)
+
 [The sample from this page in CodeSandbox](https://codesandbox.io/s/empty-sky-lnv0q?file=/src/components/FriendList.tsx)
 
+# See also
+
+[A blog post about this](https://medium.com/dexie-js/awesome-react-integration-coming-f212c2273d05)
 

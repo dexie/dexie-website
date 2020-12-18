@@ -36,7 +36,7 @@ This example shows that...
 - the component will re-render if in-parameter to the query change.
 - the component will re-render if the data you are querying change
 
-```ts
+```tsx
 import React, { useState } from "react";
 import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "../db";

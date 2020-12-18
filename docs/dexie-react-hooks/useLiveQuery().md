@@ -108,7 +108,7 @@ export function FriendList({getFriendCount, getFriendsByAge, onBirthdayClick}) {
       <button ... onClick={()=>onBirthdayClick(friend)}>...</button>
 }
 
-// Let app declare the callbacks:
+// ...and implement the callback elsewhere...
 
 function App () {
    const getFriendCount = () => db.friends.count();
@@ -130,8 +130,9 @@ function App () {
 
 ```
 
-# Playground
+# Playgrounds
 
-[Play around with liveQuery() on Stackblitz](https://stackblitz.com/edit/dexie-todo-list?file=components/TodoListView.tsx)
+[Another sample using useLiveQuery() on Stackblitz](https://stackblitz.com/edit/dexie-todo-list?file=components/TodoListView.tsx)
+[The sample from this page in CodeSandbox](https://codesandbox.io/s/empty-sky-lnv0q?file=/src/components/FriendList.tsx)
 
 

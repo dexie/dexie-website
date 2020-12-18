@@ -46,11 +46,7 @@ export function FriendList() {
 
   // Query friends within a certain range decided by state:
   const friends = useLiveQuery(
-    () =>
-      db.friends
-        .where("age")
-        .belowOrEqual(maxAge)
-        .sortBy("id"),
+    () => db.friends.where("age").belowOrEqual(maxAge).sortBy("id"),
     [maxAge] // because maxAge affects query!
   );
 

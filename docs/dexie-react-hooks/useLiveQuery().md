@@ -36,61 +36,73 @@ This example shows that...
 - the component will re-render if in-parameter to the query change.
 - the component will re-render if the data you are querying change
 
-```tsx
+```ts
+import React, { useState } from "react";
+import { useLiveQuery } from "dexie-react-hooks";
+import { db } from "../db";
 
-function MyComponent () {
-  const [fromAge, setFromAge] = useState(18);
+export function FriendList() {
+  const [maxAge, setMaxAge] = useState(21);
 
-  const friendCount = useLiveQuery(
-    () => db.friends.count()
-  );
-  
+  // Query friends within a certain range decided by state:
   const friends = useLiveQuery(
-    () => db.friends.where('age').above(fromAge).toArray(),
-    [fromAge]
+    () =>
+      db.friends
+        .where("age")
+        .belowOrEqual(maxAge)
+        .sortBy("id"),
+    [maxAge] // because maxAge affects query!
   );
+
+  // Query total friend count:
+  const friendCount = useLiveQuery(() => db.friends.count());
 
   // If default values are returned, queries are still loading:
   if (!friends || friendCount === undefined) return null;
-  
-  return <div>
-    <label>
-      From age: <input
-        type="number"
-        value={fromAge}
-        onChange={ev => setFromAge(parseInt(ev.target.value))}
-      />
-    </label>
-    <p>Your have {friendCount} friends in total.</p>
-    <p>Here are the names of all friends over the age of {fromAge}:</p>
-    <ul>
-      {
-        friends.map(friend =>
+
+  return (
+    <div>
+      <p>
+        Your have <b>{friendCount}</b> friends in total.
+      </p>
+      <label>
+        Please enter max age:
+        <input
+          type="number"
+          value={maxAge}
+          onChange={(ev) => setMaxAge(parseInt(ev.target.value, 10))}
+        />
+      </label>
+      <ul>
+        {friends.map((friend) => (
           <li key={friend.id}>
             {friend.name}, {friend.age}
-            <button onClick={() => db.friends
-                .where({id: friend.id})
-                .modify(f => ++f.age)}>
+            <button
+              onClick={() =>
+                db.friends.where({ id: friend.id }).modify((f) => ++f.age)
+              }
+            >
               Birthday!
-           </button>
+            </button>
           </li>
-        )
-      }
-    </ul>
-  </div>;
+        ))}
+      </ul>
+    </div>
+  );
 }
-
 ```
-As you can see in this sample, the expressions passed to useLiveQuery() can be any expression that returns a promise. If you don't want to tie the component to the dexie logic, you can provide a fetcher in your props and it will still be observed:
+[Open in codesandbox](https://codesandbox.io/s/empty-sky-lnv0q?file=/src/components/FriendList.tsx)
+
+As you can see in this sample, the expressions passed to useLiveQuery() can be any expression that returns a promise so if you want to decouple your component from the db, you can provide callbacks in your props and they will still be observed:
 
 ```tsx
-function MyComponent ({fetchFriendCount, fetchFriendsByAge, onBirthdayClick}) {
+export function FriendList({getFriendCount, getFriendsByAge, onBirthdayClick}) {
   ...
 
-  const friendCount = useLiveQuery(fetchFriendCount);
+  const friendCount = useLiveQuery(getFriendCount);
 
   const friends = useLiveQuery(
-    () => fetchFriendsByAge(fromAge), [fromAge]
+    () => getFriendsByAge(maxAge), [maxAge]
   );
 
   ...
@@ -98,24 +110,23 @@ function MyComponent ({fetchFriendCount, fetchFriendsByAge, onBirthdayClick}) {
       <button ... onClick={()=>onBirthdayClick(friend)}>...</button>
 }
 
-// Let app declare the fetchers:
+// Let app declare the callbacks:
 
 function App () {
-   const fetchFriendCount = () => db.friends.count();
+   const getFriendCount = () => db.friends.count();
 
-   const fetchFriendsByAge = fromAge =>
+   const getFriendsByAge = maxAge =>
     db.friends
       .where('age')
-      .above(fromAge)
-      .toArray();
+      .belowOrEqual(maxAge)
+      .sortBy('id');
 
-   const onBirthdayClick = friend => db.friends
-    .where({id: friend.id})
-    .modify(friend => ++friend.age);
+   const onBirthdayClick = friend =>
+    db.friends.where({ id: friend.id }).modify(f => ++f.age);
    
-  return <MyComponent
-    fetchFriendCount={fetchFriendCount}
-    fetchFriendsByAge={fetchFriendsByAge}
+  return <FriendList
+    fetchFriendCount={getFriendCount}
+    fetchFriendsByAge={getFriendsByAge}
     onBirthdayClick={onBirthdayClick} />;
 }
 

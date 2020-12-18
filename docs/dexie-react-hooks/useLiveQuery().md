@@ -91,7 +91,7 @@ export function FriendList() {
 
 ## Decoupling
 
-As you can see in this sample, the expressions passed to useLiveQuery() can be any expression that returns a promise so if you want to decouple your component from the db, you can provide callbacks in your props and they will still be observed:
+The expression passed to useLiveQuery() must be a function that returns a promise. If you need to decouple your component from the db, you can provide the querying functions as callbacks instead:
 
 ```tsx
 export function FriendList({getFriendCount, getFriendsByAge, onBirthdayClick}) {

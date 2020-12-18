@@ -89,6 +89,8 @@ export function FriendList() {
 ```
 [Open in codesandbox](https://codesandbox.io/s/empty-sky-lnv0q?file=/src/components/FriendList.tsx)
 
+## Decoupling
+
 As you can see in this sample, the expressions passed to useLiveQuery() can be any expression that returns a promise so if you want to decouple your component from the db, you can provide callbacks in your props and they will still be observed:
 
 ```tsx

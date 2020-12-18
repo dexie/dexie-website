@@ -20,7 +20,7 @@ npm i dexie-react-hooks
 
 export function useLiveQuery<T, TDefault=undefined> (
   querier: () => Promise<T> | T,
-  deps?: any[], // ...like deps for useMemo(). Defaults to empty array.
+  deps?: any[], // ...like deps argument in useEffect() but defaults to empty array.
   defaultResult?: TDefault // Default value returned while data is loading
 ) : T | TDefault;
 
@@ -35,17 +35,17 @@ This example shows that...
 - the component will re-render if in-parameter to the query change.
 - the component will re-render if the data you are querying change
 
-```jsx
+```tsx
 
 function MyComponent () {
   const [fromAge, setFromAge] = useState(18);
 
   const friendCount = useLiveQuery(
-    ()=>db.friends.count()
+    () => db.friends.count()
   );
   
   const friends = useLiveQuery(
-    ()=>db.friends.where('age').above(fromAge).toArray(),
+    () => db.friends.where('age').above(fromAge).toArray(),
     [fromAge]
   );
 
@@ -82,14 +82,14 @@ function MyComponent () {
 ```
 As you can see in this sample, the expressions passed to useLiveQuery() can be any expression that returns a promise. If you don't want to tie the component to the dexie logic, you can provide a fetcher in your props and it will still be observed:
 
-```jsx
+```tsx
 function MyComponent ({fetchFriendCount, fetchFriendsByAge, onBirthdayClick}) {
   ...
 
   const friendCount = useLiveQuery(fetchFriendCount);
 
   const friends = useLiveQuery(
-    ()=>fetchFriendsByAge(fromAge), [fromAge]
+    () => fetchFriendsByAge(fromAge), [fromAge]
   );
 
   ...

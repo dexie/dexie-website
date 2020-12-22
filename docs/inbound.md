@@ -4,7 +4,7 @@ title: 'Inbound'
 ---
 A primary key is considered inbound if it's included in the stored objects.
 
-## Examples of inbound primary key
+## Examples of Inbound Primary Key
 
 ```javascript
 db.version(1).stores({
@@ -38,7 +38,7 @@ await db.friends.bulkPut([{id: "id1", name: "Friend1"}, {id: "id2", name: "Frien
 ```
 
 
-## Example of non-inbound primary key
+## Example of Outbound Primary Key
 
 ```javascript
 db.version(1).stores({
@@ -58,7 +58,7 @@ db.version(1).stores({
 });
 ```
 
-### Adding / Updating Non-Inbound Values
+### Adding / Updating Outbound Values
 
 ```js
 await db.friends.add({name: "Foo"}, "fooId");

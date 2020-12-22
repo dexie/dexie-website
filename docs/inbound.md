@@ -4,7 +4,7 @@ title: 'Inbound'
 ---
 A primary key is considered inbound if it's included in the stored objects.
 
-#### Examples of inbound primary key
+## Examples of inbound primary key
 
 ```javascript
 db.version(1).stores({
@@ -24,8 +24,21 @@ db.version(1).stores({
 });
 ```
 
+### Adding / Updating Data
 
-#### Example of non-inbound primary key
+```js
+await db.friends.add({id: "fooId", name: "Foo"});
+
+await db.friends.put({id: "fooId", name: "Foo"});
+
+await db.friends.bulkAdd([{id: "id1", name: "Friend1"}, {id: "id2", name: "Friend2"}]);
+
+await db.friends.bulkPut([{id: "id1", name: "Friend1"}, {id: "id2", name: "Friend2"}]);
+
+```
+
+
+## Example of non-inbound primary key
 
 ```javascript
 db.version(1).stores({
@@ -45,16 +58,15 @@ db.version(1).stores({
 });
 ```
 
-#### Working with Inbound Keys
+### Adding / Updating Data
 
 ```js
-await db.friends.put({id: "fooId", name: "Foo"});
-const friend = await db.friends.get("fooId");
-```
+await db.friends.add({name: "Foo"}, "fooId");
 
-#### Working with Non-inbound keys
+await db.friends.bulkAdd([{name: "Friend1"}, {name: "Friend2"}], ["id1", "id2"]);
 
-```js
 await db.friends.put({name: "Foo"}, "fooId");
-const friend = await db.friends.get("fooId");
+
+await db.friends.bulkPut([{name: "Friend1"}, {name: "Friend2"}], ["id1", "id2"]);
 ```
+

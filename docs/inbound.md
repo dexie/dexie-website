@@ -44,3 +44,17 @@ db.version(1).stores({
     friends: "++,name"
 });
 ```
+
+#### Working with Inbound Keys
+
+```js
+await db.friends.put({id: "fooId", name: "Foo"});
+const friend = await db.friends.get("fooId");
+```
+
+#### Working with Non-inbound keys
+
+```js
+await db.friends.put({name: "Foo"}, "fooId");
+const friend = await db.friends.get("fooId");
+```

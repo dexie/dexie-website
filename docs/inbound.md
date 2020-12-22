@@ -61,12 +61,19 @@ db.version(1).stores({
 ### Adding / Updating Outbound Values
 
 ```js
-await db.friends.add({name: "Foo"}, "fooId");
+await db.friends.add({name: "Foo"}, "fooId"); // Specify key as 2nd argument
 
-await db.friends.bulkAdd([{name: "Friend1"}, {name: "Friend2"}], ["id1", "id2"]);
+await db.friends.put({name: "Foo"}, "fooId"); // Specify key as 2nd argument
 
-await db.friends.put({name: "Foo"}, "fooId");
+await db.friends.bulkAdd(
+  [{name: "Friend1"}, {name: "Friend2"}],
+  ["id1", "id2"] // Specify keys array in 2nd arg
+);
 
-await db.friends.bulkPut([{name: "Friend1"}, {name: "Friend2"}], ["id1", "id2"]);
+await db.friends.bulkPut(
+  [{name: "Friend1"}, {name: "Friend2"}],
+  ["id1", "id2"] // Specify keys array in 2nd arg
+);
+
 ```
 

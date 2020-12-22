@@ -24,7 +24,7 @@ db.version(1).stores({
 });
 ```
 
-### Adding / Updating Data
+### Adding / Updating Inbound Values
 
 ```js
 await db.friends.add({id: "fooId", name: "Foo"});
@@ -58,7 +58,7 @@ db.version(1).stores({
 });
 ```
 
-### Adding / Updating Data
+### Adding / Updating Non-Inbound Values
 
 ```js
 await db.friends.add({name: "Foo"}, "fooId");

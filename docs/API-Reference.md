@@ -430,7 +430,7 @@ Dexie Promises supports a pattern similar to [Thread-local storage](http://en.wi
 
 #### Exception Handling
 
-With Dexie, in contrary to indexedDB, there is one single way to catch exceptions - through the Promise.catch() method. Nowhere do you need to do a standard try..catch(). The reason for this is to not enforce the caller to need to think about several ways of error handling. When you work with transactions, you will also get the benefit of being able to catch all errors in one single place - at the end of the transaction, instead of having to catch() every promise of each database operation. Any uncatuch error (no matter error events, exception or miss-spelled variable in your code) will abort the ongoing [Transaction](/docs/Transaction/Transaction) and trigger its returned [Promise](/docs/Promise/Promise) to reject, waking up any catch() clause attached to the transaction scope.
+With Dexie, in contrary to indexedDB, there is one single way to catch exceptions - through the Promise.catch() method. Nowhere do you need to do a standard try..catch(). The reason for this is to not enforce the caller to need to think about several ways of error handling. When you work with transactions, you will also get the benefit of being able to catch all errors in one single place - at the end of the transaction, instead of having to catch() every promise of each database operation. Any uncaught error (no matter error events, exception or miss-spelled variable in your code) will abort the ongoing [Transaction](/docs/Transaction/Transaction) and trigger its returned [Promise](/docs/Promise/Promise) to reject, waking up any catch() clause attached to the transaction scope.
 
 ```javascript
 db.transaction('rw', db.friends, function() {

@@ -40,7 +40,7 @@ var db = new Dexie(databaseName, options?);
     <td>An implementation of the IDBKeyRange interface that works with provided indexedDB implementation.</td>
   </tr>
   <tr>
-    <td>allowEmtpyDB: boolean</td>
+    <td>allowEmptyDB: boolean</td>
     <td>If opening in <a href="Dexie.open()#dynamic-mode">dynamic mode</a> (not defining a schema)
         the call to db.open() will normally reject if the database didn't exist and this option is false or not set.
         By setting this option to true, Dexie.open() will succeed to create a new empty database when opening it dynamically.</td>

@@ -116,7 +116,7 @@ the client code to integrate it will be:
 db.cloud.configure({
   databaseUrl: "<database URL>",
   requireAuth: true,
-  fetchToken: () => fetch("/dexie-cloud-token").then(res => res.json())
+  fetchToken: () => fetch("/dexie-cloud-token", {credentials: 'same-origin'}).then(res => res.json())
 });
 ```
 

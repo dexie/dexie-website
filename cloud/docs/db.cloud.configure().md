@@ -57,7 +57,7 @@ Dexie Cloud comes with zero-config email OTP authentication but if you need to r
 **Node.js server endpoint**
 
 The code below examplifies how to generate tokens if your authentication solution is based on Node.js and [Passport](http://www.passportjs.org){:target="_blank"}. If you have another server-side platform or language for your existing authentication, you would need to translate this example to that language and platform. Note that the authentication platform (Passport or other) can use whatever mechanism to authenticate the user - integrate with OpenIDConnect, Google, Github, facebook etc. For guides for doing so, we refer to other guides on the internet
-that covers this. If you are starting from a white paper and just need a way to get going, we recommend the guides from [auth0](https://auth0.com){:target="_blank"} or [Passport](http://www.passportjs.org){:target="_blank"} but remember that Dexie Cloud comes with zero config authentication based on one-time-passwords over email, so setting up authentication is typically a next-step after you've got up running with Dexie Cloud zero config authentication.
+that covers this. If you are starting from a white paper and just need a way to get going, we recommend the guides from [auth0](https://auth0.com){:target="_blank"} or [Passport](http://www.passportjs.org){:target="_blank"} but remember that Dexie Cloud comes with zero config authentication based on one-time-passwords over email, so setting up custom authentication is just an optional next-step. Make sure to get up running Dexie Cloud with zero config authentication first.
 
 ```js 
 // ...other express / passport imports and setup...

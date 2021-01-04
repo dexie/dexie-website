@@ -52,7 +52,7 @@ should not be added to git either but be managed in a secure way using the cloud
 
 ### Example: Integrate Custom Authentication
 
-Dexie Cloud comes with zero-config email OTP authentication but if you need to replace that with any custom authentication, you can either integrate with your existing web server or create a new server endpoint using a authentication framework of your choice, such as Node.js and Passportjs. You need to extend the existing server with a new API endpoint (let's name it `/dexie-cloud-token`). This new endpoint shall request tokens from Dexie Cloud via server-to-server communication. The new server endpoint should accept requests from your dexie-cloud client (requested from your `fetchToken` callback), then it should request the token using server-to-server communication towards the Dexie Cloud REST API, and then return the resulting token to your client.
+Dexie Cloud comes with zero-config email OTP authentication but if you need to replace that with any custom authentication, you can either integrate with your existing web server or create a new server endpoint using an authentication framework of your choice, such as Node.js and Passportjs. You need to extend the existing server to respond to a new URL (let's use `/dexie-cloud-token`). This new URL endpoint shall request tokens from Dexie Cloud via server-to-server communication using the logged in user and return the Dexie Cloud tokens to its client. The client of your new endpoint will be dexie-cloud client (requested from your `fetchToken` callback).
 
 **Node.js server endpoint**
 

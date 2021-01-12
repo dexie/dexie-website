@@ -39,7 +39,7 @@ title: 'Samples'
 #### Dexie with Electron
 
 * [Minimal Electron App](https://github.com/dfahlander/Dexie.js/tree/master/samples/electron)
-* [Electron + Dexie + Typescript sample](https://github.com/nagappan080810/electrondexieorderapp)
+* [Electron + Dexie + Typescript (third party)](https://github.com/nagappan080810/electrondexieorderapp)
 
 #### Populate From Ajax
 

@@ -10,7 +10,9 @@ Allows app developers load indexedDB data and keep their component updated whene
 # Dependencies
 
 ```
-npm i react dexie@>3.1-alpha dexie-react-hooks
+npm install react
+npm install dexie-react-hooks
+npm install dexie@>3.1-alpha
 ```
 
 # Syntax

@@ -25,7 +25,7 @@ table.where(indexOrPrimKey).anyOfIgnoreCase(key1, key2, keyN, ...)
 
 ### Remarks
 
-Search an index for keys that matches any of given strings, ignoring case differences.
+Search an index for keys that matches any of given strings, ignoring case differences of the english letters a-z, A-Z.
 
 ### Implementation Details
 

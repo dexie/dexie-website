@@ -44,7 +44,7 @@ If options argument is omitted, or options is {allKeys: false}, the return value
 [Promise&lt;LastKey&gt;](/docs/Promise/Promise)
 
 
-*Since 3.0.0-rc.2*: If options argument is provided in second or thirs argument with {allKeys: true}, the return value is a promise resulting with an array of resulting primary keys. The resulting array will have the same length as given array of objects to put. Every position in given items array will correspond to the same position in the resulting array.
+*Since 3.0.0-rc.2*: If options argument is provided in second or third argument with {allKeys: true}, the return value is a promise resulting with an array of resulting primary keys. The resulting array will have the same length as given array of objects to put. Every position in given items array will correspond to the same position in the resulting array.
 
 [Promise&lt;Key[]&gt;](/docs/Promise/Promise)
 

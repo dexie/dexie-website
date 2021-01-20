@@ -10,7 +10,7 @@ Creates a database in the cloud.
 
 **cd** to the root directory of your web app and write:
 <pre>
-npx dexie-cloud create
+npx dexie-cloud create [--server &lt;URL&gt;]
 </pre>
 
 This command creates a new database in the cloud. You will be prompted for your email address and receive an email with the one-time password (OTP) to enter into the next prompt. Once the database has been created, your will also get two files stored in the same directory as you stand in.
@@ -22,6 +22,11 @@ Neither of these files should be added to git as they represent environment rath
 The files are not needed for the web app to work - they are only useful if you want to run other CLI commands, like white-listing new apps etc. They can also be used to access the Dexie Cloud REST API from a server.
 
 Your email will be stored in the databae as the database owner.
+
+*Options*
+```
+--server <URL>  Create the database on an alternate server (default is https://dexie.cloud)
+```
 
 #### Sample
 ```

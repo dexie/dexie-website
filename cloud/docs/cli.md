@@ -23,7 +23,7 @@ The files are not needed for the web app to work - they are only useful if you w
 
 Your email will be stored in the databae as the database owner.
 
-*Options*
+#### Options
 ```
 --server <URL>  Create the database on an alternate server (default is https://dexie.cloud)
 ```

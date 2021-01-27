@@ -29,7 +29,7 @@ Did you write something based on Dexie? Feel free to list it here.
 ## Known Addons
 
 * [dexie-encryped](https://github.com/mark43/dexie-encrypted) *Easily add encryption to all non-indexed properties*
-* [dexie-easy-encrypt](https://github.com/jaetask/dexie-easy-encrypt)
+* [dexie-easy-encrypt](https://github.com/jaetask/dexie-easy-encrypt) *Unopinionated encryption middleware with less complexity that let you provide your own encrypt() / decrypt() functions.*
 * [dexie-relationships](https://github.com/ignasbernotas/dexie-relationships) *Declare and query data with foreign keys*
 * [Dexie.Observable](/docs/Observable/Dexie.Observable)
 * [Dexie.Syncable](/docs/Syncable/Dexie.Syncable.js)

@@ -89,11 +89,14 @@ dexie-cloud.key
 ```
 
 ## delete
-Deletes a database from the cloud.
+Deletes a database from the cloud. The database gets marked for deletion and goes into a grace period of 1 month before it is completely removed from the system. During that month, clients that connect to the database receives a warning notice about the deletion along with the final deletion date. The deletion can be undone using the [undelete](#undelete) CLI command by any authorized DB manager.
 
 <pre>
 npx dexie-cloud delete &lt;Database-URL&gt;
 </pre>
+
+## undelete
+Un-deletes a previously deleted database. Only works within the grace period, see [delete](#delete).
 
 ## whitelist
 

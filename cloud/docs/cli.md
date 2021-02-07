@@ -52,15 +52,20 @@ dexie-cloud.key
 Authorizes another user to manage the database.
 
 <pre>
-npx dexie-cloud authorize
-npx dexie-cloud authorize &lt;email address&gt; [--delete]
+npx dexie-cloud authorize &lt;email address&gt;
 </pre>
 
-* Without arguments: list email addresses of authorized database managers.
-* With arguments: authorize or un-authorized given email address.
-* With flag [--delete] deletes the authorized email address. You can unauthorize yourself only if you've authorized someone else first.
+Authorizing a user will create an API client for that user with its own client ID and secret. The authorized user may then connect to the same database using the [connect](#connect) command.
 
-Authorizing a user will create an API client for that user with its own client ID and secret.
+To list authorized users, use the [clients](#clients) command.
+
+## unauthorize
+Un-authorizes a user from managing the database.
+
+You can unauthorize yourself only if there are other authorized clients. A database must have at least one API client.
+
+## clients
+List API clients along with their owner email-addresses.
 
 ## connect
 Request client_id and client_secret for an existing db and save them into dexie-cloud.key. Also set active database in dexie-cloud.json. This command will require email OTP verification before retrieving credentials and the OTP receiver must have been authorized to manager the database using the [npx dexie-cloud authorize](#autorize) command, or be the creator of the database.

@@ -48,14 +48,32 @@ dexie-cloud.json
 dexie-cloud.key
 ```
 
+## authorize
+Authorizes another user to manage the database.
+
+<pre>
+npx dexie-cloud authorize
+npx dexie-cloud authorize &lt;email address&gt; [--delete]
+</pre>
+
+* Without arguments: list email addresses of authorized database managers.
+* With arguments: authorize or un-authorized given email address.
+* With flag [--delete] deletes the authorized email address. You can unauthorize yourself only if you've authorized someone else first.
+
+## connect
+Request client_id and client_secret for an existing db and save them into dexie-cloud.key. Also set active database in dexie-cloud.json. This command will require email OTP verification before retrieving credentials and the OTP receiver must have been authorized to manager the database using the [npx dexie-cloud authorize](#autorize) command, or be the creator of the database.
+
+<pre>
+npx dexie-cloud connect &lt;Database URL&gt;
+</pre>
+
+
 ## delete
 Deletes a database from the cloud.
 
 <pre>
 npx dexie-cloud delete &lt;Database-URL&gt;
 </pre>
-
-The user will have to authorize the request using email OTP. The system will prompt for email address, which needs to be an email address of a database owner. It is not nescessary to have the dexie-cloud.json or dexie-cloud.key files to do this command.
 
 ## whitelist
 

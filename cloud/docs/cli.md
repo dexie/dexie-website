@@ -60,9 +60,14 @@ Authorizing a user will create an API client for that user with its own client I
 To list authorized users, use the [clients](#clients) command.
 
 ## unauthorize
-Un-authorizes a user from managing the database.
+Remove API clients that belong to given email address. Any authorized database manager can add and remove authorization.
+
+<pre>
+npx dexie-cloud unauthorize &lt;email address&gt;
+</pre>
 
 You can unauthorize yourself only if there are other authorized clients. A database must have at least one API client.
+To see a list of authorized database managers, see the [clients](#clients) command.
 
 ## clients
 List API clients along with their owner email-addresses.

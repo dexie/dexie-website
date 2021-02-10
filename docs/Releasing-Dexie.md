@@ -30,6 +30,8 @@ npm install # Makes sure to install added deps
 
 3. Make sure to have BROWSER_STACK_USERNAME and BROWSER_STACK_ACCESS_KEY environment variables set! Otherwise the full test suite will be unable to run.
 
+4. Make sure that BrowserStack Tunnel is KILLED on your system. To kill it, run BrowserstackLocal app on your machine and click Kill Tunnel.
+
 ### Releasing
 
 1. CD to your dedicated 'dexie-release' location.

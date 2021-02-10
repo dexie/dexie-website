@@ -48,14 +48,65 @@ dexie-cloud.json
 dexie-cloud.key
 ```
 
+## authorize
+Authorizes another user to manage the database.
+
+<pre>
+npx dexie-cloud authorize &lt;email address&gt;
+</pre>
+
+Authorizing a user will create an API client for that user with its own client ID and secret. The authorized user may then connect to the same database using the [connect](#connect) command.
+
+To list authorized users, use the [clients](#clients) command.
+
+## unauthorize
+Remove API clients that belong to given email address. Any authorized database manager can add and remove authorization.
+
+<pre>
+npx dexie-cloud unauthorize &lt;email address&gt;
+</pre>
+
+You can unauthorize yourself only if there are other authorized clients. A database must have at least one API client.
+To see a list of authorized database managers, see the [clients](#clients) command.
+
+## clients
+List API clients along with their owner email-addresses.
+
+## connect
+Request client_id and client_secret for an existing db and save them into dexie-cloud.key. Also set active database in dexie-cloud.json. This command will require email OTP verification before retrieving credentials and the OTP receiver must have been authorized to manager the database using the [npx dexie-cloud authorize](#autorize) command, or be the creator of the database.
+
+<pre>
+npx dexie-cloud connect &lt;Database URL&gt;
+</pre>
+
+#### Sample
+```
+$ npx dexie-cloud connect https://zrp8lv7rq.dexie.cloud
+Enter your email address: youremail@company.com
+Enter OTP: YourOTP
+Client created: js9bfkyfqst9hcb9
+
+We created two new local files for you:
+=======================================
+dexie-cloud.json - URL to database
+dexie-cloud.key - contains client ID and secret
+```
+
+#### Files to be listed in .gitignore
+```
+dexie-cloud.json
+dexie-cloud.key
+```
+
 ## delete
-Deletes a database from the cloud.
+Deletes a database from the cloud. The database gets marked for deletion and goes into a grace period of 1 month before it is completely removed from the system. During that month, clients that connect to the database receives a warning notice about the deletion along with the final deletion date. The deletion can be undone using the [undelete](#undelete) CLI command by any authorized DB manager.
 
 <pre>
 npx dexie-cloud delete &lt;Database-URL&gt;
 </pre>
 
-The user will have to authorize the request using email OTP. The system will prompt for email address, which needs to be an email address of a database owner. It is not nescessary to have the dexie-cloud.json or dexie-cloud.key files to do this command.
+## undelete
+Un-deletes a previously deleted database. Only works within the grace period, see [delete](#delete).
 
 ## whitelist
 

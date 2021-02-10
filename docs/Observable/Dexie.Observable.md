@@ -53,6 +53,8 @@ In contrary to the [Dexie CRUD hooks](/docs/Tutorial/Design#the-crud-hooks-creat
 
 Dexie.Observable is also the base of [Dexie.Syncable.js](/docs/Syncable/Dexie.Syncable.js) - an add-on that enables two-way replication with a remote server.
 
+Dexie.Observable excludes tables whose names begin with an underscore from observation. Therefore, it is recommended to avoid using such names.
+
 ### Extended Methods, Properties and Events
 
 #### UUID key generator

@@ -16,11 +16,26 @@ Before you file an issue, please Google your problem first - chances are you fin
 
 ## Private support issues
 
-If you really need to get in touch privately, use the following email address:
+* Email address: [privsupport@dexie.org](mailto:privsupport@dexie.org)
+* Cost: €150/h
+* We will be asking you to place an order of 10 hours at minimum.
+* In the email, please provide your details:
 
-[privsupport@dexie.org](mailto:privsupport@dexie.org)
+    *Your Name*
 
-**If you contact us for private support, we will be asking you to pay for the time we spend on it.**
+
+    *Company Name*
+
+    *Company Address*
+
+    *Country*
+
+    *VAT number (if EU)*
+
+    *Contact information*
+
+
+*NOTE: During 2021, due to high work load we are only to able to give private support for Dexie Cloud related issues. For other issues, we refer to Stack Overflow and Github issues.*
 
 ## Business related questions
 

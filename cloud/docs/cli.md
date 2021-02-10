@@ -84,10 +84,10 @@ npx dexie-cloud connect &lt;Database URL&gt;
 $ npx dexie-cloud connect https://zrp8lv7rq.dexie.cloud
 Enter your email address: youremail@company.com
 Enter OTP: YourOTP
-Client created: js9bfkyfqst9hcb9
+Successful client confirmation.
 
-We created two new local files for you:
-=======================================
+Local files have been updated:
+==============================
 dexie-cloud.json - URL to database
 dexie-cloud.key - contains client ID and secret
 ```

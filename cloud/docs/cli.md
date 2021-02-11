@@ -84,10 +84,10 @@ npx dexie-cloud connect &lt;Database URL&gt;
 $ npx dexie-cloud connect https://zrp8lv7rq.dexie.cloud
 Enter your email address: youremail@company.com
 Enter OTP: YourOTP
-Client created: js9bfkyfqst9hcb9
+Successful client confirmation.
 
-We created two new local files for you:
-=======================================
+Local files have been updated:
+==============================
 dexie-cloud.json - URL to database
 dexie-cloud.key - contains client ID and secret
 ```
@@ -107,6 +107,44 @@ npx dexie-cloud delete &lt;Database-URL&gt;
 
 ## undelete
 Un-deletes a previously deleted database. Only works within the grace period, see [delete](#delete).
+
+#### Example
+
+```
+$ npx dexie-cloud delete https://841ba920.dexie.cloud
+No credentials for https://841ba920.dexie.cloud was found in dexie-cloud.key.
+Use `npx dexie-cloud connect https://841ba920.dexie.cloud` and then retry.
+
+$ npx dexie-cloud connect https://841ba920.dexie.cloud
+Enter your email address: youremail@company.com
+Enter OTP: YourOTP
+Successful client confirmation.
+
+Local files have been updated:
+==============================
+dexie-cloud.json - URL to database
+dexie-cloud.key - contains client ID and secret
+
+$ npx dexie-cloud delete https://841ba920.dexie.cloud
+Database https://841ba920.dexie.cloud marked for deletion.
+All connection towards it will receive warnings during a
+grace period of one month.
+Scheduled for final deletion on Mar 9, 2021.
+To undo, see https://dexie.org/cloud/docs/cli#undelete.
+Local files dexie-cloud.json and dexie-cloud.key also deleted.
+
+$ npx dexie-cloud connect https://841ba920.dexie.cloud
+Enter your email address: youremail@company.com
+Enter OTP: YourOTP
+Successful client confirmation.
+
+WARNING: THIS DATABASE IS MARKED FOR DELETION ON MAR 9, 2021.
+
+$ npx dexie-cloud undelete
+Undeleting https://841ba920.dexie.cloud
+Database successfully undeleted.
+
+```
 
 ## whitelist
 

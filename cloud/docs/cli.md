@@ -52,7 +52,7 @@ dexie-cloud.key
 Authorizes another user to manage the database.
 
 <pre>
-npx dexie-cloud authorize &lt;email address&gt;
+npx dexie-cloud authorize &lt;email address&gt; [--scopes &lt;scopes&gt;]
 </pre>
 
 Authorizing a user will create an API client for that user with its own client ID and secret. The authorized user may then connect to the same database using the [connect](#connect) command.

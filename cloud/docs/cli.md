@@ -61,15 +61,15 @@ To list authorized users, use the [clients](#clients) command.
 
 #### Scopes
 
-| Scope        | Meaning                                               |
-|--------------|-------------------------------------------------------|
-| IMPERSONATE  | Client may be used to issue tokens to arbritary users |
-| ACCESS_DB    | Sync, read and write to database within own realms    |
-| MANAGE_DB    | Manage database clients                               |
-| GLOBAL_READ  | Read entire database from any realm                   |
-| GLOBAL_WRITE | Write in entire database                              |
-| DELETE_DB    | Delete the database                                   |
-| *            | Represents all scopes                                 |
+| Scope        | Meaning                                                   |
+|--------------|-----------------------------------------------------------|
+| IMPERSONATE  | Client may be used to issue tokens to arbritary users     |
+| ACCESS_DB    | Sync, read and write to database within accessable realms |
+| MANAGE_DB    | Manage database clients                                   |
+| GLOBAL_READ  | Read entire database from any realm                       |
+| GLOBAL_WRITE | Write in entire database                                  |
+| DELETE_DB    | Delete the database                                       |
+| *            | Represents all scopes                                     |
 
 ## unauthorize
 Remove API clients that belong to given email address. Any authorized database manager can add and remove authorization.

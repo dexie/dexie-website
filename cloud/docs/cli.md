@@ -64,7 +64,7 @@ To list authorized users, use the [clients](#clients) command.
 | Scope        | Meaning                                                   |
 |--------------|-----------------------------------------------------------|
 | IMPERSONATE  | Client may be used to issue tokens to arbritary users     |
-| ACCESS_DB    | Sync, read and write to database within accessable realms |
+| ACCESS_DB    | Sync, read and write to database respecting access control|
 | MANAGE_DB    | Manage database clients                                   |
 | GLOBAL_READ  | Read entire database from any realm                       |
 | GLOBAL_WRITE | Write in entire database                                  |

@@ -261,8 +261,10 @@ function addTodoItem(todoList, todoTitle) {
 
 Contains the edges between a realm and its members. Each member must have at least a realmId and an email property. Members can be added before the target user even has any user account in the system.
 
-| Table Name | "members" |
-| Primary key | @id |
+
+| Table Name  | "members" |
+|-------------|-----------|
+| Primary key | @id       |
 
 #### Properties of objects in "members" table
 

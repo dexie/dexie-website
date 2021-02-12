@@ -50,8 +50,7 @@ dexie-cloud.key
 
 ## databases
 List the databases you have credentials for in your dexie-cloud.key file.
-Can be handy when switching between multiple databases. Only a single database can be active
-at the same time. The list shows which one of the database URLs that is currectly active.
+Can be handy when switching between multiple databases. The list shows which one of the databases that is currently selected.
 To switch to another database, use `npx dexie-cloud connect <DB-URL>`.
 
 #### Sample

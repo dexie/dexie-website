@@ -165,6 +165,9 @@ db.version(2).stores({
   todoItems: '@id, title, done, todoListId',
 
   // Access Control tables
+  // (Note: these tables need to be named exactly like in this sample,
+  //        and will correspond to server-side access control of Dexie
+  //        Cloud)
   realms: '@realmId',
   members: '@id,[realmId+email]',
   roles: '[realmId+name]'

@@ -48,6 +48,28 @@ dexie-cloud.json
 dexie-cloud.key
 ```
 
+## databases
+List the URLs of databases that you have credentials for in your dexie-cloud.key file.
+Can be handy when switching between multiple databases. Only a single database can be active
+at the same time. The list shows which one of the database URLs that is currectly active.
+To switch to another database, use `npx dexie-cloud connect <DB-URL>`.
+
+#### Sample
+
+```
+$ npx dexie-cloud databases
+https://z7sk70jbj.dexie.cloud
+https://zdmrn79uu.dexie.cloud <--current
+
+$ npx dexie-cloud connect https://z7sk70jbj.dexie.cloud
+Current database is now https://z7sk70jbj.dexie.cloud (stored in dexie-cloud.json)
+
+$ npx dexie-cloud databases
+https://z7sk70jbj.dexie.cloud <--current
+https://zdmrn79uu.dexie.cloud
+
+```
+
 ## authorize
 Authorizes another user to manage the database.
 

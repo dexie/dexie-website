@@ -165,6 +165,9 @@ db.version(2).stores({
   todoItems: '@id, title, done, todoListId',
 
   // Access Control tables
+  // (Note: these tables need to be named exactly like in this sample,
+  //        and will correspond to server-side access control of Dexie
+  //        Cloud)
   realms: '@realmId',
   members: '@id,[realmId+email]',
   roles: '[realmId+name]'
@@ -258,8 +261,10 @@ function addTodoItem(todoList, todoTitle) {
 
 Contains the edges between a realm and its members. Each member must have at least a realmId and an email property. Members can be added before the target user even has any user account in the system.
 
-| Table Name | "members" |
-| Primary key | @id |
+
+| Table Name  | "members" |
+|-------------|-----------|
+| Primary key | @id       |
 
 #### Properties of objects in "members" table
 

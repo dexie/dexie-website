@@ -10,7 +10,7 @@ Creates a database in the cloud.
 
 **cd** to the root directory of your web app and write:
 <pre>
-npx dexie-cloud create [--server &lt;URL&gt;]
+npx dexie-cloud create [--service &lt;URL&gt;]
 </pre>
 
 This command creates a new database in the cloud. You will be prompted for your email address and receive an email with the one-time password (OTP) to enter into the next prompt. Once the database has been created, your will also get two files stored in the same directory as you stand in.
@@ -25,7 +25,7 @@ Your email will be stored in the databae as the database owner.
 
 #### Options
 ```
---server <URL>  Create the database on an alternate server (default is https://dexie.cloud)
+--service <URL>  Create the database using an dexie cloud service URL (default is https://dexie.cloud)
 ```
 
 #### Sample
@@ -48,16 +48,49 @@ dexie-cloud.json
 dexie-cloud.key
 ```
 
+## databases
+List the databases you have credentials for in your dexie-cloud.key file.
+Can be handy when switching between multiple databases. The list shows which one of the databases that is currently selected.
+To switch to another database, use `npx dexie-cloud connect <DB-URL>`.
+
+#### Sample
+
+```
+$ npx dexie-cloud databases
+https://z7sk70jbj.dexie.cloud
+https://zdmrn79uu.dexie.cloud <--current
+
+$ npx dexie-cloud connect https://z7sk70jbj.dexie.cloud
+Current database is now https://z7sk70jbj.dexie.cloud (stored in dexie-cloud.json)
+
+$ npx dexie-cloud databases
+https://z7sk70jbj.dexie.cloud <--current
+https://zdmrn79uu.dexie.cloud
+
+```
+
 ## authorize
 Authorizes another user to manage the database.
 
 <pre>
-npx dexie-cloud authorize &lt;email address&gt;
+npx dexie-cloud authorize &lt;email address&gt; [--scopes &lt;scopes&gt;]
 </pre>
 
 Authorizing a user will create an API client for that user with its own client ID and secret. The authorized user may then connect to the same database using the [connect](#connect) command.
 
 To list authorized users, use the [clients](#clients) command.
+
+#### Scopes
+
+| Scope        | Meaning                                                   |
+|--------------|-----------------------------------------------------------|
+| IMPERSONATE  | Client may be used to issue tokens to arbritary users     |
+| ACCESS_DB    | Sync, read and write to database respecting access control|
+| MANAGE_DB    | Manage database clients                                   |
+| GLOBAL_READ  | Read entire database from any realm                       |
+| GLOBAL_WRITE | Write in entire database                                  |
+| DELETE_DB    | Delete the database                                       |
+| *            | Represents all scopes                                     |
 
 ## unauthorize
 Remove API clients that belong to given email address. Any authorized database manager can add and remove authorization.
@@ -67,6 +100,16 @@ npx dexie-cloud unauthorize &lt;email address&gt;
 </pre>
 
 You can unauthorize yourself only if there are other authorized clients. A database must have at least one API client.
+To see a list of authorized database managers, see the [clients](#clients) command.
+
+## revoke
+Remove individual API client.
+
+<pre>
+npx dexie-cloud revoke &lt;client ID&gt;
+</pre>
+
+You can unauthorize you own client only if there are other authorized clients with enough scopes to fully manage the database and be able to delete it. A database must have at least one API client with all scopes applied.
 To see a list of authorized database managers, see the [clients](#clients) command.
 
 ## clients

@@ -78,8 +78,7 @@ app.post('/dexie-cloud-tokens', bodyParser.json(), async (req, res, next) => {
     const user = req.user; // See http://www.passportjs.org/docs/configure/
     
     // Parameters that dexie-cloud client will provide via fetchTokens option.
-    const public_key = req.body.public_key;
-    const timestamp = req.body.timestamp;
+    const public_key = req.body.public_key; // For refresh token authentication
     
     // Request token from your Dexie Cloud database:
     const tokenResponse = await nodeFetch(`${DB_URL}/token`, {
@@ -92,7 +91,6 @@ app.post('/dexie-cloud-tokens', bodyParser.json(), async (req, res, next) => {
         grant_type: "client_credentials",
         scopes: ["ACCESS_DB"],
         public_key,
-        timestamp,
         client_id: CLIENT_ID,
         client_secret: CLIENT_SECRET,
         claims: {

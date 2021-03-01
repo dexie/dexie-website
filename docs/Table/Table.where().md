@@ -79,3 +79,6 @@ const david43 = await db.friends.get({name: "David", age: 43});
 [Collection](/docs/Collection/Collection)
 
 [API-Reference#query-items](/docs/API-Reference#query-items)
+
+[Table.get()](/docs/Table/Table.get())
+

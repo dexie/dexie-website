@@ -42,7 +42,7 @@ If a plain object containing criterias was provided, this method returns a [Coll
 Find friends named david, ignoring case
 
 ```javascript
-const friends = db.friends.where("name").equalsIgnoreCase("david").toArray();
+const friends = await db.friends.where("name").equalsIgnoreCase("david").toArray();
 for (const friend of friends) {
   console.log("Found: " + friend.name + ". Phone: " + friend.phoneNumber);
 }

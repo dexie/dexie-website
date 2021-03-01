@@ -52,8 +52,11 @@ If operation fails, returned promise will reject, calling any [Promise.catch()](
 const firstFriend = await db.friends.get(1);
 alert ("Friend with id 1: " + firstFriend.name);
 
+/** This function queries the person Austin Powers
+  and resolves relational data from another table.
+*/
 function getAustinWithVehicles() {
-  return db.transaction('r', db.friends, async () => {
+  return db.transaction('r', [db.friends, db.vehicles], async () => {
     const austin = await db.friends.get({firstName: "Austin", lastName: "Powers"});
     // Query by "foreign key" on vehicles:
     const austinsVehicles = await db.vehicles.where({owner: austin.id}).toArray();

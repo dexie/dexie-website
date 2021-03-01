@@ -49,6 +49,7 @@ for (const friend of friends) {
 ```
 
 Find friends named David with age between 23 and 43.
+
 *NOTE: This example uses [compound index](https://dexie.org/docs/Compound-Index) '[name+age]' to squeeze the most performance out of IndexedDB in finding records with multiple criterias. Not all types of criterias can be filtered this way, but combinations of a range in the last part and equals on the first parts works.* 
 
 ```javascript

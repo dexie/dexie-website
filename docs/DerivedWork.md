@@ -49,6 +49,7 @@ Did you write something based on Dexie? Feel free to list it here.
 
 ## Blogs and Samples
 
+* [Logrocket blog: Using Dexie.js in React apps for offline storage](https://blog.logrocket.com/dexie-js-indexeddb-react-apps-offline-data-storage/)
 * [Using Dexie.js to write slick IndexedDB code](https://dev.to/andyhaskell/using-dexie-js-to-write-slick-indexeddb-code-304o)
 * [Using IndexedDB API with React (and Hooks)](https://levelup.gitconnected.com/using-the-indexeddb-api-with-react-and-hooks-4e63d83a5d1b)
 * [Electron app Database with Dexie.js ( indexedDB ) and web worker](https://gauriatiq.medium.com/electron-app-database-with-dexie-js-indexeddb-and-web-worker-570d9a66a47a)

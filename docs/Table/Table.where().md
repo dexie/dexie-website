@@ -39,7 +39,7 @@ If a plain object containing criterias was provided, this method returns a [Coll
 
 ### Sample
 
-Find friends named david, ignoring case
+#### Find friends named david, ignoring case
 
 ```javascript
 const friends = await db.friends.where("name").equalsIgnoreCase("david").toArray();
@@ -48,9 +48,7 @@ for (const friend of friends) {
 }
 ```
 
-Find friends named David with age between 23 and 43.
-
-*NOTE: This example uses [compound index](https://dexie.org/docs/Compound-Index) '[name+age]' to squeeze the most performance out of IndexedDB in finding records with multiple criterias. Not all types of criterias can be filtered this way, but combinations of a range in the last part and equals on the first parts works.* 
+#### Find friends named David with age between 23 and 43.
 
 ```javascript
 const davids = await db.friends.where(["name", "age"])
@@ -60,8 +58,10 @@ for (const david of davids) {
   console.log(`Found a David with age ${david.age}`);
 }
 ```
+*NOTE: This example uses [compound index](https://dexie.org/docs/Compound-Index) '[name+age]' to squeeze the most performance out of IndexedDB in finding records with multiple criterias. Not all types of criterias can be filtered this way, but combinations of a range in the last part and equals on the first parts works.* 
 
-Find a friend named David with age 43
+
+#### Find a friend named David with age 43
 
 ```javascript
 const david43 = await db.friends.where({name: "David", age: 43}).first();

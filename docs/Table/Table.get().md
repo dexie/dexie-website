@@ -49,10 +49,12 @@ If operation fails, returned promise will reject, calling any [Promise.catch()](
 
 ### Samples
 ```javascript
+/* This code gets an object by its primary key:
+*/
 const firstFriend = await db.friends.get(1);
 alert ("Friend with id 1: " + firstFriend.name);
 
-/** This function queries a friend and resolves some
+/** This function queries a friend by indices firstName and lastName. It also resolves some
   relational data in the same result.
 */
 function getAustinWithVehicles() {

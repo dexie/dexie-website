@@ -37,7 +37,7 @@ If a plain object containing criterias was provided, this method returns a [Coll
 
 [Collection](/docs/Collection/Collection) if object was provided.
 
-### Sample
+### Samples
 
 #### Find friends named david, ignoring case
 

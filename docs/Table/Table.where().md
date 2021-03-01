@@ -8,10 +8,6 @@ Start filtering the object store by creating a [WhereClause](/docs/WhereClause/W
 ### Syntax
 
 ```javascript
-// Dexie 1.x and 2.x:
-table.where(indexOrPrimaryKey)
-
-// Dexie 2.x only:
 table.where(keyPathArray);
 table.where({keyPath1: value1, keyPath2: value2, ...});
 ```
@@ -46,33 +42,27 @@ If a plain object containing criterias was provided, this method returns a [Coll
 Find friends named david, ignoring case
 
 ```javascript
-db.friends.where("name").equalsIgnoreCase("david").each(function (friend) {
-    console.log("Found: " + friend.name + ". Phone: " + friend.phoneNumber);
-}).catch(function (error) {
-    console.error(error);
-});
+const friends = db.friends.where("name").equalsIgnoreCase("david").toArray();
+for (const friend of friends) {
+  console.log("Found: " + friend.name + ". Phone: " + friend.phoneNumber);
+}
 ```
 
 Find friends named David with age between 23 and 43
 
 ```javascript
-db.friends.where(["name", "age"])
+const friends = await db.friends.where(["name", "age"])
   .between(["David", 23], ["David", 43], true, true)
-  .each(friend => {
-      console.log("Found: " + JSON.stringify(friend));
-  }).catch(error => {
-      console.error(error.stack || error);
-  });
+  .toArray();
+for (const friend of friends) {
+  console.log("Found: " + friend.name + ". Age: " + friend.age);
+}
 ```
 
 Find a friend named David with age 43
 
 ```javascript
-db.friends.where({name: "David", age: 43}).first(friend => {
-    console.log("Found David, 43: " + JSON.stringify(friend));
-}).catch(error => {
-    console.error(error.stack || error);
-});
+const david43 = await db.friends.where({name: "David", age: 43}).first();
 ```
 
 ### See Also

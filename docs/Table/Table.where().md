@@ -48,7 +48,7 @@ for (const friend of friends) {
 }
 ```
 
-#### Find friends named David with age between 23 and 43.
+#### Find friends named David with age between 23 and 43 (two criterias)
 
 ```javascript
 const davids = await db.friends.where(["name", "age"])

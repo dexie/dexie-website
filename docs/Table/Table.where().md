@@ -48,14 +48,15 @@ for (const friend of friends) {
 }
 ```
 
-Find friends named David with age between 23 and 43
+Find friends named David with age between 23 and 43.
+*NOTE: This example uses [compound index](https://dexie.org/docs/Compound-Index) '[name+age]' to squeeze the most performance out of IndexedDB in finding records with multiple criterias. Not all types of criterias can be filtered this way, but combinations of a range in the last part and equals on the first parts works.* 
 
 ```javascript
-const friends = await db.friends.where(["name", "age"])
+const davids = await db.friends.where(["name", "age"])
   .between(["David", 23], ["David", 43], true, true)
   .toArray();
-for (const friend of friends) {
-  console.log("Found: " + friend.name + ". Age: " + friend.age);
+for (const david of davids) {
+  console.log(`Found a David with age ${david.age}`);
 }
 ```
 

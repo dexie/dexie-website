@@ -5,12 +5,9 @@ title: 'Table.get()'
 
 ### Syntax
 
-```javascript
-// Dexie 1.x and 2.x:
-table.get(primaryKey, callback);
-
-// Dexie 2.x only:
-table.get({keyPath1: value1, keyPath2: value2, ...}, callback);
+```ts
+table.get(primaryKey): Promise
+table.get({keyPath1: value1, keyPath2: value2, ...}): Promise
 ```
 
 ### Parameters

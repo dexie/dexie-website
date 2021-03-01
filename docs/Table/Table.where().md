@@ -66,6 +66,11 @@ for (const david of davids) {
 ```javascript
 const david43 = await db.friends.where({name: "David", age: 43}).first();
 ```
+The above statement is equivalent to:
+```javascript
+const david43 = await db.friends.get({name: "David", age: 43});
+```
+
 
 ### See Also
 

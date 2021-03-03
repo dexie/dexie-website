@@ -26,14 +26,49 @@ export function useLiveQuery<T, TDefault=undefined> (
 ) : T | TDefault;
 
 ```
+# Simple Example
 
-# Example
+```tsx
+import React from "react";
+import Dexie from "dexie";
+import { useLiveQuery } from "dexie-react-hooks";
+
+const db = new Dexie('myDB');
+db.version(1).stores({
+  friends: '++id, name, age'
+});
+
+export function OldFriendsList() {
+  const friends = useLiveQuery(
+    () => db.friends
+      .where('age')
+      .above(75)
+      .toArray()
+  );
+  
+  if (!friends) return null; // Still loading.
+  
+  return <ul>
+    { friends.map(friend =>
+        <li key={friend.id}>
+          {friend.name}, {friend.age}
+        </li>)
+    }
+  </ul>;
+}
+
+```
+
+
+
+# Enhanced Example
 
 This example shows that...
 - you can observe the result of an arbritary function that queries Dexie
-- use state variable from useState() in your querier function.
+- you can use a state from a useState() result within your querier function (just need to mention it in the deps array)
 - the component will re-render if the data you are querying change
 - the component will re-render if in-parameter to the query change.
+- the query will change when state change.
 
 ```tsx
 import React, { useState } from "react";
@@ -49,7 +84,7 @@ export function FriendList() {
     [maxAge] // because maxAge affects query!
   );
 
-  // Query total friend count:
+  // Example of another query in the same component.
   const friendCount = useLiveQuery(() => db.friends.count());
 
   // If default values are returned, queries are still loading:

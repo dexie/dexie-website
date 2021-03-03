@@ -25,7 +25,7 @@ Your email will be stored in the databae as the database owner.
 
 #### Options
 ```
---service <URL>  Create the database using an dexie cloud service URL (default is https://dexie.cloud)
+--service <URL>  Create database on custom server (default is https://dexie.cloud)
 ```
 
 #### Sample

@@ -38,6 +38,8 @@ db.friends.update(2, {name: "Number 2"}).then(function (updated) {
 });
 ```
 
+Note: Be careful with nested object values. If you have an `address` field that includes `city`, `state`, and `zipcode`, `db.friends.update(2, {address: {zipcode: 12345}})` will replace the entire `address` object with `{zipcode: 12345}`.
+
 ### See Also
 
 [Collection.modify()](/docs/Collection/Collection.modify())

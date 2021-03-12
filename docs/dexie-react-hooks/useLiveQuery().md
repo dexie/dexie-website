@@ -12,7 +12,7 @@ Allows app developers load indexedDB data and keep their component updated whene
 ```
 npm install react
 npm install dexie-react-hooks
-npm install dexie@>3.1-alpha
+npm install dexie@v3.1.0-alpha.8
 ```
 
 # Syntax

@@ -37,7 +37,6 @@ import { useLiveQuery } from "dexie-react-hooks";
 // Database declaration
 //
 const db = new Dexie('myDB');
-
 db.version(1).stores({
   friends: '++id, name, age'
 });

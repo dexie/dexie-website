@@ -102,7 +102,7 @@ export function FriendList() {
         Your have <b>{friendCount}</b> friends in total.
       </p>
       <label>
-        Please enter max age:
+        Please enter max age to query:
         <input
           type="number"
           value={maxAge}

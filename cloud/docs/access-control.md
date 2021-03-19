@@ -196,7 +196,7 @@ function createTodoList(listName) {
     // (being owner does not imply having the object synced)
     await db.members.add({
       realmId: newRealmId,
-      userId: db.cloud.userId,
+      userId: db.cloud.currentUserId,
       // invite not needed when sharing to yourself.
       // permissions not nescessary as you are the realm owner.
     });

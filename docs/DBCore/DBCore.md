@@ -26,7 +26,7 @@ Not all access to IndexedDB go via DBCore still. Upgrade handling and opening th
 export interface DBCore {
   stack: "dbcore";
   // Transaction and Object Store
-  transaction(req: DBCoreTransactionRequest): DBCoreTransaction;
+  transaction(tables: string[], mode: 'readwrite' | 'readonly'): DBCoreTransaction;
 
   // Utility methods
   cmp(a: any, b: any) : number;
@@ -40,7 +40,6 @@ export interface DBCore {
 See [Dexie.use()](../Dexie/Dexie.use())
 
 ## See Also
-* [DBCoreTransactionRequest](DBCoreTransactionRequest)
 * [DBCoreTransaction](DBCoreTransaction)
 * [DBCoreSchema](DBCoreSchema)
 * [DBCoreTable](DBCoreTable)

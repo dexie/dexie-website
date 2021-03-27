@@ -5,7 +5,7 @@ title: 'useLiveQuery()'
 
 # Remarks
 
-Allows app developers load indexedDB data and keep their component updated whenever the data changes.
+Observe IndexedDB data in your React component. Make the component re-render when the observed data changes.
 
 # Dependencies
 

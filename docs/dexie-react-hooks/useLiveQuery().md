@@ -32,17 +32,10 @@ export function useLiveQuery<T, TDefault=undefined> (
 import React from "react";
 import Dexie from "dexie";
 import { useLiveQuery } from "dexie-react-hooks";
+import { db } from "./db";
 
 //
-// Database declaration
-//
-const db = new Dexie('myDB');
-db.version(1).stores({
-  friends: '++id, name, age'
-});
-
-//
-// Functional React component
+// React component
 //
 export function OldFriendsList() {
   const friends = useLiveQuery(

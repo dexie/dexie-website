@@ -26,7 +26,6 @@ export function useLiveQuery<T, TDefault=undefined> (
 ) : T | TDefault;
 
 ```
-## Parameters
 
 | Parameter | Description |
 |------|------|

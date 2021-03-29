@@ -64,7 +64,7 @@ The `useLiveQuery()` not just loads data - it *observes* the query for changes. 
 
 ## Fine grained observation
 
-The observation is as fine-grained as it can possibly be - queries that would be affected by the data modification will rerender - others normally not (with some exceptions). This is also true if your querier callback performs a series of queries or multiple in parallell. It can even have has conditional checks within it - still, observation will function and never miss an update. No matter how simple or complex the query is - it will be monitored in detail so that if a single part of the query is affected by a change, the querier will be executed and the component will rerender.
+The observation is as fine-grained as it can possibly be - queries that would be affected by the data modification will rerender - others normally not (with some exceptions). This is also true if your querier callback performs a series of queries or multiple in parallell. It can even contain if-statements or other conditional paths within it - still, observation will function and never miss an update. No matter how simple or complex the query is - it will be monitored in detail so that if a single part of the query is affected by a change, the querier will be executed and the component will rerender.
 
 # Enhanced Example
 

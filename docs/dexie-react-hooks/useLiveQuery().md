@@ -60,7 +60,7 @@ export function OldFriendsList() {
 
 ## Persistent state manager
 
-The `useLiveQuery()` not just loads data - it *observes* the query for changes. This means that you can use it for persistent state management.
+The `useLiveQuery()` not just loads data - it *observes* the query for changes. This means that you can use it for persistent state management. If you add, update or delete a friend using Dexie methods for the ([Table.add](../Table/Table.add()), [Table.update()](../Table/Table.update()) or [Table.delete()](../Table/Table.delete())), any component that observes the affected data will automatically rerender.
 
 
 # Enhanced Example

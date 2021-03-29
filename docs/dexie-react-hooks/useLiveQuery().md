@@ -35,8 +35,8 @@ export function useLiveQuery<T, TDefault=undefined> (
 
 ## Rules for the querier function
 
-* Don't call non-Dexie API:s from it.
-* If you really need to call other async API's (such as webCrypt APIs), always wrap the returned promise through [Dexie.waitFor()](../Dexie/Dexie.waitFor()).
+* Don't call asynchronic API:s from it except Dexie's APIs.
+* If you really need to call other async API's (such as webCrypt APIs), wrap the returned promise through [Dexie.waitFor()](../Dexie/Dexie.waitFor()). There's an example later in this page on how to do that.
 
 # Simple Example
 
@@ -180,6 +180,36 @@ function App () {
 }
 
 ```
+
+# Calling non-Dexie API:s from querier
+
+If your querier callback needs to call non-Dexie asynchronous APIs to resolve its result, the promises returned by those non-Dexie API:s needs to be wrapped using [Dexie.waitFor()](../Dexie/Dexie.waitFor()).
+
+```js
+function MyComponent(id) {
+  const friendWithMetaData = useLiveQuery(async () => {
+    const friend = await db.friends.get(id);
+    // Call fetch() to complement data from online data
+    try {
+      const friendMetaData = await Dexie.waitFor (
+        fetch(friend.metaDataUrl).then(res => res.json())
+      );
+      friend.metaData = friendMetaData;
+    } catch (error) {
+      friend.metaData = null;
+    }
+    return friend;
+  }, [id]);
+  
+  return <>
+    <p>Name: {friendWithMetaData.name}</p>
+    <p>FooBar: {friendWithMetaData.metaData?.fooBar}</p>
+  </>;
+}
+  
+```
+
+
 
 # Playgrounds
 

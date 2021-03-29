@@ -183,7 +183,7 @@ function App () {
 
 # Calling non-Dexie API:s from querier
 
-If your querier callback needs to call non-Dexie asynchronous APIs to resolve its result, the promises returned by those non-Dexie API:s needs to be wrapped using `Promise.resolve()`. This is needed in order to keep the observation context alive between async calls. Despite APIs like `fetch()`, `webCrypto` etc already returns promises and it may feel unnescessary to wrap it with `Promise.resolve()`, this is needed here because it will allow Dexie's async context to be kept alive.
+If your querier callback needs to call asynchronous non-Dexie APIs to resolve its result, the promises returned by those non-Dexie API:s needs to be wrapped using `Promise.resolve()`. This is needed in order to keep the observation context alive between async calls. Despite APIs like `fetch()`, `webCrypto` etc already returns promises and it may feel unnescessary to wrap it with `Promise.resolve()`, this is needed here because it will allow Dexie's async context to be kept alive.
 
 ```js
 function MyComponent(id) {

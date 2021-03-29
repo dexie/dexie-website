@@ -38,10 +38,6 @@ If given changes is an Object, each key in the object represents a keyPath and e
 
 If the value is a function, the function will be called for each object so that the function may modify or delete any properties on the object. A function may also replace the object with another object by using this.value = otherObject. Finally, the function may also delete the object by doing `delete this.value;` See samples below.
 
-### WARNING
-
-**Safari 10 and 11 has an [issue](https://bugs.webkit.org/show_bug.cgi?id=178380) that basically makes this method stop working on queries utilizing indexes (As with dexie where clauses) if using dexie@2. Dexie@3 works around this issue. This issue is being discussed in [Dexie issue 594](https://github.com/dfahlander/Dexie.js/issues/594)**
-
 ### Error Handling
 
 If any object fails to be modified or an exception occur in a callback function, entire operation will fail and transaction will be aborted.

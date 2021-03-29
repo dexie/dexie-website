@@ -58,6 +58,8 @@ export function OldFriendsList() {
 
 ```
 
+## `useLiveQuery()` - a persistent state manager!
+
 The `useLiveQuery()` not just loads data - it *observes* the query for changes. This means that you can use it for persistent state management.
 
 

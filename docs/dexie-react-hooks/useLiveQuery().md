@@ -33,7 +33,7 @@ export function useLiveQuery<T, TDefault=undefined> (
 | deps | Variables that querier is dependent on (similar to the `deps` argument in `useEffect()`).  |
 | defaultResult | Result returned on initial render - before the promise have resolved. |
 
-## Rules for the `querier` function
+## Rules for the querier function
 
 * Don't call non-Dexie API:s from it.
 * If you really need to call other async API's (such as webCrypt APIs), always wrap the returned promise through [Dexie.waitFor()](../Dexie/Dexie.waitFor()).

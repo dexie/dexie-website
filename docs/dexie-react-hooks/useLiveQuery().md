@@ -183,7 +183,7 @@ function App () {
 
 # Calling non-Dexie API:s from querier
 
-If your querier callback needs to call non-Dexie asynchronous APIs to resolve its result, the promises returned by those non-Dexie API:s needs to be wrapped using [Dexie.waitFor()](../Dexie/Dexie.waitFor()).
+If your querier callback needs to call non-Dexie asynchronous APIs to resolve its result, the promises returned by those non-Dexie API:s needs to be wrapped using [Dexie.waitFor()](../Dexie/Dexie.waitFor()). The reason for this is not to keep a transaction alive but to keep the observation context alive.
 
 ```js
 function MyComponent(id) {

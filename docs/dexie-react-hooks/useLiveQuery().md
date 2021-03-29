@@ -29,7 +29,7 @@ export function useLiveQuery<T, TDefault=undefined> (
 
 | Parameter | Description |
 |------|------|
-| querier  | Function that returns a final result |
+| querier  | Function that returns a final result (Promise) |
 | deps | Variables that querier is dependent on (similar to the `deps` argument in `useEffect()`).  |
 | defaultResult | Result returned on initial render - before the promise have resolved. |
 

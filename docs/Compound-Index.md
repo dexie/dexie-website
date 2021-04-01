@@ -53,7 +53,7 @@ async function playWithCompoundIndex() {
 ```
 
 ## How Compound Index Works
-A compound index can be viewed as the index of a concatenation of two properties. They are expressed as "[prop1+prop2]" both when declaring them and when referring to them in where()-clauses. It's not exactly just a string-concatenation, since the properties may be of different types, but it's one way to think about them.
+A compound index can be viewed as the index of a concatenation of two properties. They are expressed as "[prop1+prop2]" both when declaring them and when referring to them in where()-clauses. But when expecting a compound value, an array is expected, as compound keys are represented by arrays in IndexedDB. 
 
 ## Matching First Part Only
 To find all friends with `firstName='foo'` but has an arbitrary lastName, we actually do not need to use a normal index - a compound index who's first part is 'firstName' can also perform this query. For the compound index '[firstName+lastName]', the query should be expressed as follows:

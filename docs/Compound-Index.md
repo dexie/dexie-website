@@ -73,7 +73,7 @@ db.version(1).stores({
     people: 'id, [firstName+lastName]'
 });
 db.people
-  .where('firstName') // "firstName" is a virtual index built using DBCore middleware.
+  .where('firstName') // "firstName" is a virtual index that you get for free
   .equals("Foo")
   .toArray();
 ```

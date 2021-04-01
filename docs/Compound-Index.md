@@ -178,7 +178,8 @@ db.version(x).stores({
 });
 
 // Since Dexie >= 3.x makes it possible to utilize parts of
-// compound indexes as if they were full indexes, the above
+// compound indexes as if they were full indexes, with the side
+// effect of sorting by the trailing property, the above
 // declaration enables the following queries:
 
 // Get all Annas, order by lastname.

@@ -181,17 +181,17 @@ db.version(x).stores({
 // compound indexes as if they were full indexes, the above
 // declaration enables the following queries:
 
-// Get Anna Larson:
-db.people.where({
-  firstName: "Anna",
-  lastName: "Larson"
-});
-
 // Get all Annas, order by lastname.
 db.people.where({firstName: "Anna"}).toArray() 
 
 // Get all Larsons, order by firstName.
 db.people.where({lastName: "Larson"}).toArray()
+
+// Get Anna Larson:
+db.people.where({
+  firstName: "Anna",
+  lastName: "Larson"
+});
 
 // Get all Anna L*. Order by lastName:
 db.people

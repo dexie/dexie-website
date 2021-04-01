@@ -103,11 +103,11 @@ A primary key can also be compound in the same manner as indexes. However, a com
 ```javascript
 const db = new Dexie('dbname');
 db.version(1).stores({
-    people: '[date+firstName+lastName], ...'
+    people: '[firstName+lastName], ...'
 });
 ```
 
-The above sample uses a compound primary key containing four properties: date, firstName and lastName.
+The above sample uses a compound primary key containing two properties: firstName and lastName.
 
 ## Compound Type is Array
 Compound keys are represented by arrays of the contained properties. This means that in methods where a key is expected, you should provide an array key:

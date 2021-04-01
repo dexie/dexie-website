@@ -82,16 +82,46 @@ This will yield both "Mr. foo bar" and "Mrs. baz qux".
 
 # Compound Primary Key
 
-A primary key can also be compound in the same manner as indexes. However, a compound primary key cannot be auto-incremented of natural reasons.
+A primary key can also be compound in the same manner as indexes. However, a compound primary key cannot be auto-incremented since it is a combined array of multiple properties.
 
 ```javascript
-var db = new Dexie('dbname');
+const db = new Dexie('dbname');
 db.version(1).stores({
     people: '[date+firstName+lastName], ...'
 });
 ```
 
 The above sample uses a compound primary key containing four properties: date, firstName and lastName.
+
+## Compound Type: Array
+Just like compound indexes, the compound key is represented by an array of the contained properties. This means that in methods where a key is expected, you should provide an array key:
+
+```js
+const db = new Dexie('compoundDemo');
+db.version(1).stores({
+  people: '[firstName+lastName]'
+});
+
+db.people.put({
+  firstName: "Anna",
+  lastName: "Larsson"
+}).then(() => {
+  // Key arguments should be the compound array:
+  return db.people.get(["Anna", "Larsson"]);
+}).then(anna => {
+  // For Table.get(), it is also possible to use object queries:
+  return db.people.get({
+    firstName: "Anna",
+    lastName: "Larsson"
+  });
+}).then(anna => {
+  console.log(anna);
+}).then(()=>{
+  // Provide Array to Table.update():
+  return db.people.update(["Anna", "Larsson"], { foo: "bar" });
+}).catch(console.error);
+
+```
 
 # Browser limitations
 

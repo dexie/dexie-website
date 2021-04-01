@@ -176,4 +176,36 @@ db.version(x).stores({
     // Sorting by either prop
     people: '++id, [firstName+lastName], [lastName+firstName]'
 });
+
+// Since Dexie >= 3.x makes it possible to utilize parts of
+// compound indexes as if they were full indexes, the above
+// declaration enables the following queries:
+
+// Get Anna Larson:
+db.people.where({
+  firstName: "Anna",
+  lastName: "Larson"
+});
+
+// Get all Annas, order by lastname.
+db.people.where({firstName: "Anna"}).toArray() 
+
+// Get all Larsons, order by firstName.
+db.people.where({lastName: "Larson"}).toArray()
+
+// Get all Anna L*. Order by lastName:
+db.people
+  .where('[firstName+lastName]')
+  .between(
+    ["Anna", "L"],
+    ["Anna", "L\uffff"] 
+  ).toArray(); 
+
+// Get all people, order by firstName, lastName
+db.people.orderBy("[firstName+lastName]").toArray();
+
+// Get all people, order by lastName, firstName
+db.people.orderBy("[lastName+firstName]").toArray();
+
 ```
+

@@ -80,6 +80,8 @@ db.people
 
 Note that only the leading parts of a compound index can be used alone - never the trailing parts. This is the same rule for any BTree database with compisite index support. You cannot use the compound index [firstName+lastName] to search for lastName only, but you can use it to search firstName only. 
 
+Virtual indexes have the full support for any operation, just like ordinary indexes, such as equalsIgnoreCase(), anyOf(), etc.
+
 ## Matching Multiple Values
 
 To find specific people using both their first and last name, we can use [WhereClause.anyOf()](/docs/WhereClause/WhereClause.anyOf()). This allows us to have multiple criteria for the properties that are part of the compound index. The syntax should be as follows:

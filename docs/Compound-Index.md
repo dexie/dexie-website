@@ -78,16 +78,7 @@ db.people
   .toArray();
 ```
 
-However, in order to allow a query based on lastName only, you would need to add that index explicitely:
-```js
-var db = new Dexie('dbname');
-db.version(1).stores({
-    people: 'id, [firstName+lastName], lastName'
-});
-db.people
-  .where('lastName').equals("Bar")
-  .toArray();
-```
+Note that only the leading parts of a compound index can be used alone - never the trailing parts. This is the same rule for any BTree database with compisite index support. You cannot use the compound index [firstName+lastName] to search for lastName only, but you can use it to search firstName only. 
 
 ## Matching Multiple Values
 

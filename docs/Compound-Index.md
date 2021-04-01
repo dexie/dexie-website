@@ -117,7 +117,7 @@ db.version(1).stores({
 The above sample uses a compound primary key containing four properties: date, firstName and lastName.
 
 ## Compound Type is Array
-Just like compound indexes, the compound key is represented by an array of the contained properties. This means that in methods where a key is expected, you should provide an array key:
+Compound keys are represented by arrays of the contained properties. This means that in methods where a key is expected, you should provide an array key:
 
 ```js
 const db = new Dexie('compoundDemo');

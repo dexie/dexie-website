@@ -141,7 +141,7 @@ db.people.put({
 
 # Browser limitations
 
-Internet Explorer, Edge and Safari < v10 does not support compound indexes or primary keys. You can declare compound indexes, but you'd get an error when trying to use them in a plain where('[x+y]') manner. But if passing an object to Table.where() (as samplified multiple times on this page), the query will work on all browsers and only utilize the compound index if browser supports it, otherwise fallback to using a simple index, or even just a full table scan to filter it out:
+Internet Explorer, non-chromium Edge and Safari < v10 does not support compound indexes or compound primary keys. You can declare compound indexes, but you'd get an error when trying to use them in a plain where('[x+y]') manner. But if passing an object to Table.where() (as samplified multiple times on this page), the query will work on all browsers and only utilize the compound index if browser supports it, otherwise fallback to using a simple index, or even just a full table scan to filter it out:
 
 ```javascript
 table.where({
@@ -150,7 +150,7 @@ table.where({
    ...
 })
 ```
-Dexie will find out whether it can utilize the compound index or not. If user is on IE/Edge/old safari, it will still perform the query without utilizing compound index (just not as performant).
+Dexie will find out whether it can utilize the compound index or not. If user is on IE/old Edge/old safari, it will still perform the query without utilizing compound index (just not as performant).
 
 # Using with orderBy()
 

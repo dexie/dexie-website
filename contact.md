@@ -9,10 +9,14 @@ We love to answer all kinds of questions about Dexie.js on stackoverflow and we 
 ## Ask Question
 [Ask dexie question on stackoverflow](http://stackoverflow.com/questions/ask?tags=dexie)
 
+[Ask Dexie Cloud question on GitHub](https://github.com/dfahlander/Dexie.js/issues/new?labels=cloud,question)
+
 ## File Issue
 Before you file an issue, please Google your problem first - chances are you find hints or answers in an existing stackoverflow-, GitHub, docs page or some blog. Also [search for existing issues](https://github.com/dfahlander/Dexie.js/issues?q=is%3Aissue).
 
 [File a dexie issue](https://github.com/dfahlander/Dexie.js/issues/new)
+
+[File a Dexie Cloud issue](https://github.com/dfahlander/Dexie.js/issues/new?labels=cloud)
 
 ## Private support issues
 

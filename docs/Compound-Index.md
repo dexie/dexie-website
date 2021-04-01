@@ -65,6 +65,29 @@ db.people
     ["foo", Dexie.maxKey])
   .toArray();
 ```
+From Dexie 3.x, compound indexes also adds virtual indexes representing partial parts of the index so you can do the following query:
+
+```js
+var db = new Dexie('dbname');
+db.version(1).stores({
+    people: 'id, [firstName+lastName]'
+});
+db.people
+  .where('firstName') // "firstName" is a virtual index built using DBCore middleware.
+  .equals("Foo")
+  .toArray();
+```
+
+However, in order to allow a query based on lastName only, you would need to add that index explicitely:
+```js
+var db = new Dexie('dbname');
+db.version(1).stores({
+    people: 'id, [firstName+lastName], lastName'
+});
+db.people
+  .where('lastName').equals("Bar")
+  .toArray();
+```
 
 ## Matching Multiple Values
 
@@ -73,12 +96,12 @@ To find specific people using both their first and last name, we can use [WhereC
 ```javascript
 db.people
   .where('[firstName+lastName]').anyOf([
-    ["foo", "bar"],
-    ["baz", "qux"]
+    ["Foo", "Bar"],
+    ["Baz", "Qux"]
   ]).toArray();
 ```
 
-This will yield both "Mr. foo bar" and "Mrs. baz qux".
+This will yield both "Foo Bar" and "Baz Qux".
 
 # Compound Primary Key
 
@@ -93,7 +116,7 @@ db.version(1).stores({
 
 The above sample uses a compound primary key containing four properties: date, firstName and lastName.
 
-## Compound Type: Array
+## Compound Type is Array
 Just like compound indexes, the compound key is represented by an array of the contained properties. This means that in methods where a key is expected, you should provide an array key:
 
 ```js

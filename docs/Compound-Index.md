@@ -174,7 +174,10 @@ If your app needs to support several ways of sorting, you can add several combin
 ```javascript
 db.version(x).stores({
     // Sorting by either prop
-    people: '++id, [firstName+lastName], [lastName+firstName]'
+    people: `
+      ++id,
+      [firstName+lastName],
+      [lastName+firstName]`
 });
 
 // Since Dexie >= 3.x makes it possible to utilize parts of

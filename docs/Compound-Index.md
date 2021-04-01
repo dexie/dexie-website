@@ -65,7 +65,7 @@ db.people
     ["foo", Dexie.maxKey])
   .toArray();
 ```
-From Dexie 3.x, compound indexes also adds virtual indexes representing partial parts of the index so you can do the following query:
+From Dexie 3.x, compound indexes also adds virtual indexes (without actually adding them to indexedDB) acting as a representation for partial parts of the index so you can do the following query:
 
 ```js
 var db = new Dexie('dbname');

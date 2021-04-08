@@ -91,14 +91,14 @@ function fastForward(lastRow, idProp, otherCriteria) {
   };
 }
 
-// Criteria filter (WHERE clause in plain JS)
+// Criteria filter in plain JS:
 const criteraFunction = friend => friend.age > 21; // Just an example...
 
 //
 // Query First Page
 //
 let page = await db.friends
-  .orderBy('lastName') // Utilize index for sorting and paging
+  .orderBy('lastName') // Utilize index for sorting
   .filter(criteraFunction)
   .limit(PAGE_SIZE)
   .toArray();
@@ -112,7 +112,7 @@ let lastEntry = page[page.length-1];
 page = await db.friends
   // Use index to fast forward as much as possible
   // This line is what makes the paging optimized
-  .where('lastName').aboveOrEqual(lastEntry.lastName)
+  .where('lastName').aboveOrEqual(lastEntry.lastName) // makes it sorted by lastName
   
   // Use helper function to fast forward to the exact last result:
   .filter(fastForward(lastEntry, "id", criteraFunction))
@@ -134,35 +134,6 @@ page = await db.friends
   .limit(PAGE_SIZE);
   .toArray();
 
-
-```
-
-In case you have a where()-clause, the index on which it is used will also be the sort order, so:
-
-```javascript
-
-const PAGE_SIZE = 10;
-
-//
-// First Page
-//
-let page = await db.friends
-  .where('friendID').between(25, 100) // keyrange query (affects result order)
-  .filter(friend => /nice/.test(friend.notes)) // Some custom filter...
-  .limit(PAGE_SIZE)
-  .toArray();
-  
-...
-//
-// Page N
-//
-if (page.length < PAGE_SIZE) return; // Done
-lastEntry = page[page.length-1];
-page = await db.friends
-  .where('friendID').between(lastEntry.friendID, 100)
-  .filter(friend => /nice/.test(friend.notes))
-  .limit(PAGE_SIZE);
-  .toArray();
 
 ```
 

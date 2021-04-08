@@ -65,7 +65,7 @@ db.[table].where(index).above(value).and(filterFunction).offset(N)
 
 Paging can generally be done more efficiently by utilizing an index for sorting only.
 
-In this example, we want to accomplish a paging approach other than offset/filter where the order property is other than the filter property. Note that we really want paging support. Imagine that the "friends" table would include millions of friends with age above 21 so you really need to page the result efficiently. 
+In this example, we want to accomplish a paging approach that utilize an index for sorting rather than filtering. This solution is most efficient when the result could be very large without paging. Imagine that the "friends" table would include millions of friends with age above 21 so you really need to page the result efficiently. 
 
 | | |
 |---------|-------|

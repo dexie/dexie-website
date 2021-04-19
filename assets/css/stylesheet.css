@@ -32,7 +32,7 @@ h1[id]::before, h2[id]::before, h3[id]::before, h4[id]::before, h5[id]::before, 
 
 
 #parallax {
-	height: 400px;
+	height: 350px;
 	padding: 65px 0 0;
 	overflow: hidden;
 	color: #FFF;

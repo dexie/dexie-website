@@ -59,27 +59,65 @@ db.[table].where(index).anyOf(valueArray).offset(N)
 db.[table].where(index).above(value).and(filterFunction).offset(N)
 ```
 
-### A better paging approach using a unique property
+### A better paging approach
 
-Paging can generally be done more efficiently by adapting the query to the uniqueness of the last result instead of using offset/limit.
+*UPDATED 2021-04-08!*
+
+Paging can generally be done more efficiently by utilizing an index for sorting only.
+
+In this example, we want to accomplish a paging approach that utilize an index for sorting rather than filtering. This solution is most efficient when the result could be very large without paging. Imagine that the "friends" table would include millions of friends with age above 21 so you really need to page the result efficiently. 
+
+| | |
+|---------|-------|
+| FILTER: | friend.age > 21 |
+| ORDER BY: | friend.lastName |
+| PAGE SIZE: | 10 |
+
+I will go through this conceptually. The code is not meant to be just copy/pasted. It is there to explain how first query, second query and following queries can be done. When you get the idea, you can adjust the code for your particular need.
+
 ```javascript
 const PAGE_SIZE = 10;
+
+// A helper function we will use below.
+// It will prevent the same results to be returned again for next page.
+function fastForward(lastRow, idProp, otherCriteria) {
+  let fastForwardComplete = false;
+  return item => {
+    if (fastForwardComplete) return otherCriteria(item);
+    if (item[idProp] === lastRow[idProp]) {
+      fastForwardComplete = true;
+    }
+    return false;
+  };
+}
+
+// Criteria filter in plain JS:
+const criteraFunction = friend => friend.age > 21; // Just an example...
 
 //
 // Query First Page
 //
 let page = await db.friends
-  .orderBy('friendID')
+  .orderBy('lastName') // Utilize index for sorting
+  .filter(criteraFunction)
   .limit(PAGE_SIZE)
   .toArray();
 
 //
 // Page 2
 //
+// "page" variable is an array of results from last request:
 if (page.length < PAGE_SIZE) return; // Done
 let lastEntry = page[page.length-1];
 page = await db.friends
-  .where('friendID').above(lastEntry.friendID)
+  // Use index to fast forward as much as possible
+  // This line is what makes the paging optimized
+  .where('lastName').aboveOrEqual(lastEntry.lastName) // makes it sorted by lastName
+  
+  // Use helper function to fast forward to the exact last result:
+  .filter(fastForward(lastEntry, "id", criteraFunction))
+  
+  // Limit to page size:
   .limit(PAGE_SIZE);
   .toArray();
 
@@ -91,123 +129,11 @@ page = await db.friends
 if (page.length < PAGE_SIZE) return; // Done
 lastEntry = page[page.length-1];
 page = await db.friends
-  .where('friendID').above(lastEntry.friendID)
+  .where('friendID').aboveOrEqual(lastEntry.lastName)
+  .filter(fastForward(lastEntry, "id", criteraFunction))
   .limit(PAGE_SIZE);
   .toArray();
 
 
 ```
 
-In case you have a where()-clause, the index on which it is used will also be the sort order, so:
-
-```javascript
-
-const PAGE_SIZE = 10;
-
-//
-// First Page
-//
-let page = await db.friends
-  .where('friendID').between(25, 100) // keyrange query (affects result order)
-  .filter(friend => /nice/.test(friend.notes)) // Some custom filter...
-  .limit(PAGE_SIZE)
-  .toArray();
-  
-...
-//
-// Page N
-//
-if (page.length < PAGE_SIZE) return; // Done
-lastEntry = page[page.length-1];
-page = await db.friends
-  .where('friendID').between(lastEntry.friendID, 100)
-  .filter(friend => /nice/.test(friend.notes))
-  .limit(PAGE_SIZE);
-  .toArray();
-
-```
-
-### Paged OR-queries
-
-OR-queries, however, will not be able to be paged like in the above samples, as the resulting order or OR querys is undefined. With OR-queries and paging, you would have to do a more complex query.
-
-Let's say you have an arbritary query, containing both a where()-clause, one or more or() clauses, and possible some JS filter on top of that. And you want to order and page the result any index of your choice. Let's assume also that your database values contains 10,000 of records with large images on each record. Then using sortBy() and slice the result is just not an appropriate way to go.
-
-Here's what can be done to optimize that in a manner that mirrors what many other databases does internally:
-
-```javascript
-
-//
-//
-// --- Here goes the parameters ---
-//
-//
-
-// Query:
-const table = db.friends;
-const collection = table
-  .where('age').above(25)
-  .or('shoeSize').below(10)
-  .or('firstName').startsWith('X'); // Whatever Dexie query here...
-
-// Page size:
-const PAGE_SIZE = 10;
-
-// order by (choose any primary key or unique indexed property)
-const ORDER_BY = "friendID";
-
-//
-//
-// --- Here goes the algorithm ---
-//
-//
-
-// Record all matching primary keys
-const primaryKeySet = new Set(await collection.primaryKeys());
-  
-//
-// Query first page
-//
-let pageKeys = [];
-await table
-  .orderBy(ORDER_BY)
-  .until(() => pageKeys.length === PAGE_SIZE)
-  .eachPrimaryKey(id => {
-    if (primaryKeySet.has(id)) {
-      pageKeys.push(id);
-    }
-  });
-let page = await Promise.all(pageKeys.map(id => table.get(id)));
-...
-
-//
-// Query page N
-//
-if (page.length < PAGE_SIZE) return; // Done
-lastEntry = page[page.length-1];
-
-pageKeys = [];
-await table
-  .where(ORDER_BY).above(lastEntry[ORDER_BY])
-  .until(() => pageKeys.length === PAGE_SIZE)
-  .eachPrimaryKey(id => {
-    if (primaryKeySet.has(id)) {
-      pageKeys.push(id);
-    }
-  });
-page = await Promise.all(pageKeys.map(id => table.get(id)));
-    
-```
-Ordered pages of OR queries is a problem for all databases and they will do the same algorithm internally as we do here, unless the result count small enough for prefering an in-memory sort. Current version of Dexie just don't have a built-in query planner to do this yet, so that's why you need to write this code to do it.
-
-CONS:
-  * Has to query all primary keys before starting to retrieve values.
-  * Has to do a full index scan on the ordered index
-  
-PROS:
-  * Will have equal performance for page 1 and page 100.
-  * Does it the way an SQL database would do it.
-  * Does not need to load all values (which would be the case if using sortBy()) - just all primary keys.
-  * Does not require the use of Array.sort() (which can be very slow on large arrays)
-
-*A future version of Dexie (probably version 4.0) will support this natively, and will do it even more efficient than the example used here with the use of a paged getAllKeys() and a bloom filter instead of a Set.*

@@ -53,7 +53,7 @@ async function playWithCompoundIndex() {
 ```
 
 ## How Compound Index Works
-A compound index can be viewed as the index of a concatenation of two properties. They are expressed as "[prop1+prop2]" both when declaring them and when referring to them in where()-clauses. It's not exactly just a string-concatenation, since the properties may be of different types, but it's one way to think about them.
+A compound index can be viewed as the index of a concatenation of two properties. They are expressed as "[prop1+prop2]" both when declaring them and when referring to them in where()-clauses. But when expecting a compound value, an array is expected, as compound keys are represented by arrays in IndexedDB. 
 
 ## Matching First Part Only
 To find all friends with `firstName='foo'` but has an arbitrary lastName, we actually do not need to use a normal index - a compound index who's first part is 'firstName' can also perform this query. For the compound index '[firstName+lastName]', the query should be expressed as follows:
@@ -65,6 +65,22 @@ db.people
     ["foo", Dexie.maxKey])
   .toArray();
 ```
+From Dexie 3.x, compound indexes also adds virtual indexes (without actually adding them to indexedDB) acting as a representation for partial parts of the index so you can do the following query:
+
+```js
+var db = new Dexie('dbname');
+db.version(1).stores({
+    people: 'id, [firstName+lastName]'
+});
+db.people
+  .where('firstName') // "firstName" is a virtual index that you get for free
+  .equals("Foo")
+  .toArray();
+```
+
+Note that only the leading parts of a compound index can be used alone - never the trailing parts. This is the same rule for any BTree database with compisite index support. You cannot use the compound index [firstName+lastName] to search for lastName only, but you can use it to search firstName only. 
+
+Virtual indexes have the full support for any operation, just like ordinary indexes, such as equalsIgnoreCase(), anyOf(), etc.
 
 ## Matching Multiple Values
 
@@ -73,29 +89,59 @@ To find specific people using both their first and last name, we can use [WhereC
 ```javascript
 db.people
   .where('[firstName+lastName]').anyOf([
-    ["foo", "bar"],
-    ["baz", "qux"]
+    ["Foo", "Bar"],
+    ["Baz", "Qux"]
   ]).toArray();
 ```
 
-This will yield both "Mr. foo bar" and "Mrs. baz qux".
+This will yield both "Foo Bar" and "Baz Qux".
 
 # Compound Primary Key
 
-A primary key can also be compound in the same manner as indexes. However, a compound primary key cannot be auto-incremented of natural reasons.
+A primary key can also be compound in the same manner as indexes. However, a compound primary key cannot be auto-incremented since it is a combined array of multiple properties.
 
 ```javascript
-var db = new Dexie('dbname');
+const db = new Dexie('dbname');
 db.version(1).stores({
-    people: '[date+firstName+lastName], ...'
+    people: '[firstName+lastName], ...'
 });
 ```
 
-The above sample uses a compound primary key containing four properties: date, firstName and lastName.
+The above sample uses a compound primary key containing two properties: firstName and lastName.
+
+## Compound Type is Array
+Compound keys are represented by arrays of the contained properties. This means that in methods where a key is expected, you should provide an array key:
+
+```js
+const db = new Dexie('compoundDemo');
+db.version(1).stores({
+  people: '[firstName+lastName]'
+});
+
+db.people.put({
+  firstName: "Anna",
+  lastName: "Larsson"
+}).then(() => {
+  // Key arguments should be the compound array:
+  return db.people.get(["Anna", "Larsson"]);
+}).then(anna => {
+  // For Table.get(), it is also possible to use object queries:
+  return db.people.get({
+    firstName: "Anna",
+    lastName: "Larsson"
+  });
+}).then(anna => {
+  console.log(anna);
+}).then(()=>{
+  // Provide Array to Table.update():
+  return db.people.update(["Anna", "Larsson"], { foo: "bar" });
+}).catch(console.error);
+
+```
 
 # Browser limitations
 
-Internet Explorer, Edge and Safari < v10 does not support compound indexes or primary keys. You can declare compound indexes, but you'd get an error when trying to use them in a plain where('[x+y]') manner. But if passing an object to Table.where() (as samplified multiple times on this page), the query will work on all browsers and only utilize the compound index if browser supports it, otherwise fallback to using a simple index, or even just a full table scan to filter it out:
+Internet Explorer, non-chromium Edge and Safari < v10 does not support compound indexes or compound primary keys. You can declare compound indexes, but you'd get an error when trying to use them in a plain where('[x+y]') manner. But if passing an object to Table.where() (as samplified multiple times on this page), the query will work on all browsers and only utilize the compound index if browser supports it, otherwise fallback to using a simple index, or even just a full table scan to filter it out:
 
 ```javascript
 table.where({
@@ -104,7 +150,7 @@ table.where({
    ...
 })
 ```
-Dexie will find out whether it can utilize the compound index or not. If user is on IE/Edge/old safari, it will still perform the query without utilizing compound index (just not as performant).
+Dexie will find out whether it can utilize the compound index or not. If user is on IE/old Edge/old safari, it will still perform the query without utilizing compound index (just not as performant).
 
 # Using with orderBy()
 
@@ -128,6 +174,42 @@ If your app needs to support several ways of sorting, you can add several combin
 ```javascript
 db.version(x).stores({
     // Sorting by either prop
-    people: '++id, [firstName+lastName], [lastName+firstName]'
+    people: `
+      ++id,
+      [firstName+lastName],
+      [lastName+firstName]`
 });
+
+// Since Dexie >= 3.x makes it possible to utilize parts of
+// compound indexes as if they were full indexes, with the side
+// effect of sorting by the trailing property, the above
+// declaration enables the following queries:
+
+// Get all Annas, order by lastname.
+db.people.where({firstName: "Anna"}).toArray() 
+
+// Get all Larsons, order by firstName.
+db.people.where({lastName: "Larson"}).toArray()
+
+// Get Anna Larson:
+db.people.where({
+  firstName: "Anna",
+  lastName: "Larson"
+});
+
+// Get all Anna L*. Order by lastName:
+db.people
+  .where('[firstName+lastName]')
+  .between(
+    ["Anna", "L"],
+    ["Anna", "L\uffff"] 
+  ).toArray(); 
+
+// Get all people, order by firstName, lastName
+db.people.orderBy("[firstName+lastName]").toArray();
+
+// Get all people, order by lastName, firstName
+db.people.orderBy("[lastName+firstName]").toArray();
+
 ```
+

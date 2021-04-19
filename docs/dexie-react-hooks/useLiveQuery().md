@@ -36,7 +36,7 @@ export function useLiveQuery<T, TDefault=undefined> (
 ## Rules for the querier function
 
 * Don't call asynchronic API:s from it except Dexie's APIs.
-* If you really need to call other async API's (such as webCrypt APIs), wrap the returned promise through `Promise.resolve()`. There's an example later in this page on how to do that.
+* If you really need to call other async API's (such as fetch() or webCrypto), wrap the returned promise through `Promise.resolve()`. There's an example later in this page on how to do that.
 
 # Simple Example
 

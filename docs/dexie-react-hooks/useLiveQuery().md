@@ -12,7 +12,7 @@ Observe IndexedDB data in your React component. Make the component re-render whe
 ```
 npm install react
 npm install dexie-react-hooks
-npm install dexie@v3.1.0-alpha.8
+npm install dexie@v3.1.0-alpha.10
 ```
 
 # Syntax

@@ -60,3 +60,7 @@ When you've successfully deployed the Dexie Cloud software, the next step is to 
    After OTP authorization, the hosted service will start redirecting ongoing and incoming connections to the new database URL.
 5. Run `npx dexie-cloud stats --db <URL of hosted database>` regularly to verify that the connections to the hosted database is dropping down to zero.
 6. When connections drop to zero, run `npx delete-db <URL of the hosted database>`. Confirm it in the confirmation email. The hosted service will keep redirecting users to your new database for 6 months after database has been deleted.
+
+# Terms
+
+See [Terms of our Server Software License](/cloud/server-software-license-terms)

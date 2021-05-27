@@ -40,7 +40,7 @@ This edition is hosted and starts with USD \$10 per month for serving 100 users.
 
 ### Premium Software License
 
-Buy off the software with full source code and **do whatever you want with it** except competing with our cloud offering. Serve millions of users without any additional fee. Host it in the cloud of your own choice, or on your own bare metal. The server can be published on cloud providers such as Amazon AWS and Microsoft Azure. Email support, private git access and software updates in one year included. For continous support, the yearly support fee of USD $499 includes continous updates, email support and access to our private git repo.
+Buy off the software with full source code and **do whatever you want with it** except [competing with us](server-software-license-terms). Serve millions of users without any additional fee. Host it in the cloud of your own choice, or on your own bare metal. The server can be published on cloud providers such as Amazon AWS and Microsoft Azure. Email support, private git access and software updates in one year included. For continous support, the yearly support fee of USD $499 includes continous updates, email support and access to our private git repo.
 
 <a class='btn btn-primary' href='/cloud/docs/premium-software' role='button'>Read more... &raquo;</a>
 <!-- <a class='btn btn-success' href='/cloud/purchase/software' role='button'>Get it now &raquo;</a> -->

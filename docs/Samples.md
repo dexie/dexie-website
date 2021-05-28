@@ -5,6 +5,11 @@ title: 'Samples'
 
 ### Samples in the Dexie repository
 
+#### ToDo list with React and Dexie 3.1 ####
+* [Source](https://github.com/dfahlander/dexie-todo-list)
+* [Run in browser](https://dexie-todo-list.stackblitz.io)
+* [Play with it on stackblitz](https://stackblitz.com/edit/dexie-todo-list?file=components/TodoListView.tsx)
+
 #### React + Dexie >= 3.1
 
 * **[React hooks for dexie@3.1](https://medium.com/dexie-js/awesome-react-integration-coming-f212c2273d05)** *(Blog article)*

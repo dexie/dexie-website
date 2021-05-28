@@ -7,14 +7,9 @@ title: 'Samples'
 
 #### React + Dexie >= 3.1
 
-ToDo list
-
 * [Source](https://github.com/dfahlander/dexie-todo-list)
 * [Run in browser](https://dexie-todo-list.stackblitz.io)
 * [Play with it on stackblitz](https://stackblitz.com/edit/dexie-todo-list?file=components/TodoListView.tsx)
-
-Blog and docs of useLiveQuery()
-
 * **[React hooks for dexie@3.1](https://medium.com/dexie-js/awesome-react-integration-coming-f212c2273d05)** *(Blog article)*
 * [useLiveQuery](/docs/dexie-react-hooks/useLiveQuery())
 

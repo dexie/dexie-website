@@ -45,6 +45,8 @@ If you for some reason do not want to expose your question publicly, you can ema
 
 ## Business related questions
 
+Businesses around Dexie.js and Dexie Cloud is managed by Awarica AB, a Swedish company located in Stockholm.
+
 If you have business related questions, or want to get in touch on non-technical issues:
 
 [business@dexie.org](mailto:business@dexie.org)

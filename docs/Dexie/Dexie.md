@@ -270,7 +270,7 @@ Fixes the prototype chain for OOP inheritance.
 #### [Dexie.extend()](/docs/Dexie/Dexie.extend())
 Set given additional properties into given object.
 
-#### [Dexie.Events()](/docs/Dexie/Dexie.Events())
+#### [Dexie.Events()](/docs/Dexie/Dexie.events())
 Create a set of events to subscribe to and fire.
 
 ### Static Properties

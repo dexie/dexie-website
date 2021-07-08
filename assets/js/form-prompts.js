@@ -54,7 +54,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   });
 
   function postIt (action, data) {
-    return fetch(`https://dexie-cloud-stub.azurewebsites.net/api/public/action/${encodeURIComponent(action)}`, {
+    return fetch(`https://dexie.cloud/api/public/action/${encodeURIComponent(action)}`, {
       method: "POST",
       headers: {
         'Accept': 'application/json',

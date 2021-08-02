@@ -15,42 +15,21 @@ var db = new Dexie(databaseName, options?);
 
 ### Parameters
 
-<table>
-<tr><td>dbName : String</td><td>Database name</td></tr>
-<tr><td>options: Object (optional)</td><td>API Options</td></tr>
-</table>
+| Parameter                  | Description   |
+|----------------------------|---------------|
+| dbName: String             | Database name |
+| options: Object (optional) | API Options   |
 
 ### Options
-
-<table>
-  <tr>
-    <td>addons: Array&lt;DexieAddon&gt;</td>
-    <td>Explicitly define the addons to activate for this db instance</td>
-  </tr>
-  <tr>
-    <td>autoOpen: boolean</td>
-    <td>Default true. Whether database will open automatically on first query.</td>
-  </tr>
-  <tr>
-    <td>indexedDB: <a href="https://developer.mozilla.org/en-US/docs/Web/API/IDBFactory">IDBFactory</a></td>
-    <td>Supply an alternate implementation of indexedDB. If supplying this, also supply IDBKeyRange that works with that implementation.</td>
-  </tr>
-  <tr>
-    <td>IDBKeyRange: <a href="https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange">IDBKeyRange</a></td>
-    <td>An implementation of the IDBKeyRange interface that works with provided indexedDB implementation.</td>
-  </tr>
-  <tr>
-    <td>allowEmptyDB: boolean</td>
-    <td>If opening in <a href="Dexie.open()#dynamic-mode">dynamic mode</a> (not defining a schema)
-        the call to db.open() will normally reject if the database didn't exist and this option is false or not set.
-        By setting this option to true, Dexie.open() will succeed to create a new empty database when opening it dynamically.</td>
-  </tr>
-  <tr>
-    <td>modifyChunkSize: number</td>
-    <td>(since 3.1.0-alpha) Override the default value of 2000 rows per chunk used by Collection.modify(). See <a href="https://github.com/dfahlander/Dexie.js/issues/1152">FR #1152</a>.
-    </td>
-  </tr>
-</table>
+| Option                                                                                   | Description                                                                                                                                                                                                                                                                                                        |
+|------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| addons: Array<DexieAddon>                                                                | Explicitly define the addons to activate for this db instance                                                                                                                                                                                                                                                      |
+| autoOpen: boolean                                                                        | Default true. Whether database will open automatically on first query.                                                                                                                                                                                                                                             |
+| indexedDB: [IDBFactory](https://developer.mozilla.org/en-US/docs/Web/API/IDBFactory)     | Supply an alternate implementation of indexedDB. If supplying this, also supply IDBKeyRange that works with that implementation.                                                                                                                                                                                   |
+| IDBKeyRange: [IDBKeyRange](https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange) | An implementation of the IDBKeyRange interface that works with provided indexedDB implementation.                                                                                                                                                                                                                  |
+| allowEmptyDB: boolean                                                                    | If opening in [dynamic mode](Dexie.open()#dynamic-mode) (not defining a schema) the call to db.open() will normally reject if the database didn't exist and this option is false or not set. By setting this option to true, Dexie.open() will succeed to create a new empty database when opening it dynamically. |
+| modifyChunkSize: number                                                                  | (since 3.1.0-alpha) Override the default value of 2000 rows per chunk used by Collection.modify(). See [FR #1152](https://github.com/dfahlander/Dexie.js/issues/115).                                                                                                                                              |
+| chromeTransactionDurability: 'default' \| 'strict' \| 'relaxed'                          | (since 3.2.0-beta.3) Override the default transaction durability in Chrome versions >=83. See [FR #1018](https://github.com/dfahlander/Dexie.js/issues/1018)                                                                                                                                                       |
 
 If the 'addons' option is omitted, it will default to the value of [Dexie.addons](/docs/Dexie/Dexie.addons).
 

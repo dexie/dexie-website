@@ -53,13 +53,13 @@ _Note2: You only need to specify properties that you wish to index. The object s
 
 As you can see, `db.friends` and `db.pets` are instances of [Table](/docs/Table/Table) that you can operate on directly.
 
-[Table](/docs/Table/Table) is the entry points for doing all operations to your object stores, such as querying, adding, putting, deleting, clearing and modifying your data.
+[Table](/docs/Table/Table) is the entry point for doing all operations to your object stores, such as querying, adding, putting, deleting, clearing and modifying your data.
 
 ### Transactions
 
 Whenever you are going to do more than a single operation on your database in a sequence, you would normally use a transaction. [Transaction](/docs/Transaction/Transaction) represents a full [ACID](http://en.wikipedia.org/wiki/ACID) transaction. When working with transactions you get the following benefits:
 
-* If modifying database and any error occur, every modification will be rolled back.
+* If modifying a database and an error occurs, every modification will be rolled back.
 * You may do all write operations synchronously without the need to wait for it to finish before starting the next one.
 * You may catch any error event or exception of any kind in one single catch() method of the transaction, making sure no exception what so ever will make your app just stall. Even "runtime" exceptions like the use of a misspelled variable will be caught even if it happens in the _callback of a callback_ of your transaction callback...
 * Remember that a browser can close down at any moment. Think about what would happen if the user closes the browser somewhere between your operations. Would that lead to an invalid state? If so, use a transaction - that will make its operations abort if browser is closed between operations.
@@ -111,7 +111,7 @@ db.friends.put({
 });
 ```
 
-Let's say that you publish your app and people starts using it. After a while, your user requests a new feature - to be able to search for friends with a certain shoeSize. But you have not indexed shoeSize in your schema, so how do you add that index to the next version of your app? Here's how:
+Let's say that you publish your app and people start using it. After a while, your user requests a new feature - to be able to search for friends with a certain shoeSize. But you have not indexed shoeSize in your schema, so how do you add that index to the next version of your app? Here's how:
 
 In Dexie &gt;= 3.0:
 * Just increase the version number and add shoeSize along the indexes:
@@ -189,9 +189,9 @@ With Dexie it's possible to control and monitor each database change. No matter 
 
 #### The CRUD Hooks ([CREATE](/docs/Table/Table.hook('creating')), [READ](/docs/Table/Table.hook('reading')), [UPDATE](/docs/Table/Table.hook('updating')), [DELETE](/docs/Table/Table.hook('deleting')))
 
-CRUD hooks that enables application code or addons to get involved in any of the CRUD operations taking place underhood. Whenever database is about to be read from or modified, they allow hook implementation to modify what will happen, or just react on the event.
+CRUD hooks enable application code or addons to get involved in any of the CRUD operations taking place underhood. Whenever a database is about to be read from or modified, they allow hook implementation to modify what will happen, or just react on the event.
 
-The CRUD hooks could be quite powerful. It is possible to write Dexie addons that performs synchronization, observation, custom advanced indexes, foreignKey implementations, views etc.
+The CRUD hooks could be quite powerful. It is possible to write Dexie addons that perform synchronization, observation, custom advanced indexes, foreignKey implementations, views etc.
 
 #### Hooks Documentation
 * [hook('creating')](/docs/Table/Table.hook('creating'))
@@ -201,7 +201,7 @@ The CRUD hooks could be quite powerful. It is possible to write Dexie addons tha
 
 ### The [populate](/docs/Dexie/Dexie.on.populate) Event
 
-In case your database need initial data in order to work - data that must only be populated on database creation and never more, you can subscribe to the populate event. This will only be called in case the database is initially created - not when it is upgraded.
+In case your database needs initial data in order to work - data that must only be populated on database creation and never more, you can subscribe to the populate event. This will only be called in case the database is initially created - not when it is upgraded.
 
 ```javascript
 var db = new Dexie("MyTicketDB");
@@ -283,7 +283,7 @@ db.friends.where('name').startsWithIgnoreCase('arnold').toArray(function(a) {
 
 ### WhereClause
 
-You can retrieve objects from you [Table](/docs/Table/Table) instances using two methods:
+You can retrieve objects from your [Table](/docs/Table/Table) instances using two methods:
 
 * [Table.get()](/docs/Table/Table.get()) - retrieve an object by its primary key.
 * [Table.where()](/docs/Table/Table.where()) - do an advanced query.

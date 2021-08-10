@@ -14,6 +14,10 @@ title: 'Dexie.DataCloneError'
 An attempt to add or put an item into the database was made, where the object contained a strucure not supported by the
 [Structured Cloning](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm) algorithm, such as a Function or Error object.
 
+### Question regarding this issue
+
+* [Github questions about DataCloneError](https://github.com/dfahlander/Dexie.js/issues?q=is%3Aissue+label%3Aquestion+DataCloneError)
+
 ### Sample using Promise.catch()
 
 ```javascript

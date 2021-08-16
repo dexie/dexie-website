@@ -23,10 +23,10 @@ doSomeDatabaseWork().then(function(){
 }).catch(Dexie.OpenFailedError, function (e) {
     // Failed with OpenFailedError
     console.error ("open failed due to: " + e.inner);
-}).catch(Error, funtion (e) {
+}).catch(Error, function (e) {
     // Any other error derived from standard Error
     console.error ("Error: " + e.message);
-}).catch(funtion (e) {
+}).catch(function (e) {
     // Other error such as a string was thrown
     console.error (e);
 });

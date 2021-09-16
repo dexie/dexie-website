@@ -12,7 +12,7 @@ collection.or(indexOrPrimaryKey)
 ### Parameters
 
 <table>
-<tr><td>indexOrPrimaryKey: String</td><td>Name of an index or primary key registered in <a href="Version.stores()">Version.stores()</a></td></tr>
+<tr><td>indexOrPrimaryKey: String</td><td>Name of an index or primary key registered in <a href="/docs/Version/Version.stores()">Version.stores()</a></td></tr>
 </table>
 
 ### Return Value

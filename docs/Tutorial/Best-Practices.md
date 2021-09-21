@@ -193,7 +193,7 @@ db.transaction(..., ()=>{
 })
 ```
 
-### 5. Use transaction() scopes wherever you gonna make more than one operation
+### 5. Use transaction() scopes whenever you plan to make more than one operation
 Whenever you are going to do more than a single operation on your database in a sequence, use a transaction. This will not only encapsulate your changes into an atomic operation, but also optimize your code! Internally, non-transactional operations also use a transaction but it is only used in the single operation, so if you surround your code within a transaction, you will perform less costly operations in total.
 
 Using transactions gives you the following benefits:

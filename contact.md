@@ -41,8 +41,6 @@ If you for some reason do not want to expose your question publicly, you can ema
     *Contact information*
 
 
-*NOTE: During Winter and Spring 2021, we are only to able to give private support for Dexie Cloud related issues. For other issues, we refer to Stack Overflow and Github issues.*
-
 ## Business related questions
 
 Businesses around Dexie.js and Dexie Cloud is managed by Awarica AB, a Swedish company located in Stockholm.

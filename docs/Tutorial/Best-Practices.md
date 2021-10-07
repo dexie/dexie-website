@@ -142,13 +142,7 @@ function myFunc() {
 
 IndexedDB will commit a transaction as soon as it isn't used within a tick. This means that you MUST NOT call any other async API (at least not wait for it to finish) within a transaction scope. If you do, you will get a TransactionInactiveError thrown at you as soon as you try to use the transaction after having waited for the other async API.
 
-In case you really need to call a short-lived async-API, Dexie 2.0 can actually keep your transaction alive for you if you use [Dexie.waitFor()](https://dexie.org/docs/Dexie/Dexie.waitFor()).
-
-### ~~4. Stick to Dexie.Promise and never use another Promises within transactions!~~
-
-~~[Dexie.Promise](/docs/Promise/Promise) is ES6 and A+ compliant, meaning that you can use any favourite promise together with Dexie. However, within transactions, DO NOT use any other promise implementation than Dexie.Promise! Otherwise the effective transaction will be gone.~~
-
-This part is no more relevant with Dexie 2.0. Instead:
+In case you really need to call a short-lived async-API, Dexie can actually keep your transaction alive for you if you use [Dexie.waitFor()](https://dexie.org/docs/Dexie/Dexie.waitFor()).
 
 ### 4. Use the global Promise within transactions!
 

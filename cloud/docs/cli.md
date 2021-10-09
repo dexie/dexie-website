@@ -206,7 +206,7 @@ The files dexie-cloud.json and dexie-cloud.key has to be in the current or a par
 
 #### Electron apps
 
-Electron apps are whitelisted as "app:<Application Name>", where "Application Name" will be included in OTP email messages.
+Electron apps are whitelisted as "app:<Application Name>", where "Application Name" will be included in OTP email messages. As Electron apps provide a "file:" based origin to its servers, there is currently no way to distinguish between different electron apps using the same DB. There is therefore no point having more than one "app:" based origin. Future versions may provide a way for multiple electron apps using the same DB though.
 
 #### Samples
 ```

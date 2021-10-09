@@ -201,8 +201,12 @@ npx dexie-cloud whitelist &lt;app origin&gt; [--delete]
 The files dexie-cloud.json and dexie-cloud.key has to be in the current or a parent directory.
 
 * Without arguments: list all white-listed origins.
-* With arguments: add origins so white list.
+* With arguments: add origins to whitelist.
 * With flag [--delete] deletes the origins instead of adding them.
+
+#### Electron apps
+
+Electron apps are whitelisted as "app:<Application Name>", where "Application Name" will be included in OTP email messages.
 
 #### Samples
 ```
@@ -212,6 +216,9 @@ npx dexie-cloud whitelist
 # White-list new origins
 npx dexie-cloud whitelist http://localhost:8080
 npx dexie-cloud whitelist https://myapp.company.com
+
+# White-list electron app
+npx dexie-cloud whitelist "app:Marvellous ToDo List"
 
 # Remove http://localhost:8080 from being white-listed
 npx dexie-cloud whitelist http://localhost:8080 --delete

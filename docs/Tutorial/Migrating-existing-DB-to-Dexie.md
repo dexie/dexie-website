@@ -8,7 +8,7 @@ Dexie can open any indexedDB database, no matter if you've created it via raw in
 # How to migrate
 
 1. Publish [this HTML page](https://github.com/dfahlander/Dexie.js/blob/master/samples/open-existing-db/dump-databases.html) somewhere in the same origin as your app resides in (such as http://locahost:8080/dump-databases.html).
-2. Use Chrome or Opera to navigate to your existing app (to ensure it will create the database your way). Then just navigate to the dump-database.html page and copy the generated code from the output and your with your app.
+2. Use Chrome or Opera to navigate to your existing app (to ensure it will create the database your way). Then just navigate to the dump-database.html page and copy the generated code from the output and use it in your app.
 
 That's all. After that, you may even use Dexie and your own raw indexedDB code / other wrapper in parallell if you like.
 

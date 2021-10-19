@@ -75,21 +75,174 @@ layout: dexie-frontpage-template
 	</div>
 </div>
 
-<div class='container'>
-	<hr/>
+<div class="container" style="text-align: center;">
+	<hr>
+  <h1 style="font-size: 50pt; margin: 60px;">Live Queries</h1>
 </div>
 
-<div class='container' id='callouts'>
+<div class='container'>
 	<div class='row'>
-		<div class='col-md-12'>
-			<h2>Need Sync?</h2>
-			<p>Offline databases are groovy! But without keeping the database in sync with a server, you're missing a great deal.
-			</p>
-			<p><a class='btn btn-success' href="/cloud/">Check out Dexie Cloud<span class="beta">BETA</span>&nbsp;&nbsp; &raquo;</a></p>
-		</div>
+    <div class='col-md-6'>
+      <div class="framework-logo">
+
+        <img src="assets/images/Svelte_Logo.svg" />
+        Svelte
+
+      </div>
+      <pre><code class="language-svelte">  &lt;script>
+    import { liveQuery } from "dexie";
+    import { db } from "./db";
+    
+    export let minAge;
+    export let maxAge;
+
+    //
+    // Observe a query
+    //
+    $: friends = liveQuery(() =>
+      db.friends
+        .where("age")
+        .between(minAge, maxAge)
+        .toArray()
+    );
+  &lt;/script>
+  
+  {#if $friends}
+    &lt;ul&gt;
+      {#each $friends as friend (friend.id)}
+        &lt;li&gt;{friend.name}, {friend.age}&lt;/li&gt;
+      {/each}
+    &lt;/ul&gt;
+  {/if}
+
+
+</code></pre>
+<p>
+  <a target="dexiesvelte" href="https://codesandbox.io/s/svelte-with-dexie-livequery-2n8bd?file=/App.svelte">
+    Play with Dexie.js and Svelte in Codesandbox
+  </a>
+</p>
+<p>
+  <a class='btn btn-success' href="/docs/liveQuery()">Learn about liveQuery() &raquo;</a>
+</p>
+</div>
+<div class='col-md-6'>
+  <div class="framework-logo react-logo">
+
+    <img src="assets/images/React-icon.svg" />
+    React
+
+  </div>
+
+  <pre><code class="language-jsx">  import { useLiveQuery } from "dexie-react-hooks";
+  import { db } from "./db";
+
+  export function FriendsComponent ({minAge, maxAge}) {
+    //
+    // Observe a query
+    //
+    const friends = useLiveQuery(() =>
+      db.friends
+        .where("age")
+        .between(minAge, maxAge)
+        .toArray(),
+      [minAge, maxAge]
+    );
+
+    return (
+      &lt;ul&gt;
+        {
+          friends?.map(friend =>
+            &lt;li key={friend.id}&gt;
+              {friend.name}, {friend.age}
+            &lt;/li&gt;
+          )
+        }
+      &lt;/ul&gt;
+    );
+  }</code></pre>
+  <p>
+    <a target="dexiereact" href="https://codesandbox.io/s/empty-sky-lnv0q?file=/src/components/FriendList.tsx">
+      Play with Dexie.js and React in Codesandbox
+    </a>
+  </p>
+  <p>
+    <a class='btn btn-success' href="/docs/dexie-react-hooks/useLiveQuery()">Learn about useLiveQuery() &raquo;</a>
+  </p>
+
+      </div>
 	</div>
 </div>
 
+<div class='container'>
+  <hr>
+</div>
+
+<div class='container'>
+  <h1 style="font-size: 50pt; margin: 60px; text-align: center;">Sync</h1>
+</div>
+<div class='container white-text' style="position: relative;">
+  <div class="video-parent" style="border-radius: 14px; box-shadow: 0 0 2px 4px #64b;">
+    <video
+      class="lazy banner-video"
+      preload="none"
+      autoplay
+      muted
+      loop
+      playsinline
+      >
+      <source
+        data-src="https://dexie.blob.core.windows.net/dexie/Galaxy.mp4"
+        type="video/mp4">
+    </video>
+  </div>
+  <br/>
+  <div class='row white-text'>
+    <div class='col-md-6'>
+      <h3 class="widescreen">1. Create your database in the cloud</h3>
+      <h3 class="slimscreen">1. Create your db in the cloud</h3>
+      <pre class="command-line language-bash" data-prompt="~/my-web-app $" data-filter-output="(out)"><code id="dexie-cloud-create" style="margin:0;">npx dexie-cloud create</code></pre>
+      <h3>2. Whitelist your app origin(s)</h3>
+      <pre class="command-line language-bash" data-prompt="~/my-web-app $"><code id="cli-whitelist" style="margin:0;">npx dexie-cloud whitelist http://localhost:3000</code></pre>
+      <h3>3. Add dexie-cloud-addon</h3>
+      <pre class="command-line language-bash" data-prompt="~/my-web-app $"><code id="npm-install-dexie-cloud-addon" style="margin:0;">npm install dexie-cloud-addon</code></pre>
+    </div>
+    <div class='col-md-6'>
+      <h3>4. Update your DB declaration</h3>
+      <pre><code class="language-javascript" style="margin:0;" id="update-db-declaration">  import Dexie from "dexie";
+  import dexieCloud from "dexie-cloud-addon";
+
+  const db = new Dexie('MySyncedDB', {addons: [dexieCloud]});
+
+  db.version(1).stores({
+    friends: '@id, name, age', // '@' = generated global ID
+  });
+
+  // Connect to cloud database
+  db.cloud.configure({
+    databaseUrl: "https://&lt;yourdatabase&gt;.dexie.cloud",
+    requireAuth: true
+  });</code><script>
+    prismHighlight('update-db-declaration', [
+      'import dexieCloud from "dexie-cloud-addon";',
+      "{addons: [dexieCloud]}",
+      "@id",
+      ///(\/\/.*)/g, // line comments
+      /db\.cloud\.configure\(\{(.|\n)*\}\)\;/g
+    ]);
+    prismHighlight('dexie-cloud-create', ['npx dexie-cloud create']);
+    prismHighlight('cli-whitelist', ['npx dexie-cloud whitelist http://localhost:3000']);
+    prismHighlight('npm-install-dexie-cloud-addon', ['npm install dexie-cloud-addon'])
+  </script></pre>
+    </div>
+
+</div>
+<p>
+  <a class='btn btn-success' id="land-sync-read-more-btn" href="/cloud/">Read more &raquo;</a>
+  <a class='btn btn-primary' id="land-sync-pricing-btn" href="/cloud/pricing">Pricing &raquo;</a>
+</p>
+<br/>
+</div>
 
 <div class='container'>
 	<hr/>

@@ -11,7 +11,9 @@
 		<link href='/assets/css/prism-vscode-dark.css' rel='stylesheet'>
 		<link href='/assets/css/stylesheet.css' rel='stylesheet'>
 		<link rel="shortcut icon" href="/assets/images/favicon-yuri.png" />
+		<script src="/assets/js/lazyload.min.js"></script>
 		<script src="/assets/js/offline-switch.js"></script>
+		<script src='/assets/js/prism-highlight.js'></script>
 	</head>
 	<body class='language-javascript'>
 
@@ -59,18 +61,21 @@
 
 		<div class='container'>
 			<footer>
-				<p>&copy; 2014-2020 Dexie.js is the creation of David Fahlander.</p>
+				<p>&copy; 2014-2021 Dexie.js is the creation of David Fahlander.</p>
 			</footer>
 		</div>
 
 		<script src='/assets/js/jquery.min.js'></script>
 		<script src='/assets/js/bootstrap.min.js'></script>
 		<script src='/assets/js/prism-2020.js'></script>
+		<script src='/assets/js/prism-svelte.js'></script>
 		<script src='/assets/js/parallax.min.js'></script>
     <script src="/assets/js/anime.min.js"></script>
     <script src="/assets/js/shoutouts.js"></script>
 		<script>
 			new Parallax(document.getElementById('parallax'));
+			var lazyLoadInstance = new LazyLoad({});
+			document.addEventListener("DOMContentLoaded", prismHighlight.highlight);
 		</script>
 		{% include google-analytics.html %}
 		<script async defer src='//unpkg.com/dexie'></script>

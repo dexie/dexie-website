@@ -123,7 +123,7 @@ prismStyle: 'vscode-dark'
   import dexieCloud from "dexie-cloud-addon";
 
   // Declare your DB
-  const db = new Dexie('mySyncedDB', {addons: [dexieCloud]});
+  const db = new Dexie('MySyncedDB', {addons: [dexieCloud]});
   db.version(1).stores({
     todoLists: '@id, title', // '@' = generated global ID
     todoItems: '@id, title, done, todoListId'
@@ -139,6 +139,7 @@ prismStyle: 'vscode-dark'
       'import dexieCloud from "dexie-cloud-addon";',
       "{addons: [dexieCloud]}",
       "@id",
+      "'MySyncedDB'",
       ///(\/\/.*)/g, // line comments
       /db\.cloud\.configure\(\{(.|\n)*\}\)\;/g
 

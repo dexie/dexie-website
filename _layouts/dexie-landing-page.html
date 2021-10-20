@@ -122,9 +122,9 @@ layout: dexie-frontpage-template
     Play with Dexie.js and Svelte in Codesandbox
   </a>
 </p>
-<p>
+<!-- <p>
   <a class='btn btn-success' href="/docs/liveQuery()">Learn about liveQuery() &raquo;</a>
-</p>
+</p> -->
 </div>
 <div class='col-md-6'>
   <div class="framework-logo react-logo">
@@ -166,22 +166,106 @@ layout: dexie-frontpage-template
       Play with Dexie.js and React in Codesandbox
     </a>
   </p>
-  <p>
+  <!-- <p>
     <a class='btn btn-success' href="/docs/dexie-react-hooks/useLiveQuery()">Learn about useLiveQuery() &raquo;</a>
-  </p>
+  </p> -->
 
       </div>
 	</div>
+
+
+<div class='row'>
+  <div class='col-md-6'>
+    <div class="framework-logo">
+
+      <img src="assets/images/Vue.svg" />
+      Vue
+
+    </div>
+    <pre><code class="language-html">  &lt;template>
+    &lt;h2>Friends&lt;/h2>
+    &lt;ul>
+      &lt;li v-for="friend in friends" :key="friend.id">
+        &#x7B;&#x7B; friend.name }}, &#x7B;&#x7B; friend.age }}
+      &lt;/li>
+    &lt;/ul>  
+  &lt;/template>
+  &lt;script>
+    import { liveQuery } from "dexie";
+    import { db } from "../db";
+    import { useObservable } from "@vueuse/rxjs";
+    
+    export default {
+      name: "FriendList",
+      setup() {
+        return {
+          friends: useObservable(
+            liveQuery(() => db.friends.toArray())
+          )
+        };
+      }
+    };
+  &lt;/script>
+</code></pre>
+<p>
+<a target="dexiesvelte" href="https://codesandbox.io/s/vue-dexie-livequery-87exj?file=/src/components/DBItems.vue">
+  Play with Dexie.js and Vue in Codesandbox
+</a>
+</p>
 </div>
+<div class='col-md-6'>
+<div class="framework-logo react-logo">
+
+  <img src="assets/images/angular.svg" />
+  Angular
+
+</div>
+
+<pre><code class="language-typescript">  import { Component } from '@angular/core';
+  import { liveQuery } from 'dexie';
+  import { db } from '../db';
+  
+  @Component({
+    selector: 'friendlist',
+    template: `
+      &lt;h2>Friends&lt;/h2>
+      &lt;ul>
+        &lt;li *ngFor="let friend of friends$ | async">
+          &#x7B;&#x7B; friend.name }}, &#x7B;&#x7B; friend.age }}
+        &lt;/li>
+      &lt;/ul>
+    `
+  })
+  export class FriendsComponent {
+    friends$ = liveQuery(() => this.listFriends());
+  
+    async listFriends() {
+      return await db.friends.toArray();
+    }
+  }
+
+
+</code></pre>
+<p>
+  <a target="dexiereact" href="https://stackblitz.com/edit/angular-ivy-4666q1?file=src%2Fapp%2Fitemlist.component.ts">
+    Play with Dexie.js in Angular on Stackblitz
+  </a>
+</p>
+
+    </div>
+</div>
+</div>
+</div>
+
 
 <div class='container'>
   <hr>
 </div>
 
 <div class='container'>
-  <h1 style="font-size: 50pt; margin: 60px; text-align: center;">Sync</h1>
+  <h1 style="font-size: 50pt; margin: 60px; text-align: center;">Live Sync</h1>
 </div>
-<div class='container white-text' style="position: relative;">
+<div class='container white-text' style="position: relative;">  
   <div class="video-parent" style="border-radius: 14px; box-shadow: 0 0 2px 4px #64b;">
     <video
       class="lazy banner-video"
@@ -215,10 +299,9 @@ layout: dexie-frontpage-template
   const db = new Dexie('MySyncedDB', {addons: [dexieCloud]});
 
   db.version(1).stores({
-    friends: '@id, name, age', // '@' = generated global ID
+    friends: '@id, name, age'
   });
 
-  // Connect to cloud database
   db.cloud.configure({
     databaseUrl: "https://&lt;yourdatabase&gt;.dexie.cloud",
     requireAuth: true
@@ -242,8 +325,10 @@ layout: dexie-frontpage-template
   <a class='btn btn-primary' id="land-sync-pricing-btn" href="/cloud/pricing">Pricing &raquo;</a>
 </p>
 <br/>
+
 </div>
 
+<br/>
 <div class='container'>
 	<hr/>
 </div>

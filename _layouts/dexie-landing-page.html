@@ -14,9 +14,11 @@ layout: dexie-frontpage-template
 			<p><a class='btn btn-success' href='/docs/' role='button'>Check it out &raquo;</a></p>
 		</div>
 		<div class='col-md-4'>
-			<h2>Performant</h2>
-			<p>Dexie has near-native performance. Its bulk operations utilize an often-overlooked feature in IndexedDB, ignoring success callbacks when possible.</p>
-			<p><a class='btn btn-success' href='https://jsfiddle.net/dfahlander/xf2zrL4p' role='button'>See it in action &raquo;</a></p>
+			<h2>Reactive</h2>
+      <p>Dexie integrates well with frontend frameworks. Observe queries with less boilerplate. And no worry about performance - only what you query is being observed.
+      <!-- </p>
+			<p>Dexie's ability to <b><a href="/docs/liveQuery()">turn async functions into Observables</a></b> makes it possible to reuse and compose promise based queries and monitor their results in realtime.</p>-->
+			<p><a class='btn btn-success' href="#live-queries" role='button'>Live Queries &raquo;</a></p>
 		</div>
 	</div>
 </div>
@@ -77,11 +79,58 @@ layout: dexie-frontpage-template
 
 <div class="container" style="text-align: center;">
 	<hr>
-  <h1 style="font-size: 50pt; margin: 60px;">Live Queries</h1>
+  <h1 style="font-size: 50pt; margin: 60px;" id="live-queries">Live Queries</h1>
 </div>
 
 <div class='container'>
 	<div class='row'>
+<div class='col-md-6'>
+  <div class="framework-logo react-logo">
+
+    <img src="assets/images/React-icon.svg" />
+    React
+
+  </div>
+
+  <pre><code class="language-jsx">  import { useLiveQuery } from "dexie-react-hooks";
+  import { db } from "./db";
+
+  export function FriendsComponent () {
+    const friends = useLiveQuery(async () => {
+      //
+      // Query the DB using our promise based API.
+      // The end result will magically become
+      // observable.
+      //
+      return await db.friends
+        .where("age")
+        .between(18, 65)
+        .toArray();
+    });
+
+    return &lt;>
+      &lt;h2>Friends&lt;/h2>
+      &lt;ul&gt;
+        {
+          friends?.map(friend =>
+            &lt;li key={friend.id}&gt;
+              {friend.name}, {friend.age}
+            &lt;/li&gt;
+          )
+        }
+      &lt;/ul&gt;
+    &lt;/>;
+  }</code></pre>
+  <p>
+    <a target="dexiereact" href="https://codesandbox.io/s/empty-sky-lnv0q?file=/src/components/FriendList.tsx">
+      Play with Dexie.js and React in Codesandbox
+    </a>
+  </p>
+  <!-- <p>
+    <a class='btn btn-success' href="/docs/dexie-react-hooks/useLiveQuery()">Learn about useLiveQuery() &raquo;</a>
+  </p> -->
+
+      </div>
     <div class='col-md-6'>
       <div class="framework-logo">
 
@@ -93,27 +142,29 @@ layout: dexie-frontpage-template
     import { liveQuery } from "dexie";
     import { db } from "./db";
     
-    export let minAge;
-    export let maxAge;
-
-    //
-    // Observe a query
-    //
-    $: friends = liveQuery(() =>
-      db.friends
+    let friends = liveQuery(async () => {
+      //
+      // Query the DB using our promise based API.
+      // The end result will magically become
+      // observable.
+      //
+      return await db.friends
         .where("age")
-        .between(minAge, maxAge)
-        .toArray()
-    );
+        .between(18, 65)
+        .toArray();
+    });
   &lt;/script>
-  
-  {#if $friends}
+
+  &lt;div>
+    &lt;h2>Friends&lt;/h2>
     &lt;ul&gt;
-      {#each $friends as friend (friend.id)}
-        &lt;li&gt;{friend.name}, {friend.age}&lt;/li&gt;
-      {/each}
+    {#each ($friends || []) as friend (friend.id)}
+      &lt;li&gt;{friend.name}, {friend.age}&lt;/li&gt;
+    {/each}
     &lt;/ul&gt;
-  {/if}
+  &lt;/div>
+
+
 
 
 </code></pre>
@@ -126,52 +177,7 @@ layout: dexie-frontpage-template
   <a class='btn btn-success' href="/docs/liveQuery()">Learn about liveQuery() &raquo;</a>
 </p> -->
 </div>
-<div class='col-md-6'>
-  <div class="framework-logo react-logo">
-
-    <img src="assets/images/React-icon.svg" />
-    React
-
-  </div>
-
-  <pre><code class="language-jsx">  import { useLiveQuery } from "dexie-react-hooks";
-  import { db } from "./db";
-
-  export function FriendsComponent ({minAge, maxAge}) {
-    //
-    // Observe a query
-    //
-    const friends = useLiveQuery(() =>
-      db.friends
-        .where("age")
-        .between(minAge, maxAge)
-        .toArray(),
-      [minAge, maxAge]
-    );
-
-    return (
-      &lt;ul&gt;
-        {
-          friends?.map(friend =>
-            &lt;li key={friend.id}&gt;
-              {friend.name}, {friend.age}
-            &lt;/li&gt;
-          )
-        }
-      &lt;/ul&gt;
-    );
-  }</code></pre>
-  <p>
-    <a target="dexiereact" href="https://codesandbox.io/s/empty-sky-lnv0q?file=/src/components/FriendList.tsx">
-      Play with Dexie.js and React in Codesandbox
-    </a>
-  </p>
-  <!-- <p>
-    <a class='btn btn-success' href="/docs/dexie-react-hooks/useLiveQuery()">Learn about useLiveQuery() &raquo;</a>
-  </p> -->
-
-      </div>
-	</div>
+</div>
 
 
 <div class='row'>
@@ -200,15 +206,24 @@ layout: dexie-frontpage-template
       setup() {
         return {
           friends: useObservable(
-            liveQuery(() => db.friends.toArray())
+            liveQuery(async () => {
+              //
+              // Query the DB using our promise based API.
+              // The end result will magically become
+              // observable.
+              //
+              return await db.friends
+                .where("age")
+                .between(18, 65)
+                .toArray();      
+            })
           )
         };
       }
     };
-  &lt;/script>
-</code></pre>
+  &lt;/script></code></pre>
 <p>
-<a target="dexiesvelte" href="https://codesandbox.io/s/vue-dexie-livequery-87exj?file=/src/components/DBItems.vue">
+<a target="dexievue" href="https://codesandbox.io/s/vue-dexie-livequery-87exj?file=/src/components/DBItems.vue">
   Play with Dexie.js and Vue in Codesandbox
 </a>
 </p>
@@ -240,14 +255,24 @@ layout: dexie-frontpage-template
     friends$ = liveQuery(() => this.listFriends());
   
     async listFriends() {
-      return await db.friends.toArray();
+      //
+      // Query the DB using our promise based API.
+      // The end result will magically become
+      // observable.
+      //
+      return await db.friends
+        .where("age")
+        .between(18, 65)
+        .toArray();
     }
   }
 
 
+
+
 </code></pre>
 <p>
-  <a target="dexiereact" href="https://stackblitz.com/edit/angular-ivy-4666q1?file=src%2Fapp%2Fitemlist.component.ts">
+  <a target="dexieng" href="https://stackblitz.com/edit/angular-ivy-4666q1?file=src%2Fapp%2Fitemlist.component.ts">
     Play with Dexie.js in Angular on Stackblitz
   </a>
 </p>
@@ -263,7 +288,13 @@ layout: dexie-frontpage-template
 </div>
 
 <div class='container'>
-  <h1 style="font-size: 50pt; margin: 60px; text-align: center;">Live Sync</h1>
+  <div style="margin: 60px 20px 60px 20px; width: 100%;">
+    <div style="width: 380px; margin: 0 auto; display: table; text-align: center;">
+  <h1 style="font-size: 50pt;">
+    Sync
+  </h1>
+</div>
+</div>
 </div>
 <div class='container white-text' style="position: relative;">  
   <div class="video-parent" style="border-radius: 14px; box-shadow: 0 0 2px 4px #64b;">

@@ -5,7 +5,9 @@ layout: dexie-frontpage-template
 	<div class='row'>
 		<div class='col-md-4'>
 			<h2>Reactive (Since 4.0)</h2>
-      <p>Dexie integrates well with frontend frameworks. Observe queries with less boilerplate. And no worry about performance - only what you query is being observed.
+      <p>
+        Dexie 4.0 integrates better with front-end frameworks.
+        Query the db without boilerplate and let your components mirror the database in real time.
       <!-- </p>
 			<p>Dexie's ability to <b><a href="/docs/liveQuery()">turn async functions into Observables</a></b> makes it possible to reuse and compose promise based queries and monitor their results in realtime.</p>-->
 			<p><a class='btn btn-success' href="#live-queries" role='button'>Show me &raquo;</a></p>
@@ -95,7 +97,7 @@ layout: dexie-frontpage-template
   <pre><code class="language-jsx">  import { useLiveQuery } from "dexie-react-hooks";
   import { db } from "./db";
 
-  export function FriendsComponent () {
+  export function FriendList () {
     const friends = useLiveQuery(async () => {
       //
       // Query the DB using our promise based API.
@@ -252,23 +254,23 @@ layout: dexie-frontpage-template
     `
   })
   export class FriendsComponent {
-    friends$ = liveQuery(() => this.listFriends());
-  
-    async listFriends() {
-      //
-      // Query the DB using our promise based API.
-      // The end result will magically become
-      // observable.
-      //
-      return await db.friends
-        .where("age")
-        .between(18, 65)
-        .toArray();
-    }
+    friends$ = liveQuery(() => listFriends());
+  }
+
+  async function listFriends() {
+    //
+    // Query the DB using our promise based API.
+    // The end result will magically become
+    // observable.
+    //
+    return await db.friends
+      .where("age")
+      .between(18, 65)
+      .toArray();
   }
 
 
-
+  
 
 </code></pre>
 <p>

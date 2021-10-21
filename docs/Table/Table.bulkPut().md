@@ -69,7 +69,7 @@ db.version(1).stores({
 });
 var drops = [];
 for (var i=0;i<100000;++i) {
-    drops.push({id: i, position: [Math.random(),Math.random(),Math.random()]}),
+    drops.push({id: i, position: [Math.random(),Math.random(),Math.random()]})
 }
 db.raindrops.bulkPut(drops).then(function(lastKey) {
     console.log("Done putting 100,000 raindrops all over the place");

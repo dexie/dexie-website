@@ -76,6 +76,15 @@
 			new Parallax(document.getElementById('parallax'));
 			var lazyLoadInstance = new LazyLoad({});
 			document.addEventListener("DOMContentLoaded", prismHighlight.highlight);
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
+        });
+      });
 		</script>
 		{% include google-analytics.html %}
 		<script async defer src='//unpkg.com/dexie'></script>

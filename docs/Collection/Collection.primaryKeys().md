@@ -48,7 +48,6 @@ If operation fails, returned promise will reject, calling any [Promise.catch()](
 ### Sample
 
 ```javascript
-import { RangeSet } from "dexie"; // Available in Dexie 4.0
 
 db.transaction('r', db.friends, async () => {
   //

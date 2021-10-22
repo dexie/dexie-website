@@ -51,7 +51,7 @@ If operation fails, returned promise will reject, calling any [Promise.catch()](
 
 db.transaction('r', db.friends, async () => {
   //
-  // A simple logical AND operation based on multiple indices.
+  // A simple logical AND operation based on multiple indexes.
   // This sample assumes your primary keys (ids) are strings or numbers
   // as Set won't work for arrays or Dates.
   //

@@ -45,7 +45,7 @@ If callback is specified and operation succeeds, given callback will be called a
 
 If operation fails, returned promise will reject, calling any [Promise.catch()](/docs/Promise/Promise.catch()) callback.
 
-### Sample
+### Sample: AND Operation
 
 ```javascript
 
@@ -55,19 +55,31 @@ db.transaction('r', db.friends, async () => {
   // This sample assumes your primary keys (ids) are strings or numbers
   // as Set won't work for arrays or Dates.
   //
+  // The last criteria will define the order. To change which criteria to define the order,
+  // swap the criterias to have the ordering criteria last.
+  //
+  // To order by an index that is not part of the critera, use [Table.orderBy()](https://dexie.org/docs/Table/Table.orderBy())
+  // as if it was a criteria (for example `db.friends.orderBy('shoeSize').primaryKeys()`) and put it last.
+  //
 
-  // Search for friends where firstName = "Foo" and lastName = "Bar"
+  // Search for friends where firstName starts with "Ali", lastName
+  // starts with "Svens" and age is in the range 18..65.
   const results = await Promise.all([
   
     db.friends
       .where('firstName')
-      .anyOf(['Alice', 'Bob'])
+      .startsWith('Ali')
       .primaryKeys(),
       
     db.friends
       .where('lastName')
-      .anyOf(['Svensson', 'Ericsson'])
+      .startsWith('Svens')
       .primaryKeys(),
+      
+    db.friends
+      .where('age')
+      .between(18, 65)
+      .primaryKeys()
       
     //... (more operands to AND with)
   ]);

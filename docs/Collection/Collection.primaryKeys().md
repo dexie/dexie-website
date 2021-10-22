@@ -84,7 +84,7 @@ db.transaction('r', db.friends, async () => {
     //... (more operands to AND with)
   ]);
   
-  // Ok, so now we have all primary keys for both queries stored in separate results
+  // Ok, so now we have all primary keys from all queries stored in separate results
 
   // Find all common primary keys
   const intersection = results.reduce((ids1, ids2) => {

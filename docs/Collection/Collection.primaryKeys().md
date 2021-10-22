@@ -70,7 +70,7 @@ db.transaction('r', db.friends, async () => {
       .anyOfIgnoreCase(['Svensson', 'Ericsson'])
       .primaryKeys(),
       
-    ... (more operands to AND with)
+    //... (more operands to AND with)
   ]);
   
   // Ok, so now we have all primary keys for both queries stored in separate results

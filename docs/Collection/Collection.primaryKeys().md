@@ -48,24 +48,40 @@ If operation fails, returned promise will reject, calling any [Promise.catch()](
 ### Sample
 
 ```javascript
+import { RangeSet } from "dexie"; // Available in Dexie 4.0
+
 db.transaction('r', db.friends, async () => {
   //
   // A simple logical AND operation based on multiple indices.
-  // Note: This sample is just for showing an example using primaryKeys() method.
-  // In real life, it would be better to use a compound index
-  // of [firstName+lastName] to resolve this kind of query!
+  // This sample assumes your primary keys (ids) are strings or numbers
+  // as Set won't work for arrays or Dates.
   //
 
-  // Search for friends where firstName = "hillary" and lastName = "clinton"
-  const keys = await Promise.all([
-    db.friends.where('firstName').equalsIgnoreCase('hillary').primaryKeys(),
-    db.friends.where('lastName').equalsIgnoreCase('clinton').primaryKeys()
+  // Search for friends where firstName = "Foo" and lastName = "Bar"
+  const results = await Promise.all([
+  
+    db.friends
+      .where('firstName')
+      .anyOfIgnoreCase(['Alice', 'Bob'])
+      .primaryKeys(ids => new Set(ids)),
+      
+    db.friends
+      .where('lastName')
+      .anyOfIgnoreCase(['Svensson', 'Ericsson'])
+      .primaryKeys(),
+      
+    ... (more operands to AND with)
   ]);
+  
+  // Ok, so now we have all primary keys for both queries stored in separate results
 
   // Find all common primary keys
-  var intersection = keys[0].filter(key => keys[1].indexOf(key) !== -1);
+  const intersection = results.reduce((ids1, ids2) => {
+    const set = new Set(ids1);
+    return ids2.filter(id => set.has(id));
+  });
 
   // At last look up the actual objects from these primary keys:
-  return await db.friends.where(':id').anyOf(intersection).toArray();
+  return await db.friends.bulkGet(intersection);
 });
 ```

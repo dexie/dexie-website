@@ -45,7 +45,7 @@ If callback is specified and operation succeeds, given callback will be called a
 
 If operation fails, returned promise will reject, calling any [Promise.catch()](/docs/Promise/Promise.catch()) callback.
 
-### Sample: AND Operation
+### Sample
 
 ```javascript
 

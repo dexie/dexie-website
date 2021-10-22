@@ -63,7 +63,7 @@ db.transaction('r', db.friends, async () => {
     db.friends
       .where('firstName')
       .anyOf(['Alice', 'Bob'])
-      .primaryKeys(ids => new Set(ids)),
+      .primaryKeys(),
       
     db.friends
       .where('lastName')

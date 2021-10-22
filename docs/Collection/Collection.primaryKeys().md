@@ -62,12 +62,12 @@ db.transaction('r', db.friends, async () => {
   
     db.friends
       .where('firstName')
-      .anyOfIgnoreCase(['Alice', 'Bob'])
+      .anyOf(['Alice', 'Bob'])
       .primaryKeys(ids => new Set(ids)),
       
     db.friends
       .where('lastName')
-      .anyOfIgnoreCase(['Svensson', 'Ericsson'])
+      .anyOf(['Svensson', 'Ericsson'])
       .primaryKeys(),
       
     //... (more operands to AND with)

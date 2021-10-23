@@ -2,8 +2,32 @@
 layout: docs
 title: 'Deprecations'
 ---
+This page contains all historical deprecations and breaking changes for Dexie.js.
 
-*NOTICE: The deprecation of Transaction.table() and Transaction[table] is taken back (un-deprecated) and will be continously maintained in 2.0.0-beta.5 and forward. There are no plans to ever deprecated them.*
+<br>
+# Breaking Changes in Dexie 3.0
+<hr>
+
+
+## [Transaction.tables](/docs/Transaction/Transaction#tables--object)
+Deprecated since v1.5.0
+
+Obsolete in: v3.0.0
+
+Reason: Transaction-bound tables are created runtime using trans.table(tableName) or property getters for trans[tableName]. The Transaction constructor will no longer create those instances in advance. This is to optimize the Transaction constructor. Because of that, we cannot provide a tables property containing eagerly instanciated Table instances.
+
+Workaround: See code snipped below:
+
+```javascript
+trans.storeNames.map(name => trans.table(name));
+```
+
+Note: The workaround returns Array<Table> whilst Transaction.tables property contained a map between
+table names and instances.
+
+<br>
+# Breaking Changes in Dexie 2.0
+<hr>
 
 ## [Dexie.on.error / db.on('error')](/docs/Dexie/Dexie.on.error)
 
@@ -42,22 +66,6 @@ Reason: It's just a rarely used sugar for trans.on('complete', callback). Was ne
 
 Workaround: Use [trans.on('complete', callback)](/docs/Transaction/Transaction.on.complete)
 
-## [Transaction.tables](/docs/Transaction/Transaction#tables--object)
-Deprecated since v1.5.0
-
-Will go obsolete in: v3.0.0
-
-Reason: Transaction-bound tables are created runtime using trans.table(tableName) or property getters for trans[tableName]. The Transaction constructor will no longer create those instances in advance. This is to optimize the Transaction constructor. Because of that, we cannot provide a tables property containing eagerly instanciated Table instances.
-
-Workaround: See code snipped below:
-
-```javascript
-trans.storeNames.map(name => trans.table(name));
-```
-
-Note: The workaround returns Array<Table> whilst Transaction.tables property contained a map between
-table names and instances.
-
 ## WriteableTable and WriteableCollection
 
 Obsolete since: v2.0.0
@@ -74,3 +82,5 @@ Reason: According to best-practices of IndexedDBShim, it should auto-invoke by i
 
 Workaround: If you just want previous behavior, call [shimIndexedDB.__useShim();](https://www.npmjs.com/package/indexeddbshim#shimindexeddb__useshim) before including dexie.
 
+
+*NOTICE: The deprecation of Transaction.table() and Transaction[table] is taken back (un-deprecated) and will be continously maintained in 2.0.0-beta.5 and forward. There are no plans to ever deprecated them.*

@@ -11,9 +11,9 @@ title: 'Get started with Dexie in React'
 
 Dexie >= v3.2 comes with reactivity built-in.
 
-In version 3.2 we've introduced **live queries** - queries that observes the result and make your component mirror the data in real time. If a change is made (by the app itself or from an external tab or worker), a binary range tree algorithms will efficiently detect whether those changes would affect your query and, if so, trigger a re-run of your query and re-render the view. [Here's a simple ToDo app example that demonstrates it](https://stackblitz.com/edit/dexie-todo-list?file=components/TodoListView.tsx).
+In version 3.2 we've introduced **live queries** - queries that observes the result and make your component mirror the data in real time. If a change is made (by the app itself or from an external tab or worker), a binary range tree algorithms will efficiently detect whether those changes would affect your query and, if so, trigger a re-run of your query and re-render the view. [Here's a simple ToDo app example that demonstrates it](https://dexie-todo-list.stackblitz.io).
 
-[useLiveQuery()](/docs/dexie-react-hooks/useLiveQuery()) can be explained like this: **It observes the result of a promise-returning function that queries Dexie** *(In contrast to just execute it imperatively)*. You can compose an async function that performs several queries and computes a final result. Maybe you already have some functions you wrote for being called imperatively. Calling them from within the scope of the callback passed to [useLiveQuery()](/docs/dexie-react-hooks/useLiveQuery()) will turn your imperative async functions into reactive observable results.
+[useLiveQuery()](/docs/dexie-react-hooks/useLiveQuery()) can be explained like this: **It observes the result of a promise-returning function that queries Dexie** *(In contrast to just execute it imperatively)*. You can compose an async function that queries Dexie (in single or several queries) and computes a final result. Maybe you already have some functions you wrote for being called imperatively. Calling them from within the scope of the callback passed to [useLiveQuery()](/docs/dexie-react-hooks/useLiveQuery()) will turn your imperative async functions into an observable query.
 
 # 1. Create a React project
 
@@ -27,24 +27,28 @@ For the impatient one, use [CodeSandbox](https://codesandbox.io) to create a Rea
 
 # 2. Install dependencies
 
+#### yarn
 ```
 yarn add dexie
 yarn add dexie-react-hooks
 ```
 
-*or*
+#### npm
 
 ```
 npm install dexie
 npm install dexie-react-hooks
 ```
 
-*In CodeSandbox you don't write these commands but simply add the dependencies `dexie` and `dexie-react-hooks` in the left part of the page.*
+#### CodeSandbox
 
+<img
+  src="/assets/images/CodeSandBoxDeps.png"
+  style="width: 200px;margin: 0 10px 0 0px;opacity: 0.7;border-radius: 5px;">
 
 # 3. Create a file `db.js` (or `db.ts`)
 
-Applications typically have one single Dexie instance declared in its own module. This is where you declare which tables you need and how each table shall be indexed. A Dexie instance is a singleton throughout the application - you do not need to create it on demand. Export the resulting `db` instance from your module so that components or other modules can use it to query or write to the database.
+Applications typically have one single Dexie instance declared as its own module. This is where you declare which tables you need and how each table shall be indexed. A Dexie instance is a singleton throughout the application - you do not need to create it on demand. Export the resulting `db` instance from your module so that components or other modules can use it to query or write to the database.
 
 ```ts
 // db.js
@@ -160,7 +164,8 @@ export function FriendList() {
 
 Notice two things here:
 
-1. The funcion passed to [useLiveQuery()](/docs/dexie-react-hooks/useLiveQuery()) queries dexie for all friends using [toArray()](/docs/Collection/Collection.toArray()).
+1. The func
+ion passed to [useLiveQuery()](/docs/dexie-react-hooks/useLiveQuery()) queries dexie for all friends using [toArray()](/docs/Collection/Collection.toArray()).
 2. The result will be undefined on initial render - which explains why we refer it as `friends?` rather than `friends`. The reason for this is the asynchronic nature of IndexedDB. Just be aware of this fact and make sure your rendering code handles it.
 
 
@@ -238,7 +243,7 @@ Open your app (or for example [this one](https://dexie-todo-list.stackblitz.io))
 
 ## Observe joined data
 
-Do something similar to [this sample](/docs/API-Reference#joining) and observe the result of a function similar to `getBandsStartingWithA()` (a function that compose a result from multiple related queries)). Notice that any change that affects any of the queries will make the component rerender, including the related data.
+Do something similar to [this sample](/docs/API-Reference#joining) and observe the result of a function similar to `getBandsStartingWithA()` (a function that compose a result from multiple related queries). Notice that any change that affects any of the queries will make the component rerender, including the related data.
 
 <hr/>
 # More Samples and Resources

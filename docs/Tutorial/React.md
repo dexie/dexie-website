@@ -172,6 +172,7 @@ ion passed to [useLiveQuery()](/docs/dexie-react-hooks/useLiveQuery()) queries d
 # 6. Pass some query params
 
 Let's improve the FriendList component and allow a parent component to pass some props that we use from within the query.
+This time let's also use async / await (for pedagogical reasons only - it makes it simple to extend the function to do more queries if needed).
 
 ```tsx
 export function FriendList({minAge, maxAge}) {

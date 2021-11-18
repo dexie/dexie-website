@@ -9,7 +9,7 @@ title: 'Get started with Dexie in React'
   <img src="/assets/images/logo-dexie-black.svg" style="width: 200px;">    
 </div>
 
-Dexie >= v3.2 comes with reactivity built-in.
+Dexie v3.2 and later comes with reactivity built-in.
 
 In version 3.2 I've introduced **live queries** - queries that observes the result and make your component mirror the data in real time. If a change is made (by the app itself or from an external tab or worker), a binary range tree algorithms will efficiently detect whether those changes would affect your query and, if so, trigger a re-run of your query and re-render the view. [Here's a simple ToDo app example that demonstrates it](https://dexie-todo-list.stackblitz.io).
 

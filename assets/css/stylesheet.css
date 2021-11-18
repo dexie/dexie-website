@@ -536,7 +536,7 @@ div.framework-logo img {
 	margin-top: -4px;
 }
 
-div.react-logo {
+.react-logo {
 	font-family: Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif
 }
 div.react-logo img {
@@ -581,3 +581,28 @@ video.banner-video {
 	transform-origin: 50% 30%;
 }
 */
+
+a.clickable-square {
+	padding: 10px;
+	margin: 5px 0;
+	opacity: 0.7;
+	border-radius: 5px;
+	transform: scale(0.9);
+	transition: all 50ms;
+	transform-origin: 50%;
+	background-image: linear-gradient( #aaa, #eee);
+	min-height: 150px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #444;
+	border: 1px solid rgba(0,0,0,0.1);
+}
+
+a.clickable-square:hover {
+	transform: scale(1);
+	opacity: 1;
+	border: 1px solid rgba(0,0,0,0.2);
+	text-decoration: none;
+}

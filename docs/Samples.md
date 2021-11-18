@@ -1,27 +1,87 @@
 ---
-layout: docs
+layout: docs-freestyle
 title: 'Samples'
 ---
 
-#### React
+<div class="row">
+    <div class="col-md-6">
+    <a class="clickable-square react-logo"
+        href="https://stackblitz.com/edit/dexie-todo-list?file=components/TodoListView.tsx"
+        style="background-image: linear-gradient(#77a, #aaa);">
 
-* [Source](https://github.com/dfahlander/dexie-todo-list)
-* [Run in browser](https://dexie-todo-list.stackblitz.io)
-* [Play with it on stackblitz](https://stackblitz.com/edit/dexie-todo-list?file=components/TodoListView.tsx)
-* **[React hooks for dexie@3.1](https://medium.com/dexie-js/awesome-react-integration-coming-f212c2273d05)** *(Blog article)*
-* [useLiveQuery()](/docs/dexie-react-hooks/useLiveQuery()) *(docs)*
+        <img src="/assets/images/React-icon.svg" style="width:75px;">
+        <span style="font-size: 22pt;">React</span>
+    </a>
+    </div>
+    <div class="col-md-6">
+        <a class="clickable-square" href="https://codesandbox.io/s/svelte-with-dexie-livequery-2n8bd?file=/App.svelte"
+        style="background-image: linear-gradient(#977, #aaa);">
+            <div class="framework-logo" style="margin: 0;">
+                <img src="/assets/images/Svelte_Logo.svg" />
+                Svelte
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6">
+        <a class="clickable-square" href="https://codesandbox.io/s/vue-dexie-livequery-87exj?file=/src/components/DBItems.vue"
+        style="background-image: linear-gradient(#7a7, #aaa);">
+            <div class="framework-logo" style="margin: 0;">
 
-#### Svelte
-Dexie's live queries are compatible with Svelte's [Store contract](https://svelte.dev/docs#4_Prefix_stores_with_$_to_access_their_values).
+            <img src="/assets/images/vue.svg" />
+            Vue
 
-* [Codesandbox sample](https://codesandbox.io/s/svelte-with-dexie-livequery-2n8bd?file=/App.svelte)
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6">
+        <a class="clickable-square" href="https://stackblitz.com/edit/angular-ivy-4666q1?file=src%2Fapp%2Fapp.module.ts"
+            style="background-image: linear-gradient(#a77, #aaa);">
+            <div class="framework-logo react-logo" style="margin: 0;">
 
-#### Vue
+            <img src="/assets/images/angular.svg" />
+            Angular
 
-* [Codesandbox sample](https://codesandbox.io/s/friendly-tereshkova-b6dfi?file=/src/components/DBItems.vue)
+            </div>
+        </a>
+    </div>
+</div>
+<hr/>
+<div class="row">
+    <div class="col-md-12">
+        <a class="clickable-square" href="https://jsfiddle.net/3tf5r0cu/"
+            style="background-image: linear-gradient(#aac, #ddf);">
+            <div class="framework-logo" style="margin: 0;">
+                Vanilla JS
+            </div>
+        </a>
+    </div>
+</div>
+<div class="row">
 
-#### Angular
-* [Stackblitz sample](https://stackblitz.com/edit/angular-ivy-4666q1?file=src/app/app.component.html)
+    <div class="col-md-12">
+        <a class="clickable-square" href="http://localhost:4000/cloud/docs/access-control#example-a-simple-project-management-model"
+        style="background-image: linear-gradient( #5471e9, #1e3fd3, #4b965f);">
+            <!-- <div class="video-parent" style="overflow:hidden; border-radius: 5px;">
+                <video
+                    class="banner-video"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                >
+                <source
+                    src="https://dexie.blob.core.windows.net/dexie/Galaxy.mp4"
+                    type="video/mp4">
+                </video>
+            </div> -->
+            <div class="framework-logo" style="margin: 0; position: relative; color: #fff;">
+                <img src="/assets/images/dexie-logo-icon.svg" style="position: absolute;left: -10px;top: 11px;width: 27px;">Dexie Cloud
+            </div>
+        </a>
+    </div>
+</div>
+
+<hr/>
 
 #### Dexie with Typescript
 
@@ -60,3 +120,4 @@ Dexie's live queries are compatible with Svelte's [Store contract](https://svelt
 * Open existing DB: [https://jsfiddle.net/dfahlander/b8Levamm/](https://jsfiddle.net/dfahlander/b8Levamm/)
 * Storing Binary Data: [https://jsfiddle.net/dfahlander/kgsbbhca/](https://jsfiddle.net/dfahlander/kgsbbhca/)
 * Preserving custom types using [typeson](https://www.npmjs.com/package/typeson): [https://jsfiddle.net/dfahlander/qacL14tu/](https://jsfiddle.net/dfahlander/qacL14tu/)
+

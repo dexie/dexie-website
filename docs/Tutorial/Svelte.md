@@ -11,9 +11,9 @@ title: 'Get started with Dexie in Svelte'
 
 Dexie v3.2 and later comes with reactivity built-in.
 
-In version 3.2 I've introduced **live queries** - queries that observes the result and make your component mirror the data in real time. If a change is made (by the app itself or from an external tab or worker), a binary range tree algorithms will efficiently detect whether those changes would affect your query and, if so, trigger a re-run of your query and re-render the view. [Here's a sample app demonstrates it](https://2n8bd.csb.app/).
+In version 3.2 we've introduced **live queries** - queries that observes the result and make your component mirror the data in real time. If a change is made (by the app itself or from an external tab or worker), a binary range tree algorithms will efficiently detect whether those changes would affect your query and, if so, trigger a re-run of your query and re-render the view. [Here's a sample app demonstrates it](https://2n8bd.csb.app/).
 
-[liveQuery()](/docs/liveQuery()) can be explained like this: **It observes the result of a promise-returning function that queries Dexie** *(In contrast to just execute it imperatively)*. It is very composable as the only thing you have to do is to write normal async functions that queries Dexie (in single or several queries) and compute a final result. Maybe you already have some functions you wrote long time ago. Calling them from within the scope of the callback passed to [liveQuery()](/docs/liveQuery()) will turn your imperative async functions into an Observable, which also complies with the Svelte Store specification.
+[liveQuery()](/docs/liveQuery()) can be explained like this: **It observes the result of a promise-returning function that queries Dexie** *(In contrast to just execute it imperatively)*. It is very composable as the only thing you have to do is to write normal async functions that queries Dexie in various ways and compute a final result. Maybe you already have some functions you wrote long time ago. Calling them from within the scope of the callback passed to [liveQuery()](/docs/liveQuery()) will turn your imperative async functions into an Observable, which also complies with the Svelte Store specification.
 
 # 1. Create a Svelte project
 

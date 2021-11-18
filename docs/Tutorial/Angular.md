@@ -81,15 +81,15 @@ export const db = new AppDB();
 
 ```
 
-# 4. Add the app component
+# 4. Turn App component into an Offline ToDo app
 
-In this sample we will add a two components that builds up our ToDo list application. For simplicity, we are letting our components talk directly to the db here. In a real application you might prefer to put the database action and queries within dedicated services.
+In this sample we will use two components that builds up our ToDo application. For simplicity, we are letting our components talk directly to the db here. In a real application you might prefer to put the database action and queries via services.
 
 ```ts
 // app.component.ts
 import { Component, VERSION } from '@angular/core';
 import { liveQuery } from 'dexie';
-import { db, TodoList } from '../db/db';
+import { db, TodoList } from '../db';
 
 @Component({
   selector: 'my-app',
@@ -133,13 +133,13 @@ export class AppComponent {
 
 ```
 
-# 5. Add an itemlist component
+# 5. Add the ItemList component
 
 ```ts
 // itemlist.component.ts
 import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { liveQuery } from 'dexie';
-import { db, Item, TodoItem, TodoList } from '../db/db';
+import { db, Item, TodoItem, TodoList } from '../db';
 
 @Component({
   selector: 'itemlist',
@@ -149,7 +149,9 @@ import { db, Item, TodoItem, TodoList } from '../db/db';
 export class ItemListComponent {
   @Input() todoList: TodoList;
   // Observe an arbritary query:
-  todoItems$ = liveQuery(() => this.listTodoItems());
+  todoItems$ = liveQuery(
+    () => this.listTodoItems()
+  ); 
 
   async listTodoItems() {
     return await db.todoItems
@@ -191,7 +193,7 @@ export class ItemListComponent {
 
 <!--
 
-    Rendering $items - a liveQuery property
+    Rendering todoItems$
 
 -->
 <ul>
@@ -223,6 +225,6 @@ export class AppModule {}
 
 [Click here to see this component live](https://angular-ivy-4666q1.stackblitz.io)
 
-[Click here to edit the source](https://stackblitz.com/edit/angular-ivy-4666q1?file=src%2Fapp%2Fapp.module.ts)
+[Click here to play around in the source](https://stackblitz.com/edit/angular-ivy-4666q1?file=src%2Fapp%2Fapp.module.ts)
 
 {% endraw %}

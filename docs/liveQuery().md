@@ -6,7 +6,7 @@ title: 'liveQuery()'
 
 # Remarks
 
-Observe a query
+Turns a Promise-returning function that queries Dexie into an Observable.
 
 # Syntax
 
@@ -22,195 +22,61 @@ export function liveQuery<T>(
 |------|------|
 | querier  | Function that returns a final result (Promise) |
 
-## Rules for the querier function
+# Example
 
-* Don't call asynchronic API:s from it except Dexie's APIs.
-* If you really need to call other async API's (such as webCrypto), wrap the returned promise through `Promise.resolve()` or [Dexie.waitFor()](Dexie/Dexie.waitFor()). There's an example later in this page on how to do that.
+```ts
+import Dexie, { liveQuery } from "dexie";
 
-# Usage in Svelte
+const db = new Dexie('MyDatabase');
+db.version(1).stores({
+  friends: '++id, name, age'
+});
 
-```tsx
-import React from "react";
-import Dexie from "dexie";
-import { useLiveQuery } from "dexie-react-hooks";
-import { db } from "./db";
+const friendsObservable = liveQuery (
+  () => db.friends
+    .where('age').above(75)
+    .toArray()
+);
 
-//
-// React component
-//
-export function OldFriendsList() {
-  const friends = useLiveQuery(
-    () => db.friends
-      .where('age')
-      .above(75)
-      .toArray()
-  );
-  
-  if (!friends) return null; // Still loading.
-  
-  return <ul>
-    { friends.map(friend =>
-        <li key={friend.id}>
-          {friend.name}, {friend.age}
-        </li>)
-    }
-  </ul>;
-}
+friendsObservable.subscribe({
+  next: result => console.log("Got result:", result),
+  error: error => console.error(error)
+});
 
+setTimeout(() => db.friends.add({name: "Magdalena", age: 54}), 1000);
 ```
 
-## Persistent State Manager
+Directly when this code executes, you will see a log entry in the console:
+```
+Got result: []
+```
+Then when callback to setTimeout() has added a friend (after a second), you will see it log the result:
+```
+Got result: [{name: "Magdalena", age: 54}]
+```
 
-The `useLiveQuery()` hook does not only load data - it *observes* the query for changes. This means that you can use Dexie as a persistent state manager in your React application. If you add, update or delete a friend using Dexie methods for that (such as [Table.add](../Table/Table.add()), [Table.update()](../Table/Table.update()), [Table.delete()](../Table/Table.delete()), ...etc), any component that observes the affected data will automatically rerender.
+## Rules for the querier function
+
+* Don't call non-Dexie asynchronous API:s directly from it.
+* If you really need to call a non-Dexie asynchronous API (such as webCrypto), wrap the returned promise through `Promise.resolve()` or [Dexie.waitFor()](Dexie/Dexie.waitFor()) before awaiting it.
+
+# Usage in Svelte and Angular
+
+[The Svelte Store Contract](https://svelte.dev/docs#Store_contract) is a subset of the [Ecmascript Observable specification draft](https://github.com/tc39/proposal-observable) which makes the return value of liveQuery() a fully valid Svelte Store by itself. Unlike React, where we need a the [useLiveQuery() hook](dexie-react-hoos/useLiveQuery()), Svelte apps can consume the plain liveQuery() directly.
+
+[Angular](https://angular.io/) supports Rx observables natively, and since Rx Observables also are compliant with the [Ecmascript Observable specification](https://github.com/tc39/proposal-observable), angular components also understands the return value from liveQuery() similarily.
+
+# Usage in React and Vue
+For React apps, we provide a hook, [useLiveQuery()](dexie-react-hoos/useLiveQuery()) that allows components to consume live queries.
+
+For Vue, we still haven't implemented any specific hook, but the observable returned from liveQuery() can be consumed using [useObservable()](https://vueuse.org/rxjs/useobservable/) from @vueuse/rxjs.
 
 ## Fine grained observation
 
 The observation is as fine-grained as it can possibly be - queries that would be affected by a modification will rerender - others not (with some exceptions - false positives happen but never false negatives). This is also true if your querier callback performs a series of awaited queries or multiple in parallell using Promise.all(). It can even contain if-statements or other conditional paths within it, determining additional queries to make before returning a final result - still, observation will function and never miss an update. No matter how simple or complex the query is - it will be monitored in detail so that if a single part of the query is affected by a change, the querier will be executed and the component will rerender.
-
-# Enhanced Example
-
-This example shows that...
-- you can observe the result of an arbritary function that queries Dexie
-- you can use a state from a useState() result within your querier function (just need to mention it in the deps array)
-- the component will re-render if the data you are querying change
-- the component will re-render if in-parameter to the query change.
-- the query will change when state change.
-
-```tsx
-import React, { useState } from "react";
-import { useLiveQuery } from "dexie-react-hooks";
-import { db } from "../db";
-
-export function FriendList() {
-  const [maxAge, setMaxAge] = useState(21);
-
-  // Query friends within a certain range decided by state:
-  const friends = useLiveQuery(
-    () => db.friends.where("age").belowOrEqual(maxAge).sortBy("id"),
-    [maxAge] // because maxAge affects query!
-  );
-
-  // Example of another query in the same component.
-  const friendCount = useLiveQuery(() => db.friends.count());
-
-  // If default values are returned, queries are still loading:
-  if (!friends || friendCount === undefined) return null;
-
-  return (
-    <div>
-      <p>
-        Your have <b>{friendCount}</b> friends in total.
-      </p>
-      <label>
-        Please enter max age to query:
-        <input
-          type="number"
-          value={maxAge}
-          onChange={(ev) => setMaxAge(parseInt(ev.target.value, 10))}
-        />
-      </label>
-      <ul>
-        {friends.map((friend) => (
-          <li key={friend.id}>
-            {friend.name}, {friend.age}
-            <button
-              onClick={() =>
-                db.friends.where({ id: friend.id }).modify((f) => ++f.age)
-              }
-            >
-              Birthday!
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-```
-[Open in codesandbox](https://codesandbox.io/s/empty-sky-lnv0q?file=/src/components/FriendList.tsx)
-
-## Decoupling
-
-The expression passed to useLiveQuery() must be a function that returns a promise. If you need to decouple your component from the db, you can provide the querying functions as callbacks instead:
-
-```tsx
-export function FriendList({getFriendCount, getFriendsByAge, onBirthdayClick}) {
-  ...
-
-  const friendCount = useLiveQuery(getFriendCount);
-
-  const friends = useLiveQuery(
-    () => getFriendsByAge(maxAge), [maxAge]
-  );
-
-  ...
-      // And the button's onClick event:
-      <button ... onClick={()=>onBirthdayClick(friend)}>...</button>
-}
-
-// ...and implement the callback elsewhere...
-
-function App () {
-   const getFriendCount = () => db.friends.count();
-
-   const getFriendsByAge = maxAge =>
-    db.friends
-      .where('age')
-      .belowOrEqual(maxAge)
-      .sortBy('id');
-
-   const onBirthdayClick = friend =>
-    db.friends.where({ id: friend.id }).modify(f => ++f.age);
-   
-  return <FriendList
-    fetchFriendCount={getFriendCount}
-    fetchFriendsByAge={getFriendsByAge}
-    onBirthdayClick={onBirthdayClick} />;
-}
-
-```
-
-# Calling non-Dexie API:s from querier
-
-If your querier callback needs to call asynchronous non-Dexie APIs to resolve its result, the promises returned by those non-Dexie API:s needs to be wrapped using `Promise.resolve()`. This is needed in order to keep the observation context alive between async calls. Even though APIs like `fetch()`, `webCrypto` etc already returns promises, this is still needed in order for useLiveQuery() to function properly. It might feel unnescessary to wrap it with `Promise.resolve()` when it's already a promise being returned, but this is a rule that needs to be followed when using `useLiveQuery()` with non-Dexie APIs. As of Dexie 3.1.0, you might not notice any warning or error if not following this rule but in a future version of Dexie, it might start throwing some explanatory error if this rule has been forgotten. 
-
-```js
-function MyComponent(id) {
-  const friendWithMetaData = useLiveQuery(async () => {
-    
-    // Normal Dexie call:
-    const friend = await db.friends.get(id);
-    
-    // Calling non-Dexie API - always wrap with Promise.resolve():
-    try {
-      const friendMetaData = await Promise.resolve (
-        // Ok to call fetch if we wrap it with Promise.resolve()
-        fetch(friend.metaDataUrl).then(res => res.json())
-      );
-      friend.metaData = friendMetaData;
-    } catch (error) {
-      friend.metaData = null;
-    }
-    return friend;
-  }, [id]);
-  
-  return <>
-    <p>Name: {friendWithMetaData.name}</p>
-    <p>FooBar: {friendWithMetaData.metaData?.fooBar}</p>
-  </>;
-}
-  
-```
-
-
-
 # Playgrounds
 
-[Another sample using useLiveQuery() on Stackblitz](https://stackblitz.com/edit/dexie-todo-list?file=components/TodoListView.tsx)
+[Svelte app using liveQuery()](https://codesandbox.io/s/svelte-with-dexie-livequery-2n8bd?file=/App.svelte)
 
-[The sample from this page in CodeSandbox](https://codesandbox.io/s/empty-sky-lnv0q?file=/src/components/FriendList.tsx)
-
-# See also
-
-[A blog post about this](https://medium.com/dexie-js/awesome-react-integration-coming-f212c2273d05)
+[React app using useLiveQuery()](https://stackblitz.com/edit/dexie-todo-list?file=components/TodoListView.tsx)
 

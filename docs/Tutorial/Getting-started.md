@@ -62,13 +62,15 @@ title: 'Getting Started'
 
 <hr>
 
-What's an Offline First application without sync? We're cooking something slick and powerful. Curious? Have a look at some samples that showcase how to build secure, access controlled and consistenlty synced apps.
+What's an Offline First application without sync? We're cooking something slick and powerful. Curious about what's coming? Get a little glimse of how it will be to turn your client-only app into a server-backed, consistently synced and securely access controlled app.
 
 <div class="row">
 
     <div class="col-md-12">
 
-        <a class="clickable-square" href="/cloud/"
+        <a
+            onclick="typeof ga !== undefined && ga('send', 'event', 'buttons', 'click', 'cloud-get-started-btn')"            
+            class="clickable-square" href="/cloud/#getting-started"
         style="background-image: linear-gradient( #5471e9, #1e3fd3, #4b965f);">
             <!-- <div class="video-parent" style="overflow:hidden; border-radius: 5px;">
                 <video

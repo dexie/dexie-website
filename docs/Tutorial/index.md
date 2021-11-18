@@ -4,13 +4,9 @@ title: 'Tutorial'
 ---
 [Getting started](/docs/Tutorial/Getting-started)
 
-[Consuming dexie as a module](/docs/Tutorial/Consuming-dexie-as-a-module)
+[Samples](/docs/Samples)
 
-[Architectural Overview](/docs/Tutorial/Design)
-
-[Live Samples](/docs/Samples)
-
-[Best Practices](/docs/Tutorial/Best-Practices)
+[Understanding the basics](/docs/Tutorial/Understanding-the-basics)
 
 [Migrating existing DB to Dexie](/docs/Tutorial/Migrating-existing-DB-to-Dexie)
 
@@ -23,5 +19,3 @@ title: 'Tutorial'
 [Questions and Answers](/docs/Questions-and-Answers)
 
 [API Reference (with quick reference)](/docs/API-Reference)
-
-[Understanding the basics](/docs/Tutorial/Understanding-the-basics)

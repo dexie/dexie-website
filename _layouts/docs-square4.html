@@ -1,0 +1,85 @@
+---
+layout: default
+prismStyle: 'ghcolors'
+---
+
+<div class="row">
+  <div class="col-xs-12 col-md-8">
+    <div class="row docs-page-subheader">
+      <h1 class="col-xs-12 col-md-9">{{ page.title }}</h1>
+      <div class="hidden-xs col-md-3">
+        <a class="btn btn-primary btn-edit-doc-page" href="https://github.com/dfahlander/dexie.js-web/edit/gh-pages/{{ page.path }}">
+          <span class="glyphicon glyphicon-edit"></span>&nbsp; Edit on GitHub
+        </a>
+      </div>
+    </div>
+
+    <style>
+      a.clickable-square {
+        padding: 10px;
+        margin: 0;
+        opacity: 0.7;
+        border-radius: 5px;
+        transform: scale(0.9);
+        transition: all 50ms;
+        transform-origin: 50%;
+        background-color: #eee;
+        min-height: 150px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      a.clickable-square:hover {
+        transform: scale(1);
+        opacity: 1;
+        border: 1px solid rgba(0,0,0,0.1);
+      }
+    </style>
+
+    <div class="row docs-square4">
+      <div class="col-md-6">
+        {{page.square1}}
+      </div>
+      <div class="col-md-6">
+        {{page.square2}}
+      </div>
+    </div>
+    <div class="row docs-square4">
+      <div class="col-md-6">
+        {{page.square3}}
+      </div>
+      <div class="col-md-6">
+        {{page.square4}}
+      </div>
+    </div>
+    <div class="row docs-page">
+      <div class="col-xs-12">
+        <hr />
+      </div>
+    </div>
+    <div class="row docs-page">
+      <div class="col-xs-12">
+        {{ content }}
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-md-4">
+    <div class="row docs-page-subheader">
+      <h3>Table of Contents</h3>
+      <div class="docs-toc-wrapper">
+        <ul class="docs-toc">
+          {% assign pages = site.pages | sort:"title"  %}
+          {% for page in pages %}
+            {% if page.layout == 'docs' or page.layout == 'docs-dexie-cloud' %}
+              <li>
+                <a href="{{ page.url | replace: '.html', ''}}">{{ page.title }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

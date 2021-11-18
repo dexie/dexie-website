@@ -1,74 +1,83 @@
 ---
-layout: docs
+layout: docs-freestyle
 title: 'Getting Started'
 ---
+<div class="row">
+    <div class="col-md-6">
+    <a class="clickable-square react-logo"
+        href="/docs/Tutorial/React"
+        style="background-image: linear-gradient(#77a, #aaa);">
 
-Dexie.js can be consumed as a module. But let's skip that for now and just show the simplest possible setup. You will just need a text editor and a web browser.
+        <img src="/assets/images/React-icon.svg" style="width:75px;">
+        <span style="font-size: 22pt;">React</span>
+    </a>
+    </div>
+    <div class="col-md-6">
+        <a class="clickable-square" href="/docs/Tutorial/Svelte"
+        style="background-image: linear-gradient(#977, #aaa);">
+            <div class="framework-logo" style="margin: 0;">
+                <img src="/assets/images/Svelte_Logo.svg" />
+                Svelte
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6">
+        <a class="clickable-square" href="/docs/Tutorial/Vue"
+        style="background-image: linear-gradient(#7a7, #aaa);">
+            <div class="framework-logo" style="margin: 0;">
 
-### Quick Start
+            <img src="/assets/images/vue.svg" />
+            Vue
 
-1. Copy this code to and save as 'whatever.html'
-    
-```html
-<!doctype html>
-<html>
-  <head>
-      <!-- Include Dexie -->
-      <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-6">
+        <a class="clickable-square" href="/docs/Tutorial/Angular"
+            style="background-image: linear-gradient(#a77, #aaa);">
+            <div class="framework-logo react-logo" style="margin: 0;">
 
-      <script>
-          //
-          // Define your database
-          //
-          var db = new Dexie("friend_database");
-          db.version(1).stores({
-              friends: 'name,shoeSize'
-          });
+            <img src="/assets/images/angular.svg" />
+            Angular
 
-          //
-          // Put some data into it
-          //
-          db.friends.put({name: "Nicolas", shoeSize: 8}).then (function(){
-              //
-              // Then when data is stored, read from it
-              //
-              return db.friends.get('Nicolas');
-          }).then(function (friend) {
-              //
-              // Display the result
-              //
-              alert ("Nicolas has shoe size " + friend.shoeSize);
-          }).catch(function(error) {
-             //
-             // Finally don't forget to catch any error
-             // that could have happened anywhere in the
-             // code blocks above.
-             //
-             alert ("Ooops: " + error);
-          });
-      </script>
-  </head>
-</html>
-```
+            </div>
+        </a>
+    </div>
+</div>
+<hr/>
+<div class="row">
+    <div class="col-md-12">
+        <a class="clickable-square" href="/docs/Tutorial/Hello-World"
+            style="background-image: linear-gradient(#aac, #ddf);">
+            <div class="framework-logo" style="margin: 0;">
+                Vanilla JS
+            </div>
+        </a>
+    </div>
+</div>
+<div class="row">
 
-2. Open the file in Chrome, Opera or Firefox. *If you need to test on IE, Edge or Safari, make sure to serve the page over http or https*
+    <div class="col-md-12">
+        <a class="clickable-square" href="/cloud/"
+        style="background-image: linear-gradient( #5471e9, #1e3fd3, #4b965f);">
+            <!-- <div class="video-parent" style="overflow:hidden; border-radius: 5px;">
+                <video
+                    class="banner-video"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                >
+                <source
+                    src="https://dexie.blob.core.windows.net/dexie/Galaxy.mp4"
+                    type="video/mp4">
+                </video>
+            </div> -->
+            <div class="framework-logo" style="margin: 0; position: relative; color: #fff;">
+                <img src="/assets/images/dexie-logo-icon.svg" style="position: absolute;left: -10px;top: 11px;width: 27px;">Dexie Cloud
+            </div>
+        </a>
+    </div>
+</div>
 
-3. You should see an alert box pops up saying `Nicolas has shoe size 8`.
-
-4. Play with this file. Change some code and see what happens.
-
-### Next steps
-
-#### [Consuming dexie as a module](/docs/Tutorial/Consuming-dexie-as-a-module)
-
-or
-
-#### [Samples](/docs/Samples)
-
-or
-
-#### [Migrating existing DB to Dexie](/docs/Tutorial/Migrating-existing-DB-to-Dexie)
-
-or
-
-#### [Back to Tutorial](/docs/Tutorial)
+<hr/>

@@ -3,6 +3,8 @@ layout: docs
 title: 'Hello World'
 ---
 
+**See also [Getting Started](Getting-Started)**
+
 ```html
 <!DOCTYPE html>
 <html>
@@ -62,5 +64,3 @@ title: 'Hello World'
 </head>
 </html>
 ```
-
-### [Back to Tutorial](/docs/Tutorial)

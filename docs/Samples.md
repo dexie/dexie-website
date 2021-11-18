@@ -59,7 +59,7 @@ title: 'Samples'
 <div class="row">
 
     <div class="col-md-12">
-        <a class="clickable-square" href="http://localhost:4000/cloud/docs/access-control#example-a-simple-project-management-model"
+        <a class="clickable-square" href="/cloud/docs/access-control#example-a-simple-project-management-model"
         style="background-image: linear-gradient( #5471e9, #1e3fd3, #4b965f);">
             <!-- <div class="video-parent" style="overflow:hidden; border-radius: 5px;">
                 <video

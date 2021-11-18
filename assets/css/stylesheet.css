@@ -587,7 +587,7 @@ a.clickable-square {
 	margin: 5px 0;
 	opacity: 0.7;
 	border-radius: 5px;
-	transform: scale(0.9);
+	transform: scale(1);
 	transition: all 50ms;
 	transform-origin: 50%;
 	background-image: linear-gradient( #aaa, #eee);
@@ -601,7 +601,7 @@ a.clickable-square {
 }
 
 a.clickable-square:hover {
-	transform: scale(1);
+	transform: scale(1.05);
 	opacity: 1;
 	border: 1px solid rgba(0,0,0,0.2);
 	text-decoration: none;

@@ -2,6 +2,10 @@
 layout: docs-freestyle
 title: 'Getting Started'
 ---
+
+<p>Dexie is quite nice. Choose a tutorial flavour and get going...
+</p>
+
 <div class="row">
     <div class="col-md-6">
     <a class="clickable-square react-logo"
@@ -55,9 +59,15 @@ title: 'Getting Started'
         </a>
     </div>
 </div>
+
+<hr>
+
+What's an Offline First application without sync? We're cooking something slick and powerful. Curious? Have a look at some samples that showcase how to build secure, access controlled and consistenlty synced apps.
+
 <div class="row">
 
     <div class="col-md-12">
+
         <a class="clickable-square" href="/cloud/"
         style="background-image: linear-gradient( #5471e9, #1e3fd3, #4b965f);">
             <!-- <div class="video-parent" style="overflow:hidden; border-radius: 5px;">

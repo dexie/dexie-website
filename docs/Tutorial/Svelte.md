@@ -159,7 +159,7 @@ Write a simple component that just renders all friends in the database.
 
 Notice two things here:
 
-1. liveQuery() returns a reactive Svelte Store (or actually an Observable that happens to comply with Svelte Stores). To access the reactive value of a Svelte Store, friends needs to be prefixed with $, `$friends`.
+1. liveQuery() returns a reactive Svelte Store (or actually an Observable that happens to comply with the [The Svelte Store Contract](https://svelte.dev/docs#Store_contract)). To access the reactive value of a Svelte Store, friends needs to be prefixed with $, `$friends`.
 2. The result will be undefined on initial render - which explains why we need the `{#if $friends}` condition. The reason for this is the asynchronic nature of IndexedDB. Just be aware of this fact and make sure your rendering code handles it.
 
 # 6. Pass some query params

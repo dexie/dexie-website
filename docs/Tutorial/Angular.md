@@ -81,7 +81,7 @@ export const db = new AppDB();
 
 ```
 
-# 4. Turn App component into an Offline ToDo app
+# 4. Turn App into an Offline ToDo app
 
 In this sample we will use two components that builds up our ToDo application. For simplicity, we are letting our components talk directly to the db here. In a real application you might prefer to put the database action and queries via services.
 

@@ -3,21 +3,19 @@ layout: docs
 title: 'Typescript'
 ---
 
-This is a guide on how to use Dexie with Typescript. If you just want to see working code, download or fork [the source](https://github.com/dfahlander/Dexie.js/archive/releases.zip) and cd to [samples/typescript-simple](https://github.com/dfahlander/Dexie.js/tree/master/samples/typescript-simple) or [samples/typescript](https://github.com/dfahlander/Dexie.js/tree/master/samples/typescript) and follow the README there.
+This is a guide on how to use Dexie with Typescript.
 
 **[To see it in action, watch this stackblitz sample!](https://stackblitz.com/edit/typescript-dexie-appdemo?file=index.ts)**
-
-**NOTE: Dexie 2.x requires Typescript 2.x.**
 
 ## Download and install dexie
 
 ```bash
-npm install dexie --save
+npm install dexie
 ```
 
 ## Import dexie
 
-```javascript
+```ts
 import Dexie from 'dexie';
 ```
 
@@ -29,7 +27,7 @@ Assuming you have moduleResolution: "node" in your tsconfig, this will work out-
 class MyAppDatabase extends Dexie {
     // Declare implicit table properties.
     // (just to inform Typescript. Instanciated by Dexie in stores() method)
-    contacts: Dexie.Table<IContact, number>; // number = type of the primkey
+    contacts!: Dexie.Table<IContact, number>; // number = type of the primkey
     //...other tables goes here...
 
     constructor () {
@@ -38,9 +36,6 @@ class MyAppDatabase extends Dexie {
             contacts: '++id, first, last',
             //...other tables goes here...
         });
-        // The following line is needed if your typescript
-        // is compiled using babel instead of tsc:
-        this.contacts = this.table("contacts");
     }
 }
 
@@ -73,9 +68,9 @@ Therefore, in order to gain the best code completion, it is recommended to defin
 
 ```typescript
 export class MyAppDatabase extends Dexie {
-  contacts: Dexie.Table<IContact, number>;
-  emails: Dexie.Table<IEmailAddress, number>;
-  phones: Dexie.Table<IPhoneNumber, number>;
+  contacts!: Dexie.Table<IContact, number>;
+  emails!: Dexie.Table<IEmailAddress, number>;
+  phones!: Dexie.Table<IPhoneNumber, number>;
   
   constructor() {  
     super("MyAppDatabase");
@@ -89,11 +84,6 @@ export class MyAppDatabase extends Dexie {
       emails: '++id, contactId, type, email',
       phones: '++id, contactId, type, phone',
     });
-    
-    // The following lines are needed for it to work across typescipt using babel-preset-typescript:
-    this.contacts = this.table("contacts");
-    this.emails = this.table("emails");
-    this.phones = this.table("phones");
   }
 }
 
@@ -202,9 +192,3 @@ await db.transaction('rw', db.friends, async () => {
   let numberOfOldFriends = await db.friends.where('age').above(75).toArray();
 });
 ```
-
-## Putting it all together:
-
-An enhanced version of the above code is found under [samples/typescript](https://github.com/dfahlander/Dexie.js/tree/master/samples/typescript). It uses tsc + babel + webpack as build sequence. Fork/clone Dexie and laborate with it locally.
-
-There's also [another simpler example](https://github.com/dfahlander/Dexie.js/tree/master/samples/typescript-simple) based on plain tsc and requirejs.

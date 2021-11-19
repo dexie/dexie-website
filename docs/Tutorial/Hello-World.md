@@ -3,7 +3,7 @@ layout: docs
 title: 'Hello World'
 ---
 
-**See also [Getting Started](Getting-Started)**
+**See also [Getting Started](Getting-started)**
 
 ```html
 <!DOCTYPE html>

@@ -5,7 +5,7 @@ title: 'Get started with Dexie in Vue'
 {% raw %}
 
 <div style="opacity: 0.8; padding: 40px 0 40px 0">
-  <img src="/assets/images/Vue.svg" style="width:50px;margin: 0 10px 0 0">
+  <img src="/assets/images/vue.svg" style="width:50px;margin: 0 10px 0 0">
   <span>+</span>
   <img src="/assets/images/logo-dexie-black.svg" style="width: 200px;">    
 </div>

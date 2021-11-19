@@ -223,5 +223,7 @@ function MyComponent(id) {
 
 # See also
 
+[liveQuery()](/docs/liveQuery())
+
 [A blog post about this](https://medium.com/dexie-js/awesome-react-integration-coming-f212c2273d05)
 

@@ -1,10 +1,10 @@
 ---
 layout: docs-freestyle
-title: 'Getting Started'
+title: 'Getting Started with Dexie.js'
 ---
 
-<p>Dexie is quite nice. Choose a tutorial flavour and get going...
-</p>
+Please select what framework you're on and we'll guide you further...
+
 
 <div class="row">
     <div class="col-md-6">
@@ -62,15 +62,14 @@ title: 'Getting Started'
 
 <hr>
 
-What's an Offline First application without sync? We're cooking something slick and powerful. Curious about what's coming? Get a little glimse of how it will be to turn your client-only app into a server-backed, consistently synced and securely access controlled app.
+What's an Offline First application without sync? We're cooking something slick and powerful. Curious about what's **coming**? Get a *little glimse* of how it will be to turn your client-only app into a server-backed, consistently synced and securely access controlled app. And maybe list yourself on the waitlist?
 
 <div class="row">
 
     <div class="col-md-12">
 
         <a
-            onclick="typeof ga !== undefined && ga('send', 'event', 'buttons', 'click', 'cloud-get-started-btn')"            
-            class="clickable-square" href="/cloud/#getting-started"
+            class="clickable-square" href="/cloud/"
         style="background-image: linear-gradient( #5471e9, #1e3fd3, #4b965f);">
             <!-- <div class="video-parent" style="overflow:hidden; border-radius: 5px;">
                 <video

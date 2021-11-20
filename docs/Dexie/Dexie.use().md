@@ -77,7 +77,3 @@ In essence, all mutating operations are bulk-oriented. Theres only bulkPut(), bu
 
 Interface definitions for DBCore is found [here](https://github.com/dfahlander/Dexie.js/blob/master/src/public/types/dbcore.d.ts)
 
-In this version, the CRUD hooks are called from a built-in middleware (hooksMiddleware): A middleware that makes sure to call CRUD hooks in a backward compatible manner.
-
-In Dexie 3, compound indexes can be used partially as if the first part was ha plain index. This is also accomplished via a DBCore middleware [VirtualIndex](https://github.com/dfahlander/Dexie.js/blob/v3.0.1/src/dbcore/virtual-index-middleware.ts).
-

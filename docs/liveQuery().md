@@ -98,7 +98,7 @@ Got result: []
   </li>
   <li style="font-style: italic;">
     <i class="fa fa-hand-o-right" aria-hidden="true"></i>
-    If you really need to call a non-Dexie asynchronous API (such as webCrypto), wrap the returned promise through `Promise.resolve()` or [Dexie.waitFor()](Dexie/Dexie.waitFor()) before awaiting it.
+    If you really need to call a non-Dexie asynchronous API (such as webCrypto), wrap the returned promise through `Promise.resolve()` or <a href="Dexie/Dexie.waitFor()">Dexie.waitFor()</a> before awaiting it.
   </li>
 </ul>
 

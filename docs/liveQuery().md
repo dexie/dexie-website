@@ -70,6 +70,8 @@ await db.friends.delete(friendId);
 subscription.unsubscribe();
 ```
 
+*[This sample is also available in Dexie.js/samples/liveQuery/liveQuery.html](https://github.com/dfahlander/Dexie.js/blob/master/samples/liveQuery/liveQuery.html)*
+
 The following output will be seen:
 
 ```

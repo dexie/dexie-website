@@ -40,7 +40,7 @@ const friendsObservable = liveQuery (
 );
 
 friendsObservable.subscribe({
-  next: result => console.log("Got result:", result),
+  next: result => console.log("Got result:", JSON.stringify(result)),
   error: error => console.error(error)
 });
 
@@ -73,13 +73,13 @@ The following output will be seen:
 ```
 Got result: []
 1. Adding friend
-Got result: [{name: "Magdalena", age: 54}]
+Got result: [{"name":"Magdalena","age":54,"id":1}]
 2. Changing age to 99
 Got result: []
 3. Changing age to 55
-Got result: [{name: "Magdalena", age: 55}]
+Got result: [{"name":"Magdalena","age":54,"id":1}]
 4. Setting property 'foo' to 'bar'
-Got result: [{name: "Magdalena", age: 55, foo: "bar"}]
+Got result: [{"name":"Magdalena","age":54,"id":1,"foo":"bar"}]
 5. Deleting friend
 Got result: []
 ```

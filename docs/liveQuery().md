@@ -39,7 +39,7 @@ const friendsObservable = liveQuery (
     .toArray()
 );
 
-friendsObservable.subscribe({
+const subscription = friendsObservable.subscribe({
   next: result => console.log("Got result:", JSON.stringify(result)),
   error: error => console.error(error)
 });
@@ -66,6 +66,8 @@ await sleep(1000);
 
 console.log("5. Deleting friend");
 await db.friends.delete(friendId);
+
+subscription.unsubscribe();
 ```
 
 The following output will be seen:

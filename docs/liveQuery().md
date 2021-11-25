@@ -34,7 +34,8 @@ db.version(1).stores({
 
 const friendsObservable = liveQuery (
   () => db.friends
-    .where('age').above(75)
+    .where('age')
+    .between(50, 75)
     .toArray()
 );
 
@@ -43,22 +44,63 @@ friendsObservable.subscribe({
   error: error => console.error(error)
 });
 
-setTimeout(() => db.friends.add({name: "Magdalena", age: 54}), 1000);
+const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+await sleep(1000);
+
+console.log("1. Adding friend");
+const friendId = await db.friends.add({name: "Magdalena", age: 54});
+await sleep(1000);
+
+console.log("2. Changing age to 99");
+await db.friends.update(friendId, {age: 99});
+await sleep(1000);
+
+console.log("3. Changing age to 55");
+await db.friends.update(friendId, {age: 54});
+await sleep(1000);
+
+console.log("4. Setting property 'foo' to 'bar'");
+await db.friends.update(friendId, {foo: "bar"});
+await sleep(1000);
+
+console.log("5. Deleting friend");
+await db.friends.delete(friendId);
 ```
 
-Directly when this code executes, you will see a log entry in the console:
+The following output will be seen:
+
 ```
 Got result: []
-```
-Then when callback to setTimeout() has added a friend (after a second), you will see it log the result:
-```
+1. Adding friend
 Got result: [{name: "Magdalena", age: 54}]
+2. Changing age to 99
+Got result: []
+3. Changing age to 55
+Got result: [{name: "Magdalena", age: 55}]
+4. Setting property 'foo' to 'bar'
+Got result: [{name: "Magdalena", age: 55, foo: "bar"}]
+5. Deleting friend
+Got result: []
 ```
+
+<p>
+  <i class="fa fa-hand-o-right" aria-hidden="true"></i> If a database change would affect the result of your query, it will be re-executed and your observable will emit the new result.
+</p>
+
 
 ## Rules for the querier function
 
-* Don't call non-Dexie asynchronous API:s directly from it.
-* If you really need to call a non-Dexie asynchronous API (such as webCrypto), wrap the returned promise through `Promise.resolve()` or [Dexie.waitFor()](Dexie/Dexie.waitFor()) before awaiting it.
+<ul style="padding-left: 0; list-style-type: none;">
+  <li style="font-style: italic;">
+    <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    Don't call non-Dexie asynchronous API:s directly from it.
+  </li>
+  <li style="font-style: italic;">
+    <i class="fa fa-hand-o-right" aria-hidden="true"></i>
+    If you really need to call a non-Dexie asynchronous API (such as webCrypto), wrap the returned promise through `Promise.resolve()` or [Dexie.waitFor()](Dexie/Dexie.waitFor()) before awaiting it.
+  </li>
+</ul>
 
 # Usage in Svelte and Angular
 
@@ -74,6 +116,12 @@ For Vue, we still haven't implemented any specific hook, but the observable retu
 ## Fine grained observation
 
 The observation is as fine-grained as it can possibly be - queries that would be affected by a modification will rerender - others not (with some exceptions - false positives happen but never false negatives). This is also true if your querier callback performs a series of awaited queries or multiple in parallell using Promise.all(). It can even contain if-statements or other conditional paths within it, determining additional queries to make before returning a final result - still, observation will function and never miss an update. No matter how simple or complex the query is - it will be monitored in detail so that if a single part of the query is affected by a change, the querier will be executed and the component will rerender.
+
+Once again, the rule is that:
+<p>
+  <i class="fa fa-hand-o-right" aria-hidden="true"></i> If a database change would affect the result of your query, it will be re-executed and your observable will emit the new result.
+</p>
+
 # Playgrounds
 
 [Svelte app using liveQuery()](https://codesandbox.io/s/svelte-with-dexie-livequery-2n8bd?file=/App.svelte)

@@ -57,7 +57,7 @@ await db.friends.update(friendId, {age: 99});
 await sleep(1000);
 
 console.log("3. Changing age to 55");
-await db.friends.update(friendId, {age: 54});
+await db.friends.update(friendId, {age: 55});
 await sleep(1000);
 
 console.log("4. Setting property 'foo' to 'bar'");
@@ -77,9 +77,9 @@ Got result: [{"name":"Magdalena","age":54,"id":1}]
 2. Changing age to 99
 Got result: []
 3. Changing age to 55
-Got result: [{"name":"Magdalena","age":54,"id":1}]
+Got result: [{"name":"Magdalena","age":55,"id":1}]
 4. Setting property 'foo' to 'bar'
-Got result: [{"name":"Magdalena","age":54,"id":1,"foo":"bar"}]
+Got result: [{"name":"Magdalena","age":55,"id":1,"foo":"bar"}]
 5. Deleting friend
 Got result: []
 ```

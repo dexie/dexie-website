@@ -85,7 +85,7 @@ Got result: []
 ```
 
 <p>
-  <i class="fa fa-hand-o-right" aria-hidden="true"></i> If a database change would affect the result of your query, it will be re-executed and your observable will emit the new result.
+  <i class="fa fa-hand-o-right" aria-hidden="true"></i> If a database change would affect the result of your querier, your querier callback will be re-executed and your observable will emit the new result.
 </p>
 
 
@@ -119,7 +119,7 @@ The observation is as fine-grained as it can possibly be - queries that would be
 
 Once again, the rule is that:
 <p>
-  <i class="fa fa-hand-o-right" aria-hidden="true"></i> If a database change would affect the result of your query, it will be re-executed and your observable will emit the new result.
+  <i class="fa fa-hand-o-right" aria-hidden="true"></i> If a database change would affect the result of your querier, your querier callback will be re-executed and your observable will emit the new result.
 </p>
 
 # Playgrounds

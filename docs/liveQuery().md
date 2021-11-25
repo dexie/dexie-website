@@ -103,7 +103,7 @@ If you wonder how we can possibly detect whether a change would affect your quer
 * Whenever the querier is triggered, the subscribed ranges are cleared, the querier re-executed and the ranges or keys being queried this time will be tracked.
 * Mutated rangesets are also broadcasted across browsing contexts to wake up liveQueries in other tabs or workers
 
-*This is a simplified explanation of how the algorithm works. There are edge cases we also take care of, and optimizations to preserve write performance of large bulk mutations. However, the optimizations does not affect the functionality else than that liveQueries may be triggered as false positives in certain times.*
+*This is a simplified explanation of how the algorithm works. The raw details can be found [here](https://github.com/dfahlander/Dexie.js/tree/master/src/live-query). There are edge cases we also take care of, and optimizations to preserve write performance of large bulk mutations. However, the optimizations does not affect the functionality else than that liveQueries may be triggered as false positives in certain times.*
 
 ## Rules for the querier function
 

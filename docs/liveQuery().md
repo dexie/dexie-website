@@ -89,9 +89,21 @@ Got result: []
 ```
 
 <p>
-  <i class="fa fa-hand-o-right" aria-hidden="true"></i> If a database change would affect the result of your querier, your querier callback will be re-executed and your observable will emit the new result.
+  <i class="fa fa-hand-o-right" aria-hidden="true"></i> Whenever a database change is made that would affect the result of your querier, your querier callback will be re-executed and your observable will emit the new result.
 </p>
 
+If you wonder how we can possibly detect whether a change would affect your querier, the details are:
+
+* Any call to any Dexie API done during querier execution will be tracked
+* The tracking is done using an efficient datastructure for range collision detections, a [range tree](https://en.wikipedia.org/wiki/Interval_tree) implemented in [rangeset.ts](https://github.com/dfahlander/Dexie.js/blob/master/src/helpers/rangeset.ts)
+* Every index being queried is tracked with the given range it queries. This makes it possible to detect whether an added object would fit within the range or not, also whether an update of an indexed property would make it become included or not.
+* On add mutations, every indexed property is matched against ongoing queries
+* On update mutations, if an indexed property is updated, we detect whether it would become included into any ongoing query
+* On delete mutations, queries that havev the same primary keys in their results will be triggered
+* Whenever the querier is triggered, the subscribed ranges are cleared, the querier re-executed and the ranges or keys being queried this time will be tracked.
+* Mutated rangesets are also broadcasted across browsing contexts to wake up liveQueries in other tabs or workers
+
+*This is a simplified explanation of how the algorithm works. There are edge cases we also take care of, and optimizations to preserve write performance of large bulk mutations. However, the optimizations does not affect the functionality else than that liveQueries may be triggered as false positives in certain times.*
 
 ## Rules for the querier function
 

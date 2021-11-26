@@ -39,6 +39,7 @@ With the new declaration style, typescript users will automatically get table pr
 
 ```ts
 class AppDB extends Dexie {
+  // This does the same job as new Dexie('dbname').stores(...)
   friends = this.Store<Friend>('++id, name, age');
 }
 

@@ -28,7 +28,7 @@ export const db = new Dexie('dbName').stores({
 });
 ```
 
-The new declarative style also makes type inference and code completion work better as the generated table props will be infered from the declaration.
+The new declarative style also makes type inference and code completion work better since we will declare the typings so that generated table props will be infered.
 
 We will continue to support the `.version(x).stores()` API so that applications aren't forced to go over to the versionless declaration.
 

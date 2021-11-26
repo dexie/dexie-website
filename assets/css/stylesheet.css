@@ -610,3 +610,14 @@ a.clickable-square:hover {
 	border: 1px solid rgba(0,0,0,0.2);
 	text-decoration: none;
 }
+
+/* markdown checklists */
+ul.task-list {
+	padding: 0;
+}
+li.task-list-item {
+	list-style: none;
+}
+input.task-list-item-checkbox {
+	margin: 0 8px 0 0;
+}

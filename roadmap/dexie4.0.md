@@ -22,7 +22,6 @@ db.version(1).stores({
 
 #### Dexie 4.0 style
 ```js
-// Dexie 4.0 style:
 export const db = new Dexie('dbName').stores({
   friends: '++id, name, age',
 });

@@ -10,7 +10,7 @@ The goal for Dexie 4.0 will be a better experience for web developers to query t
 [Discussions and feedback on Dexie 4.0 road map](https://github.com/dfahlander/Dexie.js/discussions/1455)
 
 # Versionless declaration
-Dexie 4.0 will support the declaration of tables and indexes without specifying any version. We want to separate migration from table/index changes.
+Dexie 4.0 will support the declaration of tables and indexes without specifying any version. We want to separate migration from table/index changes. Versions will be declared as before, but only needed for the purpose of migrating data. Schema changes can be diffed and updated automatically.
 
 #### Current style
 ```js

@@ -34,13 +34,15 @@ We will continue to support the `.version(x).stores()` API so that applications 
 
  Internally dexie will increment versions dynamically for the user when using the new declaration style - whenever there is a need to modify tables or indexes, it will auto-increment the version. However, it will still support given versions for migration upgraders in the old format. To accomplish that we allow the native version to diverge from 'virtual' versions by maintaing it in a versions-table within the database. This table will only be created after utilizing the new style declaration combined a dedicated version (old style). Basically, we continue working like before, unless the db has the $versions table - in which case the info there will be respected instead of the native one. 
 
-# Simple typings for Typescript users
-Instead of having to subclass Dexie, Typescript users have the declaration inferred without doing anything. However, the properties on the models will not be typed. Therefore we'll add a new way to annotate tables with the backing type.
+# A Typescript-friendler declaration style
+
+With the new declaration style, typescript users will automatically get table props inferred without having to subclass Dexie. However, the properties on the models will not be typed. Therefore we'll add an alternative way of declaring the schema, by sub classing Dexie and declare the schema as Table props.
 
 ```ts
-const db = new Dexie('dbName').stores({
-  friends: Typed<Friend>('++id, name, age')
-});
+class DB extends Dexie {
+  friends = new Table<Friend>('++id, name, age');
+}
+const db = new DB('dbName');
 
 interface Friend {
   id: number;
@@ -48,19 +50,22 @@ interface Friend {
   age: number
 }
 ```
-More than this, we will be distinguishing between insert- and outgoing type. The declared type will represent the outgoing type while the insert type will convert the primary key to be optional in case the declaration declares it auto-incremented ('++id') or otherwise generated as in [Dexie Cloud](https://dexie.org/cloud/) ('@id'). Methods like [Table.add()](https://dexie.org/docs/Table/Table.add()) will expect the insert type while [Collection.toArray()](https://dexie.org/docs/Collection/Collection.toArray()) will return a promise of an array of the declared type.
 
-Also, methods will be omitted from the insert type so that if you have a class with methods that backs the model of your table, you will continously be able to add items using plain objects (with methods omitted).
+More than this, we will be distinguishing between insert- and outgoing type. The declared type will represent the outgoing type while the insert type will be a mapped type where the primary key becomes optional in case the declaration declares it auto-incremented ('++id') or otherwise generated as in [Dexie Cloud](https://dexie.org/cloud/) ('@id'). Methods like [Table.add()](https://dexie.org/docs/Table/Table.add()) will expect the insert type while [Collection.toArray()](https://dexie.org/docs/Collection/Collection.toArray()) will return a promise of an array of the declared type.
+
+Also, any methods in the type will be omitted from the insert type so that if you have a class with methods that backs the model of your table, you will continously be able to add items using plain objects (with methods omitted).
+
+*As you can see, we plan to introduce yet another alternative to the new Dexie.stores() alternative - by declaring Table props on the subclass to gain both the correct typings along with the runtime schema declaration. It's never optimal to introduce two new alternative ways of declaring things - I know - but we don't want to force every user to subclass Dexie either. Feel free to come up with alternate ideas regarding this in the new [discussion thread for 4.0](https://github.com/dfahlander/Dexie.js/discussions/1455).*
 
 # Improved Class Mapping
+
 Today there is [mapToClass()](https://dexie.org/docs/Table/Table.mapToClass()) that allows a table to be backed by class prototypes - so that data being returned from queries are not just PoJo Obejcts but instances of the mapped class. This will be possible to declare in a more declarative way than the imperative `mapToClass()` - which will also infere the type for typescript users.
 
 ```ts
-import { MappedClass, Dexie } from 'dexie';
-
-const db = new Dexie('dbName').stores({
-  friends: MappedClass(Friend, '++id, name, age')
-});
+class DB extends Dexie {
+  friends = new Table(Friend, '++id, name, age');
+}
+const db = new DB('dbName');
 
 class Friend {
   id!: number;
@@ -86,11 +91,9 @@ export class Friend extends Entity<DB> {
 }
 
 export class DB extends Dexie {
-  // This declaration style does the same job as Dexie.stores():
   friends = new Table(Friend, '++id, name, age');
 }
 ```
-*As you can see, we plan to introduce yet another alternative to the new Dexie.stores() alternative - by declaring Table props on the subclass to gain both the correct typings along with the runtime schema declaration. It's never optimal to introduce two new alternative ways of declaring things - I know - but we don't want to force every user to subclass Dexie either. Feel free to come up with alternate ideas regarding this in the new [discussion thread for 4.0](https://github.com/dfahlander/Dexie.js/discussions/1455).*
 
 # Richer Queries
 

@@ -38,10 +38,10 @@ We will continue to support the `.version(x).stores()` API so that applications 
 With the new declaration style, typescript users will automatically get table props inferred without having to subclass Dexie. However, the properties on the models will not be typed. Therefore we'll add an alternative way of declaring the schema, by sub classing Dexie and declare the schema as Table props.
 
 ```ts
-class DB extends Dexie {
+class AppDB extends Dexie {
   friends = new Table<Friend>('++id, name, age');
 }
-const db = new DB('dbName');
+const db = new AppDB('dbName');
 
 interface Friend {
   id: number;
@@ -61,10 +61,10 @@ Also, any methods in the type will be omitted from the insert type so that if yo
 Today there is [mapToClass()](https://dexie.org/docs/Table/Table.mapToClass()) that allows a table to be backed by class prototypes - so that data being returned from queries are not just PoJo Obejcts but instances of the mapped class. This will be possible to declare in a more declarative way than the imperative `mapToClass()` - which will also infere the type for typescript users.
 
 ```ts
-class DB extends Dexie {
+class AppDB extends Dexie {
   friends = new Table(Friend, '++id, name, age');
 }
-const db = new DB('dbName');
+const db = new AppDB('dbName');
 
 class Friend {
   id!: number;
@@ -79,7 +79,7 @@ Today, a mapped class that needs to access the database from its methods, will n
 In Dexie 4.0, this is solved using a lightweight depenency injection. There will be a generic class `Entity` that your classes may extend from in order to get your database instance injected as a protected property `db` on every entity instance. Your class methods can then perform queries onto the db without being dependant on the `db` module of your app. This use case will require a subclassed Dexie declaration though. There will still be cyclic import dependencies but only on the type level.
 
 ```ts
-export class Friend extends Entity<DB> {
+export class Friend extends Entity<AppDB> {
   id!: number;
   name!: string;
   age!: number;
@@ -89,7 +89,7 @@ export class Friend extends Entity<DB> {
   }
 }
 
-export class DB extends Dexie {
+export class AppDB extends Dexie {
   friends = new Table(Friend, '++id, name, age');
 }
 ```

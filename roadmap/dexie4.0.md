@@ -35,26 +35,29 @@ We will continue to support the `.version(x).stores()` API so that applications 
 
 # A Typescript-friendler declaration style
 
-With the new declaration style, typescript users will automatically get table props inferred without having to subclass Dexie. However, the properties on the models will not be typed. Therefore we'll add an alternative way of declaring the schema, by sub classing Dexie and declare the schema as Table props.
+With the new declaration style, typescript users will automatically get table props inferred without having to subclass Dexie. However, the properties on the models will not be typed. Therefore we'll add an alternative way of declaring the schema. Typescript devs are already used to having to subclass Dexie. In version 4.0, the subclass doesn't need to be as verbose as before - we let the subclass create table instances as a way to tell the runtime about the schema instead of the opposite:
 
 ```ts
 class AppDB extends Dexie {
-  friends = new Table<Friend>('++id, name, age');
+  friends = this.Store<Friend>('++id, name, age');
 }
-const db = new AppDB('dbName');
 
 interface Friend {
   id: number;
   name: string;
   age: number
 }
+
+const db = new AppDB('dbName');
 ```
 
-More than this, we will be distinguishing between insert- and outgoing type. The declared type will represent the outgoing type while the insert type will be a mapped type where the primary key becomes optional in case the declaration declares it auto-incremented ('++id') or otherwise generated as in [Dexie Cloud](https://dexie.org/cloud/) ('@id'). Methods like [Table.add()](https://dexie.org/docs/Table/Table.add()) will expect the insert type while [Collection.toArray()](https://dexie.org/docs/Collection/Collection.toArray()) will return a promise of an array of the declared type.
+*As you can see, we plan to introduce two new alternative to declaring the database schema. It's never optimal to introduce two new alternative ways of declaring things - I know - but we don't want to force every user to subclass Dexie either. Feel free to come up with alternate ideas regarding this in the new [discussion thread for 4.0](https://github.com/dfahlander/Dexie.js/discussions/1455).*
+
+## Distinguish insert- from output types
+
+With the help from Typescripts template literals, we will be able to distinguishing between insert- and outgoing type by parsing the schema declaration within the type system. The declared type will represent the outgoing type while the insert type will be a mapped type where the primary key becomes optional in case the declaration declares it auto-incremented ('++id') or otherwise generated as in [Dexie Cloud](https://dexie.org/cloud/) ('@id'). Methods like [Table.add()](https://dexie.org/docs/Table/Table.add()) will expect the insert type while [Collection.toArray()](https://dexie.org/docs/Collection/Collection.toArray()) will return a promise of an array of the declared type.
 
 Also, any methods in the type will be omitted from the insert type so that if you have a class with methods that backs the model of your table, you will continously be able to add items using plain objects (with methods omitted).
-
-*As you can see, we plan to introduce yet another alternative to the new Dexie.stores() alternative - by declaring Table props on the subclass to gain both the correct typings along with the runtime schema declaration. It's never optimal to introduce two new alternative ways of declaring things - I know - but we don't want to force every user to subclass Dexie either. Feel free to come up with alternate ideas regarding this in the new [discussion thread for 4.0](https://github.com/dfahlander/Dexie.js/discussions/1455).*
 
 # Improved Class Mapping
 
@@ -62,7 +65,7 @@ Today there is [mapToClass()](https://dexie.org/docs/Table/Table.mapToClass()) t
 
 ```ts
 class AppDB extends Dexie {
-  friends = new Table(Friend, '++id, name, age');
+  friends = this.Store(Friend, '++id, name, age');
 }
 const db = new AppDB('dbName');
 
@@ -87,10 +90,6 @@ export class Friend extends Entity<AppDB> {
   async birthday() {
     return await this.db.friends.update(this.id, friend => ++friend.age);
   }
-}
-
-export class AppDB extends Dexie {
-  friends = new Table(Friend, '++id, name, age');
 }
 ```
 

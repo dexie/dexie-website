@@ -3,7 +3,7 @@ layout: docs
 title: 'Road Map: Dexie Cloud'
 ---
 
-Dexie Cloud is ou in private beta since June 2021. This page contains the road map towards public release. This is a living document. See Milestones below. Features and dates may continously change.
+Dexie Cloud is out in private beta since June 2021. This page contains the road map towards public release. This is a living document. See Milestones below. Features and dates may continously change.
 
 [Dexie Cloud](https://dexie.org/cloud/)
 

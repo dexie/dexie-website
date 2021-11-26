@@ -86,9 +86,11 @@ export class Friend extends Entity<DB> {
 }
 
 export class DB extends Dexie {
+  // This declaration style does the same job as Dexie.stores():
   friends = new Table(Friend, '++id, name, age');
 }
 ```
+*As you can see, we plan to introduce yet another alternative to the new Dexie.stores() alternative - by declaring Table props on the subclass to gain both the correct typings along with the runtime schema declaration. It's never optimal to introduce two new alternative ways of declaring things - I know - but we don't want to force every user to subclass Dexie either. Feel free to come up with alternate ideas regarding this in the new [discussion thread for 4.0](https://github.com/dfahlander/Dexie.js/discussions/1455).*
 
 # Richer Queries
 

@@ -7,6 +7,8 @@ The goal for Dexie 4.0 will be a better experience for web developers to query t
 
 [Github Milestone for Dexie 4.0](https://github.com/dfahlander/Dexie.js/milestone/3)
 
+[Discussions and feedback on Dexie 4.0 road map](https://github.com/dfahlander/Dexie.js/discussions/1455)
+
 # Versionless declaration
 Dexie 4.0 will support the declaration of tables and indexes without specifying any version. We want to separate migration from table/index changes.
 
@@ -29,6 +31,8 @@ export const db = new Dexie('dbName').stores({
 The new declarative style also makes type inference and code completion work better as the generated table props will be infered from the declaration.
 
 We will continue to support the `.version(x).stores()` API so that applications aren't forced to go over to the versionless declaration.
+
+ Internally dexie will increment versions dynamically for the user when using the new declaration style - whenever there is a need to modify tables or indexes, it will auto-increment the version. However, it will still support given versions for migration upgraders in the old format. To accomplish that we allow the native version to diverge from 'virtual' versions by maintaing it in a versions-table within the database. This table will only be created after utilizing the new style declaration combined a dedicated version (old style). Basically, we continue working like before, unless the db has the $versions table - in which case the info there will be respected instead of the native one. 
 
 # Simple typings for Typescript users
 Instead of having to subclass Dexie, Typescript users have the declaration inferred without doing anything. However, the properties on the models will not be typed. Therefore we'll add a new way to annotate tables with the backing type.
@@ -121,3 +125,7 @@ Already since Dexie 3.0, it has been possible to import { Dexie } as a named exp
 ## More to come
 There might be more breaking changes to come. This is a living document. Subscribe to our [github discussions](https://github.com/dfahlander/Dexie.js) or to the [blog](https://medium.com/dexie-js).
 
+# Discuss or give feedback
+There's a github discussion dedicated for Dexie 4.0. Please feel free to give your feedback and comments there
+
+[Discussions and feedback on Dexie 4.0 road map](https://github.com/dfahlander/Dexie.js/discussions/1455)

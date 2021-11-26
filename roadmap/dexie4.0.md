@@ -52,7 +52,7 @@ interface Friend {
 const db = new AppDB('dbName');
 ```
 
-*As you can see, we plan to introduce two new alternative to declaring the database schema. It's never optimal to introduce two new alternative ways of declaring things - I know - but we don't want to force every user to subclass Dexie either. Feel free to come up with alternate ideas regarding this in the new [discussion thread for 4.0](https://github.com/dfahlander/Dexie.js/discussions/1455).*
+*As you can see, we plan to introduce two new alternative to declaring the database schema. It's never optimal to introduce two new alternative ways of declaring things - I know - but we don't want to force every user to subclass Dexie either. Feel free to comment on this in the new [discussion thread for 4.0](https://github.com/dfahlander/Dexie.js/discussions/1455).*
 
 ## Distinguish insert- from output types
 

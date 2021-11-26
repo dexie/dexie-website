@@ -5,7 +5,7 @@ title: 'Road Map: Dexie 4.0'
 
 The goal for Dexie 4.0 will be a better experience for web developers to query their data. We've already improved usability a lot in [Dexie 3.2](https://github.com/dfahlander/Dexie.js/releases/tag/v3.2.0) with [liveQuery()](https://dexie.org/docs/liveQuery()). What we'll be focusing on will be to query richness, paging and performance using caching. The goal is an intuitive and easy-to-use db API.
 
-[Github Milestone for Dexie 4.0](https://github.com/dfahlander/Dexie.js/milestones/3)
+[Github Milestone for Dexie 4.0](https://github.com/dfahlander/Dexie.js/milestone/3)
 
 # Versionless declaration
 Dexie 4.0 will support the declaration of tables and indexes without specifying any version. We want to separate migration from table/index changes.

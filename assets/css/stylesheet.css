@@ -239,6 +239,10 @@ table tr:nth-child(2n) {
 	margin: 0 0 10px 0;
 }
 
+.docs-page h1 {
+	margin-top: 40px;
+}
+
 .docs-toc {
 	padding: 10px;
 }

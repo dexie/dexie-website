@@ -78,7 +78,7 @@ class Friend {
 ```
 
 ## A solution to dependency issues with mapped classes
-Today, a mapped class that needs to access the database from its methods, will needs to access the `db` instance. This goes fine when both entities and database are declared in a single module but can cause recursive import problems when separating entity declaration from the db declaration into their own modules.
+Today, a mapped class that needs to access the database from its methods, will needs to access the a `db` instance. But it is a bit awkward to tie a method body to the same instance exported from the `db` module. For example, having two instances of db with different constructor parameters would not work as both would use one of the instances from their method bodies.
 
 In Dexie 4.0, this is solved using a lightweight depenency injection. There will be a generic class `Entity` that your classes may extend from in order to get your database instance injected as a protected property `db` on every entity instance. Your class methods can then perform queries onto the db without being dependant on the `db` module of your app. This use case will require a subclassed Dexie declaration though. There will still be cyclic import dependencies but only on the type level.
 

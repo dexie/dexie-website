@@ -106,8 +106,7 @@ await db.friends.where({
   name: 'foo',
   age: between(18, 65),
   "address.city": startsWith("S")
-})
-  .orderBy(['age', 'name'])
+}).orderBy(['age', 'name'])
   .offset(50)
   .limit(25)
   .toArray();

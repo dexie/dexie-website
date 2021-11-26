@@ -9,7 +9,7 @@ Dexie Cloud is out in private beta since June 2021. This page contains the road 
 
 # Milestone 1 - Private beta
 
-The private beta was released in June 2021 and included the following features
+The private beta was released in June 2021 and included the following features.
 
 [X] Initial documentation on dexie.org
 [X] CLI: "npx dexie-cloud create"

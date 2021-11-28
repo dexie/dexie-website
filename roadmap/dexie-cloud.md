@@ -38,12 +38,12 @@ This milestone was finalized in September 2021
 
 This milestone is planned to be released on November 30.
 
-- [X] Possible to create realms and respect permissions on sync and maintain realm consistency.
-- [X] New React hook `usePermission()` to disable unpermitted fields and buttons.
-- [X] Improve migration framework (server side on dexie cloud)
-- [X] Add new migration to reflect updated model
-- [X] Decide solution for binding an object to a dedicated realm
-- [ ] Support switching object between being shared (connected to realm) and private (connected to private realm) back and forth in a consistent manner.
+- [x] Possible to create realms and respect permissions on sync and maintain realm consistency.
+- [x] New React hook `usePermission()` to disable unpermitted fields and buttons.
+- [x] Improve migration framework (server side on dexie cloud)
+- [x] Add new migration to reflect updated model
+- [x] Decide solution for binding an object to a dedicated realm
+- [x] Support switching object between being shared (connected to realm) and private (connected to private realm) back and forth in a consistent manner.
 - [ ] Respect roles
 - [ ] Respect global roles
 - [ ] Allow importing global roles in JSON format for dexie-cloud import CLI.

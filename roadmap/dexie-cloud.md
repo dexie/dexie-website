@@ -45,10 +45,6 @@ This milestone is planned to be released on November 30.
 - [x] Add new migration to reflect updated model
 - [x] Decide solution for binding an object to a dedicated realm
 - [x] Support switching object between being shared (connected to realm) and private (connected to private realm) back and forth in a consistent manner.
-- [ ] Respect roles
-- [ ] Respect global roles
-- [ ] Allow importing global roles in JSON format for dexie-cloud import CLI.
-- [ ] Add sharing support with roles to the sample app
 - [ ] Implement invite route on dexie cloud server (endpoint for accepting / rejecting invites)
 - [ ] Send out email invites when inviting people to a realm
 - [ ] Add demo users to sample app
@@ -56,8 +52,12 @@ This milestone is planned to be released on November 30.
 - [ ] Implement solution for per-user singletons
 - [ ] Run migration on production cloud and publish new version
 
-# Milestone 4 - Update Documentation
+# Milestone 4 - Role support + Updated Documentation
 
+- [ ] Respect roles
+- [ ] Respect global roles
+- [ ] Allow importing global roles in JSON format for dexie-cloud import CLI.
+- [ ] Add sharing support with roles to the sample app
 - [ ] Update Authentication docs: signed refresh tokens
 - [ ] Updated docs explaining that '@' keys are optional.
 - [ ] Universally consistent modify() operations

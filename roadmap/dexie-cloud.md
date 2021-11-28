@@ -39,6 +39,7 @@ This milestone was finalized in September 2021
 This milestone is planned to be released on November 30.
 
 - [x] Possible to create realms and respect permissions on sync and maintain realm consistency.
+- [x] Support compound primary keys
 - [x] New React hook `usePermission()` to disable unpermitted fields and buttons.
 - [x] Improve migration framework (server side on dexie cloud)
 - [x] Add new migration to reflect updated model

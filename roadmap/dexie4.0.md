@@ -125,6 +125,9 @@ We will stop exporting Dexie as a default export as it is easier to prohibit [du
 
 Already since Dexie 3.0, it has been possible to import { Dexie } as a named export. To prepare for Dexie 4.0, it can be wise to change your imports from `import Dexie from 'dexie'` to `import { Dexie } from 'dexie'` already today.
 
+## No IE11 support
+No support for Internet Explorer 11, legacy Edge (non-chromium) nor legacy Safari below version 12.
+
 ## More to come
 There might be more breaking changes to come. This is a living document. Subscribe to our [github discussions](https://github.com/dfahlander/Dexie.js) or to the [blog](https://medium.com/dexie-js).
 

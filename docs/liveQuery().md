@@ -99,8 +99,8 @@ If you wonder how we can possibly detect whether a change would affect your quer
 * Every index being queried is tracked with the given range it queries. This makes it possible to detect whether an added object would fit within the range or not, also whether an update of an indexed property would make it become included or not.
 * Whenever a write-transaction commits successfully, mutated parts (keys and ranges) are matched against ongoing queries using the range tree structure.
   * Add-mutations: every indexed property is matched against ongoing queries
-  * Update-mutations, if an indexed property is updated, we detect whether it would become included into any ongoing query where it was previously not included, or excluded from a query it was previously included in, or whether it updates properties on a result that was part of the query result.
-  * Delete-mutations, queries that havev the same primary keys in their results will be triggered
+  * Update-mutations: if an indexed property is updated, we detect whether it would become included into any ongoing query where it was previously not included, or excluded from a query it was previously included in, or whether it updates properties on a result that was part of the query result.
+  * Delete-mutations: queries that have the same primary keys in their results will be triggered
 * Whenever the querier is triggered, the subscribed ranges are cleared, the querier re-executed and the ranges or keys being queried this time will be tracked.
 * Mutated rangesets are also broadcasted across browsing contexts to wake up liveQueries in other tabs or workers
 

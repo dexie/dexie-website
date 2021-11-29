@@ -95,7 +95,7 @@ Got result: []
 If you wonder how we can possibly detect whether a change would affect your querier, the details are:
 
 * Any call to any Dexie API done during querier execution will be tracked
-* The tracking is done using an efficient datastructure for range collision detections, a [range tree](https://en.wikipedia.org/wiki/Interval_tree) implemented in [rangeset.ts](https://github.com/dfahlander/Dexie.js/blob/master/src/helpers/rangeset.ts)
+* The tracking is done using an efficient datastructure for range collision detections, a [range tree](https://github.com/dfahlander/Dexie.js/blob/master/src/helpers/rangeset.ts)
 * Every index being queried is tracked with the given range it queries. This makes it possible to detect whether an added object would fit within the range or not, also whether an update of an indexed property would make it become included or not.
 * On add mutations, every indexed property is matched against ongoing queries
 * On update mutations, if an indexed property is updated, we detect whether it would become included into any ongoing query

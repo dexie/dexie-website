@@ -133,6 +133,12 @@ interface Realm {
    * This property is optional but it can be a good practice to name a realm for what it represents.
    */
   name?: string;
+  
+  /** A short text that describes what the realm represents.
+    This text will be used in invites to exlain what the user is invited to.
+    Examples: 'a to-do list', 'a project', 'a team'.
+  */
+  represents?: string;
 
   /** Contains the user-ID of the owner. An owner has implicit full write-access to the realm
    * and all obejcts connected to it. Ownership does not imply read (sync) access though,

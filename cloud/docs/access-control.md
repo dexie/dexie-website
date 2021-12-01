@@ -187,9 +187,10 @@ function createTodoList(listName) {
 
     // Create the new realm
     const newRealmId = await db.realms.add({
-      // A name (and optionally a description) are used in invites -
+      // A name (and what it represents) are used in invites -
       // to explain to invited members what they are invited to.
       name: `${listName}`,
+      represents: `a to-do list`
     });
 
     // Give yourself visibility of the realm and its connected objects
@@ -372,10 +373,10 @@ function addProject(projectName, description="") {
   return db.transaction("rw", db.realms, db.roles, db.projects, async () => {
     // Create the new realm
     const newRealmId = await db.realms.add({
-      // A name (and optionally a description) are used in invites -
+      // A name and what it represents are used in invites -
       // to explain to invited members what they are invited to.
       name: `${projectName}`,
-      description
+      represents: `a project`
     });
 
     // Add two roles for the project realm

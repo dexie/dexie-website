@@ -169,8 +169,7 @@ export function FriendList() {
 
 Notice two things here:
 
-1. The func
-ion passed to [useLiveQuery()](/docs/dexie-react-hooks/useLiveQuery()) queries dexie for all friends using [toArray()](/docs/Collection/Collection.toArray()).
+1. The function passed to [useLiveQuery()](/docs/dexie-react-hooks/useLiveQuery()) queries dexie for all friends using [toArray()](/docs/Collection/Collection.toArray()).
 2. The result will be undefined on initial render - which explains why we refer it as `friends?` rather than `friends`. The reason for this is the asynchronic nature of IndexedDB. Just be aware of this fact and make sure your rendering code handles it.
 
 

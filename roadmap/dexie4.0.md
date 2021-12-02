@@ -40,7 +40,7 @@ With the new declaration style, typescript users will automatically get table pr
 ```ts
 class AppDB extends Dexie {
   // This does the same job as new Dexie('dbname').stores(...)
-  friends = this.Store<Friend>('++id, name, age');
+  friends = this.Table<Friend>('++id, name, age');
 }
 
 interface Friend {
@@ -66,7 +66,7 @@ Today there is [mapToClass()](https://dexie.org/docs/Table/Table.mapToClass()) t
 
 ```ts
 class AppDB extends Dexie {
-  friends = this.Store(Friend, '++id, name, age');
+  friends = this.Table(Friend, '++id, name, age');
 }
 const db = new AppDB('dbName');
 

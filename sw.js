@@ -130,9 +130,15 @@ self.addEventListener('fetch', function (event) {
             // Could be timeout, a 404, 500 or maybe offline?
             // In case we have an OK response in the cache, respond with that one instead:
             if (cachedResponse && cachedResponse.ok) {
-                if (res === "timedout") console.log("URL", request.url, "timedout. Serving it from cache to speed up site");
-                // Either timeout or unsuccessful response from server.
-                // But we have a successful response in cache, so let's respond with that:
+                // Respond from cache.
+                // But in parallell, update the cache once the slow response arrives (if it is successful and newer)
+                if (res === "timedout") {
+                    console.debug("URL", request.url, "timedout. Serving it from cache but also update cache once slow response arrives");
+                    event.waitUntil(fetchPromise.then(async res => {
+                        if (!res.ok) return;
+                        await updateCache(res, cachedResponse);
+                    }).catch(err => null));
+                }
                 return cachedResponse;
             } else if (res === "timedout") {
                 // We don't have anything in cache. Wait for fetch even if it takes time.
@@ -150,21 +156,26 @@ self.addEventListener('fetch', function (event) {
         }
 
         // We come here if the real fetch was successful.
-        // Should we update the cache with this fresh version?
-        if (!cachedResponse || (cachedResponse.headers.get("last-modified") !== res.headers.get("last-modified"))) {
-            // There were no cached response, or "last-modified" headers was changed - keep the cache up-to-date,
-            // so that, when the user goes offline, it will have the latest and greatest, and not revert to old versions
-            const cache = await caches.open(CACHE_NAME);
-            await cache.put(request, res.clone());
-        }
+        event.waitUntil(updateCache(res, cachedResponse));
         return res;
     }, async error => {
         const cachedResponse = await cachedResponsePromise.catch(err => null);
-        console.log("sw: Finding in cache:", request.url, cachedResponse);
-        console.log("sw: ok?:", cachedResponse && cachedResponse.ok);
+        console.debug("sw: Finding in cache:", request.url, cachedResponse);
+        console.debug("sw: ok?:", cachedResponse && cachedResponse.ok);
         if (cachedResponse && cachedResponse.ok) {
             return cachedResponse;
         }
         throw error;
     }));
 });
+
+async function updateCache(res, currentCachedRes) {
+    // Should we update the cache with this fresh version?
+    let cachedLastMod = currentCachedRes && currentCachedRes.headers.get("last-modified");
+    if (!cachedLastMod || (cachedLastMod !== res.headers.get("last-modified"))) {
+        // There were no cached response, or no "last-modified", or "last-modified" headers was changed - keep the cache up-to-date,
+        // so that, when the user goes offline, it will have the latest and greatest, and not revert to old versions
+        const cache = await caches.open(CACHE_NAME);
+        await cache.put(request, res.clone());
+    }
+}

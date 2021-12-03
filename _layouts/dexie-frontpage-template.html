@@ -79,11 +79,15 @@
 			document.addEventListener("DOMContentLoaded", prismHighlight.highlight);
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
         anchor.addEventListener("click", function (e) {
-          e.preventDefault();
-
-          document.querySelector(this.getAttribute("href")).scrollIntoView({
-            behavior: "smooth",
-          });
+					var href = this.getAttribute("href");
+					if (href === "#") return;
+					var elem = document.querySelector(href);
+					if (elem) {
+						e.preventDefault();
+						elem.scrollIntoView({
+							behavior: "smooth",
+						});
+					}
         });
       });
 		</script>

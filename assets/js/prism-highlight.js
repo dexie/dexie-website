@@ -34,7 +34,6 @@ prismHighlight = (function () {
       // 3. add [pos, end, span] to lookup.
       lookup.push([startPos, startPos + text.length, span, text]);
     }
-    console.debug("Text", innerText);
     // TODO:
     // Free-text search for entries to highlight.
     // when found, lookup the spans it spans over.

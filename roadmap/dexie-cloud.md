@@ -36,7 +36,7 @@ This milestone was finalized in September 2021
 
 # Milestone 3 - Fully functional Access Control (CURRENT)
 
-This milestone is planned to be released on November 30.
+This milestone is planned to be released on December 10.
 
 - [x] Possible to create realms and respect permissions on sync and maintain realm consistency.
 - [x] Support compound primary keys

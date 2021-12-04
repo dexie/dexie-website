@@ -136,7 +136,7 @@ self.addEventListener('fetch', function (event) {
                     console.debug("URL", request.url, "timedout. Serving it from cache but also update cache once slow response arrives");
                     event.waitUntil(fetchPromise.then(async res => {
                         if (!res.ok) return;
-                        await updateCache(res, cachedResponse);
+                        await updateCache(request, res, cachedResponse);
                     }).catch(err => null));
                 }
                 return cachedResponse;
@@ -156,7 +156,7 @@ self.addEventListener('fetch', function (event) {
         }
 
         // We come here if the real fetch was successful.
-        event.waitUntil(updateCache(res, cachedResponse));
+        event.waitUntil(updateCache(request, res, cachedResponse));
         return res;
     }, async error => {
         const cachedResponse = await cachedResponsePromise.catch(err => null);
@@ -169,7 +169,7 @@ self.addEventListener('fetch', function (event) {
     }));
 });
 
-async function updateCache(res, currentCachedRes) {
+async function updateCache(request, res, currentCachedRes) {
     // Should we update the cache with this fresh version?
     let cachedLastMod = currentCachedRes && currentCachedRes.headers.get("last-modified");
     if (!cachedLastMod || (cachedLastMod !== res.headers.get("last-modified"))) {

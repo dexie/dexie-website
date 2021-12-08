@@ -21,6 +21,6 @@ db.table(storeName)
 
 [Table](/docs/Table/Table)
 
-### NOTES
+### Remarks
 
-In Dexie v1.3.x and below, it wasn't safe to store the result in a variable and reuse it later. But since version 1.4.0, it is safe to do so. Ongoing transaction is now inspected at runtime (when table is used, not when returned from this method).
+Returns a [Table](/docs/Table/Table) instance representing the object store with the given name. If database is opened with a defined schema (using db.version().stores()), this method can be called before database has been opened, but if not defining a schema, tables are not accessible until database has been successfully opened.

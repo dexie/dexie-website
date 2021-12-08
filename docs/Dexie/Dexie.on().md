@@ -32,3 +32,5 @@ db.on(eventType, subscriberFunction);
 
 ["versionchange"](/docs/Dexie/Dexie.on.versionchange)
 
+["close"](/docs/Dexie/Dexie.on.close)
+

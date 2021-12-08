@@ -19,14 +19,14 @@ Dexie 4.0 will also support schema changes without updating version. We want to 
 ```js
 export const db = new Dexie('dbName');
 db.version(1).stores({
-  friends: '++id, name, age',
+  friends: '++id, name, age'
 });
 ```
 
 #### Dexie 4.0 style
 ```js
 export const db = new Dexie('dbName').stores({
-  friends: '++id, name, age',
+  friends: '++id, name, age'
 });
 ```
 

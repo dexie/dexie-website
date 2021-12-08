@@ -9,8 +9,11 @@ The goal for Dexie 4.0 will be a better experience for web developers to query t
 
 [Discussions and feedback on Dexie 4.0 road map](https://github.com/dfahlander/Dexie.js/discussions/1455)
 
-# Versionless declaration
-Dexie 4.0 will support the declaration of tables and indexes without specifying any version. We want to separate migration from table/index changes. Versions will be declared as before, but only needed for the purpose of migrating data. Schema changes can be diffed and updated automatically. Hopefully this will save people from common error of forgetting to increase version number on any schema change.
+# Fluent declaration
+
+DB declaration will be possible within a single expression.
+
+Dexie 4.0 will also support schema changes without updating version. We want to separate migration from table/index changes. Versions will be declared as before, but version increments will only be needed for the purpose of migrating data, not schema. Schema changes can be diffed with existing schema and updated automatically. Hopefully this will save people from common error of forgetting to increase version number on any schema change.
 
 #### Current style
 ```js
@@ -29,9 +32,9 @@ export const db = new Dexie('dbName').stores({
 
 The new declarative style also makes type inference and code completion work better since we will declare the typings so that generated table props will be infered.
 
-We will continue to support the `.version(x).stores()` API so that applications aren't forced to go over to the versionless declaration.
+We will continue to support the old API so that applications aren't forced to go over to the fluent declaration.
 
- Internally dexie will increment versions dynamically for the user when using the new declaration style - whenever there is a need to modify tables or indexes, it will auto-increment the version. However, it will still support given versions for migration upgraders in the old format. To accomplish that we allow the native version to diverge from 'virtual' versions by maintaing it in a versions-table within the database. This table will only be created after utilizing the new style declaration combined a dedicated version (old style). Basically, we continue working like before, unless the db has the $versions table - in which case the info there will be respected instead of the native one. 
+Internally dexie will increment versions dynamically for the user when declared schema differs from installed schema - whenever there is a need to modify tables or indexes, it will auto-increment the native version. However, it will still support given versions for migration upgraders. To accomplish that we allow the native version to diverge from 'virtual' versions by maintaing it in a versions-table within the database. This table will only be created on-demand, if a schema upgrade on same given version was needed. Basically, we continue working like before, unless the db has the $versions table - in which case the info there will be respected instead of the native one. 
 
 # A Typescript-friendler declaration style
 

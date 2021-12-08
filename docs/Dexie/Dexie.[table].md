@@ -18,6 +18,9 @@ assert(db.table2 instanceof db.Table);
 
 [Table](/docs/Table/Table)
 
+### Notes
+
+These dymanic properties only populated onto the db instance when declaring the schema using version().stores(). If you open the database dynamically (not using version().stores(), these properties are NOT populated and you need to wait for db.open() to complete before being able to access a table. Also when db.open() has completed, you will not have the `db[table]` properties but need to use [db.table()](Dexie.table()) to retrieve a table instance. You can then also use [db.tables()](Dexie.tables()) to list existing tables after a successful call to db.open().
 ### Sample
 
 ```javascript

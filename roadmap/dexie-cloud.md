@@ -36,7 +36,7 @@ This milestone was finalized in September 2021
 
 # Milestone 3 - Fully functional Access Control (CURRENT)
 
-This milestone is planned to be released on December 10.
+This milestone is planned to be released on <strike>December 10</strike> December 13.
 
 - [x] Possible to create realms and respect permissions on sync and maintain realm consistency.
 - [x] Support compound primary keys
@@ -45,8 +45,8 @@ This milestone is planned to be released on December 10.
 - [x] Add new migration to reflect updated model
 - [x] Decide solution for binding an object to a dedicated realm
 - [x] Support switching object between being shared (connected to realm) and private (connected to private realm) back and forth in a consistent manner.
-- [ ] Implement invite route on dexie cloud server (endpoint for accepting / rejecting invites)
-- [ ] Send out email invites when inviting people to a realm
+- [x] Implement invite route on dexie cloud server (endpoint for accepting / rejecting invites)
+- [x] Send out email invites when inviting people to a realm
 - [ ] Add demo users to sample app
 - [ ] Decide a solution for per-user singletons
 - [ ] Implement solution for per-user singletons

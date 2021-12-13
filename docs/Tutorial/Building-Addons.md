@@ -55,9 +55,9 @@ db.Collection.prototype.each = Dexie.override (db.Collection.prototype.each, fun
 ### Protected methods
 
 The API Reference does not document the protected methods and properties of Dexie. You may however look into the code and find lots of methods and properties with a leading underscore. Your addon may then override protected methods to change the behaviour of the database engine.
-To see an example of this, look at how [Dexie.Observable.js](https://github.com/dfahlander/Dexie.js/blob/master/addons/Dexie.Observable/src/Dexie.Observable.js) is implemented.
+To see an example of this, look at how [Dexie.Observable.js](https://github.com/dexie/Dexie.js/blob/master/addons/Dexie.Observable/src/Dexie.Observable.js) is implemented.
 
-Note: We will try to keep all the not-yet-documented underscore properties and methods backward compatible as much as possible, but it's not a guarantee. To be certain we inform you about important API changes, please let [us](https://github.com/dfahlander/Dexie.js/graphs/contributors) know about your addon and where to find its source. To be even more certain, let your addon reside under your fork of Dexie.js/addons and keep us updated with pull requests.
+Note: We will try to keep all the not-yet-documented underscore properties and methods backward compatible as much as possible, but it's not a guarantee. To be certain we inform you about important API changes, please let [us](https://github.com/dexie/Dexie.js/graphs/contributors) know about your addon and where to find its source. To be even more certain, let your addon reside under your fork of Dexie.js/addons and keep us updated with pull requests.
 
 ### When to use prototype and when not
 

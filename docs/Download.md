@@ -39,6 +39,6 @@ yarn add dexie
 npm install dexie@next
 ```
 
-[Releases on GitHub](https://github.com/dfahlander/Dexie.js/releases)
+[Releases on GitHub](https://github.com/dexie/Dexie.js/releases)
 
 

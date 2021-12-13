@@ -70,7 +70,7 @@ await db.friends.delete(friendId);
 subscription.unsubscribe();
 ```
 
-*[This sample is also available in Dexie.js/samples/liveQuery/liveQuery.html](https://github.com/dfahlander/Dexie.js/blob/master/samples/liveQuery/liveQuery.html)*
+*[This sample is also available in Dexie.js/samples/liveQuery/liveQuery.html](https://github.com/dexie/Dexie.js/blob/master/samples/liveQuery/liveQuery.html)*
 
 The following output will be seen:
 
@@ -95,7 +95,7 @@ Got result: []
 If you wonder how we can possibly detect whether a change would affect your querier, the details are:
 
 * Any call to any Dexie API done during querier execution will be tracked
-* The tracking is done using an efficient datastructure for range collision detections, a [range tree](https://github.com/dfahlander/Dexie.js/blob/master/src/helpers/rangeset.ts)
+* The tracking is done using an efficient datastructure for range collision detections, a [range tree](https://github.com/dexie/Dexie.js/blob/master/src/helpers/rangeset.ts)
 * Every index being queried is tracked with the given range it queries. This makes it possible to detect whether an added object would fit within the range or not, also whether an update of an indexed property would make it become included or not.
 * Whenever a write-transaction commits successfully, mutated parts (keys and ranges) are matched against ongoing queries using the range tree structure.
   * Add-mutations: every indexed property is matched against ongoing queries
@@ -104,7 +104,7 @@ If you wonder how we can possibly detect whether a change would affect your quer
 * Whenever the querier is triggered, the subscribed ranges are cleared, the querier re-executed and the ranges or keys being queried this time will be tracked.
 * Mutated rangesets are also broadcasted across browsing contexts to wake up liveQueries in other tabs or workers
 
-*This is a simplified explanation of how the algorithm works. The raw details can be found [here](https://github.com/dfahlander/Dexie.js/tree/master/src/live-query). There are edge cases we also take care of, and optimizations to preserve write performance of large bulk mutations. However, the optimizations does not affect the functionality else than that liveQueries may be triggered as false positives in certain times.*
+*This is a simplified explanation of how the algorithm works. The raw details can be found [here](https://github.com/dexie/Dexie.js/tree/master/src/live-query). There are edge cases we also take care of, and optimizations to preserve write performance of large bulk mutations. However, the optimizations does not affect the functionality else than that liveQueries may be triggered as false positives in certain times.*
 
 ## Rules for the querier function
 

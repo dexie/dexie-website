@@ -3,7 +3,7 @@ layout: docs
 title: "Dexie"
 ---
 
-Dexie.js (Official home page: [dexie.org](https://dexie.org)) is a library that makes it super simple to use [indexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) - the standard client-side database in browsers. Read more about Dexie on it's [README](https://github.com/dfahlander/Dexie.js/blob/master/README.md) or at the [home page](https://dexie.org).
+Dexie.js (Official home page: [dexie.org](https://dexie.org)) is a library that makes it super simple to use [indexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) - the standard client-side database in browsers. Read more about Dexie on it's [README](https://github.com/dexie/Dexie.js/blob/master/README.md) or at the [home page](https://dexie.org).
 
 `Dexie` is the main class and the default export of the library. An instance of this class represents an indexedDB database connection.
 
@@ -29,8 +29,8 @@ var db = new Dexie(databaseName, options?);
 | indexedDB: [IDBFactory](https://developer.mozilla.org/en-US/docs/Web/API/IDBFactory)     | Supply an alternate implementation of indexedDB. If supplying this, also supply IDBKeyRange that works with that implementation.                                                                                                                                                                                     |
 | IDBKeyRange: [IDBKeyRange](https://developer.mozilla.org/en-US/docs/Web/API/IDBKeyRange) | An implementation of the IDBKeyRange interface that works with provided indexedDB implementation.                                                                                                                                                                                                                    |
 | allowEmptyDB: boolean                                                                    | If opening in [dynamic mode](<Dexie.open()#dynamic-mode>) (not defining a schema) the call to db.open() will normally reject if the database didn't exist and this option is false or not set. By setting this option to true, Dexie.open() will succeed to create a new empty database when opening it dynamically. |
-| modifyChunkSize: number                                                                  | (since 3.1.0-alpha) Override the default value of 2000 rows per chunk used by Collection.modify(). See [FR #1152](https://github.com/dfahlander/Dexie.js/issues/115).                                                                                                                                                |
-| chromeTransactionDurability: 'default' \| 'strict' \| 'relaxed'                          | (since 3.2.0-beta.3) Override the default transaction durability in Chrome versions >=83. See [FR #1018](https://github.com/dfahlander/Dexie.js/issues/1018)                                                                                                                                                         |
+| modifyChunkSize: number                                                                  | (since 3.1.0-alpha) Override the default value of 2000 rows per chunk used by Collection.modify(). See [FR #1152](https://github.com/dexie/Dexie.js/issues/115).                                                                                                                                                |
+| chromeTransactionDurability: 'default' \| 'strict' \| 'relaxed'                          | (since 3.2.0-beta.3) Override the default transaction durability in Chrome versions >=83. See [FR #1018](https://github.com/dexie/Dexie.js/issues/1018)                                                                                                                                                         |
 
 If the 'addons' option is omitted, it will default to the value of [Dexie.addons](/docs/Dexie/Dexie.addons).
 

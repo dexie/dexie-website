@@ -175,7 +175,7 @@ Found object: {"someIndex":"item2","id":2}
 Finished. 
 ```
 
-[Watch the full HTML source](https://github.com/dfahlander/Dexie.js/blob/master/samples/ajax-populate/populateFromAjaxCall.html), or [view it in your browser](https://cdn.statically.io/gh/dfahlander/Dexie.js/2446b378ccf28da657f68a9954a8e4227c3ebf3b/samples/ajax-populate/populateFromAjaxCall.html)
+[Watch the full HTML source](https://github.com/dexie/Dexie.js/blob/master/samples/ajax-populate/populateFromAjaxCall.html), or [view it in your browser](https://cdn.statically.io/gh/dfahlander/Dexie.js/2446b378ccf28da657f68a9954a8e4227c3ebf3b/samples/ajax-populate/populateFromAjaxCall.html)
 
 ### See Also
 

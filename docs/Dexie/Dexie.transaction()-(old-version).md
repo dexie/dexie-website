@@ -39,13 +39,13 @@ db.transaction(mode, table, [table2], [tableN], ..., callback)
 
 <table>
   <tr>
-    <td>table : <a href="/docs/Table/Table">Table</a> or <a href="https://github.com/dfahlander/Dexie.js/wiki/WriteableTable">WriteableTable</a></td>
+    <td>table : <a href="/docs/Table/Table">Table</a> or <a href="https://github.com/dexie/Dexie.js/wiki/WriteableTable">WriteableTable</a></td>
     <td>
       Transaction-based Table to work on.
       <br/>
       If mode == "r", instance will be <a href="/docs/Table/Table">Table</a>
       <br/>
-      If mode == "rw", instance will be <a href="https://github.com/dfahlander/Dexie.js/wiki/WriteableTable">WriteableTable</a>
+      If mode == "rw", instance will be <a href="https://github.com/dexie/Dexie.js/wiki/WriteableTable">WriteableTable</a>
     </td>
   </tr>
   <tr>

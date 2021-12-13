@@ -161,8 +161,8 @@ NOTE: Multi-valued indexes are only supported in Opera, Firefox and Chrome. Does
 However, it is also possible to implement it using custom views, which is implemented in FullTextSearch2.js.
 
 Sample Source Locations:
-* [FullTextSearch.js](https://github.com/dfahlander/Dexie.js/blob/master/samples/full-text-search/FullTextSearch.js) (using multi-valued indexes)
-* [FullTextSearch2.js](https://github.com/dfahlander/Dexie.js/blob/master/samples/full-text-search/FullTextSearch2.js) (using custom views)
+* [FullTextSearch.js](https://github.com/dexie/Dexie.js/blob/master/samples/full-text-search/FullTextSearch.js) (using multi-valued indexes)
+* [FullTextSearch2.js](https://github.com/dexie/Dexie.js/blob/master/samples/full-text-search/FullTextSearch2.js) (using custom views)
 
 ### See Also
 

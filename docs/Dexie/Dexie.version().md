@@ -14,7 +14,7 @@ db.version(versionNumber)
 <tr><td>versionNumber : Number</td><td>The version to declare</td></tr>
 </table>
 
-Note the backend DB will get the given version number multiplied by 10. See [Issue #59](https://github.com/dfahlander/Dexie.js/issues/59) where the reason for this behavior is described.
+Note the backend DB will get the given version number multiplied by 10. See [Issue #59](https://github.com/dexie/Dexie.js/issues/59) where the reason for this behavior is described.
 
 ### Return Value
 

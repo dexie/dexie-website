@@ -82,7 +82,7 @@ Start a database transaction.
 
 When accessing the database within the given scope function, any [Table](/docs/Table/Table)-based operation will execute within the current transaction.
 
-*NOTE: As of v1.4.0+, the scope function will always be executed asynchronically. In previous versions, the scope function could be executed either directly (synchronically) or asynchronically depending on whether the database was ready, or if a parent transaction was locked. See [Issue #268](https://github.com/dfahlander/Dexie.js/issues/268)*.
+*NOTE: As of v1.4.0+, the scope function will always be executed asynchronically. In previous versions, the scope function could be executed either directly (synchronically) or asynchronically depending on whether the database was ready, or if a parent transaction was locked. See [Issue #268](https://github.com/dexie/Dexie.js/issues/268)*.
 
 ### Transaction Scope
 

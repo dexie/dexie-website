@@ -3,11 +3,11 @@ layout: docs
 title: 'Road Map: Dexie 4.0'
 ---
 
-The goal for Dexie 4.0 will be a better experience for web developers to query their data. We've already improved usability in [Dexie 3.2](https://github.com/dfahlander/Dexie.js/releases/tag/v3.2.0) with [liveQuery()](https://dexie.org/docs/liveQuery()). What we'll be focusing on will be to query richness, paging and performance using caching. The goal is an intuitive and easy-to-use db API that performs well in large apps.
+The goal for Dexie 4.0 will be a better experience for web developers to query their data. We've already improved usability in [Dexie 3.2](https://github.com/dexie/Dexie.js/releases/tag/v3.2.0) with [liveQuery()](https://dexie.org/docs/liveQuery()). What we'll be focusing on will be to query richness, paging and performance using caching. The goal is an intuitive and easy-to-use db API that performs well in large apps.
 
-[Github Milestone for Dexie 4.0](https://github.com/dfahlander/Dexie.js/milestone/3)
+[Github Milestone for Dexie 4.0](https://github.com/dexie/Dexie.js/milestone/3)
 
-[Discussions and feedback on Dexie 4.0 road map](https://github.com/dfahlander/Dexie.js/discussions/1455)
+[Discussions and feedback on Dexie 4.0 road map](https://github.com/dexie/Dexie.js/discussions/1455)
 
 # Fluent declaration
 
@@ -55,7 +55,7 @@ interface Friend {
 const db = new AppDB('dbName');
 ```
 
-*As you can see, we plan to introduce two new alternative to declaring the database schema. It's never optimal to introduce two new alternative ways of declaring things - I know - but we don't want to force every user to subclass Dexie either. Feel free to comment on this in the new [discussion thread for 4.0](https://github.com/dfahlander/Dexie.js/discussions/1455).*
+*As you can see, we plan to introduce two new alternative to declaring the database schema. It's never optimal to introduce two new alternative ways of declaring things - I know - but we don't want to force every user to subclass Dexie either. Feel free to comment on this in the new [discussion thread for 4.0](https://github.com/dexie/Dexie.js/discussions/1455).*
 
 ## Distinguish insert- from output types
 
@@ -132,9 +132,9 @@ Already since Dexie 3.0, it has been possible to import { Dexie } as a named exp
 No support for Internet Explorer 11, legacy Edge (non-chromium) nor legacy Safari below version 14.
 
 ## More to come
-There might be more breaking changes to come. This is a living document. Subscribe to our [github discussions](https://github.com/dfahlander/Dexie.js) or to the [blog](https://medium.com/dexie-js).
+There might be more breaking changes to come. This is a living document. Subscribe to our [github discussions](https://github.com/dexie/Dexie.js) or to the [blog](https://medium.com/dexie-js).
 
 # Discuss or give feedback
 There's a github discussion dedicated for Dexie 4.0. Please feel free to give your feedback and comments there
 
-[Discussions and feedback on Dexie 4.0 road map](https://github.com/dfahlander/Dexie.js/discussions/1455)
+[Discussions and feedback on Dexie 4.0 road map](https://github.com/dexie/Dexie.js/discussions/1455)

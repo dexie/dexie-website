@@ -47,7 +47,7 @@ tools/release.sh
 Tests will run via karma. It will test the full suite on browserstack.
 Script will publish on npm and checkin dist builded files into github/releases branch.
 
-2. Browse to https://github.com/dfahlander/Dexie.js/releases and edit the new tag so that it becomes a release. Write release notes based on the commit history.
+2. Browse to https://github.com/dexie/Dexie.js/releases and edit the new tag so that it becomes a release. Write release notes based on the commit history.
 
 ### If release.sh fails...
 

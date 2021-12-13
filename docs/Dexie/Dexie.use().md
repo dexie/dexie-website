@@ -75,5 +75,5 @@ db.use({
 
 In essence, all mutating operations are bulk-oriented. Theres only bulkPut(), bulkAdd(), bulkDelete() and deleteRange(). Currently all of these four are reached through a single method mutate().
 
-Interface definitions for DBCore is found [here](https://github.com/dfahlander/Dexie.js/blob/master/src/public/types/dbcore.d.ts)
+Interface definitions for DBCore is found [here](https://github.com/dexie/Dexie.js/blob/master/src/public/types/dbcore.d.ts)
 

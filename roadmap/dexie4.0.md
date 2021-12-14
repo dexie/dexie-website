@@ -34,7 +34,7 @@ The new declarative style also makes type inference and code completion work bet
 
 We will continue to support the old API so that applications aren't forced to go over to the fluent declaration.
 
-Internally dexie will increment versions dynamically for the user when declared schema differs from installed schema - whenever there is a need to modify tables or indexes, it will auto-increment the native version. However, it will still support given versions for migration upgraders. To accomplish that we allow the native version to diverge from 'virtual' versions by maintaing it in a versions-table within the database. This table will only be created on-demand, if a schema upgrade on same given version was needed. Basically, we continue working like before, unless the db has the $versions table - in which case the info there will be respected instead of the native one. 
+Internally dexie will increment versions dynamically for the user when declared schema differs from installed schema - whenever there is a need to modify tables or indexes, it will auto-increment the native version. However, it will still support given versions for migration upgraders. To accomplish that we allow the native version to diverge from 'virtual' versions by maintaing it in a versions-table within the database. This table will only be created on-demand, if a schema upgrade on same given version was needed. Basically, we continue working like before, unless the db has the $versions table - in which case the info there will be respected instead of the native one. If disliking the idea of diverging from the native IndexedDB version, keep declaring a version as with current Dexie and it won't need to add a $versions table.
 
 # A Typescript-friendler declaration style
 

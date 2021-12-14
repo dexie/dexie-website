@@ -72,7 +72,7 @@ export function OldFriendsList() {
 
 ## Persistent State Manager
 
-The `useLiveQuery()` hook does not only load data - it *observes* the query for changes. This means that you can use Dexie as a persistent state manager in your React application without having to keep it in RAM memory. If you add, update or delete a friend using Dexie methods for that (such as [Table.add](../Table/Table.add()), [Table.update()](../Table/Table.update()), [Table.delete()](../Table/Table.delete()), ...etc), any component that observes the affected data will automatically rerender.
+The `useLiveQuery()` hook does not only load data - it *observes* the query for changes. This means that you can use Dexie as a persistent and RAM-sparse state manager in your React application since you don't keep entire database in RAM. If you add, update or delete a friend using Dexie methods for that (such as [Table.add](../Table/Table.add()), [Table.update()](../Table/Table.update()), [Table.delete()](../Table/Table.delete()), ...etc), any component that observes the affected data will automatically rerender.
 
 ## Fine grained observation
 

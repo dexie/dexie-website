@@ -67,28 +67,6 @@ const subscription = friendsObservable.subscribe({
 subsciption.unsubscribe();
 ```
 
-## Svelte
-
-```svelte
-<script>
-  import { liveQuery } from "dexie";
-  import { db } from "./db";
-
-  let friends = liveQuery(
-    () => db.friends.where("age").between(18, 65).toArray()
-  );
-</script>
-
-<div>
-  <h2>Friends</h2>
-  <ul>
-  {#each ($friends || []) as friend (friend.id)}
-    <li>{friend.name}, {friend.age}</li>
-  {/each}
-  </ul>
-</div>
-```
-
 ## React
 
 ```jsx
@@ -114,6 +92,32 @@ export function FriendList () {
   </>;
 }
 ```
+
+## Svelte
+
+```svelte
+<script>
+  import { liveQuery } from "dexie";
+  import { db } from "./db";
+
+  let friends = liveQuery(
+    () => db.friends.where("age").between(18, 65).toArray()
+  );
+</script>
+
+<div>
+  <h2>Friends</h2>
+  <ul>
+  {#each ($friends || []) as friend (friend.id)}
+    <li>{friend.name}, {friend.age}</li>
+  {/each}
+  </ul>
+</div>
+```
+
+## Other frameworks
+
+On [dexie.org](https://dexie.org) we also show examples for Angular and Vue.
 
 # Deep Dive
 

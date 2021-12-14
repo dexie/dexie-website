@@ -75,7 +75,7 @@ import { db } from "./db";
 
 export function FriendList () {
   const friends = useLiveQuery(
-    () => db.friends.where("age").between(18, 65).toArray()
+    () => db.friends.where("age").between(50, 75).toArray()
   );
 
   return <>
@@ -101,7 +101,7 @@ export function FriendList () {
   import { db } from "./db";
 
   let friends = liveQuery(
-    () => db.friends.where("age").between(18, 65).toArray()
+    () => db.friends.where("age").between(50, 75).toArray()
   );
 </script>
 

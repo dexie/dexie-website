@@ -29,7 +29,7 @@ Dexie.js is a wrapper library for indexedDB.
 
 #### Why is Dexie.js needed?
 
-Dexie solves three main issues with the native IndexedDB API:
+Dexie solves these main issues with the native IndexedDB API:
 
  1. [Ambivalent error handling](/docs/The-Main-Limitations-of-IndexedDB#ambivalent-error-handling)
  2. [Poor queries](/docs/The-Main-Limitations-of-IndexedDB#poor-queries)

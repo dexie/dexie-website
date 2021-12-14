@@ -3,7 +3,7 @@ layout: docs
 title: 'Road Map: Dexie 4.0'
 ---
 
-The goal for Dexie 4.0 will be a better experience for web developers to query their data. We've already improved usability in [Dexie 3.2](https://github.com/dexie/Dexie.js/releases/tag/v3.2.0) with [liveQuery()](https://dexie.org/docs/liveQuery()). What we'll be focusing on will be to query richness, paging and performance using caching. The goal is an intuitive and easy-to-use db API that performs well in large apps.
+The goal for Dexie 4.0 will be a better experience for web developers to query their data. We've already improved usability in [Dexie 3.2](https://github.com/dexie/Dexie.js/releases/tag/v3.2.0) with [liveQuery()](https://dexie.org/docs/liveQuery()). What we'll be focusing on will be to query richness, paging and performance using caching. The goal is an intuitive and easy-to-use db API that performs well in large apps without sacrificing device resource usage.
 
 [Github Milestone for Dexie 4.0](https://github.com/dexie/Dexie.js/milestone/3)
 

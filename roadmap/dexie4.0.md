@@ -134,7 +134,7 @@ Already since Dexie 3.0, it has been possible to import { Dexie } as a named exp
 No support for Internet Explorer 11, legacy Edge (non-chromium) nor legacy Safari below version 14.
 
 ## More to come
-There might be more breaking changes to come. This is a living document. Subscribe to our [github discussions](https://github.com/dexie/Dexie.js) or to the [blog](https://medium.com/dexie-js).
+Dexie has been pretty much backward compatible between major versions so far and the plan is to continue being backward compatible as much as possible. But there might be additional breaking changes to come and they will be listed here. This is a living document. Subscribe to our [github discussions](https://github.com/dexie/Dexie.js) or to the [blog](https://medium.com/dexie-js) if you want to get notified on updates.
 
 # Discuss or give feedback
 There's a github discussion dedicated for Dexie 4.0. Please feel free to give your feedback and comments there

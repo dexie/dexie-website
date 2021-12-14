@@ -33,7 +33,57 @@ For React apps, we provide a hook, [useLiveQuery()](dexie-react-hoos/useLiveQuer
 
 For Vue, we still haven't implemented any specific hook, but the observable returned from liveQuery() can be consumed using [useObservable()](https://vueuse.org/rxjs/useobservable/) from @vueuse/rxjs.
 
-# Example
+# Examples
+
+## Example (Svelte)
+
+```svelte
+<script>
+  import { liveQuery } from "dexie";
+  import { db } from "./db";
+
+  let friends = liveQuery(
+    () => db.friends.where("age").between(18, 65).toArray()
+  );
+</script>
+
+<div>
+  <h2>Friends</h2>
+  <ul>
+  {#each ($friends || []) as friend (friend.id)}
+    <li>{friend.name}, {friend.age}</li>
+  {/each}
+  </ul>
+</div>
+```
+
+## Example (React)
+
+```jsx
+import { useLiveQuery } from "dexie-react-hooks";
+import { db } from "./db";
+
+export function FriendList () {
+  const friends = useLiveQuery(
+    () => db.friends.where("age").between(18, 65).toArray()
+  );
+
+  return <>
+    <h2>Friends</h2>
+    <ul>
+      {
+        friends?.map(friend =>
+          <li key={friend.id}>
+            {friend.name}, {friend.age}
+          </li>
+        )
+      }
+    </ul>
+  </>;
+}
+```
+
+## Example (Vanilla JS)
 
 ```ts
 import Dexie, { liveQuery } from "dexie";

@@ -30,14 +30,14 @@ Svelte and Angular supports Observables natively so liveQuery() can be used dire
 
 [Angular](https://angular.io/) supports Rx observables natively, and Rx Observables also are compliant with the [Ecmascript Observable specification](https://github.com/tc39/proposal-observable).
 
-Svelte components can consume return value of liveQuery() directly using [the dollar prefix](https://svelte.dev/docs#4_Prefix_stores_with_$_to_access_their_values).
+**Svelte: Use [the dollar prefix](https://svelte.dev/docs#4_Prefix_stores_with_$_to_access_their_values) (`$friendsObservable`)**
 
-Angular components can consume the return value of liveQuery() using the [AsyncPipe](https://angular.io/api/common/AsyncPipe) (`friendObservable$ | async`).
+**Angular: Use the [AsyncPipe](https://angular.io/api/common/AsyncPipe) (`friendObservable$ | async`).**
 
 # React and Vue
-For React apps, we provide a hook, [useLiveQuery()](dexie-react-hoos/useLiveQuery()) that allows components to consume live queries.
+For React apps, we provide a hook, **[useLiveQuery()](dexie-react-hoos/useLiveQuery())** that allows components to consume live queries.
 
-For Vue, we still haven't implemented any specific hook, but the observable returned from liveQuery() can be consumed using [useObservable()](https://vueuse.org/rxjs/useobservable/) from @vueuse/rxjs.
+For Vue, we still haven't implemented any specific hook, but the observable returned from liveQuery() can be consumed using **[useObservable()](https://vueuse.org/rxjs/useobservable/)** from @vueuse/rxjs.
 
 # Examples
 

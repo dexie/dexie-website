@@ -13,7 +13,7 @@ Native IndexedDB API has a poor set of query methods. Dexie extends the API with
 
 ## Not reactive
 
-Unlike [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage), indexedDB does not provide any native events when data is mutated. This makes it cumbersome for front-end components to react on database changes that happens in another tab, window or worker. Dexie comes with a magic helper function [liveQuery()](https://dexie.org/docs/liveQuery()) that turns normal (pull-based) queries into reactive ones which fits perfectly well in front-end components so that they re-render whenever data is mutated.
+Unlike [localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage), indexedDB does not provide any native events when data is mutated. This makes it cumbersome for front-end components to react on database changes that happens in another tab, window or worker. Dexie comes with a magic helper function [liveQuery()](https://dexie.org/docs/liveQuery()) that turns normal (pull-based) queries into reactive ones which fits perfectly well in front-end components so that they re-render whenever data is mutated by the app itself, a worker or another tab.
 
 ## Code complexity
 Without a wrapper library like Dexie, your application code could become unnecessarily complex since you need to write much more lines of code and if correct error handling is important for you, your code will soon become very complex and hard to read and maintain.

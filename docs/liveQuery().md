@@ -22,20 +22,52 @@ export function liveQuery<T>(
 |------|------|
 | querier  | Function that returns a final result (Promise) |
 
-# Usage in Svelte and Angular
+# Svelte and Angular
 
 [The Svelte Store Contract](https://svelte.dev/docs#Store_contract) is a subset of the [Ecmascript Observable specification draft](https://github.com/tc39/proposal-observable) which makes the return value of liveQuery() a fully valid Svelte Store by itself. Unlike React, where we need a the [useLiveQuery() hook](dexie-react-hoos/useLiveQuery()), Svelte apps can consume the plain liveQuery() directly.
 
 [Angular](https://angular.io/) supports Rx observables natively, and since Rx Observables also are compliant with the [Ecmascript Observable specification](https://github.com/tc39/proposal-observable), angular components also understands the return value from liveQuery() similarily.
 
-# Usage in React and Vue
+# React and Vue
 For React apps, we provide a hook, [useLiveQuery()](dexie-react-hoos/useLiveQuery()) that allows components to consume live queries.
 
 For Vue, we still haven't implemented any specific hook, but the observable returned from liveQuery() can be consumed using [useObservable()](https://vueuse.org/rxjs/useobservable/) from @vueuse/rxjs.
 
-# Examples
+# Example
 
-## Example (Svelte)
+```js
+// db.js
+
+export const db = new Dexie('FriendDatabase');
+db.version(1).stores({
+  friends: '++id, name, age'
+});
+```
+
+## Vanilla JS
+
+```ts
+import { liveQuery } from "dexie";
+import { db } from './db';
+
+const friendsObservable = liveQuery (
+  () => db.friends
+    .where('age')
+    .between(50, 75)
+    .toArray()
+);
+
+// Subscribe
+const subscription = friendsObservable.subscribe({
+  next: result => console.log("Got result:", JSON.stringify(result)),
+  error: error => console.error(error)
+});
+
+// Unsubscribe
+subsciption.unsubscribe();
+```
+
+## Svelte
 
 ```svelte
 <script>
@@ -57,7 +89,7 @@ For Vue, we still haven't implemented any specific hook, but the observable retu
 </div>
 ```
 
-## Example (React)
+## React
 
 ```jsx
 import { useLiveQuery } from "dexie-react-hooks";
@@ -83,15 +115,13 @@ export function FriendList () {
 }
 ```
 
-## Example (Vanilla JS)
+# Deep Dive
+
+The following vanilla JS example should explain how the observable works by looking at the print outs.
 
 ```ts
-import Dexie, { liveQuery } from "dexie";
-
-const db = new Dexie('MyDatabase');
-db.version(1).stores({
-  friends: '++id, name, age'
-});
+import { liveQuery } from "dexie";
+import { db } from './db';
 
 const friendsObservable = liveQuery (
   () => db.friends

@@ -38,7 +38,9 @@ Internally dexie will increment versions dynamically for the user when declared 
 
 # A Typescript-friendler declaration style
 
-With the new declaration style, typescript users will automatically get table props inferred without having to subclass Dexie. However, the properties on the models will not be fully typed (primary key and indexes will auto-declare but with unknown type except for auto-incremented primary key which will be inferred to number). Therefore we'll add an alternative way of declaring the schema. Typescript devs are already used to having to subclass Dexie. In version 4.0, the subclass doesn't need to be as verbose as before - we let the subclass create table instances as a way to tell the runtime about the schema instead of the opposite:
+With the new declaration style, typescript users will automatically get table props inferred without having to subclass Dexie. However, the properties on the models will not be fully typed (primary key and indexes will auto-declare but with unknown type except for auto-incremented primary key which will be inferred to number).
+
+The inferred type from db declaration wont probably be enough for most users. Therefore we'll add an alternative way of declaring the schema so that all properties are typed. Typescript devs are already used to having to subclass Dexie. In version 4.0, the subclass doesn't need to be as verbose as before - we let the subclass create table instances as a way to tell the runtime about the schema instead of the opposite:
 
 ```ts
 class AppDB extends Dexie {

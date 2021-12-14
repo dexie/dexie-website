@@ -22,6 +22,17 @@ export function liveQuery<T>(
 |------|------|
 | querier  | Function that returns a final result (Promise) |
 
+# Usage in Svelte and Angular
+
+[The Svelte Store Contract](https://svelte.dev/docs#Store_contract) is a subset of the [Ecmascript Observable specification draft](https://github.com/tc39/proposal-observable) which makes the return value of liveQuery() a fully valid Svelte Store by itself. Unlike React, where we need a the [useLiveQuery() hook](dexie-react-hoos/useLiveQuery()), Svelte apps can consume the plain liveQuery() directly.
+
+[Angular](https://angular.io/) supports Rx observables natively, and since Rx Observables also are compliant with the [Ecmascript Observable specification](https://github.com/tc39/proposal-observable), angular components also understands the return value from liveQuery() similarily.
+
+# Usage in React and Vue
+For React apps, we provide a hook, [useLiveQuery()](dexie-react-hoos/useLiveQuery()) that allows components to consume live queries.
+
+For Vue, we still haven't implemented any specific hook, but the observable returned from liveQuery() can be consumed using [useObservable()](https://vueuse.org/rxjs/useobservable/) from @vueuse/rxjs.
+
 # Example
 
 ```ts
@@ -118,17 +129,6 @@ If you wonder how we can possibly detect whether a change would affect your quer
     If you really need to call a non-Dexie asynchronous API (such as webCrypto), wrap the returned promise through `Promise.resolve()` or <a href="Dexie/Dexie.waitFor()">Dexie.waitFor()</a> before awaiting it.
   </li>
 </ul>
-
-# Usage in Svelte and Angular
-
-[The Svelte Store Contract](https://svelte.dev/docs#Store_contract) is a subset of the [Ecmascript Observable specification draft](https://github.com/tc39/proposal-observable) which makes the return value of liveQuery() a fully valid Svelte Store by itself. Unlike React, where we need a the [useLiveQuery() hook](dexie-react-hoos/useLiveQuery()), Svelte apps can consume the plain liveQuery() directly.
-
-[Angular](https://angular.io/) supports Rx observables natively, and since Rx Observables also are compliant with the [Ecmascript Observable specification](https://github.com/tc39/proposal-observable), angular components also understands the return value from liveQuery() similarily.
-
-# Usage in React and Vue
-For React apps, we provide a hook, [useLiveQuery()](dexie-react-hoos/useLiveQuery()) that allows components to consume live queries.
-
-For Vue, we still haven't implemented any specific hook, but the observable returned from liveQuery() can be consumed using [useObservable()](https://vueuse.org/rxjs/useobservable/) from @vueuse/rxjs.
 
 ## Fine grained observation
 

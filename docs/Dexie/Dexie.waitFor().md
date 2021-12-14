@@ -17,11 +17,26 @@ Dexie.waitFor(promise, timeout=60000)
 
 ### Description
 
-This method makes it possible execute asynchronic non-indexedDB work while still keeping current transaction alive. Use with caution as it may put unnecessary CPU load on the browser. A separate task will keep the transaction alive by propagating dummy-requests on the transaction while the given promise is being executed.
+This method makes it possible execute asynchronic non-indexedDB work while still keeping current context as well as IDB transaction alive.
 
-This method kind of implements an anti-pattern of how not to use indexedDB transactions. On the other hand, it works, is stable across all browsers, and is totally in line with the new [indexeddb-promises](https://github.com/inexorabletash/indexeddb-promises) proposal where this will be possible. So in a future version if the proposal goes live, Dexie will start ride upon that new API if the browser supports it.
+#### Keeps IndexedDB transaction alive
+
+When used within a transaction, ongoing transaction will be kept busy until given promise is settled, and that way keeping it alive and prohibit it from automatically being committed.
+
+#### Keeps observation context alive (liveQuery())
+
+When used within the context of a liveQuery() querier callback, the observation context will be kept after the given promise resolves. In this case, it will not need to keep any transaction alive and does not load the CPU, unless the querier function also performs a transaction.
+
+#### Use with caution
 
 *WARNING: This method can be CPU intensive while waiting for given Promise. It typically triggers about 1000 dummy-queries while waiting for just a 100 milliseconds.*
+
+Use with caution when the purpose is to keep a transaction alive as it may put unnecessary CPU load on the browser. A separate task will keep the transaction alive by propagating dummy-requests on the transaction while the given promise is being executed.
+
+**However, when used outside a transaction, it will not load the CPU - for example for the purpose of keeping liveQuery context alive and not using it within a transaction**
+
+When used for keeping a transaction alive, this method kind of implements an anti-pattern of how not to use indexedDB transactions. On the other hand, it works, is stable across all browsers, and is totally in line with the new [indexeddb-promises](https://github.com/inexorabletash/indexeddb-promises) proposal where this will be possible. So in a future version if the proposal goes live, Dexie will start ride upon that new API if the browser supports it.
+
 
 ### Relation to [IDBTransaction.waitUntil()](https://github.com/inexorabletash/indexeddb-promises#transactions)
 As of current state of the [indexeddb-promises](https://github.com/inexorabletash/indexeddb-promises) proposal, [IDBTransaction.waitUntil()](https://github.com/inexorabletash/indexeddb-promises#transactions) will commit the transaction directly after it resolves, while Dexie.waitFor() can be reused several times within the same transaction. This is the reason why we name it differently - to distinguish it from the behavior of IDBTransaction.waitUntil(). If the proposal remains with this behavior, we could still use it to accomplish what we need here, but we would then have to execute the entire scope function using IDBTransaction.waitUntil().

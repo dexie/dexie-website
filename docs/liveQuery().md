@@ -33,10 +33,10 @@ For React apps, we provide a hook, [useLiveQuery()](dexie-react-hoos/useLiveQuer
 
 For Vue, we still haven't implemented any specific hook, but the observable returned from liveQuery() can be consumed using [useObservable()](https://vueuse.org/rxjs/useobservable/) from @vueuse/rxjs.
 
-# Example
+# Examples
 
 ```js
-// db.js
+// db.js (DB declaration only - used in the following samples)
 
 export const db = new Dexie('FriendDatabase');
 db.version(1).stores({

@@ -31,9 +31,10 @@ Dexie.js is a wrapper library for indexedDB.
 
 Dexie solves three main issues with the native IndexedDB API:
 
- 1. [Ambivalent error handling](/docs/The-Three-Main-Limitations-of-IndexedDB)
- 2. [Poor queries](/docs/The-Three-Main-Limitations-of-IndexedDB)
- 3. [Code complexity](/docs/The-Three-Main-Limitations-of-IndexedDB)
+ 1. [Ambivalent error handling](/docs/The-Main-Limitations-of-IndexedDB#ambivalent-error-handling)
+ 2. [Poor queries](/docs/The-Main-Limitations-of-IndexedDB#poor-queries)
+ 3. [Not reactive](/docs/The-Main-Limitations-of-IndexedDB#not-reactive)
+ 4. [Code complexity](/docs/The-Main-Limitations-of-IndexedDB#code-complexity)
 
 Dexie.js solves these limitations and provides a neat database API. Dexie.js aims to be the first-hand choice of a IDB Wrapper Library due to its well thought-through API design, robust [error handling](/docs/API-Reference#exception-handling), [extendability](/docs/TutorialBuilding-Addons), [change tracking awareness](/docs/Tutorial/Design#change-tracking) and its extended KeyRange support ([case insensitive search](/docs/WhereClause/WhereClause.equalsIgnoreCase()), [set matches](/docs/WhereClause/WhereClause.anyOf()) and [or operations](/docs/Collection/Collection.or())).
 

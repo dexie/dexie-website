@@ -26,9 +26,13 @@ export function liveQuery<T>(
 
 Svelte and Angular supports Observables natively so liveQuery() can be used directly.
 
-[The Svelte Store Contract](https://svelte.dev/docs#Store_contract) is a subset of the [Ecmascript Observable specification draft](https://github.com/tc39/proposal-observable) which makes the return value of liveQuery() a fully valid Svelte Store by itself. Unlike React, where we need a the [useLiveQuery() hook](dexie-react-hoos/useLiveQuery()), Svelte apps can consume the plain liveQuery() directly.
+[The Svelte Store Contract](https://svelte.dev/docs#Store_contract) is a subset of the [Ecmascript Observable specification draft](https://github.com/tc39/proposal-observable) which makes the return value of liveQuery() a fully valid Svelte Store by itself.
 
-[Angular](https://angular.io/) supports Rx observables natively, and since Rx Observables also are compliant with the [Ecmascript Observable specification](https://github.com/tc39/proposal-observable), angular components also understands the return value from liveQuery() similarily.
+[Angular](https://angular.io/) supports Rx observables natively, and Rx Observables also are compliant with the [Ecmascript Observable specification](https://github.com/tc39/proposal-observable).
+
+Svelte components can consume return value of liveQuery() directly using [the dollar prefix](https://svelte.dev/docs#4_Prefix_stores_with_$_to_access_their_values).
+
+Angular components can consume the return value of liveQuery() using the [AsyncPipe](https://angular.io/api/common/AsyncPipe) (`friendObservable$ | async`).
 
 # React and Vue
 For React apps, we provide a hook, [useLiveQuery()](dexie-react-hoos/useLiveQuery()) that allows components to consume live queries.

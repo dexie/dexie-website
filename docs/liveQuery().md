@@ -24,7 +24,7 @@ export function liveQuery<T>(
 
 # Svelte and Angular
 
-Svelte and Angular supports Observables natively, so we don't need a wrapper.
+Svelte and Angular supports Observables natively.
 
 [The Svelte Store Contract](https://svelte.dev/docs#Store_contract) is a subset of the [Ecmascript Observable specification draft](https://github.com/tc39/proposal-observable) which makes the return value of liveQuery() a fully valid Svelte Store by itself. Unlike React, where we need a the [useLiveQuery() hook](dexie-react-hoos/useLiveQuery()), Svelte apps can consume the plain liveQuery() directly.
 

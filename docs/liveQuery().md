@@ -220,6 +220,24 @@ If you wonder how we can possibly detect whether a change would affect your quer
   </li>
 </ul>
 
+#### Sample: Await non-dexie async calls in querier
+
+```js
+import { db } from './db';
+import Dexie, { liveQuery } from 'dexie';
+  
+const friendHashObservable = liveQuery (
+  async () => {
+    const friends = await db.friends.toArray();
+    const byteArray = new TextEncoder().encode(JSON.stringify(friends));
+    const digestBytes = await Dexie.waitFor(
+      crypto.subtle.digest('SHA-1', byteArray)
+    );
+    return digestBytes;
+  }
+);
+```
+
 ## Fine grained observation
 
 The observation is as fine-grained as it can possibly be - queries that would be affected by a modification will rerender - others not (with some exceptions - false positives happen but never false negatives). This is also true if your querier callback performs a series of awaited queries or multiple in parallell using Promise.all(). It can even contain if-statements or other conditional paths within it, determining additional queries to make before returning a final result - still, observation will function and never miss an update. No matter how simple or complex the query is - it will be monitored in detail so that if a single part of the query is affected by a change, the querier will be executed and the component will rerender.

@@ -20,7 +20,7 @@ Before you file an issue, please Google your problem first - chances are you fin
 
 ## Private support issues
 
-If you for some reason do not want to expose your question publicly, you can email [privsupport@dexie.org](mailto:privsupport@dexie.org) with your question. Note however, that we will only reply to questions around our Dexie Cloud offering. For other questions, please use the public channels or place a support order:
+To request private support, send an email to [privsupport@dexie.org](mailto:privsupport@dexie.org):
 
 * Email address: [privsupport@dexie.org](mailto:privsupport@dexie.org)
 * Cost: €150/h

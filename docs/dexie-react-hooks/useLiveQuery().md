@@ -7,6 +7,10 @@ title: 'useLiveQuery()'
 
 Observe IndexedDB data in your React component. Make the component re-render when the observed data changes.
 
+# See Also
+
+[liveQuery()](https://dexie.org/docs/liveQuery())
+
 # Dependencies
 
 ```

@@ -53,6 +53,7 @@ This milestone is planned to be released on <strike>December 10</strike> Decembe
 - [x] Add demo users to sample app
 - [x] Implement todo-list sharing on sample app
 - [x] Support for private IDs (solution for per-user singletons)
+- [x] Support for generating tied realm IDs (consistency of realms that are tied to an entity)
 - [x] db.cloud.invites - an observable of invites
 - [ ] Tests
 - [ ] Run migration on production cloud and publish new version

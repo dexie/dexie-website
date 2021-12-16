@@ -36,20 +36,25 @@ This milestone was finalized in September 2021
 
 # Milestone 3 - Fully functional Access Control (CURRENT)
 
-This milestone is planned to be released on <strike>December 10</strike> December 15.
+This milestone is planned to be released on <strike>December 10</strike> December 17.
+
+*Feature complete but need a bit more testing...*
 
 - [x] Possible to create realms and respect permissions on sync and maintain realm consistency.
 - [x] Support compound primary keys
 - [x] New React hook `usePermission()` to disable unpermitted fields and buttons.
+- [x] New permissions helper for non-react apps (db.cloud.permissions(db, table, obj), `can.add('members'), can.update('done'), can.delete()`)
 - [x] Improve migration framework (server side on dexie cloud)
 - [x] Add new migration to reflect updated model
 - [x] Decide solution for binding an object to a dedicated realm
 - [x] Support switching object between being shared (connected to realm) and private (connected to private realm) back and forth in a consistent manner.
 - [x] Implement invite route on dexie cloud server (endpoint for accepting / rejecting invites)
 - [x] Send out email invites when inviting people to a realm
-- [ ] Add demo users to sample app
-- [ ] Decide a solution for per-user singletons
-- [ ] Implement solution for per-user singletons
+- [x] Add demo users to sample app
+- [x] Implement todo-list sharing on sample app
+- [x] Support for private IDs (solution for per-user singletons)
+- [x] db.cloud.invites - an observable of invites
+- [ ] Tests
 - [ ] Run migration on production cloud and publish new version
 
 # Milestone 4 - Role support + Updated Documentation

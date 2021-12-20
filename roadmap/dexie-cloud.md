@@ -34,7 +34,7 @@ This milestone was finalized in September 2021
 - [X] Improved performance in WebSocket reactivity
 - [X] Bug fixes
 
-# Milestone 3 - Fully functional Access Control (CURRENT)
+# Milestone 3 - Fully functional Access Control
 
 This milestone is planned to be released on <strike>December 10</strike> December 17.
 
@@ -55,10 +55,11 @@ This milestone is planned to be released on <strike>December 10</strike> Decembe
 - [x] Support for private IDs (solution for per-user singletons)
 - [x] Support for generating tied realm IDs (consistency of realms that are tied to an entity)
 - [x] db.cloud.invites - an observable of invites
-- [ ] Tests
-- [ ] Run migration on production cloud and publish new version
+- [x] Tests
+- [x] Run migration on production cloud and publish new version
+- [x] Publish new version of sample todo app
 
-# Milestone 4 - Role support + Updated Documentation
+# Milestone 4 - Role support + Updated Documentation (CURRENT)
 
 - [ ] Respect roles
 - [ ] Respect global roles

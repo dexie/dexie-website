@@ -36,9 +36,9 @@ This milestone was finalized in September 2021
 
 # Milestone 3 - Fully functional Access Control
 
-This milestone is planned to be released on <strike>December 10</strike> December 17.
+This milestone was released December 19, 2021.
 
-*Feature complete but need a bit more testing...*
+**Another 150 people from the wait list are now able to use it (update on december 21).**
 
 - [x] Possible to create realms and respect permissions on sync and maintain realm consistency.
 - [x] Support compound primary keys
@@ -58,8 +58,11 @@ This milestone is planned to be released on <strike>December 10</strike> Decembe
 - [x] Tests
 - [x] Run migration on production cloud and publish new version
 - [x] Publish new version of sample todo app
+- [x] Allowed another 150 people from the wait list!
 
 # Milestone 4 - Role support + Updated Documentation (CURRENT)
+
+Target release date: Jan 10, 2022.
 
 - [ ] Respect roles
 - [ ] Respect global roles
@@ -76,6 +79,8 @@ This milestone is planned to be released on <strike>December 10</strike> Decembe
 - [ ] Document how to tie an object to a Realm
 
 # Milestone 5 - Commercialization
+
+Target release date: April 15, 2022.
 
 - [ ] Subscription manager
 - [ ] Stripe Integration

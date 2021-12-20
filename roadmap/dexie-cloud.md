@@ -67,7 +67,7 @@ This milestone is planned to be released on <strike>December 10</strike> Decembe
 - [ ] Add sharing support with roles to the sample app
 - [ ] Update Authentication docs: signed refresh tokens
 - [ ] Updated docs explaining that '@' keys are optional.
-- [ ] Universally consistent modify() operations
+- [ ] Docs: Explain Universally consistent modify() operations
 - [ ] Document all options in db.cloud.configure() 
 - [ ] Document service worker support
 - [ ] Update docs for unauthorized use case

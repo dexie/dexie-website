@@ -24,6 +24,10 @@ db.open().then(function (db) {
 });
 ```
 
+## Primary and secondary indexes
+
+When declaring `friends: 'name, age'` the first property implicitly becomes the primary index (also called primary key). The declaration states that we want a table called 'friends' where the property 'name' is the primary key and where we add a secondary index on 'age'. A primary key is unique - you can never tore two objects with the primary key into the same table - for that reason, most examples you will see will use a proprety 'id' or 'key' as primary key instead. You will also see sample using a `++` before the primary index - which makes it auto-incremented. You may also see examples with `&` before a secondary index, making that index unique the same way as primary indexes are implicitly unique without having to specify `&` explicitely.
+
 ## Understanding the flow
 
 ### First time

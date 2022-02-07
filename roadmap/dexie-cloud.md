@@ -62,7 +62,7 @@ This milestone was released December 19, 2021.
 
 # Milestone 4 - Role support + Updated Documentation (CURRENT)
 
-Target release date: Jan 10, 2022.
+Target release date: ~~Jan 10, 2022.~~ Mar 23, 2022.
 
 - [ ] Respect roles
 - [ ] Respect global roles
@@ -80,7 +80,7 @@ Target release date: Jan 10, 2022.
 
 # Milestone 5 - Commercialization
 
-Target release date: April 15, 2022.
+Target release date: June 2022.
 
 - [ ] Subscription manager
 - [ ] Stripe Integration

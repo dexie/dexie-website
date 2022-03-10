@@ -7,9 +7,9 @@ Hi, I'm David, the author of Dexie.js and I'm from Sweden. I hereby take a stand
 
 The world is watching.
 
-In United Nations, 141 member states voted for a [resolution deploring Russia's invasion of Ukraine](https://news.un.org/en/story/2022/03/1113152). Only 5 member states voted against.
-
 **[Russia falsely blames Ukraine for starting war](https://www.dw.com/en/fact-check-russia-falsely-blames-ukraine-for-starting-war/a-60999948)**
+
+In United Nations, 141 member states voted for a [resolution deploring Russia's invasion of Ukraine](https://news.un.org/en/story/2022/03/1113152). Only 5 member states voted against.
 
 The world is watching!
 

@@ -25,10 +25,10 @@ Russian people, please spread the true facts to relatives and friends!
 
 **[Deutche Welle's Fact check: Russia falsely blames Ukraine for starting war](https://www.dw.com/en/fact-check-russia-falsely-blames-ukraine-for-starting-war/a-60999948)**
 
-**[The Guardian: Why Vladimir Putin has already lost this war](https://www.theguardian.com/commentisfree/2022/feb/28/vladimir-putin-war-russia-ukraine)**
-
 # Open Source is about freedom, democracy and peacfulness
 
 We want to live in a world where people are free. Open source community incarnates that spirit. The spritit of democracy, freedom and peacefulness. The opposite of all this is authoritarianism. An attack on a democratic country under false flag is an attack of all of us who want's to live in a free spirit. This is a battle between good and evil. Between openess and closeness. Between democracy and authoritarianism. Between peace and war.
+
+**[The Guardian: Why Vladimir Putin has already lost this war](https://www.theguardian.com/commentisfree/2022/feb/28/vladimir-putin-war-russia-ukraine)**
 
 In the end, freedom, goodness and democracy will win.

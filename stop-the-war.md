@@ -2,7 +2,10 @@
 layout: docs
 title: Stop Putin Stop!
 ---
+
 Hi, I'm David, the author of Dexie.js and I'm from Sweden. I hereby take a stand against Putin's illegal and horrible war under **false flag** against his **brother country Ukraine**!
+
+**[Russia falsely blames Ukraine for starting war](https://www.dw.com/en/fact-check-russia-falsely-blames-ukraine-for-starting-war/a-60999948)**
 
 The world is watching.
 

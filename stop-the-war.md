@@ -27,4 +27,8 @@ Russian people, please spread the true facts to relatives and friends!
 
 **[The Guardian: Why Vladimir Putin has already lost this war](https://www.theguardian.com/commentisfree/2022/feb/28/vladimir-putin-war-russia-ukraine)**
 
+# Open Source is about freedom, democracy and peacfulness
+
+We want to live in a world where people are free. Open source community incarnates that spirit. The spritit of democracy, freedom and peacefulness. The opposite of all this is authoritarianism. An attack on a democratic country under false flag is an attack of all our freedom. This is a battle between good and evil. Between openess and closeness. Between democracy and authoritarianism. Between peace and war.
+
 In the end, freedom, goodness and democracy will win.

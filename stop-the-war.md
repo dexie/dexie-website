@@ -1,6 +1,6 @@
 ---
 layout: docs
-title: Stop Putin Stop!
+title: Stop Putin!
 ---
 
 Hi, I'm David, the author of Dexie.js and I'm from Sweden. I hereby take a stand against Putin's illegal and horrible war under **false flag** against his **brother country Ukraine**!
@@ -17,13 +17,26 @@ What can you do to stop it?
 
 [Time magazine: How to help Ukraine People](https://time.com/6151353/how-to-help-ukraine-people/)
 
-[helpukrainewin.com](https://helpukrainewin.com)
+[stopputin.net](https://www.stopputin.net)
 
-Russian people, please spread the true facts to relatives and friends!
+[Google's Ukraine donation page](https://www.google.org/ukraine-relief/)
 
-# Fact checks against Putin's propaganda
+# For Russia but against Putin!
+
+Never blame the Russian people. Instead, show Russians that you love Russia but are against Putin. Go dining on Russian Restaurants! Write in their guest book
+"The food was great! Unfortunately, Putin spoiled our appetites by invading Ukraine.".
+
+And to the Russian people, please spread the true facts to relatives and friends.
+
+# Fact checks on Putin's propaganda
+
+If you need to read about the different arguments from both the Kreml and the rest of the world, here are a few links that may give you more knowledge...
+
+**[The Guardian: 'Dont call it a war' - Propaganda filters the truth about Ukraine on Russian media](https://www.theguardian.com/world/2022/feb/26/propaganda-filters-truth-ukraine-war-russian-media)**
 
 **[Deutche Welle's Fact check: Russia falsely blames Ukraine for starting war](https://www.dw.com/en/fact-check-russia-falsely-blames-ukraine-for-starting-war/a-60999948)**
+
+**[Wikipedia.org: Media portrayal of the Ukrainian crisis](https://en.wikipedia.org/wiki/Media_portrayal_of_the_Ukrainian_crisis)**
 
 # Open Source is about freedom, democracy and peacfulness
 

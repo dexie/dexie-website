@@ -23,10 +23,13 @@ What can you do to stop it?
 
 # For Russia but against Putin!
 
-Never blame the Russian people. Instead, show Russians that you love Russia but are against Putin. Go dining on Russian Restaurants! Write in their guest book
-"The food was great! Unfortunately, Putin spoiled our appetites by invading Ukraine.".
+Never blame the Russian people. Instead, show Russians that you love Russia but are against Putin. Go dining on Russian Restaurants! Write in their guest book:
 
-And to the Russian people, please spread the true facts to relatives and friends.
+    Dear Russian Restaurant,
+
+    The food was great! Unfortunately, Putin spoiled our appetites by invading Ukraine.
+
+And to the Russian people, **please spread the true facts to relatives and friends!**
 
 # Fact checks on Putin's propaganda
 

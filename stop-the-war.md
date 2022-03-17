@@ -41,7 +41,7 @@ If you need to read about the different arguments from both the Kreml and the re
 
 **[Wikipedia.org: Media portrayal of the Ukrainian crisis](https://en.wikipedia.org/wiki/Media_portrayal_of_the_Ukrainian_crisis)**
 
-# Open Source is about freedom, democracy and peacfulness
+# Open Source is about freedom, democracy and peacefulness
 
 We want to live in a world where people are free. Open source community incarnates that spirit. The spritit of democracy, freedom and peacefulness. The opposite of all this is authoritarianism. An attack on a democratic country under false flag is an attack of all of us who want's to live in a free spirit. This is a battle between good and evil. Between openess and closeness. Between democracy and authoritarianism. Between peace and war.
 

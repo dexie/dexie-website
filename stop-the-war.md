@@ -21,17 +21,6 @@ What can you do to stop it?
 
 [Google's Ukraine donation page](https://www.google.org/ukraine-relief/)
 
-# For Russia but against Putin!
-
-Never blame the Russian people. Instead, show Russians that you love Russia but are against Putin's illegal war and awful lies to the all and especially his lies to the Russian people.
-
-
-Go dining on Russian Restaurants! Write in their guest book:
-
-    The food was great! Unfortunately, Putin spoiled our appetites by invading Ukraine.
-
-And to the Russian people, **please spread the true facts to relatives and friends!**
-
 # Fact checks on Putin's propaganda
 
 If you need to read about the different arguments from both the Kreml and the rest of the world, here are a few links that may give you more knowledge...

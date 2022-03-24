@@ -62,11 +62,10 @@ This milestone was released December 19, 2021.
 
 # Milestone 4 - Role support + Updated Documentation (CURRENT)
 
-Target release date: ~~Jan 10, 2022.~~ Mar 23, 2022.
+Target release date: ~~Jan 10, 2022.~~ Mars 31, 2022.
 
-- [ ] Respect roles
-- [ ] Respect global roles
-- [ ] Allow importing global roles in JSON format for dexie-cloud import CLI.
+- [x] Respect global roles
+- [x] Allow importing global roles in JSON format for dexie-cloud import CLI.
 - [ ] Add sharing support with roles to the sample app
 - [ ] Update Authentication docs: signed refresh tokens
 - [ ] Updated docs explaining that '@' keys are optional.

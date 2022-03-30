@@ -66,7 +66,7 @@ Target release date: ~~Jan 10, 2022.~~ Mars 31, 2022.
 
 - [x] Respect global roles
 - [x] Allow importing global roles in JSON format for dexie-cloud import CLI.
-- [ ] Add sharing support with roles to the sample app
+- [x] Add sharing support with roles to the sample app
 - [ ] Update Authentication docs: signed refresh tokens
 - [ ] Updated docs explaining that '@' keys are optional.
 - [ ] Docs: Explain Universally consistent modify() operations

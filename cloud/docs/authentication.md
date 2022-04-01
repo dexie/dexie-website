@@ -51,7 +51,7 @@ To replace authentication, see [the following sample](db.cloud.configure()#examp
 
 ## Tokens
 
-Every Dexie Cloud Database has a token endpoint that gives out tokens for client applications. A successful OTP authentication will result in a new token returned. Dexie Cloud also gives out refresh tokens. Refresh tokens are accompanied with an RSA keypair stored on the client. The private key is protected from being
+Every Dexie Cloud Database has a token endpoint that gives out tokens for client applications. A successful authentication will result in a new token returned. Dexie Cloud also gives out refresh tokens. Refresh tokens are accompanied with an RSA keypair stored on the client. The private key is protected from being
 copied - stored as a CryptoKey instance in IndexedDB. Dexie cloud will only accept refresh tokens if they
 are accompanied with a valid signature from the client's private key - a signature of the refresh token
 content concatinated with current timestamp.
@@ -71,9 +71,9 @@ to copy over to another device.
 2. Server verifies that signature is valid and that the timestamp is within current time +/- a margin for clock differences.
 3. Server generates new access token from the claims in the refresh token.
 
-### 2 ways of obtaining the tokens
+### 3 ways of obtaining the tokens
 
-Every Dexie Cloud database URL has a token endpoint that can give out tokens for a client. In order to do so, it will either require an authorization code from a successful authorization flow, OR accept a client_id and client_secret together with the email and name claims. The latter way is the way to use when you want to integrate an existing authentication solution to be able to authenticate users to use Dexie Cloud.
+Every Dexie Cloud database URL has a token endpoint that can give out tokens for a client. In order to do so, it will either require an authorization code from a successful authorization flow, OR a signed refresh-token, or accept a client_id and client_secret together with the email and name claims. The latter way is the way to use when you want to integrate an existing authentication solution to be able to authenticate users to use Dexie Cloud.
 
 #### Default OTP Autentication
 

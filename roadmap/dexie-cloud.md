@@ -67,14 +67,14 @@ Target release date: ~~Jan 10, 2022.~~ Mars 31, 2022.
 - [x] Respect global roles
 - [x] Allow importing global roles in JSON format for dexie-cloud import CLI.
 - [x] Add sharing support with roles to the sample app
-- [ ] Update Authentication docs: signed refresh tokens
-- [ ] Updated docs explaining that '@' keys are optional.
+- [x] Update Authentication docs: signed refresh tokens
+- [x] Updated docs explaining that '@' keys are optional.
 - [ ] Docs: Explain Universally consistent modify() operations
 - [ ] Document all options in db.cloud.configure() 
+- [ ] Document db.cloud properties and how to use them
 - [ ] Document service worker support
 - [ ] Update docs for unauthorized use case
 - [ ] Document REST API: import / export
-- [ ] Document db.cloud properties and how to use them
 - [ ] Document how to tie an object to a Realm
 
 # Milestone 5 - Commercialization

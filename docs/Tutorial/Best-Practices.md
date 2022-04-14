@@ -12,11 +12,14 @@ Here's a little test. Please review the code below and then ask yourself if you 
 ```javascript
 function doSomething() {
     // Important: Understand why we use 'return' here and what we actually return!
-    return db.friends.where('name').startsWith('A').first().then(function (aFriend) {
+    return db.friends.where('name').startsWith('A').first().then((aFriend) => {
         return aFriend.id; // Important: Understand what 'return' means here!
-    }).then (function (aFriendsId) {
+    }).then ((aFriendsId) => {
         // Important: Understand what it means to return another Promise here:
         return fetch ('https://blablabla/friends/' + aFriendsId);
+    }).then ((response) => {
+        // ...and here:
+        return response.json();
     });
 }
 
@@ -49,7 +52,7 @@ function somePromiseReturningFunc() {
     return db.friends.add({
         name: 'foo',
         age: 40
-    }).catch (function (err) {
+    }).catch ((err) => {
         console.log(err);
     });
 }
@@ -74,12 +77,12 @@ In transaction scopes, it is even more important to NOT catch promises because i
 
 ```javascript
 function myDataOperations() {
-    return db.transaction('rw', db.friends, db.pets, function(){
+    return db.transaction('rw', db.friends, db.pets, () => {
         return db.friends.add({name: 'foo'}).then(function(id){
             return db.pets.add({name: 'bar', daddy: id});
-        }).then (function() {
+        }).then (() => {
             return db.pets.where('name').startsWith('b').toArray();
-        }).then (function (pets) {
+        }).then ((pets) => {
             ....
         }); // Don't catch! Transaction SHOULD abort if error occur, shouldn't it?
 
@@ -90,9 +93,9 @@ function myDataOperations() {
 But on an event handler or other root-level scope, always catch! Why?! Because you are the last one to catch it since you are NOT returning Promise! You have no caller that expects a promise and you are the sole responsible of catching and informing the user about any error. If you don't catch it anywhere, an error will end-up in the standard [unhandledrejection](https://dexie.org/docs/Promise/unhandledrejection-event.html) event.
 
 ```javascript
-somePromiseReturningFunc().catch(function (err) {
-    $('#appErrorLabel').text(err);
-    console.error(err.stack || err);
+somePromiseReturningFunc().catch((error) => {
+    $('#appErrorLabel').text(error);
+    console.error(error + '');
 });
 ```
 
@@ -110,9 +113,7 @@ function getHillary() {
       return db.friends
         .where('firstName')
         .equals('Taylor')
-        .and(function (friend) {
-          return friend.lastName == 'Swift';
-        });
+        .and(friend => friend.lastName === 'Swift');
     });
 }
 ```
@@ -122,17 +123,17 @@ What about if you want to log stuff for debugging purpose? Just remember to reth
 
 ```javascript
 function myFunc() {
-    return Promise.resolve().then(function(){
+    return Promise.resolve().then(() => {
         return db.friends.add({name: 'foo'});
-    }).catch(function (err) {
+    }).catch((err) => {
         console.error("Failed to add foo!: " + err);
         throw err; // Re-throw the error to abort flow!
-    }).then(function(id){
+    }).then((id) => {
         return db.pets.add({name: 'bar', daddy: id});
-    }).catch(function (err) {
+    }).catch((err) => {
         console.error("Failed to add bar!: " + err);
         throw err; // Re-throw the error!
-    }).then (function() {
+    }).then (() => {
         ...
     });
 };
@@ -202,7 +203,7 @@ Using transactions gives you the following benefits:
 Here is how you enter a transaction block:
 
 ```javascript
-db.transaction("rw", db.friends, db.pets, function() {
+db.transaction("rw", db.friends, db.pets, () => {
     db.friends.add({name: "Måns", isCloseFriend: 1}); // unhandled promise = ok!
     db.friends.add({name: "Nils", isCloseFriend: 1}); // unhandled promise = ok!
     db.friends.add({name: "Jon", isCloseFriend: 1});  // unhandled promise = ok!
@@ -212,17 +213,17 @@ db.transaction("rw", db.friends, db.pets, function() {
 
     // Since we are in a transaction, we can query the table right away and
     // still get the results of the write operations above.
-    var promise = db.friends.where("isCloseFriend").equals(1).toArray();
+    let promise = db.friends.where("isCloseFriend").equals(1).toArray();
 
     // Make the transaction resolve with the last promise result
     return promise;
 
-}).then(function (closeFriends) {
+}).then((closeFriends) => {
 
     // Transaction complete.
     console.log("My close friends: " + JSON.stringify(closeFriends));
 
-}).catch(function (error) {
+}).catch((error) => {
 
     // Log or display the error.
     console.error(error);
@@ -244,10 +245,10 @@ Saying this again.
 When you catch database operations explicitely for logging purpose, transaction will not abort unless you rethrow the error or return the rejected Promise.
 
 ```javascript
-db.transaction("rw", db.friends, function () {
+db.transaction("rw", db.friends, () => {
     return Promise.all([
         db.friends.add ({name: "Måns", isCloseFriend: 1})
-          .catch(function (error) {
+          .catch((error) => {
               console.error("Couldnt add Måns to the database");
               // If not rethrowing here, error will be regarded as "handled"
               // and transaction would not abort.
@@ -264,94 +265,5 @@ db.transaction("rw", db.friends, function () {
 If not rethrowing the error, Nils would be successfully added and transaction would commit since the error is regarded as handled when you catch the database operation.
 
 An alternate way of rethrowing the error is to replace `throw error;` with `return Promise.reject(error)`.
-
-### 7. (Optionally:) Declare Classes
-
-When you declare your object stores (`db.version(1).stores({...})`), you only specify nescessary indexes, not all properties. A good practice is to have a more detailed class declaration for your persistant classes. It will help the IDE with autocomplete making life easier for you while coding. Also, it is very good to have a reference somewhere of what properties are actually used on your objects.
-
-There are two different methods available to accomplish this. Use whichever you prefer:
-
-1. [mapToClass()](/docs/Table/Table.mapToClass()) - map an existing class to an objectStore
-2. [defineClass()](/docs/Table/Table.defineClass()) - let Dexie declare a class for you
-
-Whichever method you use, your database will return real instances of your mapped class, so that the expression
-
-```javascript
-(obj instanceof Class)
-```
-will return true, and you may use any methods declared via
-
-```javascript
-Class.prototype.method = function(){}
-```
-.
-
-##### Method 1: Use [mapToClass()](/docs/Table/Table.mapToClass()) (map existing class)
-
-```javascript
-var db = new Dexie("MyAppDB");
-
-db.version(1).stores({
-    folders: "++id,&path",
-    files: "++id,filename,extension,folderId"
-});
-
-// Folder class
-function Folder(path, description) {
-    this.path = path;
-    this.description = description; 
-}
-Folder.prototype.save = function () {
-    return db.folders.put(this);
-}
-
-/// File class
-function File(filename, extention, parentFolderId) {
-    this.filename = filename;
-    this.extention = extention;
-    this.folderId = parentFolderId;
-}
-
-File.prototype.save = function () {
-    return db.files.put(this);
-}
-
-db.folders.mapToClass(Folder);
-db.files.mapToClass(File);
-```
-
-##### Method 2: Use [defineClass()](/docs/Table/Table.defineClass())
-
-```javascript
-var db = new Dexie("MyAppDB");
-
-db.version(1).stores({
-    folders: "++id,&path",
-    files: "++id,filename,extension,folderId"
-});
-
-var Folder = db.folders.defineClass({
-    id: Number,
-    path: String,
-    description: String
-});
-
-Folder.prototype.save = function () {
-    return db.folders.put(this);
-}
-
-var File = db.files.defineClass({
-    id: Number,
-    filename: String,
-    extension: String,
-    folderId: Number,
-    tags: [String]
-});
-
-File.prototype.save = function () {
-    return db.files.put(this);
-}
-
-```
 
 ### [Back to Tutorial](/docs/Tutorial)

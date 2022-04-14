@@ -102,7 +102,7 @@ somePromiseReturningFunc().catch((error) => {
 Sometimes you really WANT to handle an explicit error because you know it can happen and you have a way to work around it.
 
 ```javascript
-function getHillary() {
+function getTaylorSwift() {
   return db.friends
     .where('[firstName+lastName]')
     .equals(['Taylor', 'Swift'])

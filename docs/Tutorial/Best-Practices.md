@@ -106,7 +106,7 @@ function getTaylorSwift() {
   return db.friends
     .where('[firstName+lastName]')
     .equals(['Taylor', 'Swift'])
-    .toArray()
+    .first()
     .catch('DataError', function (err) {
       // May fail in IE/Edge because it lacks support for compound keys.
       // Use a fallback method:
@@ -138,6 +138,28 @@ function myFunc() {
     });
 };
 ```
+
+An equivalent async / await example:
+
+```javascript
+async function myFunc() {
+  let id;
+  try {
+    id = await db.friends.add({name: 'foo'});
+  } catch (err) {
+    console.error("Failed to add foo!: " + err);
+    throw err; // Re-throw the error to abort flow!
+  }
+  try {
+    await db.pets.add({name: 'bar', daddy: id});
+  } catch (err) {
+    console.error("Failed to add bar!: " + err);
+    throw err; // Re-throw the error!
+  }
+  ...
+};
+```
+
 
 ### 3. Avoid using other async APIs inside transactions
 

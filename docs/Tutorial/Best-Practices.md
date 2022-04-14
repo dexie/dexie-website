@@ -102,16 +102,16 @@ Sometimes you really WANT to handle an explicit error because you know it can ha
 function getHillary() {
   return db.friends
     .where('[firstName+lastName]')
-    .equals(['Hillary', 'Clinton'])
+    .equals(['Taylor', 'Swift'])
     .toArray()
     .catch('DataError', function (err) {
       // May fail in IE/Edge because it lacks support for compound keys.
       // Use a fallback method:
       return db.friends
         .where('firstName')
-        .equals('Hillary')
+        .equals('Taylor')
         .and(function (friend) {
-          return friend.lastName == 'Clinton';
+          return friend.lastName == 'Swift';
         });
     });
 }
@@ -142,7 +142,7 @@ function myFunc() {
 
 IndexedDB will commit a transaction as soon as it isn't used within a tick. This means that you MUST NOT call any other async API (at least not wait for it to finish) within a transaction scope. If you do, you will get a TransactionInactiveError thrown at you as soon as you try to use the transaction after having waited for the other async API.
 
-In case you really need to call a short-lived async-API, Dexie can actually keep your transaction alive for you if you use [Dexie.waitFor()](https://dexie.org/docs/Dexie/Dexie.waitFor()).
+In case you really need to call a short-lived async-API, Dexie can actually keep your transaction alive for you if you use [Dexie.waitFor()](https://dexie.org/docs/Dexie/Dexie.waitFor()) but it is not a recomendation to use it unless for very short async calls where there is no other way around (such as Crypto calls).
 
 ### 4. Use the global Promise within transactions!
 

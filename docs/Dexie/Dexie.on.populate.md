@@ -3,12 +3,13 @@ layout: docs
 title: 'Dexie.on.populate'
 ---
 
-_API changed since 0.9.8 but is still backward compatible. To view the old documentation, see [Dexie.on.populate (old version)](/docs/Dexie/Dexie.on.populate-(old-version)). The difference is that there is no more need to provide a [Transaction](/docs/Transaction/Transaction) instance as argument to the callback. But for backward compatibility we still do._
-
 ### Syntax
 
-```javascript
-db.on("populate", function () {});
+```ts
+db.on("populate", (tx: Transaction) => {
+  // Use provided transaction to populate database with initial data
+  // tx.table('users').add({id: "me", name: "Me"});
+});
 ```
 
 ### Description
@@ -24,8 +25,8 @@ The populate event is fired during an onupgradeneeded event and before db.open()
 ```javascript
 var db = new Dexie("MyDB");
 db.version(1).stores({friends: "id++,name,gender"});
-db.on("populate", function() {
-    db.friends.add({name: "Josephina", gender: "unisex"});
+db.on("populate", function(transaction) {
+    transaction.friends.add({name: "Josephina", gender: "unisex"});
 });
 db.open();
 ```
@@ -43,11 +44,11 @@ This sample shows how to populate your database from an ajax call. Note that on(
 ```javascript
 var db = new Dexie('someDB');
 db.version(1).stores({
-    someTable: "++id,someIndex"
+    someTable: "++id, someIndex"
 });
 
 // Populate from AJAX:
-db.on('ready', function () {
+db.on('ready', function (db) {
     // on('ready') event will fire when database is open but 
     // before any other queued operations start executing.
     // By returning a Promise from this event,

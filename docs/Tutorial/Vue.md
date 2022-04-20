@@ -163,7 +163,7 @@ Note that there are other ways to consume observables in vue - such as manually 
     setup() {
       return {
         db,
-        items: useObservable(
+        friends: useObservable(
           liveQuery(() => db.friends.toArray())
         ),
       };

@@ -35,6 +35,8 @@ db.open();
 
 The transaction running when the populate event is firing is an upgrade transaction and as all IndexedDB transactions, it will commit as soon as you stop using it. This means that if you call other async APIs, such as ajax calls or setTimeout(), the transaction object will automatically commit and your database will finish opening. When you ajax request as arrives, you are not anymore within the upgrade transaction.
 
+**NOTE: If the callback is an async function, make sure to use the provided transaction rather than the Dexie instance (see above sample). **
+
 If your aim is to populate the database from an ajax- or other asyncronic request, the only bullet-proof way to do that is by using the on('ready') event rather than on('populate'). See a working (and fully tested) sample below:
 
 #### Ajax Populate Sample

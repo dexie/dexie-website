@@ -24,7 +24,7 @@ The populate event is fired during an onupgradeneeded event and before db.open()
 
 ```javascript
 var db = new Dexie("MyDB");
-db.version(1).stores({friends: "id++,name,gender"});
+db.version(1).stores({friends: "++id, name, gender"});
 db.on("populate", function(transaction) {
     transaction.friends.add({name: "Josephina", gender: "unisex"});
 });

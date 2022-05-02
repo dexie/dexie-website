@@ -77,7 +77,7 @@ export class MySubClassedDexie extends Dexie {
 export const db = new MySubClassedDexie();
 
 ```
-*See also [issue 1560](https://github.com/dexie/Dexie.js/issues/1560) on how to fix typings for `liveQuery()` in Svelte*
+*See also [issue 1560](https://github.com/dexie/Dexie.js/issues/1560) containing a solution to improve typings for `liveQuery()` in case you want a more precise typings of the '$' vars.*
 
 # 4. Create a component that adds some data
 

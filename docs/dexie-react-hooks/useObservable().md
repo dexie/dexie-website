@@ -62,18 +62,18 @@ import React from "react";
 import { BehaviorSubject } from "rxjs";
 import { useObservable } from "dexie-react-hooks";
 
-const counterObservable = new BehaviorSubject(1);
+const counter = new BehaviorSubject(1);
 
 //
 // React component
 //
 export function SimpleCounter() {
-  const currentCount = useObservable(counterObservable);
+  const currentCount = useObservable(counter);
 
   return (
     <>
       <p>Current Count is {currentCount}</p>
-      <button onClick={() => currentCount.next(counterObservable.getValue() + 1)}>
+      <button onClick={() => counter.next(counter.getValue() + 1)}>
         Click to increment
       </button>
     </>

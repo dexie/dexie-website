@@ -36,7 +36,7 @@ export interface PermissionChecker<T> {
 | db        | A Dexie instance with dexie-cloud addon active |
 | table | A table name or Table instance              |
 | obj          | An object retrieved from a dexie query |
-| entity     | If your table is declared using [Dexie 4.0 Entity](https://dexie.org/roadmap/dexie4.0#a-solution-to-dependency-issues-with-mapped-classes) and [DexieCloudTable](/cloud/docs/DexieCloudTable), as in [dexie-cloud-todo-app](https://github.com/dexie/Dexie.js/blob/v4.0.0-alpha.3/samples/dexie-cloud-todo-app/src/db/TodoDB.ts), you only need to provide a single argument - the entity itself |
+| entity     | If your table is declared using DexieCloudTable using a `Entity`-derive class mapped to the table using mapToClass(), as examplified in declaration of the TodoList class declared in [dexie-cloud-todo-app](https://github.com/dexie/Dexie.js/blob/v4.0.0-alpha.3/samples/dexie-cloud-todo-app/src/db/TodoDB.ts), you only need to provide a single argument - the entity itself |
 
 
 # Sample

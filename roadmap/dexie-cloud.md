@@ -62,7 +62,7 @@ This milestone was released December 19, 2021.
 
 # Milestone 4 - Role support + Updated Documentation (CURRENT)
 
-Target release date: ~~Jan 10, 2022.~~ Mars 31, 2022.
+Target release date: ~~Jan 10, 2022.~~ May 31, 2022.
 
 - [x] Respect global roles
 - [x] Allow importing global roles in JSON format for dexie-cloud import CLI.
@@ -79,7 +79,7 @@ Target release date: ~~Jan 10, 2022.~~ Mars 31, 2022.
 
 # Milestone 5 - Commercialization
 
-Target release date: June 2022.
+Target release date: ~~June 2022~~ August 2022.
 
 - [ ] Subscription manager
 - [ ] Stripe Integration

@@ -16,9 +16,11 @@ Let your react component subscribe to an observable and re-render whenever the o
 # Dependencies
 
 ```
-yarn add react
-yarn add dexie
-yarn add dexie-react-hooks
+npm i react dexie dexie-react-hooks
+```
+or
+```
+yarn add react dexie dexie-react-hooks
 ```
 
 # Syntax
@@ -57,10 +59,8 @@ interface Observable<T> {
 
 ```tsx
 import React from "react";
-import Dexie from "dexie";
 import { BehaviorSubject } from "rxjs";
 import { useObservable } from "dexie-react-hooks";
-import { db } from "./db";
 
 const counterObservable = new BehaviorSubject(1);
 

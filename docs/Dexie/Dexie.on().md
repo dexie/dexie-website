@@ -9,17 +9,21 @@ title: 'Dexie.on()'
 db.on(eventType, subscriberFunction);
 ```
 
+```js
+Dexie.on(staticEventType, subscriberFunction)
+```
+
 ### Parameters
 
 <table>
-<tr><td>eventType: String</td><td>The event to subscribe to</td></tr>
+<tr><td>eventType / staticEventType: String</td><td>The event to subscribe to</td></tr>
 <tr><td>subscriberFunction: Function</td><td>Function called when event is triggered</td></tr>
 </table>
 
-### Return Value
 
-[Dexie](/docs/Dexie/Dexie)
+### Static Events
 
+["storagemutated"](/docs/Dexie/Dexie.on.storagemutated)
 ### Events
 
 ["ready"](/docs/Dexie/Dexie.on.ready)

@@ -14,9 +14,11 @@ Observe IndexedDB data in your React component. Make the component re-render whe
 # Dependencies
 
 ```
-npm i react
-npm i dexie@latest
-npm i dexie-react-hooks
+npm i react dexie dexie-react-hooks
+```
+or
+```
+yarn add react dexie dexie-react-hooks
 ```
 
 # Syntax
@@ -41,6 +43,10 @@ export function useLiveQuery<T, TDefault=undefined> (
 
 * Don't call asynchronic API:s from it except Dexie's APIs.
 * If you really need to call other async API's (such as fetch() or webCrypto), wrap the returned promise through `Promise.resolve()`. There's an example later in this page on how to do that.
+
+# Safari Support
+
+Safari 15.3 and older does not support [BroadcastChannel](https://caniuse.com/broadcastchannel) requied to make useLiveQuery() react to changes written from Web Workers. However, it will react to changes performed in a Service Worker. There are two small snippets that you can use to make it work with Web Workers also for older Safari browsers, see [Dexie.on.storagemutated#supporting-safari-153-and-below](/docs/Dexie/Dexie.on.storagemutated#supporting-safari-153-and-below).
 
 # Simple Example
 
@@ -231,3 +237,4 @@ function MyComponent(id) {
 
 [A blog post about this](https://medium.com/dexie-js/awesome-react-integration-coming-f212c2273d05)
 
+[Dexie.on.storagemutated](/docs/Dexie/Dexie.on.storagemutated)

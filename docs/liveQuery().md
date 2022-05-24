@@ -22,6 +22,11 @@ export function liveQuery<T>(
 |------|------|
 | querier  | Function that returns a final result (Promise) |
 
+# Safari Support
+
+Safari 15.3 and older does not support [BroadcastChannel](https://caniuse.com/broadcastchannel) requied to make `liveQuery()` react to changes written from Web Workers. However, it will react to changes performed in a Service Worker. There are two small snippets that you can use to make it work with Web Workers also for older Safari browsers, see [Dexie.on.storagemutated#supporting-safari-153-and-below](/docs/Dexie/Dexie.on.storagemutated#supporting-safari-153-and-below).
+
+
 # Svelte and Angular
 
 Svelte and Angular supports Observables natively so liveQuery() can be used directly.
@@ -35,7 +40,7 @@ Svelte and Angular supports Observables natively so liveQuery() can be used dire
 **Angular: Use the [AsyncPipe](https://angular.io/api/common/AsyncPipe) (`liveQueryReturnValue | async`).**
 
 # React and Vue
-For React apps, we provide a hook, **[useLiveQuery()](dexie-react-hoos/useLiveQuery())** that allows components to consume live queries.
+For React apps, we provide a hook, **[useLiveQuery()](dexie-react-hooks/useLiveQuery())** that allows components to consume live queries.
 
 For Vue, we still haven't implemented any specific hook, but the observable returned from liveQuery() can be consumed using **[useObservable()](https://vueuse.org/rxjs/useobservable/)** from @vueuse/rxjs.
 

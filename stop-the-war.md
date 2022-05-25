@@ -5,11 +5,15 @@ title: Stop Putin!
 
 Hi, I'm David, the author of Dexie.js and I'm from Sweden. I hereby take a stand against Putin's illegal and horrible war under **false flag** against his **brother country Ukraine**!
 
-The world is watching.
+Millions of innocent civilians are scared to death and have had to flee their country.
+
+According to independant Russian journalist Alexander Podrabinek, Putin had a history of using wars to increase and maintain his power and was now using a war with Ukraine to deflect opposition in Russia.
 
 In United Nations, 141 member states voted for a [resolution deploring Russia's invasion of Ukraine](https://news.un.org/en/story/2022/03/1113152). Only 5 member states voted against.
 
 **[Fact check: Russia falsely blames Ukraine for starting war](https://www.dw.com/en/fact-check-russia-falsely-blames-ukraine-for-starting-war/a-60999948)**
+
+**[Wikipedia.org: Media portrayal of the Ukrainian crisis](https://en.wikipedia.org/wiki/Media_portrayal_of_the_Ukrainian_crisis)**
 
 The world is watching!
 
@@ -25,11 +29,11 @@ What can you do to stop it?
 
 If you need to read about the different arguments from both the Kreml and the rest of the world, here are a few links that may give you more knowledge...
 
+**[Wikipedia.org: Media portrayal of the Ukrainian crisis](https://en.wikipedia.org/wiki/Media_portrayal_of_the_Ukrainian_crisis)**
+
 **[The Guardian: 'Dont call it a war' - Propaganda filters the truth about Ukraine on Russian media](https://www.theguardian.com/world/2022/feb/26/propaganda-filters-truth-ukraine-war-russian-media)**
 
 **[Deutche Welle's Fact check: Russia falsely blames Ukraine for starting war](https://www.dw.com/en/fact-check-russia-falsely-blames-ukraine-for-starting-war/a-60999948)**
-
-**[Wikipedia.org: Media portrayal of the Ukrainian crisis](https://en.wikipedia.org/wiki/Media_portrayal_of_the_Ukrainian_crisis)**
 
 # Open Source is about freedom, democracy and peacefulness
 

@@ -69,13 +69,14 @@ Target release date: ~~Jan 10, 2022.~~ May 31, 2022.
 - [x] Add sharing support with roles to the sample app
 - [x] Update Authentication docs: signed refresh tokens
 - [x] Updated docs explaining that '@' keys are optional.
-- [ ] Docs: Explain Universally consistent modify() operations
+- [x] Docs: Explain Universally consistent modify() operations
 - [ ] Document all options in db.cloud.configure() 
 - [ ] Document db.cloud properties and how to use them
 - [ ] Document service worker support
 - [ ] Update docs for unauthorized use case
 - [ ] Document REST API: import / export
 - [ ] Document how to tie an object to a Realm
+
 
 # Milestone 5 - Commercialization
 

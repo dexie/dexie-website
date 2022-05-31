@@ -86,20 +86,35 @@ prismStyle: 'vscode-dark'
             </p>
           </div>
           <div class="col-md-3">
-            <h2>Scale to Millions</h2>
+            <h2>Consistent Sync</h2>
             <p>
-              Dexie Cloud is built to scale both horizontally and vertically.
-              We use a cloud infrastructure that enables auto-scaling disk and resources
-              as well as adding new shards when popularity explode.
+              Dexie Cloud doesn't just sync individual CRUD operations - it syncs the where-expressions along with the operations, making it possible to keep related data consistent.
             </p>
             <p>
-              <a class="btn btn-success" href="docs/scaling" role="button"
+              <a class="btn btn-success" href="docs/consistency" role="button"
                 >Read more &raquo;</a
               >
             </p>
           </div>
         </div>
       </div>
+      <hr/>
+      <h1 id="what-it-is">What it is:</h1>
+        <ul style="padding: 32px; list-style-type: none; max-width: 90%; font-size: 12pt;">
+          <li style="margin: 16px 0">
+            <i class="fa fa-hand-o-right" aria-hidden="true" style="margin-left: -24px; width: 24px;"></i>Think plain Dexie.js (the IndexedDB wrapper) but also with online sync. Write completely Offline-First apps using Dexie.js
+            as your sole storage model. Then let Dexie Cloud sync your data with the cloud.
+          </li>
+          <li style="margin: 16px 0">
+            <i class="fa fa-hand-o-right" aria-hidden="true" style="margin-left: -24px; width: 24px;"></i>The data in the cloud is protected using authentication and authorization to
+            prohibit unauthorized access.
+          </li>
+          <li style="margin: 16px 0">
+            <i class="fa fa-hand-o-right" aria-hidden="true" style="margin-left: -24px; width: 24px;"></i>Data can be shared between multiple or individual users, making it possible to
+            build reactive online collaboration apps hosted on a static web page without bothering about a server. And of course: with offline support so there's no problem sending a chat
+            messages or look at the latest conversation while the network is down.
+          </li>
+        </ul>      
       <hr/>
       <h2 id="getting-started">Get started</h2>
         <p>This guide assumes you're already using Dexie.js and now want to connect it to Dexie Cloud.
@@ -164,7 +179,7 @@ prismStyle: 'vscode-dark'
           </p>
           <p>Changes sync instantly with the cloud in both directions. When offline, changes are queued until next time user goes online.
             When online, changes will be synced eagerly in both directions.
-            If user is idle for a time, the client will go over to period sync strategy instead of the eager sync.
+            If user is idle for a time, the client will go over to periodic sync strategy instead of the eager sync.
             As soon as user starts interact with the application (mouse moves or key strokes), the app will go over to eager sync mode again.
           </p>
           <p>Without taking advantage of the <a href="/cloud/docs/access-control">access control</a> features, all data

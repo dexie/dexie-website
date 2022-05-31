@@ -24,6 +24,8 @@ When launching your app, our extremely simple [pricing](/cloud/pricing) makes it
 
 <i class="fa fa-hand-o-right" aria-hidden="true"></i> [Authentication in Dexie Cloud](docs/authentication)
 
+<i class="fa fa-hand-o-right" aria-hidden="true"></i> [Consistency in Dexie Cloud](docs/consistency)
+
 ### Examples
 
 <i class="fa fa-code" aria-hidden="true"></i> [Create a sharable ToDo list](docs/access-control#example-sharable-todo-list)

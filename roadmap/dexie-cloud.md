@@ -71,11 +71,11 @@ Target release date: ~~Jan 10, 2022.~~ May 31, 2022.
 - [x] Updated docs explaining that '@' keys are optional.
 - [x] Docs: Explain Universally consistent modify() operations
 - [x] Document all options in db.cloud.configure() 
-- [ ] Document db.cloud properties and how to use them
-- [ ] Document service worker support
-- [ ] Update docs for unauthorized use case
+- [x] Document db.cloud properties and how to use them
+- [x] Document service worker support
+- [x] Update docs for unauthorized use case
 - [ ] Document REST API: import / export
-- [ ] Document how to tie an object to a Realm
+- [x] Document how to tie an object to a Realm
 
 
 # Milestone 5 - Commercialization

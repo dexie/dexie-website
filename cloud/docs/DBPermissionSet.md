@@ -28,3 +28,4 @@ export interface DBPermissionSet {
 }
 ```
 
+See also the [Permissions](access-control#permissions) section on the Access Control page that describes the permissions.

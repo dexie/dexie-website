@@ -2,6 +2,7 @@
 layout: docs-dexie-cloud
 title: "Access Control in Dexie Cloud"
 ---
+
 <div class="shoutouts" style="text-align: left; margin: 20px 0 35px 0;">
    <p>Minimalistic and easy to understand access model</p>
    <p>Share entities with teams and between individuals</p>
@@ -39,7 +40,7 @@ A realm represents an access controlled partition of data. All objects in your d
 
 New realms can be created by anyone but they are of little use unless that user invites members and the members accepts the invitation.
 
-Realms are managed in the `db.realms` table. A given user will only have the realms they are member of visible for them and synced for offline access. When a realm is shared with new users, those users will get an invitation to join the realm and when users accept the invitation, they will get the realm in their next sync request together with objects that are connected to that realm. Invitations are created using the `db.members` table. Invited members can be given full, limited or no permission to mutate objects connected to the realm. 
+Realms are managed in the `db.realms` table. A given user will only have the realms they are member of visible for them and synced for offline access. When a realm is shared with new users, those users will get an invitation to join the realm and when users accept the invitation, they will get the realm in their next sync request together with objects that are connected to that realm. Invitations are created using the `db.members` table. Invited members can be given full, limited or no permission to mutate objects connected to the realm.
 
 ## Members
 
@@ -47,7 +48,7 @@ Realms have members. A member connected to a realm will have the realm and all o
 
 ## Roles
 
-Instead of giving members direct permissions, a member can be given one or many roles that grants certain permissions. Roles needs to be created and connected to a realm. The role has a name and a set of permissions. The roles of a member is defined by the `roles` property of the [member](#properties-of-objects-in-members-table).
+Instead of giving members direct permissions, a member can be given one or many roles that grants certain permissions. Roles are global per database and needs to be imported using [npx dexie-cloud import](cli#import). Each role has a name and a set of permissions. The roles of a member is defined by the `roles` property of the [member](#properties-of-objects-in-members-table).
 
 ## Reserved property names
 
@@ -78,7 +79,7 @@ db.version(1).stores({
 
 db.cloud.configure({
   databaseUrl: "<your database URL>",
-  requireAuth: true
+  requireAuth: true,
 });
 ```
 
@@ -133,7 +134,7 @@ interface Realm {
    * This property is optional but it can be a good practice to name a realm for what it represents.
    */
   name?: string;
-  
+
   /** A short text that describes what the realm represents.
     This text will be used in invites to exlain what the user is invited to.
     Examples: 'a to-do list', 'a project', 'a team'.
@@ -156,6 +157,7 @@ This example shows how to create sharable entities, how to share them and how to
 1. **createTodoList()** creates a sharable ToDo list
 2. **shareTodoList()** shares the list to other users
 3. **addTodoItem()** adds a todoItem related to the shared list that also inherits sharing.
+4. **deleteTodoList()** deletes the todo-list along with all its related objects
 
 ```js
 import Dexie from "dexie";
@@ -164,19 +166,19 @@ import dexieCloud from "dexie-cloud-addon";
 //
 // Declare database, tables, keys and indexes
 //
-const db = new Dexie('myToDoDB', {addons: [dexieCloud]});
+const db = new Dexie("myToDoDB", { addons: [dexieCloud] });
 db.version(2).stores({
   // Application tables
-  todoLists: '@id, title',
-  todoItems: '@id, title, done, todoListId',
+  todoLists: "@id, title",
+  todoItems: "@id, title, done, todoListId",
 
   // Access Control tables
   // (Note: these tables need to be named exactly like in this sample,
   //        and will correspond to server-side access control of Dexie
   //        Cloud)
-  realms: '@realmId',
-  members: '@id,[realmId+email]',
-  roles: '[realmId+name]'
+  realms: "@realmId",
+  members: "@id,[realmId+email]",
+  roles: "[realmId+name]",
 });
 
 //
@@ -188,35 +190,9 @@ db.version(2).stores({
  * @param {string} listName Name of the ToDo list
  * @returns {Promise} Promise resolving with the ID of the created list.
  */
-function createTodoList(listName) {
-  return db.transaction('rw', db.todoLists, db.realms, db.members, async () => {
-
-    // Create the new realm
-    const newRealmId = await db.realms.add({
-      // A name (and what it represents) are used in invites -
-      // to explain to invited members what they are invited to.
-      name: `${listName}`,
-      represents: `a to-do list`
-    });
-
-    // Give yourself visibility of the realm and its connected objects
-    // (being owner does not imply having the object synced)
-    await db.members.add({
-      realmId: newRealmId,
-      userId: db.cloud.currentUserId,
-      // invite not needed when sharing to yourself.
-      // permissions not nescessary as you are the realm owner.
-    });
-
-    // Create the new list and connect it to this realm
-    const newTodoListId = await db.todoLists.add({
-      realmId: newRealmId,
-      title: listName
-    });
-
-    // Return the ID. This becomes the return value of the transaction.
-    return newTodoListId;
-  });
+async function createTodoList(listName) {
+  const id = await db.todoLists.add({ title: listName });
+  return id;
 }
 
 /** Share ToDoList with some friends
@@ -226,15 +202,31 @@ function createTodoList(listName) {
  * @returns {Promise}
  */
 function shareTodoList(todoList, ...friends) {
-  return db.members.bulkAdd(friends.map(friend => ({
-    realmId: todoList.realmId,
-    email: friend.email,
-    name: friend.name,
-    invite: true, // Generates invite email on server on sync
-    permissions: {
-      manage: "*" // Give your friend full permissions within this new realm.
-    }
-  })));
+  return db.transaction("rw", [db.todoLists, db.realms, db.members], () => {
+    // Add or update a realm, tied to the todo-list using getTiedRealmId():
+    const realmId = getTiedRealmId(todoList.id);
+    db.realms.put({
+      realmId,
+      name: todoList.title,
+      represents: "a to-do list",
+    });
+
+    // Move todo-list into the realm (if not already there):
+    db.todoLists.update(todoList.id, { realmId });
+
+    // Add the members to share it to:
+    db.members.bulkAdd(
+      friends.map((friend) => ({
+        realmId,
+        email: friend.email,
+        name: friend.name,
+        invite: true, // Generates invite email on server on sync
+        permissions: {
+          manage: "*", // Give your friend full permissions within this new realm.
+        },
+      }))
+    );
+  });
 }
 
 /** Unshare ToDoList for given friends
@@ -244,8 +236,9 @@ function shareTodoList(todoList, ...friends) {
  * @returns {Promise}
  */
 function unshareTodoList(todoList, ...friends) {
-  return db.members.where('[realmId+email]')
-    .anyOf(friends.map(friend => [todoList.realmId, friend.email]))
+  return db.members
+    .where("[realmId+email]")
+    .anyOf(friends.map((friend) => [todoList.realmId, friend.email]))
     .delete();
 }
 
@@ -258,19 +251,44 @@ function addTodoItem(todoList, todoTitle) {
   return db.todoItems.add({
     todoListId: todoList.id, // Connect the item to the todoList
     realmId: todoList.realmId, // Connect it to the same realm
-    title: todoTitle
-    done: 0
+    title: todoTitle,
+    done: 0,
   });
 }
+
+/** Delete todo-list along with any possible related entity.
+ * For sync consistency, we do not rely on queries within the transaction, but
+ * instead make sure to delete all possible related entites using where clauses
+ * that also executes on server when syncing, as well as on future syncs from
+ * other clients (see docs about consistency in dexie cloud)
+ * */
+function deleteTodoList(todoList) {
+  // Use a transaction for full consistency also when syncing it:
+  return db.transaction(
+    "rw",
+    [db.todoLists, db.todoItems, db.realms, db.members],
+    () => {
+      // Delete possible todo-items:
+      db.todoItems.where({ todoListId: todoList.id }).delete();
+      // Delete the list:
+      db.todoLists.delete(todoList.id);
+      // Delete possible realm and its members in case list was shared:
+      const tiedRealmId = getTiedRealmId(todoList.id);
+      db.members.where({ realmId: tiedRealmId }).delete();
+      db.realms.delete(tiedRealmId);
+    }
+  );
+}
 ```
+
+For another example, see [TodoList class](https://github.com/dexie/Dexie.js/blob/master/samples/dexie-cloud-todo-app/src/db/TodoList.ts) in Dexie Cloud Todo-app example that encapsulates actions into class methods. Also read about [dexie cloud consistency concepts](consistency) that makes this model consistent using tied realm ID and where clauses when moving objects between realms.
 
 ### Table "members"
 
 Contains the edges between a realm and its members. Each member must have at least a realmId and an email property. Members can be added before the target user even has any user account in the system.
 
-
 | Table Name  | "members" |
-|-------------|-----------|
+| ----------- | --------- |
 | Primary key | @id       |
 
 #### Properties of objects in "members" table
@@ -299,11 +317,11 @@ interface Member {
 
 **Properties with special restrictions**
 
-* **realmId** - you will only have permission to specify a realm where you have permissions to add members in.
-* **userId** - you can only set this field to your own userId, or leave it undefined unless you are database owner (for example if adding members via REST interface)
-* **invited** - Managed by the system only. Cannot be set or updated by user.
-* **accepted** - Managed by the system only. Cannot be set or updated by user.
-* **rejected** - Managed by the system only. Cannot be set or updated by user.
+- **realmId** - you will only have permission to specify a realm where you have permissions to add members in.
+- **userId** - you can only set this field to your own userId, or leave it undefined unless you are database owner (for example if adding members via REST interface)
+- **invited** - Managed by the system only. Cannot be set or updated by user.
+- **accepted** - Managed by the system only. Cannot be set or updated by user.
+- **rejected** - Managed by the system only. Cannot be set or updated by user.
 
 #### The permissions field
 
@@ -375,14 +393,14 @@ db.version(1).stores({
  * @returns {Promise}
  *    Promise of string representing the ID of the added project.
  */
-function addProject(projectName, description="") {
+function addProject(projectName, description = "") {
   return db.transaction("rw", db.realms, db.roles, db.projects, async () => {
     // Create the new realm
     const newRealmId = await db.realms.add({
       // A name and what it represents are used in invites -
       // to explain to invited members what they are invited to.
       name: `${projectName}`,
-      represents: `a project`
+      represents: `a project`,
     });
 
     // Add two roles for the project realm
@@ -421,7 +439,7 @@ function addProject(projectName, description="") {
     return await db.projects.add({
       realmId: newRealmId,
       name: projectName,
-      description
+      description,
     });
   });
 }
@@ -530,14 +548,16 @@ Permission to add new objects to given set of tables. Note that [object ownershi
 Example
 
 ```js
-{add: ["todoItems", "comments"]}
+{
+  add: ["todoItems", "comments"];
+}
 ```
 
 The **add** permission also grants the user move an object of the given types (tables) into this realm (by changing the realmId property). Note though that the same user also needs to either be owner of the object in the source realm, or to have **manage** permission in the source realm.
 
 **update**
 
-Permission to update given set of properties in given set of tables. Allowing "\*" will allow updating all non-reserver properties (all properties but `realmId` and `owner`). 
+Permission to update given set of properties in given set of tables. Allowing "\*" will allow updating all non-reserver properties (all properties but `realmId` and `owner`).
 
 Example
 
@@ -552,12 +572,12 @@ Example
 
 NOTES:
 
-* `"*"` represents all properties except the reserved properties (`owner` and `realmId`). If you have `{update: {todoItems: "*"}}` permission, you can change the todoItems `title`, `done` fields etc but not its `owner` or `realmId`.
-* In order to grant permissions for all fields including `owner` and `realmId` you have to specify them explicitely:
+- `"*"` represents all properties except the reserved properties (`owner` and `realmId`). If you have `{update: {todoItems: "*"}}` permission, you can change the todoItems `title`, `done` fields etc but not its `owner` or `realmId`.
+- In order to grant permissions for all fields including `owner` and `realmId` you have to specify them explicitely:
   ```js
   {
     update: {
-      todoItems: ["*", "realmId", "owner"]
+      todoItems: ["*", "realmId", "owner"];
     }
   }
   ```
@@ -569,12 +589,18 @@ Full permissions on objects within the realm in given set of tables.
 Example
 
 ```js
-{manage: ["todoLists", "todoItems"]}
+{
+  manage: ["todoLists", "todoItems"];
+}
 ```
 
 ```js
-{manage: "*"}
+{
+  manage: "*";
+}
 ```
+
+See [typescript interface DBPermissionSet](DBPermissionSet)
 
 ## Object Ownership
 

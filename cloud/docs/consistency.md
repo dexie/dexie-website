@@ -164,9 +164,9 @@ async function deleteList(todoList: TodoList) {
       const tiedRealmId = getTiedRealmId(todoList.id);
       db.todoLists.delete(todoList.id);
       db.todoItems.where({todoListId: todoList.id}).delete();
-      // Empty out the realm from members!
+      // Empty out any tied realm from members:
       db.members.where({realmId: tiedRealmId}).delete(); 
-      db.roles.where({realmId: tiedRealmId}).delete();
+      // Delete the tied realm if it exists:
       db.realms.delete(tiedRealmId);
    });
 }

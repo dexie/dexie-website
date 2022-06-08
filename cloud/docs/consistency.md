@@ -38,7 +38,7 @@ The concepts being used in Dexie Cloud to keep data consistent, are:
 - Consistent Modify- and Delete Operations
 - Tied Realms
 - Update Operations
-- Private Singletons
+- Private Singleton IDs
 
 ## Globally Unique IDs
 
@@ -171,3 +171,39 @@ async function deleteList(todoList: TodoList) {
    });
 }
 ```
+
+## Private Singleton IDs
+
+Private Singleton IDs are primary keys that starts with a hash "#". They only need to be unique per user and they can be created referred to no matter whether the user is authenticated or not. When they sync, they can never collide with other user's private IDs even when being identical.
+
+Some examples when private singleton IDs can be useful:
+
+* You have some personal settings per user and you want the database objects representing a setting to be a singleton instance (one and only one per user).
+* You want a default placeholder to exist for every user. In a music app, it could be "My personal favourite songs".
+
+### Example: Personal Settings Object
+
+```ts
+// Read setting:
+const themeSetting = await db.personalSettings.get('#theme');
+console.log("User theme is:", themeSetting?.value ?? "default-theme");
+
+// Update setting:
+await db.personalSettings.put({id: '#theme', value: 'dark-mode'});
+```
+
+Like all data in Dexie Cloud, it is allowed to add objects even when not yet authenticated to the server. Adding normal objects with globally unique IDs have a drawback in case you want to avoid multiple instances of an object after logging in to the service and syncing it with existing data (where the action to add the same object had been done by the same user on another client).
+
+Private IDs prohibits getting multiple instances in these cases. The settings example above is a good example.
+
+1. User opens app on phone and changes the theme to "light-mode".
+2. User logs in. The #theme object with value "light-mode" is persisted on her account in the cloud.
+3. User opens app on desktop and changes the theme to "dark-mode".
+4. User logs in. The #theme obejct with value "dark-mode" will overwrite the existing "light-mode".
+5. User opens app on a tablet without changing the theme.
+6. User logs in. The #theme object is synced to the client and user will get the latest chosed theme ("dark-mode")
+
+### Private Singletons must never be shared
+
+An object with an private ID (starting with "#") must never be shared but needs to always lie in the private realm. If your app allows for sharing placeholder objects such as To-do lists, music albums or similar, take special care if the placeholder uses a private ID, and if so, disable the possibility to share it.
+

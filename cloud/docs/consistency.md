@@ -184,6 +184,12 @@ Some examples when private singleton IDs can be useful:
 ### Example: Personal Settings Object
 
 ```ts
+// Database declaration
+const db = new Dexie("MyAppDB");
+db.version(1).stores({
+  personalSettings: 'id'
+});
+
 // Read setting:
 const themeSetting = await db.personalSettings.get('#theme');
 console.log("User theme is:", themeSetting?.value ?? "default-theme");

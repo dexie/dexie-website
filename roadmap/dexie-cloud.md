@@ -60,7 +60,7 @@ This milestone was released December 19, 2021.
 - [x] Publish new version of sample todo app
 - [x] Allowed another 150 people from the wait list!
 
-# Milestone 4 - Role support + Updated Documentation (CURRENT)
+# Milestone 4 - Role support + Updated Documentation
 
 Target release date: ~~Jan 10, 2022.~~ May 31, 2022.
 
@@ -74,16 +74,20 @@ Target release date: ~~Jan 10, 2022.~~ May 31, 2022.
 - [x] Document db.cloud properties and how to use them
 - [x] Document service worker support
 - [x] Update docs for unauthorized use case
-- [ ] Document REST API: import / export
+- [ ] ~~Document REST API: import / export~~
 - [x] Document how to tie an object to a Realm
 
+# Milestone 5 - Increase number of beta testers (CURRENT)
+ 
+ - [x] Set up monitoring, alarms and redundancy
+ - [ ] Approve more testers
+ - [ ] Start sending out waitlist confirmation emails
+ - [ ] Collect new requirements
+ - [ ] Document REST API: import / export
 
-# Milestone 5 - Commercialization
-
-Target release date: ~~June 2022~~ August 2022.
+# Milestone 6 - Commercialization
 
 - [ ] Subscription manager
 - [ ] Stripe Integration
 - [ ] Implement monthly cost limit setting
 - [ ] Implement end-user trial period for customer apps
-- [ ] Implement option to allow end-users purchase subscriptions from us

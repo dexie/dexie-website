@@ -175,7 +175,8 @@ async function updateCache(request, res, currentCachedRes) {
     if (!cachedLastMod || (cachedLastMod !== res.headers.get("last-modified"))) {
         // There were no cached response, or no "last-modified", or "last-modified" headers was changed - keep the cache up-to-date,
         // so that, when the user goes offline, it will have the latest and greatest, and not revert to old versions
+        const clonedResponse = res.clone();
         const cache = await caches.open(CACHE_NAME);
-        await cache.put(request, res.clone());
+        await cache.put(request, clonedResponse);
     }
 }

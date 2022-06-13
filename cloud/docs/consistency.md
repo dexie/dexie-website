@@ -198,7 +198,7 @@ console.log("User theme is:", themeSetting?.value ?? "default-theme");
 await db.personalSettings.put({id: '#theme', value: 'dark-mode'});
 ```
 
-Like all data in Dexie Cloud, it is allowed to add objects even when not yet authenticated to the server. Once authenticated, all locally added objects will sync to the server.
+Like all data in Dexie Cloud, it is allowed to add objects even when not yet authenticated to the server. When user finally authenticates, his or her created objects will get their realmId set to the correct private realmId of the authenticated user and get synced to the server. This goes for private objects only - non-authenticated users may never create or manipulate objects in other realms than the private one.
 
 Adding normal objects with globally unique IDs have a drawback in case you want to avoid multiple instances of an object after logging in to the service and syncing it with existing data (where the action to add the same object had been done by the same user on another client).
 

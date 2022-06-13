@@ -119,6 +119,8 @@ Update operations avoid conflicts as long as the different clients updates diffe
 
 ## Tied Realms
 
+Tied realms are for objects that are created as private but may be shared later on.
+
 All database objects in Dexie Cloud have a `realmId` property (defaulting to current user's private realmId). The realmId represents which access-realm an object belongs to. When a realmId is not given for an object, it will default to the built-in private realm for the current user, representing private access. Those objects can be considered private, such as a private todo-list with private todo-items in it. You don't want to share your
 private realm in whole, so if a private object needs to be shared, you would typically need to create a new realm, add members to the new realm and move the related entities into that new realm by updating their `realmId` property.
 

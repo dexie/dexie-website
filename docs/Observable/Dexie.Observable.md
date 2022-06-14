@@ -5,6 +5,10 @@ title: 'Dexie.Observable'
 
 Observe changes to database - even when they happen in another browser window.
 
+**NOTE!**
+
+**This addon adds meta tables your database to maintain change tracking. This can slow down the performance. As of dexie version >= 3.2, you no longer need this addon to observe data. We encourage you to look at the docs of [liveQuery()](/docs/liveQuery()) and [useLiveQuery()](/docs/dexie-react-hooks/useLiveQuery()) - built-in observation in Dexie >= 3.2, before considering this addon.**
+
 ### Install
 
 ```bash

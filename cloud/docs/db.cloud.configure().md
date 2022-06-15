@@ -134,7 +134,7 @@ should not be added to git either but be managed in a secure way using the cloud
 
 ### Example: Integrate Custom Authentication
 
-Dexie Cloud comes with zero-config email OTP authentication but if you need to replace that with any custom authentication, you can follow this guide. By defining the `fetchToken` configuration parameter, you opt-out from zero-config authentication and control the the authentication flow yourself instead. The `fetchToken` callback needs to return a promise containing the Dexie Cloud token. That token can be retrieved over server-to-server requests towards Dexie Cloud so you will need a server endpoint to do it. You can either integrate with your existing web server or create a new server endpoint using an authentication framework of your choice, such as Node.js and Passportjs. You need to extend the existing server to respond to a new URL (let's use `/dexie-cloud-token`). This new URL endpoint shall request tokens from Dexie Cloud via server-to-server communication using the logged in user and return the Dexie Cloud tokens to its client. The client of your new endpoint will be dexie-cloud client (requested from your `fetchToken` callback).
+Dexie Cloud comes with zero-config email OTP authentication but if you need to replace that with any custom authentication, you can follow this guide. By defining the `fetchTokens` configuration parameter, you opt-out from zero-config authentication and control the the authentication flow yourself instead. The `fetchTokens` callback needs to return a promise containing the Dexie Cloud token. That token can be retrieved over server-to-server requests towards Dexie Cloud so you will need a server endpoint to do it. You can either integrate with your existing web server or create a new server endpoint using an authentication framework of your choice, such as Node.js and Passportjs. You need to extend the existing server to respond to a new URL (You can name the route what you want but in our example, we'll use `/dexie-cloud-tokens`). This new URL endpoint shall request tokens from Dexie Cloud via server-to-server communication using the logged in user and return the Dexie Cloud tokens to its client. The client of your new endpoint will be the browser where your dexie based app resides, and it will request server in the callback you configured in the `fetchTokens` option.
 
 **Node.js server endpoint**
 
@@ -196,7 +196,7 @@ app.post('/dexie-cloud-tokens', bodyParser.json(), async (req, res, next) => {
 });
 ```
 
-**fetchToken implementation in your client code**
+**fetchTokens implementation in your client code**
 
 Assuming that your server endpoint will respond to the path "/dexie-cloud-tokens" as examplified above (using whatever server side technology you have for that),
 the client code to integrate it will be:
@@ -205,7 +205,7 @@ the client code to integrate it will be:
 db.cloud.configure({
   databaseUrl: "<database URL>",
   requireAuth: true,
-  fetchToken: (tokenParams) => fetch("/dexie-cloud-tokens", {
+  fetchTokens: (tokenParams) => fetch("/dexie-cloud-tokens", {
     method: "post",
     credentials: "same-origin",
     headers: { "Content-Type": "application/json" },

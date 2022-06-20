@@ -148,7 +148,7 @@ Note that there are other ways to consume observables in vue - such as manually 
 <template>
   <ul>
     <li v-for="friend in friends" :key="friend.id">
-      {{ friend.name }}, {{ item.age }}
+      {{ friend.name }}, {{ friend.age }}
     </li>
   </ul>
 </template>

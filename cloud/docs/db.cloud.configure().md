@@ -104,7 +104,7 @@ if ('serviceWorker' in navigator) {
 
 Then where you configure dexie cloud, use the option `{tryUseServiceWorker: true}`.
 
-#### Enable Service Worker With reate-react-app
+#### Enable Service Worker With `create-react-app`
 
 For those who use [create-react-app](https://create-react-app.dev/docs/making-a-progressive-web-app/), run it with option `--template cra-template-pwa` or `--template cra-template-pwa-typescript` to get the service worker setup for you with a nice template for a full progressive web app including a PWA manifest etc so that your app becomes installable at peoples devices. Then add the following line to the top of the generated `service-worker.js` or `service-worker.ts` of your app:
 

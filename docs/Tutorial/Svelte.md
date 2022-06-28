@@ -170,7 +170,7 @@ Notice two things here:
 
 ### Using Sveltekit?
 
-Sveltekit will try to run your queries on the server unless you prohibit it from doing so:
+Sveltekit will try to run your queries on the server which is not where your offline data resides. You will need to add a `browser` condition within the liveQuery() callback:
 
 ```svelte
 <!-- FriendList.svelte -->

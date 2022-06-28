@@ -168,6 +168,24 @@ Notice two things here:
 1. liveQuery() returns a reactive Svelte Store (or actually an Observable that happens to comply with the [The Svelte Store Contract](https://svelte.dev/docs#Store_contract)). To access the reactive value of a Svelte Store, friends needs to be prefixed with $, `$friends`.
 2. The result will be undefined momentarily before the very initial result arrives - which explains why we need the `{#if $friends}` condition.
 
+### Using Sveltekit?
+
+Sveltekit will try to run your queries on the server unless you prohibit it from doing so:
+
+```svelte
+<!-- FriendList.svelte -->
+<script>
+  import { liveQuery } from "dexie";
+  import { db } from "./db";
+  import { browser } from '$app/env';
+
+  let friends = liveQuery(
+    () => browser ? db.friends.toArray() : []
+  );
+
+</script>
+```
+
 # 6. Pass some query params
 
 Let's improve the FriendList component and allow a parent component to pass some props that we use from within the query.

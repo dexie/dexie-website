@@ -180,7 +180,9 @@ Sveltekit will try to run your queries on the server which is not where your off
   import { browser } from '$app/env';
 
   let friends = liveQuery(
-    () => browser ? db.friends.toArray() : []
+    () => browser
+       ? db.friends.toArray()
+       : []
   );
 
 </script>

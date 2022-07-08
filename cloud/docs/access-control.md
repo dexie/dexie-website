@@ -394,7 +394,7 @@ db.version(1).stores({
  *    Promise of string representing the ID of the added project.
  */
 function addProject(projectName, description = "") {
-  return db.transaction("rw", db.realms, db.roles, db.projects, async () => {
+  return db.transaction("rw", db.realms, db.projects, async () => {
     // Create the new realm
     const newRealmId = await db.realms.add({
       // A name and what it represents are used in invites -
@@ -402,38 +402,6 @@ function addProject(projectName, description = "") {
       name: `${projectName}`,
       represents: `a project`,
     });
-
-    // Add two roles for the project realm
-    await db.roles.bulkAdd([
-      {
-        // Let managers create, update and delete all
-        // objects and fields within the realm.
-        name: "manager",
-        realmId: newRealmId,
-        permissions: { manage: "*" },
-      },
-      {
-        // Let doers only update the "done" field in tasks
-        name: "doer",
-        realmId: newRealmId,
-        permissions: {
-          update: {
-            tasks: [
-              "done", // Allow update "done" property
-            ],
-          },
-        },
-      },
-      {
-        // Let commenters only add comments.
-        // Since the added comments will have the owner property set to the
-        // creator of the comment, the commenter will also be able to delete
-        // or update own comments (but not others).
-        name: "commenter",
-        realmId: newRealmId,
-        permissions: { add: ["comments"] },
-      },
-    ]);
 
     // Create project and put it in the new realm.
     return await db.projects.add({
@@ -526,6 +494,8 @@ function updateComment(commentId, newComment) {
   });
 }
 ```
+
+*The sample uses roles, which need to be imported using the `dexie-cloud` command-line tool with command [npx dexie-cloud import](https://dexie.org/cloud/docs/cli#import)*
 
 ## The Public Realm
 

@@ -58,15 +58,15 @@ interface Props {
 }
 
 function MyComponent({ todoList }: Props) {
-  // Get the PermissionChecker into a local variable 'can' to be
-  // used in the JSX later on:
-  const can = usePermissions(db, "todoLists", todoList);
-
   // Retrieve the todo-items
   const items = useLiveQuery(
     () => db.todoItems.where({ todoListId: todoList.id }).toArray(),
     [todoList.id]
   );
+  
+  // Get the PermissionChecker into a local variable 'can' to be
+  // used in the JSX later on:
+  const can = usePermissions(db, "todoLists", todoList);  
 
   return (
     <>

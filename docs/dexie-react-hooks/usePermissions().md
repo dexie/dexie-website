@@ -82,7 +82,9 @@ function MyComponent({ todoList }: Props) {
           </li>
         ))}
       </ul>
-      {can.add("todoItems") && <button onClick={addNewItem}>Add new item</button>}
+      {
+        can.add("todoItems") && <button onClick={addNewItem}> Add new item </button>
+      }
     </>
   );
   

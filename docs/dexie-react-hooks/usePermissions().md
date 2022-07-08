@@ -68,6 +68,24 @@ function MyComponent({ todoList }: Props) {
     [todoList.id]
   );
 
+  return (
+    <>
+      Title: {todoList.title}
+      {can.update("title") && <button onClick={editTitle}>Edit title</button>}
+      <button disabled={!can.delete()} onClick={deleteList}>
+        Delete list
+      </button>
+      <ul>
+        {items?.map((item) => (
+          <li key={item.id}>
+            <TodoItem item={item} />
+          </li>
+        ))}
+      </ul>
+      {can.add("todoItems") && <button onClick={addNewItem}>Add new item</button>}
+    </>
+  );
+  
   //
   // Actions
   //
@@ -92,26 +110,6 @@ function MyComponent({ todoList }: Props) {
       }
     );
   }
-
-  //
-  // JSX part:
-  //
-  return (
-    <>
-      Title: {todoList.title}{" "}
-      {can.update("title") && <button onClick={editTitle}>Edit title</button>}
-      <button disabled={!can.delete()} onClick={deleteList}>
-        Delete list
-      </button>
-      <ul>
-        {items?.map((item) => (
-          <li key={item.id}>
-            <TodoItem item={item} />
-          </li>
-        ))}
-      </ul>
-      {can.add("todoItems") && <button onClick={addNewItem}>Add new item</button>}
-    </>
-  );
+  
 }
 ```

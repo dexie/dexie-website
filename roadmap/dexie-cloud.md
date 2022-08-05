@@ -80,8 +80,8 @@ Target release date: ~~Jan 10, 2022.~~ May 31, 2022.
 # Milestone 5 - Increase number of beta testers (CURRENT)
  
  - [x] Set up monitoring, alarms and redundancy
- - [ ] Approve more testers
- - [ ] Start sending out waitlist confirmation emails
+ - [x] Approve more testers
+ - [x] Start sending out waitlist confirmation emails
  - [ ] Collect new requirements
  - [ ] Document REST API: import / export
 

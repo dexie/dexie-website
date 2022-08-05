@@ -83,11 +83,11 @@ export function SimpleCounter() {
 
 ## How does this hook relate to Dexie.js?
 
-`useObservable()` is vital for consuming the API of [dexie-cloud-addon](/cloud/docs/dexie-cloud-addon) that have properties that are observables. We've choosed to expose it as part of `dexie-react-hooks` in order to simplify consumption of [dexie-cloud-addon](/cloud/docs/dexie-cloud-addon)'s API such as [db.cloud.currentUser](/cloud/docs/db.cloud.currentUser), [db.cloud.permissions()](/cloud/docs/db.cloud.permissions()) etc.
+`useObservable()` is vital for consuming the API of [dexie-cloud-addon](/cloud/docs/dexie-cloud-addon) that have properties that are observables. It could be seen as too generic for being a part of `dexie-react-hooks`, but we've choosed to expose in order to simplify consumption of [dexie-cloud-addon](/cloud/docs/dexie-cloud-addon)'s API such as [db.cloud.currentUser](/cloud/docs/db.cloud.currentUser) and [other db.cloud props](/cloud/docs/dexie-cloud-addon#properties).
 
-There are other libraries with similar hooks that could be used equally well but only our version of the hook also allows to pass an observable-returning function, accompanied with a `deps` array.
+There are other generic libraries with similar hooks that could be used equally well (such as [react-use](https://github.com/streamich/react-use)) but our version also allows to pass an observable-returning function, accompanied with a `deps` array.
 
-Our hook is also an internal building block for [useLiveQuery()](/docs/dexie-react-hooks/useLiveQuery()), which is implemented as so:
+`useObsevable()` is also an internal building block for [useLiveQuery()](/docs/dexie-react-hooks/useLiveQuery()), which is implemented as so:
 
 ```ts
 const useLiveQuery = (callback, deps, defaultResult) =>

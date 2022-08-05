@@ -83,7 +83,7 @@ export function SimpleCounter() {
 
 ## How does this hook relate to Dexie.js?
 
-`useObservable()` is vital for consuming the API of [dexie-cloud-addon](/cloud/docs/dexie-cloud-addon) that have properties that are observables. It could be seen as too generic for being a part of `dexie-react-hooks`, but we've choosed to expose in order to simplify consumption of [dexie-cloud-addon](/cloud/docs/dexie-cloud-addon)'s API such as [db.cloud.currentUser](/cloud/docs/db.cloud.currentUser) and [other db.cloud props](/cloud/docs/dexie-cloud-addon#properties).
+`useObservable()` is vital for consuming the API of [dexie-cloud-addon](/cloud/docs/dexie-cloud-addon) that have properties that are observables. 
 
 There are other generic libraries with similar hooks that could be used equally well (such as [react-use](https://github.com/streamich/react-use)) but our version also allows to pass an observable-returning function, accompanied with a `deps` array.
 

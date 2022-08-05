@@ -87,7 +87,7 @@ export function SimpleCounter() {
 
 There are other libraries with similar hooks that could be used equally well but only our version of the hook also allows to pass an observable-returning function, accompanied with a `deps` array.
 
-Our hook is also an internal building block [useLiveQuery()](/docs/dexie-react-hooks/useLiveQuery()), which is implemented as
+Our hook is also an internal building block for [useLiveQuery()](/docs/dexie-react-hooks/useLiveQuery()), which is implemented as so:
 
 ```ts
 const useLiveQuery = (callback, deps, defaultResult) =>

@@ -68,7 +68,7 @@ db.version(1).stores({
 
 ### Using Typescript?
 
-If you use Typescript, table properties (such as `db.friends`) needs to be explicitely declared on a subclass of Dexie just to help out with the typings for your db instance, its tables and entity models.
+If you use Typescript, table properties (such as `db.friends`) needs to be explicitly declared on a subclass of Dexie just to help out with the typings for your db instance, its tables and entity models.
 
 ```ts
 // db.ts

@@ -21,7 +21,7 @@ But it's not just Putin. We have the war mongers - those who's dream is a greate
 
 I never believed a war like this could happen in present time. I thought this kind of thinking was over after the 20th century. In order to understand why, I read a lot of Russian news because I want to understand how people can even think that invading another country, killing children, torturing and raping could be something they would accept their goverment doing.
 
-The problem seems to be long time Russian propaganda that have made Russians believe in rediculous lies about Ukranians over a long period of time. Lies about Ukraininans being nazies (despite that neo-nazism is more common in other countries than Ukraine). The lies have been going on over and over, for years using state television brain washing the people. And yes - Hitler used the exact same tactics - to lie about another country, to get people onboard before invading it.
+The problem seems to be long time Russian propaganda that have made Russians believe in rediculous lies about Ukranians over a long period of time. Lies about Ukraininans being nazies (despite that neo-nazism is more common in other countries than Ukraine). The lies have been going on over and over, for years using state television brain washing the people. Hitler used the exact same tactics as Putin - to lie about another country, to get people onboard before invading it.
 
 The world is watching this awful war with disgust.
 

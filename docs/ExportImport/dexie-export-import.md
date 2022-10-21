@@ -104,7 +104,7 @@ Even though this sample doesn't show it, blobs can also be sent or retrieved to/
 
 | Product | Supported versions        |
 | ------- | ------------------------- |
-| dexie   | ^2.0.4 or ^3.0.0-alpha.5  |
+| dexie   | ^2.0.4, ^3.0.0-alpha.5, ^4.0.0-alpha.1  |
 | Safari  | ^10.1                     |
 | IE      | 11                        |
 | Edge    | any version               |

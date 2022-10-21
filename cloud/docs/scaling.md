@@ -11,5 +11,5 @@ Our managed service dexie.cloud runs in Microsoft Azure as a scalable app servic
 
 The solution scales vertically using Azure's auto-scaling, and horizontally by adding new shards when needed.
 
-For customers that buy the [Premium Software license](premium-software), this architecture can be managed the same way as we do.
+For customers that buy the [On-Premise Software license](premium-software), this architecture can be managed the same way as we do.
 

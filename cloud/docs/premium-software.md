@@ -3,7 +3,7 @@ layout: docs-dexie-cloud
 title: "Run Dexie Cloud on Own Servers"
 ---
 
-Dexie Cloud is available both as a cloud service and as a premium licensed softare with source included and private git repo access. The former is the obvious choice while your business is growing but at any time, you will be able to switch over to purchase the software license, giving the following benefits:
+Dexie Cloud is available both as a cloud service and as a on-premise licensed softare with source included and private git repo access. The former is the obvious choice while your business is growing but at any time, you will be able to switch over to purchase the software license, giving the following benefits:
 
 1. You can customize the software for the needs of your business. Do whatever you like with the software as long as you do not compete with Dexie Cloud. Full git access with history, branches, merge requests and updates.
 2. You get cost savings if your business explodes - you no longer pay per user / month.
@@ -16,7 +16,7 @@ Dexie Cloud consists of a Node.js app and a Postgresql database. A typical cloud
 ## Deploy in Azure
 
 1. Follow the guide [Azure Database for PostgreSQL](https://azure.microsoft.com/en-us/services/postgresql/) to create a Postgresql database.
-2. Clone the dexie-cloud repo from the URL you got with your premium software license.
+2. Clone the dexie-cloud repo from the URL you got with your on-premise software license.
 3. cd packages/dexie-cloud-server && npm install
 4. Follow the guide [Azure Webapps for Node.js](docs.microsoft.com/en-us/azure/app-service/quickstart-nodejs)
 5. In azure portal, go to settings/configuration of your node app in azure and:

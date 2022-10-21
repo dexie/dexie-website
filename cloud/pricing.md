@@ -8,7 +8,7 @@ title: "Dexie Cloud Pricing"
 
 # Dexie Cloud Pricing
 
-|                                       | Free       | Production &nbsp;       | Premium Software License                |
+|                                       | Free       | Production &nbsp;       | On-Premise Software License                |
 | ------------------------------------- | ---------- | ----------------------- | --------------------------------------- |
 | Easy to setup: **[npx dexie-cloud create](/cloud/#getting-started)** | &#10003;   | &#10003;            | See [these docs](docs/premium-software) |
 | All features included                 | &#10003;   | &#10003;                | &#10003;                                |
@@ -21,8 +21,8 @@ title: "Dexie Cloud Pricing"
 | Source code of server-part            | -          | -                       | &#10003;                                |
 | Access to private git repo            | -          | -                       | &#10003;                                |
 | Monthly fee                           | 0          | USD $10 per 100 users   | 0                                       |
-| One-time license fee                  | 0          | 0                       | USD \$2,495                             |
-| Yearly support fee                    | 0          | 0                       | USD \$499                               |
+| One-time license fee                  | 0          | 0                       | [Contact us](https://dexie.org/contact)                             |
+| Yearly support fee                    | 0          | 0                       | [Contact us](https://dexie.org/contact)                               |
 
 _We reserve for future changes in pricing_.
 
@@ -38,7 +38,7 @@ This edition is hosted and starts with USD \$10 per month for serving 100 users.
 
 <a class='btn btn-success' href='/cloud/purchase/production' role='button'>Get it now &raquo;</a>
 
-### Premium Software License
+### On-Premise Software License
 
 Buy off the software with full source code and **do whatever you want with it** except [competing with us](server-software-license-terms). Serve millions of users without any additional fee. Host it in the cloud of your own choice, or on your own bare metal. The server can be published on cloud providers such as Amazon AWS and Microsoft Azure. Email support, private git access and software updates in one year included. For continous support, the yearly support fee of USD $499 includes continous updates, email support and access to our private git repo.
 

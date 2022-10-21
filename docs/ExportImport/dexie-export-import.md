@@ -84,6 +84,8 @@ await db.import(blob, [options]); // equivalent to importInto()
 
 Even though this sample doesn't show it, blobs can also be sent or retrieved to/from a server, using the [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). 
 
+[Here's a blog article](https://dfahlander.medium.com/export-indexeddb-from-a-web-app-using-devtools-62c55a8996a1) on how to export IndexedDB from DevTools on an arbritary web page or web app, by dynamically including dexie and dexie-export-import in the devtools console.
+
 # Features
 
 * Export of IndexedDB Database to JSON Blob.

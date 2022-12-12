@@ -19,7 +19,7 @@ table.update(key, changes)
 
 ### Return Value
 
-[Promise](/docs/Promise/Promise) with the number of updated records (1 if an object was updated, otherwise 0). The reason for a result of 0 can be either that the provided key was not found, or if the provided data was identical to existing data so that nothing was updated.
+[Promise](/docs/Promise/Promise) with the number of updated records (1 if an object that match the criteria was found and updated (regardless of whether the update affects the object or not), otherwise 0). A result of 0 indicates that the given key was not found.
 
 ### Remarks
 

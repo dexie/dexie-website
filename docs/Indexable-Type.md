@@ -31,6 +31,8 @@ Index keys of different types can be compared against each other. The following 
 6. [TypedArray](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray) and [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer)
 7. Arrays
 
+## Lowest and Highest possible keys
+
 * The lowest possible value is `-Infinity`. Dexie has an alias for it: `Dexie.minKey`.
 * There is theoretically no highest possible value as Array may contain Arrays of Arrays etc... But Dexie provide an alias for the practical maximum key `Dexie.maxKey = [[]]` (an array of an array).
 

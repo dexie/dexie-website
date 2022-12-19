@@ -5,9 +5,9 @@ title: 'Indexable Type'
 
 The following javascript types are possible to index:
 
-* string
 * number
 * Date
+* string
 * ArrayBuffer
 * Typed arrays (Uint8Array, Float32Array, ..., etc)
 * Arrays of (strings, numbers, Dates, ArrayBuffer, Typed array) or a mix of those.
@@ -18,6 +18,26 @@ Note that all other types are non-indexable, including:
 * undefined
 * Object
 * null
+
+## Type order
+
+Index keys of different types can be compared against each other. The following order applies:
+
+1. -Infinity
+2. number
+3. Infinity
+4. Date
+5. string
+6. [TypedArray](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray) and [ArrayBuffer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer)
+7. Arrays
+
+* The lowest possible value is `-Infinity`. Dexie has an alias for it: `Dexie.minKey`.
+* There is theoretically no highest possible value as Array may contain Arrays of Arrays etc... But Dexie provide an alias for the practical maximum key `Dexie.maxKey = [[]]` (an array of an array).
+
+## See also
+
+https://w3c.github.io/IndexedDB/#key-type
+
 
 ## Sample
 

@@ -53,7 +53,7 @@ If you use Typescript, table properties (such as `db.friends`) needs to be expli
 
 ```ts
 // db.ts
-import Dexie, { Table } from 'dexie';
+import Dexie, { type Table } from 'dexie';
 
 export interface Friend {
   id?: number;

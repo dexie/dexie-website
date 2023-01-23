@@ -1,6 +1,6 @@
 ---
 layout: docs
-title: 'Dexie.on.blocked'
+title: 'Dexie.on.close'
 ---
 
 ### Syntax

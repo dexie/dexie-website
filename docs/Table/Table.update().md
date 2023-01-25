@@ -52,3 +52,5 @@ db.friends.update(friendId, {
 [Collection.modify()](/docs/Collection/Collection.modify())
 
 [Table.put()](/docs/Table/Table.put())
+
+[Table.bulkUpdate()](/docs/Table/Table.bulkUpdate())

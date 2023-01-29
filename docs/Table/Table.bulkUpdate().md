@@ -96,7 +96,14 @@ await db.friends.bulkUpdate([
       name: "Foo Barsson",
     }
   },
-  // Update "address" property of contact with id 3:
+  // Update nested property "address.streetNo" of contact with id 1:
+  {
+    key: 1,
+    changes: {
+      "address.streetNo": 2
+    }
+  },
+  // Replace entire "address" property of contact with id 3:
   {
     key: 3,
     changes: {
@@ -107,14 +114,7 @@ await db.friends.bulkUpdate([
       }
     }
   },
-  // Update "address.streetNo" property of contact with id 1:
-  {
-    key: 1,
-    changes: {
-      "address.streetNo": 2
-    }
-  },
-  // Delete the "address.city" property of contact with id 5:
+  // Delete the nested property "address.city" of contact with id 5:
   {
     key: 5,
     "address.city": undefined

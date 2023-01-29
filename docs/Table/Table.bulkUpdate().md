@@ -66,7 +66,7 @@ Array properties follow the same keyPath pattern as object properties - using nu
 ### Sample
 
 ```ts
-import Dexie, { EntityTable } from 'dexie';
+import Dexie, { type EntityTable } from 'dexie';
 
 interface Contact {
   id: number;

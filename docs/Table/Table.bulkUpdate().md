@@ -66,9 +66,22 @@ Array properties follow the same keyPath pattern as object properties - using nu
 ### Sample
 
 ```ts
-import Dexie, { Table } from 'dexie';
+import Dexie, { EntityTable } from 'dexie';
 
-const db = new Dexie('contactDB') as Dexie & {friends: Table<Friend>};
+interface Contact {
+  id: number;
+  name: string;
+  tags: string[];
+  address: {
+    city: string;
+    street: string;
+    streetNo: number;
+  }
+}
+
+const db = new Dexie('contactDB') as Dexie & {
+  contacts: EntityTable<Contact, 'id'>;
+};
 
 db.version(1).stores({
   contacts: '++id, name, *tags, address.city'

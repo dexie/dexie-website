@@ -41,7 +41,7 @@ await importInto(db, blob, [options]);
 // performing any import operation
 // (since v1.0.0)
 //
-const importMeta = await peekImportFile(blob);
+const importMeta = await peakImportFile(blob);
 assert.areEqual(importMeta.formatName, "dexie");
 assert.isTrue(importMeta.formatVersion === 1);
 console.log("Database name:", importMeta.data.databaseName);

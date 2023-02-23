@@ -7,14 +7,14 @@ Enables two-way synchronization with a remote server of any kind.
 
 **If you are looking for a batteries-included sync solution, check out the following alternatives:**
 
-* **[Dexie Cloud](/cloud/)** - our cloud based sync service 
+* **[Dexie Cloud](/cloud/)** - our cloud based sync service
 
 or:
 
 * **[sync-client](https://www.npmjs.com/package/sync-client)**
 * **[sync-server](https://www.npmjs.com/package/sync-server)**
 
-*These are built upon Dexie.Syncable but also implements ISyncProtocol and the backend.*
+*The two latter are built upon Dexie.Syncable but also implements ISyncProtocol and the backend.*
 
 ### Dependency Tree
 

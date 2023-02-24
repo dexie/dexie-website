@@ -249,6 +249,10 @@ npx dexie-cloud whitelist http://localhost:8080 --delete
 
 ```ts
 interface ImportFileFormat {
+  schema?: {
+    [tableName: string]: string; // Dexie.js schema
+  };
+  sealed?: boolean; // Whether schema is locked from being extended in sync
   demoUsers?: {
     [userName: `${anyname}@demo.local`]: {};
   };
@@ -269,8 +273,8 @@ interface ImportFileFormat {
   };
 }
 ```
-See [DBPermissionSet](DBPermissionSet).
 
+See [DBPermissionSet](DBPermissionSet).
 
 ### Import file example for creating or updating data
 
@@ -340,7 +344,7 @@ To delete individual objects, their correct realm, table and primary key need to
       "sortOrder": 3,
       "permissions": {}
     }
-  },
+  }
 }
 ```
 
@@ -357,13 +361,97 @@ To delete individual objects, their correct realm, table and primary key need to
 
 Demo users are users without passwords that can be used to showcase your application. Real users do not need to be imported as they authenticate to your application using OTP or your custom authentication mechanism. If you need to control your users you can do that using another framework or authentication solution. Dexie Cloud only cares about JWT claims.
 
+### Import file example for sealing the schema
+
+*Since dexie-cloud@>=1.1.0-beta.2*
+
+Sealing the schema means locking the schema from letting clients add new tables as a step in a sync call.
+
+```json
+{
+  "sealed": true
+}
+```
+
+### Import file example for unsealing the schema
+
+*Since dexie-cloud@>=1.1.0-beta.2*
+
+
+```json
+{
+  "sealed": false
+}
+```
+
+### Import file example for updating a sealed schema
+
+*Since dexie-cloud@>=1.1.0-beta.2*
+
+When a database schema is sealed, it won't tolerate the addition of new tables, so adding a table in the client code will have to be accompanied with importing the new schema into Dexie Cloud before the new clients will succeed to sync their data.
+
+```json
+{
+  "schema": {
+    "todoLists": "@id",
+    "todoItems": "@itemId, [todoListId+realmId]",
+    "newTableWithCustomPrimKey": "customId",
+    "newTableWithGeneratedPrimKey": "@myGeneratedPrimKeyProp",
+    "oldTableToDelete": null
+  },
+  "sealed": true
+}
+```
+
+The syntax of the schema is equal to the syntax of a schema in Dexie.js:
+
+```js
+db.version(1).stores({
+  todoLists: "@id",
+  todoItems: "@itemId, [todoListId+realmId]",
+  newTableWithCustomPrimKey: "customId",
+  newTableWithGeneratedPrimKey: "@myGeneratedPrimKeyProp",
+  oldTableToDelete: null, // delete the table
+});
+```
+
+However, Dexie Cloud don't care about secondary indexes (so far) - the only information that Dexie Cloud server needs is the name of the primary key, and whether it is marked with an '@' sign or not.
+
+Just list in Dexie, omitting a table doesn't mean deleting it. Explicitely set it to null in order to delete a table. A deleted table in the cloud does not delete its content - it is possible to bring the data back. In order to reset a table or database completely, 
+use `npx dexie-cloud reset` command (not implemented yet).
+
 ## export
 
 ```
 npx dexie-cloud export [options] <json-filepath>
 ```
 
-The export format is the same as the import format. Currently there are no options to filter what to export. Only the entire database can be exported at this point. This is subject to change in a future version.
+The export format is the same as the import format.
+
+### Options
+
+| Option    | Type   | Meaning                           |
+| --------- | ------ | --------------------------------- |
+| schema    | flag   | Only export "schema" and "sealed" |
+| data      | flag   | Only export "data"                |
+| roles     | flag   | Only export "roles"               |
+| demoUsers | flag   | Only export "demoUsers"           |
+| realmId   | string | Only export data in given realmId |
+| table     | string | Only export data in given table   |
+
+Note: Re-importing export files is always possibleto do, no matter if they are partial or not, as the import command is additive only, except for objects that are explicitely set to null.
+
+For example, if you only want to update roles, use:
+
+```
+npx dexie-cloud export --roles roles.json
+```
+
+Then edit roles.json, and:
+
+```
+npx dexie-cloud import roles.json
+```
 
 ## add-replica
 

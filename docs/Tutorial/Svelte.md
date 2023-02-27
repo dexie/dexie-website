@@ -177,7 +177,7 @@ Sveltekit will try to run your queries on the server which is not where your off
 <script>
   import { liveQuery } from "dexie";
   import { db } from "./db";
-  import { browser } from '$app/env';
+  import { browser } from '$app/environment';
 
   let friends = liveQuery(
     () => browser

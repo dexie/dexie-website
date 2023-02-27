@@ -165,7 +165,7 @@ Write a simple component that just renders all friends in the database.
 
 Notice two things here:
 
-1. liveQuery() returns a reactive Svelte Store (or actually an Observable that happens to comply with the [The Svelte Store Contract](https://svelte.dev/docs#Store_contract)). To access the reactive value of a Svelte Store, friends needs to be prefixed with $, `$friends`.
+1. liveQuery() returns a reactive Svelte Store (or actually an Observable that happens to comply with the [The Svelte Store Contract](https://svelte.dev/docs#component-format-script-4-prefix-stores-with-$-to-access-their-values)). To access the reactive value of a Svelte Store, friends needs to be prefixed with $, `$friends`.
 2. The result will be undefined momentarily before the very initial result arrives - which explains why we need the `{#if $friends}` condition.
 
 ### Using Sveltekit?

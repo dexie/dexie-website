@@ -4,7 +4,4 @@
 },{
   "relation": ["lookalikes/allowlist"],
   "target" : { "namespace": "web", "site": "https://dexie-cloud-status.com"}
-},{
-  "relation": ["lookalikes/allowlist"],
-  "target" : { "namespace": "web", "site": "https://dexie.cloud"}
 }]

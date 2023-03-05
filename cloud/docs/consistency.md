@@ -20,10 +20,6 @@ It can be a challenge to keep consistency in synced offline-first applications. 
 
 Dexie Cloud uses a combination of concepts that the application programmer can utilize in order to keep the data totally consistent at all times.
 
-# Consistency vs Conflict Handling
-
-Consistency is the concept of that each copy of the database, at any time will be in a consistent state - such as that one object must never refer to another object that has been deleted. Conflict handling on the other hand refers to how to merge two operations that tries to modify the same data in different ways. People sometimes mix these two concepts. The most important reason for conflict resolution is undoubtly to keep the resulting data consistent, it is even better if the model can be designed and manipulated in a way that avoids consistency-sensitive conflicts from ever happen.
-
 # Designing a Consistency-friendly model
 
 If you work with Dexie Cloud, it is important to avoid storing objects in array properties if the array needs to be manipulated frequently by multiple clients. It is much better to use a relational model and let every type map to a table, and let collections belonging to an entity be represented in as its own database object, with its own ID and with a reference-property acting as a foreign key to the owning object (a traditional one-to-many relationship in relational databases). Many-to-many relations are best represented using an [associative entity](https://en.wikipedia.org/wiki/Associative_entity) for the same reason. By using a relational approach, these collections may be managed in a consistent manner also by offline clients and conflicts can be avoided using consistent modify- and delete operations as described later on this page.

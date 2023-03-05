@@ -28,7 +28,7 @@ This method is identical to [Collection.and()](/docs/Collection/Collection.and()
 ```javascript
 db.friends
   .orderBy('age')
-  .filter((friend) => /Foo/i.test(friend.name))
+  .filter((friend) => /foo/i.test(friend.name))
   .offset(50)
   .limit(25)
   .toArray()

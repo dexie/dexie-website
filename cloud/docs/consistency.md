@@ -83,7 +83,7 @@ The intension here is to set all todo-items to done for the entire list.
 
 ### Offline consistency
 
-But what if you were offline when you made the operation, and your client is not aware of some additional todo-items that has been added during your offline period? When the sync takes place, the where-expression will execute on the server data and if other items had been added to the list, they will also be updated. And items that had been removed from the list would not be affected by the operation (a roll-back will happen for these as if they were never affected by the operation).
+Given our previous operation to set all todoItems' `done` to `true`; what if you were offline when you made the operation, and your client is not aware of some additional todo-items that has been added during your offline period? When the sync takes place, the where-expression will execute on the server data and if other items had been added to the list, they will also be updated. And items that had been removed from the list would not be affected by the operation (a roll-back will happen for these as if they were never affected by the operation).
 
 Example:
 

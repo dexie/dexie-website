@@ -26,7 +26,7 @@ This method is identical to [Collection.filter()](/docs/Collection/Collection.fi
 
 ```javascript
 const collection = db.friends
-  .where('age').between(25, 30)
+  .where('age').between(25, 30, true, true)
   .and(friend => /foo/i.test(friend.name));
   
 const result = await collection.offset(50).limit(25).toArray();

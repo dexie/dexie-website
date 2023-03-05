@@ -75,7 +75,7 @@ For example, let's say you want to modify all ToDo-items within a certain Todo-l
 await db.todoItems.where({ todoListId: todoListId }).modify({ done: true });
 ```
 
-The intension here is to set all todo-items to done for the entire list.
+The intension here is to set all todo-items to done for the entire list. The intension is articulated using a where-clause and we'll describe below how this intention will affect the sync operation to maintain intended consistency.
 
 ### Offline consistency
 

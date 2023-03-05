@@ -26,10 +26,10 @@ This method is identical to [Collection.and()](/docs/Collection/Collection.and()
 ### Sample
 
 ```javascript
-db.friends
+const collection = db.friends
   .orderBy('age')
   .filter((friend) => /foo/i.test(friend.name))
   .offset(50)
-  .limit(25)
-  .toArray()
+  .limit(25);
+const result = await collection.toArray();
 ```

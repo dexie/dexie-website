@@ -180,7 +180,7 @@ app.post('/dexie-cloud-tokens', bodyParser.json(), async (req, res, next) => {
           email: user.email, // optional but nice.
           name: user.name // optional but nice.
         }
-      });
+      })
     });
     if (!tokenResponse.ok) {
       throw new Error(`Failed to retrieve token from Dexie Cloud.`);

@@ -77,17 +77,19 @@ Target release date: ~~Jan 10, 2022.~~ May 31, 2022.
 - [ ] ~~Document REST API: import / export~~
 - [x] Document how to tie an object to a Realm
 
-# Milestone 5 - Increase number of beta testers (CURRENT)
- 
- - [x] Set up monitoring, alarms and redundancy
- - [x] Approve more testers
- - [x] Start sending out waitlist confirmation emails
- - [ ] Collect new requirements
- - [ ] Document REST API: import / export
+# Milestone 5 - Increase number of beta testers
 
-# Milestone 6 - Commercialization
+- [x] Set up monitoring, alarms and redundancy
+- [x] Approve more testers
+- [x] Start sending out waitlist confirmation emails
+- [x] Collect new requirements
+- [x] New REST API
+- [x] Document REST API
+
+# Milestone 6 - Commercialization (CURRENT)
 
 - [ ] Subscription manager
 - [ ] Stripe Integration
 - [ ] Implement monthly cost limit setting
 - [ ] Implement end-user trial period for customer apps
+

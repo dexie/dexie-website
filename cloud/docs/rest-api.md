@@ -203,7 +203,7 @@ Content-Type: application/json
 
 ```
 
-*The difference between `DELETE /all/<table>/id` and `DELETE /public/<table>/id` is that the latter will fail to delete anything that resides outside "rlm-public".*
+*The difference between `DELETE /all/<table>/id` and `DELETE /public/<table>/id` is that the latter will only delete the object if its property `realmId` is set to `"rlm-public"` (the public realm).*
 
 ```http
 DELETE /my/<table>/<primaryKey> HTTP/1.1

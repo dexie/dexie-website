@@ -9,9 +9,10 @@ title: 'Get started with Dexie in Svelte'
   <img src="/assets/images/logo-dexie-black.svg" style="width: 200px;">    
 </div>
 
-Dexie v3.2 and later comes with reactivity built-in.
+Dexie v4.x comes with the best Svelte- and Sveltekit support.
 
-In version 3.2 we've introduced **live queries** - queries that observes the result and make your component mirror the data in real time.
+In version 3.2 we've introduced **live queries** - queries that observes the result and make your component mirror the data in real time and in version 4.0.1-alpha.10 we improved the typing compability and SvelteKit support of liveQuery().
+
 If a change is made (by the app itself or from an external tab or worker), a binary range tree algorithm will efficiently detect whether those changes would affect your queries and if so, re-execute your callback and re-render component.
 [Here's a sample app demonstrates it](https://2n8bd.csb.app/).
 

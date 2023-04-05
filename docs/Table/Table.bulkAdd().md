@@ -54,6 +54,12 @@ Add all given objects to the store.
 
 If you have a large number of objects to add to the object store, bulkAdd() is a little faster than doing add() in a loop.
 
+If you do bulkAdd () within a transaction and don't catch the operation explicitly, the entire transaction will fail and roll back if any one item has an existing primary key. Catching the bulkAdd () will make sure any successful operation succeeds while failed operations are just ignored.
+
+### Difference between bulkPut() and bulkAdd()
+
+bulkAdd() will fail to add any item with same primary key whilst bulkPut () will succeed and update those records as well as the new ones.
+
 ### Sample
 
 ```javascript

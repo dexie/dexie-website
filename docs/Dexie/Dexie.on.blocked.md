@@ -17,8 +17,6 @@ By default, Dexie will close any connection and console.warn() when a "versionch
 
 When the blocked event occur, the upgrade transaction has not yet failed. The upgrading will resume as soon as the blocker releases the database.
 
-IE, Edge and Safari does NOT implement the "versionchange" event, which could lead to that the blocked event occurred every time you didn't properly close your db instance. But since Dexie v1.3.6, the "versionchange" event is "kind of" polyfilled for those browsers so that this doesnt happen anymore. "Kind of" because it's only triggered for databases in the same window. 
-
 ### Sample
 
 ```javascript

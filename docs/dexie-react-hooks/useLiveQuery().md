@@ -44,10 +44,6 @@ export function useLiveQuery<T, TDefault=undefined> (
 * Don't call asynchronic API:s from it except Dexie's APIs.
 * If you really need to call other async API's (such as fetch() or webCrypto), wrap the returned promise through `Promise.resolve()`. There's an example later in this page on how to do that.
 
-# Safari Support
-
-Safari 15.3 and older does not support [BroadcastChannel](https://caniuse.com/broadcastchannel) requied to make useLiveQuery() react to changes written from Web Workers. However, it will react to changes performed in a Service Worker. There are two small snippets that you can use to make it work with Web Workers also for older Safari browsers, see [Dexie.on.storagemutated#supporting-safari-153-and-below](/docs/Dexie/Dexie.on.storagemutated#supporting-safari-153-and-below).
-
 # Simple Example
 
 ```tsx
@@ -79,6 +75,8 @@ export function OldFriendsList() {
 }
 
 ```
+
+*See also [this stackoverflow question (and answer)](https://stackoverflow.com/questions/73526472/how-to-track-if-dexie-uselivequery-is-finished) on how to determine whether a response is still loading or has returned an undefined result*
 
 ## Persistent State Manager
 

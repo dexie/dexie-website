@@ -88,7 +88,7 @@ The observation is as fine-grained as it can possibly be - queries that would be
 
 ## Limitations
 
-This hook will react to changes no matter if they are performed from the same tab or from another tab, window, web worker or service worker. The functionality is built-in into Dexie.js itself and a react app will also be able to observe changes made from another app that does not have dexie-react-hooks installed. However, it will only react to changes made using Dexie.js (version 3.1 or later). Changes made to IndexedDB in devtools will not be observed. Since there is no native API for this kind of observation, Dexie made it a first-class citisen for all that use Dexie.js as persistence layer.
+This hook will react to changes no matter if they are performed from the same tab or from another tab, window, web worker or service worker. The functionality is built-in into Dexie.js itself and a react app will also be able to observe changes made from another app that does not have dexie-react-hooks installed. However, it will only react to changes made using Dexie.js (version 3.1 or later). Changes made to IndexedDB in devtools will not be observed. Since there is no native API for this kind of observation, Dexie made it a first-class citizen for all that use Dexie.js as persistence layer.
 
 # Enhanced Example
 

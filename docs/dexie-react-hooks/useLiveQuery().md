@@ -86,6 +86,10 @@ The `useLiveQuery()` hook does not only load data - it *observes* the query for 
 
 The observation is as fine-grained as it can possibly be - queries that would be affected by a modification will rerender - others not (with some exceptions - false positives happen but never false negatives). This is also true if your querier callback performs a series of awaited queries or multiple in parallell using Promise.all(). It can even contain if-statements or other conditional paths within it, determining additional queries to make before returning a final result - still, observation will function and never miss an update. No matter how simple or complex the query is - it will be monitored in detail so that if a single part of the query is affected by a change, the querier will be executed and the component will rerender.
 
+## Limitations
+
+This hook will react to changes no matter if they are performed from the same tab or from another tab, window, web worker or service worker. The functionality is built-in into Dexie.js itself and a react app will also be able to observe changes made from another app that does not have dexie-react-hooks installed. However, it will only react to changes made using Dexie.js (version 3.1 or later). Changes made to IndexedDB in devtools will not be observed. Since there is no native API for this kind of observation, Dexie made it a first-class citisen for all that use Dexie.js as persistence layer.
+
 # Enhanced Example
 
 This example shows that...

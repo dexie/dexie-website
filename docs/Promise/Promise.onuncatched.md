@@ -5,6 +5,8 @@ title: 'Promise.onuncatched'
 
 Called if the promise wasn't caught.
 
+*Deprecated. This event is deprecated and obsolete since 4.x*
+
 #### Sample
 
 ```javascript

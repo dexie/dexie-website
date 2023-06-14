@@ -3,9 +3,9 @@ layout: docs
 title: 'Promise.PSD'
 ---
 
-Dexie.Promise.PSD is a custom [Zone system](https://github.com/domenic/zones) to maintain ongoing database [transactions](/docs/Dexie/Dexie.transaction()). Unlike other zone implementations, Dexie's zones are unobtrusive, meaning that the zone system does not require including any monkey-patching script or import. Dexie is not dependant on zone.js or any other zone implementation.
+Dexie.Promise.PSD is a custom [Async Context](https://github.com/tc39/proposal-async-context) to maintain ongoing database [transactions](/docs/Dexie/Dexie.transaction()). Unlike other zone implementations, Dexie's zones are unobtrusive, meaning that the zone system does not require including any monkey-patching script or import. Dexie is not dependant on zone.js or any other zone implementation.
 
-As of Dexie 2.0.0-beta.4, this zone system is also capable of maintaining zones between await expressions (both transpiled and browser-native. The zone system has been tested agains native await with Chrome 55+, Edge 14+, Firefox, Opera and Safari. Transpiled support has been tested with babel and typescript).
+As of Dexie 2.0.0, this system is also capable of maintaining contexts between await expressions (both transpiled and browser-native. The zone system has been tested agains native await with Chrome 55+, Edge 14+, Firefox, Opera and Safari. Transpiled support has been tested with babel and typescript).
 
 ### Syntax
 
@@ -43,11 +43,11 @@ In Dexie, PSD is used for:
 Thread-specific Data is one-dimentional. You can set Thread-static property that will be set for the currently running thread. PSD is a tree (or stack on most cases) where each new PSD acts as a stack frame that will derive from its parent. This makes PSD data automatically disappear when a Promise.newPSD() goes out of scope. This is also nescessary since Promise chains (unlike threads) can all root down the the same promise but be forked on certain frames.
 
 ### Difference from Angular's Zone.js
-Dexie's zone system is unobtrusive, meaning that it does not require your application to include a monkey-patching script at the top of the HTML page. Dexie's zone system only maintains zones between promises and does not propagate zones into other async apis, such as setTimeout() etc. The API is also more lightweight. Currently, the API differs a lot from [Zone.js](https://github.com/angular/zone.js/) as well as the [TC39 Zone proposal](https://github.com/domenic/zones).
+Dexie's zone system is unobtrusive, meaning that it does not require your application to include a monkey-patching script at the top of the HTML page. Dexie's zone system only maintains contexts between promises and does not propagate contexts into other async apis, such as setTimeout() etc.
 
 ### Non-Standard
 
-PSD is Dexie-proprietary invention and is not standardized in any Promise specificatotion. We'll be following the [TC39 Zone proposal](https://github.com/domenic/zones) closely and gradually adapt the API to aline with the specification.
+PSD is Dexie-proprietary invention and is not standardized in any Promise specificatotion. We'll be following the [TC39 AsyncContext proposal](https://github.com/tc39/proposal-async-context) closely and gradually adapt the API to aline with the specification.
 
 ### How To Use
 

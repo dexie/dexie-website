@@ -272,10 +272,8 @@ function deleteTodoList(todoList) {
       db.todoItems.where({ todoListId: todoList.id }).delete();
       // Delete the list:
       db.todoLists.delete(todoList.id);
-      // Delete possible realm and its members in case list was shared:
-      const tiedRealmId = getTiedRealmId(todoList.id);
-      db.members.where({ realmId: tiedRealmId }).delete();
-      db.realms.delete(tiedRealmId);
+      // Delete possible realm in case list was shared:
+      db.realms.delete(getTiedRealmId(todoList.id)); // members are auto-deleted with realm
     }
   );
 }

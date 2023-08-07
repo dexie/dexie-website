@@ -44,9 +44,9 @@ A subscriber may use the given `transaction` object to do additional operations 
 
 ### Error Handling
 
-If subscriber throws an exception, the delete operation will fail and the caller of the delete operation will get the failure as a Promise rejection that may be catched/handled or not. If the caller of the delete operation does not catch the excetion using Promise.catch(), the transaction will be aborted.
+If subscriber throws an exception, the delete operation will fail and the caller of the delete operation will get the failure as a Promise rejection that may be caught/handled or not. If the caller of the delete operation does not catch the exception using Promise.catch(), the transaction will be aborted.
 
-If a database operation initiated by the subscriber, results in a failure the transaction will be aborted no matter if the origin caller of the delete operation calls catch() or not. However, the origin caller will recieve your error if catching transaction failures. If you as the implementor of the subscriber want to ignore errors resulting from your operations, you may catch() your database operations to prohibit transaction from being aborted. However, it is normally better to let the transaction abort in case a failure of your database operation would impinge database consistancy.
+If a database operation initiated by the subscriber, results in a failure the transaction will be aborted no matter if the origin caller of the delete operation calls catch() or not. However, the origin caller will recieve your error if catching transaction failures. If you as the implementer of the subscriber want to ignore errors resulting from your operations, you may catch() your database operations to prohibit transaction from being aborted. However, it is normally better to let the transaction abort in case a failure of your database operation would impinge database consistency.
 
 If setting this.onsuccess or this.onerror, those callback functions are responsible of not throwing any exception. Any code within that callback must either be bullet proof or surrounded by try/catch.
 

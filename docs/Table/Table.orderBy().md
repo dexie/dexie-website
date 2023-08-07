@@ -36,7 +36,7 @@ db.friends
   .where('age').above(25)
   .orderBy('name') // Not possible in Dexie 1.x, 2.x or 3.x.
 ```
-... and there is a simple reason for that: No database can do this query easily as it can only operate on one btree at a time. However, most databases yet supports, but involving set matching of primary keys and a full index scans on the ordered query.
+... and there is a simple reason for that: No database can do this query easily as it can only operate on one B-tree at a time. However, most databases yet supports, but involving set matching of primary keys and a full index scans on the ordered query.
 
 Even though current version of Dexie (v3.0) does not have orderBy() on Collections, the feature may be introduced in a future version, and can already be accomplished without using sortBy() - see [this sample](https://dexie.org/docs/Collection/Collection.offset()#paged-or-queries).
 

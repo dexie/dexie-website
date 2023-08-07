@@ -29,7 +29,7 @@ table.where({keyPath1: value1, keyPath2: value2, ...});
 
 If a string, or array of strings was provided (indexes or primary keys), this method returns a [WhereClause](/docs/WhereClause/WhereClause) based on given index(es) or primary key(s). The returned WhereClause can be used to build a query on how to extract objects from the database using any of the methods in [WhereClause](/docs/WhereClause/WhereClause). An array of strings represents [compound indexes](/docs/Compound-Index).
 
-If a plain object containing criterias was provided, this method returns a [Collection](/docs/Collection/Collection) filtered using given criterias. If providing a single criteria, the keyPath must match with an index. If providing multiple criterias, it is recommended to have a [compound index](/docs/Compound-Index) containing all of the keyPath (in arbitrary order), but it is not required. If no [compound index](/docs/Compound-Index), at least one of the keyPaths must match a simple index. If `Dexie.debug=true` and not having compound index of all provided keyPaths, a console.warn() will give a hint on how to index this query properly.
+If a plain object containing criteria was provided, this method returns a [Collection](/docs/Collection/Collection) filtered using given criterias. If providing a single criteria, the keyPath must match with an index. If providing multiple criteria, it is recommended to have a [compound index](/docs/Compound-Index) containing all of the keyPath (in arbitrary order), but it is not required. If no [compound index](/docs/Compound-Index), at least one of the keyPaths must match a simple index. If `Dexie.debug=true` and not having compound index of all provided keyPaths, a console.warn() will give a hint on how to index this query properly.
 
 ### Return Value
 
@@ -58,7 +58,7 @@ for (const david of davids) {
   console.log(`Found a David with age ${david.age}`);
 }
 ```
-*NOTE: This example uses [compound index](https://dexie.org/docs/Compound-Index) '[name+age]' to squeeze the most performance out of IndexedDB in finding records with multiple criterias. Not all types of criterias can be filtered this way, but combinations of a range in the last part and equals on the first parts works.* 
+*NOTE: This example uses [compound index](https://dexie.org/docs/Compound-Index) '[name+age]' to squeeze the most performance out of IndexedDB in finding records with multiple criteria. Not all types of criteria can be filtered this way, but combinations of a range in the last part and equals on the first parts works.* 
 
 
 #### Find a friend named David with age 43

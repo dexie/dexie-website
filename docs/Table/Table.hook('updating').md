@@ -31,7 +31,7 @@ db.[tableName].hook('updating', function (modifications, primKey, obj, transacti
 
 ### Return Value
 
-If you do not want to change any modification, dont return any value (return undefined). If you want to add additional modifications or change any of the modifications in the given _modifications_ argument, you should return another object containing the additional or overridden modifications to make.
+If you do not want to change any modification, don't return any value (return undefined). If you want to add additional modifications or change any of the modifications in the given _modifications_ argument, you should return another object containing the additional or overridden modifications to make.
 
 ### To Unsubscribe
 
@@ -51,9 +51,9 @@ If it is desired to know whether the modification will succeed or not, use `this
 
 ### Error Handling
 
-If subscriber throws an exception, the update operation will fail and the caller of the update operation will get the failure as a Promise rejection that may be catched/handled or not. If the caller of the update operation does not catch the excetion using Promise.catch(), the transaction will be aborted.
+If subscriber throws an exception, the update operation will fail and the caller of the update operation will get the failure as a Promise rejection that may be caught/handled or not. If the caller of the update operation does not catch the exception using Promise.catch(), the transaction will be aborted.
 
-If a database operation initiated by the subscriber, results in a failure, the transaction will be aborted no matter if the origin caller of the update operation calls catch() or not. However, the origin caller will receive your error if catching transaction failures, but then the transaction has already aborted. If you as the implementor of the subscriber want to ignore errors resulting from your operations, you may catch() your database operations to prohibit transaction from being aborted. However, it is normally better to let the transaction abort in case a failure of your database operation would impinge database consistency.
+If a database operation initiated by the subscriber, results in a failure, the transaction will be aborted no matter if the origin caller of the update operation calls catch() or not. However, the origin caller will receive your error if catching transaction failures, but then the transaction has already aborted. If you as the implementer of the subscriber want to ignore errors resulting from your operations, you may catch() your database operations to prohibit transaction from being aborted. However, it is normally better to let the transaction abort in case a failure of your database operation would impinge database consistency.
 
 If setting this.onsuccess or this.onerror, those callback functions are responsible of not throwing any exception. Any code within that callback must either be bullet proof or surrounded by try/catch.
 

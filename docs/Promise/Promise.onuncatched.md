@@ -14,7 +14,7 @@ var p = new Promise(function (resolve, reject) {
     reject("Failed!");
 });
 p.onuncatched = function (e) {
-    alert ("No-one catched this error: " + e);
+    alert ("No-one caught this error: " + e);
 }
 ```
 

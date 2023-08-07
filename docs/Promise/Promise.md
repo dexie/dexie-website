@@ -28,7 +28,7 @@ See also [Best Practices - Understand Promises](/docs/Tutorial/Best-Practices#1-
 
 ### Why we don't use native Promise
 
-As of May 2018, all modern browsers started supporting Promises withing IndexedDB transactions. So the inital reason for introducing an alternate Promise implemetation is not as accurate as before. At least in the long term as users move away from old browsers. However, we also use Dexie.Promise to interact with native promises in order to maintain transaction zones, so we still need to have Dexie.Promise accomplish that for us.
+As of May 2018, all modern browsers started supporting Promises withing IndexedDB transactions. So the initial reason for introducing an alternate Promise implemetation is not as accurate as before. At least in the long term as users move away from old browsers. However, we also use Dexie.Promise to interact with native promises in order to maintain transaction zones, so we still need to have Dexie.Promise accomplish that for us.
 
 ### Interopability
 
@@ -60,7 +60,7 @@ new window.Promise(function(resolve, reject) {
     return db.cars.where('brand').equals('Volvo');
 }).then( function(cars) {
     // Here we get the cars array from Dexie,
-    // delivered throught the standard Promise implementation.
+    // delivered through the standard Promise implementation.
     console.log(cars.join(JSON.stringify()));
 }).catch(function(error) {
     // Handle error standardized

@@ -117,7 +117,7 @@ db.friends.add({email: "abc@def.com", name: "Gertrud"}).then(function() {
 
 #### Catching Error of Specific 'name'
 
-Sometimes the error type doesnt tell exactly what error occurred. IndexedDB for example, will always fail with a DOMError, where its name property tells the actual reason. Dexie.Promise has support for supplying a string as first argument. By doing that, the name property of the error is cheched against the given string.
+Sometimes the error type doesn't tell exactly what error occurred. IndexedDB for example, will always fail with a DOMError, where its name property tells the actual reason. Dexie.Promise has support for supplying a string as first argument. By doing that, the name property of the error is checked against the given string.
 
 ```javascript
 var db = new Dexie('db');

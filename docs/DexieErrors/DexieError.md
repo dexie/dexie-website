@@ -67,7 +67,7 @@ doSomeDatabaseWork().then(function(){
     //
     // Other error such as a string was thrown
     //
-    console.error ("Other unknown error catched: " + e);
+    console.error ("Other unknown error caught: " + e);
 });
 ```
 
@@ -98,7 +98,7 @@ doSomeDatabaseWork().then(function(){
 <tr><td>name: string</td><td>Name of the error</td></tr>
 <tr><td>message: string</td><td>Detailed message</td></tr>
 <tr><td>inner?: any</td><td>Inner exception instance (if any)</td></tr>
-<tr><td>stack?: string</td><td>Can be present if the error was thown. If signaled, there wont be any call stack.</td></tr>
+<tr><td>stack?: string</td><td>Can be present if the error was thrown. If signaled, there wont be any call stack.</td></tr>
 </table>
 
 ### Catching Errors Affect Transaction

@@ -27,7 +27,7 @@ db.transaction('r', db.friends, ()=> {
 
 To work around this error, make sure that the parent transaction includes all tables that subtransactions may include and that if subtransactions require 'rw' mode, use 'rw' mode also in parent transactions.
 
-If you didn't have a parent transaction, but your transaction was initiated in your [Collection.each()](/docs/Collection/Collection.each()) or [Collection.modify()](/docs/Collection/Collection.modify()) callback, you should surround the call to Collection.each() / Collection.modify() with a transaction block, incuding the correct mode and tables to include.
+If you didn't have a parent transaction, but your transaction was initiated in your [Collection.each()](/docs/Collection/Collection.each()) or [Collection.modify()](/docs/Collection/Collection.modify()) callback, you should surround the call to Collection.each() / Collection.modify() with a transaction block, including the correct mode and tables to include.
 
 ### Sample using Promise.catch()
 
@@ -67,5 +67,5 @@ db.on('error', function (error) {
 <tr><td>name</td><td>Will always be Dexie.errnames.SubTransaction === "SubTransactionError"</td></tr>
 <tr><td>message</td><td>Detailed message</td></tr>
 <tr><td>inner?</td><td>Inner exception instance (if any)</td></tr>
-<tr><td>stack</td><td>Can be present if the error was thown. If signaled, there wont be any call stack.</td></tr>
+<tr><td>stack</td><td>Can be present if the error was thrown. If signaled, there wont be any call stack.</td></tr>
 </table>

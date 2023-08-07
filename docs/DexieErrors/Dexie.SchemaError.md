@@ -21,10 +21,10 @@ doSomeDatabaseWork().then(function(){
 }).catch(Dexie.SchemaError, function (e) {
     // Failed with SchemaError
     console.error ("Schema error: " + e.message);
-}).catch(Error, funtion (e) {
+}).catch(Error, function (e) {
     // Any other error derived from standard Error
     console.error ("Error: " + e.message);
-}).catch(funtion (e) {
+}).catch(function (e) {
     // Other error such as a string was thrown
     console.error (e);
 });
@@ -50,5 +50,5 @@ db.on('error', function (error) {
 <tr><td>name</td><td>Will always be Dexie.errnames.Schema === "SchemaError"</td></tr>
 <tr><td>message</td><td>Detailed message</td></tr>
 <tr><td>inner?</td><td>Inner exception instance (if any)</td></tr>
-<tr><td>stack</td><td>Can be present if the error was thown. If signaled, there wont be any call stack.</td></tr>
+<tr><td>stack</td><td>Can be present if the error was thrown. If signaled, there wont be any call stack.</td></tr>
 </table>

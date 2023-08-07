@@ -20,7 +20,7 @@ The methods that may throw this error can perform multiple operations on a colle
 <table>
 <tr><td>failures</td><td>Array of Error objects of all errors that have occurred</td></tr>
 <tr><td>failedKeys</td><td>Array of the keys of the failed modifications. This array will have the same order as failures so that failures[i] will always represent the failure of failedKeys[i]</td></tr>
-<tr><td>successCount</td><td>Number of successful modifications made. NOTE: Only useful in case error is catched and transaction is not aborted.</td></tr>
+<tr><td>successCount</td><td>Number of successful modifications made. NOTE: Only useful in case error is caught and transaction is not aborted.</td></tr>
 </table>
 
 ### Properties derived from Error
@@ -49,7 +49,7 @@ db.transaction('rw', db.friends, function* ()=> {
                                  .delete();
     } catch (err) {
         if (err instanceof Dexie.ModifyError) {
-            // Handle ModifyErrors explicitely
+            // Handle ModifyErrors explicitly
             err.failures.forEach(function (failure) {
             console.error (failure.stack || failure.message);
         } else {

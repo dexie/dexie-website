@@ -39,7 +39,7 @@ db.[tableName].hook('creating', function (primKey, obj, transaction) {
 
 ### Return Value
 
-If return value of given subscriber is other than `undefined`, the return value will be used as the primary key. Implementors may use this to provide extended methods of auto-generation primary keys other than the built-in autoIncrement (++) method. Return value is only handled in case given primKey was undefined. If primKey was set, any return value will be ignored since it is not allowed.
+If return value of given subscriber is other than `undefined`, the return value will be used as the primary key. Implementers may use this to provide extended methods of auto-generation primary keys other than the built-in autoIncrement (++) method. Return value is only handled in case given primKey was undefined. If primKey was set, any return value will be ignored since it is not allowed.
 
 ### To Unsubscribe
 

@@ -46,7 +46,7 @@ If options argument is omitted, or options is {allKeys: false}, the return value
 
 ### Errors
 If some operations fail, bulkAdd will ignore those failures but return a rejected Promise with a
-[Dexie.BulkError](/docs/DexieErrors/Dexie.BulkError) referencing failures. If caller does not catch that error, transaction will abort. If caller wants to ignore the failes, the bulkAdd() operations must be catched. **NOTE: If you call bulkAdd() outside a transaction scope and an error occur on one of the operations, the successful operations will still be persisted to DB! If this is not desired, surround your call to `bulkAdd()` in a transaction and catch the transaction's promise instead of the `bulkAdd()` operation.**
+[Dexie.BulkError](/docs/DexieErrors/Dexie.BulkError) referencing failures. If caller does not catch that error, transaction will abort. If caller wants to ignore the fails, the bulkAdd() operations must be caught. **NOTE: If you call bulkAdd() outside a transaction scope and an error occur on one of the operations, the successful operations will still be persisted to DB! If this is not desired, surround your call to `bulkAdd()` in a transaction and catch the transaction's promise instead of the `bulkAdd()` operation.**
 
 ### Remarks
 
@@ -75,7 +75,7 @@ db.raindrops.bulkAdd(drops).then(function(lastKey) {
     console.log("Done adding 100,000 raindrops all over the place");
     console.log("Last raindrop's id was: " + lastKey); // Will be 100000.
 }).catch(Dexie.BulkError, function (e) {
-    // Explicitely catching the bulkAdd() operation makes those successful
+    // Explicitly catching the bulkAdd() operation makes those successful
     // additions commit despite that there were errors.
     console.error ("Some raindrops did not succeed. However, " +
        100000-e.failures.length + " raindrops was added successfully");

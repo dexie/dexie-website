@@ -19,7 +19,7 @@ table.get({keyPath1: value1, keyPath2: value2, ...}): Promise
   </tr>
   <tr>
     <td>{keyPath1: value1, keyPath2: value2, ...}</td>
-    <td>Criterias to filter</td>
+    <td>Criteria to filter</td>
     <td></td>
   </tr>
 </table>

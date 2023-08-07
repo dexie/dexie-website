@@ -23,7 +23,7 @@ db.[table].offset(N)
 
 ### Remarks
 
-Return a collection when the first N entries in the object store are ignored. If it is requested to skip the LAST N entires rather than the first, this method can be used in combination with the [Collection.reverse()](/docs/Collection/Collection.reverse()) method.
+Return a collection when the first N entries in the object store are ignored. If it is requested to skip the LAST N entries rather than the first, this method can be used in combination with the [Collection.reverse()](/docs/Collection/Collection.reverse()) method.
 
 This method is equivalent to:
 

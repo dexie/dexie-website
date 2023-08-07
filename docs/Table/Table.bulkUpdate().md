@@ -43,7 +43,7 @@ This method is the bulk-version of [Table.update()](Table.update()) such that it
 
 This method will update objects with given keys using given update-specifications (changes) if the keys are found. If a key is not found, its corresponding changes wont be applied but the method will still succeed. The return value indicates how many keys were found (and updated).
 
-The `UpdateSpec` provided in `changes` prop of each item can specify individual properties to be updated or deleted. Existing properties will be updated and non-existing properties will be added (if the row pointed out by the key exists). If the value provided is explicitely set to undefined, the property will be deleted.
+The `UpdateSpec` provided in `changes` prop of each item can specify individual properties to be updated or deleted. Existing properties will be updated and non-existing properties will be added (if the row pointed out by the key exists). If the value provided is explicitly set to undefined, the property will be deleted.
 
 Array properties follow the same keyPath pattern as object properties - using number as parts of the property name, such as `tags.0`, `tags.1` etc, see sample below.
 

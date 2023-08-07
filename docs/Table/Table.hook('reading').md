@@ -49,7 +49,7 @@ But not for:
 
 ### Error Handling
 
-If subscriber throws an exception, the read operation will fail and the caller of the read operation will get the failure as a Promise rejection that may be catched/handled or not. If the caller of the read operation does not catch the excetion using Promise.catch(), the transaction will be aborted.
+If subscriber throws an exception, the read operation will fail and the caller of the read operation will get the failure as a Promise rejection that may be caught/handled or not. If the caller of the read operation does not catch the exception using Promise.catch(), the transaction will be aborted.
 
 ### Use Cases of the CRUD events
 

@@ -29,7 +29,7 @@ collection.primaryKeys(callback)
 
 ### Performance Notice
 
-Similar to [Collection.keys()](/docs/Collection/Collection.keys()), this operation is faster than [Collection.toArray()](/docs/Collection/Collection.toArray()) of several reasons. First because entire objects does not need to be instanciated (less data processsing). Secondly because the underlying database engine need not to do follow the primaryKey reference for each found item and load it (less disk IO).
+Similar to [Collection.keys()](/docs/Collection/Collection.keys()), this operation is faster than [Collection.toArray()](/docs/Collection/Collection.toArray()) of several reasons. First because entire objects does not need to be instantiated (less data processing). Secondly because the underlying database engine need not to do follow the primaryKey reference for each found item and load it (less disk IO).
 
 This method will use [IDBObjectStore.getAllKeys()](https://developer.mozilla.org/en-US/docs/Web/API/IDBObjectStore/getAllKeys) / [IDBIndex.getAllKeys()](https://developer.mozilla.org/en-US/docs/Web/API/IDBIndex/getAllKeys) when available in the IndexedDB API to read all the primary keys. However, this optimization will only be used when collection is a NOT [reversed](/docs/Collection/Collection.reverse()), has no [offset](/docs/Collection/Collection.offset()) and is only filtered using a vanilla key range ([below()](/docs/WhereClause/WhereClause.below()), [above()](/docs/WhereClause/WhereClause.above()), [between()](/docs/WhereClause/WhereClause.between()), [equals()](/docs/WhereClause/WhereClause.equals()), [startsWith()](/docs/WhereClause/WhereClause.startsWith()) or [Table.orderBy](/docs/Table/Table.orderBy())), optionally combined with a [limit](/docs/Collection/Collection.limit()).
 
@@ -37,7 +37,7 @@ This method will use [IDBObjectStore.getAllKeys()](https://developer.mozilla.org
 
 Selects primary keys of all items in the collection. 
 
-Given callback / returned Promise, will recieve an array containing all primary keys of the index being indexed in the collection.
+Given callback / returned Promise, will receive an array containing all primary keys of the index being indexed in the collection.
 
 If callback is omitted and operation succeeds, returned Promise will resolve with the result of the operation, calling any [Promise.then()](/docs/Promise/Promise.then()) callback.
 

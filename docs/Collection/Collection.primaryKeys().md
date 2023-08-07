@@ -55,11 +55,11 @@ db.transaction('r', db.friends, async () => {
   // This sample assumes your primary keys (ids) are strings or numbers
   // as Set won't work for arrays or Dates.
   //
-  // The last criteria will define the order. To change which criteria to define the order,
-  // swap the criterias to have the ordering criteria last.
+  // The last criterion will define the order. To change which criterion will define the order,
+  // swap the criteria to have the ordering criteria last.
   //
-  // To order by an index that is not part of the critera, use [Table.orderBy()](https://dexie.org/docs/Table/Table.orderBy())
-  // as if it was a criteria (for example `db.friends.orderBy('shoeSize').primaryKeys()`) and put it last.
+  // To order by an index that is not part of the criteria, use [Table.orderBy()](https://dexie.org/docs/Table/Table.orderBy())
+  // as if it was a criterion (for example `db.friends.orderBy('shoeSize').primaryKeys()`) and put it last.
   //
 
   // Search for friends where firstName starts with "Ali", lastName

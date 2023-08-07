@@ -11,7 +11,7 @@ title: 'Get started with Dexie in React'
 
 Dexie v3.2 and later comes with reactivity built-in.
 
-In version 3.2 we've introduced **live queries** - queries that observes the result and make your component mirror the data in real time.
+In version 3.2 we've introduced **live queries** - queries that observe the result and make your component mirror the data in real time.
 If a change is made (by the app itself or from an external tab or worker), a binary range tree algorithm will efficiently detect whether those changes would affect your queries and if so, re-execute your callback and re-render component.
 [Here's a simple ToDo app example that demonstrates it](https://dexie-todo-list.stackblitz.io).
 
@@ -207,8 +207,8 @@ export function FriendList({minAge, maxAge}) {
 
 Notice two things in the above example:
 
-1. We pass two arguments to [useLiveQuery()](/docs/dexie-react-hooks/useLiveQuery()): the async function and the deps. The callback is just a plain async function that can compute any type of result based on what it queries. It can use Promise.all() to query things in parallel or query things sequencially after each other. Any Dexie-call along the way will be marked for observation. In any case the end result will become observed.
-2. Deps are needed when the querying function uses closures that affect the query. In this case the minAge and maxAge parameters. A parent component may pass new values for it and that needs to be detected and make our query reexecued.
+1. We pass two arguments to [useLiveQuery()](/docs/dexie-react-hooks/useLiveQuery()): the async function and the deps. The callback is just a plain async function that can compute any type of result based on what it queries. It can use Promise.all() to query things in parallel or query things sequentially after each other. Any Dexie-call along the way will be marked for observation. In any case the end result will become observed.
+2. Deps are needed when the querying function uses closures that affect the query. In this case the minAge and maxAge parameters. A parent component may pass new values for it and that needs to be detected and make our query reexecuted.
 
 # 7. Put it together
 

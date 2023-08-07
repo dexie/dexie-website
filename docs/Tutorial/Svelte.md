@@ -11,7 +11,7 @@ title: 'Get started with Dexie in Svelte'
 
 Dexie v4.x comes with the best Svelte- and Sveltekit support.
 
-In version 3.2 we've introduced **live queries** - queries that observes the result and make your component mirror the data in real time and in version 4.0.1-alpha.10 we improved the typing compability and SvelteKit support of liveQuery().
+In version 3.2 we've introduced **live queries** - queries that observe the result and make your component mirror the data in real time and in version 4.0.1-alpha.10 we improved the typing compability and SvelteKit support of liveQuery().
 
 If a change is made (by the app itself or from an external tab or worker), a binary range tree algorithm will efficiently detect whether those changes would affect your queries and if so, re-execute your callback and re-render component.
 [Here's a sample app demonstrates it](https://2n8bd.csb.app/).
@@ -214,7 +214,7 @@ This time let's also use async / await (for pedagogical reasons only - it makes 
 Notice two things in the above example:
 
 1. As the query depends on the minAge and maxAge params, it needs to be declared as `$: friends` rather than just `let friends`, so that the query will update if a parent component changes minAge or maxAge.
-2. The async callback is just a plain async function that can compute any type of result based on what it queries. It can use Promise.all() to query things in parallel or query things sequencially after each other. Any Dexie-call along the way will be marked for observation. In any case the end result will become observed.
+2. The async callback is just a plain async function that can compute any type of result based on what it queries. It can use Promise.all() to query things in parallel or query things sequentially after each other. Any Dexie-call along the way will be marked for observation. In any case the end result will become observed.
 
 # 7. Put it together
 

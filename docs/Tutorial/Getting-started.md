@@ -62,7 +62,7 @@ Please select what framework you're on and we'll guide you further...
 
 <hr>
 
-What's an Offline First application without sync? We're cooking something slick and powerful. Curious about what's **coming**? Get a *little glimse* of how it will be to turn your client-only app into a server-backed, consistently synced and securely access controlled app. And maybe list yourself on the waitlist?
+What's an Offline First application without sync? We're cooking something slick and powerful. Curious about what's **coming**? Get a *little glimpse* of how it will be to turn your client-only app into a server-backed, consistently synced and securely access controlled app. And maybe list yourself on the waitlist?
 
 <div class="row">
 

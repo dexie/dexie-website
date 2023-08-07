@@ -40,14 +40,14 @@ In Dexie, PSD is used for:
  * Enabling subscribers to db.on('ready') work on db before db.open() completes
 
 ### Difference Between [Thread-specific data](http://en.wikipedia.org/wiki/Thread-Specific_Data) and PSD
-Thread-specific Data is one-dimentional. You can set Thread-static property that will be set for the currently running thread. PSD is a tree (or stack on most cases) where each new PSD acts as a stack frame that will derive from its parent. This makes PSD data automatically disappear when a Promise.newPSD() goes out of scope. This is also nescessary since Promise chains (unlike threads) can all root down the the same promise but be forked on certain frames.
+Thread-specific Data is one-dimensional. You can set Thread-static property that will be set for the currently running thread. PSD is a tree (or stack on most cases) where each new PSD acts as a stack frame that will derive from its parent. This makes PSD data automatically disappear when a Promise.newPSD() goes out of scope. This is also necessary since Promise chains (unlike threads) can all root down the the same promise but be forked on certain frames.
 
 ### Difference from Angular's Zone.js
 Dexie's zone system is unobtrusive, meaning that it does not require your application to include a monkey-patching script at the top of the HTML page. Dexie's zone system only maintains contexts between promises and does not propagate contexts into other async apis, such as setTimeout() etc.
 
 ### Non-Standard
 
-PSD is Dexie-proprietary invention and is not standardized in any Promise specificatotion. We'll be following the [TC39 AsyncContext proposal](https://github.com/tc39/proposal-async-context) closely and gradually adapt the API to aline with the specification.
+PSD is Dexie-proprietary invention and is not standardized in any Promise specification. We'll be following the [TC39 AsyncContext proposal](https://github.com/tc39/proposal-async-context) closely and gradually adapt the API to align with the specification.
 
 ### How To Use
 

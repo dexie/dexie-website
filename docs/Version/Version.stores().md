@@ -66,7 +66,7 @@ The first entry in the schema string will always represent the primary key.
 <tr><td colspan="3"><i><b>Syntax For Primary Key</b></i></td></tr>
 <tr><td>++keyPath</td><td>Autoincrement primary key</td><td>Means that the primary key will be auto-incremented. Primary key must always be unique.</td></tr>
 <tr><td>++</td><td>Hidden autoincremented primary key</td><td>Means that primary key is auto-incremented but not visible on the objects.</td></tr>
-<tr><td>keyPath</td><td>Dont autoincrement primary key</td><td>Means that primary key can be any type and we have to provide it ourself</td></tr>
+<tr><td>keyPath</td><td>Don&apos;t autoincrement primary key</td><td>Means that primary key can be any type and we have to provide it ourself</td></tr>
 <tr><td><i>(blank)</i></td><td>Hidden primary key</td><td>Leaving the first entry blank means that primary key is hidden and not auto-incremented</td></tr>
 <tr><td colspan="3"><i><b>Syntax For Indexes</b></i></td></tr>
 <tr><td>keyPath</td><td></td><td>Means that keyPath is indexed</td></tr>

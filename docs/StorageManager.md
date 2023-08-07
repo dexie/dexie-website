@@ -62,7 +62,7 @@ Dexie is just a wrapper for IndexedDB and enables the creation of (and access to
 
 ## Prohibit Unwanted Dialogs?
 
-Using `navigator.storage.persist()` may prompt the end user for permission. Personally, I would not like a webapp to ask for a permission as the first thing it does. I would rather provide my own GUI to advertise that based on my app's criteria. For example, when the user seems to get more involved with the application, I could advertise and explain that the app might need to ensure that the data will not be accidentially cleared without user's notice. Or it could be turned on in a *Settings* menu for your app.
+Using `navigator.storage.persist()` may prompt the end user for permission. Personally, I would not like a webapp to ask for a permission as the first thing it does. I would rather provide my own GUI to advertise that based on my app's criteria. For example, when the user seems to get more involved with the application, I could advertise and explain that the app might need to ensure that the data will not be accidentally cleared without user's notice. Or it could be turned on in a *Settings* menu for your app.
 
 Chrome and Firefox also implement this differently. In Chrome, the "persistent" or "best-effort" mode is not decided by the end user but is based on how the user has interacted with the application, so it might actually be the case that your application is already allowed to be "persistent" without prompting the user for that permission. And the opposite - `persist()` may return false without ever prompting the user...
 
@@ -90,7 +90,7 @@ async function showEstimatedQuota() {
 ## Eviction Limits
 These limits are specific to each browser and its underlying data storage implementation. When the limit is reached, either non peristent data will get evicted, depending on persistence, or new data will fail to be written to the storage. 
 
-When the browser tries to perform an operation that would cause the application to exceed its storage quota, it will throw a `DOMException` with a `QuotaExceededError` or similiar depending on the browser.
+When the browser tries to perform an operation that would cause the application to exceed its storage quota, it will throw a `DOMException` with a `QuotaExceededError` or similar depending on the browser.
 
 More information regarding browser storage limits and eviction criterias can be found on the [Mozilla Developer Portal](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API/Browser_storage_limits_and_eviction_criteria)
 
@@ -107,7 +107,7 @@ Web Workers and Service Workers access the storage API the same way as web pages
 
 ## Summary
 
-If you are storing critical data with Dexie (or in IndexedDB generally), you might consider using [StorageManager](https://developer.mozilla.org/en-US/docs/Web/API/StorageManager) to ensure the data can be persistently stored, and not just "best-effort". For user experience, some apps may want to wait with enabling the persistent mode until the user seems to be repeatingly using the application, or maybe using certain parts of the application where persisted storage is critical.
+If you are storing critical data with Dexie (or in IndexedDB generally), you might consider using [StorageManager](https://developer.mozilla.org/en-US/docs/Web/API/StorageManager) to ensure the data can be persistently stored, and not just "best-effort". For user experience, some apps may want to wait with enabling the persistent mode until the user seems to be repeatedly using the application, or maybe using certain parts of the application where persisted storage is critical.
 
 In summary, here are some handy functions to use:
 

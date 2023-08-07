@@ -24,7 +24,7 @@ export function liveQuery<T>(
 
 # Safari Support
 
-Safari 15.3 and older does not support [BroadcastChannel](https://caniuse.com/broadcastchannel) requied to make `liveQuery()` react to changes written from Web Workers. However, it will react to changes performed in a Service Worker. There are two small snippets that you can use to make it work with Web Workers also for older Safari browsers, see [Dexie.on.storagemutated#supporting-safari-153-and-below](/docs/Dexie/Dexie.on.storagemutated#supporting-safari-153-and-below).
+Safari 15.3 and older does not support [BroadcastChannel](https://caniuse.com/broadcastchannel) required to make `liveQuery()` react to changes written from Web Workers. However, it will react to changes performed in a Service Worker. There are two small snippets that you can use to make it work with Web Workers also for older Safari browsers, see [Dexie.on.storagemutated#supporting-safari-153-and-below](/docs/Dexie/Dexie.on.storagemutated#supporting-safari-153-and-below).
 
 
 # Svelte and Angular
@@ -75,7 +75,7 @@ const subscription = friendsObservable.subscribe({
 });
 
 // Unsubscribe
-subsciption.unsubscribe();
+subscription.unsubscribe();
 ```
 
 ## React
@@ -201,14 +201,14 @@ Got result: []
 If you wonder how we can possibly detect whether a change would affect your querier, the details are:
 
 * Any call to any Dexie API done during querier execution will be tracked
-* The tracking is done using an efficient datastructure for range collision detections, a [range tree](https://github.com/dexie/Dexie.js/blob/master/src/helpers/rangeset.ts)
+* The tracking is done using an efficient data structure for range collision detection, a [range tree](https://github.com/dexie/Dexie.js/blob/master/src/helpers/rangeset.ts)
 * Every index being queried is tracked with the given range it queries. This makes it possible to detect whether an added object would fit within the range or not, also whether an update of an indexed property would make it become included or not.
 * Whenever a write-transaction commits successfully, mutated parts (keys and ranges) are matched against active live queries using the range tree structure.
   * Add-mutations: every indexed property is matched against active live queries
   * Update-mutations: if an indexed property is updated, we detect whether it would become included into any live query where it was previously not included, or excluded from a query it was previously included in, or whether it updates properties on a result that was part of the query result.
   * Delete-mutations: queries that have the same primary keys in their results will be triggered
 * Whenever the querier is triggered, the subscribed ranges are cleared, the querier re-executed and the ranges or keys being queried this time will be tracked.
-* Mutated rangesets are also broadcasted across browsing contexts to wake up liveQueries in other tabs or workers
+* Mutated rangesets are also broadcast across browsing contexts to wake up liveQueries in other tabs or workers
 
 *This is a simplified explanation of how the algorithm works. The raw details can be found [here](https://github.com/dexie/Dexie.js/tree/master/src/live-query). There are edge cases we also take care of, and optimizations to preserve write performance of large bulk mutations. However, the optimizations does not affect the functionality else than that liveQueries may be triggered as false positives in certain times.*
 
@@ -245,7 +245,7 @@ const friendHashObservable = liveQuery (
 
 ## Fine grained observation
 
-The observation is as fine-grained as it can possibly be - queries that would be affected by a modification will rerender - others not (with some exceptions - false positives happen but never false negatives). This is also true if your querier callback performs a series of awaited queries or multiple in parallell using Promise.all(). It can even contain if-statements or other conditional paths within it, determining additional queries to make before returning a final result - still, observation will function and never miss an update. No matter how simple or complex the query is - it will be monitored in detail so that if a single part of the query is affected by a change, the querier will be executed and the component will rerender.
+The observation is as fine-grained as it can possibly be - queries that would be affected by a modification will rerender - others not (with some exceptions - false positives happen but never false negatives). This is also true if your querier callback performs a series of awaited queries or multiple in parallel using Promise.all(). It can even contain if-statements or other conditional paths within it, determining additional queries to make before returning a final result - still, observation will function and never miss an update. No matter how simple or complex the query is - it will be monitored in detail so that if a single part of the query is affected by a change, the querier will be executed and the component will rerender.
 
 Once again, the rule is that:
 <p>

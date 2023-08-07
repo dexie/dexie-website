@@ -8,5 +8,5 @@
 * [Safari Upgrade issue: Can't create Dexie database in Safari 11.0.1 (11604.3.5.1.1)](https://github.com/dexie/Dexie.js/issues/616)
 * [Safari 11 add blob becomes null](https://github.com/dexie/Dexie.js/issues/618)
 * MAJOR: [Safari save Uint8Array in DB](https://github.com/dexie/Dexie.js/issues/656)
-* [Chrashed Page on Safari](https://github.com/dexie/Dexie.js/issues/668)
+* [Crashed Page on Safari](https://github.com/dexie/Dexie.js/issues/668)
 

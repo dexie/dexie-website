@@ -84,7 +84,7 @@ await db.import(blob, [options]); // equivalent to importInto()
 
 Even though this sample doesn't show it, blobs can also be sent or retrieved to/from a server, using the [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API). 
 
-[Here's a blog article](https://dfahlander.medium.com/export-indexeddb-from-a-web-app-using-devtools-62c55a8996a1) on how to export IndexedDB from DevTools on an arbritary web page or web app, by dynamically including dexie and dexie-export-import in the devtools console.
+[Here's a blog article](https://dfahlander.medium.com/export-indexeddb-from-a-web-app-using-devtools-62c55a8996a1) on how to export IndexedDB from DevTools on an arbitrary web page or web app, by dynamically including dexie and dexie-export-import in the devtools console.
 
 # Features
 
@@ -95,7 +95,7 @@ Even though this sample doesn't show it, blobs can also be sent or retrieved to/
 * Chunk-wise / Streaming - does not read the entire DB into RAM
 * Progress callback (typically for showing progress bar)
 * Optional filter allows to import/export subset of data
-* Support for all structured clonable exotic types (Date, ArrayBuffer, Blob, etc) except CryptoKeys (which by design cannot be exported)
+* Support for all structured cloneable exotic types (Date, ArrayBuffer, Blob, etc) except CryptoKeys (which by design cannot be exported)
 * Atomic - import / export within one database transaction (optional)
 * Export speed: Using getAll() in chunks rather than openCursor().
 * Import speed: Using bulkPut() in chunks rather than put().
@@ -340,7 +340,7 @@ import {importDB, exportDB} from "dexie-export-import";
 
 
 async function exportDatabase(databaseName) {
-  // Open an arbritary IndexedDB database:
+  // Open an arbitrary IndexedDB database:
   const db = await new Dexie(databaseName).open();
   // Export it
   const blob = await exportDB(db);
@@ -394,7 +394,7 @@ But:
 This addon solves these issues, and some more, with the help of some libraries.
 
 ## Libraries Used
-To accomplish a streamable export/import, and allow exotic types, I use the libraries listed below. Note that these libraries are listed as devDependencies because they are bundles using rollupjs - so there's no real dependency from the library user persective.
+To accomplish a streamable export/import, and allow exotic types, I use the libraries listed below. Note that these libraries are listed as devDependencies because they are bundles using rollupjs - so there's no real dependency from the library user perspective.
 
 ### [typeson](https://www.npmjs.com/package/typeson) and [typeson-registry](https://www.npmjs.com/package/typeson-registry)
 These modules enables something similar as JSON.stringify() / JSON.parse() for exotic or custom types.
@@ -438,15 +438,15 @@ I use two different solutions for this:
 1. If we are in a Worker, I use `new FileReaderSync()` instead of `new FileReader()`.
 2. If in the main thread, I use `Dexie.waitFor()` to while reading this short elapsed chunk, keeping the transaction alive still.
 
-Ok, fine, but how do we parse the chunk then? Cannot use JSON.parse(firstPart) because it will most defenitely be incomplete.
+Ok, fine, but how do we parse the chunk then? Cannot use JSON.parse(firstPart) because it will most definitely be incomplete.
 
 [Clarinet](https://www.npmjs.com/package/clarinet) to the rescue. This library can read JSON and callback whenever JSON tokens come in.
 
 ### Writing JSON in Chunks
 
-Writing JSON is solved more easily. As the BlobBuilder interface was deprecated from the DOM, I firstly found this task impossible. But after digging around, I found that also this SHOULD be possible if browers implement the Blob interface correctly.
+Writing JSON is solved more easily. As the BlobBuilder interface was deprecated from the DOM, I firstly found this task impossible. But after digging around, I found that this SHOULD be possible if browsers implement the Blob interface correctly.
 
-Blobs can be constructeed from an array of other Blobs. This is the key.
+Blobs can be constructed from an array of other Blobs. This is the key.
 
 1. Let's say we generate 1000 Blobs of 1MB each on a device with 512 MB RAM. If the browser does its job well, it will allow the first 200 blobs or so to reside in RAM. But then, it should start putting the remanding blobs onto temporary files.
 2. We put all these 1000 blobs into an array and generate a final Blob from that array.

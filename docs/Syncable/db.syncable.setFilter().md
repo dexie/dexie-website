@@ -59,7 +59,7 @@ db.syncable.setFilter({table: "friends"}, function (obj) {
 });
 ```
 
-The above sample will only apply to the 'friends' table. Close friends will never be syncronized. Existing friends that turn into close friends will be deleted from remote nodes.
+The above sample will only apply to the 'friends' table. Close friends will never be synchronized. Existing friends that turn into close friends will be deleted from remote nodes.
 
 ***
 

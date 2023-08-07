@@ -114,7 +114,7 @@ db.transaction('rw', db.friends, function (friends) {
 });
 ```
 
-_NOTE: Transactions only provide the Atomicity part of the [ACID](http://en.wikipedia.org/wiki/ACID) properties when using 2-way syncronization. This is due to that the syncronization phase may result in that another change could override the changes. However, it's still meaningfull to use the transaction() since method for atomicity. Atomicity is guaranteed not only locally but also when synced to the server, meaning that a part of the changes will never commit on the server until all changes from the transaction has been synced. In practice, you cannot increment a counter in the database (for example) and expect it to be consistent, but you can be guaranteed that if you add a sequence of objects, all or none of them will replicate._
+_NOTE: Transactions only provide the Atomicity part of the [ACID](http://en.wikipedia.org/wiki/ACID) properties when using 2-way synchronization. This is due to that the synchronization phase may result in that another change could override the changes. However, it's still meaningful to use the transaction() since method for atomicity. Atomicity is guaranteed not only locally but also when synced to the server, meaning that a part of the changes will never commit on the server until all changes from the transaction has been synced. In practice, you cannot increment a counter in the database (for example) and expect it to be consistent, but you can be guaranteed that if you add a sequence of objects, all or none of them will replicate._
 
 ### API Reference
 
@@ -132,7 +132,7 @@ Text lookup for status numbers
 #### Non-Static Methods and Events
 
 ##### [db.syncable.connect (protocol, url, options)](/docs/Syncable/db.syncable.connect())
-Create a presistend a two-way sync connection with given URL.
+Create a persistent a two-way sync connection with given URL.
 
 ##### [db.syncable.disconnect (url)](/docs/Syncable/db.syncable.disconnect())
 Stop syncing with given URL but keep revision states until next connect.
@@ -159,7 +159,7 @@ Get the options object for the given URL.
 
 ### Description
 
-Dexie.Syncable enables syncronization with a remote database (of almost any kind). It has it's own API [ISyncProtocol](/docs/Syncable/Dexie.Syncable.ISyncProtocol). The [ISyncProtocol](/docs/Syncable/Dexie.Syncable.ISyncProtocol) is pretty straight-forward to implement. The implementation of that API defines how client- and server- changes are transported between local and remote nodes. The API support both poll-patterns (such as ajax calls) and direct reaction pattern (such as WebSocket or long-polling methods). See samples below for each pattern.
+Dexie.Syncable enables synchronization with a remote database (of almost any kind). It has it's own API [ISyncProtocol](/docs/Syncable/Dexie.Syncable.ISyncProtocol). The [ISyncProtocol](/docs/Syncable/Dexie.Syncable.ISyncProtocol) is pretty straight-forward to implement. The implementation of that API defines how client- and server- changes are transported between local and remote nodes. The API support both poll-patterns (such as ajax calls) and direct reaction pattern (such as WebSocket or long-polling methods). See samples below for each pattern.
 
 ### Sample [ISyncProtocol](/docs/Syncable/Dexie.Syncable.ISyncProtocol) Implementations
  * [https://github.com/nponiros/sync_client](https://github.com/nponiros/sync_client)

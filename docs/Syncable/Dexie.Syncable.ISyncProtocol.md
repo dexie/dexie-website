@@ -60,37 +60,37 @@ Implementors of ISyncProtocol may be independent on any framework. There are no 
 Some assumptions are made upon how the database is structured though. We assume that:
  * Databases has 1..N tables. (For NOSQL databases without tables, tables can be emulated using one DB per table)
  * Each table has a primary key.
- * The primary key is a UUID of some kind since auto-incremented primary keys are not suitable for syncronization (auto-incremented key would work but changes of conflicts would increase on create).
+ * The primary key is a UUID of some kind since auto-incremented primary keys are not suitable for synchronization (auto-incremented key would work but changes of conflicts would increase on create).
  * A database record is a JSON compatible object. For SQL databases, this can be accomplished using server-side JSON serializers to map between SQL columns and JSON properties.
  * Always assume that the client may send the same set of changes twice. For example if client sent changes that server stored, but network went down before client got the ack from server, the client may try resending same set of changes again. This means that the same Object Create change may be sent twice etc.
  * The implementation must not fail if trying to create an object with the same key twice, or delete an object with a key that does not exist.
  * Client and server must resolve conflicts in such way that the result on both sides are equal.
- * Since a server is the point of the most up-to-date database, conflicts should be resolved by prefering server changes over client changes. This makes it predestinable for client that the more often the client syncs, the more chance to prohibit conflicts.
+ * Since a server is the point of the most up-to-date database, conflicts should be resolved by preferring server changes over client changes. This makes it predestinable for client that the more often the client syncs, the more chance to prohibit conflicts.
 
 ## Parameters
 
 ### context : [IPersistedContext](/docs/Syncable/Dexie.Syncable.IPersistedContext)
-A context that you may store persistent state within if you'd need to. You may set any custom properties on the context. The context is an arbritary document that will persist within the _syncNodes table in property 'syncContext'.
+A context that you may store persistent state within if you'd need to. You may set any custom properties on the context. The context is an arbitrary document that will persist within the _syncNodes table in property 'syncContext'.
 
 The same context instance will be given for all calls to sync() as long as the URL is the same. If calling context.save(), all properties stored on the context will be persisted in an internal table contained by the same database that is being synced.
 
 An example on how to use this context can be found in: [WebSocketSyncProtocol.js](https://github.com/dfahlander/Dexie.js/blob/master/samples/remote-sync/websocket/WebSocketSyncProtocol.js).
 
 ### url : String
-URL of the remote node to establish a continous sync with.
+URL of the remote node to establish a continuos sync with.
 
 ### options : Object
 Additional information from caller. Example of options could be timeout settings, poll intervals, authentication credentials, etc. The options are optional and implementation specific. Options maps to the 'options' parameter in [db.syncable.connect()](/docs/Syncable/db.syncable.connect())
 
 ### baseRevision
 
-Server revision that the changes are based on. Should be used when resolving conflicts. On initial sync, this value will be null. If having synced before, this will one of the values that has been sent previously to [applyRemoteChanges()](#applyremotechanges--function-changes-lastrevision-partial-clear), but not nescessarily the last value. baseRevision is persisted so it will survive a reboot.
+Server revision that the changes are based on. Should be used when resolving conflicts. On initial sync, this value will be null. If having synced before, this will one of the values that has been sent previously to [applyRemoteChanges()](#applyremotechanges--function-changes-lastrevision-partial-clear), but not necessarily the last value. baseRevision is persisted so it will survive a reboot.
 
 A revision can be of any JS type (such as Number, String, Array, Date or Object). Remote node should use this value to know if there are conflicts. If changes on the remote node was made after this revision, and any of those changes modified the same properties on the same objects, it must be considered a conflict and the remote node should resolve that conflict by choosing the remote node's version of the conflicting properties unless it is a conflict where client has deleted an object that server has updated - then the deletion should win over the update. An implementation of this rule is defined in WebSocketSyncServer.js: function resolveConflicts().
 
 ### syncedRevision
 
-Server revision that local database is in sync with already. On initial sync, this value will be null. If having synced before, this will be the same value that were previously sent by the sync implementor to [applyRemoteChanges()](#applyremotechanges--function-changes-lastrevision-partial-clear). syncedRevision is persisted so even after a reboot, the last value will be remembered. A revision can be of any JS type (such as Number, String, Array, Date or Object).
+Server revision that local database is in sync with already. On initial sync, this value will be null. If having synced before, this will be the same value that were previously sent by the sync implementer to [applyRemoteChanges()](#applyremotechanges--function-changes-lastrevision-partial-clear). syncedRevision is persisted so even after a reboot, the last value will be remembered. A revision can be of any JS type (such as Number, String, Array, Date or Object).
 
 Server should use this value to know which changes to send to client. Server should only send changes occurred after given syncedRevision.
 
@@ -125,11 +125,11 @@ The 'clear' argument is another optional Boolean. As of current version (0.9.1),
 
 ### onChangesAccepted : function ()
 
-Call this function when you get an ack from the server that the changes has been recieved. Must be called no matter if changes were partial or not partial. This will mark the changes as handled so that they need not to be sent again to the particular remote node being synced.
+Call this function when you get an ack from the server that the changes has been received. Must be called no matter if changes were partial or not partial. This will mark the changes as handled so that they need not to be sent again to the particular remote node being synced.
 
 ### onSuccess : function (continuation)
 
-Call this function when all changes you got from the server has been sent to applyRemoteChanges(). Note that not all changes from client has to be sent or acked yet (nescessarily).
+Call this function when all changes you got from the server have been sent to applyRemoteChanges(). Note that not all changes from client have to be sent or acked yet (necessarily).
 
  * Sample when using a poll strategy:
 
@@ -153,7 +153,7 @@ onSuccess({
 
 The given continuation object tells the framework how to continue syncing. Possible values are:
  * `{ again: milliseconds }` - tells the framework to call sync() again in given milliseconds.
- * `{ react: onLocalChanges, disconnect: disconnectFunction }` - tells the framework that you will continue listening on both client- and server changes simultanously. When you get changes from server, you will once again call applyRemoteChanges() and when client changes arrive, you will get notified in your 'react' function: function (changes, baseRevision, partial, onChangesAccepted). When the framework want to close down your provider, it will call your provided disconnect function. Note that the disconnect function is only required when using the 'react' pattern. This is because the 'again' pattern is always initiated by the framework.
+ * `{ react: onLocalChanges, disconnect: disconnectFunction }` - tells the framework that you will continue listening on both client- and server changes simultaneously. When you get changes from server, you will once again call applyRemoteChanges() and when client changes arrive, you will get notified in your 'react' function: function (changes, baseRevision, partial, onChangesAccepted). When the framework want to close down your provider, it will call your provided disconnect function. Note that the disconnect function is only required when using the 'react' pattern. This is because the 'again' pattern is always initiated by the framework.
 
 Note that onSuccess() must only be called once. If continuing using the 'react' pattern, you will no more call onSuccess(). (If using the 'again' pattern, the next call will be to sync() again and thus the same implementation as initial sync and therefore you must call onSuccess() again).
 
@@ -161,6 +161,6 @@ Note also that the onChangesAccepted callback provided in your react() function 
 
 ### onError : function (err, again)
 
-Call this function if an error occur. Provide the error object (exception or other toStringable object such as a String instance) as well as the again value that should be number of milliseconds until trying to call sync() again. For repairable errors, such as network down, provide a value for again so that the framework may try again later. If the error is non-repairable (wouldnt be fixed if trying again later), you should provide Infinity, null or undefined as value for the again parameter.
+Call this function if an error occur. Provide the error object (exception or other toStringable object such as a String instance) as well as the again value that should be number of milliseconds until trying to call sync() again. For repairable errors, such as network down, provide a value for again so that the framework may try again later. If the error is non-repairable (wouldn't be fixed if trying again later), you should provide Infinity, null or undefined as value for the again parameter.
 
 If an error occur while listening for server changes after having gone over to the 'react' pattern, you may also call onError() to inform the framework that the remote node has gone down. If doing so, your sync call will be terminated and you will no longer recieve any local changes to your 'react' callback. Instead you inform the framework about the number of milliseconds until it should call sync() again to reestablish the connection.

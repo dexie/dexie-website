@@ -7,10 +7,10 @@ title: 'Dexie.Syncable.Statuses'
 
 ```typescript
 enum SyncStatus {
-    /** An irrepairable error occurred and the sync provider is dead. */
+    /** An irreparable error occurred and the sync provider is dead. */
     ERROR = -1,
 
-    /** The sync provider hasnt yet become online, or it has been disconnected. */
+    /** The sync provider hasn't yet become online, or it has been disconnected. */
     OFFLINE = 0,
 
     /** Trying to connect to server */
@@ -23,7 +23,7 @@ enum SyncStatus {
      * For react pattern, this is when local changes are being sent to server. */
     SYNCING = 3,
 
-    /** An error occured such as net down but the sync provider will retry to connect. */
+    /** An error occurred such as net down but the sync provider will retry to connect. */
     ERROR_WILL_RETRY = 4
 }
 ```

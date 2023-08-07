@@ -37,7 +37,7 @@ Map between table names and [Table](/docs/Table/Table) instances
 Array of object store names that the Transaction can access. The list depends on which tables were given to [Dexie.transaction()](/docs/Dexie/Dexie.transaction()) when starting the transaction. For upgrade transactions, all object stores will be present in this list.
 
 #### scopeFunc : Function (optional)
-The callback function passed to db.transaction(). For Transactions that has been implicitely created (Not created via db.transaction()), this property will not be set.
+The callback function passed to db.transaction(). For Transactions that has been implicitly created (Not created via db.transaction()), this property will not be set.
 
 ### Events
 

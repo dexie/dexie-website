@@ -35,7 +35,7 @@ db.syncable.connect (
 
 Connect to given URL using given protocol and options. Returned Promise will resolve when [sync-protocol](/docs/Syncable/Dexie.Syncable.ISyncProtocol) has called its [onSuccess()](/docs/Syncable/Dexie.Syncable.ISyncProtocol#onsuccess--function-continuation) callback. If [sync-protocol](/docs/Syncable/Dexie.Syncable.ISyncProtocol) calls [onError()](/docs/Syncable/Dexie.Syncable.ISyncProtocol#onerror--error-again), the returned promise will reject but the underlying framework may continue to try connecting in the background. If you want to stop this, call [db.syncable.disconnect (url)](/docs/Syncable/db.syncable.disconnect()) in your catch clause.
 
-Once connected, you will never have to call connect() again. Not even after a reboot. The framework will keep in sync forever with this node until a call to disconnect(), delete() happens, or if an irrepairable error occur on the node (not network down, but a fatal error).
+Once connected, you will never have to call connect() again. Not even after a reboot. The framework will keep in sync forever with this node until a call to disconnect(), delete() happens, or if an irreparable error occurs on the node (not network down, but a fatal error).
 
 The very first time that connect() is called upon an URL, the framework will start syncing the entire indexedDB database towards the sync protocol implementation. If this is not desired, supply option `{initialUpload: false}` in your connect call.
 

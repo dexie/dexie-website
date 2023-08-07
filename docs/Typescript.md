@@ -26,7 +26,7 @@ Assuming you have moduleResolution: "node" in your tsconfig, this will work out-
 ```typescript
 class MyAppDatabase extends Dexie {
     // Declare implicit table properties.
-    // (just to inform Typescript. Instanciated by Dexie in stores() method)
+    // (just to inform Typescript. Instantiated by Dexie in stores() method)
     contacts!: Dexie.Table<IContact, number>; // number = type of the primkey
     //...other tables goes here...
 
@@ -166,7 +166,7 @@ export class Contact implements IContact {
         
         // At last, save our own properties.
         // (Must not do put(this) because we would get
-        // reduntant emails/phones arrays saved into db)
+        // redundant emails/phones arrays saved into db)
         db.contacts.put(new Contact(this.first, this.last, this.id))
           .then(id => this.id = id);
       });
@@ -174,7 +174,7 @@ export class Contact implements IContact {
   }
 }
 ```
-As shown in this sample, Contact has a method for resolving the foreign collections emails and phones into local array properties. It also has a save() method that will translate changes of the local arrays into database changes. These methods are just examples of a possible use case of class methods in database objects. In this case, I choosed to write methods that are capable of resolving related objects into member properties and saving them back to database again using a relational pattern.
+As shown in this sample, Contact has a method for resolving the foreign collections emails and phones into local array properties. It also has a save() method that will translate changes of the local arrays into database changes. These methods are just examples of a possible use case of class methods in database objects. In this case, I chose to write methods that are capable of resolving related objects into member properties and saving them back to database again using a relational pattern.
 
 To inform Dexie about the table/class mapping, use [Table.mapToClass()](/docs/Table/Table.mapToClass()). This will make all instances returned by the database actually being instances of the Contact class with a proper prototype inheritance chain.
 

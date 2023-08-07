@@ -18,9 +18,9 @@ Only for lead contributors with access to publish on npm.
 1. Have a dedicated 'dexie-release' clone of master
 
 ```bash
-cd /c/repos/dexie-release # or dexie-release-1 for maintainance releases o 1.x.
+cd /c/repos/dexie-release # or dexie-release-1 for maintenance releases o 1.x.
 git status # Make sure your working directory is clean
-git checkout master # Or master-1 for maintainance release of 1.x.
+git checkout master # Or master-1 for maintenance release of 1.x.
 git pull # Pull latest
 git status # Make sure your working directory is still clean.
 npm install # Makes sure to install added deps
@@ -57,4 +57,4 @@ git reset --hard origin/master
 
 Then, fix problems and re-run tools/release.sh
 
-*NOTE: IE and Edge have some general indexedDB instability that periodically makes arbritary tests timeout or fail. When this happens, you might need to re-run the whole procedure again.*
+*NOTE: IE and Edge have some general indexedDB instability that periodically makes arbitrary tests timeout or fail. When this happens, you might need to re-run the whole procedure again.*

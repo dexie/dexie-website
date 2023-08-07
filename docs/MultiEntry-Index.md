@@ -5,7 +5,7 @@ title: 'MultiEntry Index'
 
 A multiEntry index in indexedDB is an index that refers to an array property, and where each item in the array is indexed towards the object / record / document. It is similar to GIN index in PostgreSQL. 
 
-In Dexie, an index is marked multiEntry by putting an asterix (*) char in front of the index name in the schema as examplified below:
+In Dexie, an index is marked multiEntry by putting an asterisk (*) char in front of the index name in the schema as exemplified below:
 
 ```javascript
 var db = new Dexie('dbname');

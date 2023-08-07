@@ -149,7 +149,7 @@ There are two possible of structuring your code with sub functions.
 
 ### Method 1
 
-NOTE: Using ES5 style vars to make the samples work in todays browsers (March 2016).
+NOTE: Using ES5 style vars to make the samples work in today's browsers (March 2016).
 
 ```javascript
 var async = Dexie.async;

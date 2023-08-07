@@ -27,7 +27,7 @@ collection.keys(callback)
 
 ### Performance Notice
 
-Similar to [Collection.primaryKeys()](/docs/Collection/Collection.primaryKeys()), this operation is faster than [Collection.toArray()](/docs/Collection/Collection.toArray()) of several reasons. First because entire objects does not need to be instanciated (less data processsing). Secondly because the underlying database engine need not to do follow the primaryKey reference for each found item and load it (less disk IO).
+Similar to [Collection.primaryKeys()](/docs/Collection/Collection.primaryKeys()), this operation is faster than [Collection.toArray()](/docs/Collection/Collection.toArray()) of several reasons. First because entire objects does not need to be instantiated (less data processing). Secondly because the underlying database engine need not to do follow the primaryKey reference for each found item and load it (less disk IO).
 
 ### Remarks
 

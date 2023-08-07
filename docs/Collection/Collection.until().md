@@ -19,7 +19,7 @@ collection.until(filterFunction, bIncludeStopEntry)
 
 ### Remarks
 
-Works similary to [limit()](/docs/Collection/Collection.limit()) but rather than specifying a number, you specify a filter function to execute on each item and when it returns true, the iteration will stop.
+Works similar to [limit()](/docs/Collection/Collection.limit()) but rather than specifying a number, you specify a filter function to execute on each item and when it returns true, the iteration will stop.
 
 ### Sample
 

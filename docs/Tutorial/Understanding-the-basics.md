@@ -5,7 +5,7 @@ title: 'Understanding the basics'
 
 ## Creating Database vs opening existing
 
-IndexedDB (and Dexie) has a built-in system for db installation and schema upgrades. Many people think they will have to check if the database needs to be created, and then run different code depending on whether or not the database was installed on the client. This is not neeeded. Your Dexie code can be declarative (you declare what tables and schemas you have in current and previously released versions and you let Dexie / indexedDB handle the situation where a database wasn't created yet, needs upgrading, or is already on latest version).
+IndexedDB (and Dexie) has a built-in system for db installation and schema upgrades. Many people think they will have to check if the database needs to be created, and then run different code depending on whether or not the database was installed on the client. This is not needed. Your Dexie code can be declarative (you declare what tables and schemas you have in current and previously released versions and you let Dexie / indexedDB handle the situation where a database wasn't created yet, needs upgrading, or is already on latest version).
 
 IndexedDB is designed for handling database creation and upgrades through the `onupgradeneeded` event, and defines the schema there. There is no native method for checking whether or not a database exists. Dexie adds a declarative schema syntax on top of that so that you don't need to subscribe to the `onupgradeneeded` event either. 
 
@@ -95,7 +95,7 @@ db.version(3).stores({
 ```
 
 ### Deleting tables
-Since it is not mandatory to repeat old table definitions, Dexie has to be explicitely informed about table deletion. This is done by specifying *null* as the table schema.
+Since it is not mandatory to repeat old table definitions, Dexie has to be explicitly informed about table deletion. This is done by specifying *null* as the table schema.
 
 ```javascript
 db.version(1).stores({

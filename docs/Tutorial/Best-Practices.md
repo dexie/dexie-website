@@ -71,7 +71,7 @@ function somePromiseReturningFunc() {
 }
 ```
 
-If you catch a promise, your resulting promise will be considered successful. It's like doing try..catch in a function where it should be done from the caller, or caller's caller instead. Your flow would continue even after the error has occured.
+If you catch a promise, your resulting promise will be considered successful. It's like doing try..catch in a function where it should be done from the caller, or caller's caller instead. Your flow would continue even after the error has occurred.
 
 In transaction scopes, it is even more important to NOT catch promises because if you do, transaction will commit! Catching a promise should mean you have a way to handle the error gracefully. If you don't have that, don't catch it!
 
@@ -117,7 +117,7 @@ function getTaylorSwift() {
     });
 }
 ```
-In the above exampe, we are handling the error because we know it may happen and we have a way to solve that.
+In the above example, we are handling the error because we know it may happen and we have a way to solve that.
 
 What about if you want to log stuff for debugging purpose? Just remember to rethrow the error if you do.
 
@@ -165,7 +165,7 @@ async function myFunc() {
 
 IndexedDB will commit a transaction as soon as it isn't used within a tick. This means that you MUST NOT call any other async API (at least not wait for it to finish) within a transaction scope. If you do, you will get a TransactionInactiveError thrown at you as soon as you try to use the transaction after having waited for the other async API.
 
-In case you really need to call a short-lived async-API, Dexie can actually keep your transaction alive for you if you use [Dexie.waitFor()](https://dexie.org/docs/Dexie/Dexie.waitFor()) but it is not a recomendation to use it unless for very short async calls where there is no other way around (such as Crypto calls).
+In case you really need to call a short-lived async-API, Dexie can actually keep your transaction alive for you if you use [Dexie.waitFor()](https://dexie.org/docs/Dexie/Dexie.waitFor()) but it is not a recommendation to use it unless for very short async calls where there is no other way around (such as Crypto calls).
 
 ### 4. Use the global Promise within transactions!
 
@@ -216,9 +216,9 @@ Whenever you are going to do more than a single operation on your database in a 
 Using transactions gives you the following benefits:
 
 * Robustness: If any error occur, transaction will be rolled back!
-* Simpler code: You may do all operations sequencially - they get queued on the transaction.
+* Simpler code: You may do all operations sequentially - they get queued on the transaction.
 * One single line to catch them all - exceptions, errors wherever they occur.
-* You can just fire off database operations without handling returned promises. The transaction block will catch any error explicitely.
+* You can just fire off database operations without handling returned promises. The transaction block will catch any error explicitly.
 * Faster execution
 * Remember that a browser can close down at any moment. Think about what would happen if the user closes the browser somewhere between your operations. Would that lead to an invalid state? If so, use a transaction - that will make all operations abort if browser is closed between operations.
 
@@ -257,21 +257,21 @@ db.transaction("rw", db.friends, db.pets, () => {
 Notes:
 * `friends` and `pets` are objectStores registered using [Version.stores()](/docs/Version/Version.stores()) method.
 * `"rw"` should be replaced with `"r"` if you are just going to read from database.
-* Also errors occurring in nested callbacks in the block will be catched by the catch() method.
+* Also errors occurring in nested callbacks in the block will be caught by the catch() method.
 
 
 ### 6. Rethrow errors if transaction should be aborted
 
 Saying this again.
 
-When you catch database operations explicitely for logging purpose, transaction will not abort unless you rethrow the error or return the rejected Promise.
+When you catch database operations explicitly for logging purpose, transaction will not abort unless you rethrow the error or return the rejected Promise.
 
 ```javascript
 db.transaction("rw", db.friends, () => {
     return Promise.all([
         db.friends.add ({name: "Måns", isCloseFriend: 1})
           .catch((error) => {
-              console.error("Couldnt add Måns to the database");
+              console.error("Couldn't add Måns to the database");
               // If not rethrowing here, error will be regarded as "handled"
               // and transaction would not abort.
               throw error;

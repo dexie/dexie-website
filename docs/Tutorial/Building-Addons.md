@@ -112,7 +112,7 @@ db.anotherMethod ();
 
 ### Creating an AMD based addon
 
-If you write a pure AMD based addon, you should (by convention) not register it to Dexie.addons but let the module user explicitely provide your addon as an option to the Dexie constructor.
+If you write a pure AMD based addon, you should (by convention) not register it to Dexie.addons but let the module user explicitly provide your addon as an option to the Dexie constructor.
 
 ```javascript
 define('Dexie.NequalAddon', ["Dexie"], function (Dexie) {

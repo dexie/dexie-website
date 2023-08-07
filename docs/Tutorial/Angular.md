@@ -26,7 +26,7 @@ npm install dexie
 
 Applications typically have one single Dexie instance declared as its own module. This is where you declare which tables you need and how each table shall be indexed. A Dexie instance is a singleton throughout the application - you do not need to create it on demand. Export the resulting `db` instance from your module so that you can use it from your services to write or query data.
 
-To make the best Typescript experience with Dexie.js, table properties (such as `db.todoLists` and `db.todoItems`) needs to be explicitely declared on a subclass of Dexie just to help out with the typings for your db instance, its tables and entity models.
+To make the best Typescript experience with Dexie.js, table properties (such as `db.todoLists` and `db.todoItems`) needs to be explicitly declared on a subclass of Dexie just to help out with the typings for your db instance, its tables and entity models.
 
 ```ts
 // db.ts
@@ -148,7 +148,7 @@ import { db, Item, TodoItem, TodoList } from '../db';
 })
 export class ItemListComponent {
   @Input() todoList: TodoList;
-  // Observe an arbritary query:
+  // Observe an arbitrary query:
   todoItems$ = liveQuery(
     () => this.listTodoItems()
   ); 

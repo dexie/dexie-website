@@ -164,7 +164,7 @@ The es6 version is located on [https://npmcdn.com/dexie@latest/src/Dexie.js](htt
 
 ### requirejs
 
-requirejs doesn't find modules with tha magic that goes with npm and webpack. So you have to update your require config accordningly:
+requirejs doesn't find modules with the magic that goes with npm and webpack. So you have to update your require config accordingly:
 
 ```javascript
 require.config({

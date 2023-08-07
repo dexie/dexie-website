@@ -82,7 +82,7 @@ Start a database transaction.
 
 When accessing the database within the given scope function, any [Table](/docs/Table/Table)-based operation will execute within the current transaction.
 
-*NOTE: As of v1.4.0+, the scope function will always be executed asynchronically. In previous versions, the scope function could be executed either directly (synchronically) or asynchronically depending on whether the database was ready, or if a parent transaction was locked. See [Issue #268](https://github.com/dexie/Dexie.js/issues/268)*.
+*NOTE: As of v1.4.0+, the scope function will always be executed asynchronously. In previous versions, the scope function could be executed either directly (synchronically) or asynchronously depending on whether the database was ready, or if a parent transaction was locked. See [Issue #268](https://github.com/dexie/Dexie.js/issues/268)*.
 
 ### Transaction Scope
 
@@ -157,7 +157,7 @@ so make sure to only use the global Promise (window.Promise), or Dexie.Promise w
 
 ### The Auto-Commit Behavior of IndexedDB Transactions
 
-IndexedDB will commit a transaction as soon as it isn't used within a tick. This means that you MUST NOT call any other async API (at least not wait for it to finish) within a transaction scope. If you do, you will get a TransactionInactiveError thrown at you. To avoid this, you may use [Dexie.waitFor()](https://dexie.org/docs/Dexie/Dexie.waitFor()), but use it with causion.
+IndexedDB will commit a transaction as soon as it isn't used within a tick. This means that you MUST NOT call any other async API (at least not wait for it to finish) within a transaction scope. If you do, you will get a TransactionInactiveError thrown at you. To avoid this, you may use [Dexie.waitFor()](https://dexie.org/docs/Dexie/Dexie.waitFor()), but use it with caution.
 
 ### Accessing Transaction Object
 
@@ -252,7 +252,7 @@ async function birthday (friendName) {
 }
 ```
 
-_...but that wouldnt visualize the beauty of nested transactions..._
+_...but that wouldn't visualize the beauty of nested transactions..._
 
 ### Creating Code With Reusable Transaction
 
@@ -321,7 +321,7 @@ db.transaction("rw?", db.Table, () => {
 ```
 
 <dl>
-  <dt>!</dt><dd>Force Top-level Transaction. This will make your code independant on any ongoing transaction and instead always spawn a new transaction at top-level scope.</dd>
+  <dt>!</dt><dd>Force Top-level Transaction. This will make your code independent on any ongoing transaction and instead always spawn a new transaction at top-level scope.</dd>
   <dt>?</dt><dd>Reuse parent transaction only if they are compatible, otherwise launch a top-level transaction.</dd>
 </dl>
 
@@ -368,27 +368,27 @@ Note: This is just a theoretical sample to explain the "!" postfix. In a real wo
 
 ### Implementation Details of Nested Transactions
 
-Nested transactions has no out-of-the-box support in IndexedDB. Dexie emulates it by reusing the parent IDBTransaction within a new Dexie Transaction object with reference count of ongoing requests. The nested transaction will also block any operations made on parent transaction until nested transaction "commits". The nested transaction will "commit" when there are no more ongoing requests on it (exactly as IDB works for main transactions). The "commit" of a nested transaction only means that the transaction Promise will resolve and any pending operations on the main transaction can resume. An error occuring in the parent transaction after a "commit" will still abort the entire transaction including the nested transaction.
+Nested transactions has no out-of-the-box support in IndexedDB. Dexie emulates it by reusing the parent IDBTransaction within a new Dexie Transaction object with reference count of ongoing requests. The nested transaction will also block any operations made on parent transaction until nested transaction "commits". The nested transaction will "commit" when there are no more ongoing requests on it (exactly as IDB works for main transactions). The "commit" of a nested transaction only means that the transaction Promise will resolve and any pending operations on the main transaction can resume. An error occurring in the parent transaction after a "commit" will still abort the entire transaction including the nested transaction.
 
-### Parallell Transactions
+### Parallel Transactions
 
 At a glance, it could seem like you could only be able to run one transaction at a time. However, that is not the case. [Dexie.currentTransaction](/docs/Dexie/Dexie.currentTransaction) is a [Promise-Local](/docs/Promise/Promise.PSD) static property (similar to how Thread-local storage works in threaded environments) that makes sure to always return the [Transaction](/docs/Transaction/Transaction) instance that is bound to the transaction scope that initiated the operation.
 
-#### Spawning a parallell operation
+#### Spawning a parallel operation
 
-Once you have entered a transaction, any database operation done in the transaction will reuse the same transaction. If you want to explicitely spawn another top-level transaction from within your current scope, you could either add the "!" postfix to the mode, or use encapsulate the database operation with [Dexie.ignoreTransaction()](/docs/Dexie/Dexie.ignoreTransaction()).
+Once you have entered a transaction, any database operation done in the transaction will reuse the same transaction. If you want to explicitly spawn another top-level transaction from within your current scope, you could either add the "!" postfix to the mode, or use encapsulate the database operation with [Dexie.ignoreTransaction()](/docs/Dexie/Dexie.ignoreTransaction()).
 
 ```javascript
 db.transaction('rw', db.friends, function () {
-    // Use Dexie.ignoreTransaction() to launch a parallell
+    // Use Dexie.ignoreTransaction() to launch a parallel
     // transaction from within your current transaction.
     db.transaction('r!', db.pets, function() {
-        // This transaction will run in parallell because using the "!" postfix.
+        // This transaction will run in parallel because using the "!" postfix.
     }).catch(...);
 
     // Spawn a transaction-less operation outside our transaction:
     Dexie.ignoreTransaction(function () {
-        // Will launch in parallell due to Dexie.ignoreTransaction()
+        // Will launch in parallel due to Dexie.ignoreTransaction()
         db.pets.toArray(function (){}).catch(...);
     });
 });
@@ -422,7 +422,7 @@ function logCarModels() {
 
 The above operations will run in parallel even though they run withing the same transaction. So you will get a mixture of Volvos and Peugeots scrambled around in your console log.
 
-To make sure that stuff happends in a sequence, you would have to write something like the following:
+To make sure that stuff happens in a sequence, you would have to write something like the following:
 
 ```javascript
 // 1. Log Volvos

@@ -25,14 +25,14 @@ Dexie.debug = true | false | "dexie";
 
 If served from localhost: true, else false.
 
-Explicitely turn off debug mode:
+Explicitly turn off debug mode:
 
 ```javascript
 import Dexie from "dexie";
 Dexie.debug = false;
 ```
 
-Explicitely turn on debug mode:
+Explicitly turn on debug mode:
 
 ```javascript
 import Dexie from "dexie";

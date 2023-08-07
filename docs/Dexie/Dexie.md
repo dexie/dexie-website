@@ -156,10 +156,10 @@ How _options_ tells how to apply addons:
 // Open normally. Registered addons will be invoked automatically.
 var db1 = new Dexie("dbname");
 
-// Explicitely tell Dexie to ignore registered addons:
+// Explicitly tell Dexie to ignore registered addons:
 var db2 = new Dexie("dbname", { addons: [] });
 
-// Explicitely tell Dexie to use just your set of addons:
+// Explicitly tell Dexie to use just your set of addons:
 var db3 = new Dexie("dbname", { addons: [myForEachAddon] });
 ```
 

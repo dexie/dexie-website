@@ -148,7 +148,7 @@ db.someTable.each(function (obj) {
     // including our ajax call failed, this operation will fail and we will get
     // the error here!
     console.error(error.stack || error);
-    // Note that we could also have catched it on db.open() but in this sample,
+    // Note that we could also have caught it on db.open() but in this sample,
     // we show it here.
 });
 ```

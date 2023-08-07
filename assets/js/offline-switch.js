@@ -14,7 +14,9 @@ function setOffline (checked) {
       var checkbox = document.getElementById("offline-checkbox");
       checkbox.checked = false;
       offlineSwitch.className = "";
+	  offlineSwitch.setAttribute("aria-labelledby","offlineOffHeading");
     });
+	
   } else {
     localStorage.setItem("offline", "false");
     navigator.serviceWorker.getRegistration("/sw.js").then(function (reg) {
@@ -39,9 +41,11 @@ function updateSwitchFromStorage() {
     navigator.serviceWorker.getRegistration("/sw.js").then(function (reg) {
       if (reg) {
         offlineSwitch.className = "checked";
+		offlineSwitch.setAttribute("aria-labelledby","offlineOnHeading");
         var checkbox = document.getElementById("offline-checkbox");
         checkbox.checked = true;
         localStorage.setItem("offline", "true");
+		
       }
     });
   }

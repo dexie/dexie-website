@@ -23,7 +23,7 @@ function doSomething() {
     });
 }
 
-// Important: Undestand how you would call and consume the doSomething() function.
+// Important: Understand how you would call and consume the doSomething() function.
 ```
 
 Was there any of the "Understand" parts that you didn't understand? Then you would benefit from learning a little about promises. This will be useful knowledge whatever lib you'll be using. Some links to dive into:

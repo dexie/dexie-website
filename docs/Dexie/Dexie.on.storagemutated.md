@@ -50,7 +50,7 @@ export type ObservabilitySet = {
    * IntervalTree
    *    * See definition of IntervalTree type in rangeset.d.ts
    *    * See rangesOverlap() in rangeset.ts that can be used to compare two
-   *      IntervalTrees and detect collissions.
+   *      IntervalTrees and detect collisions.
    *    * See RangeSet class that can be used to create an IntervalTree and add
    *      ranges to it.
    */
@@ -65,7 +65,7 @@ For this event to fully propagate mutations performed within Web Workers, the br
 
 ### Supporting Safari 15.3 and below
 
-Safari 15.3 and older works fine with this event only when mutations and subscribtion are performed in windows, tabs or service workers. Dexie has built-in workarounds for Safari <= 15.3 where BroadcastChannel support is missing to support change propagation between tabs/windows and from service workers to its clients. However, if you are writing to a database in a Web Worker and want your live queries in the browser to react on in, you will need a custom workaround if you need it to work also for Safari 15.3 and older:
+Safari 15.3 and older works fine with this event only when mutations and subscription are performed in windows, tabs or service workers. Dexie has built-in workarounds for Safari <= 15.3 where BroadcastChannel support is missing to support change propagation between tabs/windows and from service workers to its clients. However, if you are writing to a database in a Web Worker and want your live queries in the browser to react on in, you will need a custom workaround if you need it to work also for Safari 15.3 and older:
 
 **worker:**
 ```ts

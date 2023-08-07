@@ -58,6 +58,6 @@ Dexie.exists("myDatabase").then(function(exists) {
     else
         console.log("Database doesn't exist");
 }).catch(function (error) {
-    console.error("Oops, an error occurred when trying to check database existance");
+    console.error("Oops, an error occurred when trying to check database existence");
 });
 ```

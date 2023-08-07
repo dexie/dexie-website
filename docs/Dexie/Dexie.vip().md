@@ -8,7 +8,7 @@ title: 'Dexie.vip()'
 ```javascript
 db.on('ready', function() {
     return new Dexie.Promise(function (resolve, reject) {
-        // At this point we are still VIP:ed, but if we use an asyncronic
+        // At this point we are still VIP:ed, but if we use an asynchronous
         // api without encapsulating it in another Dexie.Promise, we will
         // loose our VIP status. One example is when using setTimeout():
         setTimeout(function(){
@@ -53,7 +53,7 @@ The following sample solves the deadlock issue without using the vip() method. N
 ```javascript
 db.on('ready', function() {
     return new Dexie.Promise(function (resolve, reject) {
-        // At this point we are still VIP:ed, but if we use an asyncronic
+        // At this point we are still VIP:ed, but if we use an asynchronous
         // api without encapsulating it in another Dexie.Promise, we will
         // loose our VIP status. One example is when using setTimeout():
         setTimeout(function(){
@@ -61,7 +61,7 @@ db.on('ready', function() {
         }, 0);
     }).then(function() {
         // Since we are executing in the then() clause of an already VIP:ed
-        // Promise, we dont need to VIP ourselves here.
+        // Promise, we don't need to VIP ourselves here.
         return db.friends.put({name: "Urban"});
     });
 });
@@ -69,5 +69,5 @@ db.on('ready', function() {
 
 ### Situations in which vip() is required
 
-As shown in the above example, it was not required to call vip() in the setTimeout() sample since we could workaround it by letting the async callback call resolve() and then follow it up in the then() method instead. But there might be more complex situations when working with various asyncronic APIs where vip() could be handy.
+As shown in the above example, it was not required to call vip() in the setTimeout() sample since we could workaround it by letting the async callback call resolve() and then follow it up in the then() method instead. But there might be more complex situations when working with various asynchronous APIs where vip() could be handy.
 

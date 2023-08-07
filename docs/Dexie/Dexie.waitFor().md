@@ -17,7 +17,7 @@ Dexie.waitFor(promise, timeout=60000)
 
 ### Description
 
-This method makes it possible execute asynchronic non-indexedDB work while still keeping current context as well as IDB transaction alive.
+This method makes it possible execute asynchronous non-indexedDB work while still keeping current context as well as IDB transaction alive.
 
 #### Keeps IndexedDB transaction alive
 
@@ -119,4 +119,4 @@ db.transaction('r', db.friends, () => {
 
 ### Behavior of Dexie.waitFor() when not in a transaction
 
-Dexie.waitFor() can also be used when your code is not executing within a transaction. It will then just be equaivalent to Promise.resolve(). This can be useful if you write code that does not encapsulate through transaction by itself, but may be encapsulated in a transaction by the caller. By using Dexie.waitFor() you ensure that non-indexedDB operations will keep any existing transaction alive in case caller has encapsulated your code in a transaction.
+Dexie.waitFor() can also be used when your code is not executing within a transaction. It will then just be equivalent to Promise.resolve(). This can be useful if you write code that does not encapsulate through transaction by itself, but may be encapsulated in a transaction by the caller. By using Dexie.waitFor() you ensure that non-indexedDB operations will keep any existing transaction alive in case caller has encapsulated your code in a transaction.

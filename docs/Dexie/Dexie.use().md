@@ -21,7 +21,7 @@ db.use({stack, name?, create})
   </tr>
   <tr>
     <td>create : Function</td>
-    <td>The middlware itself. It takes a DBCore instance and should return a modified DBCore instance.</td>
+    <td>The middleware itself. It takes a DBCore instance and should return a modified DBCore instance.</td>
   </tr>
 </table>
 
@@ -73,7 +73,7 @@ db.use({
 
 ```
 
-In essence, all mutating operations are bulk-oriented. Theres only bulkPut(), bulkAdd(), bulkDelete() and deleteRange(). Currently all of these four are reached through a single method mutate().
+In essence, all mutating operations are bulk-oriented. There's only bulkPut(), bulkAdd(), bulkDelete() and deleteRange(). Currently all of these four are reached through a single method mutate().
 
 Interface definitions for DBCore is found [here](https://github.com/dexie/Dexie.js/blob/master/src/public/types/dbcore.d.ts)
 

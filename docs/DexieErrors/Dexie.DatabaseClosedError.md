@@ -11,7 +11,7 @@ title: 'Dexie.DatabaseClosedError'
 
 ### Description 
 
-The database connection has been closed explicitely, by calling [db.close()](/docs/Dexie/Dexie.close()), or it was opened with option `{autoOpen: false}` and [db.open()](/docs/Dexie/Dexie.open())
+The database connection has been closed explicitly, by calling [db.close()](/docs/Dexie/Dexie.close()), or it was opened with option `{autoOpen: false}` and [db.open()](/docs/Dexie/Dexie.open())
 was not yet called upon.
 
 ### Sample using Promise.catch()
@@ -52,5 +52,5 @@ db.on('error', function (error) {
 <tr><td>name</td><td>Will always be Dexie.errnames.DatabaseClosed === "DatabaseClosedError"</td></tr>
 <tr><td>message</td><td>Detailed message</td></tr>
 <tr><td>inner?</td><td>Inner exception instance (if any)</td></tr>
-<tr><td>stack</td><td>Can be present if the error was thown. If signaled, there wont be any call stack.</td></tr>
+<tr><td>stack</td><td>Can be present if the error was thrown. If signaled, there wont be any call stack.</td></tr>
 </table>

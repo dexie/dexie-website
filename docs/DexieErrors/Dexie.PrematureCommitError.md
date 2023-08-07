@@ -129,7 +129,7 @@ You can also keep a transaction alive using [Dexie.waitFor()](https://dexie.org/
 
 ### Parallel transactions
 
-It's also OK to run several different database transactions in parallell. Transactions are maintained using [zones](/docs/Promise/Promise.PSD).
+It's also OK to run several different database transactions in parallel. Transactions are maintained using [zones](/docs/Promise/Promise.PSD).
 
 #### THIS IS OK:
 

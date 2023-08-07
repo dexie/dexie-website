@@ -51,5 +51,5 @@ db.on('error', function (error) {
 <tr><td>name</td><td>Will always be Dexie.errnames.ReadOnly === "ReadOnlyError"</td></tr>
 <tr><td>message</td><td>Detailed message</td></tr>
 <tr><td>inner?</td><td>Inner exception instance (if any)</td></tr>
-<tr><td>stack</td><td>Can be present if the error was thown. If signaled, there wont be any call stack.</td></tr>
+<tr><td>stack</td><td>Can be present if the error was thrown. If signaled, there wont be any call stack.</td></tr>
 </table>

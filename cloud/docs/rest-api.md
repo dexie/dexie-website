@@ -129,7 +129,7 @@ GET /public/roles HTTP/1.1
 
 ### POST and DELETE
 
-In either of the REST entpoints you can use GET, POST or DELETE methods where the two latter are used to mutate data.
+In either of the REST endpoints you can use GET, POST or DELETE methods where the two latter are used to mutate data.
 
 #### POST
 
@@ -207,7 +207,7 @@ Content-Type: application/json
 
 ```http
 DELETE /my/<table>/<primaryKey> HTTP/1.1
-Authorization: Bearer <token from /token endpoint (with ACCESS_DB scope and approriate permissions on the object)>
+Authorization: Bearer <token from /token endpoint (with ACCESS_DB scope and appropriate permissions on the object)>
 Content-Type: application/json
 
 ```

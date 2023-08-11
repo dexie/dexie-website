@@ -80,10 +80,10 @@ const PAGE_SIZE = 10;
 
 // A helper function we will use below.
 // It will prevent the same results to be returned again for next page.
-function fastForward(lastRow, idProp, otherCriteria) {
+function fastForward(lastRow, idProp, otherCriterion) {
   let fastForwardComplete = false;
   return item => {
-    if (fastForwardComplete) return otherCriteria(item);
+    if (fastForwardComplete) return otherCriterion(item);
     if (item[idProp] === lastRow[idProp]) {
       fastForwardComplete = true;
     }
@@ -91,15 +91,15 @@ function fastForward(lastRow, idProp, otherCriteria) {
   };
 }
 
-// Criteria filter in plain JS:
-const criteraFunction = friend => friend.age > 21; // Just an example...
+// Criterion filter in plain JS:
+const criterionFunction = friend => friend.age > 21; // Just an example...
 
 //
 // Query First Page
 //
 let page = await db.friends
   .orderBy('lastName') // Utilize index for sorting
-  .filter(criteraFunction)
+  .filter(criterionFunction)
   .limit(PAGE_SIZE)
   .toArray();
 
@@ -115,7 +115,7 @@ page = await db.friends
   .where('lastName').aboveOrEqual(lastEntry.lastName) // makes it sorted by lastName
   
   // Use helper function to fast forward to the exact last result:
-  .filter(fastForward(lastEntry, "id", criteraFunction))
+  .filter(fastForward(lastEntry, "id", criterionFunction))
   
   // Limit to page size:
   .limit(PAGE_SIZE);
@@ -130,7 +130,7 @@ if (page.length < PAGE_SIZE) return; // Done
 lastEntry = page[page.length-1];
 page = await db.friends
   .where('friendID').aboveOrEqual(lastEntry.lastName)
-  .filter(fastForward(lastEntry, "id", criteraFunction))
+  .filter(fastForward(lastEntry, "id", criterionFunction))
   .limit(PAGE_SIZE);
   .toArray();
 

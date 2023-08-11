@@ -3,7 +3,7 @@ layout: docs-dexie-cloud
 title: "Dexie Cloud CLI"
 ---
 
-The Dexie Cloud command-line interface `dexie-cloud` is an executable npm package. It is the CLI for creating and managing sync databases. You do not have to install the package to use it. The only prerequisit is having node.js installed on your system. The `npx` tool that comes with Node.js will download it temporarily from npm when you run any dexie-cloud command, such as `npx dexie-cloud --help`.
+The Dexie Cloud command-line interface `dexie-cloud` is an executable npm package. It is the CLI for creating and managing sync databases. You do not have to install the package to use it. The only prerequisite is having node.js installed on your system. The `npx` tool that comes with Node.js will download it temporarily from npm when you run any dexie-cloud command, such as `npx dexie-cloud --help`.
 
 ## create
 
@@ -23,7 +23,7 @@ This command creates a new database in the cloud. You will be prompted for your 
 Neither of these files should be added to git as they represent environment rather than source. It is especially important to not add the .key file as it contains the secret.
 The files are not needed for the web app to work - they are only useful if you want to run other CLI commands, like white-listing new apps etc. They can also be used to access the Dexie Cloud REST API from a server.
 
-Your email will be stored in the databae as the database owner.
+Your email will be stored in the database as the database owner.
 
 #### Options
 
@@ -127,7 +127,7 @@ List API clients along with their owner email-addresses.
 
 ## connect
 
-Request client_id and client_secret for an existing db and save them into dexie-cloud.key. Also set active database in dexie-cloud.json. This command will require email OTP verification before retrieving credentials and the OTP receiver must have been authorized to manager the database using the [npx dexie-cloud authorize](#autorize) command, or be the creator of the database.
+Request client_id and client_secret for an existing db and save them into dexie-cloud.key. Also set active database in dexie-cloud.json. This command will require email OTP verification before retrieving credentials and the OTP receiver must have been authorized to manager the database using the [npx dexie-cloud authorize](#authorize) command, or be the creator of the database.
 
 <pre>
 npx dexie-cloud connect &lt;Database URL&gt;
@@ -417,7 +417,7 @@ db.version(1).stores({
 
 However, Dexie Cloud don't care about secondary indexes (so far) - the only information that Dexie Cloud server needs is the name of the primary key, and whether it is marked with an '@' sign or not.
 
-Just list in Dexie, omitting a table doesn't mean deleting it. Explicitely set it to null in order to delete a table. A deleted table in the cloud does not delete its content - it is possible to bring the data back. In order to reset a table or database completely, 
+Just list in Dexie, omitting a table doesn't mean deleting it. Explicitly set it to null in order to delete a table. A deleted table in the cloud does not delete its content - it is possible to bring the data back. In order to reset a table or database completely, 
 use `npx dexie-cloud reset` command (not implemented yet).
 
 ## export
@@ -439,7 +439,7 @@ The export format is the same as the import format.
 | realmId   | string | Only export data in given realmId |
 | table     | string | Only export data in given table   |
 
-Note: Re-importing export files is always possibleto do, no matter if they are partial or not, as the import command is additive only, except for objects that are explicitely set to null.
+Note: Re-importing export files is always possible to do, no matter if they are partial or not, as the import command is additive only, except for objects that are explicitly set to null.
 
 For example, if you only want to update roles, use:
 

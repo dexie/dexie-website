@@ -16,4 +16,4 @@ This area is for documentation of Dexie Cloud APIs
 
 You will also find more docs pages in the right part of this page (or in mobile version, the bottom of this page).
 
-*These pages are still being constructed. Please hit the Edit on Github button on pages where you find texts that you believe should be changed. Your changes will result in a Github PR.*
+*These pages are still being constructed. Please hit the Edit on GitHub button on pages where you find texts that you believe should be changed. Your changes will result in a GitHub PR.*

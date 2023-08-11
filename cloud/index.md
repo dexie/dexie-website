@@ -28,7 +28,7 @@ When launching your app, our extremely simple [pricing](/cloud/pricing) makes it
 
 ### Examples
 
-<i class="fa fa-code" aria-hidden="true"></i> [Create a sharable ToDo list](docs/access-control#example-sharable-todo-list)
+<i class="fa fa-code" aria-hidden="true"></i> [Create a shareable ToDo list](docs/access-control#example-shareable-todo-list)
 
 <i class="fa fa-code" aria-hidden="true"></i> [Create a role-based access controlled project management model](docs/access-control#example-a-simple-project-management-model)
 

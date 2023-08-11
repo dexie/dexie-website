@@ -19,14 +19,14 @@ See also [this blog post](https://medium.com/dexie-js/dexie-cloud-subscription-m
 | Horizontally scalable                                                                                                                       | -         | &#10003;                   | &#10003;                                |
 | Max Number of databases                                                                                                                     | Unlimited | Unlimited                  | Unlimited                               |
 | Evaluation users <a href="https://medium.com/dexie-js/dexie-cloud-subscription-model-cbf9a709ce7#768b" target="blog"><i>(read more)</i></a> | Max 25    | Unlimited                  | Unlimited                               |
-| Prodution users                                                                                                                             | Max 1     | Unlimited                  | Unlimited                               |
+| Production users                                                                                                                             | Max 1     | Unlimited                  | Unlimited                               |
 | Demo users (can login without pwd)                                                                                                          | Max 5     | Unlimited                  | Unlimited                               |
 | Use own authentication                                                                                                                      | &#10003;  | &#10003;                   | &#10003;                                |
 | Full source code                                                                                                                            | -         | -                          | Available as option                     |
 | Access to private git repo                                                                                                                  | -         | -                          | Available as option                     |
 | Monthly fee                                                                                                                                 | 0         | USD $12 per 100 prod users | 0                                       |
 | One-time license fee                                                                                                                        | 0         | 0                          | From USD $3,500 incl. 1 year support    |
-| Optional continous support                                                                                                                  | 0         | 0                          | From USD $3,500 per additional year     |
+| Optional continuous support                                                                                                                  | 0         | 0                          | From USD $3,500 per additional year     |
 
 _These prices are per August 2023. In EU, prices are same numbers in EUR instead of USD. For private non-business buyers, VAT may be added to the price depending on local tax rules for private sales._
 
@@ -44,7 +44,7 @@ This edition is hosted and starts with USD \$12 per month for serving 100 users.
 
 ### On-Premise Software License
 
-Buy off the software (optionally with full source code and private GIT access) and **do whatever you want with it** except [competing with us](server-software-license-terms). Serve millions of users without any additional fee. Host it in the cloud of your own choice, or on your own bare metal. The server can be published on cloud providers such as Amazon AWS and Microsoft Azure. Email support, private git access and software updates in one year included. For continous support, the yearly support fee includes continous updates, email support and access to our private git repo.
+Buy off the software (optionally with full source code and private GIT access) and **do whatever you want with it** except [competing with us](server-software-license-terms). Serve millions of users without any additional fee. Host it in the cloud of your own choice, or on your own bare metal. The server can be published on cloud providers such as Amazon AWS and Microsoft Azure. Email support, private git access and software updates in one year included. For continous support, the yearly support fee includes continuous updates, email support and access to our private git repo.
 
 <a class='btn btn-primary' href='/cloud/docs/premium-software' role='button'>Read more... &raquo;</a>
 

@@ -3,7 +3,7 @@ layout: docs-dexie-cloud
 title: "Run Dexie Cloud on Own Servers"
 ---
 
-Dexie Cloud is available both as a cloud service and as a on-premise licensed softare with source included and private git repo access. The former is the obvious choice while your business is growing but at any time, you will be able to switch over to purchase the software license, giving the following benefits:
+Dexie Cloud is available both as a cloud service and as a on-premise licensed software with source included and private git repo access. The former is the obvious choice while your business is growing but at any time, you will be able to switch over to purchase the software license, giving the following benefits:
 
 1. You can customize the software for the needs of your business. Do whatever you like with the software as long as you do not compete with Dexie Cloud. Full git access with history, branches, merge requests and updates.
 2. You get cost savings if your business explodes - you no longer pay per user / month.

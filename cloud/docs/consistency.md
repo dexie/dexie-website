@@ -3,7 +3,7 @@ layout: docs-dexie-cloud
 title: "Consistency in Dexie Cloud"
 ---
 
-This page describes the concepts that Dexie Cloud use in order to guarantee consistency in the synchronized offline-first database. Offline clients may share the same subset of data - and perform operations that may yield one direct result on the offline database, but would have yielded another result after a sync where updated data from another client would make the original operation yield another result. Consistent add-, modify-, put- and delete operations are core concepts of Dexie Cloud and makes sure to not just sync invididual objects but also the conditions used in the operations, so that the same operations can be re-executed on updated data to guarantee the same consistency at all times.
+This page describes the concepts that Dexie Cloud use in order to guarantee consistency in the synchronized offline-first database. Offline clients may share the same subset of data - and perform operations that may yield one direct result on the offline database, but would have yielded another result after a sync where updated data from another client would make the original operation yield another result. Consistent add-, modify-, put- and delete operations are core concepts of Dexie Cloud and makes sure to not just sync individual objects but also the conditions used in the operations, so that the same operations can be re-executed on updated data to guarantee the same consistency at all times.
 
 If you are new to Dexie Cloud, please visit the [Dexie Cloud landing page](/cloud/).
 
@@ -60,7 +60,7 @@ The protocol used when syncing between Dexie Cloud client and server assures tha
 
 1. Client sends all mutated objects along with their primary keys. Client also provides a revision pointing out the server data snapshot from the last sync. The logical outcome of this, is that all non-provided keys are for sure unchanged.
 2. Operations are executed on the server data
-3. When done, server should virtually send back the entire data snapshot to assure the canonical server data snapshot at this point. However, since we know what keys the client has changed, and what keys the server has changed, we know that these objects and only these objects needs to be sent back to the client in order to fullfill this promise.
+3. When done, server should virtually send back the entire data snapshot to assure the canonical server data snapshot at this point. However, since we know what keys the client has changed, and what keys the server has changed, we know that these objects and only these objects needs to be sent back to the client in order to fulfill this promise.
 4. Before sending back all objects that have been changed by the server or client, the server will first further compute which parts of the objects (properties) that will actually have to be sent back - ignoring all properties that would be the same value anyway.
 
 ## Consistent Modify- and Delete Operations
@@ -109,7 +109,7 @@ Basically, where-based modify- and delete-operations persist on the server until
 
 ## Update Operations
 
-Update-operations manipulate individual properties rather than replacing entire objects. Update operations prohibit conflicts when two different clients mutate different properties on the same object. This requires that the dexie operation to update was a [Table.update()](</docs/Table/Table.update()>) (or [Collection.modify()](/docs/Collection/Collection.modify()) with a where-clause using equality comparision on primary key) and that the provided changes was an object that listed the properties to update (not a JS callback). If [Table.put()](</docs/Table/Table.put()>) however was used instead of [Table.update()](</docs/Table/Table.update()>), the intention would be to actually replace the entire object and will therefore overwrite another update or put operation and not allow for two clients updating different props.
+Update-operations manipulate individual properties rather than replacing entire objects. Update operations prohibit conflicts when two different clients mutate different properties on the same object. This requires that the dexie operation to update was a [Table.update()](</docs/Table/Table.update()>) (or [Collection.modify()](/docs/Collection/Collection.modify()) with a where-clause using equality comparison on primary key) and that the provided changes was an object that listed the properties to update (not a JS callback). If [Table.put()](</docs/Table/Table.put()>) however was used instead of [Table.update()](</docs/Table/Table.update()>), the intention would be to actually replace the entire object and will therefore overwrite another update or put operation and not allow for two clients updating different props.
 
 Update operations avoid conflicts as long as the different clients updates different properties on the object, but if two different clients update the same property, the latest performed operation will overwrite the previous one. An example would be a Todo item's `done` property. If user A sets `{done: true}` on the same object as user B sets `{done: false}` the operation that was performed latest in time will be the one that overwrites the other. The timestamp of when the actual operation took place on the client, decides which operation will overwrite the other. This timestamp is adjusted to each client's time-diff against the server.
 
@@ -204,7 +204,7 @@ Private IDs prohibits getting multiple instances in these cases. The settings ex
 1. User opens app on phone and changes the theme to "light-mode".
 2. User logs in. The #theme object with value "light-mode" is persisted on her account in the cloud.
 3. User opens app on desktop (without logging in yet) but now chooses the theme "dark-mode".
-4. User logs in. The #theme obejct with value "dark-mode" will overwrite the existing "light-mode".
+4. User logs in. The #theme object with value "dark-mode" will overwrite the existing "light-mode".
 5. User opens app on a third device where he or she have already logged in before.
 6. The latest #theme object is synced to the client and user will get the latest chosed theme ("dark-mode")
 

@@ -33,7 +33,7 @@ o.subscribe(can => {
 });
 
 ```
-If your table is declared using DexieCloudTable using a `Entity`-derived class mapped to the table using mapToClass(), as examplified in declaration of the TodoList class declared in [dexie-cloud-todo-app](https://github.com/dexie/Dexie.js/blob/v4.0.0-alpha.3/samples/dexie-cloud-todo-app/src/db/TodoDB.ts), you only need to provide a single argument - the entity itself as it already contains method to extract table name from it.
+If your table is declared using DexieCloudTable using a `Entity`-derived class mapped to the table using mapToClass(), as exemplified in declaration of the TodoList class declared in [dexie-cloud-todo-app](https://github.com/dexie/Dexie.js/blob/v4.0.0-alpha.3/samples/dexie-cloud-todo-app/src/db/TodoDB.ts), you only need to provide a single argument - the entity itself as it already contains method to extract table name from it.
 
 # Return Value
 

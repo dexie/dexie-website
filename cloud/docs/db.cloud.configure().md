@@ -123,7 +123,7 @@ Service workers are great for production but can be confusing while developing a
 
 By default Dexie Cloud will append part of the given `databaseURL` to your IndexedDB database name. `'FriendsDatabase'` becomes `'FriendsDatabase-z0lesejpr'` or similar (last part is the ID part from your database URL). The reason it does this is to make your local IndexedDB database unique per database URL and so that vanilla Dexie databases can coexist with a cloud-connected database even when they specify the same name in their constructor. Likewise, if the databaseUrl is changed to another remote database, it will not try to connect the same local database to match the new remote one.
 
-The `nameSuffix` option is considered `true` by default, so in order to disable it, you must explicitely set `nameSuffix` option to `false`.
+The `nameSuffix` option is considered `true` by default, so in order to disable it, you must explicitly set `nameSuffix` option to `false`.
 By specifying `{nameSuffix: false}`, Dexie will name the database without appending a suffix - the same way as it does in plain Dexie.js.
 ### fetchTokens
 
@@ -138,7 +138,7 @@ Dexie Cloud comes with zero-config email OTP authentication but if you need to r
 
 **Node.js server endpoint**
 
-The code below examplifies how to generate tokens if your authentication solution is based on Node.js and [Passport](http://www.passportjs.org){:target="_blank"}. If you have another server-side platform or language for your existing authentication, you would need to translate this example to that language and platform. Note that the authentication platform (Passport or other) can use whatever mechanism to authenticate the user - integrate with OpenIDConnect, Google, Github, facebook etc. For guides for doing so, we refer to other guides on the internet
+The code below exemplifies how to generate tokens if your authentication solution is based on Node.js and [Passport](http://www.passportjs.org){:target="_blank"}. If you have another server-side platform or language for your existing authentication, you would need to translate this example to that language and platform. Note that the authentication platform (Passport or other) can use whatever mechanism to authenticate the user - integrate with OpenIDConnect, Google, GitHub, facebook etc. For guides for doing so, we refer to other guides on the internet
 that covers this. If you are starting from a white paper and just need a way to get going, we recommend the guides from [auth0](https://auth0.com){:target="_blank"} or [Passport](http://www.passportjs.org){:target="_blank"} but remember that Dexie Cloud comes with zero config authentication based on one-time-passwords over email, so setting up custom authentication is just an optional next-step. Make sure to get up running Dexie Cloud with zero config authentication first.
 
 ```js 
@@ -198,7 +198,7 @@ app.post('/dexie-cloud-tokens', bodyParser.json(), async (req, res, next) => {
 
 **fetchTokens implementation in your client code**
 
-Assuming that your server endpoint will respond to the path "/dexie-cloud-tokens" as examplified above (using whatever server side technology you have for that),
+Assuming that your server endpoint will respond to the path "/dexie-cloud-tokens" as exemplified above (using whatever server side technology you have for that),
 the client code to integrate it will be:
 
 ```js

@@ -26,6 +26,6 @@ If you are looking for a redistribution license, please [contact us](mailto:busi
 ### <i class="fa fa-hand-o-right" aria-hidden="true"></i> You may not compete with our cloud offering
 This license does not allow you to setup a Dexie Cloud service to be utilized for applications outside your company. You cannot allow 3rd party developers to be tenants on your Dexie Cloud server without purchasing a license for each external company that host their app on your Dexie Cloud server, or else negotiate another agreement with us for that kind of license.
 
-If you are interested in offering Dexie Cloud as service for external companies (like we do), please [contact us](mailto:business@dexie.org) so we can find a fare deal for that.
+If you are interested in offering Dexie Cloud as service for external companies (like we do), please [contact us](mailto:business@dexie.org) so we can find a fair deal for that.
 
 <br /><br /><br /><br /><br /><br /><br />

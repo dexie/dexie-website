@@ -20,7 +20,7 @@ If you prefer to jump right in to samples, here some shortcuts:
 ## Examples
 
 - [Sharable ToDo list](#example-sharable-todo-list)
-- [Simple project managment model](#example-a-simple-project-management-model)
+- [Simple project management model](#example-a-simple-project-management-model)
 
 ## Introduction
 
@@ -32,11 +32,11 @@ Dexie Cloud comes with an access control model that has the same security benefi
 
 The invitation step is important in non-enterprise use cases because it protects other users from unwillingly starting to see new data showing up in their app without their acceptance - data that could potentially confuse them or delude them to mix it up with authentic data.
 
-For enterprise use cases, Dexie Cloud also has a server side REST API that enables realm and bulk member management without requiring an invititation step. The client of such an API could typically sync users from a directiry with realm members in Dexie Cloud.
+For enterprise use cases, Dexie Cloud also has a server side REST API that enables realm and bulk member management without requiring an invititation step. The client of such an API could typically sync users from a directory with realm members in Dexie Cloud.
 
 ## Realms
 
-A realm represents an access controlled partition of data. All objects in your database are connected to a realm via the `realmId` property also when that property isn't explicitely set. The realmId property of any object will implicitely be set to the private realmId of the object creator. Every user has its own unique realmId that is private for that user only.
+A realm represents an access controlled partition of data. All objects in your database are connected to a realm via the `realmId` property also when that property isn't explicitly set. The realmId property of any object will implicitly be set to the private realmId of the object creator. Every user has its own unique realmId that is private for that user only.
 
 New realms can be created by anyone but they are of little use unless that user invites members and the members accepts the invitation.
 
@@ -44,7 +44,7 @@ Realms are managed in the `db.realms` table. A given user will only have the rea
 
 ## Members
 
-Realms have members. A member connected to a realm will have the realm and all objects connected to it synced locally if the member have accepted the membership. Each member can be given **permissions** to mutate objects connected to the realm. Zero perissions means readonly access. Member can also be given roles.
+Realms have members. A member connected to a realm will have the realm and all objects connected to it synced locally if the member have accepted the membership. Each member can be given **permissions** to mutate objects connected to the realm. Zero permissions means readonly access. Member can also be given roles.
 
 ## Roles
 
@@ -55,11 +55,11 @@ Instead of giving members direct permissions, a member can be given one or many 
 In all custom application tables, there are two reserved property names that affect access control:
 
 - **realmId** - connects the object to a realm, making it visible (synced) for the members in the realm. If realmId is not specified, the current user's userID will be used, which is a built-in realmId that each user has. However, there are no realm objects representing these built-in realms.
-- **owner** - connects the object to a user that gains full permissions on it. Ownership implies access to update and delete the object including changing realmId and owner properties, but it does not imply visibility (sync). If a member is removed from a realm, objects connected to that realm that are owned by the user will go out of scope for the user. If owner is not specified, it will default to user-ID of the current user. If explicitely set to null, it will not have an owner.
+- **owner** - connects the object to a user that gains full permissions on it. Ownership implies access to update and delete the object including changing realmId and owner properties, but it does not imply visibility (sync). If a member is removed from a realm, objects connected to that realm that are owned by the user will go out of scope for the user. If owner is not specified, it will default to user-ID of the current user. If explicitly set to null, it will not have an owner.
 
 ## Default Access Control
 
-In the simplest setup of Dexie Cloud, you do not need to specify anything related to access control. All data that one user creates will be private. It will sync to the cloud but not visible for any other user. This is still a valid use case since the data is continously backed up and possible to access from different devices for the same user.
+In the simplest setup of Dexie Cloud, you do not need to specify anything related to access control. All data that one user creates will be private. It will sync to the cloud but not visible for any other user. This is still a valid use case since the data is continuously backed up and possible to access from different devices for the same user.
 
 ### Example: Zero config Access Control
 
@@ -142,7 +142,7 @@ interface Realm {
   represents?: string;
 
   /** Contains the user-ID of the owner. An owner has implicit full write-access to the realm
-   * and all obejcts connected to it. Ownership does not imply read (sync) access though,
+   * and all objects connected to it. Ownership does not imply read (sync) access though,
    * so realm owners still needs to add themself as a member if they are going to use the realm
    * themselves.
    */
@@ -152,9 +152,9 @@ interface Realm {
 
 ### Example: Sharable ToDo list
 
-This example shows how to create sharable entities, how to share them and how to connect related entities to it. It consists of three functions:
+This example shows how to create shareable entities, how to share them and how to connect related entities to it. It consists of three functions:
 
-1. **createTodoList()** creates a sharable ToDo list
+1. **createTodoList()** creates a shareable ToDo list
 2. **shareTodoList()** shares the list to other users
 3. **addTodoItem()** adds a todoItem related to the shared list that also inherits sharing.
 4. **deleteTodoList()** deletes the todo-list along with all its related objects
@@ -185,7 +185,7 @@ db.version(2).stores({
 // Example functions
 //
 
-/** Create a sharable ToDo list
+/** Create a shareable ToDo list
  *
  * @param {string} listName Name of the ToDo list
  * @returns {Promise} Promise resolving with the ID of the created list.
@@ -258,7 +258,7 @@ function addTodoItem(todoList, todoTitle) {
 
 /** Delete todo-list along with any possible related entity.
  * For sync consistency, we do not rely on queries within the transaction, but
- * instead make sure to delete all possible related entites using where clauses
+ * instead make sure to delete all possible related entities using where clauses
  * that also executes on server when syncing, as well as on future syncs from
  * other clients (see docs about consistency in dexie cloud)
  * */
@@ -327,7 +327,7 @@ See [Permissions](#permissions)
 
 #### Default Membership flow
 
-This is the typical flow for the non-enterprise use case in applications with a similar model as Slack, Github and ToDo list applications.
+This is the typical flow for the non-enterprise use case in applications with a similar model as Slack, GitHub and ToDo list applications.
 
 1. Client side: Add new object to the 'members' table with {invite: true}.
 2. The changes are synced onto Dexie Cloud backend who will send an invite email to the added member.
@@ -501,7 +501,7 @@ As mentioned before, realms can be created any time, but there are also one "bui
 
 Public data can either be populated using the REST API or using Dexie.js after having logged in as a user with the right permissions for that, such as the user who created the database - that user is automatically listed as a member in the public realm with full permissions. To add more users that should have access to publish public content, the original member has the permision to add more members to that realm and give fine grained permissions on what type of data the user can add or what fields the user can update.
 
-The public realm can be specifically useful when you have structured public data such as a product catalog, list of locatio etc that should be available offline and indexed by IndexedDB.
+The public realm can be specifically useful when you have structured public data such as a product catalog, list of locations, etc that should be available offline and indexed by IndexedDB.
 
 Public realm is also useful in the zero-auth use case - when your app can be used without logging in to Dexie Cloud.
 
@@ -511,7 +511,7 @@ Permissions can be set on members and / or roles. Here we explain their syntax a
 
 **add**
 
-Permission to add new objects to given set of tables. Note that [object ownership](#object-ownership) imply full permissions of an object. So unless a user specifies `{owner: null}` when addding an object, the user will keep control of the object and be able to delete it or update any field of it no matter not having any other permission than the **add** permission.
+Permission to add new objects to given set of tables. Note that [object ownership](#object-ownership) imply full permissions of an object. So unless a user specifies `{owner: null}` when adding an object, the user will keep control of the object and be able to delete it or update any field of it no matter not having any other permission than the **add** permission.
 
 Example
 
@@ -541,7 +541,7 @@ Example
 NOTES:
 
 - `"*"` represents all properties except the reserved properties (`owner` and `realmId`). If you have `{update: {todoItems: "*"}}` permission, you can change the todoItems `title`, `done` fields etc but not its `owner` or `realmId`.
-- In order to grant permissions for all fields including `owner` and `realmId` you have to specify them explicitely:
+- In order to grant permissions for all fields including `owner` and `realmId` you have to specify them explicitly:
   ```js
   {
     update: {

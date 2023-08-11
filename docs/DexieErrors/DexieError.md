@@ -103,7 +103,7 @@ doSomeDatabaseWork().then(function(){
 
 ### Catching Errors Affect Transaction
 
-If explicitely catching an error, the ongoing transaction will NOT abort. If that is not your desire, for example if you are just catching the error for logging purpose, you should rethrow the error after logging it.
+If explicitly catching an error, the ongoing transaction will NOT abort. If that is not your desire, for example if you are just catching the error for logging purpose, you should rethrow the error after logging it.
 
 The catch effect also applies when using yield or async / await and a standard try..catch.
 

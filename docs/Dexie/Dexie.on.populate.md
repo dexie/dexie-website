@@ -37,7 +37,7 @@ The transaction running when the populate event is firing is an upgrade transact
 
 **NOTE: If the callback is an async function, make sure to use the provided transaction rather than the Dexie instance (see above sample). **
 
-If your aim is to populate the database from an ajax- or other asyncronic request, the only bullet-proof way to do that is by using the on('ready') event rather than on('populate'). See a working (and fully tested) sample below:
+If your aim is to populate the database from an ajax- or other asynchronous request, the only bullet-proof way to do that is by using the on('ready') event rather than on('populate'). See a working (and fully tested) sample below:
 
 #### Ajax Populate Sample
 

@@ -447,7 +447,7 @@ db.transaction('rw', db.friends, function() {
 });
 ```
 
-All transaction promises should either be catched or returned to its caller.
+All transaction promises should either be caught or returned to its caller.
 
 #### Catching means Handling!
 If you catch a Promise from a database operation within a transaction, it will be considered to be handled and the transaction will not be aborted. This could be a common pitfall when people catch promises within transactions just to log  it but expecting the transaction to abort. Solution: re-throw the errors that you don't handle!
@@ -494,15 +494,15 @@ db.transaction('rw', db.friends, db.pets, function () {
 Notes:
 * 'friends' and 'pets' are objectStores registered using [Version.stores()](/docs/Version/Version.stores()) method.
 * `"rw"` should be replaced with `"r"` if you are just going to do read operations.
-* Also errors from chained database operations within the transaction, or plain exceptions happening in any then() callback of any chained operation will be catched by the transaction's catch() method.
-* It is possible to prohibit the transaction from being aborted if a failing DB operation is catched explicitely:
+* Also errors from chained database operations within the transaction, or plain exceptions happening in any then() callback of any chained operation will be caught by the transaction's catch() method.
+* It is possible to prohibit the transaction from being aborted if a failing DB operation is caught explicitly:
 
 ```javascript
 db.transaction('rw', db.friends, function() {
     db.friends.add({id:1, name:"Fredrik"});
     db.friends.add({id:1, name:"Fredrik"}).catch(function (err) {
         // Adding same primary key twice will of course fail. But
-        // since we catch this error explicitely, the transaction
+        // since we catch this error explicitly, the transaction
         // wont abort. This makes it possible to continue the
         // transaction in a managed way. If you still want to abort
         // the transaction, just do Dexie.currentTransaction.abort(),

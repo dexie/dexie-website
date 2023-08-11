@@ -22,7 +22,7 @@ Did you write something based on Dexie? Feel free to list it here.
 * [FlightRadar24](https://www.flightradar24.com) - Live air traffic.
 * [Minbrowser](https://minbrowser.github.io/min/) - "A smarter browser" - browse without distractions
 * [Wire](https://wire.com) - An end-to-end encrypted chat application.
-* [Medical Physics Quality Assurance Tool](http://electrons.simonbiggs.net/) -- Built with Typescript2, Angular2, Dexie2, Bokehjs, on Github Pages (Client) and Heroku (RestAPI). [Source Code](https://github.com/SimonBiggs/electroninserts-webapp).
+* [Medical Physics Quality Assurance Tool](http://electrons.simonbiggs.net/) -- Built with Typescript2, Angular2, Dexie2, Bokehjs, on GitHub Pages (Client) and Heroku (RestAPI). [Source Code](https://github.com/SimonBiggs/electroninserts-webapp).
 * [Memex](https://worldbrain.io) - Open source browser extension providing full-text search on bookmarks and history.
 * [more than 8000 other repos on GitHub](https://github.com/dexie/Dexie.js/network/dependents?package_id=UGFja2FnZS0xMzg0ODIyOQ%3D%3D)...
 

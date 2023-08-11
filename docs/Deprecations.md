@@ -83,4 +83,4 @@ Reason: According to best-practices of IndexedDBShim, it should auto-invoke by i
 Workaround: If you just want previous behavior, call [shimIndexedDB.__useShim();](https://www.npmjs.com/package/indexeddbshim#shimindexeddb__useshim) before including dexie.
 
 
-*NOTICE: The deprecation of Transaction.table() and Transaction[table] is taken back (un-deprecated) and will be continously maintained in 2.0.0-beta.5 and forward. There are no plans to ever deprecated them.*
+*NOTICE: The deprecation of Transaction.table() and Transaction[table] is taken back (un-deprecated) and will be continuously maintained in 2.0.0-beta.5 and forward. There are no plans to ever deprecated them.*

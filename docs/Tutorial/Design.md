@@ -79,7 +79,7 @@ db.transaction("rw", db.friends, db.pets, function() {
 Notes:
 * 'friends' and 'pets' are objectStores registered using the [version()](/docs/Dexie/Dexie.version()) method.
 * Replace `"rw"` with `"r"` if you are just going to read from the stores.
-* Also errors occurring in nested callbacks in the block will be catched by the catch() method.
+* Also errors occurring in nested callbacks in the block will be caught by the catch() method.
 * It is also possible to prohibit the transaction from being aborted by [catching](/docs/Promise/Promise.catch) specific errors. (See [Dexie.transaction()](/docs/Dexie/Dexie.transaction()) ).
 
 #### Transaction Lifetime

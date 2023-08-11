@@ -75,7 +75,7 @@ db.raindrops.bulkPut(drops).then(function(lastKey) {
     console.log("Done putting 100,000 raindrops all over the place");
     console.log("Last raindrop's id was: " + lastKey); // Will be 100000.
 }).catch(Dexie.BulkError, function (e) {
-    // Explicitely catching the bulkAdd() operation makes those successful
+    // Explicitly catching the bulkAdd() operation makes those successful
     // additions commit despite that there were errors.
     console.error ("Some raindrops did not succeed. However, " +
        100000-e.failures.length + " raindrops was added successfully");

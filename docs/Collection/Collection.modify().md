@@ -28,7 +28,7 @@ collection.modify(changes)
 
 ### Return Value
 
-[Promise](/docs/Promise/Promise) where resolved value is the number of modified objects. If any object fails to be updated, the entire operation will fail and Promise will reject. To catch the error, call Promise.catch() on the returned Promise, else the error will bubble to the aborted transaction and if not catched there, finally bubble to [db.on("error")](/docs/Dexie/Dexie.on.error).
+[Promise](/docs/Promise/Promise) where resolved value is the number of modified objects. If any object fails to be updated, the entire operation will fail and Promise will reject. To catch the error, call Promise.catch() on the returned Promise, else the error will bubble to the aborted transaction and if not caught there, finally bubble to [db.on("error")](/docs/Dexie/Dexie.on.error).
 
 ### Remarks
 

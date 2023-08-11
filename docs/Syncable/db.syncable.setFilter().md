@@ -14,7 +14,7 @@ db.syncable.setFilter([criteria], filter);
 ### Parameters
 
 <table>
-<tr><td>critera: Object</td><td><i>optional</i> Criteria of which table, url and protocol that the filter should apply: {<br/>
+<tr><td>criterion: Object</td><td><i>optional</i> Criterion of which table, url and protocol that the filter should apply: {<br/>
 &nbsp;&nbsp;table: String (table name)<br/>
 &nbsp;&nbsp;url: String (URL of sync server)<br/>
 &nbsp;&nbsp;protocol: String (protocol name)<br/>
@@ -32,7 +32,7 @@ The filter will apply in the following scenarios:
  2. If server was out-of-sync and requests a local clear of all client data ([See clear flag in ISyncProtocol](/docs/Syncable/Dexie.Syncable.ISyncProtocol#applyremotechanges--function-changes-lastrevision-partial-clear), objects where filter returns false wont be wiped out.
  3. Whenever an object is updated, it is tested against the filter before and after the change. If that results in that the filter outcome turns from false to true, an CREATE change will be triggered. If it results in that the filter outcome turns from true to false, a DELETE change will be triggered.
 
-Calling db.syncable.setFilter() twice with the same criteras will remove previous criterias (not add another criteria). For example if doing the following calls below, the first filter will only apply for all tables except the pets table:
+Calling db.syncable.setFilter() twice with the same criterion will remove previous criterion (not add another criterion). For example if doing the following calls below, the first filter will only apply for all tables except the pets table:
 
 ```javascript
 db.syncable.setFilter(function(obj){return !obj.localOnly;});

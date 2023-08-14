@@ -11,22 +11,22 @@ title: "Dexie Cloud Pricing"
 
 For more details, check out [this blog post](https://medium.com/dexie-js/dexie-cloud-subscription-model-cbf9a709ce7).
 
-|                                               | Evaluation (free)         | Production (subscribe)      | Dexie Cloud Server Software (buy)       |
-| --------------------------------------------- | ------------------------- | ---------------------------- | --------------------------------------- |
-| Easy setup: **[npx dexie-cloud create](/cloud/#getting-started)** | &#10003;                  | &#10003;                     | See [these docs](docs/premium-software) |
-| All features included                         | &#10003;                  | &#10003;                     | &#10003;                                |
-| Customizable authentication                   | &#10003;                  | &#10003;                     | &#10003;                                |
-| Replaceable authentication                    | &#10003;                  | &#10003;                     | &#10003;                                |
-| Vertically scalable                           | -                         | &#10003;                     | &#10003;                                |
-| Horizontally scalable                         | -                         | &#10003;                     | &#10003;                                |
-| Max Number of databases                       | Unlimited, free of charge | Unlimited, free of charge    | Unlimited, free of charge               |
-| Evaluation users                              | Unlimited, free of charge | Unlimited, free of charge    | Unlimited, free of charge               |
-| Demo accounts                                 | Unlimited, free of charge | Unlimited, free of charge    | Unlimited, free of charge               |
-| Production users                              | 3 seats, free of charge   | USD $12/mo per 100 seats     | Unlimited, free of charge               |
-| Full source code                              | -                         | -                            | Available as an option                  |
-| Access to private Git repo                    | -                         | -                            | Available as an option                  |
-| One-time license fee                          | -                         | -                            | From USD $4,000 incl. 1-year support    |
-| Optional continuous support                   | -                         | -                            | From USD $3,500 per additional year     |
+|                                                                   | Evaluation (free)         | Production (subscribe)    | Dexie Cloud Server Software (buy)       |
+| ----------------------------------------------------------------- | ------------------------- | ------------------------- | --------------------------------------- |
+| Easy setup: **[npx dexie-cloud create](/cloud/#getting-started)** | &#10003;                  | &#10003;                  | See [these docs](docs/premium-software) |
+| All features included                                             | &#10003;                  | &#10003;                  | &#10003;                                |
+| [Customizable authentication](#customizable-authentication)       | &#10003;                  | &#10003;                  | &#10003;                                |
+| [Replaceable authentication](#replaceable-authentication)         | &#10003;                  | &#10003;                  | &#10003;                                |
+| Vertically scalable                                               | -                         | &#10003;                  | &#10003;                                |
+| Horizontally scalable                                             | -                         | &#10003;                  | &#10003;                                |
+| Max Number of databases                                           | Unlimited, free of charge | Unlimited, free of charge | Unlimited, free of charge               |
+| [Evaluation users](#evaluation-users)                             | Unlimited, free of charge | Unlimited, free of charge | Unlimited, free of charge               |
+| [Demo accounts](#demo-accounts)                                   | Unlimited, free of charge | Unlimited, free of charge | Unlimited, free of charge               |
+| [Production users](#production-users)                             | 3 seats, free of charge   | USD $12/mo per 100 seats  | Unlimited, free of charge               |
+| Full source code                                                  | -                         | -                         | Available as an option                  |
+| Access to private Git repo                                        | -                         | -                         | Available as an option                  |
+| One-time license fee                                              | -                         | -                         | From USD $4,000 incl. 1-year support    |
+| Optional continuous support                                       | -                         | -                         | From USD $3,500 per additional year     |
 
 _Pricing as of August 2023. In the EU, prices are in EUR instead of USD. VAT may be added for private non-business buyers based on local tax rules._
 
@@ -66,8 +66,20 @@ A production user occupies one of the production seats. The Evaluation edition i
 
 ### Demo Accounts
 
-Demo accounts are for testing and demoing your app. They lack login credentials and are useful for showcasing data sharing. Demo accounts do not access private production data unless shared by a real user. Enable or disable demo accounts as needed.
+Demo accounts are for testing and demoing your app. They lack login credentials and are useful for showcasing data sharing. Like any other user account, demo accounts do not have access to any private data that hasn't been actively shared to it. Enable or disable demo accounts as needed.
 
 Find more about Dexie Cloud and its features by visiting the [Dexie Cloud Documentation](/cloud/docs/).
+
+## Customized Authentication
+
+In all editions, it is possible to replace or customize end-user authentication. Dexie Cloud comes with OTP authentication and a default GUI that prompts the user for email and One-time password. There's no need to write any backend or even front-end code for this. But many customers want either to customise the user interface, or even replace the authentication to something else than the built-in OTP authentication from Dexie Cloud.
+
+### Customizable Authentication
+
+To customize the default GUI for our OTP authentication, [configure `{customLoginGui: true}`](<https://dexie.org/cloud/docs/db.cloud.configure()>) and let a component use the [`db.cloud.userInteraction` observable](https://dexie.org/cloud/docs/dexie-cloud-addon) to display dialogs with your own look and feel. Customized authentication does not need a custom backend but can be served the way you prefer, and even from a static web site.
+
+### Replaceable Authentication
+
+To replace the default OTP authentication with your own authentication of choice, you'll need a backend-for-frontend (BFF) server side app to serve your client application. The server-side app needs to serve a dedicated token endpoint for dexie-cloud client that integrates with your authentication solution. See [this guide](<https://dexie.org/cloud/docs/db.cloud.configure()#example-integrate-custom-authentication>) on how it can be accomplished.
 
 <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>

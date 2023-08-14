@@ -32,5 +32,5 @@ This license does not authorize the establishment of a Dexie Cloud service for e
 
 If you are interested in providing Dexie Cloud as a service to external companies (similar to our offering), please [contact us](mailto:business@dexie.org) to explore suitable arrangements.
 
-For further information and details, consult the [Dexie Cloud Server Documentation](docs/premium-software).
+For further information and details, consult the [Dexie Cloud Documentation](/cloud/docs).
 <br /><br /><br /><br /><br /><br /><br />

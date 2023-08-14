@@ -11,22 +11,22 @@ title: "Dexie Cloud Pricing"
 
 For more details, check out [this blog post](https://medium.com/dexie-js/dexie-cloud-subscription-model-cbf9a709ce7).
 
-|                                                                                                                                             | Free      | Production &nbsp;          | On-Premise Software License             |
-| ------------------------------------------------------------------------------------------------------------------------------------------- | --------- | -------------------------- | --------------------------------------- |
-| Easy to setup: **[npx dexie-cloud create](/cloud/#getting-started)**                                                                        | &#10003;  | &#10003;                   | See [these docs](docs/premium-software) |
-| All features included                                                                                                                       | &#10003;  | &#10003;                   | &#10003;                                |
-| Vertically scalable                                                                                                                         | -         | &#10003;                   | &#10003;                                |
-| Horizontally scalable                                                                                                                       | -         | &#10003;                   | &#10003;                                |
-| Max Number of databases                                                                                                                     | Unlimited | Unlimited                  | Unlimited                               |
-| Evaluation users <a href="https://medium.com/dexie-js/dexie-cloud-subscription-model-cbf9a709ce7#768b" target="blog"><i>(read more)</i></a> | Max 25    | Unlimited                  | Unlimited                               |
-| Production users                                                                                                                             | Max 1     | Unlimited                  | Unlimited                               |
-| Demo users (can login without pwd)                                                                                                          | Max 5     | Unlimited                  | Unlimited                               |
-| Use own authentication                                                                                                                      | &#10003;  | &#10003;                   | &#10003;                                |
-| Full source code                                                                                                                            | -         | -                          | Available as option                     |
-| Access to private git repo                                                                                                                  | -         | -                          | Available as option                     |
-| Monthly fee                                                                                                                                 | 0         | USD $12 per 100 prod users | 0                                       |
-| One-time license fee                                                                                                                        | 0         | 0                          | From USD $3,500 incl. 1 year support    |
-| Optional continuous support                                                                                                                  | 0         | 0                          | From USD $3,500 per additional year     |
+|                                               | Evaluation (free)         | Production (subscribe)      | Dexie Cloud Server Software (buy)       |
+| --------------------------------------------- | ------------------------- | ---------------------------- | --------------------------------------- |
+| Easy setup: **[npx dexie-cloud create](/cloud/#getting-started)** | &#10003;                  | &#10003;                     | See [these docs](docs/premium-software) |
+| All features included                         | &#10003;                  | &#10003;                     | &#10003;                                |
+| Customizable authentication                   | &#10003;                  | &#10003;                     | &#10003;                                |
+| Replaceable authentication                    | &#10003;                  | &#10003;                     | &#10003;                                |
+| Vertically scalable                           | -                         | &#10003;                     | &#10003;                                |
+| Horizontally scalable                         | -                         | &#10003;                     | &#10003;                                |
+| Max Number of databases                       | Unlimited, free of charge | Unlimited, free of charge    | Unlimited, free of charge               |
+| Evaluation users                              | Unlimited, free of charge | Unlimited, free of charge    | Unlimited, free of charge               |
+| Demo accounts                                 | Unlimited, free of charge | Unlimited, free of charge    | Unlimited, free of charge               |
+| Production users                              | 3 seats, free of charge   | USD $12/mo per 100 seats     | Unlimited, free of charge               |
+| Full source code                              | -                         | -                            | Available as an option                  |
+| Access to private Git repo                    | -                         | -                            | Available as an option                  |
+| One-time license fee                          | -                         | -                            | From USD $4,000 incl. 1-year support    |
+| Optional continuous support                   | -                         | -                            | From USD $3,500 per additional year     |
 
 _Pricing as of August 2023. In the EU, prices are in EUR instead of USD. VAT may be added for private non-business buyers based on local tax rules._
 
@@ -44,7 +44,7 @@ This edition is hosted and starts at USD $12 per month for 100 seats. It works s
 
 ## Dexie Cloud Server Software
 
-Buy off the software (optionally with full source code and private GIT access) and **do whatever you want with it** except [competing with us](server-software-license-terms). Serve millions of users without any additional fee. Host it in the cloud of your own choice, or on your own bare metal. The server can be published on cloud providers such as Amazon AWS and Microsoft Azure. Email support, private git access and software updates in one year included. For continous support, the yearly support fee includes continuous updates, email support and access to our private git repo.
+Purchase the software (with optional full source code and private Git access) and utilize it as you wish (modify source code or taylor it for your systems). The only rule is to [not compete with us](server-software-license-terms). Serve millions of users without additional fees. Host it on a cloud provider of your choice or your own hardware. The server is compatible with cloud platforms like Amazon AWS and Microsoft Azure. The package includes one year of chat- and email support and software updates. For continuous support, the yearly fee covers ongoing updates, chat- and email support.
 
 <a class='btn btn-primary' href='/cloud/docs/premium-software' role='button'>Read more... &raquo;</a>
 

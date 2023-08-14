@@ -24,6 +24,13 @@ This license prohibits the copying, selling, or other forms of redistributing th
 
 *Note: This restriction pertains to Dexie Cloud Server (private source), not Dexie.js (open source, Apache 2.0 licensed).*
 
-If you are interested in offering Dexie Cloud as service for external companies (like we do), please [contact us](mailto:business@dexie.org) so we can find a fair deal for that.
+If you require a redistribution license, kindly [get in touch](mailto:business@dexie.org).
 
+### <i class="fa fa-hand-o-right" aria-hidden="true"></i> Prohibition of Competing Cloud Offering
+
+This license does not authorize the establishment of a Dexie Cloud service for external applications beyond your company. Hosting third-party developers as tenants on your Dexie Cloud server necessitates a license for each external company, or alternatively, a distinct agreement with us for such usage.
+
+If you are interested in providing Dexie Cloud as a service to external companies (similar to our offering), please [contact us](mailto:business@dexie.org) to explore suitable arrangements.
+
+For further information and details, consult the [Dexie Cloud Server Documentation](docs/premium-software).
 <br /><br /><br /><br /><br /><br /><br />

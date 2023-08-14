@@ -50,12 +50,15 @@ Buy off the software (optionally with full source code and private GIT access) a
 
 <!-- <a class='btn btn-success' href='/cloud/purchase/software' role='button'>Get it now &raquo;</a> -->
 
+---
 
 ## End User Types
 
+This section describes the difference between Evaluation-, Production- and Demo users that are referred in the pricing table.
+
 ### Evaluation Users
 
-Dexie Cloud allows anyone to authenticate by default (configurable). Unknown users do not occupy seats but receive an evaluation license for up to 30 active days. Evaluation accounts are paused on inactive days (configurable). After an evaluation period ends, the user can continue using the app but won't be able to sync data. You can indicate the user's evaluation status and prompt them to upgrade. Upgrade evaluation users to production via the Dexie Cloud Management app or REST API.
+Evaluation users are free time-limited user accounts that can be upgraded to production at any time. By default, Dexie Cloud allows anyone to authenticate (configurable). Unknown users do not occupy seats but receive an evaluation license for up to 30 active days. Evaluation accounts are paused on inactive days (configurable). After an evaluation period ends, the user can continue using the app but won't be able to sync data. You can indicate the user's evaluation status and prompt them to upgrade. Upgrade evaluation users to production via the Dexie Cloud Management app or REST API.
 
 ### Production Users
 

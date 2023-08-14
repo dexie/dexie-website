@@ -54,7 +54,7 @@ Buy off the software (optionally with full source code and private GIT access) a
 
 ## End User Types
 
-This section describes the difference between Evaluation-, Production- and Demo users that are referred in the pricing table.
+This section outlines the distinctions between Evaluation, Production, and Demo users as referenced in the pricing table.
 
 ### Evaluation Users
 

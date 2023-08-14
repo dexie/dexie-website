@@ -23,7 +23,6 @@ For more details, check out [this blog post](https://medium.com/dexie-js/dexie-c
 | [Evaluation users](#evaluation-users) (your end users)            | Unlimited, free of charge | Unlimited, free of charge | Unlimited, free of charge               |
 | [Demo accounts](#demo-accounts) (for showcasing app)              | Unlimited, free of charge | Unlimited, free of charge | Unlimited, free of charge               |
 | [Production users](#production-users) (your end users)            | 3 seats, free of charge   | USD $12/mo per 100 seats  | Unlimited, free of charge               |
-| Storage limit                                                     | 100 MB                    | 50 GB per 100 seats       | Unlimited, free of charge               |
 | Full source code                                                  | -                         | -                         | Available as an option                  |
 | Access to private Git repo                                        | -                         | -                         | Available as an option                  |
 | One-time license fee                                              | -                         | -                         | From USD $4,000 incl. 1-year support    |

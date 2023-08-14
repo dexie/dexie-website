@@ -22,10 +22,6 @@ export function liveQuery<T>(
 |------|------|
 | querier  | Function that returns a final result (Promise) |
 
-# Safari Support
-
-Safari 15.3 and older does not support [BroadcastChannel](https://caniuse.com/broadcastchannel) required to make `liveQuery()` react to changes written from Web Workers. However, it will react to changes performed in a Service Worker. There are two small snippets that you can use to make it work with Web Workers also for older Safari browsers, see [Dexie.on.storagemutated#supporting-safari-153-and-below](/docs/Dexie/Dexie.on.storagemutated#supporting-safari-153-and-below).
-
 
 # Svelte and Angular
 

@@ -32,13 +32,13 @@ _Pricing as of August 2023. In the EU, prices are in EUR instead of USD. VAT may
 
 ## Free
 
-This edition is hosted and forever free but limited to 3 production users that you select. By default, any user can authenticate to your application and start an evaluation account for up to 30 active days. Evaluation accounts are free and do not occupy seats. Evaluation will be paused on days when the user doesn't use the application. After the evaluation period ends, users can continue using your application offline, but data syncing will stop. You can manually or programmatically upgrade individual evaluation accounts to production to resume sync. The Evaluation edition supports up to 3 production seats. When more seats are needed, existing databases can be upgraded to [Production](#production).
+This edition is hosted and forever free. Let your app accept unlimited number of evaluation users and up to 3 production users. An end user's evaluation period will be paused on days when there are no sync requests from that user. After a user's evaluation period ends (30 active days), they can continue using your application offline, but data syncing will stop unless the user is upgraded to production. Upgrading a user can be done manually or programmatically. If more than 3 production seats are needed, existing databases can be upgraded to the [Production](#production) edition.
 
 <a class='btn btn-success' href='/cloud/#getting-started' role='button'>Get started now &raquo;</a>
 
 ## Production
 
-This edition is hosted and starts at USD $12 per month for 100 seats. It works similarly to the [Free](#free) edition but with more seats and auto-scaling. You control which users occupy production seats via the Dexie Cloud Management app or REST API. Integrate this REST API with the web hooks of your payment gateway (e.g., Stripe, Paypal) to manage seats based on your subscription with customers. When the number of production end users reaches 100, you can manually purchase more seats or let the subscription automatically upgrade or downgrade as needed.
+This edition is hosted and starts at USD $12 per month for 100 seats. It works similarly to the [Free](#free) edition but with more seats and auto-scaling. Continue enjoying free evaluation users on top of the 100 production seats. You control which users occupy production seats via the Dexie Cloud Management app or REST API. Integrate this REST API with the web hooks of your payment gateway (e.g., Stripe, Paypal) to manage seats based on your subscription with customers. When the number of production end users reaches 100, you can manually purchase more seat-packs or let the subscription automatically upgrade or downgrade as needed.
 
 <a class='btn btn-success' href='/cloud/purchase/production' role='button'>Get it now &raquo;</a>
 
@@ -66,7 +66,7 @@ A production user occupies one of the production seats. The Evaluation edition i
 
 ### Demo Accounts
 
-Demo accounts are for testing and demoing your app. They lack login credentials and are useful for showcasing data sharing. Like any other user account, demo accounts do not have access to any private data that hasn't been actively shared to it. Enable or disable demo accounts as needed.
+Demo accounts are for testing and demoing your app. They lack login credentials and are useful for showcasing data sharing. Like any other user account, demo accounts do not have access to any private data that hasn't been actively shared to it. Enable or disable demo accounts as needed. Demo accounts do not occupy seats and do not expire.
 
 Find more about Dexie Cloud and its features by visiting the [Dexie Cloud Documentation](/cloud/docs/).
 

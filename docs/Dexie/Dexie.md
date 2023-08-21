@@ -1,6 +1,6 @@
 ---
 layout: docs
-title: "Dexie"
+title: "Dexie Constructor"
 ---
 
 Dexie.js (Official home page: [dexie.org](https://dexie.org)) is a library that makes it super simple to use [indexedDB](https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API) - the standard client-side database in browsers. Read more about Dexie on it's [README](https://github.com/dexie/Dexie.js/blob/master/README.md) or at the [home page](https://dexie.org).

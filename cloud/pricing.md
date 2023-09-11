@@ -3,7 +3,7 @@ layout: dexie-cloud-pricing
 title: "Dexie Cloud Pricing"
 ---
 
-**[Dexie Cloud](/cloud/)**<a href="/cloud/" class="beta" style="font-weight: bold;">BETA</a>&nbsp; is a cloud service **supports the further development of the completely free open source project [Dexie.js](https://github.com/dexie/Dexie.js)**.
+**[Dexie Cloud](/cloud/)**<a href="/cloud/" class="beta" style="font-weight: bold;">BETA</a>&nbsp; is a cloud service supporting the **further development of the completely free open source project [Dexie.js](https://github.com/dexie/Dexie.js)**.
 
 **[Dexie Cloud](/cloud/)**<a href="/cloud/" class="beta" style="font-weight: bold;">BETA</a>&nbsp; also has a [free](#free) edition for labs and demos.
 

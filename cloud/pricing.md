@@ -13,6 +13,7 @@ For more details, check out [this blog post](https://medium.com/dexie-js/dexie-c
 
 |                                                                   | Free                      | Production                | Dexie Cloud Server Software             |
 | ----------------------------------------------------------------- | ------------------------- | ------------------------- | --------------------------------------- |
+| | <a class='btn btn-primary' href='/cloud/#getting-started' role='button'><span class="glyphicon glyphicon-flash"></span> Get started!</a> | <a class='btn btn-success' href='https://buy.stripe.com/test_6oE5mccK1ajMamkaEJ' role='button'>Buy subscription</a> | <a class='btn btn-success' href='/cloud/purchase/server-software' role='button'>Buy server software</a> |
 | Easy setup: **[npx dexie-cloud create](/cloud/#getting-started)** | &#10003;                  | &#10003;                  | See [these docs](docs/premium-software) |
 | All features included                                             | &#10003;                  | &#10003;                  | &#10003;                                |
 | [Customizable authentication](#customizable-authentication)       | &#10003;                  | &#10003;                  | &#10003;                                |
@@ -25,8 +26,8 @@ For more details, check out [this blog post](https://medium.com/dexie-js/dexie-c
 | [Production users](#production-users) (your end users)            | 3 seats, free of charge   | USD $12/mo per 100 seats  | Unlimited, free of charge               |
 | Full source code                                                  | -                         | -                         | Available as an option                  |
 | Access to private Git repo                                        | -                         | -                         | Available as an option                  |
-| One-time license fee                                              | -                         | -                         | From USD $4,000 incl. 1-year support    |
-| Optional continuous support                                       | -                         | -                         | From USD $3,500 per additional year     |
+| One-time license fee                                              | -                         | -                         | From USD $4,000 incl. 1-year support & updates    |
+| Optional continuous support and updates                           | -                         | -                         | From USD $3,500 per additional year     |
 
 _Pricing as of August 2023. In the EU, prices are in EUR instead of USD. VAT may be added for private non-business buyers based on local tax rules._
 
@@ -38,15 +39,17 @@ This edition is hosted and forever free. Let your app accept unlimited number of
 
 ## Production
 
-This edition is hosted and starts at USD $12 per month for 100 seats. It works similarly to the [Free](#free) edition but with more seats and auto-scaling. Continue enjoying free evaluation users on top of the 100 production seats. You control which users occupy production seats via the Dexie Cloud Management app or REST API. Integrate this REST API with the web hooks of your payment gateway (e.g., Stripe, Paypal) to manage seats based on your subscription with customers. When the number of production end users reaches 100, you can manually purchase more seat-packs or let the subscription automatically upgrade or downgrade as needed.
+Purchase this edition when it's time to release your app. Login to [Dexie Cloud Management app](https://manager.dexie.cloud) to connect the subscription to your databases and manage users and seats.
 
-<a class='btn btn-success' href='/cloud/purchase/production' role='button'>Get it now &raquo;</a>
+<a class='btn btn-success' href='https://buy.stripe.com/test_6oE5mccK1ajMamkaEJ' role='button'>Buy subscription</a>
 
 ## Dexie Cloud Server Software
 
 Purchase the software (optionally with full source code and private Git access) and utilize it as you wish (modify source code or taylor it for your systems - anything except [competing with us](server-software-license-terms)). Serve millions of users without additional fees. Host it on a cloud provider of your choice or your own hardware. The server is compatible with cloud platforms like Amazon AWS and Microsoft Azure. The package includes one year of chat- and email support and software updates. For continuous support, the yearly fee covers ongoing updates, chat- and email support.
 
-<a class='btn btn-primary' href='/cloud/docs/premium-software' role='button'>Read more... &raquo;</a>
+<a href='/cloud/docs/premium-software'>Read more</a>
+
+<a class='btn btn-success' href='/cloud/purchase/server-software' role='button'>Buy server software</a>
 
 <!-- <a class='btn btn-success' href='/cloud/purchase/software' role='button'>Get it now &raquo;</a> -->
 

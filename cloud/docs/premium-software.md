@@ -9,6 +9,8 @@ Dexie Cloud is available both as a cloud service and as a on-premise licensed so
 2. You get cost savings if your business explodes - you no longer pay per user / month.
 3. You can chose whatever cloud vendor and region to run it in or you can host it on bare metal.
 
+<a class='btn btn-success' href='/cloud/purchase/server-software' role='button'>Buy now!</a>
+
 ## Software Architecture
 
 Dexie Cloud consists of a Node.js app and a Postgresql database. A typical cloud setup (like our own) also includes load balancing, auto-scaling, DoS protection ([Amazon Elastic beanstalk](https://aws.amazon.com/elasticbeanstalk/) or [Azure Webapps for Node.js](docs.microsoft.com/en-us/azure/app-service/quickstart-nodejs)). The Postgres service can typically run as a managed database service on [Amazon RDS for Postgresql](https://aws.amazon.com/rds/postgresql/) or [Azure Database for Postgresql](https://azure.microsoft.com/en-us/services/postgresql/). No matter your choice of cloud provider, the managed app and database services are very easy to get up running with, scalable and take advantage of best-practice architecture for apps and databases. You still got a cloud hosted solution but you will have more control over it and for exploding businesses, the total cost for the software becomes minimal compared to hosted version since there is no per-user cost.

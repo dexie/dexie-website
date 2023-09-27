@@ -36,7 +36,7 @@ Dexie solves these main issues with the native IndexedDB API:
  3. [Not reactive](/docs/The-Main-Limitations-of-IndexedDB#not-reactive)
  4. [Code complexity](/docs/The-Main-Limitations-of-IndexedDB#code-complexity)
 
-Dexie.js solves these limitations and provides a neat database API. Dexie.js aims to be the first-hand choice of a IDB Wrapper Library due to its well thought-through API design, robust [error handling](/docs/API-Reference#exception-handling), [extendability](/docs/TutorialBuilding-Addons), [change tracking awareness](/docs/Tutorial/Design#change-tracking) and its extended KeyRange support ([case insensitive search](/docs/WhereClause/WhereClause.equalsIgnoreCase()), [set matches](/docs/WhereClause/WhereClause.anyOf()) and [or operations](/docs/Collection/Collection.or())).
+Dexie.js solves these limitations and provides a neat database API. Dexie.js aims to be the first-hand choice of a IDB Wrapper Library due to its well thought-through API design, robust [error handling](/docs/API-Reference#exception-handling), [extendability](/docs/Tutorial/Building-Addons), [change tracking awareness](/docs/Tutorial/Design#change-tracking) and its extended KeyRange support ([case insensitive search](/docs/WhereClause/WhereClause.equalsIgnoreCase()), [set matches](/docs/WhereClause/WhereClause.anyOf()) and [or operations](/docs/Collection/Collection.or())).
 
 #### Please Show me a Hello World Example
 

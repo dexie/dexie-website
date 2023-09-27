@@ -34,7 +34,7 @@ When declaring `friends: 'name, age'` the first property implicitly becomes the 
 The first time a browser hits the appdb.js code, the following happens:
 
 1. The database is created
-2. The [populate](/docs/Dexie/Dexie.on.populate.html) event is triggered to allow the developer to populate the database
+2. The [populate](/docs/Dexie/Dexie.on.populate) event is triggered to allow the developer to populate the database
 3. The db.open() promise resolves
 
 ### Second time

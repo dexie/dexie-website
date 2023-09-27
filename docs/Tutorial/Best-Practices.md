@@ -90,7 +90,7 @@ function myDataOperations() {
 }
 ```
 
-But on an event handler or other root-level scope, always catch! Why?! Because you are the last one to catch it since you are NOT returning Promise! You have no caller that expects a promise and you are the sole responsible of catching and informing the user about any error. If you don't catch it anywhere, an error will end-up in the standard [unhandledrejection](https://dexie.org/docs/Promise/unhandledrejection-event.html) event.
+But on an event handler or other root-level scope, always catch! Why?! Because you are the last one to catch it since you are NOT returning Promise! You have no caller that expects a promise and you are the sole responsible of catching and informing the user about any error. If you don't catch it anywhere, an error will end-up in the standard [unhandledrejection](/docs/Promise/unhandledrejection-event) event.
 
 ```javascript
 somePromiseReturningFunc().catch((error) => {

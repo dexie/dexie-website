@@ -38,7 +38,7 @@ await db.friends.bulkPut([{id: "id1", name: "Friend1"}, {id: "id2", name: "Frien
 ```
 
 
-## Example of Outbound Primary Key
+## Examples of Outbound Primary Key
 
 ```javascript
 db.version(1).stores({

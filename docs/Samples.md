@@ -85,7 +85,7 @@ title: 'Samples'
 
 #### Populate From Ajax
 
-* [Source](https://dexie.org/docs/Dexie/Dexie.on.populate.html#ajax-populate-sample)
+* [Source](/docs/Dexie/Dexie.on.populate#ajax-populate-sample)
 
 #### Open Existing Databases
 

@@ -15,7 +15,7 @@ The database schema is declarative, not imperative.
 ```javascript
 var db = new Dexie('dbname');
 db.version(1).stores({
-    friends: 'name, age'
+    friends: 'id, name, age'
 });
 db.open().then(function (db) {
     // Database opened successfully
@@ -47,7 +47,7 @@ When you need to modify the schema, also update the version number. In the sampl
 
 ```javascript
 db.version(2).stores({
-    friends: 'firstName, lastName, age'
+    friends: 'id, firstName, lastName, age'
 });
 ```
 
@@ -55,10 +55,10 @@ In older version of Dexie (version &lt;3.0), you were required to keep all previ
 
 ```javascript
 db.version(1).stores({
-    friends: 'name, age'
+    friends: 'id, name, age'
 });
 db.version(2).stores({
-    friends: 'firstName, lastName, age',
+    friends: 'id, name, firstName, lastName',
 });
 ```
 
@@ -68,10 +68,10 @@ When migrating existing data, you need to keep the old version alongside the new
 
 ```javascript
 db.version(1).stores({
-    friends: 'name, age'
+    friends: 'id, name, age'
 });
 db.version(2).stores({
-    friends: 'firstName, lastName, age',
+    friends: 'id, name, firstName, lastName',
 }).upgrade(tx => {
     return tx.table("friends").toCollection().modify(friend => {
         const names = friend.name.split(' ');
@@ -87,10 +87,10 @@ If you are just adding or changing a few tables, you do not need to repeat the s
 
 ```javascript
 db.version(2).stores({
-    friends: 'name, age, firstName, lastName',
+    friends: 'id, name, age, firstName, lastName',
 });
 db.version(3).stores({
-    pets: 'name' // Only need to specify pets, as friends should be same as for version 2.
+    pets: 'petId, petName' // Only need to specify pets, as friends should be same as for version 2.
 });
 ```
 
@@ -99,13 +99,13 @@ Since it is not mandatory to repeat old table definitions, Dexie has to be expli
 
 ```javascript
 db.version(1).stores({
-    friends: 'name, age'
+    friends: 'id, name, age'
 });
 db.version(2).stores({
-    friends: 'name, age, firstName, lastName',
+    friends: 'id, name, age, firstName, lastName',
 });
 db.version(3).stores({
-    pets: 'name'
+    pets: 'petId, petName'
 });
 db.version(4).stores({
     pets: null // Will delete 'pets' table

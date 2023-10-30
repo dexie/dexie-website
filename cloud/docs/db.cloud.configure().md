@@ -49,17 +49,22 @@ The call to db.cloud.configure() must be done before any requests are put on the
 
 | Parameter   | Type     | Explanation                                        |
 | ----------- | -------- | -------------------------------------------------- |
-| databaseUrl | string   | The URL to your Dexie Cloud database               |
-| requireAuth | boolean  | Whether or not to require authentication initially or allow unauthorized usage with option to login when needed. A value of false enables unauthorized shopping basket example with possibility to authenticate to get the data become connected to user account. |
-| tryUseServiceWorker | boolean | Let service worker take care of the sync job. See [tryUseServiceWorker](#tryuseserviceworker) below.  |
-| periodicSync | `{minInterval: number}` | The minimum interval time, in milliseconds, at which the service-worker's periodic sync should occur. See <https://github.com/WICG/background-sync/blob/main/explainers/periodicsync-explainer.md#timing-of-periodic-sync-tasks> |
-| customLoginGui | boolean | Disable default login GUI and replace it with your own by subscribing to the `db.cloud.userInteraction` observable and render its emitted data. |
+| [databaseUrl](#databaseurl) | string   | The URL to your Dexie Cloud database               |
+| [requireAuth](#requireauth) | boolean  | Whether or not to require authentication initially or allow unauthorized usage with option to login when needed. A value of false enables unauthorized shopping basket example with possibility to authenticate to get the data become connected to user account. |
+| [tryUseServiceWorker](#tryuseserviceworker) | boolean | Let service worker take care of the sync job. See [tryUseServiceWorker](#tryuseserviceworker) below.  |
+| [periodicSync](#periodic-sync) | `{minInterval: number}` | The minimum interval time, in milliseconds, at which the service-worker's periodic sync should occur. See <https://github.com/WICG/background-sync/blob/main/explainers/periodicsync-explainer.md#timing-of-periodic-sync-tasks> |
+| [customLoginGui](#customlogingui) | boolean | Disable default login GUI and replace it with your own by subscribing to the `db.cloud.userInteraction` observable and render its emitted data. |
 | unsyncedTables | string[] | Array of table names that should be considered local-only and not be synced with Dexie Cloud |
 | nameSuffix | boolean | See [nameSuffix](<#namesuffix>) below |
 | disableWebSocket | boolean | Disable websocket connection. This will disable listening of server changes and only sync when there is a client change. You can manually call `db.cloud.sync({purpose: 'pull'})` periodically as an alternative to using the WebSocket connection. |
+| disableEagerSync | boolean | When set, local changes will not trigger a sync towards the server. |
 | fetchTokens | Callback | Provide JWT tokens customly. Enables custom authentication. See [full client- and server example here](#example-integrate-custom-authentication).
 
 See the Typescript definition of this parametered object argument to get the typing details: [DexieCloudOptions](DexieCloudOptions).
+
+### databaseUrl
+
+The URL to the database. This is the URL to your Dexie Cloud database. If you don't know your database URL, you can login to [Dexie Cloud Manager](https://manager.dexie.cloud) to see what databases you have access to manage. You can also create a new database using [npx dexie-cloud create](/cloud/docs/cli#create) on a command prompt on any mac, PC or linux computer with node installed.
 
 ### requireAuth
 
@@ -77,11 +82,14 @@ Dexie Cloud takes advantage of Service Worker Background Sync. It makes it possi
 
 #### Periodic Sync
 
-Periodic Sync is also a service worker feature. It makes it possible to pull remote changes from a server even when the app is not open. Think weather app... You take up your phone and click the weather app and get an up-to-date weather report despite being offline! This is because you were online 2 hours ago while walking with the phone in your pocket and periodic sync kicked in and did a pull sync from the server, retrieving a recent weather report prepared for you.
+Periodic Sync is also a service worker feature and can be configured with a minimum requested interval (see [these docs from the specification](https://github.com/WICG/background-sync/blob/main/explainers/periodicsync-explainer.md#timing-of-periodic-sync-tasks)). If the `periodicSync` option is specified to `db.cloud.configure()` it will be passed to the background-sync configruation for the service worker.
 
-Periodic sync registration will only be active when the PWA is actually installed on the user device (and as of may 2022, only works in Chrome). However, periodic sync is normally not a crucial feature, but quite nice to have as it can keep the offline database up-to-date before user starts interacting with the app. 
+Periodic sync makes it possible to pull remote changes from a server even when the app is not open. Think weather app... You take up your phone and click the weather app and get an up-to-date weather report despite being offline! This is because you were online 2 hours ago while walking with the phone in your pocket and periodic sync kicked in and did a pull sync from the server, retrieving a recent weather report prepared for you.
+
+Periodic sync registration will only be active when the PWA is actually installed on the user device (and as of October 2023, only works in Chrome, Edge, Opera and possibly in Ionic or Capacitor based installations). However, periodic sync is normally not a crucial feature, but quite nice to have as it can keep the offline database up-to-date before user starts interacting with the app.
 
 #### Dexie Cloud without Sevice Worker
+
 Service Worker enables Background Sync and Periodic Sync (and a bunch of other features not covered here). But life is not so hard without it anyway. Dexie Cloud works very well without a service worker. As long as the application is open and the user is active, it will keep a bidirectional eager sync connection to the server. Any change on the client will eagerly sync to server and any change on the server will be eagerly sent to the client over its websocket connection. The only downside with not using service worker is that it will only sync while application is open and never be able to sync in the background when the app is closed and phone is in your pocket.
 
 #### Enable Service Worker With plain JS
@@ -118,6 +126,12 @@ Also, in `index.jsx` / `index.tsx`, change the line `serviceWorkerRegistration.u
 #### Only for Production Builds
 
 Service workers are great for production but can be confusing while developing and debugging an application - specifically because they do not update unless you close down all instances of your application and reopen it. If you used create-react-app to generate the service worker, it will automatically turn off service worker when starting the dev version of your app but activates it in its production build.
+
+### customLoginGui
+
+Enable this option and subscribe to [db.cloud.userInteraction](db.cloud.userInteraction) to provide your own user interface for the built-in OTP authentication. Enabling this option will silence the built-in GUI of login dialogs and instead allow you to render a component that displays your preferred style of login dialogs.
+
+If you rather want to replace the authentication solution from email OTP to your own or a 3rd part solution, see [Example: Integrate Custom Authentication](#example-integrate-custom-authentication)
 
 ### nameSuffix
 

@@ -6,7 +6,7 @@ title: "DexieCloudOptions"
 Interface used as argument to [db.cloud.configure()](db.cloud.configure()) and available as a readonly property on [db.cloud.options](dexie-cloud-addon#properties)
 
 ```ts
-interface DexieCloudOptions {
+export interface DexieCloudOptions {
   // URL to a database created with `npx dexie-cloud create`
   databaseUrl: string;
 
@@ -43,8 +43,11 @@ interface DexieCloudOptions {
   // without a suffix.
   nameSuffix?: boolean;
 
-  // Disable websocket connection
+  // Disable websocket connection - don't listen to remote changes - effectively disabling eager sync from remote to local.
   disableWebSocket?: boolean;
+
+  // Disable eager sync from local to remote
+  disableEagerSync?: boolean;
 
   // Provides a custom way of fetching the JWT tokens. This option
   // can be used when integrating with custom authentication.

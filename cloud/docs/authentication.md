@@ -16,7 +16,7 @@ If you are new to Dexie Cloud, please visit the [Dexie Cloud landing page](/clou
 If you prefer to jump right in to samples, here some shortcuts:
 
 - [Example zero config setup](#zero-config-setup)
-- [Customizing login GUI](#custom-auth-gui)
+- [Example customizing login GUI](#customizing-login-gui)
 - [Example auth integration](db.cloud.configure()#example-integrate-custom-authentication)
 
 ## Introduction

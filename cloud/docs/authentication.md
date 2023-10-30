@@ -33,7 +33,7 @@ If you just enable dexie-cloud-addon the way it is explained on [the landing pag
 
 If nothing is configured, dexie-cloud-addon will provide a default login GUI when a login is required. If you don't need to replace the default OTP authentication but still need to control the GUI of the default OTP solution, it can be customized by as follows:
 
-1. Configure it to disable built-in GUI: `db.cloud.configure({customLoginGUI: true})`
+1. Configure it to disable built-in GUI: `db.cloud.configure({customLoginGui: true})`
 2. Observe `db.cloud.userInteraction` and show a dialog that corresponds to what it requests.
 
 Here's an example based on dexie-cloud-addon@4.0.1-beta.52 or later.

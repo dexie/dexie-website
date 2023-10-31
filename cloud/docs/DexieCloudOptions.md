@@ -3,7 +3,7 @@ layout: docs-dexie-cloud
 title: "DexieCloudOptions"
 ---
 
-Interface used as argument to [db.cloud.configure()](db.cloud.configure()) and available as a readonly property on [db.cloud.options](dexie-cloud-addon#properties)
+Interface used as argument to [db.cloud.configure()#options](db.cloud.configure()#options) and available as a readonly property on [db.cloud.options](dexie-cloud-addon#properties)
 
 ```ts
 export interface DexieCloudOptions {

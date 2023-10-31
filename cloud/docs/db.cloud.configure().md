@@ -45,7 +45,7 @@ db.cloud.configure({
 
 The call to db.cloud.configure() must be done before any requests are put on the `db` (the Dexie instance) so that the database knows what to do when before opening it the first time.
 
-## Parameters
+## Options
 
 | Parameter   | Type     | Explanation                                        |
 | ----------- | -------- | -------------------------------------------------- |
@@ -82,7 +82,7 @@ Dexie Cloud takes advantage of Service Worker Background Sync. It makes it possi
 
 #### Periodic Sync
 
-Periodic Sync is also a service worker feature and can be configured with a minimum requested interval (see [these docs from the specification](https://github.com/WICG/background-sync/blob/main/explainers/periodicsync-explainer.md#timing-of-periodic-sync-tasks)). If the `periodicSync` option is specified to `db.cloud.configure()` it will be passed to the background-sync configruation for the service worker.
+Periodic Sync is also a service worker feature and can be configured with a minimum requested interval (see [these docs from the specification](https://github.com/WICG/background-sync/blob/main/explainers/periodicsync-explainer.md#timing-of-periodic-sync-tasks)). If the `periodicSync` option is specified in `db.cloud.configure()`, it will be passed to the background-sync configuration for the service worker.
 
 Periodic sync makes it possible to pull remote changes from a server even when the app is not open. Think weather app... You take up your phone and click the weather app and get an up-to-date weather report despite being offline! This is because you were online 2 hours ago while walking with the phone in your pocket and periodic sync kicked in and did a pull sync from the server, retrieving a recent weather report prepared for you.
 

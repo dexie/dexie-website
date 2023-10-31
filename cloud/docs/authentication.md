@@ -205,7 +205,9 @@ After this initial step, user does not need to reauthenticate for months unless 
 
 ## Encrypting your offline data
 
-For more sensitive applications, instead of limiting the session timeout (which by design should be long for offline first apps), your app could choose to encrypt sensitive data and require a password from your user for decryption. There are two dexie compatible open source libraries that adds encryption to Dexie: [dexie-encrypted](https://github.com/mark43/dexie-encrypted) and [dexie-easy-encrypt](https://github.com/jaetask/dexie-easy-encrypt). By encrypting the sensisitve parts of the offline data you protect the data much better than short session timeouts, that would require resync more often.
+For more sensitive applications, instead of limiting the session timeout (which by design should be long for offline first apps), your app could choose to encrypt sensitive data and require a password from your user for decryption. There are two dexie compatible open source libraries that adds encryption to Dexie: [dexie-encrypted](https://github.com/mark43/dexie-encrypted) with the steps described in [this issue comment](https://github.com/dexie/Dexie.js/issues/1604#issuecomment-1237065115) and [dexie-easy-encrypt](https://github.com/jaetask/dexie-easy-encrypt). By encrypting the sensisitve parts of the offline data you protect the data much better than short session timeouts, that would require resync more often.
+
+Dexie Cloud will focus on making encryption easier to integrate going forward, with built-in support for local offline authentication, but if you need a working solution today, I would recommend the solution with dexie-encrypted as described above and provide some custom way of deriving an encryption key from a user password or similar. If you could wait with encryption until we have a more integrated solution, that might be even better as your encrypted data might need to be migrated if you later on decide to switch encryption solution.
 
 ## Replace authentication with custom authentication
 

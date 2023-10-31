@@ -5,7 +5,7 @@ title: "Dexie Cloud API"
 
 ### Client side (JS / TS)
 
-See [dexie-cloud-addon#api](dexie-cloud-addon#api)
+See [dexie-cloud-addon](dexie-cloud-addon)
 
 ### REST
 

@@ -58,11 +58,11 @@ import styled from 'styled-components';
  *       may be present in any type of dialog.
  *     * ui.fields = input fields to collect from user. This is an object where key is the field name and
  *       value is a field description (DXCInputField)
- *     * submitLabel = A suggested text for the submit / OK button
- *     * cancelLabel = undefined if no cancel button is appropriate, or a suggested text for the cancel button.
- *     * onSubmit = callback to call when fields have been collected from user. Accepts an object where
+ *     * ui.submitLabel = A suggested text for the submit / OK button
+ *     * ui.cancelLabel = undefined if no cancel button is appropriate, or a suggested text for the cancel button.
+ *     * ui.onSubmit = callback to call when fields have been collected from user. Accepts an object where
  *       key is the field name and value is the collected value.
- *     * onCancel = callback to call if user clicks cancel button.
+ *     * ui.onCancel = callback to call if user clicks cancel button.
  */
 export function MyLoginGUI() {
   const ui = useObservable(db.cloud.userInteraction);

@@ -129,7 +129,7 @@ Service workers are great for production but can be confusing while developing a
 
 ### customLoginGui
 
-Enable this option and subscribe to [db.cloud.userInteraction](db.cloud.userInteraction) to provide your own user interface for the built-in OTP authentication. Enabling this option will silence the built-in GUI of login dialogs and instead allow you to render a component that displays your preferred style of login dialogs.
+Enable this option and subscribe to [db.cloud.userInteraction](db.cloud.userInteraction) to provide your own user interface for the built-in OTP authentication. Enabling this option will silence the built-in GUI of login dialogs and instead allow you to render a component that displays your preferred style of login dialogs. See [this react example](/cloud/docs/authentication#customizing-login-gui) on how to implement custom login GUI. 
 
 If you rather want to replace the authentication solution from email OTP to your own or a 3rd part solution, see [Example: Integrate Custom Authentication](#example-integrate-custom-authentication)
 

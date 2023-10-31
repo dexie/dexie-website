@@ -417,7 +417,7 @@ db.version(1).stores({
 
 However, Dexie Cloud don't care about secondary indexes (so far) - the only information that Dexie Cloud server needs is the name of the primary key, and whether it is marked with an '@' sign or not.
 
-Just list in Dexie, omitting a table doesn't mean deleting it. Explicitly set it to null in order to delete a table. A deleted table in the cloud does not delete its content - it is possible to bring the data back. In order to reset a table or database completely, 
+Just like in the client-side dexie schema, omitting a table doesn't mean deleting it. Explicitly set it to null in order to delete a table. A deleted table in the cloud does not delete its content - it is possible to bring the data back. In order to reset a table or database completely, 
 use `npx dexie-cloud reset` command (not implemented yet).
 
 ## export
@@ -430,14 +430,14 @@ The export format is the same as the import format.
 
 ### Options
 
-| Option    | Type   | Meaning                           |
-| --------- | ------ | --------------------------------- |
-| schema    | flag   | Only export "schema" and "sealed" |
-| data      | flag   | Only export "data"                |
-| roles     | flag   | Only export "roles"               |
-| demoUsers | flag   | Only export "demoUsers"           |
-| realmId   | string | Only export data in given realmId |
-| table     | string | Only export data in given table   |
+| Option        | Type   | Meaning                           |
+| ------------- | ------ | --------------------------------- |
+| `--schema`    | flag   | Only export "schema" and "sealed" |
+| `--data`      | flag   | Only export "data"                |
+| `--roles`     | flag   | Only export "roles"               |
+| `--demoUsers` | flag   | Only export "demoUsers"           |
+| `--realmId`   | string | Only export data in given realmId |
+| `--table`     | string | Only export data in given table   |
 
 Note: Re-importing export files is always possible to do, no matter if they are partial or not, as the import command is additive only, except for objects that are explicitly set to null.
 
@@ -452,6 +452,14 @@ Then edit roles.json, and:
 ```
 npx dexie-cloud import roles.json
 ```
+
+Options of type string are passed as follows:
+
+```
+npx dexie-cloud export --data --realmId "rlm-public" publicData.json
+npx dexie-cloud export --data --realmId "rlm-public" --table "products" publicProducts.json
+```
+
 
 ## add-replica
 

@@ -1,15 +1,21 @@
 ---
 layout: docs-dexie-cloud
-title: "UserLogin"
+title: 'UserLogin'
 ---
 
 ```ts
 export interface UserLogin {
-  userId: string;
+  userId?: string;
   name?: string;
   email?: string;
   claims: {
     [claimName: string]: any;
+  };
+  license?: {
+    type: 'demo' | 'eval' | 'prod' | 'client';
+    status: 'ok' | 'expired' | 'deactivated';
+    validUntil?: Date;
+    evalDaysLeft?: number;
   };
   lastLogin: Date;
   accessToken?: string;

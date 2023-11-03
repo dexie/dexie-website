@@ -4,21 +4,13 @@ title: "SyncState"
 ---
 
 ```ts
-
 export interface SyncState {
   status: SyncStatus;
   phase: SyncStatePhase;
   progress?: number; // 0..100
   error?: Error; // If phase === "error"
+  license?: "ok" | "expired" | "deactivated";
 }
-
-export type SyncStatus =
-  | "not-started"
-  | "connecting"
-  | "connected"
-  | "disconnected"
-  | "error"
-  | "offline";
 
 export type SyncStatePhase =
   | "initial"
@@ -29,4 +21,11 @@ export type SyncStatePhase =
   | "error"
   | "offline";
 
+export type SyncStatus =
+  | "not-started"
+  | "connecting"
+  | "connected"
+  | "disconnected"
+  | "error"
+  | "offline";
 ```

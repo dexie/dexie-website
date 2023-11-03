@@ -26,7 +26,7 @@ function MyComponent() {
 
 ### Example (Svelte)
 
-```html
+```svelte
 <script>
   import { db } from "./db.js";
 
@@ -58,5 +58,8 @@ db.version(1).stores({
 db.cloud.configure({
   databaseUrl: "https://xxxxxx.dexie.cloud",
 });
-
 ```
+
+## See Also
+
+[db.cloud.currentUserId](db.cloud.currentUserId)

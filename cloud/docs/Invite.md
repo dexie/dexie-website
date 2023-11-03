@@ -5,6 +5,8 @@ title: "Invite"
 
 Represents an invite for current user to join a realm. This object is obtained by subscribing to the [db.cloud.invites](dexie-cloud-addon#properties) observable.
 
+An invite is member from the [members](db.members) table with attached properties `realm`, `accept()` and `reject()` properties. `realm` is a lookup from member.realmId to the actual realm object. `accept()` and `reject()` are methods / callbacks that can be used to accept or reject the realm. A user will only get the desired access after accepting the invite.
+
 ```ts
 export interface Invite {
   id: string;
@@ -25,11 +27,23 @@ export interface Invite {
     name: string; // Name of the realm
     represents: string; // A short explainer what this realm represents, such as "a to-do list", "a project", etc.
     owner: string; // UserID of Realm owner
-    permissions: DBPermissionSet // Current permissions in the realm (before accepting invite)
-  },
+    permissions: DBPermissionSet; // Current permissions in the realm (before accepting invite)
+  };
   accept: () => Promise<void>; // Callback to accept this invite
   reject: () => Promise<void>; // Callback to reject this invite
 }
 ```
 
-See also [DBPermissionSet](DBPermissionSet)
+## See also
+
+[DBPermissionSet](DBPermissionSet)
+
+[Role](Role)
+
+[Realm](Realm)
+
+[db.cloud.invites](db.cloud.invites)
+
+[db.members](db.members)
+
+[Access Control in Dexie Cloud](access-control)

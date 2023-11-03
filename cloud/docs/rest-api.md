@@ -9,18 +9,11 @@ This page documents the REST API that every database in Dexie Cloud has.
 
 ## Endpoints
 
-| [/authorize](#authorize) | Authorize endpoint |
 | [/token](#token) | Token endpoint |
 | [/all/...](#all-endpoint) | All data endpoint |
 | [/my/...](#my-endpoint) | My data endpoint |
 | [/public/...](#public-endpoint) | Public data endpoint |
-
-### /authorize
-
-This endpoint authenticates the user using passwordless email OTP.
-
-| Method | GET |
-| Parameters | redirect_uri, state?, nonce, name?, email? |
+| [/users/...](#users-endpoint) | Users data endpoint |
 
 ### /token
 
@@ -53,6 +46,11 @@ A client must be given the "IMPERSONATE" scope in order to call this endpoint.
 #### scopes
 
 If you use the endpoint to give out tokens for web users, the "ACCESS_DB" scope is the only one to use. If you however, need to generate a token for a server application to use the "/all/..." endpoint, you might want to request a "GLOBAL_READ" or "GLOBAL_WRITE" scope depending on whether the integration should be allowed to read or write to the database within any realm.
+
+#### See Also
+
+- [Tokens](authentication#tokens)
+- [Example auth integration](<db.cloud.configure()#example-integrate-custom-authentication>)
 
 ### /all/... endpoint
 
@@ -214,7 +212,235 @@ Content-Type: application/json
 
 _Deleting personal data does not require GLOBAL_WRITE scope but will fail to delete data where user does not have permissions to do so within the realm the object belongs to._
 
-## See Also
+### /users endpoint
 
-- [Tokens](authentication#tokens)
-- [Example auth integration](<db.cloud.configure()#example-integrate-custom-authentication>)
+The /users endpoint can be used to list, get, update and delete application users from your database. You can use the API to upgrade users from evaluation accounts to production accounts or vice versa. This API does supports sorting and paging results.
+
+#### Get Many Users
+
+**Request:**
+
+```http
+GET /users?<query parameters> HTTP/1.1
+Authorization: Bearer <token from /token endpoint (with GLOBAL_READ scope)>
+```
+
+**Query Parameters:**
+
+| Param                   | description                               |
+| ----------------------- | ----------------------------------------- |
+| `search=<searchText>`   | Fuzzy part of userId, email or name       |
+| `active=true`           | Only return active users                  |
+| `active=false`          | Only return inactive users                |
+| `type=eval`             | Only return evaluation users              |
+| `type=prod`             | Only return production users              |
+| `type=demo`             | Only return demo users                    |
+| `sort=created`          | Sort by creation date                     |
+| `sort=validUntil`       | Sort by validUntil date                   |
+| `sort=updated`          | Sort by updated date property             |
+| `sort=evalDaysLeft`     | Sort by evalDaysLeft property             |
+| `sort=lastLogin`        | Sort by lastLogin property                |
+| `sort=userId`           | Sort by userId property                   |
+| `sort=type`             | Sort by type property                     |
+| `sort=displayName`      | Sort by displayName property              |
+| `desc`                  | Sort descending                           |
+| `desc=true`             | Sort descending                           |
+| `desc=false`            | Sort ascending (default)                  |
+| `limit=N`               | Max number of result users (default 1000) |
+| `pagingKey=<pagingKey>` | The pagingKey prop from last result       |
+
+**JSON Response Format:**
+
+```ts
+{
+  "data": DBUserJsonModel[],
+  "hasMore": boolean, // true if more than "limit" results where available
+  "pagingKey"?: string // The pagingKey to use in next request to get more results
+}
+
+interface DBUserJsonModel {
+  readonly userId: string;
+  readonly created: ISODateTimeString;
+  readonly updated: ISODateTimeString;
+  readonly lastLogin?: ISODateTimeString | null;
+  type: 'eval' | 'prod' | 'demo';
+  validUntil?: ISODateTimeString;
+  evalDaysLeft?: number;
+  readonly maxAllowedEvalDaysLeft: number
+  deactivated?: ISODateTimeString;
+  data: {
+    displayName?: string;
+    email?: string;
+    [key: string]: any;
+  };
+}
+```
+
+**HTTP Example listing users:**
+
+```http
+GET /users?sort=userId&limit=2 HTTP/1.1
+Authorization: Bearer XXX...
+
+HTTP/1.1 200 Ok
+Content-Type: application/json
+
+{
+  "data": [
+    {
+      "created": "2023-10-27T22:10:29.922Z",
+      "data": null,
+      "deactivated": null,
+      "evalDaysLeft": 0,
+      "lastLogin": "2023-10-31T08:22:56.816Z",
+      "maxAllowedEvalDaysLeft": 0,
+      "type": "demo",
+      "updated": "2023-10-27T22:10:29.922Z",
+      "userId": "alice@demo.local"
+    },
+    {
+      "created": "2023-10-30T13:45:24.993Z",
+      "data": {
+        "email": "david@dexie.org",
+        "displayName": "David Fahlander"
+      },
+      "deactivated": null,
+      "evalDaysLeft": 30,
+      "lastLogin": "2023-10-30T14:45:04.051Z",
+      "maxAllowedEvalDaysLeft": 30,
+      "type": "eval",
+      "updated": "2023-10-30T13:45:24.981Z",
+      "userId": "david@dexie.org"
+    }
+  ],
+  "hasMore": true,
+  "pagingKey": "WyJhbGljZUBkZW1vLmxvY2FsIiwiYWxpY2VAZGVtby5sb2NhbCJd"
+}
+```
+
+**Paging:**
+
+When `hasMore` is `true`, there will always be a `pagingKey`. To retrieve next page of data, just repeat the exact same request but with given `pagingKey` added in a query parameter:
+
+```http
+GET /users?sort=userId&limit=2&pagingKey=WyJhbGljZUBkZW1vLmxvY2FsIiwiYWxpY2VAZGVtby5sb2NhbCJd HTTP/1.1
+Authorization: Bearer XXX...
+```
+
+#### Get Single User
+
+```http
+GET /users/<userId> HTTP/1.1
+Authorization: Bearer <token from /token endpoint>
+```
+
+**JSON Reponse format:**
+The JSON format will be the plain user data.
+
+**HTTP Example retrieving single user:**
+
+```http
+GET /users/alice@demo.local HTTP/1.1
+Authorization: Bearer XXX...
+
+HTTP/1.1 200 Ok
+Content-Type: application/json
+
+{
+   "created" : "2023-10-27T22:10:29.922Z",
+   "data" : null,
+   "deactivated" : null,
+   "evalDaysLeft" : 0,
+   "lastLogin" : "2023-10-31T08:22:56.816Z",
+   "maxAllowedEvalDaysLeft" : 0,
+   "type" : "demo",
+   "updated" : "2023-10-27T22:10:29.922Z",
+   "userId" : "alice@demo.local"
+}
+```
+
+#### Create users
+
+To create one or several users, do a POST request against /users endpoint with Content-Type: application/json. The JSON data must be an array of users. Each user in the array must at least have the "userId" and the "type" properties set. Optionally, supply the properties "validUntil", "evalDaysLeft", "deactivated" and "data" properties. This API is picky about unsupported properties and will fail if any unsupported or unauthorized property was present in the provided users. The only fuzzy part of a user is the data property that can contain arbritary sub properties.
+
+```http
+POST /users HTTP/1.1
+Authorization: Bearer XXX...
+Content-Type: application/json
+
+[
+  {
+    "userId": "david@dexie.org",
+    "type": "eval",
+    "evalDaysLeft": 30,
+    "data": {
+      "email": "david@dexie.org",
+    }
+  }
+]
+```
+
+#### Update users
+
+To update one or several users, do a POST request against /users endpoint with Content-Type: application/json. The JSON data must be an array of change objects. Each entry in the array does only need to specify the userId property along with the properties to update. This API is picky about unsupported properties and will fail if any unsupported or unauthorized property was present in the change objects. The only fuzzy part of a user is the data property that can contain arbritary sub properties.
+
+**_Updateable user properties:_**
+
+- type
+- validUntil
+- evalDaysLeft
+- deactivated
+- data
+
+```http
+POST /users HTTP/1.1
+Authorization: Bearer XXX...
+Content-Type: application/json
+
+[
+  {
+    "userId": "david@dexie.org",
+    "type": "prod",
+    "data": {
+      "email": "david@dexie.org",
+      "displayName": "David Fahlander"
+    }
+  }
+]
+```
+
+#### Delete user
+
+```http
+DELETE /users/<userId>
+Authorization: Bearer XXX...
+```
+
+To delete any other user than your own account, you need the GLOBAL_WRITE scope in your Bearer token. Any user have the permission to delete themselves. The permission to delete own user is for GDPR compliance.
+
+Deleting a user will make the system erase everything associated with the user including private data that the user has created. If the user has shared data with other users, the user will be removed from the realm in question but the data will be kept and stay available for the other users.
+
+If a deleted user was the only user with full permissions in a realm, we would end up with a realm that no one would have permissions to manage or delete. If that situation occurs, all other members of the realm will gain full control over it s that they will have the possibility to delete it or take ownership of it.
+
+Evaluation users might extend their evaluation by deleting their own user (along with the associated data) in order to re-register and start a new evaluation period.
+
+**NOTE!**
+
+DELETING A USER IS A DESTRUCTIVE OPERATION AND WILL IMPLY DATA DELETION OF ALL DATA THAT WAS PRIVATE FOR THAT USER! Consider deactivating a user rather than deleting it.
+
+#### Deactivate User
+
+Deactivating a user is a soft delete. No data associated with the user will be deleted and the user may be reactivated later on.
+
+```http
+POST /users HTTP/1.1
+Authorization: Bearer XXX...
+Content-Type: application/json
+
+[
+  {
+    "userId": "david@dexie.org",
+    "deactivated": true
+  }
+]
+```

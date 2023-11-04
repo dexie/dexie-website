@@ -216,7 +216,7 @@ _Deleting personal data does not require GLOBAL_WRITE scope but will fail to del
 
 The /users endpoint can be used to list, get, update and delete application users from your database. You can use the API to upgrade users from evaluation accounts to production accounts or vice versa. This API does supports sorting and paging results.
 
-#### Get Many Users
+#### List users
 
 **Request:**
 

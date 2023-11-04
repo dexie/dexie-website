@@ -58,6 +58,7 @@ If you use the endpoint to give out tokens for web users, the "ACCESS_DB" scope 
 
 ```http
 GET /all/<table> HTTP/1.1
+Host: xxxx.dexie.cloud
 Authorization: Bearer <token from /token endpoint (with GLOBAL_READ scope)>
 ```
 
@@ -65,6 +66,7 @@ Authorization: Bearer <token from /token endpoint (with GLOBAL_READ scope)>
 
 ```http
 GET /all/<table>?realmId=<realmId> HTTP/1.1
+Host: xxxx.dexie.cloud
 Authorization: Bearer <token from /token endpoint (with GLOBAL_READ scope)>
 ```
 
@@ -72,6 +74,7 @@ Authorization: Bearer <token from /token endpoint (with GLOBAL_READ scope)>
 
 ```http
 GET /all/<table>?<propName>=<propValue>&<propName2>=<propValue2>&... HTTP/1.1
+Host: xxxx.dexie.cloud
 Authorization: Bearer <token from /token endpoint (with GLOBAL_READ scope)>
 ```
 
@@ -79,6 +82,7 @@ This request will filter the query to only return matching objects. A concrete e
 
 ```http
 GET /all/todoItems?todoListId=xxx HTTP/1.1
+Host: xxxx.dexie.cloud
 Authorization: Bearer <token from /token endpoint (with GLOBAL_READ scope)>
 ```
 
@@ -88,6 +92,7 @@ _This example would give you all todoItems that has the property todoListId set 
 
 ```http
 GET /all/<table>/<primary key> HTTP/1.1
+Host: xxxx.dexie.cloud
 Authorization: Bearer <token from /token endpoint (with GLOBAL_READ scope)>
 ```
 
@@ -97,6 +102,7 @@ The /my/... endpoint works exactly like the /all/... endpoint, except that it do
 
 ```http
 GET /my/<table> HTTP/1.1
+Host: xxxx.dexie.cloud
 Authorization: Bearer <token from /token endpoint (with ACCESS_DB scope)>
 ```
 
@@ -106,6 +112,7 @@ The token to use should be given out to a certain subject (userId) with the "ACC
 
 ```http
 GET /my/todoLists HTTP/1.1
+Host: xxxx.dexie.cloud
 Authorization: Bearer <token from /token endpoint (with ACCESS_DB scope)>
 ```
 
@@ -142,6 +149,7 @@ If an object already exists with the given primary key, it will be replaced, oth
 
 ```http
 POST /all/<table> HTTP/1.1
+Host: xxxx.dexie.cloud
 Authorization: Bearer <token from /token endpoint (with GLOBAL_WRITE scope)>
 Content-Type: application/json
 
@@ -160,6 +168,7 @@ Content-Type: application/json
 
 ```http
 POST /my/<table> HTTP/1.1
+Host: xxxx.dexie.cloud
 Authorization: Bearer <token from /token endpoint (with ACCESS_DB scope and appropriate permissions if realmId is specified)>
 Content-Type: application/json
 
@@ -175,6 +184,7 @@ Content-Type: application/json
 
 ```http
 POST /all/<table> HTTP/1.1
+Host: xxxx.dexie.cloud
 Authorization: Bearer <token from /token endpoint (with GLOBAL_WRITE scope)>
 Content-Type: application/json
 
@@ -189,6 +199,7 @@ DELETE method deletes any object in given table that matches the given primary k
 
 ```http
 DELETE /all/<table>/<primaryKey> HTTP/1.1
+Host: xxxx.dexie.cloud
 Authorization: Bearer <token from /token endpoint (with GLOBAL_WRITE scope)>
 Content-Type: application/json
 
@@ -196,6 +207,7 @@ Content-Type: application/json
 
 ```http
 DELETE /public/<table>/<primaryKey> HTTP/1.1
+Host: xxxx.dexie.cloud
 Authorization: Bearer <token from /token endpoint (with GLOBAL_WRITE scope)>
 Content-Type: application/json
 
@@ -205,6 +217,7 @@ _The difference between `DELETE /all/<table>/id` and `DELETE /public/<table>/id`
 
 ```http
 DELETE /my/<table>/<primaryKey> HTTP/1.1
+Host: xxxx.dexie.cloud
 Authorization: Bearer <token from /token endpoint (with ACCESS_DB scope and appropriate permissions on the object)>
 Content-Type: application/json
 
@@ -222,6 +235,7 @@ The /users endpoint can be used to list, get, update and delete application user
 
 ```http
 GET /users?<query parameters> HTTP/1.1
+Host: xxxx.dexie.cloud
 Authorization: Bearer <token from /token endpoint (with GLOBAL_READ scope)>
 ```
 
@@ -280,6 +294,7 @@ interface DBUserJsonModel {
 
 ```http
 GET /users?sort=userId&limit=2 HTTP/1.1
+Host: xxxx.dexie.cloud
 Authorization: Bearer XXX...
 
 HTTP/1.1 200 Ok
@@ -324,6 +339,7 @@ When `hasMore` is `true`, there will always be a `pagingKey`. To retrieve next p
 
 ```http
 GET /users?sort=userId&limit=2&pagingKey=WyJhbGljZUBkZW1vLmxvY2FsIiwiYWxpY2VAZGVtby5sb2NhbCJd HTTP/1.1
+Host: xxxx.dexie.cloud
 Authorization: Bearer XXX...
 ```
 
@@ -341,6 +357,7 @@ The JSON format will be the plain user data.
 
 ```http
 GET /users/alice@demo.local HTTP/1.1
+Host: xxxx.dexie.cloud
 Authorization: Bearer XXX...
 
 HTTP/1.1 200 Ok
@@ -365,6 +382,7 @@ To create one or several users, do a POST request against /users endpoint with C
 
 ```http
 POST /users HTTP/1.1
+Host: xxxx.dexie.cloud
 Authorization: Bearer XXX...
 Content-Type: application/json
 
@@ -394,6 +412,7 @@ To update one or several users, do a POST request against /users endpoint with C
 
 ```http
 POST /users HTTP/1.1
+Host: xxxx.dexie.cloud
 Authorization: Bearer XXX...
 Content-Type: application/json
 
@@ -413,6 +432,7 @@ Content-Type: application/json
 
 ```http
 DELETE /users/<userId>
+Host: xxxx.dexie.cloud
 Authorization: Bearer XXX...
 ```
 
@@ -434,6 +454,7 @@ Deactivating a user is a soft delete. No data associated with the user will be d
 
 ```http
 POST /users HTTP/1.1
+Host: xxxx.dexie.cloud
 Authorization: Bearer XXX...
 Content-Type: application/json
 

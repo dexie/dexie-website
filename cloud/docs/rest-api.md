@@ -234,34 +234,42 @@ The /users endpoint can be used to list, get, update and delete application user
 **Request:**
 
 ```http
-GET /users?<query parameters> HTTP/1.1
+GET /users?<query> HTTP/1.1
 Host: xxxx.dexie.cloud
 Authorization: Bearer <token from /token endpoint (with GLOBAL_READ scope)>
 ```
 
+The query is optional and consists of a list of optional &amp;-separated key=value pairs (see below)
+
 **Query Parameters:**
 
-| Param                   | description                               |
-| ----------------------- | ----------------------------------------- |
-| `search=<searchText>`   | Fuzzy part of userId, email or name       |
-| `active=true`           | Only return active users                  |
-| `active=false`          | Only return inactive users                |
-| `type=eval`             | Only return evaluation users              |
-| `type=prod`             | Only return production users              |
-| `type=demo`             | Only return demo users                    |
-| `sort=created`          | Sort by creation date                     |
-| `sort=validUntil`       | Sort by validUntil date                   |
-| `sort=updated`          | Sort by updated date property             |
-| `sort=evalDaysLeft`     | Sort by evalDaysLeft property             |
-| `sort=lastLogin`        | Sort by lastLogin property                |
-| `sort=userId`           | Sort by userId property                   |
-| `sort=type`             | Sort by type property                     |
-| `sort=displayName`      | Sort by displayName property              |
-| `desc`                  | Sort descending                           |
-| `desc=true`             | Sort descending                           |
-| `desc=false`            | Sort ascending (default)                  |
-| `limit=N`               | Max number of result users (default 1000) |
-| `pagingKey=<pagingKey>` | The pagingKey prop from last result       |
+| Param                   | Description                           |
+| ----------------------- | ------------------------------------- |
+| `search=<searchText>`   | Fuzzy part of userId, email or name   |
+| `active=true`           | Only return active users              |
+| `active=false`          | Only return inactive users            |
+| `type=eval`             | Only return evaluation users          |
+| `type=prod`             | Only return production users          |
+| `type=demo`             | Only return demo users                |
+| `sort=created`          | Sort by creation date                 |
+| `sort=validUntil`       | Sort by validUntil date               |
+| `sort=updated`          | Sort by updated date property         |
+| `sort=evalDaysLeft`     | Sort by evalDaysLeft property         |
+| `sort=lastLogin`        | Sort by lastLogin property            |
+| `sort=userId`           | Sort by userId property               |
+| `sort=type`             | Sort by type property                 |
+| `sort=displayName`      | Sort by displayName property          |
+| `desc`                  | Sort descending                       |
+| `desc=true`             | Sort descending                       |
+| `desc=false`            | Sort ascending (default)              |
+| `limit=N`               | Max number of result users (max 1000) |
+| `pagingKey=<pagingKey>` | The pagingKey prop from last result   |
+
+| Default query parameters | Description                                                  |
+| ------------------------ | ------------------------------------------------------------ |
+| `sort=userId`            | Sort by userId                                               |
+| `desc=false`             | Sort ascending                                               |
+| `limit=1000`             | Max 1000 users in result (use pagingKey to get more results) |
 
 **JSON Response Format:**
 
@@ -375,6 +383,10 @@ Content-Type: application/json
    "userId" : "alice@demo.local"
 }
 ```
+
+#### userId vs email
+
+In all these samples, userId is the same as email. This is true when using the built-in OTP authentication that sends OTP to email address to authenticate a user. However, custom authentication solution might separate these two and that is the reason we have them separated in our models.
 
 #### Create users
 

@@ -314,9 +314,7 @@ Content-Type: application/json
       "created": "2023-10-27T22:10:29.922Z",
       "data": null,
       "deactivated": null,
-      "evalDaysLeft": 0,
       "lastLogin": "2023-10-31T08:22:56.816Z",
-      "maxAllowedEvalDaysLeft": 0,
       "type": "demo",
       "updated": "2023-10-27T22:10:29.922Z",
       "userId": "alice@demo.local"

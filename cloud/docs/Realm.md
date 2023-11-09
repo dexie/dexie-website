@@ -1,6 +1,6 @@
 ---
 layout: docs-dexie-cloud
-title: "Member"
+title: 'Realm'
 ---
 
 Object interface for [db.realms](db.realms) table.

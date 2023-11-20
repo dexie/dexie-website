@@ -47,6 +47,42 @@ A client must be given the "IMPERSONATE" scope in order to call this endpoint.
 
 If you use the endpoint to give out tokens for web users, the "ACCESS_DB" scope is the only one to use. If you however, need to generate a token for a server application to use the "/all/..." endpoint, you might want to request a "GLOBAL_READ" or "GLOBAL_WRITE" scope depending on whether the integration should be allowed to read or write to the database within any realm.
 
+#### Response
+
+The response body from POST /token can be described by the following interface:
+
+```ts
+export interface TokenFinalResponse {
+  type: 'tokens';
+  claims: {
+    sub: string;
+    license?: 'ok' | 'expired' | 'deactivated';
+    [claimName: string]: any;
+  };
+  accessToken: string;
+  accessTokenExpiration: number;
+  refreshToken?: string;
+  refreshTokenExpiration?: number | null;
+  userType: 'demo' | 'eval' | 'prod' | 'client';
+  evalDaysLeft?: number;
+  userValidUntil?: number;
+  alerts?: {
+    type: 'warning' | 'info';
+    messageCode: string;
+    message: string;
+    messageParams?: { [param: string]: string };
+  }[];
+}
+```
+
+To use this response in the other REST requests, make sure to include an "Authorization" header with the accessToken provided as such
+
+```js
+`Authorization: Bearer ${tokenResponse.accessToken}`;
+```
+
+The token is valid in one hour from the time it was requested.
+
 #### See Also
 
 - [Tokens](authentication#tokens)

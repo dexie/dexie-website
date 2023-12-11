@@ -15,10 +15,10 @@ In version 3.2 we've introduced **live queries** - queries that observe the resu
 If a change is made (by the app itself or from an external tab or worker), a binary range tree algorithm will efficiently detect whether those changes would affect your queries and if so, re-execute your callback and re-render component.
 [Here's a simple ToDo app example that demonstrates it](https://dexie-todo-list.stackblitz.io).
 
-[useLiveQuery()](/docs/dexie-react-hooks/useLiveQuery()) can be explained like this: **It observes the result of a promise-returning function that queries Dexie** *(In contrast to just execute it imperatively)*.
+[useLiveQuery()](</docs/dexie-react-hooks/useLiveQuery()>) can be explained like this: **It observes the result of a promise-returning function that queries Dexie** _(In contrast to just execute it imperatively)_.
 It is highly composable as you can call other functions that queries dexie and compute a result based on their outcome.
 Maybe you already have some functions you wrote long time ago.
-Calling them from within the scope of the callback passed to [useLiveQuery()](/docs/dexie-react-hooks/useLiveQuery()) will turn your imperative async functions into an observable query.
+Calling them from within the scope of the callback passed to [useLiveQuery()](</docs/dexie-react-hooks/useLiveQuery()>) will turn your imperative async functions into an observable query.
 
 # 1. Create a React project
 
@@ -33,6 +33,7 @@ For the impatient one, use [CodeSandbox](https://codesandbox.io) to create a Rea
 # 2. Install dependencies
 
 #### yarn
+
 ```
 yarn add dexie
 yarn add dexie-react-hooks
@@ -61,9 +62,8 @@ import Dexie from 'dexie';
 
 export const db = new Dexie('myDatabase');
 db.version(1).stores({
-  friends: '++id, name, age', // Primary key and indexed props
+  friends: '++id, name, age' // Primary key and indexed props
 });
-
 ```
 
 ### Using Typescript?
@@ -83,7 +83,7 @@ export interface Friend {
 export class MySubClassedDexie extends Dexie {
   // 'friends' is added by dexie when declaring the stores()
   // We just tell the typing system this is the case
-  friends!: Table<Friend>; 
+  friends!: Table<Friend>;
 
   constructor() {
     super('myDatabase');
@@ -94,22 +94,20 @@ export class MySubClassedDexie extends Dexie {
 }
 
 export const db = new MySubClassedDexie();
-
 ```
 
 # 4. Create a component that adds some data
 
-Writing to the database can be done using [Table.add()](/docs/Table/Table.add()), [Table.put()](/docs/Table/Table.put()), [Table.update()](/docs/Table/Table.update()) and [Collection.modify()](/docs/Collection/Collection.modify()) - see Dexie's [quick reference](/docs/API-Reference#add-items) for examples. Here we're gonna create a simple React component that allows the user to add friends into the database using [Table.add()](/docs/Table/Table.add()).
+Writing to the database can be done using [Table.add()](</docs/Table/Table.add()>), [Table.put()](</docs/Table/Table.put()>), [Table.update()](</docs/Table/Table.update()>) and [Collection.modify()](</docs/Collection/Collection.modify()>) - see Dexie's [quick reference](/docs/API-Reference#add-items) for examples. Here we're gonna create a simple React component that allows the user to add friends into the database using [Table.add()](</docs/Table/Table.add()>).
 
 ```tsx
-export function AddFriendForm({defaultAge} = {defaultAge: 21}) {
-  const [name, setName] = useState("");
+export function AddFriendForm({ defaultAge } = { defaultAge: 21 }) {
+  const [name, setName] = useState('');
   const [age, setAge] = useState(defaultAge);
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState('');
 
   async function addFriend() {
     try {
-
       // Add the new friend!
       const id = await db.friends.add({
         name,
@@ -117,34 +115,31 @@ export function AddFriendForm({defaultAge} = {defaultAge: 21}) {
       });
 
       setStatus(`Friend ${name} successfully added. Got id ${id}`);
-      setName("");
+      setName('');
       setAge(defaultAge);
     } catch (error) {
       setStatus(`Failed to add ${name}: ${error}`);
     }
   }
 
-  return <>
-    <p>
-      {status}
-    </p>
-    Name:
-    <input
-      type="text"
-      value={name}
-      onChange={ev => setName(ev.target.value)}
-    />
-    Age:
-    <input
-      type="number"
-      value={age}
-      onChange={ev => setAge(Number(ev.target.value))}
-    />
-    
-    <button onClick={addFriend}>
-      Add
-    </button>
-  </>
+  return (
+    <>
+      <p>{status}</p>
+      Name:
+      <input
+        type="text"
+        value={name}
+        onChange={(ev) => setName(ev.target.value)}
+      />
+      Age:
+      <input
+        type="number"
+        value={age}
+        onChange={(ev) => setAge(Number(ev.target.value))}
+      />
+      <button onClick={addFriend}>Add</button>
+    </>
+  );
 }
 ```
 
@@ -154,24 +149,26 @@ Write a simple component that just renders all friends in the database.
 
 ```tsx
 export function FriendList() {
-  const friends = useLiveQuery(
-    () => db.friends.toArray()
-  );
+  const friends = useLiveQuery(() => db.friends.toArray());
 
-  return <ul>
-    {friends?.map(friend => <li key={friend.id}>
-      {friend.name}, {friend.age}
-    </li>)}
-  </ul>;
+  return (
+    <ul>
+      {friends?.map((friend) => (
+        <li key={friend.id}>
+          {friend.name}, {friend.age}
+        </li>
+      ))}
+    </ul>
+  );
 }
 ```
-*To make more detailed queries, refer to Dexie's [quick reference for querying items](/docs/API-Reference#query-items).*
+
+_To make more detailed queries, refer to Dexie's [quick reference for querying items](/docs/API-Reference#query-items)._
 
 Notice two things here:
 
-1. The function passed to [useLiveQuery()](/docs/dexie-react-hooks/useLiveQuery()) queries dexie for all friends.
+1. The function passed to [useLiveQuery()](</docs/dexie-react-hooks/useLiveQuery()>) queries dexie for all friends.
 2. The result will be undefined momentarily before the very initial result arrives - which explains why we refer it as `friends?` rather than `friends`.
-
 
 # 6. Pass some query params
 
@@ -179,7 +176,7 @@ Let's improve the FriendList component and allow a parent component to pass some
 This time let's also use async / await (for pedagogical reasons only - it makes it simple to extend the function to do more queries if needed).
 
 ```tsx
-export function FriendList({minAge, maxAge}) {
+export function FriendList({ minAge, maxAge }) {
   const friends = useLiveQuery(
     async () => {
       //
@@ -194,37 +191,40 @@ export function FriendList({minAge, maxAge}) {
       return friends;
     },
     // specify vars that affect query:
-    [minAge, maxAge] 
+    [minAge, maxAge]
   );
 
-  return <ul>
-    {friends?.map(friend => <li key={friend.id}>
-      {friend.name}, {friend.age}
-    </li>)}
-  </ul>;
+  return (
+    <ul>
+      {friends?.map((friend) => (
+        <li key={friend.id}>
+          {friend.name}, {friend.age}
+        </li>
+      ))}
+    </ul>
+  );
 }
 ```
 
 Notice two things in the above example:
 
-1. We pass two arguments to [useLiveQuery()](/docs/dexie-react-hooks/useLiveQuery()): the async function and the deps. The callback is just a plain async function that can compute any type of result based on what it queries. It can use Promise.all() to query things in parallel or query things sequentially after each other. Any Dexie-call along the way will be marked for observation. In any case the end result will become observed.
+1. We pass two arguments to [useLiveQuery()](</docs/dexie-react-hooks/useLiveQuery()>): the async function and the deps. The callback is just a plain async function that can compute any type of result based on what it queries. It can use Promise.all() to query things in parallel or query things sequentially after each other. Any Dexie-call along the way will be marked for observation. In any case the end result will become observed.
 2. Deps are needed when the querying function uses closures that affect the query. In this case the minAge and maxAge parameters. A parent component may pass new values for it and that needs to be detected and make our query reexecuted.
 
 # 7. Put it together
 
 ```tsx
-export const App = () => <>
+export const App = () => (
+  <>
+    <h1>My simple Dexie app</h1>
 
-  <h1>My simple Dexie app</h1>
+    <h2>Add Friend</h2>
+    <AddFriendForm defaultAge={21} />
 
-  <h2>Add Friend</h2>
-  <AddFriendForm defaultAge={21} />
-
-  <h2>Friend List</h2>
-  <FriendList minAge={18} maxAge={65} />
-
-</>;
-
+    <h2>Friend List</h2>
+    <FriendList minAge={18} maxAge={65} />
+  </>
+);
 ```
 
 When running this example, notice that adding friends within the given age range will make them show up instantly in your view.
@@ -235,16 +235,15 @@ When running this example, notice that adding friends within the given age range
 
 Test out how to edit query parameters and watch the live results update, or open up app in several windows and see them instantly reflect the changes from the other window...
 
-
 ## Make query parameters editable
 
-Add a new component that allows the user to specify `minAge` and `maxAge` and pass those into the props to `<FriendList>`. You will notice that updating the props will also be instantly reflected in the query results of your app (also demonstrated in [this already cooked app](https://lnv0q.csb.app/))
+Add a new component that allows the user to specify `minAge` and `maxAge` and pass those into the props to `<FriendList>`. You will notice that updating the props will also be instantly reflected in the query results of your app.
 
 ## Run app in multiple windows
 
 Open your app (or for example [this one](https://dexie-todo-list.stackblitz.io)) in multiple new windows and watch them react to each other's changes.
 
-*NOTE: IndexedDB is tied to using same browser and same origin. Sync across different origins, browsers, clients and users is another topic and requires a sync solution. If you're interested, have a look at what's coming in [Dexie Cloud](/cloud/).*
+_NOTE: IndexedDB is tied to using same browser and same origin. Sync across different origins, browsers, clients and users is another topic and requires a sync solution. If you're interested, have a look at what's coming in [Dexie Cloud](/cloud/)._
 
 ## Observe joined data
 
@@ -253,7 +252,6 @@ Do something similar to [this sample](/docs/API-Reference#joining) and observe t
 <hr/>
 # More Samples and Resources
 
-* [Play with Dexie.js and React in Codesandbox](https://codesandbox.io/s/empty-sky-lnv0q?file=/src/components/FriendList.tsx)
-* [A simple ToDo list (Stackblitz)](https://stackblitz.com/edit/dexie-todo-list?file=components/TodoListView.tsx)
-* [Read the docs for useLiveQuery()](/docs/dexie-react-hooks/useLiveQuery())
-* [Read the general docs for Dexie.js](/docs/).
+- [A simple ToDo list (Stackblitz)](https://stackblitz.com/edit/dexie-todo-list?file=components/TodoListView.tsx)
+- [Read the docs for useLiveQuery()](</docs/dexie-react-hooks/useLiveQuery()>)
+- [Read the general docs for Dexie.js](/docs/).

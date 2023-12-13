@@ -132,6 +132,8 @@ Host: xxxx.dexie.cloud
 Authorization: Bearer <token from /token endpoint (with GLOBAL_READ scope)>
 ```
 
+If primary key is [compound](/docs/Compound-Index#compound-primary-key), the JSON representation of the key shall be given. Always encode `<table>` and `<primaryKey>` using URL encoding (`encodeURIComponent()` in JS).
+
 ### /my/... endpoint
 
 The /my/... endpoint works exactly like the /all/... endpoint, except that it doesn't search the global database but can only return objects that are accessible for the token subject.
@@ -156,7 +158,8 @@ _Lists all todoLists that the user has at least readonly access to. Either their
 
 ### /public/... endpoint
 
-The /public/... endpoint works exactly list the /all/... and /my/... endpoints except that it will only access public data - i.e. data that resides in the public realm "rlm-public". This endpoint does not require authorization.
+The /public/... endpoint works exactly list the /all/... and /my/... endpoints except that it will only access public data - i.e. data that resides in the public realm "rlm-public".
+This endpoint does not require authorization on GET requests.
 
 **Examples:**
 
@@ -233,11 +236,12 @@ Content-Type: application/json
 
 DELETE method deletes any object in given table that matches the given primary key.
 
+If primary key is [compound](/docs/Compound-Index#compound-primary-key), the JSON representation of the key shall be given. Always encode `<table>` and `<primaryKey>` using URL encoding (`encodeURIComponent()` in JS).
+
 ```http
 DELETE /all/<table>/<primaryKey> HTTP/1.1
 Host: xxxx.dexie.cloud
 Authorization: Bearer <token from /token endpoint (with GLOBAL_WRITE scope)>
-Content-Type: application/json
 
 ```
 
@@ -245,7 +249,6 @@ Content-Type: application/json
 DELETE /public/<table>/<primaryKey> HTTP/1.1
 Host: xxxx.dexie.cloud
 Authorization: Bearer <token from /token endpoint (with GLOBAL_WRITE scope)>
-Content-Type: application/json
 
 ```
 
@@ -260,6 +263,27 @@ Content-Type: application/json
 ```
 
 _Deleting personal data does not require GLOBAL_WRITE scope but will fail to delete data where user does not have permissions to do so within the realm the object belongs to._
+
+#### Examples
+
+Delete a todoItem
+
+```
+DELETE /all/todoItems/tdi0Oma0cOxZhnmTbCQTMxP3Xetcal HTTP/1.1
+Host: z0lesejpr.dexie.cloud
+Authorization: Bearer <token from /token endpoint (with GLOBAL_WRITE scope)>
+
+```
+
+Delete a compound key (array key `["Bob",42]`)
+
+```
+DELETE /all/compoundTable/%5B%22Bob%22%2C42%5D HTTP/1.1
+Host: xxxx.dexie.cloud
+Authorization: Bearer <token from /token endpoint (with GLOBAL_WRITE scope)>
+```
+
+...where `%5B%22Bob%22%2C42%5D` is the URI encoded representation of JSON `["Bob",42]`.
 
 ### /users endpoint
 

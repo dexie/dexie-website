@@ -31,7 +31,7 @@ Request a token for the calling endpoint. This method can be called directly fro
   client_id: <your client ID>,
   client_secret: <your client secret>,
   public_key?: <public key> (if a refresh token is needed),
-  claims: {
+  claims?: {
     sub: <userid>,
     email: <email>,
     name: <name of user to authenticate>
@@ -41,11 +41,54 @@ Request a token for the calling endpoint. This method can be called directly fro
 
 See a [sample code to call this endpoint to authenticate end users](<db.cloud.configure()#example-integrate-custom-authentication>).
 
-A client must be given the "IMPERSONATE" scope in order to call this endpoint.
+A client must be given the "IMPERSONATE" scope in order to supply `claims` property to this endpoint.
 
 #### scopes
 
-If you use the endpoint to give out tokens for web users, the "ACCESS_DB" scope is the only one to use. If you however, need to generate a token for a server application to use the "/all/..." endpoint, you might want to request a "GLOBAL_READ" or "GLOBAL_WRITE" scope depending on whether the integration should be allowed to read or write to the database within any realm.
+You can only request a subset of the scopes that your client has. The default client of a database have all the scopes available. Additional clients are created using `npx dexie-cloud authorize` where the scopes can be configured.
+
+For REST calls described here, you could either act on behalf of an end-user and use the /my/... endpoint to request and modify data. Or you can act with global database access and use the /all/... endpoint. The /public/... endpoint require no authorization whatsoever for GET requests, but require GLOBAL_WRITE in order to POST or DELETE objects.
+
+##### Get a token on behalf of an end-user
+
+If you're interested in acting on behalf of an end-user, you can request a token for the end-user as such:
+
+```
+POST /token HTTP/1.1
+Host: xxxx.dexie.cloud
+Content-Type: application/json
+
+{
+  "grant_type": "client_credentials",
+  "scopes": ["ACCESS_DB"],
+  "client_id": <your client ID>,
+  "client_secret": <your client secret>,
+  "claims": {
+    "sub": <userid>,
+    "email": <email>,
+    "name": <name of user to authenticate>
+  }
+}
+```
+
+Then use the /my/... endpoint to access their data.
+
+##### Get a token with global database access
+
+```
+POST /token HTTP/1.1
+Host: xxxx.dexie.cloud
+Content-Type: application/json
+
+{
+  "grant_type": "client_credentials",
+  "scopes": ["ACCESS_DB","GLOBAL_READ","GLOBAL_WRITE"],
+  "client_id": <your client ID>,
+  "client_secret": <your client secret>,
+}
+```
+
+A token with global access allows you to read data from any realm and if you include GLOBAL_WRITE you can also modify any data.
 
 #### Response
 
@@ -75,6 +118,9 @@ export interface TokenFinalResponse {
 }
 ```
 
+Make sure that the response has the response code 200 with Content-Type "application/json". The access token can be picked
+from the "accessToken" JSON property in the response body.
+
 To use this response in the other REST requests, make sure to include an "Authorization" header with the accessToken provided as such
 
 ```js
@@ -95,7 +141,7 @@ The token is valid in one hour from the time it was requested.
 ```http
 GET /all/<table> HTTP/1.1
 Host: xxxx.dexie.cloud
-Authorization: Bearer <token from /token endpoint (with GLOBAL_READ scope)>
+Authorization: Bearer <token from /token endpoint (with GLOBAL_READ and ACCESS_DB scopes)>
 ```
 
 **Get all objects in given table and realm:**
@@ -103,7 +149,7 @@ Authorization: Bearer <token from /token endpoint (with GLOBAL_READ scope)>
 ```http
 GET /all/<table>?realmId=<realmId> HTTP/1.1
 Host: xxxx.dexie.cloud
-Authorization: Bearer <token from /token endpoint (with GLOBAL_READ scope)>
+Authorization: Bearer <token from /token endpoint (with GLOBAL_READ and ACCESS_DB scopes)>
 ```
 
 **Get all objects in given table with a filter:**
@@ -111,7 +157,7 @@ Authorization: Bearer <token from /token endpoint (with GLOBAL_READ scope)>
 ```http
 GET /all/<table>?<propName>=<propValue>&<propName2>=<propValue2>&... HTTP/1.1
 Host: xxxx.dexie.cloud
-Authorization: Bearer <token from /token endpoint (with GLOBAL_READ scope)>
+Authorization: Bearer <token from /token endpoint (with GLOBAL_READ and ACCESS_DB scopes)>
 ```
 
 This request will filter the query to only return matching objects. A concrete example:
@@ -119,7 +165,7 @@ This request will filter the query to only return matching objects. A concrete e
 ```http
 GET /all/todoItems?todoListId=xxx HTTP/1.1
 Host: xxxx.dexie.cloud
-Authorization: Bearer <token from /token endpoint (with GLOBAL_READ scope)>
+Authorization: Bearer <token from /token endpoint (with GLOBAL_READ and ACCESS_DB scopes)>
 ```
 
 _This example would give you all todoItems that has the property todoListId set to "xxx"._
@@ -129,7 +175,7 @@ _This example would give you all todoItems that has the property todoListId set 
 ```http
 GET /all/<table>/<primary key> HTTP/1.1
 Host: xxxx.dexie.cloud
-Authorization: Bearer <token from /token endpoint (with GLOBAL_READ scope)>
+Authorization: Bearer <token from /token endpoint (with GLOBAL_READ and ACCESS_DB scopes)>
 ```
 
 If primary key is [compound](/docs/Compound-Index#compound-primary-key), the JSON representation of the key shall be given. Always encode `<table>` and `<primaryKey>` using URL encoding (`encodeURIComponent()` in JS).
@@ -189,7 +235,7 @@ If an object already exists with the given primary key, it will be replaced, oth
 ```http
 POST /all/<table> HTTP/1.1
 Host: xxxx.dexie.cloud
-Authorization: Bearer <token from /token endpoint (with GLOBAL_WRITE scope)>
+Authorization: Bearer <token from /token endpoint (with GLOBAL_WRITE and ACCESS_DB scopes)>
 Content-Type: application/json
 
 [{
@@ -224,7 +270,7 @@ Content-Type: application/json
 ```http
 POST /all/<table> HTTP/1.1
 Host: xxxx.dexie.cloud
-Authorization: Bearer <token from /token endpoint (with GLOBAL_WRITE scope)>
+Authorization: Bearer <token from /token endpoint (with GLOBAL_WRITE and ACCESS_DB scopes)>
 Content-Type: application/json
 
 [{
@@ -241,14 +287,14 @@ If primary key is [compound](/docs/Compound-Index#compound-primary-key), the JSO
 ```http
 DELETE /all/<table>/<primaryKey> HTTP/1.1
 Host: xxxx.dexie.cloud
-Authorization: Bearer <token from /token endpoint (with GLOBAL_WRITE scope)>
+Authorization: Bearer <token from /token endpoint (with GLOBAL_WRITE and ACCESS_DB scopes)>
 
 ```
 
 ```http
 DELETE /public/<table>/<primaryKey> HTTP/1.1
 Host: xxxx.dexie.cloud
-Authorization: Bearer <token from /token endpoint (with GLOBAL_WRITE scope)>
+Authorization: Bearer <token from /token endpoint (with GLOBAL_WRITE and ACCESS_DB scopes)>
 
 ```
 
@@ -271,7 +317,7 @@ Delete a todoItem
 ```
 DELETE /all/todoItems/tdi0Oma0cOxZhnmTbCQTMxP3Xetcal HTTP/1.1
 Host: z0lesejpr.dexie.cloud
-Authorization: Bearer <token from /token endpoint (with GLOBAL_WRITE scope)>
+Authorization: Bearer <token from /token endpoint (with GLOBAL_WRITE and ACCESS_DB scopes)>
 
 ```
 
@@ -280,7 +326,7 @@ Delete a compound key (array key `["Bob",42]`)
 ```
 DELETE /all/compoundTable/%5B%22Bob%22%2C42%5D HTTP/1.1
 Host: xxxx.dexie.cloud
-Authorization: Bearer <token from /token endpoint (with GLOBAL_WRITE scope)>
+Authorization: Bearer <token from /token endpoint (with GLOBAL_WRITE and ACCESS_DB scopes)>
 ```
 
 ...where `%5B%22Bob%22%2C42%5D` is the URI encoded representation of JSON `["Bob",42]`.
@@ -296,7 +342,7 @@ The /users endpoint can be used to list, get, update and delete application user
 ```http
 GET /users?<query> HTTP/1.1
 Host: xxxx.dexie.cloud
-Authorization: Bearer <token from /token endpoint (with GLOBAL_READ scope)>
+Authorization: Bearer <token from /token endpoint (with GLOBAL_READ and ACCESS_DB scopes)>
 ```
 
 The query is optional and consists of a list of optional &amp;-separated key=value pairs (see below)
@@ -506,7 +552,7 @@ Host: xxxx.dexie.cloud
 Authorization: Bearer XXX...
 ```
 
-To delete any other user than your own account, you need the GLOBAL_WRITE scope in your Bearer token. Any user have the permission to delete themselves. The permission to delete own user is for GDPR compliance.
+To delete any other user than your own account, you need the GLOBAL_WRITE and ACCESS_DB scopes in your Bearer token. Any user have the permission to delete themselves. The permission to delete own user is for GDPR compliance.
 
 Deleting a user will make the system erase everything associated with the user including private data that the user has created. If the user has shared data with other users, the user will be removed from the realm in question but the data will be kept and stay available for the other users.
 

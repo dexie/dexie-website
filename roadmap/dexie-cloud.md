@@ -3,36 +3,40 @@ layout: docs
 title: 'Road Map: Dexie Cloud'
 ---
 
-Dexie Cloud is out in private beta since June 2021. This page contains the road map towards public release. This is a living document. See Milestones below. Features and dates may continously change.
+<img src="http://dexie.org/assets/images/fireworks.png" />
 
-[Dexie Cloud](https://dexie.org/cloud/)
+[Dexie Cloud](https://dexie.org/cloud/) is now **Feature Complete** and can be used in production apps for existing customers.
 
-# Milestone 1 - Private beta
+_Until the public release date is set, all existing beta customers can use the service for free. Evaluation dates have been extended for all customer end users in order to guarantee continous service until the official release date._
+
+_A newsletter and blog post will reveal the official release date. For continous production level service, please prepare to purchase a subscription some time in Februari 2024. All existing beta customers will be able to continue the service without purchasing a subscription but with a limited number of production end users._
+
+## Milestone 1 - Private beta
 
 The private beta was released in June 2021 and included the following features.
 
-- [X] Initial documentation on dexie.org
-- [X] CLI: "npx dexie-cloud create"
-- [X] dexie-cloud-addon
-- [X] Dexie Cloud Server published on https://dexie.cloud
-- [X] Dexie Cloud CLI
-- [X] Complete authentication flow using email OTP
-- [X] Complete Sync flow
-- [X] DB management access control
-- [X] Token endpoint for custom authentication
-- [X] Service Worker with periodic sync
-- [X] A workind sample app
+- [x] Initial documentation on dexie.org
+- [x] CLI: "npx dexie-cloud create"
+- [x] dexie-cloud-addon
+- [x] Dexie Cloud Server published on https://dexie.cloud
+- [x] Dexie Cloud CLI
+- [x] Complete authentication flow using email OTP
+- [x] Complete Sync flow
+- [x] DB management access control
+- [x] Token endpoint for custom authentication
+- [x] Service Worker with periodic sync
+- [x] A workind sample app
 
 # Milestone 2 - Consistent Sync
 
 This milestone was finalized in September 2021
 
-- [X] ACID atomicity in sync requests
-- [X] Full consistency when syncing Collection.modify() and Collection.delete() operations.
-- [X] Respect CORS origins
-- [X] Fully implemented CLI tool
-- [X] Improved performance in WebSocket reactivity
-- [X] Bug fixes
+- [x] ACID atomicity in sync requests
+- [x] Full consistency when syncing Collection.modify() and Collection.delete() operations.
+- [x] Respect CORS origins
+- [x] Fully implemented CLI tool
+- [x] Improved performance in WebSocket reactivity
+- [x] Bug fixes
 
 # Milestone 3 - Fully functional Access Control
 
@@ -70,7 +74,7 @@ Target release date: ~~Jan 10, 2022.~~ May 31, 2022.
 - [x] Update Authentication docs: signed refresh tokens
 - [x] Updated docs explaining that '@' keys are optional.
 - [x] Docs: Explain Universally consistent modify() operations
-- [x] Document all options in db.cloud.configure() 
+- [x] Document all options in db.cloud.configure()
 - [x] Document db.cloud properties and how to use them
 - [x] Document service worker support
 - [x] Update docs for unauthorized use case
@@ -86,10 +90,26 @@ Target release date: ~~Jan 10, 2022.~~ May 31, 2022.
 - [x] New REST API
 - [x] Document REST API
 
-# Milestone 6 - Commercialization (CURRENT)
+# Milestone 6 - Commercialization
 
-- [ ] Subscription manager
-- [ ] Stripe Integration
-- [ ] Implement monthly cost limit setting
-- [ ] Implement end-user trial period for customer apps
+- [x] Subscription manager
+- [x] Stripe Integration
+- [x] Implement monthly cost limit setting
+- [x] Implement end-user trial period for customer apps
+- [x] Feature complete
+- [x] The new [Subscription model](https://medium.com/dexie-js/dexie-cloud-subscription-model-cbf9a709ce7) applied
+- [x] Extend all customers' eval users to guarantee full service until official release date.
+- [x] Production level service for paying customers
+- [x] Possible to manage databases, users and evaluation policy using [Dexie Cloud Manager](https://manager.dexie.cloud)
+- [x] Possible to purchase Dexie Cloud Production using [Dexie Cloud Manager](https://manager.dexie.cloud)
 
+# Milestone 7 - Public Release
+
+- [ ] Release new version (prod version) of the software to On-Prem customers
+- [ ] Dexie Cloud Manager officially released
+- [ ] Communicate the release in a newsletter to everyone in the waitlist
+- [ ] Marketing campaign launched
+- [ ] "beta" removed from web site
+- [ ] Waitlist closed
+- [ ] Anyone can create databases and use the Free version
+- [ ] Anyone can purchase subscriptions

@@ -1,21 +1,21 @@
 ---
 layout: docs-dexie-cloud
-title: 'Limits'
+title: 'Dexie Cloud API Limits'
 ---
 
 ## API Rate Limits
 
-Dexie Cloud API has rate-limits per client IP address. A single customer can request the API from
+Dexie Cloud API has rate-limits per end-user for authorized requests and per client IP address for unauthorized requests.
 
-| Request Type     | Eval users         | Prod users        |
-| ---------------- | ------------------ | ----------------- |
-| token            | 100 per hour       | 100 per hour      |
-| create-db        | 10 per 12 hours    | 10 per 12 hours   |
-| sync             | 50 per 5 minutes   | 200 per 5 minutes |
-| import db        | 25 per 10 minutes  | 25 per 10 minutes |
-| export db        | 25 per 10 minutes  | 25 per 10 minutes |
-| REST GET         | 200 per 15 minutes | 200 per 1 minute  |
-| REST POST/DELETE | 100 per 15 minutes | 100 per 1 minute  |
+| Request Type     | Eval users                            | Prod users                          |
+| ---------------- | ------------------------------------- | ----------------------------------- |
+| token            | 100 per hour per target end-user      | 100 per hour per target end-user    |
+| create-db        | 10 per 12 hours per creator email     | 10 per 12 hours per creator email   |
+| sync             | 50 per 5 minutes per end user         | 200 per 5 minutes per end user      |
+| import db        | 25 per 10 minutes per API client      | 25 per 10 minutes per API client    |
+| export db        | 25 per 10 minutes per API client      | 25 per 10 minutes per API client    |
+| REST GET         | 200 per 15 minutes per client or user | 200 per 1 minute per client or user |
+| REST POST/DELETE | 100 per 15 minutes per client or user | 100 per 1 minute per client or user |
 
 ## Client Rate-limit behavior
 

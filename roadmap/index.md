@@ -7,7 +7,8 @@ title: 'Road Map'
 
 [Dexie 4.0](dexie4.0)
 
-*Dexie's Road map is maintained using GitHub milestones.*
+[Dexie 5.0](dexie5.0)
+
 # Dexie Cloud
 
 [Dexie Cloud](dexie-cloud)

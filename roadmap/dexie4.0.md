@@ -3,7 +3,7 @@ layout: docs
 title: 'Road Map: Dexie 4.0'
 ---
 
-The feature planned for Dexie@4 has been splitted in January 2024 between [dexie@4](dexie4.0) and [dexie@5](dexie5.0). All non-implemented features have moved to the road map of [dexie@5](dexie5.0.md). The news in Dexie 4.0 is now limited to better typings, optimized live queries and a more stable IndexedDB experience by working around new browser bugs in Chrome and Safari. Dexie@4 also has the option to connect to [Dexie Cloud](/cloud/) to create web apps that continously sync their offline data with the cloud.
+The feature planned for Dexie@4 has been splitted in January 2024. All non-implemented features have moved to the road map of [dexie@5](dexie5.0.md). The news in Dexie 4.0 is now limited to better typings, optimized live queries and a more stable IndexedDB experience by working around new browser bugs in Chrome and Safari. Dexie@4 also has the option to connect to [Dexie Cloud](/cloud/) to create web apps that continously sync their offline data with the cloud.
 
 [Discussions and feedback on Dexie 4.0 road map](https://github.com/dexie/Dexie.js/discussions/1455)
 

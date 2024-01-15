@@ -1,17 +1,22 @@
 ---
 layout: docs-dexie-cloud
-title: "dexie-cloud-addon"
+title: 'dexie-cloud-addon'
 ---
+
+Add-on (plugin) for connecting Dexie database with a database in the cloud, [Dexie Cloud](/cloud/). The add-on is loaded on the client and integrates with Dexie to track changes, sync, authenticate and observe remote changes.
 
 ## Installation
 
 #### Install dexie-cloud-addon
 
 ```
-npm install dexie-cloud-addon
+npm install dexie@^4.0.1-beta.1 # Only dexie version >=4 supports dexie-cloud-addon
+npm install dexie-cloud-addon@latest
 ```
 
 #### Create a cloud database to sync with
+
+Use [dexie-cloud](/cloud/docs/cli) (another package) to create a database in the cloud, so that dexie-cloud-addon will have a database URL to sync with. Dexie Cloud has a [forever free edition](/cloud/pricing#free) for 3 production users, unlimited devices and unlimited evaluation users.
 
 ```
 npx dexie-cloud create
@@ -20,20 +25,20 @@ npx dexie-cloud create
 ## Usage
 
 ```tsx
-import Dexie from "dexie";
-import dexieCloud from "dexie-cloud-addon"; // Import the addon
+import Dexie from 'dexie';
+import dexieCloud from 'dexie-cloud-addon'; // Import the addon
 
-const db = new Dexie("mydb", {
-  addons: [dexieCloud], // Include addon in your Dexie instance
+const db = new Dexie('mydb', {
+  addons: [dexieCloud] // Include addon in your Dexie instance
 });
 
 db.version(1).stores({
-  myTable: "@myId, myIndex1, myIndex2, ...",
+  myTable: '@myId, myIndex1, myIndex2, ...'
 });
 
 db.cloud.configure({
-  databaseUrl: "https://xxxxxxx.dexie.cloud", // URL from `npx dexie-cloud create`
-  ...otherOptions,
+  databaseUrl: 'https://xxxxxxx.dexie.cloud', // URL from `npx dexie-cloud create`
+  ...otherOptions
 });
 ```
 
@@ -78,8 +83,8 @@ Observables can be consumed in any GUI framework and we give two samples below.
 ### Example (React)
 
 ```tsx
-import { useObservable } from "dexie-react-hooks";
-import { db } from "./db.js";
+import { useObservable } from 'dexie-react-hooks';
+import { db } from './db.js';
 
 function MyComponent() {
   // db.cloud.invites is an Observable of Invite[] array.
@@ -91,7 +96,7 @@ function MyComponent() {
       <ul>
         {invites.map((invite) => (
           <li key={invite.id}>
-            You are invited to act as {invite.roles?.join(", ")}
+            You are invited to act as {invite.roles?.join(', ')}
             in the realm {invite.realm.name}
             <button onClick={() => invite.accept()}>Accept</button>
             <button onClick={() => invite.reject()}>Reject</button>

@@ -299,6 +299,12 @@ await db.friends
 
 The cache will assist in improving paging. The caller will keep using offset()/limit() to do its paging. The difference will be that the engine can optimize an offset()-based query in case it starts close to an earlier query with the same criteria and order, so the caller will not need to use a new paging API
 
+# Encryptiong
+
+We will provide a new encryption addon, similar to the 3rd part [dexie-encrypted](https://github.com/mark43/dexie-encrypted) and [dexie-easy-encrypt](https://github.com/jaetask/dexie-easy-encrypt) addons. These addons will continue to work with dexie@5 but due to the lack of maintainance of we believe there's a need to have a maintained addon for such an important feature.
+
+The syntax for initializing encryption is not yet decided on, but might not correspond to those of the current 3rd part addons.
+
 # Breaking Changes
 
 ## No default export

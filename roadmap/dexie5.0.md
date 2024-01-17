@@ -273,7 +273,7 @@ db.version(3)
 | ------------------- | -------------------------------------------------------------------------------- |
 | `'allow'` (default) | Allow downgrade - reverse renaming of tables and props only - data is left as is |
 | `'recreate'`        | Erase all data on downgrade                                                      |
-| `'throw'`           | Do not allow dowgrade (same as dexie 2,3 and 4 behavior)                         |
+| `'throw'`           | Do not allow downgrade (same as dexie 2,3 and 4 behavior)                        |
 
 # Richer Queries
 
@@ -299,7 +299,7 @@ await db.friends
 
 The cache will assist in improving paging. The caller will keep using offset()/limit() to do its paging. The difference will be that the engine can optimize an offset()-based query in case it starts close to an earlier query with the same criteria and order, so the caller will not need to use a new paging API
 
-# Encryptiong
+# Encryption
 
 We will provide a new encryption addon, similar to the 3rd part [dexie-encrypted](https://github.com/mark43/dexie-encrypted) and [dexie-easy-encrypt](https://github.com/jaetask/dexie-easy-encrypt) addons. These addons will continue to work with dexie@5 but due to the lack of maintainance of we believe there's a need to have a maintained addon for such an important feature.
 

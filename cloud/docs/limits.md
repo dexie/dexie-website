@@ -11,7 +11,7 @@ Dexie Cloud API has rate-limits per end-user for authorized requests and per cli
 | ---------------- | ------------------------------------- | ----------------------------------- |
 | token            | 100 per hour per target end-user      | 100 per hour per target end-user    |
 | create-db        | 10 per 12 hours per creator email     | 10 per 12 hours per creator email   |
-| sync             | 50 per 5 minutes per end user         | 200 per 5 minutes per end user      |
+| sync             | 50 per 5 minutes per end user         | 200 per 5 minutes per end user. (Client gracefully slows down sync interval avoiding to ever reaching this limit)      |
 | import db        | 25 per 10 minutes per API client      | 25 per 10 minutes per API client    |
 | export db        | 25 per 10 minutes per API client      | 25 per 10 minutes per API client    |
 | REST GET         | 200 per 15 minutes per client or user | 200 per 1 minute per client or user |

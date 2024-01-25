@@ -118,7 +118,7 @@ page = await db.friends
   .filter(fastForward(lastEntry, "id", criterionFunction))
   
   // Limit to page size:
-  .limit(PAGE_SIZE);
+  .limit(PAGE_SIZE)
   .toArray();
 
 ...
@@ -131,7 +131,7 @@ lastEntry = page[page.length-1];
 page = await db.friends
   .where('friendID').aboveOrEqual(lastEntry.lastName)
   .filter(fastForward(lastEntry, "id", criterionFunction))
-  .limit(PAGE_SIZE);
+  .limit(PAGE_SIZE)
   .toArray();
 
 

@@ -72,3 +72,7 @@ a.getstarted.selected {
 pre > code span.token.comment {
 	color: #4b965f;
 }
+
+.row p>img {
+	max-width: 100%;
+}

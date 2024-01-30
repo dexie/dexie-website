@@ -1,6 +1,6 @@
 ---
 layout: dexie-cloud-pricing
-title: "Dexie Cloud Pricing"
+title: 'Dexie Cloud Pricing'
 ---
 
 **[Dexie Cloud](/cloud/)**<a href="/cloud/" class="beta" style="font-weight: bold;">BETA</a>&nbsp; is a cloud service supporting the **further development of the completely free open source project [Dexie.js](https://github.com/dexie/Dexie.js)**.
@@ -14,9 +14,10 @@ For more details, check out [this blog post](https://medium.com/dexie-js/dexie-c
 |                                                                   | Free                      | Production                | Dexie Cloud Server Software             |
 | ----------------------------------------------------------------- | ------------------------- | ------------------------- | --------------------------------------- |
 | Easy setup: **[npx dexie-cloud create](/cloud/#getting-started)** | &#10003;                  | &#10003;                  | See [these docs](docs/premium-software) |
-| All features included                                             | &#10003;                  | &#10003;                  | &#10003;                                |
+| All main features included                                        | &#10003;                  | &#10003;                  | &#10003;                                |
 | [Customizable authentication](#customizable-authentication)       | &#10003;                  | &#10003;                  | &#10003;                                |
 | [Replaceable authentication](#replaceable-authentication)         | &#10003;                  | &#10003;                  | &#10003;                                |
+| [Custom email templates](/cloud/docs/custom-emails)               | -                         | &#10003;                  | &#10003;                                |
 | Vertically scalable                                               | -                         | &#10003;                  | &#10003;                                |
 | Horizontally scalable                                             | -                         | &#10003;                  | &#10003;                                |
 | Max Number of databases                                           | Unlimited, free of charge | Unlimited, free of charge | Unlimited, free of charge               |

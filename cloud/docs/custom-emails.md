@@ -30,7 +30,7 @@ There are two criterias that need to be fulfilled in order to customize email te
 1. You have a purchased subscription (prod version and not just the free version). This can be purchased in [Dexie Cloud Manager](https://manager.dexie.cloud)
 2. You have enabled _Use custom Email Settings_ in [Dexie Cloud Manager](https://manager.dexie.cloud) and configured it against an SMTP server.
 
-If any of these criterias aren't met, templates can still be edited and pushed but they will not be used by the service.
+If any of these criterias aren't met, templates can still be edited but they will not be able to push to the service.
 
 ## Editing Email Templates
 
@@ -40,12 +40,12 @@ The email templates can be edited using the following steps:
 
 2. Edit the templates. They will be located under a folder called `dexie-cloud` on the same level as your `dexie-cloud.json` file. You'll find two sub directories: `web-templates/` and `email-templates/`. The latter contains handlebars templates for subject and body. Each email type have two body templates - one HTML based and one text-based (fallback for old email clients). Handlebars is an old and stable templating library described [here](https://handlebarsjs.com/guide/#what-is-handlebars)). The subject- and body-txt templates are pure texts with triple-bracket parameters (triple brackeds means no escaping). The html body template is HTML based with double-bracket variables (which makes them escaped correctly in HTML). The available variables (such as `{{otp}}`, `{{originName}}` etc) are documented within comments in each template.
 
-3. Test templates by sending them to your own email address. Run `npx dexie-cloud@latest templates test-send otp`. This will send a test OTP to your own email address.
+3. Test templates by sending them to your own email address. Run `npx dexie-cloud templates test-send otp`. This will send a test OTP to your own email address.
 
    - replace the last word `otp` with `invite` so test the invite templates instead of the otp templates.
    - use `--to <someoneelse@somedomain.com>` to send the test message to other than yourself. This requires having specified custom SMTP settings on your database using Dexie Cloud Manager.
    - edit the files `otp-testdata.json` and `invite-testadata.json` to edit the template parameters used when sending a test message.
 
-4. When done editing and testing templates, publish them by running `npx dexie-cloud@latest templates push`. It's also a good idea to commit the files to GIT if you want them version controlled.
+4. When done editing and testing templates, publish them by running `npx dexie-cloud templates push`. It's also a good idea to commit the files to GIT if you want them version controlled.
 
 Steps 1-3 above can be done on the Free edition and without specifying your own SMTP settings - so that you can design and test templates right away and get everything prepared before production launch of your app. But the last step - to push templates is only possible after having purchased a subscription for you database using [Dexie Cloud Manager](https://manager.dexie.cloud). You also need to have custom SMTP settings configured in order to push your custom templates. This is also configured using [Dexie Cloud Manager](https://manager.dexie.cloud).

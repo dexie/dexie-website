@@ -1,6 +1,6 @@
 ---
 layout: docs-dexie-cloud
-title: "Dexie Cloud CLI"
+title: 'Dexie Cloud CLI'
 ---
 
 The Dexie Cloud command-line interface `dexie-cloud` is an executable npm package. It is the CLI for creating and managing sync databases. You do not have to install the package to use it. The only prerequisite is having node.js installed on your system. The `npx` tool that comes with Node.js will download it temporarily from npm when you run any dexie-cloud command, such as `npx dexie-cloud --help`.
@@ -363,7 +363,7 @@ Demo users are users without passwords that can be used to showcase your applica
 
 ### Import file example for sealing the schema
 
-*Since dexie-cloud@>=1.1.0-beta.2*
+_Since dexie-cloud@>=1.1.0-beta.2_
 
 Sealing the schema means locking the schema from letting clients add new tables as a step in a sync call.
 
@@ -375,8 +375,7 @@ Sealing the schema means locking the schema from letting clients add new tables 
 
 ### Import file example for unsealing the schema
 
-*Since dexie-cloud@>=1.1.0-beta.2*
-
+_Since dexie-cloud@>=1.1.0-beta.2_
 
 ```json
 {
@@ -386,7 +385,7 @@ Sealing the schema means locking the schema from letting clients add new tables 
 
 ### Import file example for updating a sealed schema
 
-*Since dexie-cloud@>=1.1.0-beta.2*
+_Since dexie-cloud@>=1.1.0-beta.2_
 
 When a database schema is sealed, it won't tolerate the addition of new tables, so adding a table in the client code will have to be accompanied with importing the new schema into Dexie Cloud before the new clients will succeed to sync their data.
 
@@ -407,17 +406,17 @@ The syntax of the schema is equal to the syntax of a schema in Dexie.js:
 
 ```js
 db.version(1).stores({
-  todoLists: "@id",
-  todoItems: "@itemId, [todoListId+realmId]",
-  newTableWithCustomPrimKey: "customId",
-  newTableWithGeneratedPrimKey: "@myGeneratedPrimKeyProp",
-  oldTableToDelete: null, // delete the table
+  todoLists: '@id',
+  todoItems: '@itemId, [todoListId+realmId]',
+  newTableWithCustomPrimKey: 'customId',
+  newTableWithGeneratedPrimKey: '@myGeneratedPrimKeyProp',
+  oldTableToDelete: null // delete the table
 });
 ```
 
 However, Dexie Cloud don't care about secondary indexes (so far) - the only information that Dexie Cloud server needs is the name of the primary key, and whether it is marked with an '@' sign or not.
 
-Just like in the client-side dexie schema, omitting a table doesn't mean deleting it. Explicitly set it to null in order to delete a table. A deleted table in the cloud does not delete its content - it is possible to bring the data back. In order to reset a table or database completely, 
+Just like in the client-side dexie schema, omitting a table doesn't mean deleting it. Explicitly set it to null in order to delete a table. A deleted table in the cloud does not delete its content - it is possible to bring the data back. In order to reset a table or database completely,
 use `npx dexie-cloud reset` command (not implemented yet).
 
 ## export
@@ -460,6 +459,82 @@ npx dexie-cloud export --data --realmId "rlm-public" publicData.json
 npx dexie-cloud export --data --realmId "rlm-public" --table "products" publicProducts.json
 ```
 
+## templates pull
+
+_Since 2024-01-31_
+
+Pulls all email- and web templates to your file system so you can edit them in a text editor. This command will pull down all templates to your file system. The files will be put under new directories `dexie-cloud/email-templates` and `dexie-cloud/web-templates` relative to the location of your dexie-cloud.json file.
+
+For each email type, there are 3 handlebars templates and one JSON file. The handlebars files represents templates for subject, text-version of body and html-version of body. Most email clients will only display the HTML version but the text version is there for pure text-based email clients. For one-time passwords (OTP), we have the following files:
+
+- dexie-cloud/email-templates/otp-subject.handlebars
+- dexie-cloud/email-templates/otp-body-txt.handlebars
+- dexie-cloud/email-templates/otp-body-html.handlebars
+- dexie-cloud/email-templates/otp-testdata.json
+
+### Example
+
+```
+npx dexie-cloud@latest templates pull
+```
+
+## templates test-send
+
+_Since 2024-01-31_
+
+When having pulled down templates and edited them, you can test to send them to see how they look in an email client.
+
+This command will send a test email using your edited local version of templates. Specify which type to send. Possible types are "otp" and "invite". The files ending with "test-data.json" will be used for filling in variables in the templates. The JSON files are only for test-send command and will not be used in production.
+
+### Examples
+
+```
+npx dexie-cloud templates test-send otp # Send OTP message to your own email address
+npx dexie-cloud templates test-send invite # Send invite message to your own email address
+npx dexie-cloud templates test-send otp --to someoneelse@company.com # Send to someone else
+```
+
+### Remarks
+
+Sending test emails without specifying the `--to` argument will send message to yourself (it uses the email address associated with your clientID in your local dexie-cloud.key file).
+
+Sending to someone else requires to specify the `--to` argument and also that you have configured custom SMTP settings using [Dexie Cloud Manager](https://manager.dexie.cloud).
+
+When testing is done, it can be a good idea to commit the templates to git if you are working in a code repository.
+
+## templates push
+
+_Since 2024-01-31_
+
+Push your local templates to your database on dexie.cloud. Next time the service need to use a template it will use your customized version. The command will fail if there is no subscription connected to your database or if custom there are no SMTP settings configured. Custom templates is a production feature.
+
+### Example
+
+```
+npx dexie-cloud templates push
+```
+
+### Remarks
+
+If you are unable to push the templates, make sure to commit them to your git repository to secure them until a subscription and SMTP settings are in place.
+
+To configure SMTP settings, click the database in [Dexie Cloud Manager](https://magager.dexie.cloud) and scroll down to Email Settings. Check the `Use custom Email settings` checkbox and fill in the SMTP details from your SMTP provider. Test-send an email directly from the management app before saving your changes.
+
+To purchase a subscription, login to [Dexie Cloud Manager](https://magager.dexie.cloud) using the same email that you used for creating your database. Click the upgrade badge next to your database and then the Buy button.
+
+### See also
+
+[Custom Emails](/cloud/docs/custom-emails)
+
+## templates reset
+
+Resets custom templates back to the default templates provided by the service. Any pushed templates will be deleted and the system will go back to using default templates again. This command will only affect the server and leave the local files as they are. You may delete them manually afterwards.
+
+### Example
+
+```
+npx dexie-cloud templates reset
+```
 
 ## add-replica
 

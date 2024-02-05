@@ -5,19 +5,19 @@ document.addEventListener('DOMContentLoaded', ()=>{
       $('#applyBetaBtn').click();
     }
   });
-  $('#sign-up-beta-btn').on("click", ()=>{
+  $('.sign-up-beta-btn').on("click", ()=>{
     $('#signup-form').slideDown(()=>$('#emailAddressInput').focus());
     if (typeof ga !== "undefined") ga('send', 'event', 'buttons', 'click', 'sign-up-beta-btn');
   });
-  $('#applyBetaBtn').on('click', ()=>{
-    $('#sign-up-beta-btn').prop("disabled", true);
-    $('#applyBetaBtn').prop("disabled", true);
+  $('.applyBetaBtn').on('click', ()=>{
+    $('.sign-up-beta-btn').prop("disabled", true);
+    $('.applyBetaBtn').prop("disabled", true);
     const emailInput = $('#emailAddressInput');
     const email = emailInput.val();
     function trackInput() {
       if (emailRegexp.test(emailInput.val())) {
         $('#emailAddrAlert').hide();
-        $('#applyBetaBtn').prop("disabled", false);
+        $('.applyBetaBtn').prop("disabled", false);
         emailInput.off('input', trackInput);
       }
     }
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     $('#form-prompts').slideDown(1000);
 
     function handleRequest(request) {
-      $('#applyBetaBtn').prop("disabled", false);
+      $('.applyBetaBtn').prop("disabled", false);
       $('#form-prompts-spinner').hide();
       if (request) {
         formPrompts("form-prompts-area", request, (action, data) => {
@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
     if (completed) {
       const doneBtn = $('<button autofocus class="btn btn-success">Done</button>')
         .on('click', ()=>{
-          $('#sign-up-beta-btn').html(`
+          $('.sign-up-beta-btn').html(`
             <span class='glyphicon glyphicon-ok'></span>
             <span>Signed up</span>`
           )

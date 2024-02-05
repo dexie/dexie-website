@@ -1,7 +1,8 @@
 ---
 layout: docs-dexie-cloud
-title: "Authentication in Dexie Cloud"
+title: 'Authentication in Dexie Cloud'
 ---
+
 <div class="shoutouts" style="text-align: left; margin: 20px 0 35px 0;">
    <p>Zero config, registrationless, passwordless</p>
    <p>Easy to replace with your own authentication</p>
@@ -17,7 +18,7 @@ If you prefer to jump right in to samples, here some shortcuts:
 
 - [Example zero config setup](#zero-config-setup)
 - [Example customizing login GUI](#customizing-login-gui)
-- [Example auth integration](db.cloud.configure()#example-integrate-custom-authentication)
+- [Example auth integration](<db.cloud.configure()#example-integrate-custom-authentication>)
 
 ## Introduction
 
@@ -34,7 +35,7 @@ If you just enable dexie-cloud-addon the way it is explained on [the landing pag
 If nothing is configured, dexie-cloud-addon will provide a default login GUI when a login is required. If you don't need to replace the default OTP authentication but still need to control the GUI of the default OTP solution, it can be customized by as follows:
 
 1. Configure it to disable built-in GUI: `db.cloud.configure({customLoginGui: true})`
-2. Observe `db.cloud.userInteraction` and show a dialog that corresponds to what it requests.
+2. Observe `db.cloud.userInteraction` somewhere the root component of your app so that it is always listened to. Whenever this observable emits something else than undefined, show a dialog that corresponds to what it requests.
 
 Here's an example based on dexie-cloud-addon@4.0.1-beta.52 or later.
 
@@ -42,11 +43,15 @@ Here's an example based on dexie-cloud-addon@4.0.1-beta.52 or later.
 import { useState } from 'react';
 import { useObservable } from 'dexie-react-hooks';
 import { db } from './db'; // A module that exports the Dexie instance with dexie-cloud-addon attached.
-import { resolveText, DXCInputField, DXCUserInteraction } from 'dexie-cloud-addon';
+import {
+  resolveText,
+  DXCInputField,
+  DXCUserInteraction
+} from 'dexie-cloud-addon';
 import styled from 'styled-components';
 
 /** Example login dialog
- * 
+ *
  * This component showcases how to provide a custom login GUI for login dialog.
  * The principle is simple:
  *   * We use useObservable() to observe `db.cloud.userInteraction` into local variable ui.
@@ -67,7 +72,7 @@ import styled from 'styled-components';
 export function MyLoginGUI() {
   const ui = useObservable(db.cloud.userInteraction);
   if (!ui) return null; // No user interaction is requested.
-  return <MyLoginDialog ui={ui} />
+  return <MyLoginDialog ui={ui} />;
 }
 
 export function MyLoginDialog({ ui }: { ui: DXCUserInteraction }) {
@@ -81,7 +86,9 @@ export function MyLoginDialog({ ui }: { ui: DXCUserInteraction }) {
           <h2>My Custom Login Prompt</h2>
           <h3>{ui.title}</h3>
           {ui.alerts?.map((alert, i) => (
-            <p key={i} className={`dxcdlg-alert-${alert.type}`}>{resolveText(alert)}</p>
+            <p key={i} className={`dxcdlg-alert-${alert.type}`}>
+              {resolveText(alert)}
+            </p>
           ))}
           <form
             onSubmit={(ev) => {
@@ -103,7 +110,7 @@ export function MyLoginDialog({ ui }: { ui: DXCUserInteraction }) {
                       const value = ev.target.value;
                       let updatedParams = {
                         ...params,
-                        [fieldName]: value,
+                        [fieldName]: value
                       };
                       setParams(updatedParams);
                     }}
@@ -114,16 +121,11 @@ export function MyLoginDialog({ ui }: { ui: DXCUserInteraction }) {
           </form>
           <div className="dxc-buttons">
             <>
-              <button
-                type="submit"
-                onClick={() => ui.onSubmit(params)}
-              >
+              <button type="submit" onClick={() => ui.onSubmit(params)}>
                 {ui.submitLabel}
               </button>
               {ui.cancelLabel && (
-                <button onClick={ui.onCancel}>
-                  {ui.cancelLabel}
-                </button>
+                <button onClick={ui.onCancel}>{ui.cancelLabel}</button>
               )}
             </>
           </div>
@@ -188,9 +190,8 @@ const MyDialogStyling = styled.div`
   }
   .alert-info {
     color: black;
-  }    
+  }
 `;
-
 ```
 
 ## Default Authentication from a user's perspective
@@ -213,8 +214,7 @@ Dexie Cloud will focus on making encryption easier to integrate going forward, w
 
 The transport security will still be the same if you replace the default authentication - tokens will still be protected by CryptoKeys. The difference is only how the authentication takes place - the step that is required for Dexie Cloud to negotiate the token flow.
 
-To replace authentication, see [the following sample](db.cloud.configure()#example-integrate-custom-authentication).
-
+To replace authentication, see [the following sample](<db.cloud.configure()#example-integrate-custom-authentication>).
 
 ## Tokens
 
@@ -250,4 +250,4 @@ When the Dexie Cloud server endpoint verifies the user's email itself, you will 
 
 When you have an existing authentication solution using a server-side framework and programming language of your own choice, and you want to integrate that solution to authenticate users for your Dexie Cloud application, you will need to write a new endpoint into your existing server-side authentication server that, using your client_id and client_secret can request token from Dexie Cloud for the user you have already authenticated.
 
-See [Example auth integration](db.cloud.configure()#example-integrate-custom-authentication).
+See [Example auth integration](<db.cloud.configure()#example-integrate-custom-authentication>).

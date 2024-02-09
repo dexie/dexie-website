@@ -11,7 +11,7 @@ title: 'Dexie.VersionError'
 
 ### Description 
 
-This error is thrown when the installed version of the database is higher than the version passed to [Dexie.version(/docs/Dexie/Dexie.version())]. The error is a native error from IndexedDB and will show the conflicting native version numbers in the message.
+This error is thrown when the installed version of the database is higher than the version passed to [Dexie.version](/docs/Dexie/Dexie.version()). The error is a native error from IndexedDB and will show the conflicting native version numbers in the message.
 
 Since dexie@4.0.1-beta.8, this error is no longer expected to happen because Dexie will silently adapt to the installed version in the background. This makes it possible to revert to an earlier version of the database without getting into the situation of VersionError being thrown.
 

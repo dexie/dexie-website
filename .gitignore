@@ -4,3 +4,4 @@ _site
 .jekyll-metadata
 debug.log
 jekyll.pid
+**/.DS_Store

@@ -347,12 +347,14 @@ layout: dexie-frontpage-template
   const db = new Dexie('MySyncedDB', {addons: [dexieCloud]});
 
   db.version(1).stores({
-    friends: '@id, name, age'
+    // Avoid '++'. Primary keys must be globally unique.
+    // Prefix with '@' to auto-generate.
+    friends: '@id, name, age' // '@' is optional.
   });
 
   db.cloud.configure({
     databaseUrl: "https://&lt;yourdatabase&gt;.dexie.cloud",
-    requireAuth: true // (optional)
+    requireAuth: true // (optional. Block DB until authenticated)
   });</code><script>
     prismHighlight('update-db-declaration', [
       'import dexieCloud from "dexie-cloud-addon";',

@@ -303,10 +303,14 @@ layout: dexie-frontpage-template
 
 <div class='container'>
   <div style="margin: 60px 0 60px 0; text-align: center;">
-  <h1 style="font-size: 50pt;">
+  <h1 id="sync" style="font-size: 50pt;">
     Sync
   </h1>
 </div>
+<div class='container'>
+  <p style="font-size: 18pt">
+    <b>Dexie Cloud</b> transforms your Local Dexie into a synced Dexie through a few simple steps:
+  </p>
 </div>
 <div class='container white-text' style="position: relative;">  
   <div class="video-parent" style="border-radius: 14px; box-shadow: 0 0 2px 4px #64b;">
@@ -366,12 +370,18 @@ layout: dexie-frontpage-template
 <p>
   <a class='btn btn-success' id="land-sync-read-more-btn" href="/cloud/">Read more &raquo;</a>
   <a class='btn btn-primary' id="land-sync-pricing-btn" href="/cloud/pricing">Pricing &raquo;</a>
+  <button style="width: fit-content" id="sign-up-beta-btn" class='sign-up-beta-btn getstarted btn btn-success' href='/cloud/#getting-started' role='button'>
+    <span class='glyphicon glyphicon-flash'></span>
+    <span>Try it now!</span>
+  </button>
 </p>
 <br/>
-
 </div>
 
-<br/>
+{% include signup-forms.html %}
+
+{% include public-release-counter.html %}
+
 <div class='container'>
 	<hr/>
 </div>

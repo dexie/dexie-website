@@ -2,16 +2,21 @@
 layout: dexie-frontpage
 title: Contact
 ---
+
 # Contact
 
 We love to answer all kinds of questions about Dexie.js on stackoverflow and we try do our best to be fast to respond to and fix issues posted on Github! Never hesitate to ask something on [stackoverflow](http://stackoverflow.com/questions/ask?tags=dexie). Also, please [file issues](https://github.com/dexie/Dexie.js/issues/new) when you suspect a bug, but please do a bit of research before you do: [search for existing issues](https://github.com/dexie/Dexie.js/issues?q=is%3Aissue).
 
 ## Ask Question
+
 [Ask Dexie question on stackoverflow](http://stackoverflow.com/questions/ask?tags=dexie)
 
 [Ask Dexie Cloud question on GitHub](https://github.com/dexie/Dexie.js/issues/new?labels=cloud,question)
 
+[Chat with us](https://account.wire.com/conversation-join/?key=earNGQtQbLegPGpz8jAX&code=t8lYpyUrpgFyp53w3vvE&domain=wire.com)
+
 ## File Issue
+
 Before you file an issue, please Google your problem first - chances are you find hints or answers in an existing stackoverflow-, GitHub, docs page or some blog. Also [search for existing issues](https://github.com/dexie/Dexie.js/issues?q=is%3Aissue).
 
 [File a Dexie issue](https://github.com/dexie/Dexie.js/issues/new)
@@ -22,24 +27,22 @@ Before you file an issue, please Google your problem first - chances are you fin
 
 To request private support, send an email to [privsupport@dexie.org](mailto:privsupport@dexie.org):
 
-* Email address: [privsupport@dexie.org](mailto:privsupport@dexie.org)
-* Cost: €150/h
-* We will be asking you to place an order of 10 hours at minimum.
-* In the email, please provide your details:
+- Email address: [privsupport@dexie.org](mailto:privsupport@dexie.org)
+- Cost: €150/h
+- We will be asking you to place an order of 10 hours at minimum.
+- In the email, please provide your details:
 
-    *Your Name*
+  _Your Name_
 
+  _Company Name_
 
-    *Company Name*
+  _Company Address_
 
-    *Company Address*
+  _Country_
 
-    *Country*
+  _VAT number (if EU)_
 
-    *VAT number (if EU)*
-
-    *Contact information*
-
+  _Contact information_
 
 ## Business related questions
 

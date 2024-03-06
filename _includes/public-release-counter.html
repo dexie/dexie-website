@@ -1,0 +1,9 @@
+<p style="width: fit-content; font-weight: bold; font-size: 24pt; color: #000; background-color: #5cb85c; border-radius: 27px; padding: 7px 28px; margin: 18px 0 0 0;">
+  Dexie Cloud Public Release in <span class="numDaysLeft"></span> days!
+</p>
+<script>
+  var releaseDate = new Date("2024-03-27");
+  var now = new Date();
+  var daysLeft = Math.ceil((releaseDate - now) / (1000 * 60 * 60 * 24));
+  document.querySelector(".numDaysLeft").textContent = daysLeft;
+</script>

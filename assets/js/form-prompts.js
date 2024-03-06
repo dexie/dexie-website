@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
   function formPrompts(id, request, respond, complete) {
     const area = document.getElementById(id);
     area.innerHTML = "";
-    window.scrollTo(0,0); 
+    //window.scrollTo(0,0); 
 
     const {message, prompts, action, actionData, completed} = request;
 

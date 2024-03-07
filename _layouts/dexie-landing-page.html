@@ -341,15 +341,14 @@ npm install dexie-cloud-addon</code></pre>
     </div>
     <div class='col-md-6'>
       <h3>4. Update your DB declaration</h3>
-      <p><b><i><span style="padding: 4px 6px; background-color: #3b2c48; border-radius: 4px; text-shadow: rgb(255, 255, 255) 0px 0px 15px">highlighted</span> parts represents required changes:</i></b></p>
+      <p><b><i><span style="padding: 4px 6px; background-color: #3b2c48; border-radius: 4px; text-shadow: rgb(255, 255, 255) 0px 0px 15px">highlighted</span> parts represents changes needed to activate sync:</i></b></p>
       <pre><code class="language-javascript" style="margin:0;" id="update-db-declaration">  import Dexie from "dexie";
   import dexieCloud from "dexie-cloud-addon";
 
   const db = new Dexie('MySyncedDB', {addons: [dexieCloud]});
 
   db.version(1).stores({
-    // Avoid '++'. Primary keys must be globally unique.
-    // Prefix with '@' to auto-generate.
+    // Prefix with '@' to auto-generate globally unique keys.
     friends: '@id, name, age' // '@' is optional.
   });
 

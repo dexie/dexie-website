@@ -132,14 +132,17 @@ npm install dexie-cloud-addon</code></pre>
           </div>
           <div class='col-md-6'>
             <h3>4. Update your DB declaration</h3>
+            <p><i>The dexie-cloud specific parts are highlighted below:</i></p>
             <pre><code class="language-javascript" id="update-db-declaration" style="margin:0;">  import Dexie from "dexie";
   import dexieCloud from "dexie-cloud-addon";
 
   // Declare your DB
   const db = new Dexie('MySyncedDB', {addons: [dexieCloud]});
   db.version(1).stores({
+    // Prefix with '@' to auto-generate globally unique keys
+    // (optional)
     todoLists: '@id, title', // '@' = generated global ID
-    todoItems: '@id, title, done, todoListId'
+    todoItems: 'id, title, done, todoListId'
   });
 
   // Connect your dexie-cloud database:

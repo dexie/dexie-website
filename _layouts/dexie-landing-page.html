@@ -335,8 +335,9 @@ layout: dexie-frontpage-template
       <pre class="command-line language-bash" data-prompt="~/my-web-app $" data-filter-output="(out)"><code id="dexie-cloud-create" style="margin:0;">npx dexie-cloud create</code></pre>
       <h3>2. Whitelist your app origin(s)</h3>
       <pre class="command-line language-bash" data-prompt="~/my-web-app $"><code id="cli-whitelist" style="margin:0;">npx dexie-cloud whitelist http://localhost:3000</code></pre>
-      <h3>3. Add dexie-cloud-addon</h3>
-      <pre class="command-line language-bash" data-prompt="~/my-web-app $"><code id="npm-install-dexie-cloud-addon" style="margin:0;">npm install dexie-cloud-addon</code></pre>
+      <h3>3. Upgrade dexie + install dexie-cloud-addon</h3>
+      <pre class="command-line language-bash" data-prompt="~/my-web-app $"><code style="margin:0;">npm install dexie@next
+npm install dexie-cloud-addon</code></pre>
     </div>
     <div class='col-md-6'>
       <h3>4. Update your DB declaration</h3>

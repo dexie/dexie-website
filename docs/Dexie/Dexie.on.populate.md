@@ -129,8 +129,6 @@ Found object: {"someIndex":"item2","id":2}
 Finished.
 ```
 
-[Watch the full HTML source](https://github.com/dexie/Dexie.js/blob/master/samples/ajax-populate/populateFromAjaxCall.html), or [view it in your browser](https://raw.githack.com/dexie/Dexie.js/master/samples/ajax-populate/populateFromAjaxCall.html)
-
 ### See Also
 
 [The Populate Event](/docs/Tutorial/Design#the-populate-event)

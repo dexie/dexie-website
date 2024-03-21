@@ -3,7 +3,7 @@ layout: docs
 title: 'Road Map: Dexie 4.0'
 ---
 
-The feature planned for Dexie@4 has been splitted in January 2024 between [dexie@4](dexie4.0) and [dexie@5](dexie5.0). All non-implemented features have moved to the road map of [dexie@5](dexie5.0.md). The news in Dexie 4.0 is now limited to better typings, optimized live queries and a more stable IndexedDB experience by working around new browser bugs in Chrome and Safari. Dexie@4 also has the option to connect to [Dexie Cloud](/cloud/) to create web apps that continously sync their offline data with the cloud.
+In January, 2024 all non-implemented features originally planned for Dexie@4 were moved to the road map of [dexie@5](dexie5.0.md). Dexie 4.0 offers better typings, optimized live queries and a more stable IndexedDB experience by working around new browser bugs in Chrome and Safari. Dexie@4 also has the option to connect to [Dexie Cloud](/cloud/) to create web apps that continously sync their offline data with the cloud.
 
 [Discussions and feedback on Dexie 4.0 road map](https://github.com/dexie/Dexie.js/discussions/1455)
 
@@ -13,7 +13,7 @@ Non-transactional live queries utilize memory cache to assist in query resolutio
 
 # Workarounds for flaky browsers
 
-Dexie 4 catches various issues in the IndexedDB support for Chrome and Safari. Without dexie@4 tranasactions and write operations can suddenly fail in modern versions of Chrome and Safari but dexie makes sure to protect the end user from experience any issues. It does this by reopening the database or redoing the transaction when these things happen - all without the developer having to worry about it. See issues [#543](https://github.com/dexie/Dexie.js/issues/543), [#613](https://github.com/dexie/Dexie.js/issues/613), [#1660](https://github.com/dexie/Dexie.js/issues/1660) and [#1829](https://github.com/dexie/Dexie.js/issues/1829).
+Dexie 4 catches various issues in the IndexedDB support for Chrome and Safari. Without dexie@4 transactions and write operations can suddenly fail in modern versions of Chrome and Safari but dexie makes sure to protect the end user from experience any issues. It does this by reopening the database or redoing the transaction when these things happen - all without the developer having to worry about it. See issues [#543](https://github.com/dexie/Dexie.js/issues/543), [#613](https://github.com/dexie/Dexie.js/issues/613), [#1660](https://github.com/dexie/Dexie.js/issues/1660) and [#1829](https://github.com/dexie/Dexie.js/issues/1829).
 
 # Supports Dexie Cloud
 

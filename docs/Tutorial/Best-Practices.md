@@ -94,7 +94,7 @@ But on an event handler or other root-level scope, always catch! Why?! Because y
 
 ```javascript
 somePromiseReturningFunc().catch((error) => {
-    $('#appErrorLabel').text(error);
+    document.getElementById('appErrorLabel').innerText = error.toString();
     console.error(error + '');
 });
 ```

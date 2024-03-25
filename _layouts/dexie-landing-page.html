@@ -4,7 +4,7 @@ layout: dexie-frontpage-template
 <div class='container' id='callouts'>
 	<div class='row'>
 		<div class='col-md-4'>
-			<h2>Reactive (Since v3.2)</h2>
+			<h2>Reactive</h2>
       <p>
         Dexie 3.2 integrates better with front-end frameworks.
         Query the db without boilerplate and let your components mirror the database in real time.
@@ -18,9 +18,9 @@ layout: dexie-frontpage-template
 			<p><a class='btn btn-success' href='/docs/Tutorial/' role='button'>Dive right in &raquo;</a></p>
 		</div>
 		<div class='col-md-4'>
-			<h2>Well documented</h2>
-			<p>What good is any development tool without great documentation? Dexie is thoroughly explained, and examples are available to help you on your way.</p>
-			<p><a class='btn btn-success' href='/docs/' role='button'>Check it out &raquo;</a></p>
+			<h2>Easy to sync</h2>
+			<p>With only a few lines of extra code, you can build a consistent, authenticated and access controlled local-first app!</p>
+			<p><a class='btn btn-success' href='#sync' role='button'>Add sync &raquo;</a></p>
 		</div>
 	</div>
 </div>
@@ -77,6 +77,13 @@ layout: dexie-frontpage-template
 								</code></pre>
 					</div>
 	</div>
+  <br/>
+  <a class='getstarted btn btn-success btn-lg' href='#sync' role='button'>
+    <span class='glyphicon glyphicon-flash'></span>
+    <span class='widescreen'>Getting started with Sync</span>
+    <span class='slimscreen'>Add Sync</span>
+  </a>
+
 </div>
 
 <div class="container" style="text-align: center;">
@@ -309,7 +316,7 @@ layout: dexie-frontpage-template
 </div>
 <div class='container'>
   <p style="font-size: 18pt">
-    <b>Dexie Cloud</b> transforms your Local Dexie into a synced Dexie through a few simple steps:
+    Turn on sync with a few simple steps:
   </p>
 </div>
 <div class='container white-text' style="position: relative;">  
@@ -333,23 +340,27 @@ layout: dexie-frontpage-template
       <h3 class="widescreen">1. Create your database in the cloud</h3>
       <h3 class="slimscreen">1. Create your db in the cloud</h3>
       <pre class="command-line language-bash" data-prompt="~/my-web-app $" data-filter-output="(out)"><code id="dexie-cloud-create" style="margin:0;">npx dexie-cloud create</code></pre>
+      <!-- <p style="color:#ddd"><i>The command is for a terminal/console window on any system with
+        <a href="https://nodejs.org/en/download/current">Node.js</a>
+        installed.</i></p>-->
       <h3>2. Whitelist your app origin(s)</h3>
       <pre class="command-line language-bash" data-prompt="~/my-web-app $"><code id="cli-whitelist" style="margin:0;">npx dexie-cloud whitelist http://localhost:3000</code></pre>
+      <!-- <p style="color:#ddd"><i>localhost:3000 is just while developing. When app is published, whitelist the public URL.</i></p>-->
       <h3>3. Upgrade dexie + install dexie-cloud-addon</h3>
-      <pre class="command-line language-bash" data-prompt="~/my-web-app $"><code style="margin:0;">npm install dexie@next
+      <pre class="command-line language-bash" data-prompt="~/my-web-app $"><code style="margin:0;">npm install dexie@latest
 npm install dexie-cloud-addon</code></pre>
     </div>
     <div class='col-md-6'>
       <h3>4. Update your DB declaration</h3>
-      <p><b><i><span style="padding: 4px 6px; background-color: #3b2c48; border-radius: 4px; text-shadow: rgb(255, 255, 255) 0px 0px 15px">highlighted</span> parts represents changes needed to activate sync:</i></b></p>
+      <!-- <p><b><i><span style="padding: 4px 6px; background-color: #3b2c48; border-radius: 4px; text-shadow: rgb(255, 255, 255) 0px 0px 15px">highlighted</span> parts represents changes needed to activate sync:</i></b></p> -->
       <pre><code class="language-javascript" style="margin:0;" id="update-db-declaration">  import Dexie from "dexie";
   import dexieCloud from "dexie-cloud-addon";
 
   const db = new Dexie('MySyncedDB', {addons: [dexieCloud]});
 
   db.version(1).stores({
-    // Prefix with '@' to auto-generate globally unique keys.
-    friends: '@id, name, age' // '@' is optional.
+    friends: '++id, name, age' // '++' = auto-incremented ID
+    friends: '@id, name, age' // '@' = auto-generated global ID
   });
 
   db.cloud.configure({
@@ -359,7 +370,8 @@ npm install dexie-cloud-addon</code></pre>
     prismHighlight('update-db-declaration', [
       'import dexieCloud from "dexie-cloud-addon";',
       "{addons: [dexieCloud]}",
-      "@id",
+      {text: "friends: '++id, name, age' // '++' = auto-incremented ID", action: 'strikethrough'},
+      "friends: '@id, name, age' // '@' = auto-generated global ID",
       ///(\/\/.*)/g, // line comments
       /db\.cloud\.configure\(\{(.|\n)*\}\)\;/g
     ]);
@@ -367,23 +379,27 @@ npm install dexie-cloud-addon</code></pre>
     prismHighlight('cli-whitelist', ['npx dexie-cloud whitelist http://localhost:3000']);
     prismHighlight('npm-install-dexie-cloud-addon', ['npm install dexie-cloud-addon'])
   </script></pre>
+    <p>Read more about authentication,
+      access control and consistency in the <a href="/cloud/">Dexie Cloud documentation</a>.</p>
+    </p>
     </div>
 
 </div>
 <p>
   <a class='btn btn-success' id="land-sync-read-more-btn" href="/cloud/">Read more &raquo;</a>
-  <a class='btn btn-primary' id="land-sync-pricing-btn" href="/cloud/pricing">Pricing &raquo;</a>
+  <!-- <a class='btn btn-primary' id="land-sync-pricing-btn" href="/cloud/pricing">Pricing &raquo;</a>
   <button style="width: fit-content" id="sign-up-beta-btn" class='sign-up-beta-btn getstarted btn btn-success' href='/cloud/#getting-started' role='button'>
     <span class='glyphicon glyphicon-flash'></span>
     <span>Try it now!</span>
   </button>
+  -->
 </p>
 <br/>
 </div>
 
 {% include signup-forms.html %}
 
-{% include public-release-counter.html %}
+<!-- {% include public-release-counter.html %} -->
 
 <div class='container'>
 	<hr/>

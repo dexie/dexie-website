@@ -1,5 +1,6 @@
 prismHighlight = (function () {
   var map = new Map();
+
   function prismHighlight(nodeId, highlights) {
     var node = document.getElementById(nodeId);
     if (!Array.isArray(highlights))
@@ -38,7 +39,7 @@ prismHighlight = (function () {
     // Free-text search for entries to highlight.
     // when found, lookup the spans it spans over.
     // add them to a Set.
-    var spanSet = new Set();
+    var spanMap = new Map();
     var newHighlighted = [];
     highlighted.forEach(function (needle) {
       if (needle instanceof RegExp) {
@@ -49,11 +50,18 @@ prismHighlight = (function () {
           }
       } else if (typeof needle === "string") {
         newHighlighted.push(needle);
+      } else if (typeof needle === "object" && needle != null && needle.hasOwnProperty("text")) {
+        newHighlighted.push(needle);
       }
     });
     highlighted = newHighlighted;
     for (var i = 0; i < highlighted.length; ++i) {
       var needle = highlighted[i];
+      let action = "highlight";
+      if (typeof needle === "object" && needle != null && needle.hasOwnProperty("text")) {
+        action = needle.action;
+        needle = needle.text;
+      }
       var startP = 0;
       while (startP >= 0 && startP < innerText.length) {
         var needleStart = innerText.indexOf(needle, startP);
@@ -68,9 +76,9 @@ prismHighlight = (function () {
             var spanText = lookup[j][3];
             if (needleStart === start && needleEnd === end) {
               // Exact match.
-              spanSet.add(span);
+              spanMap.set(span, action);
             } else if (needleStart < end && needleEnd > start) {
-              spanSet.add(span);
+              spanMap.set(span, action);
               // overlap
               if (needleEnd < end) {
                 // Start match but split ends:
@@ -99,17 +107,21 @@ prismHighlight = (function () {
     // Add opacity: 0.4 to all spans but the highlighted ones.
     for (var i = 0; i < spans.length; ++i) {
       var span = spans[i];
-      if (!spanSet.has(span)) {
+      const action = spanMap.get(span);
+      if (!action) {
         span.style.opacity = 0.5;
-      } else {
+      } else if (action === 'highlight') {
         span.style.textShadow = "0 0 20px #fff";
+      } else if (action === 'strikethrough') {
+        span.style.opacity = 0.5;
+        span.style.textDecoration = "line-through";
       }
     }
   }
 
   prismHighlight.highlight = function () {
-    map.forEach((value, key) => {
-      highlight(key, value);
+    map.forEach((highlights, key) => {
+      highlight(key, highlights);
     });
   };
 

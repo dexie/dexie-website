@@ -10,6 +10,18 @@ prismStyle: 'vscode-dark'
 
     <main class="container">
       {% include signup-forms.html %}
+      {% include nice-pricing-table.html %}
+      <hr />
+      {% include testimonials.html %}
+      <hr />
+      {% include presentation-free.html %}
+      <hr />
+      {% include presentation-prod.html %}
+      <hr />
+      {% include presentation-silver.html %}
+      <hr />
+      {% include presentation-gold.html %}
+      <hr />
       {{ content }}
     </main>
 
@@ -20,6 +32,8 @@ prismStyle: 'vscode-dark'
     <script src='/assets/js/bootstrap.min.js'></script>
 
     {% include google-analytics.html %}
+
+    <script src="/assets/js/scroll-to-anchor.js"></script>
 
     <!-- Include dexie for people wanting to open devtools to laborate -->
     <script async src="https://unpkg.com/dexie"></script>

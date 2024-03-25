@@ -3,33 +3,55 @@ layout: dexie-cloud-pricing
 title: 'Dexie Cloud Pricing'
 ---
 
-**[Dexie Cloud](/cloud/)**<a href="/cloud/" class="beta" style="font-weight: bold;">BETA</a>&nbsp; is a cloud service supporting the **further development of the completely free open source project [Dexie.js](https://github.com/dexie/Dexie.js)**.
+## Prod Support
 
-**[Dexie Cloud](/cloud/)**<a href="/cloud/" class="beta" style="font-weight: bold;">BETA</a>&nbsp; also has a [free](#free) edition for labs and demos.
+This support option is included when subscribing to Dexie Cloud Production (SaaS) and includes email and chat support.
 
-## Dexie Cloud Pricing
+## Silver Support
+
+This support option is available for the On-Prem editions and includes Email- and chat support. One year of Silver Support is included when purchasing Dexie Cloud On-Prem Silver, but it can also be purchased separately to extend the support after purchasing Dexie Cloud On-Prem Gold.
+
+Price: $695 per year.
+
+## Gold Support
+
+Every customer is different and require different levels of support. With the Gold Support package, we can dedicate our support to your team, tailor SLAs and be available at the levels of customer's requirements.
+
+The basic level of Gold Support that is included in On-Prem Gold edition includes:
+
+- SLA 16 business hours
+- Chat
+- Email
+- Video
+- Dedication
+
+Price (basic level): $3,495/yr
+
+# Detailed Pricing Table
 
 For more details, check out [this blog post](https://medium.com/dexie-js/dexie-cloud-subscription-model-cbf9a709ce7).
 
-|                                                                   | Free                      | Production                | Dexie Cloud Server Software             |
-| ----------------------------------------------------------------- | ------------------------- | ------------------------- | --------------------------------------- |
-| Easy setup: **[npx dexie-cloud create](/cloud/#getting-started)** | &#10003;                  | &#10003;                  | See [these docs](docs/premium-software) |
-| All main features included                                        | &#10003;                  | &#10003;                  | &#10003;                                |
-| [Customizable authentication](#customizable-authentication)       | &#10003;                  | &#10003;                  | &#10003;                                |
-| [Replaceable authentication](#replaceable-authentication)         | &#10003;                  | &#10003;                  | &#10003;                                |
-| [Custom email templates](/cloud/docs/custom-emails)               | -                         | &#10003;                  | &#10003;                                |
-| Vertically scalable                                               | -                         | &#10003;                  | &#10003;                                |
-| Horizontally scalable                                             | -                         | &#10003;                  | &#10003;                                |
-| Max Number of databases                                           | Unlimited, free of charge | Unlimited, free of charge | Unlimited, free of charge               |
-| [Evaluation users](#evaluation-users) (your end users)            | Unlimited, free of charge | Unlimited, free of charge | Unlimited, free of charge               |
-| [Demo accounts](#demo-accounts) (for showcasing app)              | Unlimited, free of charge | Unlimited, free of charge | Unlimited, free of charge               |
-| [Production users](#production-users) (your end users)            | 3 seats, free of charge   | USD $12/mo per 100 seats  | Unlimited, free of charge               |
-| Full source code                                                  | -                         | -                         | Available as an option                  |
-| Access to private Git repo                                        | -                         | -                         | Available as an option                  |
-| One-time license fee                                              | -                         | -                         | From USD $4,000 incl. 1-year support    |
-| Optional continuous support                                       | -                         | -                         | From USD $3,500 per additional year     |
-
-_Pricing as of August 2023. In the EU, prices are in EUR instead of USD. VAT may be added for private non-business buyers based on local tax rules._
+|                                                                   | Free (SaaS)               | Production (SaaS)          | On-prem                                 |
+| ----------------------------------------------------------------- | ------------------------- | -------------------------- | --------------------------------------- |
+| Easy setup: **[npx dexie-cloud create](/cloud/#getting-started)** | ✔                         | ✔                          | See [these docs](docs/premium-software) |
+| All main features included                                        | ✔                         | ✔                          | ✔                                       |
+| [Customizable authentication](#customizable-authentication)       | ✔                         | ✔                          | ✔                                       |
+| [Replaceable authentication](#replaceable-authentication)         | ✔                         | ✔                          | ✔                                       |
+| [Custom email templates](/cloud/docs/custom-emails)               | -                         | ✔                          | ✔                                       |
+| Vertically scalable                                               | -                         | ✔                          | ✔                                       |
+| Horizontally scalable                                             | -                         | ✔                          | ✔                                       |
+| Max Number of databases                                           | Unlimited, free of charge | Unlimited, free of charge  | Unlimited, free of charge               |
+| [Evaluation users](#evaluation-users) (your end users)            | Unlimited, free of charge | Unlimited, free of charge  | Unlimited, free of charge               |
+| [Demo accounts](#demo-accounts) (for showcasing app)              | Unlimited, free of charge | Unlimited, free of charge  | Unlimited, free of charge               |
+| [Production users](#production-users) (your end users)            | 3 seats, free of charge   | USD $12/mo per 100 seats   | Unlimited, free of charge               |
+| Storage                                                           | Max 100 MB                | Max 200 GB per 100 users   | Limited by your installation only       |
+| Simultanous Client Connection                                     | Max 10                    | Max 200 per 100 users      | Limited by your installation only       |
+| Sync rate-limits                                                  | 50 per 5 mins per user    | 200 per 5 minutes per user | Configurable                            |
+| Software updates (client)                                         | ✔ (via npm)               | ✔ (via npm)                | ✔ (via npm )                            |
+| Software updates (server)                                         | N/A                       | N/A                        | ✔ (via git or npm)                      |
+| Full source code                                                  | -                         | -                          | In Gold version only                    |
+| Access to private Git repo                                        | -                         | -                          | In Gold version only                    |
+| Support options                                                   | Free                      | Production                 | On-Prem Silver or On-Prem Gold          |
 
 ## Free
 

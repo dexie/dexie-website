@@ -1,0 +1,110 @@
+<style>
+  .pricing-box-height {
+    min-height: 370px;
+  }
+  .pricing-box {
+    border: 1px solid #aaa;
+    border-radius: 9px;
+    padding: 20px;
+    margin: 20px 5px;
+    text-align: left;
+    min-height: 370px;
+    background-color: #ddd;
+    cursor: pointer;
+    color: white;
+    opacity: 0.8;
+    user-select: none;
+  }
+
+  .pricing-box:hover {
+    opacity: 1;
+  }
+    
+  .pricing-box h4 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #eee;
+  }
+  .pricing-box p.price {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .pricing-box ul.features {
+    list-style: none;
+    padding: 0;
+    height: auto;
+  }
+  .pricing-box ul.features li {
+    padding: 3px 0;
+    position: relative;
+    padding-left: 30px; /* Add space for the custom bullet point */
+  }
+  .pricing-box ul.features li::before {
+    content: '✔'; 
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%); /* Center the bullet point vertically */
+  }
+  .pricing-box p.explanation {
+    font-size: 18px;
+    font-style: italic;
+    font-family: Georgia, Times, 'Times New Roman', serif;
+    margin-top: 20px;
+    text-align: center;
+  }
+  .pricing-box a {
+    color: white;
+  }
+  .free {
+    background-color: #6dc06d;
+  }
+  .production {
+    background-color: #156999;
+  }
+  .onprem-silver {
+    background-color: #727878;
+  }
+  .onprem-gold {
+    background-color: #7d6f1d;
+  }
+</style>
+<div class='container'>
+  <div class='row'>
+    <h1 style="text-align: center; margin: 0 0 10px 0;">Dexie Cloud Pricing</h1>
+  </div>
+  <div class='row'>
+    <div class='col-md-3'>
+      {% include pricing-card-free.html %}
+    </div>
+    <div class='col-md-3'>
+      {% include pricing-card-prod.html %}
+    </div>
+    <div class='col-md-3'>
+      {% include pricing-card-silver.html %}
+    </div>
+    <div class='col-md-3'>
+      {% include pricing-card-gold.html %}
+    </div>
+  </div>
+  <div class='row'>
+    <p style="font-size: 12px; text-align: center;">
+      (*) The price is $12 per 100 users. As your userbase grows, upgrade your subscription for $12/mo per pack of 100 production users.<br/>
+      (**) By default, storage limit is 100 GB per 100 users, but additional 100 GB can be purchase for $5/mo.<br/>
+      (***) Serve up to 200 Web Socket connections per 100 users. This is more than you'll ever need, but if you do, you can contact us for a custom plan.
+    </p>
+  </div>
+</div>
+<script>
+  document.querySelectorAll('.pricing-box').forEach(box => {
+    const dataSection = box.getAttribute('data-section');
+    box.onclick = () => {
+      document.querySelector(dataSection)?.scrollIntoView({behavior:'smooth'});
+      history.pushState(null, null, dataSection);
+    };
+  });
+</script>

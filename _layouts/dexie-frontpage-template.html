@@ -84,20 +84,8 @@
 			new Parallax(document.getElementById('parallax'));
 			var lazyLoadInstance = new LazyLoad({});
 			document.addEventListener("DOMContentLoaded", prismHighlight.highlight);
-      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-					var href = this.getAttribute("href");
-					if (href === "#") return;
-					var elem = document.querySelector(href);
-					if (elem) {
-						e.preventDefault();
-						elem.scrollIntoView({
-							behavior: "smooth",
-						});
-					}
-        });
-      });
 		</script>
+		<script src="/assets/js/scroll-to-anchor.js"></script>
 		{% include google-analytics.html %}
 		<script async defer src='//unpkg.com/dexie'></script>
 	</body>

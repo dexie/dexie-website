@@ -1,5 +1,5 @@
 <header class="site-header">
-  <div class="jumbotron docs-page-jumbotron">
+  <div class="jumbotron docs-page-jumbotron {{ page.bannerClass }}">
     <div class="container">
       <!-- <div style="position:relative; margin:0;padding:0; width: 100%;">
         <a href="/cloud/" style="position: absolute; top: 0; right: 200px;">
@@ -8,6 +8,9 @@
       </div> -->
       
       {% if page.pageHeader %}
+      {% if page.dexieIcon %}
+      <img src="/assets/images/dexie-logo-icon.svg" class="dexie-logo-icon" />
+      {% endif %}
       <h1>
       {{ page.pageHeader }}
       </h1>
@@ -17,6 +20,7 @@
         <a href="/">Dexie.js Docs</a>
       </h1>
       {% endif %}
+
       {% if page.dateStamp %}
       <p class="date-stamp">{{ page.dateStamp }}</p>
       {% endif %}

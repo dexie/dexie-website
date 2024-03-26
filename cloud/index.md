@@ -2,21 +2,26 @@
 layout: dexie-cloud-landing-page
 title: 'Dexie Cloud'
 ---
-## Start coding your sync-ready app today
 
-You can start creating your awesome app based on Dexie Cloud **today** - even before you've been accepted to join the private beta. Declare your tables with the '@' prefix and install the addon. Declare the [access control tables](docs/access-control#access-control-tables) and client side wrappers for CRUD operations. Use the same Dexie API you are used to and create your app logic. Let the multi-user experience with sync, access control and realtime collaboration features start working as soon as Dexie Cloud is available for you.
+## The Free Edition
 
-To prepare your app for Dexie Cloud:
+All databases are automatically on the **Free** edition with <b>all features</b> including...
 
-1. Install the alpha version of [dexie-cloud-addon](https://npmjs.com/dexie-cloud-addon) package so you can use <span style="color: #ce9178;">'@'</span>-prefixed IDs (auto-generated global IDs).
-2. Optionally declare [access control tables](docs/access-control#access-control-tables) in your new db version and use them to support
-   shared objects in teams or between users (see [sharing a ToDo list](/cloud/docs/access-control#example-sharable-todo-list) or [manage projects](/cloud/docs/access-control#example-a-simple-project-management-model)). The access is not yet checked nor synced and their content will be treated as normal app tables for now.
+- [REST-api](/cloud/docs/rest-api)
+- [Authentication](/cloud/docs/authentication)
+- [Access Control](/cloud/docs/access-control)
+- [Dexie Cloud Manager](https://manager.dexie.cloud)
+- [Dexie Cloud CLI](/cloud/docs/cli)
 
-You will be able to code and locally test your application, taking advantage of the features in Dexie Cloud once you'll join the beta or Dexie Cloud is released publicly.
+Continue developing your app as long as it takes! Its' forever free.
 
-When launching your app, our extremely simple [pricing](/cloud/pricing) makes it risk free to grow both small and big.
+## Only $ 3 per month to go live!
 
-<hr/>
+<a href="/cloud/pricing">See our pricing page...</a>
+
+When its time to launch your app - to a smaller audience or to the entire world, it's time to select an edition to purchase
+
+<a class='btn btn-success' href='/cloud/pricing' role='button'>Click here to select an edition to purchase &raquo;</a>
 
 ## Want to know more?
 
@@ -32,6 +37,6 @@ When launching your app, our extremely simple [pricing](/cloud/pricing) makes it
 
 <i class="fa fa-code" aria-hidden="true"></i> [Create a role-based access controlled project management model](docs/access-control#example-a-simple-project-management-model)
 
-<i class="fa fa-code" aria-hidden="true"></i> [Integrate with PassportJS authentication](docs/db.cloud.configure()#example-integrate-custom-authentication)
+<i class="fa fa-code" aria-hidden="true"></i> [Integrate with PassportJS authentication](<docs/db.cloud.configure()#example-integrate-custom-authentication>)
 
 <br/>

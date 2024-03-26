@@ -656,7 +656,6 @@ input.task-list-item-checkbox {
 
 .one-page-high {
   min-height: 100vh;
-  position: relative;
 }
 
 p.quote {
@@ -694,4 +693,94 @@ img.headshot {
   height: 200px;
   margin: 0 auto;
   display: block;
+}
+
+p.date-stamp {
+  font-size: 14px;
+}
+
+/** Pricing table */
+
+.pricing-box-height {
+  min-height: 370px;
+}
+.pricing-box {
+  border: 1px solid #aaa;
+  border-radius: 9px;
+  padding: 20px;
+  margin: 20px 5px;
+  text-align: left;
+  min-height: 370px;
+  background-color: #ddd;
+  cursor: pointer;
+  color: white;
+  opacity: 0.8;
+  user-select: none;
+}
+
+.pricing-box:hover {
+  opacity: 1;
+}
+
+.pricing-box h4 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #eee;
+}
+.pricing-box p.price {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.pricing-box p.under-price {
+  font-size: 12px;
+  font-style: italic;
+  margin-top: -26px;
+  margin-left: 24px;
+  text-align: center;
+}
+.pricing-box ul.features {
+  list-style: none;
+  padding: 0;
+  height: auto;
+}
+.pricing-box ul.features li {
+  padding: 3px 0;
+  position: relative;
+  padding-left: 30px; /* Add space for the custom bullet point */
+}
+.pricing-box ul.features li::before {
+  content: '✔';
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%); /* Center the bullet point vertically */
+}
+.pricing-box p.explanation {
+  font-size: 18px;
+  font-style: italic;
+  font-family: Georgia, Times, 'Times New Roman', serif;
+  margin-top: 20px;
+  text-align: center;
+}
+.pricing-box a {
+  color: white;
+}
+.free {
+  background-color: #6dc06d;
+}
+.production {
+  background-color: #156999;
+}
+.scaled {
+  background-color: #7e4a9a;
+}
+.onprem-silver {
+  background-color: #727878;
+}
+.onprem-gold {
+  background-color: #7d6f1d;
 }

@@ -63,13 +63,15 @@ This edition is hosted and forever free. Let your app accept unlimited number of
 
 This edition is hosted and starts at USD $12 per month for 100 seats. It works similarly to the [Free](#free) edition but with more seats and auto-scaling. Continue enjoying free evaluation users on top of the 100 production seats. You control which users occupy production seats via the Dexie Cloud Management app or REST API. Integrate this REST API with the web hooks of your payment gateway (e.g., Stripe, Paypal) to manage seats based on your subscription with customers. When the number of production end users reaches 100, you can manually purchase more seat-packs or let the subscription automatically upgrade or downgrade as needed.
 
-<a class='btn btn-success' href='/cloud/purchase/production' role='button'>Get it now &raquo;</a>
+<a class='btn btn-success' href='https://buy.stripe.com/14k9CEgSne5D1BS8ww' role='button'>Buy now &raquo;</a>
 
 ## Dexie Cloud Server Software
 
 Purchase the software (optionally with full source code and private Git access) and utilize it as you wish (modify source code or taylor it for your systems - anything except [competing with us](server-software-license-terms)). Serve millions of users without additional fees. Host it on a cloud provider of your choice or your own hardware. The server is compatible with cloud platforms like Amazon AWS and Microsoft Azure. The package includes one year of chat- and email support and software updates. For continuous support, the yearly fee covers ongoing updates, chat- and email support.
 
-<a class='btn btn-primary' href='/cloud/docs/premium-software' role='button'>Read more... &raquo;</a>
+<a href='/cloud/docs/premium-software'>Read more... &raquo;</a>
+
+<a class='btn btn-success' href='https://buy.stripe.com/8wM8yAfOjf9HbcsfZ0' role='button'>Buy now &raquo;</a>
 
 <!-- <a class='btn btn-success' href='/cloud/purchase/software' role='button'>Get it now &raquo;</a> -->
 

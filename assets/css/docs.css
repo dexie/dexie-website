@@ -2,46 +2,50 @@ header.site-header {
   position: relative;
 }
 #star-button {
-	position: absolute;
-	bottom: 2px;
-	right: 6px;
-	z-index: 90;
+  position: absolute;
+  bottom: 2px;
+  right: 6px;
+  z-index: 90;
 }
 .anchorlink {
-	float: left;
-	padding-left: 1.2em;
-	margin-left: -2.4em;
-	max-width: 0;
-	max-height: 0;
-	overflow: hidden;
-	opacity: 0;
-	font-weight: normal;
-	transition: opacity 0.5s;
-	color: #444;
+  float: left;
+  padding-left: 1.2em;
+  margin-left: -2.4em;
+  max-width: 0;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  font-weight: normal;
+  transition: opacity 0.5s;
+  color: #444;
 }
 
 .anchorable {
-	padding-left: 1.2em;
-	margin-left: -1.2em;
+  padding-left: 1.2em;
+  margin-left: -1.2em;
 }
 
 .anchorable:hover > .anchorlink,
 .anchorlink:hover {
-	max-width: unset;
-	max-height: unset;
-	opacity: 0.9;
+  max-width: unset;
+  max-height: unset;
+  opacity: 0.9;
 }
 .docs-page-jumbotron {
-	padding: 15px 15px 15px 15px;
+  padding: 15px 15px 15px 15px;
 }
 
 .docs-page-jumbotron.dexie-cloud-docs {
-	background-image: linear-gradient( #5471e9, #1e3fd3,#4b965f);
+  background-image: linear-gradient(#5471e9, #1e3fd3, #4b965f);
+}
+
+.docs-page-jumbotron.announcement-banner {
+  background-image: linear-gradient(#ba46d1, #ebc1f3, #ba46d1);
 }
 
 .docs-page-jumbotron.dexie-cloud {
-	background: transparent;
-	color: white;
+  background: transparent;
+  color: white;
 }
 
 .dexie-cloud .switch input:checked + .slider {
@@ -49,30 +53,30 @@ header.site-header {
 }
 
 @media screen and (min-width: 768px) {
-	.docs-page-jumbotron {
-		padding: 70px 0 40px 0;
-	}
+  .docs-page-jumbotron {
+    padding: 70px 0 40px 0;
+  }
 }
 
 .dexie-cloud a.getstarted.btn {
-	margin: 0 0 16px 0;
+  margin: 0 0 16px 0;
 }
 
 .docs-page-jumbotron.dexie-cloud-docs p {
-	font-size: 18px;
-	font-weight: normal;
-	font-style: italic;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: italic;
 }
 
 a.getstarted.selected {
-	background-color: #fff;
-	color: #222;
+  background-color: #fff;
+  color: #222;
 }
 
 pre > code span.token.comment {
-	color: #4b965f;
+  color: #4b965f;
 }
 
-.row p>img {
-	max-width: 100%;
+.row p > img {
+  max-width: 100%;
 }

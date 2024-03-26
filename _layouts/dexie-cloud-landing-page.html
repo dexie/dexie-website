@@ -125,36 +125,34 @@ prismStyle: 'vscode-dark'
               will output to the console and stored in a new local file <span style="font-family: monospace;">dexie-cloud.json</span>.
             <span style="font-style: italic;">See the <a href="/cloud/docs/cli">CLI docs</a>.</span></p>
             <h3>2. Whitelist your app origin(s)</h3>
-            <pre class="command-line language-bash" data-prompt="~/my-web-app $"><code style="margin:0;">npx dexie-cloud whitelist http://localhost:8080</code></pre>
+            <pre class="command-line language-bash" data-prompt="~/my-web-app $"><code style="margin:0;">npx dexie-cloud whitelist http://localhost:3000</code></pre>
             <h3>3. Upgrade dexie + install dexie-cloud-addon</h3>
-            <pre class="command-line language-bash" data-prompt="~/my-web-app $"><code style="margin:0;">npm install dexie@next
+            <pre class="command-line language-bash" data-prompt="~/my-web-app $"><code style="margin:0;">npm install dexie@latest
 npm install dexie-cloud-addon</code></pre>
           </div>
           <div class='col-md-6'>
             <h3>4. Update your DB declaration</h3>
-            <p><i>The dexie-cloud specific parts are highlighted below:</i></p>
             <pre><code class="language-javascript" id="update-db-declaration" style="margin:0;">  import Dexie from "dexie";
   import dexieCloud from "dexie-cloud-addon";
 
-  // Declare your DB
-  const db = new Dexie('MySyncedDB', {addons: [dexieCloud]});
+  const db = new Dexie('SyncedFriends', {addons: [dexieCloud]});
+
   db.version(1).stores({
-    // Prefix with '@' to auto-generate globally unique keys
-    // (optional)
-    todoLists: '@id, title', // '@' = generated global ID
-    todoItems: 'id, title, done, todoListId'
+    friends: '++id, name, age' // '++' = auto-incremented ID
+    friends: '@id, name, age' // '@' = auto-generated global ID
   });
 
   // Connect your dexie-cloud database:
   db.cloud.configure({
     databaseUrl: "https://&lt;yourdatabase&gt;.dexie.cloud",
-    requireAuth: true
+    requireAuth: true // optional
   });</code></pre>
   <script>
     prismHighlight('update-db-declaration', [
       'import dexieCloud from "dexie-cloud-addon";',
       "{addons: [dexieCloud]}",
-      "@id",
+      {text: "friends: '++id, name, age' // '++' = auto-incremented ID", action: 'strikethrough'},
+      "friends: '@id, name, age' // '@' = auto-generated global ID",
       ///(\/\/.*)/g, // line comments
       /db\.cloud\.configure\(\{(.|\n)*\}\)\;/g
 
@@ -167,10 +165,10 @@ npm install dexie-cloud-addon</code></pre>
           </div>
           </div>
 
-          <button style="width: fit-content" id="sign-up-beta-btn" class='sign-up-beta-btn getstarted btn btn-success btn-lg' href='/cloud/#getting-started' role='button'>
+          <!--<button style="width: fit-content" id="sign-up-beta-btn" class='sign-up-beta-btn getstarted btn btn-success btn-lg' href='/cloud/#getting-started' role='button'>
             <span class='glyphicon glyphicon-flash'></span>
             <span>Try it now!</span>
-          </button>
+          </button>-->
     
           <h3>5. Done!</h3>
           <p>Enjoy.</p>
@@ -199,7 +197,6 @@ npm install dexie-cloud-addon</code></pre>
         
       {{ content }}
     </main>
-
     {% include footer.html %}
 
     <script src="/assets/js/prism-2020.js"></script>
@@ -210,6 +207,7 @@ npm install dexie-cloud-addon</code></pre>
     <script>
       document.addEventListener("DOMContentLoaded", prismHighlight.highlight);
     </script>
+    <script src="/assets/js/scroll-to-anchor.js"></script>
 
     {% include google-analytics.html %}
 

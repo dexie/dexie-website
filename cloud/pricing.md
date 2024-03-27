@@ -9,7 +9,7 @@ This support option is included when subscribing to Dexie Cloud Production (SaaS
 
 ## Silver Support
 
-This support option is available for the On-Prem editions and includes Email- and chat support. One year of Silver Support is included when purchasing Dexie Cloud On-Prem Silver, but it can also be purchased separately to extend the support after purchasing Dexie Cloud On-Prem Gold.
+This support option is available for the On-Prem editions and includes Email- and chat support. One year of Silver Support is included when purchasing Dexie Cloud On-Prem Silver.
 
 Price: $695 per year.
 
@@ -20,6 +20,7 @@ Every customer is different and require different levels of support. With the Go
 The basic level of Gold Support that is included in On-Prem Gold edition includes:
 
 - SLA 16 business hours
+- Access to private GIT repo of Dexie Cloud Server for source code updates
 - Chat
 - Email
 - Video

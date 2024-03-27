@@ -37,7 +37,7 @@ If nothing is configured, dexie-cloud-addon will provide a default login GUI whe
 1. Configure it to disable built-in GUI: `db.cloud.configure({customLoginGui: true})`
 2. Observe `db.cloud.userInteraction` somewhere the root component of your app so that it is always listened to. Whenever this observable emits something else than undefined, show a dialog that corresponds to what it requests.
 
-Here's an example based on dexie-cloud-addon@4.0.1-beta.52 or later.
+Here's an example based on dexie-cloud-addon@4.0.1 or later.
 
 ```tsx
 import { useState } from 'react';

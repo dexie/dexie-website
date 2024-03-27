@@ -10,7 +10,7 @@ Add-on (plugin) for connecting Dexie database with a database in the cloud, [Dex
 #### Install dexie-cloud-addon
 
 ```
-npm install dexie@^4.0.1-beta.1 # Only dexie version >=4 supports dexie-cloud-addon
+npm install dexie@latest
 npm install dexie-cloud-addon@latest
 ```
 

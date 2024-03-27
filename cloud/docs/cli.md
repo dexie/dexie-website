@@ -363,8 +363,6 @@ Demo users are users without passwords that can be used to showcase your applica
 
 ### Import file example for sealing the schema
 
-_Since dexie-cloud@>=1.1.0-beta.2_
-
 Sealing the schema means locking the schema from letting clients add new tables as a step in a sync call.
 
 ```json
@@ -375,8 +373,6 @@ Sealing the schema means locking the schema from letting clients add new tables 
 
 ### Import file example for unsealing the schema
 
-_Since dexie-cloud@>=1.1.0-beta.2_
-
 ```json
 {
   "sealed": false
@@ -384,8 +380,6 @@ _Since dexie-cloud@>=1.1.0-beta.2_
 ```
 
 ### Import file example for updating a sealed schema
-
-_Since dexie-cloud@>=1.1.0-beta.2_
 
 When a database schema is sealed, it won't tolerate the addition of new tables, so adding a table in the client code will have to be accompanied with importing the new schema into Dexie Cloud before the new clients will succeed to sync their data.
 

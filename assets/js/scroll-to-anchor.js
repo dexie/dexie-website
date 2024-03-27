@@ -1,10 +1,15 @@
 document.querySelectorAll('a[href]').forEach((anchor) => {
-  var href = anchor.getAttribute("href");
+  let href = anchor.getAttribute("href");
+  if (!/#/.test(href)) return;
   if (href === "#") return;
-  if (href.startsWith(location.pathname + '#' || href.startsWith(location.pathname + '/#'))) {
+  let currentPath = location.pathname;
+  if (currentPath.endsWith('/')) {
+    currentPath = currentPath.slice(0, -1);
+  }
+  if (href.startsWith(currentPath + '#' || href.startsWith(currentPath + '/#'))) {
     href = href
-      .replace(location.pathname + '/', '')
-      .replace(location.pathname, '');
+      .replace(currentPath + '/', '')
+      .replace(currentPath, '');
   }
   if (href.startsWith('#')) {
     anchor.addEventListener("click", function (e) {

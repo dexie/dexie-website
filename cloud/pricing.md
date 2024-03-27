@@ -9,7 +9,11 @@ This support option is included when subscribing to Dexie Cloud Production (SaaS
 
 ## Silver Support
 
-This support option is available for the On-Prem editions and includes Email- and chat support. One year of Silver Support is included when purchasing Dexie Cloud On-Prem Silver.
+This support option is available for the On-Prem Silver Edition. One year of Silver Support is included when purchasing Dexie Cloud On-Prem Silver and includes:
+
+- Chat
+- Email
+- Github issues
 
 Price: $695 per year.
 
@@ -21,6 +25,7 @@ The basic level of Gold Support that is included in On-Prem Gold edition include
 
 - SLA 16 business hours
 - Access to private GIT repo of Dexie Cloud Server for source code updates
+- Private Github issues
 - Chat
 - Email
 - Video
@@ -32,27 +37,27 @@ Price (basic level): $3,495/yr
 
 For more details, check out [this blog post](https://medium.com/dexie-js/dexie-cloud-subscription-model-cbf9a709ce7).
 
-|                                                                   | Free (SaaS)               | Production (SaaS)          | On-prem                                 |
-| ----------------------------------------------------------------- | ------------------------- | -------------------------- | --------------------------------------- |
-| Easy setup: **[npx dexie-cloud create](/cloud/#getting-started)** | ✔                         | ✔                          | See [these docs](docs/premium-software) |
-| All main features included                                        | ✔                         | ✔                          | ✔                                       |
-| [Customizable authentication](#customizable-authentication)       | ✔                         | ✔                          | ✔                                       |
-| [Replaceable authentication](#replaceable-authentication)         | ✔                         | ✔                          | ✔                                       |
-| [Custom email templates](/cloud/docs/custom-emails)               | -                         | ✔                          | ✔                                       |
-| Vertically scalable                                               | -                         | ✔                          | ✔                                       |
-| Horizontally scalable                                             | -                         | ✔                          | ✔                                       |
-| Max Number of databases                                           | Unlimited, free of charge | Unlimited, free of charge  | Unlimited, free of charge               |
-| [Evaluation users](#evaluation-users) (your end users)            | Unlimited, free of charge | Unlimited, free of charge  | Unlimited, free of charge               |
-| [Demo accounts](#demo-accounts) (for showcasing app)              | Unlimited, free of charge | Unlimited, free of charge  | Unlimited, free of charge               |
-| [Production users](#production-users) (your end users)            | 3 seats, free of charge   | USD $12/mo per 100 seats   | Unlimited, free of charge               |
-| Storage                                                           | Max 100 MB                | Max 200 GB per 100 users   | Limited by your installation only       |
-| Simultanous Client Connection                                     | Max 10                    | Max 200 per 100 users      | Limited by your installation only       |
-| Sync rate-limits                                                  | 50 per 5 mins per user    | 200 per 5 minutes per user | Configurable                            |
-| Software updates (client)                                         | ✔ (via npm)               | ✔ (via npm)                | ✔ (via npm )                            |
-| Software updates (server)                                         | N/A                       | N/A                        | ✔ (via git or npm)                      |
-| Full source code                                                  | -                         | -                          | In Gold version only                    |
-| Access to private Git repo                                        | -                         | -                          | In Gold version only                    |
-| Support options                                                   | Free                      | Production                 | On-Prem Silver or On-Prem Gold          |
+|                                                                   | Free (SaaS)               | Production (SaaS)                              | On-prem Silver / Gold                                       |
+| ----------------------------------------------------------------- | ------------------------- | ---------------------------------------------- | ----------------------------------------------------------- |
+| Easy setup: **[npx dexie-cloud create](/cloud/#getting-started)** | ✔                         | ✔                                              | See [these docs](docs/premium-software)                     |
+| All main features included                                        | ✔                         | ✔                                              | ✔                                                           |
+| [Customizable authentication](#customizable-authentication)       | ✔                         | ✔                                              | ✔                                                           |
+| [Replaceable authentication](#replaceable-authentication)         | ✔                         | ✔                                              | ✔                                                           |
+| [Custom email templates](/cloud/docs/custom-emails)               | -                         | ✔                                              | ✔                                                           |
+| Vertically scalable                                               | -                         | ✔                                              | ✔                                                           |
+| Horizontally scalable                                             | -                         | ✔                                              | ✔                                                           |
+| Max Number of databases                                           | Unlimited, free of charge | Unlimited, free of charge                      | Unlimited                                                   |
+| [Evaluation users](#evaluation-users) (your end users)            | Unlimited, free of charge | Unlimited, free of charge                      | Unlimited                                                   |
+| [Demo accounts](#demo-accounts) (for showcasing app)              | Unlimited, free of charge | Unlimited, free of charge                      | Unlimited                                                   |
+| [Production users](#production-users) (your end users)            | 3 seats, free of charge   | USD $3/mo per 25 seats                         | Unlimited                                                   |
+| Storage                                                           | 100 MB                    | 100 GB / 100 users. Extendable for $0.05 / GB. | Unlimited                                                   |
+| Simultanous Client Connections                                    | 10                        | 200 per 100 users                              | Unlimited                                                   |
+| Sync rate-limits                                                  | 50 per 5 mins per user    | 200 per 5 minutes per user                     | Configurable                                                |
+| Software updates (client)                                         | ✔ (via npm)               | ✔ (via npm)                                    | ✔ (via npm)                                                 |
+| Software updates (server)                                         | N/A                       | N/A                                            | ✔ (via git, npm or download)                                |
+| Full source code                                                  | -                         | -                                              | [On-Prem Gold](#gold-edition)                               |
+| Access to private Git repo                                        | -                         | -                                              | [On-Prem Gold](#gold-edition)                               |
+| Support options                                                   | Github or Stackoverflow   | Email / chat                                   | [Silver](#silver-support)- or [Gold](#gold-support) Support |
 
 ## Free
 

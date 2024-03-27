@@ -5,11 +5,13 @@ title: 'Road Map: Dexie Cloud'
 
 <img src="http://dexie.org/assets/images/fireworks.png" />
 
-[Dexie Cloud](https://dexie.org/cloud/) is now **Feature Complete** and can be used in production apps for existing customers.
+[Dexie Cloud](https://dexie.org/cloud/) is now [publicly released](/announcements/2024-03-27) and can be used in production apps.
 
-_Until the public release date is set, all existing beta customers can use the service for free. Evaluation dates have been extended for all customer end users in order to guarantee continous service until the official release date._
+For backlog, future and current work, see [https://github.com/orgs/dexie/projects](https://github.com/orgs/dexie/projects).
 
-_A newsletter and blog post will reveal the official release date. For continous production level service, please prepare to purchase a subscription some time in Februari 2024. All existing beta customers will be able to continue the service without purchasing a subscription but with a limited number of production end users._
+---
+
+# Old Milestones:
 
 ## Milestone 1 - Private beta
 
@@ -105,11 +107,11 @@ Target release date: ~~Jan 10, 2022.~~ May 31, 2022.
 
 # Milestone 7 - Public Release
 
-- [ ] Release new version (prod version) of the software to On-Prem customers
-- [ ] Dexie Cloud Manager officially released
-- [ ] Communicate the release in a newsletter to everyone in the waitlist
-- [ ] Marketing campaign launched
-- [ ] "beta" removed from web site
-- [ ] Waitlist closed
-- [ ] Anyone can create databases and use the Free version
-- [ ] Anyone can purchase subscriptions
+- [x] Release new version (prod version) of the software to On-Prem customers
+- [x] Dexie Cloud Manager officially released
+- [x] Communicate the release in a newsletter to everyone in the waitlist
+- [x] Marketing campaign launched
+- [x] "beta" removed from web site
+- [x] Waitlist closed
+- [x] Anyone can create databases and use the Free version
+- [x] Anyone can purchase subscriptions

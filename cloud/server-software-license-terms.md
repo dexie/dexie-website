@@ -5,11 +5,13 @@ title: 'Server Software License Terms'
 
 # Terms of Our Server Software License
 
-The **Dexie Cloud Server software** includes binaries, source code, and documentation necessary to deploy Dexie Cloud on your own infrastructure.
+The **Dexie Cloud On-Prem Silver Software** includes binaries and documentation necessary to deploy Dexie Cloud on your own infrastructure.
 
-## Purpose of Our Software License
+The **Dexie Cloud On-Prem Gold Software** includes all in Silver plus source code and access to our private git repository.
 
-Our software license aims:
+## Purpose of Our Software Licenses
+
+Our software licenses aims:
 
 - To grant you complete control over your infrastructure, including locations, cloud providers, hardware, etc.
 - To prevent vendor lock-in and promote freedom in customizing the software to suit your application's needs.

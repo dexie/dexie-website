@@ -720,7 +720,7 @@ p.date-stamp {
 
 @media (max-width: 768px) {
   .pricing-box {
-    margin: 0 0;
+    margin: 20px 0;
     padding: 5px;
   }
 }

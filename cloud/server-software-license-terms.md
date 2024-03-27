@@ -1,7 +1,8 @@
 ---
-layout: dexie-cloud-pricing
-title: "Server Software License Terms"
+layout: dexie-cloud
+title: 'Server Software License Terms'
 ---
+
 # Terms of Our Server Software License
 
 The **Dexie Cloud Server software** includes binaries, source code, and documentation necessary to deploy Dexie Cloud on your own infrastructure.
@@ -22,7 +23,7 @@ However, certain limitations still apply under this license, as detailed below.
 
 This license prohibits the copying, selling, or other forms of redistributing the source code or binaries to other companies. While the software can be used to serve your application globally without extra costs, you are not permitted to distribute or sell the Dexie Cloud Server software itself. A purchased Dexie Cloud Server license is exclusively for internal use by the purchasing company, functioning as a storage platform for company-owned application(s).
 
-*Note: This restriction pertains to Dexie Cloud Server (private source), not Dexie.js (open source, Apache 2.0 licensed).*
+_Note: This restriction pertains to Dexie Cloud Server (private source), not Dexie.js (open source, Apache 2.0 licensed)._
 
 If you require a redistribution license, kindly [get in touch](mailto:business@dexie.org).
 

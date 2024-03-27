@@ -3,8 +3,6 @@ layout: docs-dexie-cloud
 title: 'Dexie Cloud REST API'
 ---
 
-This doc page is under construction.
-
 This page documents the REST API that every database in Dexie Cloud has.
 
 ## Endpoints

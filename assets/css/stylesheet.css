@@ -718,6 +718,13 @@ p.date-stamp {
   user-select: none;
 }
 
+@media (max-width: 768px) {
+  .pricing-box {
+    margin: 0 0;
+    padding: 5px;
+  }
+}
+
 .pricing-box:hover {
   opacity: 1;
 }

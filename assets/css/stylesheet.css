@@ -30,7 +30,7 @@ h1[id]::before, h2[id]::before, h3[id]::before, h4[id]::before, h5[id]::before, 
 }
 
 #parallax {
-  height: 350px;
+  min-height: 350px;
   padding: 65px 0 0;
   overflow: hidden;
   color: #fff;
@@ -41,6 +41,12 @@ h1[id]::before, h2[id]::before, h3[id]::before, h4[id]::before, h5[id]::before, 
 #parallax .btn,
 #star-button {
   text-shadow: none;
+}
+
+@media (max-width: 767px) {
+  #star-button {
+    display: none;
+  }
 }
 
 #parallax .parallax-wrap {
@@ -664,6 +670,12 @@ p.quote {
   color: #777;
   font-size: 24px;
   font-family: 'Times New Roman', Times, serif;
+}
+@media (max-width: 768px) {
+  p.quote {
+    padding: 10px;
+    font-size: 18px;
+  }
 }
 p.quote-author {
   text-align: right;

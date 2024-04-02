@@ -223,6 +223,15 @@ The files dexie-cloud.json and dexie-cloud.key has to be in the current or a par
 
 Electron apps are whitelisted as "app:&lt;Application Name&gt;", where "Application Name" will be included in OTP email messages as information for the user about the app that the OTP should be used in and a warning from using it on other apps or web sites (to make user aware of phishing attacks). As Electron apps provide a "file:" based origin to its servers, there is currently no way to distinguish between different electron apps using the same DB. There is therefore no point having more than one "app:" based origin. Future versions may provide a way for multiple electron apps using the same DB though.
 
+#### Capacitor apps
+
+* For Capacitor Android builds, whitelist "https://localhost"
+* For Capacitor iOS builds, whitelist "capacitory://localhost"
+
+#### Detecting which address to whitelist
+
+The address to list should be the same as the value of `location.origin` on the client-side javascript. On normal web sites, this will be the same as the official URL to your fully qualified domain name (FQDN), starting with "https://" + FQDN. Note that your app need to be served from "https" and not "http", except for localhost where "http" is accepted. This is due to security limitations in the DOM environment. The reason for "localhost" being treated differently is for making it possible to have all features on while developing. For other app environments such as Electron, Capacitor, Ionic, Quasar etc, origins can be different for different devices.
+
 #### Samples
 
 ```

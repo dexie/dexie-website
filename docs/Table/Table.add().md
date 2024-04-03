@@ -24,9 +24,9 @@ table.add(item, [key])
 
 ### Remarks
 
-Add given object to store. If an object with the same primary key already exist, the operation will fail and returned promise [catch()](/docs/Promise/Promise.catch()) callback will be called with the error object. If the operation succeeds, the returned promise [then()](/docs/Promise/Promise.then()) callback receives the result of the `add` request on the object store, the id of the inserted object.
+Add a given object to the object store. If an object with the same primary key already exists, then the operation will fail and the returned promise [catch()](/docs/Promise/Promise.catch()) callback will be called with the error object. If the operation succeeds, then the returned promise [then()](/docs/Promise/Promise.then()) callback receives the result of the `add` request on the object store, i.e. the `id` of the inserted object.
 
-The optional second *key* argument must only be used if your table uses [outbound keys](/docs/inbound#examples-of-outbound-primary-key). If providing the key argument on a table with [inbound](/docs/inbound) keys, the operation will fail and the returned promise will be a rejection.
+The optional second *key* argument must only be used if your table uses [outbound keys](/docs/inbound#examples-of-outbound-primary-key). If providing the *key* argument on a table with [inbound](/docs/inbound) keys, then the operation will fail and the returned promise will be a rejection.
 
 ### See Also
 

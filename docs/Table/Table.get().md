@@ -37,15 +37,15 @@ table.get({keyPath1: value1, keyPath2: value2, ...}): Promise
 
 [Promise&lt;T \| undefined&gt;](/docs/Promise/Promise)
 
-If no item was found, the returned promise will resolve with `undefined`. Otherwise it will resolve with the found value.
+If no item was found, then the returned promise will resolve with `undefined`. Otherwise it will resolve with the found value.
 
 ### Remarks
 
-Fetches object of given primaryKey or where given criteria `({keyPath1: value1, keyPath2: value2})` are fulfilled and returns the first matching result.
+Fetches an object with a given primaryKey or where the given criteria `({keyPath1: value1, keyPath2: value2})` are fulfilled and returns the first matching result.
 
-If operation succeeds, returned Promise will resolve with the result of the operation, calling any [Promise.then()](/docs/Promise/Promise.then()) callback.
+If the operation succeeds, then the returned Promise will resolve with the result of the operation, calling any [Promise.then()](/docs/Promise/Promise.then()) callback.
 
-If operation fails, returned promise will reject, calling any [Promise.catch()](/docs/Promise/Promise.catch()) callback.
+If the operation fails, then the returned promise will reject, calling any [Promise.catch()](/docs/Promise/Promise.catch()) callback.
 
 ### Samples
 ```javascript

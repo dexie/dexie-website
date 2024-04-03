@@ -30,10 +30,8 @@ Here we refer to Svelte's own [Getting Started](https://svelte.dev/blog/the-easi
 # 2. Install dexie
 
 ```
-npm install dexie@next
+npm install dexie
 ```
-
-*Svelte and SvelteKit users are recommended to install `dexie@next` which gives you version 4.x, as it contains Svelte compatible typings and SSR friendly `liveQuery()`*
 
 # 3. Create a file `db.js` (or `db.ts`)
 

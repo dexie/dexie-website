@@ -93,7 +93,7 @@ Evaluation users are free time-limited end user accounts for your app, that can 
 
 ### Production Users
 
-A production user occupies one of the production seats. The Evaluation edition includes 3 free production seats, while the Production edition comes in 100-seat packs. Manage production seat occupancy via the Dexie Cloud Management app or REST API. Integrate this API with payment gateway web hooks to manage seats based on your customer subscriptions.
+A production user occupies one of the production seats. The Evaluation edition includes 3 free production seats, while the Production edition comes in 25-seat packs. Manage production seat occupancy via the Dexie Cloud Management app or REST API. Integrate this API with payment gateway web hooks to manage seats based on your customer subscriptions.
 
 ### Demo Accounts
 

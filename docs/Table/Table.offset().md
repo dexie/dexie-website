@@ -23,7 +23,7 @@ db.[table].offset(N)
 
 ### Remarks
 
-Return a collection when the first N entries in the object store are ignored. If it is requested to skip the LAST N entries rather than the first, this method can be used in combination with the [Collection.reverse()](/docs/Collection/Collection.reverse()) method.
+Returns a collection where the first N entries in the object store are ignored. If it is requested to skip the LAST N entries rather than the FIRST N entries, then this method can be used in combination with the [Collection.reverse()](/docs/Collection/Collection.reverse()) method.
 
 This method is equivalent to:
 
@@ -39,7 +39,7 @@ db.[table].orderBy(':id').offset(N)
 
 ### Sample
 
-This sample will sort friends by lastName and include the last 15th to 10th friend.
+This sample will sort friends by lastName and output to the console the 11th to the 15th friend from the end.
 
 ```javascript
 db.friends.orderBy('lastName')
@@ -54,11 +54,11 @@ db.friends.orderBy('lastName')
 
 ### Limitations
 
-In combination with the [or()](/docs/Collection/Collection.or()) method, the offset() method makes no sense since the sort order of the result will be undefined ([or()](/docs/Collection/Collection.or()) is working on multiple different indexes in parallel). Instead, use [sortBy()](/docs/Collection/Collection.sortBy()) and then slice the resulting array from requested offset.
+In combination with the [or()](/docs/Collection/Collection.or()) method, the offset() method makes no sense since the sort order of the result will be undefined (this is because [or()](/docs/Collection/Collection.or()) works on multiple different indexes in parallel). Instead, use [sortBy()](/docs/Collection/Collection.sortBy()) and then slice the resulting array from the requested offset.
 
 ### Performance Notes
 
-If executed on simple queries, the native IDBCursor.advance() method will be used (fast execution). If advanced queries are used, the implementation have to execute a query to iterate all items and ignore N items using a JS filter.
+If executed on simple queries, then the native IDBCursor.advance() method will be used (fast execution). If advanced queries are used, then the implementation has to execute a query to iterate all items and ignore N items using a JS filter.
 
 #### Examples where offset() will be fast
 

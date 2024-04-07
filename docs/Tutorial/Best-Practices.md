@@ -28,7 +28,7 @@ function doSomething() {
 
 Was there any of the "Understand" parts that you didn't understand? Then you would benefit from learning a little about promises. This will be useful knowledge whatever lib you'll be using. Some links to dive into:
 
-* [http://www.html5rocks.com/en/tutorials/es6/promises/](http://www.html5rocks.com/en/tutorials/es6/promises/)
+* [https://web.dev/articles/promises](https://web.dev/articles/promises)
 * [https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html](https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html)
 
 ### 2. Be wise when catching promises!

@@ -3,7 +3,8 @@ layout: docs
 title: "Table.hook('creating')"
 ---
 
-*NOTE: Since Dexie 3.0, there is a new API superior to this hooks API: [DBCore](/docs/DBCore/DBCore). There is NO PLAN for deprecation of this hooks API though, but it in future, we may extract this API to an addon.*
+> [!NOTE]
+> Since Dexie 3.0, there is a new API superior to this hooks API: [DBCore](/docs/DBCore/DBCore). There is NO PLAN to deprecate this hooks API though, but we may extract this API to an add-on in the future.
 
 ### Syntax
 
@@ -21,7 +22,7 @@ db.[tableName].hook('creating', function (primKey, obj, transaction) {
 <table>
   <tr>
     <td>primKey</td>
-    <td>The primary key of the object being added, or undefined in case primary key will be created by the system.</td>
+    <td>The primary key of the object being added, or undefined when the primary key is created by the system.</td>
   </tr>
   <tr>
     <td>obj</td>
@@ -39,14 +40,14 @@ db.[tableName].hook('creating', function (primKey, obj, transaction) {
 
 ### Return Value
 
-If return value of given subscriber is other than `undefined`, the return value will be used as the primary key. Implementers may use this to provide extended methods of auto-generation primary keys other than the built-in autoIncrement (++) method. Return value is only handled in case given primKey was undefined. If primKey was set, any return value will be ignored since it is not allowed.
+If the return value of a given subscriber is other than `undefined`, then the return value will be used as the primary key. Implementers may use this to provide extended methods of auto-generation primary keys other than the built-in autoIncrement (++) method. The return value is only handled when the given primKey was undefined. If primKey was set, then any return value will be ignored since it is not allowed.
 
 ### To Unsubscribe
 
 ```javascript
 db.[tableName].hook('creating').unsubscribe(yourListenerFunction)
 ```
-*yourListenerFunction* refers to the same function instance that you have passed to Table.hook('creating'). If you will need to unsubscribe, you can't inline that function as we do in the main sample. Instead keep a reference to it in a closure or on a class property.
+*yourListenerFunction* refers to the same function instance that you passed to Table.hook('creating'). If you need to unsubscribe, then you can't inline that function as we do in the main sample. Instead keep a reference to it in a closure or on a class property.
 
 ```javascript
 function listenerFunction (primKey, obj, transaction) {
@@ -64,29 +65,29 @@ db.[tableName].hook('creating').unsubscribe(listenerFunction);
 
 ### Description
 
-This event is called whenever an object is being added into the database no matter which method is used. When calling [Table.add()](/docs/Table/Table.add()), it will always be called. But when calling [Table.put()](/docs/Table/Table.put()) it will only be called if the operation results in an object creation. If it would result in replacing an existing object, hook('updating') will be triggered.
+This event is called whenever an object is being added to the database irrespective of which method is used. When calling [Table.add()](/docs/Table/Table.add()), it will always be called. But when calling [Table.put()](/docs/Table/Table.put()), it will only be called if the operation results in object creation. If it results in replacing an existing object, then hook('updating') will be triggered.
 
-A subscriber may use the given `transaction` object to do additional operations on the database. The chain of operations can be considered atomic since the subscriber can work on the same transaction as being used for creating the object. If any exception or database error event occur, the entire transaction will abort.
+A subscriber may use the given `transaction` object to do additional operations on the database. The chain of operations can be considered atomic since the subscriber can work on the same transaction which is being used to create the object. If any exception or database error event occurs, then the entire transaction will abort.
 
 ### Error Handling
 
-If subscriber throws an exception, the create operation will fail and the caller of the create operation will get the failure as a Promise rejection that may be caught/handled or not. If the caller of the create operation does not catch the exception using Promise.catch(), the transaction will be aborted.
+If a subscriber throws an exception, then the create operation will fail and the caller of the create operation will get the failure as a Promise rejection that may be caught/handled or not. If the caller of the create operation does not catch the exception using Promise.catch(), then the transaction will be aborted.
 
-If a database operation initiated by the subscriber, results in a failure, the transaction will be aborted no matter if the origin caller of the create operation calls catch() or not. However, the origin caller will receive your error if catching transaction failures, but then the transaction has already aborted. If you as the implementer of the subscriber want to ignore errors resulting from your operations, you may catch() your database operations to prohibit transaction from being aborted. However, it is normally better to let the transaction abort in case a failure of your database operation would impinge database consistency.
+If a database operation initiated by the subscriber results in a failure, then the transaction will be aborted irrespective of whether the original caller of the create operation calls catch() or not. However, the original caller will receive your error if catching transaction failures, but then the transaction has already aborted. If you as the implementer of the subscriber want to ignore errors resulting from your operations, then you may catch() your database operations to prohibit the transaction from being aborted. However, it is normally better to let the transaction abort in case a failure of your database operation impinges upon database consistency.
 
-If setting `this.onsuccess` or `this.onerror`, those callback functions are responsible for not throwing any exception. Any code within that callback must either be bullet proof or surrounded by try/catch.
+If setting `this.onsuccess` or `this.onerror`, then those callback functions are responsible for not throwing any exception. Any code within those callbacks must either be bullet proof or surrounded by try/catch.
 
 ### Use Cases of the CRUD events
 
-Dexie CRUD events can be used to implement several addons to Dexie such as:
+Dexie CRUD events can be used to implement several add-ons to Dexie such as:
 * Server Synchronization
 * Automatic primary key generation
 * Full-text search or other custom ways of indexing properties
 * Manipulation of returned objects
 
-The add-ons [Dexie.Observable.js](/docs/Observable/Dexie.Observable.js) and [Dexie.Syncable.js](/docs/Syncable/Dexie.Syncable.js) uses `hook('creating')`, `hook('updating')` and `hook('deleting')` to make the database locally observable as well as syncable with a remote server.
+The add-ons [Dexie.Observable.js](/docs/Observable/Dexie.Observable.js) and [Dexie.Syncable.js](/docs/Syncable/Dexie.Syncable.js) use `hook('creating')`, `hook('updating')` and `hook('deleting')` to make the database locally observable as well as syncable with a remote server.
 
-The `hook('reading')` is used internally by Dexie.js by the methods [Table.defineClass()](/docs/Table/Table.defineClass()) and [Table.mapToClass()](/docs/Table/Table.mapToClass()) in order to make all objects retrieved from database inherit a given class using prototypal inheritance.
+The `hook('reading')` is used internally by Dexie.js by the methods [Table.defineClass()](/docs/Table/Table.defineClass()) and [Table.mapToClass()](/docs/Table/Table.mapToClass()) in order to make all objects retrieved from the database inherit a given class using prototypal inheritance.
 
 ### Sample: Full-text search
 
@@ -157,8 +158,9 @@ db.transaction('rw', db.emails, function () {
 });
 ```
 
-NOTE: Multi-valued indexes are only supported in Opera, Firefox and Chrome. Does not work with IE so far.
-However, it is also possible to implement it using custom views, which is implemented in FullTextSearch2.js.
+> [!NOTE]
+> Multi-valued indexes are only supported in Opera, Firefox, and Chrome. They do not work with IE so far.
+> However, it is also possible to implement it using custom views, which is implemented in FullTextSearch2.js.
 
 Sample Source Locations:
 * [FullTextSearch.js](https://github.com/dexie/Dexie.js/blob/master/samples/full-text-search/FullTextSearch.js) (using multi-valued indexes)

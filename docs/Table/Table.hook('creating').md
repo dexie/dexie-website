@@ -3,7 +3,8 @@ layout: docs
 title: "Table.hook('creating')"
 ---
 
-> [!NOTE]
+> **NOTE**
+> 
 > Since Dexie 3.0, there is a new API superior to this hooks API: [DBCore](/docs/DBCore/DBCore). There is NO PLAN to deprecate this hooks API though, but we may extract this API to an add-on in the future.
 
 ### Syntax
@@ -158,7 +159,8 @@ db.transaction('rw', db.emails, function () {
 });
 ```
 
-> [!NOTE]
+> **NOTE**
+> 
 > Multi-valued indexes are only supported in Opera, Firefox, and Chrome. They do not work with IE so far.
 > However, it is also possible to implement it using custom views, which is implemented in FullTextSearch2.js.
 

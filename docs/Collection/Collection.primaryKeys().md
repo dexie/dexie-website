@@ -87,9 +87,9 @@ db.transaction('r', db.friends, async () => {
   // Ok, so now we have all primary keys from all queries stored in separate results
 
   // Find all common primary keys
-  const intersection = results.reduce((ids1, ids2) => {
-    const set = new Set(ids1);
-    return ids2.filter(id => set.has(id));
+  const intersection = results.reduce((keysInCommon, keysFromPromise) => {
+    const set = new Set(keysInCommon);
+    return keysFromPromise.filter(id => set.has(id));
   });
 
   // At last look up the actual objects from these primary keys:

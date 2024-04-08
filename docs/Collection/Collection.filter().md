@@ -27,8 +27,8 @@ This method is identical to [Collection.and()](/docs/Collection/Collection.and()
 
 ```javascript
 const collection = db.friends
-  .orderBy('age')
-  .filter((friend) => /foo/i.test(friend.name));
+  .filter((friend) => /foo/i.test(friend.name))
+  .orderBy('age');
   
 const result = await collection.offset(50).limit(25).toArray();
 ```

@@ -13,15 +13,15 @@ table.bulkAdd(items, keys?, options?);
 
 <table>
 <tr><td>items</td><td>Array of objects to add</td></tr>
-<tr><td>keys (optional)</td><td>Array of primary keys that corresponds to given items array</td></tr>
-<tr><td>options (optional)</td><td><i>Since 3.0.0-rc.2:</i><br/><br/><code>{allKeys?: boolean}</code> If specifying {allKeys: true} the return value will be an array of resulting primary keys instead of just the primary key of the last add. If the table use inbound keys, the options can be given as the second argument. API will know if the second argument represents the options or the keys array by type inspection.</td></tr>
+<tr><td>keys (optional)</td><td>Array of primary keys that corresponds to the given array of items</td></tr>
+<tr><td>options (optional)</td><td><i>Since 3.0.0-rc.2:</i><br/><br/><code>{allKeys?: boolean}</code> If specifying <code>{allKeys: true}</code>, then the return value will be an array of resulting primary keys instead of just the primary key of the last item added. If the table uses inbound keys, then the options can be given as the second argument. The API will know whether the second argument represents the options or the keys array by type inspection.</td></tr>
 </table>
 
 #### When to use the keys argument
 
-* If your primary key is [inbound](/docs/inbound), you MUST NOT provide the `keys` argument.
-* If primary key is non-[inbound](/docs/inbound) but auto-incremented, `keys` argument is optional.
-* If primary key is non-[inbound](/docs/inbound) and non-auto-incremented, `keys` argument is compulsory.
+* If the primary key is [inbound](/docs/inbound), then you MUST NOT provide the `keys` argument.
+* If the primary key is non-[inbound](/docs/inbound) but auto-incremented, then the `keys` argument is optional.
+* If the primary key is non-[inbound](/docs/inbound) and non-auto-incremented, then the `keys` argument is compulsory.
 
 ```javascript
 var db = new Dexie("test");
@@ -34,31 +34,37 @@ db.version(1).stores({
 
 ### Return Value
 
-If options argument is omitted, or options is {allKeys: false}, the return value is a promise resolving with the resulting primary key of the object that was last in given array:
+If the options argument is omitted, or options is `{allKeys: false}`, then the return value is a promise resolving with the resulting primary key of the object that was last added from the given array:
 
 [Promise&lt;LastKey&gt;](/docs/Promise/Promise)
 
 
-*Since 3.0.0-rc.2*: If options argument is provided in second or thirs argument with {allKeys: true}, the return value is a promise resulting with an array of resulting primary keys. The resulting array will have the same length as given array of objects to add.
+*Since 3.0.0-rc.2*:
+
+If the options argument is provided as the second or third argument with `{allKeys: true}`, then the return value is a promise resolving with an array of the resulting primary keys. The resulting array will have the same length as the given array of objects to be added.
 
 [Promise&lt;Key[]&gt;](/docs/Promise/Promise)
 
 
 ### Errors
-If some operations fail, bulkAdd will ignore those failures but return a rejected Promise with a
-[Dexie.BulkError](/docs/DexieErrors/Dexie.BulkError) referencing failures. If caller does not catch that error, transaction will abort. If caller wants to ignore the fails, the bulkAdd() operations must be caught. **NOTE: If you call bulkAdd() outside a transaction scope and an error occur on one of the operations, the successful operations will still be persisted to DB! If this is not desired, surround your call to `bulkAdd()` in a transaction and catch the transaction's promise instead of the `bulkAdd()` operation.**
+If some operations fail, then `bulkAdd()` will ignore those failures and return a rejected Promise with a
+[Dexie.BulkError](/docs/DexieErrors/Dexie.BulkError) referencing the failures. If a caller does not catch that error, then the transaction will abort. If a caller wants to ignore the failures, then the `bulkAdd()` operation must be caught.
+
+>**NOTE**
+>
+> If `bulkAdd()` is called outside of a transaction scope and an error occurs for one of the operations, then the successful operations will still be persisted to the database! If this is not desired, then surround the call to `bulkAdd()` in a transaction and catch the transaction's promise instead of the `bulkAdd()` operation.
 
 ### Remarks
 
 Add all given objects to the store.
 
-If you have a large number of objects to add to the object store, bulkAdd() is a little faster than doing add() in a loop.
+If you have a large number of objects to add to the object store, then `bulkAdd()` is a little faster than calling `add()` in a loop.
 
-If you do bulkAdd () within a transaction and don't catch the operation explicitly, the entire transaction will fail and roll back if any one item has an existing primary key. Catching the bulkAdd () will make sure any successful operation succeeds while failed operations are just ignored.
+If you call `bulkAdd()` within a transaction and don't catch the operation explicitly, then the entire transaction will fail and roll back if any item has an existing primary key. Catching `bulkAdd()` will make sure that successful operations will succeed while failed operations are just ignored.
 
 ### Difference between bulkPut() and bulkAdd()
 
-bulkAdd() will fail to add any item with same primary key whilst bulkPut () will succeed and update those records as well as the new ones.
+`bulkAdd()` will fail to add any item with a primary key that already exists in the store, whereas `bulkPut()` will succeed and update those records that already have a primary key that exists as well as new records (i.e. those records that have a primary key which does not exist in the store).
 
 ### Sample
 

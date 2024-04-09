@@ -23,9 +23,9 @@ db.table.bulkGet(keys)
 
 ### Remarks
 
-Request an array of keys and retrieve a Promise of an array of results. The resulting array will always have the same length as the given array of keys. Every position in given key array will correspond to the same position in the resulting array.
+Make a request with an array of keys and retrieve a Promise of an array of results. The resulting array will always have the same length as the given array of keys. Every position in the given key array will correspond to the same position in the array of results.
 
-For those keys that do not exist in the database, undefined will be returned in their place.
+`undefined` will be returned for those keys that do not exist in the database.
 
 ### Example
 
@@ -49,9 +49,9 @@ async function test() {
   
   // Call bulkGet() to lookup values from given keys in the order of the requested array:
   const [foo, nonExisting, bar] = await db.friends.bulkGet([1, 777, 2]);
-  assert (foo.name === "Foo");
-  assert (bar.name === "Bar");
-  assert (nonExisting === undefined);
+  console.assert (foo.name === "Foo");
+  console.assert (bar.name === "Bar");
+  console.assert (nonExisting === undefined);
 }
 
 test().then(()=>{

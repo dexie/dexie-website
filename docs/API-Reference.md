@@ -241,6 +241,7 @@ const forbundsKansler = await db.friends.get({
 const angelasSortedByLastName = await db.friends
     .where('[firstName+lastName]')
     .between([["Angela", ""], ["Angela", "\uffff"])
+    .orderBy("lastName")
     .toArray()
 ```
 

@@ -13,6 +13,7 @@ This support option is available for the On-Prem Silver Edition. One year of Sil
 
 - Chat
 - Email
+- Software updates
 - Github issues
 
 Price: $695 per year.
@@ -26,6 +27,7 @@ The basic level of Gold Support that is included in On-Prem Gold edition include
 - SLA 16 business hours
 - Access to private GIT repo of Dexie Cloud Server for source code updates
 - Private Github issues
+- Software and source code updates
 - Chat
 - Email
 - Video

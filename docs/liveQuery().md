@@ -27,7 +27,7 @@ export function liveQuery<T>(
 
 Svelte and Angular supports Observables natively so liveQuery() can be used directly.
 
-[The Svelte Store Contract](https://svelte.dev/docs#Store_contract) is a subset of the [Ecmascript Observable specification draft](https://github.com/tc39/proposal-observable) which makes the return value of liveQuery() a fully valid Svelte Store by itself.
+[The Svelte Store Contract](https://svelte.dev/docs#Store_contract) implements a subset of the [Ecmascript Observable specification draft](https://github.com/tc39/proposal-observable) which makes the return value of liveQuery() a fully valid Svelte Store by itself.
 
 [Angular](https://angular.io/) supports Rx observables natively, and Rx Observables also are compliant with the [Ecmascript Observable specification](https://github.com/tc39/proposal-observable).
 

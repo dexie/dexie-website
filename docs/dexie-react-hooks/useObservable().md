@@ -1,6 +1,6 @@
 ---
 layout: docs
-title: "useObservable()"
+title: 'useObservable()'
 ---
 
 # Remarks
@@ -18,7 +18,9 @@ Let your react component subscribe to an observable and re-render whenever the o
 ```
 npm i react dexie dexie-react-hooks
 ```
+
 or
+
 ```
 yarn add react dexie dexie-react-hooks
 ```
@@ -58,9 +60,9 @@ interface Observable<T> {
 # Simple Example
 
 ```tsx
-import React from "react";
-import { BehaviorSubject } from "rxjs";
-import { useObservable } from "dexie-react-hooks";
+import React from 'react';
+import { BehaviorSubject } from 'rxjs';
+import { useObservable } from 'dexie-react-hooks';
 
 const counter = new BehaviorSubject(1);
 
@@ -83,11 +85,11 @@ export function SimpleCounter() {
 
 ## How does this hook relate to Dexie.js?
 
-`useObservable()` is vital for consuming the API of [dexie-cloud-addon](/cloud/docs/dexie-cloud-addon) that have properties that are observables. 
+`useObservable()` is vital for consuming the API of [dexie-cloud-addon](/cloud/docs/dexie-cloud-addon) that have properties that are observables.
 
 There are other generic libraries with similar hooks that could be used equally well (such as [react-use](https://github.com/streamich/react-use)) but our version also allows to pass an observable-returning function, accompanied with a `deps` array.
 
-`useObsevable()` is also an internal building block for [useLiveQuery()](/docs/dexie-react-hooks/useLiveQuery()), which is implemented as so:
+`useObservable()` is also an internal building block for [useLiveQuery()](</docs/dexie-react-hooks/useLiveQuery()>), which is implemented as so:
 
 ```ts
 const useLiveQuery = (callback, deps, defaultResult) =>

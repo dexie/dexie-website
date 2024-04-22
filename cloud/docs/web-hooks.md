@@ -7,7 +7,7 @@ title: "Dexie Cloud Web Hooks"
 
 A Dexie Cloud database can be configured to let a web hook take decision on how to treat new (unknown) users. In [Dexie Cloud Manager](https://manager.dexie.cloud), in the section **Policy for new users** (See screenshot below), it is possible to configure a URL to a web hook so that a server-side end-point can be implented to integrate the application according to custom logic or directory lookup.
 
-![Screenshot from Dexie Cloud Manager, section 'Policy for new users' where it is possible to configure this web hook](webhook-unknownuser.png)
+[![Screenshot from Dexie Cloud Manager, section 'Policy for new users' where it is possible to configure this web hook](webhook-unknownuser.png)](https://manager.dexie.cloud)
 
 ### Request
 

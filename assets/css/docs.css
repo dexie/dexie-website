@@ -77,6 +77,11 @@ pre > code span.token.comment {
   color: #4b965f;
 }
 
-.row p > img {
+.row p > img,
+.row p > a > img {
   max-width: 100%;
+}
+.row p > a > img {
+  border: 1px solid #a7bed3;
+  border-radius: 2px;
 }

@@ -309,9 +309,6 @@ table tr:nth-child(2n) {
   top: 16px;
   right: 76px;
   font-size: 10pt;
-  font-style: italic;
-  opacity: 0.6;
-  transition: opacity 0.4s;
   color: rgb(240, 240, 255);
 }
 @media (min-width: 768px) {
@@ -319,6 +316,12 @@ table tr:nth-child(2n) {
     top: 5px;
     right: 8px;
   }
+}
+
+#offline-switch #offline-switch-enabled {
+  opacity: 0.6;
+  transition: opacity 0.4s;
+  font-style: italic;
 }
 
 #offline-switch #offlineOnHeading {
@@ -331,7 +334,7 @@ table tr:nth-child(2n) {
   display: none;
 }
 
-#offline-switch.checked {
+#offline-switch.checked #offline-switch-enabled {
   opacity: 1;
   font-style: inherit;
 }

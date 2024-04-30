@@ -74,22 +74,7 @@
       </ul>
     </div><!-- /.navbar-collapse -->
 
-    <div id="offline-switch" title="Make Dexie documentation available offline">
-      <span id="offlineOffHeading">Make offline</span>
-      <span id="offlineOnHeading">Available offline</span>
-      <label class="switch">
-        <input
-          id="offline-checkbox"
-		  aria-labelledby="offlineOffHeading"
-          type="checkbox"
-          onchange="setOffline(event.target.checked)"
-        />
-        <span class="slider round"></span>
-      </label>
-      <script>
-        updateSwitchFromStorage();
-      </script>
-    </div>
+    {% include offline-switch.html %}
     
   </div><!-- /.container-fluid -->
 </nav>		

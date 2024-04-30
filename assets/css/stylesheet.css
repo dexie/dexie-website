@@ -116,6 +116,14 @@ h1[id]::before, h2[id]::before, h3[id]::before, h4[id]::before, h5[id]::before, 
   width: 200px;
 }
 
+@media (max-width: 767px) {
+  /** Leave some space between "Get Started" and "Add sync" buttons 
+  in mobile view.*/
+  a.getstarted.btn:nth-child(2) {
+    margin-top: 12px;
+  }
+}
+
 .getstarted:hover {
   border: 1px solid rgba(0, 0, 0, 0.6);
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);

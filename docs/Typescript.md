@@ -107,9 +107,9 @@ import { Entity } from 'dexie';
 import { AppDB } from './AppDB';
 
 export class Friend extends Entity<AppDB> {
-  id: number;
-  name: string;
-  age: number;
+  id!: number;
+  name!: string;
+  age!: number;
 
   // example method that access the DB:
   async birthday() {
@@ -152,11 +152,11 @@ export class AppDB extends Dexie {
 // Friend.ts
 //
 export class Friend extends Entity<AppDB> {
-  id: string;
-  name: string;
-  age: number;
-  owner: string;
-  realmId: string;
+  id!: string;
+  name!: string;
+  age!: number;
+  owner!: string;
+  realmId!: string;
 }
 
 //

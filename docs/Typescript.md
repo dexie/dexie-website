@@ -46,7 +46,7 @@ export interface Friend {
 
 ### What is EntityTable?
 
-EntityTable is a generic type that provide a more exactly typed [Table](Table/Table) based on supplied entity type and it's primary key property. Methods such as [Table.add()](<Table/Table.add()>), [Table.put()](<Table/Table.put()>) etc will expect a variant of the provided entity type where the primary key is optional, while methods such as [Collection.toArray()](<Collection/Collection.toArray()>), [Table.get()](<Table/Table.get()>) etc will return data typed with the provided entity type as it is declared and exported (interface Friend {...} in this case).
+EntityTable is a generic type that provide a more exactly typed [Table](Table/Table) based on supplied entity type and it's primary key property. Methods such as [Table.add()](<Table/Table.add()>), [Table.put()](<Table/Table.put()>) etc will expect plain javascript objects that corresponds to the provided entity type where the primary key is optional.
 
 ### Differencies between Table&lt;T&gt; and EntityTable&lt;T&gt;
 
@@ -54,7 +54,7 @@ EntityTable is a generic type that provide a more exactly typed [Table](Table/Ta
 
 `EntityTable<T, KeyPropName>` is new in Dexie 4 and provides syntactic sugar on top of `Table` so it can be used with optional primary key and classes that may have methods:
 
-1. It defines the TInsertType where primary key is optional and methods are omitted.
+1. It defines the TInsertType where primary key is optional and any class methods are omitted (so that plain javascript objects can be provided to [Table.add()](<Table/Table.add()>), instead of having to construct using new())
 2. It extracts the TKey type from T[KeyPropName]
 
 ## Example with Mapped Classes

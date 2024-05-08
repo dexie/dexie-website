@@ -3,192 +3,182 @@ layout: docs
 title: 'Typescript'
 ---
 
-This is a guide on how to use Dexie with Typescript.
+This is a guide on how to use Dexie with Typescript using dexie@4.0 - a little more lightweight than than the old docs by utilizing new features in 4.0. Since dexie@4 is practically backward compatible, you may also still follow [the old Typescript](Typescript-old) docs if your prefer so.
 
-**[To see it in action, watch this stackblitz sample!](https://stackblitz.com/edit/typescript-dexie-appdemo?file=index.ts)**
+## Install dexie
 
-## Download and install dexie
+Typings are part of the npm package so there's no need to for any @types library.
 
 ```bash
 npm install dexie
 ```
 
-## Import dexie
+_Like all other npm packages, dexie can also be installed using yarn or pnpm as alternatives to npm._
+
+## Simplest Typescript Example
+
+If you are storing plain data and just want the typing to reflect your data:
 
 ```ts
-import Dexie from 'dexie';
-```
+//
+// db.ts
+//
 
-Assuming you have moduleResolution: "node" in your tsconfig, this will work out-of-the-box. **Don't use tsd (DefinitelyTyped)** because we bundle dexie.d.ts with our npm package and tsc compiler will understand how to find it (it reads "typings" from package.json).
+// EntityTable is new in 4.0 and improves typings
+import Dexie, { EntityTable } from "dexie";
 
-## Create a Subclass
+export const db = new Dexie("FriendsDatabase") as Dexie & {
+  friends: EntityTable<Friend, 'id'>; // Make sure to reflect schema declaration below!
+};
 
-```typescript
-class MyAppDatabase extends Dexie {
-    // Declare implicit table properties.
-    // (just to inform Typescript. Instantiated by Dexie in stores() method)
-    contacts!: Dexie.Table<IContact, number>; // number = type of the primkey
-    //...other tables goes here...
-
-    constructor () {
-        super("MyAppDatabase");
-        this.version(1).stores({
-            contacts: '++id, first, last',
-            //...other tables goes here...
-        });
-    }
-}
-
-interface IContact {
-    id?: number,
-    first: string,
-    last: string
-}
-```
-
-Here's why you need a sub class.
-
-In vanilla javascript, when defining the database schema you get implicit table properties that are not detected with Typescript since they are defined runtime. The following line would not compile in typescript:
-
-```javascript
-var db = new Dexie("MyAppDatabase");
-db.version(1).stores({contacts: 'id, first, last'});
-db.contacts.put({first: "First name", last: "Last name"}); // Fails to compile
-```
-
-This can be worked around by using the [Dexie.table()](/docs/Dexie/Dexie.table()) static method:
-
-```typescript
-db.table("contacts").put({first: "First name", last: "Last name"});
-```
-
-However, this is not just cumbersome but will also give you bad intellisense and type safety for the objects and primary keys you are working with.
-
-Therefore, in order to gain the best code completion, it is recommended to define a typescript class that extends [Dexie](/docs/Dexie/Dexie) and defines the [Table](/docs/Table/Table) properties on it as shown in the sample below. Here's a sample with some more tables.
-
-```typescript
-export class MyAppDatabase extends Dexie {
-  contacts!: Dexie.Table<IContact, number>;
-  emails!: Dexie.Table<IEmailAddress, number>;
-  phones!: Dexie.Table<IPhoneNumber, number>;
-  
-  constructor() {  
-    super("MyAppDatabase");
-    
-    //
-    // Define tables and indexes
-    // (Here's where the implicit table props are dynamically created)
-    //
-    this.version(1).stores({
-      contacts: '++id, first, last',
-      emails: '++id, contactId, type, email',
-      phones: '++id, contactId, type, phone',
-    });
-  }
-}
-
-// By defining the interface of table records,
-// you get better type safety and code completion
-export interface IContact {
-  id?: number; // Primary key. Optional (autoincremented)
-  first: string; // First name
-  last: string; // Last name
-}
-
-export interface IEmailAddress {
-  id?: number;
-  contactId: number; // "Foreign key" to an IContact
-  type: string; // Type of email such as "work", "home" etc...
-  email: string; // The email address
-}
-
-export interface IPhoneNumber {
-  id?: number;
-  contactId: number;
-  type: string;
-  phone: string;
-}
-```
-
-## Storing real classes instead of just interfaces
-
-In the sample above, you only inform the typescript engine about how the objects in the database looks like. This is good for type safety code completion. But you could also work with real classes so that the objects retrieved from the database will be actual instances of the class you have defined in typescript. This is simply accomplished by using [Table.mapToClass()](/docs/Table/Table.mapToClass()). You will then go a step further and map a Typescript class to a table, so that it may have methods and computed properties.
-
-```typescript
-/* This is a 'physical' class that is mapped to
- * the contacts table. We can have methods on it that
- * we could call on retrieved database objects.
- */
-export class Contact implements IContact {
-  id: number;
-  first: string;
-  last: string;
-  emails: IEmailAddress[];
-  phones: IPhoneNumber[];
-  
-  constructor(first: string, last: string, id?:number) {
-    this.first = first;
-    this.last = last;
-    if (id) this.id = id;
-  }
-  
-  loadEmailsAndPhones() {
-    return Promise.all(
-        db.emails
-        .where('contactId').equals(this.id)
-        .toArray(emails => this.emails = emails),
-        db.phones
-        .where('contactId').equals(this.id)
-        .toArray(phones => this.phones = phones) 
-      )
-      .then(x => this);
-  }
-  
-  save() {
-    return db.transaction('rw', db.contacts, db.emails, db.phones, () => {
-      return Promise.all(
-        // Save existing arrays
-        Promise.all(this.emails.map(email => db.emails.put(email))),
-        Promise.all(this.phones.map(phone => db.phones.put(phone)))
-      )
-      .then(results => {
-        // Remove items from DB that is was not saved here:
-        var emailIds = results[0], // array of resulting primary keys
-        phoneIds = results[1]; // array of resulting primary keys
-        
-        db.emails.where('contactId').equals(this.id)
-          .and(email => emailIds.indexOf(email.id) === -1)
-          .delete();
-        
-        db.phones.where('contactId').equals(this.id)
-          .and(phone => phoneIds.indexOf(phone.id) === -1)
-          .delete();
-        
-        // At last, save our own properties.
-        // (Must not do put(this) because we would get
-        // redundant emails/phones arrays saved into db)
-        db.contacts.put(new Contact(this.first, this.last, this.id))
-          .then(id => this.id = id);
-      });
-    });
-  }
-}
-```
-As shown in this sample, Contact has a method for resolving the foreign collections emails and phones into local array properties. It also has a save() method that will translate changes of the local arrays into database changes. These methods are just examples of a possible use case of class methods in database objects. In this case, I chose to write methods that are capable of resolving related objects into member properties and saving them back to database again using a relational pattern.
-
-To inform Dexie about the table/class mapping, use [Table.mapToClass()](/docs/Table/Table.mapToClass()). This will make all instances returned by the database actually being instances of the Contact class with a proper prototype inheritance chain.
-
-```typescript
-db.contacts.mapToClass(Contact);
-```
-
-## async and await
-
-Async functions works perfectly well with Dexie as of v2.0.
-
-```javascript
-await db.transaction('rw', db.friends, async () => {
-  // Transaction block
-  let numberOfOldFriends = await db.friends.where('age').above(75).toArray();
+// Schema declaration.
+db.version(1).stores({
+  friends: "++id, name, age"; // table name "friends". Primary key "id".
 });
+
+export interface Friend {
+  id: number;
+  name: string;
+  age: number;
+}
+
+```
+
+### What is EntityTable?
+
+EntityTable is a generic type that provide a more exactly typed [Table](Table/Table) based on supplied entity type and it's primary key property. Methods such as [Table.add()](<Table/Table.add()>), [Table.put()](<Table/Table.put()>) etc will expect a variant of the provided entity type where the primary key is optional, while methods such as [Collection.toArray()](<Collection/Collection.toArray()>), [Table.get()](<Table/Table.get()>) etc will return data typed with the provided entity type as it is declared and exported (interface Friend {...} in this case).
+
+### Differencies between Table&lt;T&gt; and EntityTable&lt;T&gt;
+
+`Table<T, TKey, TInsertType=T>` is the building block for `EntityTable<T, KeyPropName>`. Table allows an optional 3rd argument `TInsertType` that is expected from [Table.add()](<Table/Table.add()>), [Table.put()](<Table/Table.put()>) etc. That's where we want to provide a version of our type where the primary key is optional (as it can be auto-generated).
+
+`EntityTable<T, KeyPropName>` is new in Dexie 4 and provides syntactic sugar on top of `Table` so it can be used with optional primary key and classes that may have methods:
+
+1. It defines the TInsertType where primary key is optional and methods are omitted.
+2. It extracts the TKey type from T[KeyPropName]
+
+## Example with Mapped Classes
+
+Here's an example of how to use mapped classes in Dexie 4.
+
+There are three modules:
+
+- db.ts - _exports the singleton Dexie instance_. To be imported wherever your db is needed.
+- AppDB.ts - _declaration of database schema_
+- Friend.ts - _Entity class example. You could have muliple modules like this_
+
+```ts
+//
+// db.ts
+//
+
+import { AppDB } from './AppDB';
+
+export const db = new AppDB();
+```
+
+```ts
+//
+// AppDB.ts
+//
+
+import Dexie, { EntityTable } from 'dexie';
+import { Friend } from './Friend';
+
+export class AppDB extends Dexie {
+  friends!: EntityTable<Friend, 'id'>;
+
+  constructor() {
+    super('FriendsDB');
+    this.version(1).stores({
+      friends: '++id, name, age'
+    });
+    this.friends.mapToClass(Friend);
+  }
+}
+```
+
+```ts
+//
+// Friend.ts
+//
+
+import { Entity } from 'dexie';
+import { AppDB } from './AppDB';
+
+export class Friend extends Entity<AppDB> {
+  id: number;
+  name: string;
+  age: number;
+
+  // example method that access the DB:
+  async birthday() {
+    // this.db is inherited from Entity<AppDB>:
+    await this.db.friends.update(this.id, (friend) => ++friend.age);
+  }
+}
+```
+
+### DexieCloudTable
+
+If you are using [dexie-cloud-addon](/cloud/docs/dexie-cloud-addon), synced tables have a few more properties that, similar to auto-generated primary keys, are optional on insert but "required"/mandatory on all instances returned from db queries: `owner` and `realmId`. DexieCloudTable is therefore a better generic to use for synced tables with dexie cloud.
+
+```ts
+//
+// AppDB.ts
+//
+
+import Dexie from 'dexie';
+import dexieCloud, {
+  DexieCloudTable,
+  DexieCloudEntity
+} from 'dexie-cloud-addon';
+import { Friend } from './Friend';
+
+export class AppDB extends Dexie {
+  friends!: DexieCloudTable<Friend, 'id'>;
+
+  constructor() {
+    super('FriendsDB', {
+      addons: [dexieCloud]
+    });
+
+    this.version(1).stores({
+      friends: '@id, name, age'
+    });
+
+    this.friends.mapToClass(Friend);
+  }
+}
+
+//
+// Friend.ts
+//
+export class Friend extends Entity<AppDB> {
+  id: string;
+  name: string;
+  age: number;
+  owner: string;
+  realmId: string;
+}
+
+db.version(1).stores({
+  friends: '@id, name, age'
+});
+
+//
+// Usage examples
+//
+
+// add
+db.friends.add({ name: 'Foo', age: 25 }); // Ok to leave out id, realmId and owner as they are all auto-generated.
+
+// query
+const friends = (await db.friends.toArray()) satisfies Friend[];
+// friends is now an array of your declared Friend class with all properties on:
+//   id,
+//   name,
+//   age,
+//   owner,
+//   realmId
 ```

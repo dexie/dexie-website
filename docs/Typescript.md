@@ -25,7 +25,7 @@ If you are storing plain data and just want the typing to reflect your data:
 //
 
 // EntityTable is new in 4.0 and improves typings
-import Dexie, { EntityTable } from "dexie";
+import Dexie, { type EntityTable } from "dexie";
 
 export const db = new Dexie("FriendsDatabase") as Dexie & {
   friends: EntityTable<Friend, 'id'>; // Make sure to reflect schema declaration below!
@@ -82,7 +82,7 @@ export const db = new AppDB();
 // AppDB.ts
 //
 
-import Dexie, { EntityTable } from 'dexie';
+import Dexie, { type EntityTable } from 'dexie';
 import { Friend } from './Friend';
 
 export class AppDB extends Dexie {
@@ -129,10 +129,7 @@ If you are using [dexie-cloud-addon](/cloud/docs/dexie-cloud-addon), synced tabl
 //
 
 import Dexie from 'dexie';
-import dexieCloud, {
-  DexieCloudTable,
-  DexieCloudEntity
-} from 'dexie-cloud-addon';
+import dexieCloud, { type DexieCloudTable } from 'dexie-cloud-addon';
 import { Friend } from './Friend';
 
 export class AppDB extends Dexie {

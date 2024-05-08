@@ -1,6 +1,6 @@
 ---
 layout: docs
-title: 'Typescript'
+title: 'Typescript (old)'
 ---
 
 This is a guide on how to use Dexie with Typescript.
@@ -25,24 +25,24 @@ Assuming you have moduleResolution: "node" in your tsconfig, this will work out-
 
 ```typescript
 class MyAppDatabase extends Dexie {
-    // Declare implicit table properties.
-    // (just to inform Typescript. Instantiated by Dexie in stores() method)
-    contacts!: Dexie.Table<IContact, number>; // number = type of the primkey
-    //...other tables goes here...
+  // Declare implicit table properties.
+  // (just to inform Typescript. Instantiated by Dexie in stores() method)
+  contacts!: Dexie.Table<IContact, number>; // number = type of the primkey
+  //...other tables goes here...
 
-    constructor () {
-        super("MyAppDatabase");
-        this.version(1).stores({
-            contacts: '++id, first, last',
-            //...other tables goes here...
-        });
-    }
+  constructor() {
+    super('MyAppDatabase');
+    this.version(1).stores({
+      contacts: '++id, first, last'
+      //...other tables goes here...
+    });
+  }
 }
 
 interface IContact {
-    id?: number,
-    first: string,
-    last: string
+  id?: number;
+  first: string;
+  last: string;
 }
 ```
 
@@ -51,15 +51,15 @@ Here's why you need a sub class.
 In vanilla javascript, when defining the database schema you get implicit table properties that are not detected with Typescript since they are defined runtime. The following line would not compile in typescript:
 
 ```javascript
-var db = new Dexie("MyAppDatabase");
-db.version(1).stores({contacts: 'id, first, last'});
-db.contacts.put({first: "First name", last: "Last name"}); // Fails to compile
+var db = new Dexie('MyAppDatabase');
+db.version(1).stores({ contacts: 'id, first, last' });
+db.contacts.put({ first: 'First name', last: 'Last name' }); // Fails to compile
 ```
 
-This can be worked around by using the [Dexie.table()](/docs/Dexie/Dexie.table()) static method:
+This can be worked around by using the [Dexie.table()](</docs/Dexie/Dexie.table()>) static method:
 
 ```typescript
-db.table("contacts").put({first: "First name", last: "Last name"});
+db.table('contacts').put({ first: 'First name', last: 'Last name' });
 ```
 
 However, this is not just cumbersome but will also give you bad intellisense and type safety for the objects and primary keys you are working with.
@@ -71,10 +71,10 @@ export class MyAppDatabase extends Dexie {
   contacts!: Dexie.Table<IContact, number>;
   emails!: Dexie.Table<IEmailAddress, number>;
   phones!: Dexie.Table<IPhoneNumber, number>;
-  
-  constructor() {  
-    super("MyAppDatabase");
-    
+
+  constructor() {
+    super('MyAppDatabase');
+
     //
     // Define tables and indexes
     // (Here's where the implicit table props are dynamically created)
@@ -82,7 +82,7 @@ export class MyAppDatabase extends Dexie {
     this.version(1).stores({
       contacts: '++id, first, last',
       emails: '++id, contactId, type, email',
-      phones: '++id, contactId, type, phone',
+      phones: '++id, contactId, type, phone'
     });
   }
 }
@@ -112,7 +112,7 @@ export interface IPhoneNumber {
 
 ## Storing real classes instead of just interfaces
 
-In the sample above, you only inform the typescript engine about how the objects in the database looks like. This is good for type safety code completion. But you could also work with real classes so that the objects retrieved from the database will be actual instances of the class you have defined in typescript. This is simply accomplished by using [Table.mapToClass()](/docs/Table/Table.mapToClass()). You will then go a step further and map a Typescript class to a table, so that it may have methods and computed properties.
+In the sample above, you only inform the typescript engine about how the objects in the database looks like. This is good for type safety code completion. But you could also work with real classes so that the objects retrieved from the database will be actual instances of the class you have defined in typescript. This is simply accomplished by using [Table.mapToClass()](</docs/Table/Table.mapToClass()>). You will then go a step further and map a Typescript class to a table, so that it may have methods and computed properties.
 
 ```typescript
 /* This is a 'physical' class that is mapped to
@@ -125,58 +125,64 @@ export class Contact implements IContact {
   last: string;
   emails: IEmailAddress[];
   phones: IPhoneNumber[];
-  
-  constructor(first: string, last: string, id?:number) {
+
+  constructor(first: string, last: string, id?: number) {
     this.first = first;
     this.last = last;
     if (id) this.id = id;
   }
-  
+
   loadEmailsAndPhones() {
     return Promise.all(
-        db.emails
-        .where('contactId').equals(this.id)
-        .toArray(emails => this.emails = emails),
-        db.phones
-        .where('contactId').equals(this.id)
-        .toArray(phones => this.phones = phones) 
-      )
-      .then(x => this);
+      db.emails
+        .where('contactId')
+        .equals(this.id)
+        .toArray((emails) => (this.emails = emails)),
+      db.phones
+        .where('contactId')
+        .equals(this.id)
+        .toArray((phones) => (this.phones = phones))
+    ).then((x) => this);
   }
-  
+
   save() {
     return db.transaction('rw', db.contacts, db.emails, db.phones, () => {
       return Promise.all(
         // Save existing arrays
-        Promise.all(this.emails.map(email => db.emails.put(email))),
-        Promise.all(this.phones.map(phone => db.phones.put(phone)))
-      )
-      .then(results => {
+        Promise.all(this.emails.map((email) => db.emails.put(email))),
+        Promise.all(this.phones.map((phone) => db.phones.put(phone)))
+      ).then((results) => {
         // Remove items from DB that is was not saved here:
         var emailIds = results[0], // array of resulting primary keys
-        phoneIds = results[1]; // array of resulting primary keys
-        
-        db.emails.where('contactId').equals(this.id)
-          .and(email => emailIds.indexOf(email.id) === -1)
+          phoneIds = results[1]; // array of resulting primary keys
+
+        db.emails
+          .where('contactId')
+          .equals(this.id)
+          .and((email) => emailIds.indexOf(email.id) === -1)
           .delete();
-        
-        db.phones.where('contactId').equals(this.id)
-          .and(phone => phoneIds.indexOf(phone.id) === -1)
+
+        db.phones
+          .where('contactId')
+          .equals(this.id)
+          .and((phone) => phoneIds.indexOf(phone.id) === -1)
           .delete();
-        
+
         // At last, save our own properties.
         // (Must not do put(this) because we would get
         // redundant emails/phones arrays saved into db)
-        db.contacts.put(new Contact(this.first, this.last, this.id))
-          .then(id => this.id = id);
+        db.contacts
+          .put(new Contact(this.first, this.last, this.id))
+          .then((id) => (this.id = id));
       });
     });
   }
 }
 ```
+
 As shown in this sample, Contact has a method for resolving the foreign collections emails and phones into local array properties. It also has a save() method that will translate changes of the local arrays into database changes. These methods are just examples of a possible use case of class methods in database objects. In this case, I chose to write methods that are capable of resolving related objects into member properties and saving them back to database again using a relational pattern.
 
-To inform Dexie about the table/class mapping, use [Table.mapToClass()](/docs/Table/Table.mapToClass()). This will make all instances returned by the database actually being instances of the Contact class with a proper prototype inheritance chain.
+To inform Dexie about the table/class mapping, use [Table.mapToClass()](</docs/Table/Table.mapToClass()>). This will make all instances returned by the database actually being instances of the Contact class with a proper prototype inheritance chain.
 
 ```typescript
 db.contacts.mapToClass(Contact);

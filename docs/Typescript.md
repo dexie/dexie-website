@@ -162,13 +162,11 @@ export class Friend extends Entity<AppDB> {
   realmId: string;
 }
 
-db.version(1).stores({
-  friends: '@id, name, age'
-});
-
 //
 // Usage examples
 //
+
+import { db } from './db';
 
 // add
 db.friends.add({ name: 'Foo', age: 25 }); // Ok to leave out id, realmId and owner as they are all auto-generated.

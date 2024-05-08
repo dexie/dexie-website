@@ -3,7 +3,7 @@ layout: docs
 title: 'Typescript'
 ---
 
-This is a guide on how to use Dexie with Typescript using dexie@4.0 - a little more lightweight than than the old docs by utilizing new features in 4.0. Since dexie@4 is practically backward compatible, you may also still follow [the old Typescript](Typescript-old) docs if your prefer so.
+This is a guide on how to use Dexie with Typescript using dexie@4.0 - a little more lightweight than the old docs by utilizing new features in 4.0. Since dexie@4 is practically backward compatible, you may also still follow [the old Typescript](Typescript-old) docs if your prefer to do so.
 
 ## Install dexie
 

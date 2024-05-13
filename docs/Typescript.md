@@ -169,11 +169,8 @@ import { db } from './db';
 db.friends.add({ name: 'Foo', age: 25 }); // Ok to leave out id, realmId and owner as they are all auto-generated.
 
 // query
-const friends = (await db.friends.toArray()) satisfies Friend[];
-// friends is now an array of your declared Friend class with all properties on:
-//   id,
-//   name,
-//   age,
-//   owner,
-//   realmId
+const friends: Friend[] = await db.friends.toArray();
+// Typescript would infer Friend[] here
+// The annotation is only for the purpose of these docs - to show we have an array if Friend returned.
+
 ```

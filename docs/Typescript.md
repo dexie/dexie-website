@@ -25,7 +25,7 @@ If you are storing plain data and just want the a minimal get-started code in a 
 import Dexie, { type EntityTable } from 'dexie';
 
 interface Friend {
-  id: number; // This prop will be primary key (see below)
+  id: number; // This prop will be used as primary key (see below)
   name: string;
   age: number;
 }

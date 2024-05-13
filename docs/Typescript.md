@@ -104,7 +104,7 @@ export class AppDB extends Dexie {
 //
 
 import { Entity } from 'dexie';
-import { AppDB } from './AppDB';
+import type { AppDB } from './AppDB';
 
 export class Friend extends Entity<AppDB> {
   id!: number;

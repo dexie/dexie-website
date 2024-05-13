@@ -25,7 +25,7 @@ If you are storing plain data and just want the a minimal get-started code in a 
 import Dexie, { type EntityTable } from 'dexie';
 
 interface Friend {
-  id: number;
+  id: number; // This prop will be primary key (see below)
   name: string;
   age: number;
 }
@@ -33,16 +33,13 @@ interface Friend {
 const db = new Dexie('FriendsDatabase') as Dexie & {
   friends: EntityTable<
     Friend,
-    'id' // primary key "id" - see schema declaration!
+    'id' // primary key "id" (for the typings only)
   >;
 };
 
 // Schema declaration:
 db.version(1).stores({
-  friends: `
-    ++id,
-    name,
-    age`
+  friends: '++id, name, age' // primary key "id" (for the runtime!)
 });
 
 export type { Friend };

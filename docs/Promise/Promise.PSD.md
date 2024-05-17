@@ -38,6 +38,7 @@ In Dexie, PSD is used for:
  * Maintaining transaction scopes
  * Enabling reentrant write-locks on transactions
  * Enabling subscribers to db.on('ready') work on db before db.open() completes
+ * Tracking [live queries](/docs/liveQuery())
 
 ### Difference Between [Thread-specific data](http://en.wikipedia.org/wiki/Thread-Specific_Data) and PSD
 Thread-specific Data is one-dimensional. You can set Thread-static property that will be set for the currently running thread. PSD is a tree (or stack on most cases) where each new PSD acts as a stack frame that will derive from its parent. This makes PSD data automatically disappear when a Promise.newPSD() goes out of scope. This is also necessary since Promise chains (unlike threads) can all root down the the same promise but be forked on certain frames.

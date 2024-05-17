@@ -24,7 +24,8 @@ A list of Safari related issues that has been reported can be found [here](safar
 
 ## Safari version >= 14
 
-Fast and stable IndexedDB support. A few race condition issues that Dexie can workaround. For the most stable Safari support, use Dexie 4 (`npm install dexie@latest`). It works around the most major Safari issue and it continuously runs its unit tests on Safari browsers in browserstack for every commit.
+Fast and stable IndexedDB support. A few race condition issues that Dexie can workaround. For the most stable Safari support, use Dexie 4 (`npm install dexie@latest`).
+It works around the most major Safari issue and it continuously runs its unit tests on Safari browsers in Lambdatest for every commit.
 
 ## Chrome and Opera on IOS
 

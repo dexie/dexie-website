@@ -1,49 +1,52 @@
 ---
 prismStyle: 'vscode-dark'
 ---
+
 <!DOCTYPE html>
 <html>
-
   {% include head.html %}
 
   <body>
-
-		{% include navbar.html %}
-    {% include dexie-cloud-docs-header.html %}
+    {% include navbar.html %} {% include dexie-cloud-docs-header.html %}
 
     <main class="container">
       <div class="row">
         <div class="col-xs-12 col-md-8">
           <div class="row docs-page">
             <div class="col-xs-12">
-              <h1 class="col-xs-12 col-md-9" style="padding: 0;margin: 0;">{{ page.title }}</h1>
+              <h1 class="col-xs-12 col-md-9" style="padding: 0; margin: 0">
+                {{ page.title }}
+              </h1>
               <div class="hidden-xs col-md-3">
-                <a class="btn btn-primary btn-edit-doc-page" href="https://github.com/dfahlander/dexie.js-web/edit/gh-pages/{{ page.path }}">
-                  <span class="glyphicon glyphicon-edit"></span>&nbsp; Edit on GitHub
+                <a
+                  class="btn btn-primary btn-edit-doc-page"
+                  href="https://github.com/dfahlander/dexie.js-web/edit/gh-pages/{{ page.path }}"
+                >
+                  <span class="glyphicon glyphicon-edit"></span>&nbsp; Edit on
+                  GitHub
                 </a>
               </div>
             </div>
           </div>
-          <hr/>
+          <hr />
           <div class="row">
-            <div class="col-xs-12">
-              {{ content }}
-            </div>
+            <div class="col-xs-12">{{ content }}</div>
           </div>
         </div>
         <div class="col-xs-12 col-md-4">
           <div class="row docs-page-subheader">
-            <h3 style="margin-top: 4px;">Dexie Cloud Docs</h3>
+            <h3>Table of Contents</h3>
             <div class="docs-toc-wrapper">
               <ul class="docs-toc">
-                {% assign pages = site.pages | sort:"title"  %}
-                {% for page in pages %}
-                  {% if page.layout == 'docs-dexie-cloud' %}
-                    <li>
-                      <a href="{{ page.url | replace: '.html', ''}}">{{ page.title }}</a>
-                    </li>
-                  {% endif %}
-                {% endfor %}
+                {% assign pages = site.pages | sort:"title" %} {% for page in
+                pages %} {% if page.layout == 'docs' or page.layout ==
+                'docs-dexie-cloud' %}
+                <li>
+                  <a href="{{ page.url | replace: '.html', ''}}"
+                    >{{ page.title }}</a
+                  >
+                </li>
+                {% endif %} {% endfor %}
               </ul>
             </div>
           </div>
@@ -51,22 +54,19 @@ prismStyle: 'vscode-dark'
       </div>
     </main>
     {% include footer.html %}
-    <script src='/assets/js/prism-2020.js'></script>
-    <script src='/assets/js/prism-svelte.js'></script>
-		<script src='/assets/js/jquery.min.js'></script>
-    <script src='/assets/js/bootstrap.min.js'></script>
+    <script src="/assets/js/prism-2020.js"></script>
+    <script src="/assets/js/prism-svelte.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
     {% include google-analytics.html %}
     <!-- Include dexie for people wanting to open devtools to laborate -->
-    <script async src='https://unpkg.com/dexie'></script>
-    
+    <script async src="https://unpkg.com/dexie"></script>
+
     <!-- Highlight anchors the same way as github wiki works -->
     <script defer src="/assets/js/highlight-anchors.js"></script>
 
     <!-- Allow shoutouts -->
     <script src="/assets/js/anime.min.js"></script>
     <script src="/assets/js/shoutouts.js"></script>
-    
-    
   </body>
-
 </html>

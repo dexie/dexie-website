@@ -38,7 +38,10 @@ The email templates can be edited using the following steps:
 
 1. Run `npx dexie-cloud@latest templates pull` from a directory or sub-directory where your dexie-cloud.json file is located. This is normally within your app directory. _The dexie-cloud.json file is created for you when creating a new DB using `npx dexie-cloud create` or connecting to an existing db using `npx dexie-cloud connect <DB URL>`._
 
-2. Edit the templates. They will be located under a folder called `dexie-cloud` on the same level as your `dexie-cloud.json` file. You'll find two sub directories: `web-templates/` and `email-templates/`. The latter contains handlebars templates for subject and body. Each email type have two body templates - one HTML based and one text-based (fallback for old email clients). Handlebars is an old and stable templating library described [here](https://handlebarsjs.com/guide/#what-is-handlebars)). The subject- and body-txt templates are pure texts with triple-bracket parameters (triple brackeds means no escaping). The html body template is HTML based with double-bracket variables (which makes them escaped correctly in HTML). The available variables (such as `{{otp}}`, `{{originName}}` etc) are documented within comments in each template.
+2. Edit the templates. They will be located under a folder called `dexie-cloud` on the same level as your `dexie-cloud.json` file. You'll find two sub directories: `web-templates/` and `email-templates/`. The latter contains handlebars templates for subject and body. Each email type have two body templates - one HTML based and one text-based (fallback for old email clients). Handlebars is an old and stable templating library described [here](https://handlebarsjs.com/guide/#what-is-handlebars)). The subject- and body-txt templates are pure texts with triple-bracket parameters (triple brackeds means no escaping). The html body template is HTML based with double-bracket variables (which makes them escaped correctly in HTML).
+   {% raw %}
+   The available variables (such as `{{otp}}`, `{{originName}}` etc) are documented within comments in each template.
+   {% endraw %}
 
 3. Test templates by sending them to your own email address. Run `npx dexie-cloud templates test-send otp`. This will send a test OTP to your own email address.
 

@@ -9,7 +9,7 @@ At dexie.org, we value your privacy. This Privacy Policy explains how we collect
 
 ## Cookies
 
-dexie.org uses cookies for Google Analytics 4 tracking purposes only. These cookies help us understand how visitors interact with our website so we can improve our services. By clicking "Accept" on the cookie banner or continuing to use dexie.org, you consent to the use of cookies as described in this Privacy Policy.
+dexie.org uses cookies for Google Analytics 4 tracking purposes only. These cookies help us understand how visitors interact with our website so we can improve our services. By clicking "Accept" on the cookie banner, you consent to the use of cookies as described in this Privacy Policy.
 
 ## Information Collection and Use
 

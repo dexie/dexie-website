@@ -1,11 +1,12 @@
 ---
 layout: docs-dexie-cloud
-title: "Dexie Cloud Docs"
+title: 'Dexie Cloud Docs'
 ---
 
 This area is for documentation of Dexie Cloud APIs
 
 - [Getting started](/cloud/#getting-started)
+- [Dexie Cloud Best Practices](/cloud/docs/best-practices)
 - [Authentication](/cloud/docs/authentication)
 - [Access Control](/cloud/docs/access-control)
 - [Consistency](/cloud/docs/consistency)

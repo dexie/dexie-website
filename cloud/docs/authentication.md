@@ -19,6 +19,7 @@ If you prefer to jump right in to samples, here some shortcuts:
 - [Example zero config setup](#zero-config-setup)
 - [Example customizing login GUI](#customizing-login-gui)
 - [Example auth integration](<db.cloud.configure()#example-integrate-custom-authentication>)
+- [Customizing email templates](custom-emails)
 
 ## Introduction
 
@@ -40,15 +41,15 @@ If nothing is configured, dexie-cloud-addon will provide a default login GUI whe
 Here's an example based on dexie-cloud-addon@4.0.1 or later.
 
 ```tsx
-import { useState } from 'react';
-import { useObservable } from 'dexie-react-hooks';
-import { db } from './db'; // A module that exports the Dexie instance with dexie-cloud-addon attached.
+import { useState } from 'react'
+import { useObservable } from 'dexie-react-hooks'
+import { db } from './db' // A module that exports the Dexie instance with dexie-cloud-addon attached.
 import {
   resolveText,
   DXCInputField,
-  DXCUserInteraction
-} from 'dexie-cloud-addon';
-import styled from 'styled-components';
+  DXCUserInteraction,
+} from 'dexie-cloud-addon'
+import styled from 'styled-components'
 
 /** Example login dialog
  *
@@ -70,13 +71,13 @@ import styled from 'styled-components';
  *     * ui.onCancel = callback to call if user clicks cancel button.
  */
 export function MyLoginGUI() {
-  const ui = useObservable(db.cloud.userInteraction);
-  if (!ui) return null; // No user interaction is requested.
-  return <MyLoginDialog ui={ui} />;
+  const ui = useObservable(db.cloud.userInteraction)
+  if (!ui) return null // No user interaction is requested.
+  return <MyLoginDialog ui={ui} />
 }
 
 export function MyLoginDialog({ ui }: { ui: DXCUserInteraction }) {
-  const [params, setParams] = useState<{ [param: string]: string }>({});
+  const [params, setParams] = useState<{ [param: string]: string }>({})
 
   return (
     <MyDialogStyling>
@@ -92,8 +93,8 @@ export function MyLoginDialog({ ui }: { ui: DXCUserInteraction }) {
           ))}
           <form
             onSubmit={(ev) => {
-              ev.preventDefault();
-              ui.onSubmit(params);
+              ev.preventDefault()
+              ui.onSubmit(params)
             }}
           >
             {(Object.entries(ui.fields) as [string, DXCInputField][]).map(
@@ -107,12 +108,12 @@ export function MyLoginDialog({ ui }: { ui: DXCUserInteraction }) {
                     placeholder={placeholder}
                     value={params[fieldName] || ''}
                     onChange={(ev) => {
-                      const value = ev.target.value;
+                      const value = ev.target.value
                       let updatedParams = {
                         ...params,
-                        [fieldName]: value
-                      };
-                      setParams(updatedParams);
+                        [fieldName]: value,
+                      }
+                      setParams(updatedParams)
                     }}
                   />
                 </label>
@@ -132,7 +133,7 @@ export function MyLoginDialog({ ui }: { ui: DXCUserInteraction }) {
         </div>
       </div>
     </MyDialogStyling>
-  );
+  )
 }
 
 // Dialog styling
@@ -191,7 +192,7 @@ const MyDialogStyling = styled.div`
   .alert-info {
     color: black;
   }
-`;
+`
 ```
 
 ## Default Authentication from a user's perspective

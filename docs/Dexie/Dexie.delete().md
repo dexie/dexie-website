@@ -5,9 +5,18 @@ title: 'Dexie.delete()'
 
 ### Syntax
 
-```javascript
+Delete database and leave it closed:
+```js
 db.delete();
-// Static method
+```
+
+Delete database and recreate it whenever the db instance is accessed again:
+```js
+db.delete({disableAutoOpen: false});
+```
+
+Delete another database (Static method):
+```js
 Dexie.delete('database_name');
 ```
 
@@ -17,7 +26,7 @@ Dexie.delete('database_name');
 
 ### Description
 
-Deletes the database and calls the `then()` method of the returned Promise when done. If the database does not exist (`db.open()` was never called) this method will also succeed.
+Deletes the database. If the database does not exist (`db.open()` was never called) this method will also succeed.
 
 ### Sample
 

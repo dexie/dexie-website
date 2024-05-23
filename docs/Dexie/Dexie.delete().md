@@ -12,6 +12,7 @@ db.delete();
 
 Delete database and recreate it whenever the db instance is accessed again:
 ```js
+// dexie@4 only:
 db.delete({disableAutoOpen: false});
 ```
 

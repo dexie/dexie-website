@@ -1,6 +1,6 @@
 ---
 layout: docs-dexie-cloud
-title: "Consistency in Dexie Cloud"
+title: 'Consistency in Dexie Cloud'
 ---
 
 This page describes the concepts that Dexie Cloud use in order to guarantee consistency in the synchronized offline-first database. Offline clients may share the same subset of data - and perform operations that may yield one direct result on the offline database, but would have yielded another result after a sync where updated data from another client would make the original operation yield another result. Consistent add-, modify-, put- and delete operations are core concepts of Dexie Cloud and makes sure to not just sync individual objects but also the conditions used in the operations, so that the same operations can be re-executed on updated data to guarantee the same consistency at all times.
@@ -32,6 +32,9 @@ The concepts being used in Dexie Cloud to keep data consistent, are:
 - Atomic Transactions
 - Canonical Server Data Snapshot
 - Consistent Modify- and Delete Operations
+- Consistently add or remove unique entries to sets of strings or numbers
+- Consistent addition / subtraction
+- Consistent hierarchial tree structures
 - Tied Realms
 - Update Operations
 - Private Singleton IDs
@@ -72,7 +75,7 @@ If [Collection.modify()](</docs/Collection/Collection.modify()>) or [Collection.
 For example, let's say you want to modify all ToDo-items within a certain Todo-list to `{done: true}`:
 
 ```ts
-await db.todoItems.where({ todoListId: todoListId }).modify({ done: true });
+await db.todoItems.where({ todoListId: todoListId }).modify({ done: true })
 ```
 
 The intension here is to set all todo-items to done for the entire list. The intension is articulated using a where-clause and we'll describe below how this intention will affect the sync operation to maintain the intended consistency.
@@ -109,9 +112,167 @@ Basically, where-based modify- and delete-operations persist on the server until
 
 ## Update Operations
 
-Update-operations manipulate individual properties rather than replacing entire objects. Update operations prohibit conflicts when two different clients mutate different properties on the same object. This requires that the dexie operation to update was a [Table.update()](</docs/Table/Table.update()>) (or [Collection.modify()](/docs/Collection/Collection.modify()) with a where-clause using equality comparison on primary key) and that the provided changes was an object that listed the properties to update (not a JS callback). If [Table.put()](</docs/Table/Table.put()>) however was used instead of [Table.update()](</docs/Table/Table.update()>), the intention would be to actually replace the entire object and will therefore overwrite another update or put operation and not allow for two clients updating different props.
+Update-operations manipulate individual properties rather than replacing entire objects. Update operations prohibit conflicts when two different clients mutate different properties on the same object. This requires that the dexie operation to update was a [Table.update()](</docs/Table/Table.update()>) (or [Collection.modify()](</docs/Collection/Collection.modify()>) with a where-clause using equality comparison on primary key) and that the provided changes was an object that listed the properties to update (not a JS callback). If [Table.put()](</docs/Table/Table.put()>) however was used instead of [Table.update()](</docs/Table/Table.update()>), the intention would be to actually replace the entire object and will therefore overwrite another update or put operation and not allow for two clients updating different props.
 
 Update operations avoid conflicts as long as the different clients updates different properties on the object, but if two different clients update the same property, the latest performed operation will overwrite the previous one. An example would be a Todo item's `done` property. If user A sets `{done: true}` on the same object as user B sets `{done: false}` the operation that was performed latest in time will be the one that overwrites the other. The timestamp of when the actual operation took place on the client, decides which operation will overwrite the other. This timestamp is adjusted to each client's time-diff against the server.
+
+## Consistently add or remove unique entries to sets of strings or numbers
+
+Update- and modify operations take an object containing the properties to update. The value to be set can either be a plain value (such as `{name: "Foo"}` which will update the "name" property to "Foo") but can also be a CRDT operation. This can be utilized to modify the property relative to its current value. When working with array properties that represent a set of strings or numbers (such as `tags` or `hobbies`), the CRDT operations `add()` and `remove()` can be used to manipulate the array consistently across sync rather than replacing the whole array. See [/docs/add()] and [/docs/remove()].
+
+## Consistent addition / subtraction
+
+Number or BigInt properties can be manipulated using addition or subtraction that is consistent across sync.
+See [/docs/add()] and [/docs/remove()].
+
+## Consistent Tree Structures
+
+One pattern for managing tree structures in a database is to have an indexed property representing the path to the parent node, such as `parentPath`. This makes it efficient to delete or list all descendants in one query without any need of recursion:
+
+```ts
+// Add new node
+function addNode(childProps, parentId = null) {
+  return db.transaction('rw', db.treeNodes, async ()=> {
+    const parent = parentId && await db.treeNodes.get(parentId);
+    await db.treeNodes.add({
+      ...childProps,
+      parentPath: parent
+        ? `${parent.parentPath}${parent.id}/`
+        : '' // If no parent, parentPath will be empty string (added at the root)
+    });
+  }
+}
+
+// List direct children
+function listChildren(node) {
+  return db.treeNodes.where({parentPath: `${node.parentPath}${node.id}/`}).toArray();
+}
+
+// List all descendants without recursion:
+function listAllDescendants(node) {
+  return db.treeNodes.where('parentPath').startsWith(`${node.parentPath}${node.id}/`).toArray();
+}
+
+// Load parent
+function loadParent(node) {
+  return db.treeNodes.get(node.parentPath.split('/').at(-2));
+}
+
+// Load all ancestors
+function async loadAllAncestors(node) {
+  return (node.parentPath
+    ? await db.treeNodes.bulkGet(node.parentPath.substring(0, node.parentPath.length - 1).split('/'))
+    : []
+  );
+}
+
+// Delete the node and all its descendants:
+function deleteNode(node) {
+  return db.transaction('rw', db.treeNodes, () => {
+    db.treeNodes.where('parentPath')
+      .startsWith(`${node.parentPath}${node.id}/`)
+      .delete();
+    db.treeNodes.where({
+      parentPath: node.parentPath, // for consistence
+      id: node.id
+    }).delete();
+  });
+}
+
+
+// Move subtree with sync consistency:
+import { replacePrefix } from 'dexie';
+
+function moveNode(node, newParentPath) {
+  return db.transaction('rw', db.treeNodes, () => {
+    // Move node
+    db.treeNodes.where({
+      parentPath: node.parentPath, // consistency-check
+      id: node.id
+    }).modify({
+      parentPath: newParentPath
+    });
+    // Move all its descendants in relation to their sub path:
+    db.treeNodes
+      .where('parentPath')
+      .startsWith(`${node.parentPath}${node.id}/`)
+      .modify({
+        // Here we're in a declarative object - not a JS callback - ==> Consistent operation.
+        parentPath: replacePrefix(node.parentPath, newParentPath);
+      });
+  });
+}
+```
+
+All the mutating operations above are also [sync consistent](https://dexie.org/cloud/docs/consistency#consistent-modify--and-delete-operations): If one offline client adds a child under "/a/b/c" and another offline client modifies all descendants under "/a/b/c" to have a new property {color: "blue"}, the merge of these operation will set {color: "blue"} on the added child also no matter in which order the clients became online.
+
+## The new support for moving trees
+
+But modify-operations that use a JS callback does not benefit from sync consistency, only local consistency. Moving an entire tree from one node to another has been one of those operation that need a JS function because the new parentPath's value depends on its existing value. So a tree move has only been possible with local consistency but not sync consistency before:
+
+```ts
+function moveNode(node, newParentPath) {
+  return db.transaction('rw', db.treeNodes, () => {
+    // Move node. Having the parentPath criteria here is for consistency:
+    // Only perform the 2 moves if parentPath is still the same.
+    db.treeNodes
+      .where({
+        parentPath: node.parentPath,
+        id: node.id,
+      })
+      .modify({
+        parentPath: newParentPath,
+      })
+    // Move all its descendants in relation to their sub path:
+    db.treeNodes
+      .where('parentPath')
+      .startsWith(`${node.parentPath}${node.id}/`)
+      .modify((node) => {
+        // This is a JS callback that cannot be expressed to the server
+        node.parentPath =
+          newParentPath + node.parentPath.substring(node.parentPath.length)
+      })
+  })
+}
+```
+
+JS code cannot securely be sent to the server due to several reasons: closures information missing + the risk of sending code that injects arbitrary code on the server. The operation above won't be sync consistent. If an offline client did add a new node under /a/b/c and that node is moved to /x/y/z, the merging of these operations would not be consistent - a node would still be placed under /a/b/c even though the c node has moved and doesn't exist anymore. So there is a need for declarative ways of doing certain operations, and moving trees is one of them.
+
+A new export `replacePrefix` now available for this purpose. We will add more of these in coming versions (such as increment, push, deleteArrayItem, etc). `replacePrefix` is the first "complex" operation that already has support in Dexie Cloud (if upgrading dexie-cloud-addon to 4.0.1-beta.58) and can be executed to perform sync consistent tree moves:
+
+```ts
+import { replacePrefix } from 'dexie';
+
+// Move subtree with sync consistency:
+function moveNode(node, newParentPath) {
+  return db.transaction('rw', db.treeNodes, () => {
+    // Move node
+    db.treeNodes.where({
+      parentPath: node.parentPath, // consistency-check
+      id: node.id
+    }).modify({
+      parentPath: newParentPath
+    });
+    // Move all its descendants in relation to their sub path:
+    db.treeNodes
+      .where('parentPath')
+      .startsWith(`${node.parentPath}${node.id}/`)
+      .modify({
+        // Here we're in a declarative object - not a JS callback - ==> Consistent operation.
+        parentPath: replacePrefix(node.parentPath, newParentPath);
+      });
+  });
+}
+
+```
+
+This transaction does it all - it moves the node and all its descendants consistently in one atomic all-or-nothing transaction but also preserves the where-condition and the `replacePrefix` operation in the information to the server so that if an offline client added a node under /a/b/c, and then this operation happened, moving all descendants to the new location, and then the offline client comes online again and syncs, the new node would be placed on the correct new location and be hanging below a non-existing /a/b/c.
+
+### Consistency in conflicting move operations
+
+If two operations competes in a move operation involving the same nodes, consistency is maintained by the extra criteria on parentPath in both the move of the parent node and the operation to move its descendants. A move operation will not be performed if another move operation came first. The end result will always be a consistent tree. The last syncer might then experience that the move operation they made got rolled back after a sync and they would instead see the peer's hierarchy.
+
+### Remove unique item from array property
 
 ## Tied Realms
 
@@ -128,44 +289,48 @@ The solution to the problem described above is to generate an ID for the realm c
 And when finally deleting an entity that MAY have a tied realm, application code should also delete the possibly existing realm along with its related entities (todoItems, realm and its members). By doing all these operations within a single Dexie transaction, atomicity is also guaranteed. In the end we have a waterproof and consistent way of managing entire life cycle of entities that may be shared or may be private.
 
 ```ts
-import { getTiedRealmId } from "dexie-cloud-addon";
+import { getTiedRealmId } from 'dexie-cloud-addon'
 
 async function shareList(todoList: TodoList) {
   await db.transaction(
-    "rw",
+    'rw',
     [db.todoLists, db.todoItems, db.realms],
     async () => {
       // Create realm (use put instead of add if other client did the same)
-      const newRealmId = getTiedRealmId(todoList.id);
+      const newRealmId = getTiedRealmId(todoList.id)
       await db.realms.put({
         realmId: newRealmId,
-        name: "A todo list",
-        represents: "a todo list",
-      });
+        name: 'A todo list',
+        represents: 'a todo list',
+      })
       // Move todo-list into the new realm:
-      await db.todoLists.update(todoList.id, { realmId: newRealmId });
+      await db.todoLists.update(todoList.id, { realmId: newRealmId })
       // Move all todo items into the new realm consistently (modify() is consistent across sync peers)
       await db.todoItems
         .where({ todoListId: todoList.id })
-        .modify({ realmId: newRealmId });
+        .modify({ realmId: newRealmId })
     }
-  );
+  )
 }
 
 // Consistently delete the list. Also delete its tied realm (even if it is on the private realm)
-// Reason for always deleting its tied realm is: What if we are offline, and another client has 
+// Reason for always deleting its tied realm is: What if we are offline, and another client has
 // shared the list while we're not yet aware of this. By always deleting a possible tied realm along
 // with deleting the list, we make sure that the deletion will also delete the realm if it exists.
 async function deleteList(todoList: TodoList) {
-   await db.transaction('rw', [db.todoLists, db.todoItems, db.realms, db.members], ()=>{
-      const tiedRealmId = getTiedRealmId(todoList.id);
-      db.todoLists.delete(todoList.id);
-      db.todoItems.where({todoListId: todoList.id}).delete();
+  await db.transaction(
+    'rw',
+    [db.todoLists, db.todoItems, db.realms, db.members],
+    () => {
+      const tiedRealmId = getTiedRealmId(todoList.id)
+      db.todoLists.delete(todoList.id)
+      db.todoItems.where({ todoListId: todoList.id }).delete()
       // Empty out any tied realm from members:
-      db.members.where({realmId: tiedRealmId}).delete(); 
+      db.members.where({ realmId: tiedRealmId }).delete()
       // Delete the tied realm if it exists:
-      db.realms.delete(tiedRealmId);
-   });
+      db.realms.delete(tiedRealmId)
+    }
+  )
 }
 ```
 
@@ -175,24 +340,24 @@ Private Singleton IDs are primary keys that starts with a hash "#". They only ne
 
 Some examples when private singleton IDs can be useful:
 
-* You have some personal settings per user and you want the database objects representing a setting to be a singleton instance (one per setting and user).
-* You want a default placeholder to exist for every user. In a music app, it could be "Favourite songs".
+- You have some personal settings per user and you want the database objects representing a setting to be a singleton instance (one per setting and user).
+- You want a default placeholder to exist for every user. In a music app, it could be "Favourite songs".
 
 ### Example: Personal Settings Object
 
 ```ts
 // Database declaration
-const db = new Dexie("MyAppDB");
+const db = new Dexie('MyAppDB')
 db.version(1).stores({
-  personalSettings: 'id'
-});
+  personalSettings: 'id',
+})
 
 // Read setting:
-const themeSetting = await db.personalSettings.get('#theme');
-console.log("User theme is:", themeSetting?.value ?? "default-theme");
+const themeSetting = await db.personalSettings.get('#theme')
+console.log('User theme is:', themeSetting?.value ?? 'default-theme')
 
 // Update setting:
-await db.personalSettings.put({id: '#theme', value: 'dark-mode'});
+await db.personalSettings.put({ id: '#theme', value: 'dark-mode' })
 ```
 
 Like all data in Dexie Cloud, it is allowed to add objects even when not yet authenticated to the server. When user finally authenticates, his or her created objects will get their realmId set to the correct private realmId of the authenticated user and get synced to the server. This goes for private objects only - non-authenticated users may never create or manipulate objects in other realms than the private one.
@@ -211,4 +376,3 @@ Private IDs prohibits getting multiple instances in these cases. The settings ex
 ### Private Singletons must never be shared
 
 An object with an private ID (starting with "#") must never be shared but needs to always lie in the private realm. If your app allows for sharing placeholder objects such as To-do lists, music albums or similar, take special care if the placeholder uses a private ID, and if so, disable the possibility to share it.
-

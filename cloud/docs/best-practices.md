@@ -157,7 +157,7 @@ Migrating synced data can be a complex task as data might be shared between clie
 
 Dexie's ordinary upgrading framework operates on local data only and before the dexie-cloud-addon has been invoked to setup its required data.
 
-For these reasons, a Dexie Cloud app need to be written to avoid migrations. Should a migration be needed anywat, the recommendation is currently to create a new database and manually migrate the data using [npx dexie-cloud export](/cloud/docs/cli#export), migrate it off-line and then import it to the new database using [npx dexie-cloud import](/cloud/docs/cli#import).
+For these reasons, a Dexie Cloud app need to be written to avoid migrations. Should a migration be needed anyway, the recommendation is currently to create a new database and manually migrate the data using [npx dexie-cloud export](/cloud/docs/cli#export), migrate it off-line and then import it to the new database using [npx dexie-cloud import](/cloud/docs/cli#import).
 
 ### Ad-hoc Migration
 

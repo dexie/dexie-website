@@ -256,7 +256,7 @@ The example above will retrieve the primary keys of the items to delete as they 
 
 ```ts
 function deleteTodoList(todoListId) {
-  return db.transaction('rw', db.todoLists, db.todoItems, async () => {
+  return db.transaction('rw', db.todoLists, db.todoItems, () => {
     db.todoItems.where({ todoListId: todoListId }).delete()
     db.todoLists.delete(todoListId)
   })

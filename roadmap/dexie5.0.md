@@ -210,7 +210,7 @@ class Friends extends Entity<AppDB> {
 
   // methods can access this.db because we're subclassing Entity<AppDB>
   async birthDay() {
-    return this.db.friends.update((friend) => ++friend.age);
+    return this.db.friends.update(this.id, { age: add(1) });
   }
 }
 ```

@@ -25,7 +25,7 @@ const db = new Dexie('friendsDB').stores({
   friends: Friend // Declares schema and maps the class
 });
 
-// Versions / migrations are optional!
+// As in dexie@4, versions / migrations are now optional!
 ```
 
 #### Dexie's classical schema style

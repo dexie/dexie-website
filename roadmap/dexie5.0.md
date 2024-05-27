@@ -11,9 +11,7 @@ We don't have a any dedicated time schedule of when dexie 5 will be in alpha, be
 
 # Type Safe Declation and Easier Class Mapping
 
-DB declaration will be possible within a single expression instead of specifying different schemas for different versions.
-
-Dexie 5.0 will also support schema changes without updating version. We want to separate migration from table/index changes. Versions can be declared like before, but version increments will only be needed for the purpose of migrating data, not schema. Schema changes can be diffed with existing schema and updated automatically. Hopefully this will save people from common error of forgetting to increase version number on any schema change.
+DB declaration will be possible within a single expression instead of having to repeat declarations for the typings and for the actual schema (runtime).
 
 ```ts
 class Friend {

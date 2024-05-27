@@ -7,6 +7,12 @@ title: Contact
 
 We love to answer all kinds of questions about Dexie.js on stackoverflow and we try do our best to be fast to respond to and fix issues posted on Github! Never hesitate to ask something on [stackoverflow](http://stackoverflow.com/questions/ask?tags=dexie). Also, please [file issues](https://github.com/dexie/Dexie.js/issues/new) when you suspect a bug, but please do a bit of research before you do: [search for existing issues](https://github.com/dexie/Dexie.js/issues?q=is%3Aissue).
 
+## Sales
+
+To get in touch with sales, drop us an email!
+
+Email: [sales@awarica.com](mailto:sales@awarica.com)
+
 ## Ask Question
 
 [Ask Dexie question on stackoverflow](http://stackoverflow.com/questions/ask?tags=dexie)

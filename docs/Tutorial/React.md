@@ -72,28 +72,28 @@ If you use Typescript, table properties (such as `db.friends`) needs to be expli
 
 ```ts
 // db.ts
-import Dexie, { Table } from 'dexie';
+import Dexie, { type EntityTable } from 'dexie';
 
 export interface Friend {
-  id?: number;
+  id: number;
   name: string;
   age: number;
 }
 
-export class MySubClassedDexie extends Dexie {
-  // 'friends' is added by dexie when declaring the stores()
-  // We just tell the typing system this is the case
-  friends!: Table<Friend>;
+const db = new Dexie('FriendsDatabase') as Dexie & {
+  friends: EntityTable<
+    Friend,
+    'id' // primary key "id" (for the typings only)
+  >;
+};
 
-  constructor() {
-    super('myDatabase');
-    this.version(1).stores({
-      friends: '++id, name, age' // Primary key and indexed props
-    });
-  }
-}
+// Schema declaration:
+db.version(1).stores({
+  friends: '++id, name, age' // primary key "id" (for the runtime!)
+});
 
-export const db = new MySubClassedDexie();
+export type { Friend };
+export { db };
 ```
 
 # 4. Create a component that adds some data

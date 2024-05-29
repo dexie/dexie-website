@@ -54,28 +54,28 @@ If you use Typescript, table properties (such as `db.friends`) needs to be expli
 
 ```ts
 // db.ts
-import Dexie, { type Table } from 'dexie';
+import Dexie, { type EntityTable } from 'dexie';
 
 export interface Friend {
-  id?: number;
+  id: number;
   name: string;
   age: number;
 }
 
-export class MySubClassedDexie extends Dexie {
-  // 'friends' is added by dexie when declaring the stores()
-  // We just tell the typing system this is the case
-  friends!: Table<Friend>; 
+const db = new Dexie('FriendsDatabase') as Dexie & {
+  friends: EntityTable<
+    Friend,
+    'id' // primary key "id" (for the typings only)
+  >;
+};
 
-  constructor() {
-    super('myDatabase');
-    this.version(1).stores({
-      friends: '++id, name, age' // Primary key and indexed props
-    });
-  }
-}
+// Schema declaration:
+db.version(1).stores({
+  friends: '++id, name, age' // primary key "id" (for the runtime!)
+});
 
-export const db = new MySubClassedDexie();
+export type { Friend };
+export { db };
 
 ```
 *See also [issue 1560](https://github.com/dexie/Dexie.js/issues/1560) containing a solution to improve typings for `liveQuery()` in case you want a more precise typings of the '$' vars.*

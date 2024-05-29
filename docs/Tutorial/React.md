@@ -74,7 +74,7 @@ If you use Typescript, table properties (such as `db.friends`) needs to be expli
 // db.ts
 import Dexie, { type EntityTable } from 'dexie';
 
-export interface Friend {
+interface Friend {
   id: number;
   name: string;
   age: number;

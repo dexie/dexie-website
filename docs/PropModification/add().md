@@ -1,6 +1,6 @@
 ---
 layout: docs
-title: 'add()'
+title: 'Consistent add() operator'
 ---
 
 ### Syntax
@@ -58,3 +58,5 @@ If using Dexie Cloud and there are two different clients with access to the same
 ### See Also
 
 [remove()](<remove()>)
+
+[replacePrefix()](<replacePrefix()>)

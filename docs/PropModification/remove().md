@@ -1,6 +1,6 @@
 ---
 layout: docs
-title: 'remove()'
+title: 'Consistent remove() operator'
 ---
 
 ### Syntax
@@ -63,3 +63,5 @@ If using Dexie Cloud and there are two different clients with access to the same
 ### See Also
 
 [add()](<add()>)
+
+[replacePrefix()](<replacePrefix()>)

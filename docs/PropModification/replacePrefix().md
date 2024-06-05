@@ -1,6 +1,6 @@
 ---
 layout: docs
-title: 'replacePrefix()'
+title: 'Consistent replacePrefix() operator'
 ---
 
 ### Syntax

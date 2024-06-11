@@ -182,7 +182,7 @@ db.version(x).stores({
 
 ```
 
-### Subsclassing Dexie
+### Sub-classing Dexie
 
 ```ts
 export class AppDB extends Dexie {

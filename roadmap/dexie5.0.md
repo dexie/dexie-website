@@ -303,6 +303,10 @@ We will provide a new encryption addon, similar to the 3rd part [dexie-encrypted
 
 The syntax for initializing encryption is not yet decided on, but might not correspond to those of the current 3rd part addons.
 
+# Support SQLite as backing DB
+
+We also aim to make it possible to use Dexie and Dexie Cloud in react-native, nativescript, Node, Bun, Deno or in the browser with SQLite's webassembly build. Running Dexie on Node is actually already possible using [IndexedDBShim](https://www.npmjs.com/package/indexeddbshim) but the idea is to support it natively to improve performance and stability.
+
 # Breaking Changes
 
 ## No default export

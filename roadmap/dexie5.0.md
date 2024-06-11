@@ -192,7 +192,7 @@ export class AppDB extends Dexie {
 const db = new AppDB('appDB');
 ```
 
-The subsclassed version above is equivalent to:
+The sub-classed version above is equivalent to:
 
 ```ts
 const db = new Dexie('appDB').stores({

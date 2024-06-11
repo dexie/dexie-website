@@ -271,7 +271,7 @@ db.version(3)
 | ------------------- | -------------------------------------------------------------------------------- |
 | `'allow'` (default) | Allow downgrade - reverse renaming of tables and props only - data is left as is |
 | `'recreate'`        | Erase all data on downgrade                                                      |
-| `'throw'`           | Do not allow downgrade (same as dexie 2,3 and 4 behavior)                        |
+| `'throw'`           | Do not allow downgrade (same as dexie 2 and 3 behavior)                          |
 
 # Richer Queries
 

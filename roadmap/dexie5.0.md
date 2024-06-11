@@ -9,7 +9,7 @@ The goal for Dexie 5.0 will be a better experience for web developers to declare
 
 We don't have a any dedicated time schedule of when dexie 5 will be in alpha, beta or feature complete. This road map may also be updated and modified along the way.
 
-# Type Safe Declation and Easier Class Mapping
+# Type Safe Declaration and Easier Class Mapping
 
 DB declaration will be possible within a single expression instead of having to repeat declarations for the typings and for the actual schema (runtime).
 

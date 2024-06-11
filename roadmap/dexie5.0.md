@@ -255,7 +255,7 @@ db.version(2)
 ```ts
 db.version(3)
   .upgrade(async (tx) => {
-    await tx.table('contacts')?.update((contact) => {
+    await tx.table('contacts')?.toCollection().modify((contact) => {
       const [firstName, lastName] = contact.displayName?.split(' ') ?? [];
       contact.firstName = firstName;
       contact.lastName = lastName;

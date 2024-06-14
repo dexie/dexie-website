@@ -22,26 +22,35 @@ import Dexie from "dexie";
 import {importDB, exportDB, importInto, peakImportFile} from "dexie-export-import";
 
 //
+// --- importDB() ---
+//
 // Import from Blob or File to Dexie instance:
 //
 const db = await importDB(blob, [options]);
 
+//
+// --- exportDB() ---
 //
 // Export to Blob
 //
 const blob = await exportDB(db, [options]);
 
 //
+// --- importInto() ---
+//
 // Import from Blob or File to existing Dexie instance
 //
 await importInto(db, blob, [options]);
 
+//
+// --- peakImportFile() ---
 //
 // If you need to peek the metadata from the import file without actually
 // performing any import operation
 // (since v1.0.0)
 //
 const importMeta = await peakImportFile(blob);
+
 assert.areEqual(importMeta.formatName, "dexie");
 assert.isTrue(importMeta.formatVersion === 1);
 console.log("Database name:", importMeta.data.databaseName);
@@ -62,15 +71,21 @@ import Dexie from "dexie";
 import "dexie-export-import";
 
 //
+// --- Dexie.import() ---
+//
 // Import from Blob or File to Dexie instance:
 //
 const db = await Dexie.import(blob, [options]); // equivalent to importDB()
 
 //
+// --- db.export() ---
+//
 // Export to Blob
 //
 const blob = await db.export([options]); // equivalent to exportDB()
 
+//
+// --- db.import() ---
 //
 // Import from Blob or File to existing Dexie instance
 //

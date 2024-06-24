@@ -26,8 +26,8 @@ function MyComponent() {
     <>
       <h1>Roles</h1>
       <ul>
-        {roles.map((role) => (
-          <li key={role.id}>{role.displayName}</li>
+        {Object.keys(roles).map((roleId) => (
+          <li key={roleId}>{roles[roleId].displayName}</li>
         ))}
       </ul>
     </>
@@ -50,8 +50,8 @@ See [useObservable()](</docs/dexie-react-hooks/useObservable()>)
 
 <div>
   <h1>Roles</h1>
-  {#each $oRoles as role (role.id)}
-    <li>{role.displayName}</li>
+  {#each Object.keys($oRoles || {}) as roleId}
+    <li>{$oRoles[roleId].displayName}</li>
   {/each}
 </div>
 ```

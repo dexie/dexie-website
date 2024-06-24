@@ -11,7 +11,7 @@ Roles can be used when sharing data with other users by adding an entry into the
 
 ### Type
 
-Observable of [Role](Role)[]
+Observable of [{[roleId: string]: Role}](Role)
 
 ### Example (React)
 

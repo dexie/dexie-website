@@ -50,7 +50,7 @@ See [useObservable()](</docs/dexie-react-hooks/useObservable()>)
 
 <div>
   <h1>Roles</h1>
-  {#each Object.keys($oRoles || {}) as roleId}
+  {#each Object.keys($oRoles) as roleId}
     <li>{$oRoles[roleId].displayName}</li>
   {/each}
 </div>

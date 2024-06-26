@@ -30,17 +30,13 @@ function MyComponent() {
 <script>
   import { db } from "./db.js";
 
-  function login() {
-    db.cloud.login();
-  }
-
-  let oUser = db.cloud.currentUser;
+  let user = db.cloud.currentUser;
 </script>
 
 <div>
-  <p>Current User: {$oUser.name}</p>
-  <p>Is Logged in: {$oUser.isLoggedIn}</p>
-  <button on:click={login}>Login</button>
+  <p>Current User: {$user.name}</p>
+  <p>Is Logged in: {$user.isLoggedIn}</p>
+  <button on:click={() => db.cloud.login()}>Login</button>
 </div>
 ```
 

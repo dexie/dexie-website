@@ -8,6 +8,7 @@ This page documents the REST API that every database in Dexie Cloud has.
 ## Endpoints
 
 | [/token](#token) | Token endpoint |
+| [/token/validate](#token-validate) | Token validation endpoint |
 | [/all/...](#all-endpoint) | All data endpoint |
 | [/my/...](#my-endpoint) | My data endpoint |
 | [/public/...](#public-endpoint) | Public data endpoint |
@@ -131,6 +132,34 @@ The token is valid in one hour from the time it was requested.
 
 - [Tokens](authentication#tokens)
 - [Example auth integration](<db.cloud.configure()#example-integrate-custom-authentication>)
+
+### /token/validate
+
+| Method | GET |
+| Authorization | Bearer token |
+
+Validates a JWT token.
+
+```http
+GET /token/validate HTTP/1.1
+Host: xxxx.dexie.cloud
+Origin: <the origin header from your client>
+Authorization: Bearer <JWT token>
+```
+
+Expected result:
+
+```http
+HTTP/1.1 200 Ok
+Content-Type: application/json
+
+{
+  valid: true,
+  claims: {
+    ...claims
+  }
+}
+```
 
 ### /all/... endpoint
 

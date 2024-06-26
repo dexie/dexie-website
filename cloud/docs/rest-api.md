@@ -8,7 +8,7 @@ This page documents the REST API that every database in Dexie Cloud has.
 ## Endpoints
 
 | [/token](#token) | Token endpoint |
-| [/token/validate](#token-validate) | Token validation endpoint |
+| [/token/validate](#tokenvalidate) | Token validation endpoint |
 | [/all/...](#all-endpoint) | All data endpoint |
 | [/my/...](#my-endpoint) | My data endpoint |
 | [/public/...](#public-endpoint) | Public data endpoint |

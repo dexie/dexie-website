@@ -17,5 +17,5 @@ table.toCollection()
 
 ### Remarks
 
-Returns a unfiltered Collection instance containing all objects in the store.
+Returns an unfiltered Collection instance containing all objects in the store.
 

@@ -30,7 +30,7 @@ function log (message) {
     // Our callers should not have to include the "logs" table in
     // it's transactions.
     // To make sure we add the log entry using a fresh transaction, we
-    // use the spawn() method:
+    // use the ignoreTransaction() method:
     Dexie.ignoreTransaction(function() {
         db.logs.add({message: message, date: new Date()});
     });

@@ -414,13 +414,13 @@ db.transaction('rw', db.friends, db.diary, async () => {
 
 *The above snippet shows that you can also reuse code that is indeed transaction-aware, but encapsulate several such functions in an overall umbrella-transaction.*
 
-**NOTE: The code above may look like it could only execute this transaction one-at-a-time, but with thanks to [zone](/docs/Promise/Promise.PSD) technology, this code can work in parallell with other transactions. (Dexie implements its own zone system and is not dependent on zone.js)**
+**NOTE: The code above may look like it could only execute this transaction one-at-a-time, but with thanks to [zone](/docs/Promise/Promise.PSD) technology, this code can work in parallel with other transactions. (Dexie implements its own zone system and is not dependent on zone.js)**
 
 Reference: [Dexie.transaction()](/docs/Dexie/Dexie.transaction())
 
 #### Working with Asynchronic APIs
 
-Dexie.js is an asynchronic API. In synchronic APIs, errors are normally handled using exceptions. This is very convinient because you code on without doing error checking everywhere and instead catch exceptions on a higher level. Asynchronic APIs normally use success- and error events to signal back when operation complete. Since indexedDB uses a combination of exceptions and error events to notify the caller, it is quite cumbersome to code against it using correct error handling - you need both to do try..catch and request.onerror for each and every request. Dexie.js solves this by working with ECMAScript6 compliant [Promises](http://www.html5rocks.com/en/tutorials/es6/promises/) making error handling as easy as it is on a synchronous API with try..catch error handling.
+Dexie.js is an asynchronic API. In synchronic APIs, errors are normally handled using exceptions. This is very convenient because you code on without doing error checking everywhere and instead catch exceptions on a higher level. Asynchronic APIs normally use success- and error events to signal back when operation complete. Since indexedDB uses a combination of exceptions and error events to notify the caller, it is quite cumbersome to code against it using correct error handling - you need both to do try..catch and request.onerror for each and every request. Dexie.js solves this by working with ECMAScript6 compliant [Promises](http://www.html5rocks.com/en/tutorials/es6/promises/) making error handling as easy as it is on a synchronous API with try..catch error handling.
 
 #### Working with Promises
 Promise based APIs (such as Dexie.js) will look more like synchronous APIs than event based APIs, but instead of returning the result, it will return an instance of [Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise). ECMAScript6 promises has two methods: [then()](/docs/Promise/Promise.then) and [catch()](/docs/Promise/Promise.catch). These methods expects a callback to call when the operation succeeds or fails respectively. All asynchronic methods in Dexie returns a Promise instance and this makes the API way more easy to use, as you will see in our examples.

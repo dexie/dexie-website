@@ -66,7 +66,7 @@ db.friends.where("name").startsWithIgnoreCase("d").each(function(friend) {
 import Dexie from 'dexie';
 
 export class FriendsDB extends Dexie {
-    friends: Dexie.Table<Friend, number>;
+    friends!: Dexie.Table<Friend, number>;
 
     constructor() {
         super("FriendsDB");

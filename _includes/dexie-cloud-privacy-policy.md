@@ -1,4 +1,4 @@
-**Last Updated:** 2024-04-24
+**Last Updated:** 2024-08-08
 
 Thank you for choosing Dexie Cloud, a cloud database service designed to facilitate offline data synchronization for app developers. This Privacy Policy outlines how we collect, use, disclose, and protect your information when you use our service.
 
@@ -61,6 +61,10 @@ You may access and update your personal information by logging into your Dexie C
 ### 5.2 Opt-Out
 
 You may opt-out of receiving promotional emails from us by following the unsubscribe instructions provided in the emails.
+
+### 5.3 Self-Hosting Option
+
+If you require complete control over your data, cloud provider, or hosting region, you have the option to purchase the Dexie Cloud Server software [Silver](/cloud/pricing#silver-edition) or [Gold](/cloud/pricing#gold-edition). This allows you to host Dexie Cloud in your own cloud or on-premise servers, ensuring full control over data integrity, backup, and security.
 
 ## 6. Changes to this Privacy Policy
 

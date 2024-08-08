@@ -7,6 +7,8 @@ title: Privacy Policy
 
 At dexie.org, we value your privacy. This Privacy Policy explains how we collect, use, and protect your personal information when you visit our website and how you can control the collection and use of that information.
 
+For information about how we handle data in our Dexie Cloud service, please refer to the [Dexie Cloud Privacy Policy](/cloud/privacy).
+
 ## Cookies
 
 dexie.org uses cookies for Google Analytics 4 tracking purposes only. These cookies help us understand how visitors interact with our website so we can improve our services. By clicking "Accept" on the cookie banner, you consent to the use of cookies as described in this Privacy Policy.

@@ -9,9 +9,28 @@ We love to answer all kinds of questions about Dexie.js on stackoverflow and we 
 
 ## Sales
 
-To get in touch with sales, drop us an email!
+You are more than welcome to contact us on email or even to directly here and now, schedule a sales meeting with us, see links below:
 
 Email: [sales@awarica.com](mailto:sales@awarica.com)
+
+<p>
+  Schedule a meeting: 
+  <!-- Calendly link widget begin -->
+  <link
+    href="https://assets.calendly.com/assets/external/widget.css"
+    rel="stylesheet"
+  />
+  <script
+    src="https://assets.calendly.com/assets/external/widget.js"
+    type="text/javascript"
+    async
+  ></script>
+  <a
+    href=""
+    onclick="Calendly.initPopupWidget({url: 'https://calendly.com/david-fahlander-awarica/30min'});return false;"
+    >Check available time slots</a>
+  <!-- Calendly link widget end -->
+</p>
 
 ## Ask Question
 

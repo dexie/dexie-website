@@ -23,17 +23,17 @@ However, certain limitations still apply under this license, as detailed below.
 
 ### <i class="fa fa-hand-o-right" aria-hidden="true"></i> Restrictions on Competition
 
-This license prohibits the copying, selling, or other forms of redistributing the source code or binaries to other companies. While the software can be used to serve your application globally without extra costs, you are not permitted to distribute or sell the Dexie Cloud Server software itself. A purchased Dexie Cloud Server license is exclusively for internal use by the purchasing company, functioning as a storage platform for company-owned application(s).
+This license prohibits the copying, selling, or other forms of redistributing the source code or binaries to other companies except when being used to host apps developed by your company only. While the software can be used to serve your application globally without extra costs, you are not permitted to distribute or sell the Dexie Cloud Server software itself as a general storage platform for 3rd party apps. A purchased Dexie Cloud Server license is exclusively for internal use by the purchasing company, functioning as a storage platform for company-owned application(s).
 
 _Note: This restriction pertains to Dexie Cloud Server (private source), not Dexie.js (open source, Apache 2.0 licensed)._
 
-If you require a redistribution license, kindly [get in touch](mailto:business@dexie.org).
+If you require a redistribution license, kindly [get in touch](mailto:sales@awarica.com).
 
 ### <i class="fa fa-hand-o-right" aria-hidden="true"></i> Prohibition of Competing Cloud Offering
 
-This license does not authorize the establishment of a Dexie Cloud service for external applications beyond your company. Hosting third-party developers as tenants on your Dexie Cloud server necessitates a license for each external company, or alternatively, a distinct agreement with us for such usage.
+This license does not authorize the establishment of a Dexie Cloud service for external applications beyond the apps developed by your company. Hosting third-party developers as tenants on your Dexie Cloud server necessitates a license for each external company, or alternatively, a distinct agreement with us for such usage.
 
-If you are interested in providing Dexie Cloud as a service to external companies (similar to our offering), please [contact us](mailto:business@dexie.org) to explore suitable arrangements.
+If you are interested in providing Dexie Cloud as a service to external companies (similar to our offering), please [contact us](mailto:sales@awarica.com) to explore suitable arrangements.
 
 For further information and details, consult the [Dexie Cloud Documentation](/cloud/docs).
 <br /><br /><br /><br /><br /><br /><br />

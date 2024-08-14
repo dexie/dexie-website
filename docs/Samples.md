@@ -106,6 +106,3 @@ title: 'Samples'
 
 * Dexie Fiddle: [https://jsfiddle.net/dfahlander/3tf5r0cu/](https://jsfiddle.net/dfahlander/3tf5r0cu/)
 * Open existing DB: [https://jsfiddle.net/dfahlander/b8Levamm/](https://jsfiddle.net/dfahlander/b8Levamm/)
-* Storing Binary Data: [https://jsfiddle.net/dfahlander/kgsbbhca/](https://jsfiddle.net/dfahlander/kgsbbhca/)
-* Preserving custom types using [typeson](https://www.npmjs.com/package/typeson): [https://jsfiddle.net/dfahlander/qacL14tu/](https://jsfiddle.net/dfahlander/qacL14tu/)
-

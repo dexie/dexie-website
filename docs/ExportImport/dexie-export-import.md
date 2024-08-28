@@ -110,6 +110,7 @@ Even though this sample doesn't show it, blobs can also be sent or retrieved to/
 * Chunk-wise / Streaming - does not read the entire DB into RAM
 * Progress callback (typically for showing progress bar)
 * Optional filter allows to import/export subset of data
+* Optional transform allows to alter or migrate data being imported
 * Support for all structured cloneable exotic types (Date, ArrayBuffer, Blob, etc) except CryptoKeys (which by design cannot be exported)
 * Atomic - import / export within one database transaction (optional)
 * Export speed: Using getAll() in chunks rather than openCursor().
@@ -172,6 +173,7 @@ export interface StaticImportOptions {
   noTransaction?: boolean;
   chunkSizeBytes?: number; // Default: DEFAULT_KILOBYTES_PER_CHUNK ( 1MB )
   filter?: (table: string, value: any, key?: any) => boolean;
+  transform?: (table: string, value: any, key?: any) => ({value: any, key?: any});
   progressCallback?: (progress: ImportProgress) => boolean;
 }
 
@@ -185,6 +187,7 @@ export interface ImportOptions extends StaticImportOptions {
   noTransaction?: boolean;
   chunkSizeBytes?: number; // Default: DEFAULT_KILOBYTES_PER_CHUNK ( 1MB )
   filter?: (table: string, value: any, key?: any) => boolean;
+  transform?: (table: string, value: any, key?: any) => ({value: any, key?: any});
   progressCallback?: (progress: ImportProgress) => boolean;
 }
 

@@ -64,8 +64,6 @@ interface Contact {
 
 const db = new Dexie('contactDB') as Dexie & {
   contacts: EntityTable<Contact, 'id'>;
-  // (The 4.x EntityTable<T> can make a the primary key optional on
-  // add/bulkAdd operations)
 };
 
 db.version(1).stores({

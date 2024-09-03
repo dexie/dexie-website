@@ -31,10 +31,7 @@ interface Friend {
 }
 
 const db = new Dexie('FriendsDatabase') as Dexie & {
-  friends: EntityTable<
-    Friend,
-    'id' // primary key "id" (for the typings only)
-  >;
+  friends: EntityTable<Friend, 'id'>
 };
 
 // Schema declaration:

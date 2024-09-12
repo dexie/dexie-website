@@ -14,7 +14,7 @@ Dexie v4.x comes with the best Svelte- and Sveltekit support.
 In version 3.2 we've introduced **live queries** - queries that observe the result and make your component mirror the data in real time and in version 4.0.1-alpha.10 we improved the typing compability and SvelteKit support of liveQuery().
 
 If a change is made (by the app itself or from an external tab or worker), a binary range tree algorithm will efficiently detect whether those changes would affect your queries and if so, re-execute your callback and re-render component.
-[Here's a sample app demonstrates it](https://2n8bd.csb.app/).
+[Here's a sample app demonstrates it](https://codesandbox.io/p/sandbox/2n8bd).
 
 [liveQuery()](/docs/liveQuery()) can be explained like this: **It observes the result of a promise-returning function that queries Dexie** *(In contrast to just execute it imperatively)*.
 It is highly composable as you can call other functions that queries dexie compute a result based on their outcome.

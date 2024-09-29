@@ -12,7 +12,7 @@ title: 'Get started with Dexie in Angular'
 
 # 1. Create an Angular project
 
-Here we refer to Angular's own [Getting Started](https://angular.io/start) page.
+Here we refer to Angular's own [Getting Started](https://angular.dev/installation) page.
 
 <br/>
 

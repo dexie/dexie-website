@@ -5,43 +5,28 @@ title: 'Dexie.VersionChangeError'
 
 ### Inheritance Hierarchy
 
-* [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
-  * [Dexie.DexieError](/docs/DexieErrors/DexieError)
-    * Dexie.VersionChangeError
+- [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
+  - [Dexie.DexieError](/docs/DexieErrors/DexieError)
+    - Dexie.VersionChangeError
 
-### Description 
+### Description
 
 Happens when another database instance deletes or upgrades the database so that the own instance had to be closed. The host wep app is probably not in sync with the latest version of the database. A typical solution is for the current web app to be updated from the server.
 
-### Sample using Promise.catch()
+### Sample
 
 ```javascript
-doSomeDatabaseWork().then(function(){
-    // Success
-}).catch(Dexie.VersionChangeError, function (e) {
-    // Failed with VersionChangeError
-    console.error ("VersionChange error: " + e.message);
-}).catch(Error, function (e) {
-    // Any other error derived from standard Error
-    console.error ("Error: " + e.message);
-}).catch(function (e) {
-    // Other error such as a string was thrown
-    console.error (e);
-});
-```
-
-### Sample: switch(error.name)
-
-```javascript
-db.on('error', function (error) {
-    switch (error.name) {
-        case Dexie.errnames.VersionChange:
-            console.error ("VersionChanged error");
-            break;
-        default:
-            console.error ("error: " + e.message);
+try {
+    await doSomeDatabaseWork();
+} catch(error) {
+    if (error?.name === Dexie.errnames.VersionChangeError) {
+        // Handle VersionChangeError error...
+        console.error ("VersionChangeError error: " + e.message);
+    } else {
+        // Handle or rethrow other errors
+        ...
     }
-});
+}
 ```
 
 ### Properties

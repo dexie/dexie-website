@@ -5,15 +5,15 @@ title: 'Dexie.ModifyError'
 
 ### Inheritance Hierarchy
 
-* [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
-  * [Dexie.DexieError](/docs/DexieErrors/DexieError)
-    * Dexie.ModifyError
+- [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
+  - [Dexie.DexieError](/docs/DexieErrors/DexieError)
+    - Dexie.ModifyError
 
-### Description 
+### Description
 
-Error that may occur in [Collection.modify()](/docs/Collection/Collection.modify()) and [Collection.delete()](/docs/Collection/Collection.delete())
+Error that may occur in [Collection.modify()](</docs/Collection/Collection.modify()>) and [Collection.delete()](</docs/Collection/Collection.delete()>)
 
-The methods that may throw this error can perform multiple operations on a collection.  Therefore this error object will contain an array of the errors the occurred during the failed operations. 
+The methods that may throw this error can perform multiple operations on a collection. Therefore this error object will contain an array of the errors the occurred during the failed operations.
 
 ### Properies
 
@@ -29,18 +29,23 @@ The methods that may throw this error can perform multiple operations on a colle
 
 #### [name](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/name)
 
-### Sample 
+### Sample
 
 ```javascript
 db.friends.where('name').startsWith('a').delete ()
-    .catch(Dexie.ModifyError, function (err) {
-        err.failures.forEach(function (failure) {
-        console.error (failure.stack || failure.message);
+    .catch(function (err) {
+        if (err instanceof Dexie.ModifyError) {
+            err.failures.forEach(function (failure) {
+            console.error (failure.stack || failure.message);
+        } else {
+            throw err;
+        }
     });
 });
 ```
 
 With yield
+
 ```javascript
 db.transaction('rw', db.friends, function* ()=> {
     try {

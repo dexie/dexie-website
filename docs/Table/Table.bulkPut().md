@@ -10,6 +10,7 @@ table.bulkPut(items, keys?, options?)
 ```
 
 ### Parameters
+
 <table>
   <tr>
     <td><code>items</code></td>
@@ -24,16 +25,16 @@ table.bulkPut(items, keys?, options?)
 
 #### When to use the keys argument
 
-* If your primary key is [inbound](/docs/inbound), you MUST NOT provide the `keys` argument.
-* If primary key is non-[inbound](/docs/inbound) but auto-incremented, `keys` argument is optional.
-* If primary key is non-[inbound](/docs/inbound) and non-auto-incremented, `keys` argument is compulsory.
+- If your primary key is [inbound](/docs/inbound), you MUST NOT provide the `keys` argument.
+- If primary key is non-[inbound](/docs/inbound) but auto-incremented, `keys` argument is optional.
+- If primary key is non-[inbound](/docs/inbound) and non-auto-incremented, `keys` argument is compulsory.
 
 ```javascript
-var db = new Dexie("test");
+var db = new Dexie('test');
 db.version(1).stores({
-    tableWithInboundKeys: "id,x,y,z", // Don't provide "keys"
-    tableWithAutoIncNonInbound: "++,x,y,x", // Optionally provide "keys"
-    tableWithoutInboundKeys: ",x,y,z" // Always provide "keys"
+  tableWithInboundKeys: 'id,x,y,z', // Don't provide "keys"
+  tableWithAutoIncNonInbound: '++,x,y,x', // Optionally provide "keys"
+  tableWithoutInboundKeys: ',x,y,z' // Always provide "keys"
 });
 ```
 
@@ -43,11 +44,9 @@ If options argument is omitted, or options is {allKeys: false}, the return value
 
 [Promise&lt;LastKey&gt;](/docs/Promise/Promise)
 
-
-*Since 3.0.0-rc.2*: If options argument is provided in second or third argument with {allKeys: true}, the return value is a promise resulting with an array of resulting primary keys. The resulting array will have the same length as given array of objects to put. Every position in given items array will correspond to the same position in the resulting array.
+_Since 3.0.0-rc.2_: If options argument is provided in second or third argument with {allKeys: true}, the return value is a promise resulting with an array of resulting primary keys. The resulting array will have the same length as given array of objects to put. Every position in given items array will correspond to the same position in the resulting array.
 
 [Promise&lt;Key[]&gt;](/docs/Promise/Promise)
-
 
 ### Errors
 
@@ -63,33 +62,46 @@ If you have a large number of objects to add to the object store, `bulkPut()` is
 ### Sample
 
 ```javascript
-var db = new Dexie("test");
+var db = new Dexie('test');
 db.version(1).stores({
-    raindrops: 'id,position'
+  raindrops: 'id,position'
 });
 var drops = [];
-for (var i=0;i<100000;++i) {
-    drops.push({id: i, position: [Math.random(),Math.random(),Math.random()]})
+for (var i = 0; i < 100000; ++i) {
+  drops.push({
+    id: i,
+    position: [Math.random(), Math.random(), Math.random()]
+  });
 }
-db.raindrops.bulkPut(drops).then(function(lastKey) {
-    console.log("Done putting 100,000 raindrops all over the place");
-    console.log("Last raindrop's id was: " + lastKey); // Will be 100000.
-}).catch(Dexie.BulkError, function (e) {
-    // Explicitly catching the bulkAdd() operation makes those successful
-    // additions commit despite that there were errors.
-    console.error ("Some raindrops did not succeed. However, " +
-       100000-e.failures.length + " raindrops was added successfully");
-});
+db.raindrops
+  .bulkPut(drops)
+  .then(() => {
+    console.log('Done putting 100,000 raindrops all over the place');
+  })
+  .catch((e) => {
+    if (e.name === 'BulkError') {
+      // Explicitly catching the bulkPut() operation makes those successful
+      // additions commit despite that there were errors.
+      console.error(
+        'Some raindrops did not succeed. However, ' +
+          100000 -
+          e.failures.length +
+          ' raindrops was added successfully'
+      );
+    } else {
+      throw e; // We're only handling BulkError here.
+    }
+  });
 ```
 
 ### See Also
 
-[Table.bulkUpdate()](/docs/Table/Table.bulkUpdate())
+[Table.bulkUpdate()](</docs/Table/Table.bulkUpdate()>)
 
-[Table.bulkGet()](/docs/Table/Table.bulkGet())
+[Table.bulkGet()](</docs/Table/Table.bulkGet()>)
 
-[Table.bulkAdd()](/docs/Table/Table.bulkAdd())
+[Table.bulkAdd()](</docs/Table/Table.bulkAdd()>)
 
-[Table.bulkDelete()](/docs/Table/Table.bulkDelete())
+[Table.bulkDelete()](</docs/Table/Table.bulkDelete()>)
 
-[Table.put()](/docs/Table/Table.put())
+[Table.put()](</docs/Table/Table.put()>)

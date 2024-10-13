@@ -5,11 +5,11 @@ title: 'Dexie.OpenFailedError'
 
 ### Inheritance Hierarchy
 
-* [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
-  * [Dexie.DexieError](/docs/DexieErrors/DexieError)
-    * Dexie.OpenFailedError
+- [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
+  - [Dexie.DexieError](/docs/DexieErrors/DexieError)
+    - Dexie.OpenFailedError
 
-### Description 
+### Description
 
 Happens when a db operation has failed due to that database couldn't be opened.
 
@@ -18,32 +18,36 @@ Happens when a db operation has failed due to that database couldn't be opened.
 ### Sample using Promise.catch()
 
 ```javascript
-doSomeDatabaseWork().then(function(){
+doSomeDatabaseWork()
+  .then(function () {
     // Success
-}).catch(Dexie.OpenFailedError, function (e) {
+  })
+  .catch(function (e) {
     // Failed with OpenFailedError
-    console.error ("open failed due to: " + e.inner);
-}).catch(Error, function (e) {
+    console.error('open failed due to: ' + e.inner);
+  })
+  .catch(Error, function (e) {
     // Any other error derived from standard Error
-    console.error ("Error: " + e.message);
-}).catch(function (e) {
+    console.error('Error: ' + e.message);
+  })
+  .catch(function (e) {
     // Other error such as a string was thrown
-    console.error (e);
-});
+    console.error(e);
+  });
 ```
 
 ### Sample: switch(error.name)
 
 ```javascript
 db.on('error', function (error) {
-    switch (error.name) {
-        case Dexie.errnames.OpenFailed:
-            const innerError = error.inner;            
-            console.log ("open failed due to " + innerError.name);
-            break;
-        default:
-            console.log ("error: " + e.message);
-    }
+  switch (error.name) {
+    case Dexie.errnames.OpenFailed:
+      const innerError = error.inner;
+      console.log('open failed due to ' + innerError.name);
+      break;
+    default:
+      console.log('error: ' + e.message);
+  }
 });
 ```
 

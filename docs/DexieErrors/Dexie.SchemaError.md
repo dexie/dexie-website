@@ -5,43 +5,28 @@ title: 'Dexie.SchemaError'
 
 ### Inheritance Hierarchy
 
-* [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
-  * [Dexie.DexieError](/docs/DexieErrors/DexieError)
-    * Dexie.SchemaError
+- [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
+  - [Dexie.DexieError](/docs/DexieErrors/DexieError)
+    - Dexie.SchemaError
 
-### Description 
+### Description
 
 Happens when the database schema has errors.
 
 ### Sample using Promise.catch()
 
 ```javascript
-doSomeDatabaseWork().then(function(){
-    // Success
-}).catch(Dexie.SchemaError, function (e) {
-    // Failed with SchemaError
-    console.error ("Schema error: " + e.message);
-}).catch(Error, function (e) {
-    // Any other error derived from standard Error
-    console.error ("Error: " + e.message);
-}).catch(function (e) {
-    // Other error such as a string was thrown
-    console.error (e);
-});
-```
-
-### Sample using switch(error.name)
-
-```javascript
-db.on('error', function (error) {
-    switch (error.name) {
-        case Dexie.errnames.Schema:
-            console.error ("Schemad error");
-            break;
-        default:
-            console.error ("error: " + e.message);
+try {
+    await doSomeDatabaseWork();
+} catch(error) {
+    if (error?.name === Dexie.errnames.Schema) {
+        // Handle schema error...
+        console.error ("Schema error: " + e.message);
+    } else {
+        // Handle or rethrow other errors
+        ...
     }
-});
+}
 ```
 
 ### Properties

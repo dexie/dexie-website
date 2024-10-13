@@ -5,44 +5,27 @@ title: 'Dexie.InvalidTableError'
 
 ### Inheritance Hierarchy
 
-* [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
-  * [Dexie.DexieError](/docs/DexieErrors/DexieError)
-    * Dexie.InvalidTableError
+- [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
+  - [Dexie.DexieError](/docs/DexieErrors/DexieError)
+    - Dexie.InvalidTableError
 
-### Description 
+### Description
 
 Happens when trying to access a table that does not exist or is not part of current transaction.
 
 ### Sample using Promise.catch()
 
 ```javascript
-doSomeDatabaseWork().then(function() {
+doSomeDatabaseWork()
+  .then(() => {
     // Success
-}).catch(Dexie.InvalidTableError, function (e) {
-    // Failed with InvalidTableError
-    console.error ("InvalidTable error: " + e.message);
-}).catch(Error, function (e) {
-    // Any other error derived from standard Error
-    console.error ("Error: " + e.message);
-}).catch(function (e) {
-    // Other error such as a string was thrown
-    console.error (e);
-});
-```
-
-### Sample: switch(error.name)
-
-```javascript
-db.on('error', function (error) {
-    switch (error.name) {
-        // errnames.InvalidTable ==="InvalidTableError"
-        case Dexie.errnames.InvalidTable:
-            console.error ("InvalidTable error");
-            break;
-        default:
-            console.error ("error: " + e);
+  })
+  .catch((e) => {
+    if (e?.name === 'InvalidTableError') {
+      // Failed with InvalidTableError
+      console.error('InvalidTable error: ' + e.message);
     }
-});
+  });
 ```
 
 ### Properties

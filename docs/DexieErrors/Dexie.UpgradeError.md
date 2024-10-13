@@ -5,44 +5,28 @@ title: 'Dexie.UpgradeError()'
 
 ### Inheritance Hierarchy
 
-* [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
-  * [Dexie.DexieError](/docs/DexieErrors/DexieError)
-    * Dexie.UpgradeError
+- [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error)
+  - [Dexie.DexieError](/docs/DexieErrors/DexieError)
+    - Dexie.UpgradeError
 
-### Description 
+### Description
 
 Happens when the database could not be upgraded.
 
-### Sample using Promise.catch()
+### Sample
 
 ```javascript
-doSomeDatabaseWork().then(function(){
-    // Success
-}).catch(Dexie.UpgradeError, function (e) {
-    // Failed with UpgradeError
-    console.error ("Upgrade error: " + e.message);
-}).catch(Error, function (e) {
-    // Any other error derived from standard Error
-    console.error ("Error: " + e.message);
-}).catch(function (e) {
-    // Other error such as a string was thrown
-    console.error (e);
-});
-```
-
-### Sample: switch(error.name)
-
-```javascript
-db.on('error', function (error) {
-    switch (error.name) {
-        // errnames.Upgrade ==="UpgradeError"
-        case Dexie.errnames.Upgrade:
-            console.error ("Upgrade error");
-            break;
-        default:
-            console.error ("error: " + e);
+try {
+    await doSomeDatabaseWork();
+} catch(error) {
+    if (error?.name === Dexie.errnames.UpgradeError) {
+        // Handle UpgradeError error...
+        console.error ("UpgradeError error: " + e.message);
+    } else {
+        // Handle or rethrow other errors
+        ...
     }
-});
+}
 ```
 
 ### Properties

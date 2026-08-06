@@ -1,0 +1,63 @@
+<style>
+  .archive-site-banner {
+    position: absolute;
+    top: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 11;
+    background: rgba(36, 40, 58, 0.92);
+    border: 1px solid rgba(225, 232, 255, 0.28);
+    border-radius: 999px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.22);
+    color: #eef2ff;
+    font-size: 13px;
+    line-height: 1.35;
+    padding: 5px 12px;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .archive-site-banner a {
+    color: #9fd7ff;
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  .archive-site-banner a:hover,
+  .archive-site-banner a:focus {
+    color: #d4ecff;
+  }
+
+  @media (max-width: 767px) {
+    .archive-site-banner {
+      position: static;
+      transform: none;
+      border-radius: 0;
+      border-left: 0;
+      border-right: 0;
+      white-space: normal;
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+  }
+</style>
+
+<div class="archive-site-banner" role="status" aria-live="polite">
+  This is an archive of the old site. Visit the latest version at
+  <a id="archive-site-banner-link" href="https://dexie.org/">dexie.org</a>.
+</div>
+
+<script>
+  (function () {
+    var link = document.getElementById("archive-site-banner-link");
+    if (!link) {
+      return;
+    }
+
+    var path = window.location.pathname || "/";
+    var search = window.location.search || "";
+    var hash = window.location.hash || "";
+
+    link.href = "https://dexie.org" + path + search + hash;
+  })();
+</script>
